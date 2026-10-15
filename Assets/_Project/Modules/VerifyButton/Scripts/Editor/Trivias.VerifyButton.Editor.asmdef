@@ -4,7 +4,9 @@
     "references": [
         "Trivias.Shared",
         "Trivias.Shared.Editor",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Trivias.VerifyButton",
+        "Trivias.Match"
     ],
     "includePlatforms": [
         "Editor"

@@ -79,6 +79,7 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(motor, "_controller", controller);
             SerializedWiring.Set(motor, "_animator", animator);
             SerializedWiring.Set(motor, "_cameraRoot", cameraRoot.transform);
+            SerializedWiring.Set(motor, "_controlGate", SharedAssets.PlayerControlGate());
             motor.enabled = false;
 
             root.AddComponent<NetworkObject>();

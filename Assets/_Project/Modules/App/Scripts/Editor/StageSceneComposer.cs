@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using TMPro;
 using Trivias.Booth.Editor;
+using Trivias.Match.Editor;
 using Trivias.Money.Editor;
 using Trivias.Networking.Components;
 using Trivias.Networking.Editor;
+using Trivias.Shared.Editor;
 using Trivias.Shared.Spawning;
+using Trivias.Stage.Editor;
 using Trivias.Table.Editor;
 using Unity.Netcode;
 using UnityEditor;
@@ -22,6 +25,7 @@ namespace Trivias.App.Editor
         public GameObject[] SessionPrefabs;
         public GameObject CameraRig;
         public GameObject InteractionHud;
+        public GameObject MatchHud;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -51,7 +55,7 @@ namespace Trivias.App.Editor
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             CreateLighting();
-            Place(prefabs.Environment, Vector3.zero, 0f);
+            var environment = Place(prefabs.Environment, Vector3.zero, 0f);
             var table = Place(prefabs.Table, Vector3.zero, 0f);
             Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
             Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
@@ -59,10 +63,12 @@ namespace Trivias.App.Editor
             var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
             ConnectMoney(table, booths);
+            ConnectMatch(environment, booths);
 
             PlaceNetworkManager(prefabs);
             PlaceCameraRig(prefabs.CameraRig);
             PrefabUtility.InstantiatePrefab(prefabs.InteractionHud);
+            PrefabUtility.InstantiatePrefab(prefabs.MatchHud);
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(SCENE_PATH, true) };
@@ -131,6 +137,20 @@ namespace Trivias.App.Editor
             EditorUtility.SetDirty(spawnPoints);
         }
 
+        /// <summary>Une cabinas y pantalla con el módulo Match (textos de respuesta y número de pregunta).</summary>
+        private static void ConnectMatch(GameObject environment, GameObject[] booths)
+        {
+            for (var i = 0; i < booths.Length; i++)
+            {
+                MatchBuilder.AttachBoothLabel(booths[i], i,
+                    booths[i].transform.Find(BoothPrefabBuilder.ANSWER_LABEL).GetComponent<TextMeshPro>());
+            }
+
+            var screen = environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN);
+            MatchBuilder.AttachQuestionScreen(screen.gameObject,
+                environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN_TITLE).GetComponent<TextMeshPro>());
+        }
+
         private static void PlaceNetworkManager(StageScenePrefabs prefabs)
         {
             var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefabs.NetworkManager);
@@ -142,7 +162,8 @@ namespace Trivias.App.Editor
                 lists.Add(prefabs.NetworkPrefabs);
 
             PrefabUtility.RecordPrefabInstancePropertyModifications(networkManager);
-            NetworkManagerPrefabBuilder.SetSessionPrefabs(instance.GetComponent<ConnectionService>(), prefabs.SessionPrefabs);
+            var connection = instance.GetComponent<ConnectionService>();
+            NetworkManagerPrefabBuilder.SetSessionPrefabs(connection, prefabs.SessionPrefabs);
         }
 
         private static void PlaceCameraRig(GameObject cameraRigPrefab)

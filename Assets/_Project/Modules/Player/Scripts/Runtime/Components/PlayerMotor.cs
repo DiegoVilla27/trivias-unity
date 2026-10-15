@@ -1,5 +1,6 @@
 using Trivias.Player.Data;
 using Trivias.Player.Logic;
+using Trivias.Shared.Gameplay;
 using Trivias.Shared.Physics;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ namespace Trivias.Player.Components
         [SerializeField] private CharacterController _controller;
         [SerializeField] private Animator _animator;
         [SerializeField] private Transform _cameraRoot;
+        [Tooltip("Cerrado en la sala de espera: el concursante no se mueve hasta que empieza la partida.")]
+        [SerializeField] private PlayerControlGate _controlGate;
 
         private float _speed;
         private float _animationBlend;
@@ -82,7 +85,7 @@ namespace Trivias.Player.Components
 
         private void Move(float deltaTime)
         {
-            var input = _input.Move;
+            var input = _controlGate.CanMove ? _input.Move : Vector2.zero;
             var hasInput = input.sqrMagnitude > INPUT_DEADZONE_SQR;
             var targetSpeed = hasInput ? _config.MoveSpeed : 0f;
             var inputMagnitude = hasInput ? Mathf.Clamp01(input.magnitude) : 1f;

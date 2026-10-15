@@ -1,0 +1,22 @@
+using UnityEngine;
+
+namespace Trivias.Match.Data
+{
+    /// <summary>Ritmo y reglas de la partida (GDD 3-4). Valores ajustables sin tocar código.</summary>
+    [CreateAssetMenu(menuName = "Trivias/Match/Match Config", fileName = "MatchConfig")]
+    public sealed class MatchConfig : ScriptableObject
+    {
+        [SerializeField, Range(1, 30)] private int _questionsPerMatch = 15;
+        [Tooltip("Cuenta atrás tras pulsar VERIFICAR (GDD: 3 segundos).")]
+        [SerializeField, Range(1f, 10f)] private float _lockCountdownSeconds = 3f;
+        [Tooltip("Tiempo mostrando la respuesta y el resultado antes de la siguiente pregunta.")]
+        [SerializeField, Range(2f, 20f)] private float _revealSeconds = 7f;
+        [Tooltip("Regla provisional (GDD 4.2): el dinero que no está en una bandeja al verificar se pierde.")]
+        [SerializeField] private bool _loseUnplacedMoney = true;
+
+        public int QuestionsPerMatch => _questionsPerMatch;
+        public float LockCountdownSeconds => _lockCountdownSeconds;
+        public float RevealSeconds => _revealSeconds;
+        public bool LoseUnplacedMoney => _loseUnplacedMoney;
+    }
+}

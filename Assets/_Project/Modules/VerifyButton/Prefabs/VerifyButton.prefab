@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 361227521974311663}
+  - component: {fileID: 5260899698573379761}
   m_Layer: 9
   m_Name: VerifyButton
   m_TagString: Untagged
@@ -35,6 +36,23 @@ Transform:
   - {fileID: 2092336167233228949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5260899698573379761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779703741494796347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c308992de810849bfa93c8a32f27ce1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.VerifyButton::Trivias.VerifyButton.Components.VerifyButtonTarget
+  _runtime: {fileID: 11400000, guid: 5d37e1be8915745e380c413acd95a791, type: 2}
+  _registry: {fileID: 11400000, guid: d5a8b26083ae84dd38542015a8cf8ada, type: 2}
+  _reach: 1.6
+  _cap: {fileID: 8033954189326924746}
+  _pressedDepth: 0.04
 --- !u!1 &3152723594025961766
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,7 +69,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 87
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8033954189326924746
 Transform:

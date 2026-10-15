@@ -37,9 +37,11 @@ namespace Trivias.Networking.Editor
             SerializedWiring.Set(connection, "_networkManager", networkManager);
             SerializedWiring.Set(connection, "_transport", transport);
             SerializedWiring.Set(connection, "_config", config);
+            SerializedWiring.Set(connection, "_matchStartRequested", SharedAssets.MatchStartRequested());
 
             var panel = root.AddComponent<DebugConnectionPanel>();
             SerializedWiring.Set(panel, "_connection", connection);
+            SerializedWiring.Set(panel, "_cursorBlockers", SharedAssets.CursorCaptureBlockers());
 
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }

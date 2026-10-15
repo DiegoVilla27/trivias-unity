@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffec40ecf70948f786e5ca1d29bbb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Trivias.Cameras::Trivias.Cameras.Components.CursorLockController
+  _controlGate: {fileID: 11400000, guid: b2b72f57b756241328283c41f69705f5, type: 2}
+  _blockers: {fileID: 11400000, guid: c08967e58f5d44ad6a17da13670656b4, type: 2}
 --- !u!114 &38870806498400598
 MonoBehaviour:
   m_ObjectHideFlags: 0

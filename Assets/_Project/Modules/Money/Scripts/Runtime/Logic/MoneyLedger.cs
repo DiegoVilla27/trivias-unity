@@ -45,12 +45,84 @@ namespace Trivias.Money.Logic
         // ---- Autoridad (host) ----
         // Las operaciones devuelven cuántos objetos movieron y añaden sus índices a "changed" (lista reutilizable).
 
-        /// <summary>Crea un objeto nuevo en la mesa. Devuelve su índice.</summary>
+        /// <summary>
+        /// Crea un objeto nuevo en la mesa. Reutiliza el índice de un objeto perdido si lo hay,
+        /// para que la lista (y lo que se replica por red) no crezca sin límite. Devuelve su índice.
+        /// </summary>
         public int AddToTable(Denomination denomination)
         {
-            var slot = FreeSlot(MoneyPlace.Table, 0);
-            _items.Add(new MoneyItem(denomination, MoneyPlace.Table, 0, (ushort)slot, 0));
+            var item = new MoneyItem(denomination, MoneyPlace.Table, 0, (ushort)FreeSlot(MoneyPlace.Table, 0), 0);
+            for (var i = 0; i < _items.Count; i++)
+            {
+                if (_items[i].Place != MoneyPlace.Lost)
+                    continue;
+                _items[i] = item;
+                return i;
+            }
+
+            _items.Add(item);
             return _items.Count - 1;
+        }
+
+        /// <summary>
+        /// Resuelve una pregunta (GDD 4-5): lo de las bandejas incorrectas se pierde; lo de la correcta vuelve a la mesa
+        /// y se multiplica por <paramref name="multiplier"/> (1 + concursantes apostados en ella). El extra se paga en la
+        /// denominación más grande posible. Con <paramref name="loseUnplaced"/> (regla provisional) también se pierde
+        /// lo que está en la mesa o en las manos.
+        /// </summary>
+        public RoundOutcome ResolveRound(int correctTray, int multiplier, bool loseUnplaced, List<int> changed)
+        {
+            long lost = 0;
+            long kept = 0;
+
+            // 1) Primero se pierde lo que no cuenta, para liberar sus huecos en la mesa.
+            for (var i = 0; i < _items.Count; i++)
+            {
+                var item = _items[i];
+                var losesItem = (item.Place == MoneyPlace.Tray && item.PlaceIndex != correctTray) ||
+                                (loseUnplaced && (item.Place == MoneyPlace.Table || item.Place == MoneyPlace.Carried));
+                if (!losesItem)
+                    continue;
+
+                lost += _values.Of(item.Denomination);
+                _items[i] = item.With(MoneyPlace.Lost, 0, 0, 0);
+                changed.Add(i);
+            }
+
+            // 2) Después vuelve a la mesa lo de la bandeja correcta (y, sin la regla provisional, lo de las manos).
+            for (var i = 0; i < _items.Count; i++)
+            {
+                var item = _items[i];
+                var isCorrectTray = item.Place == MoneyPlace.Tray && item.PlaceIndex == correctTray;
+                if (!isCorrectTray && item.Place != MoneyPlace.Carried)
+                    continue;
+
+                if (isCorrectTray)
+                    kept += _values.Of(item.Denomination);
+                _items[i] = item.With(MoneyPlace.Table, 0, FreeSlot(MoneyPlace.Table, 0), 0);
+                changed.Add(i);
+            }
+
+            var bonus = multiplier > 1 ? kept * (multiplier - 1) : 0;
+            EmitToTable(bonus, changed);
+            return new RoundOutcome(lost, kept, bonus, TotalInPlay());
+        }
+
+        /// <summary>Pone una cantidad en la mesa usando el menor número de objetos (lingotes, luego bolsas, luego fajos).</summary>
+        public long EmitToTable(long amount, List<int> changed)
+        {
+            long emitted = 0;
+            for (var d = (int)Denomination.GoldBar; d >= (int)Denomination.Bundle; d--)
+            {
+                var denomination = (Denomination)d;
+                var value = _values.Of(denomination);
+                while (amount - emitted >= value)
+                {
+                    changed.Add(AddToTable(denomination));
+                    emitted += value;
+                }
+            }
+            return emitted;
         }
 
         /// <summary>

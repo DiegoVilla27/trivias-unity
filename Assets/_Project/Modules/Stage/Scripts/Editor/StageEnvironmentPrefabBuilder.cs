@@ -14,6 +14,8 @@ namespace Trivias.Stage.Editor
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Stage";
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/StageEnvironment.prefab";
+        public const string SCREEN = "QuestionScreen";
+        public const string SCREEN_TITLE = "QuestionScreen/Title";
 
         public const float HALF_SIZE = 22f;
         private const float WALL_HEIGHT = 8f;
@@ -48,7 +50,7 @@ namespace Trivias.Stage.Editor
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "WallEast", t, new Vector3(HALF_SIZE, halfHeight, 0f), new Vector3(WALL_THICKNESS, WALL_HEIGHT, size), wall, layer, true);
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "WallWest", t, new Vector3(-HALF_SIZE, halfHeight, 0f), new Vector3(WALL_THICKNESS, WALL_HEIGHT, size), wall, layer, true);
 
-            var screenRoot = EditorAssets.CreateEmpty("QuestionScreen", t, new Vector3(0f, 5.2f, 15f)).transform;
+            var screenRoot = EditorAssets.CreateEmpty(SCREEN, t, new Vector3(0f, 5.2f, 15f)).transform;
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Frame", screenRoot, Vector3.zero, new Vector3(9f, 5f, 0.3f), frame, layer, true);
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Panel", screenRoot, new Vector3(0f, 0f, -0.16f), new Vector3(8.4f, 4.4f, 0.04f), screen, layer, true, keepCollider: false);
             var title = EditorAssets.CreateWorldText("Title", screenRoot, "PREGUNTA 1 / 15", 12f, Color.white,

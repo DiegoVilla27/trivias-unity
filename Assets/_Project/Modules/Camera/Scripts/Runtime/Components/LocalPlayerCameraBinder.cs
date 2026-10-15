@@ -21,7 +21,7 @@ namespace Trivias.Cameras.Components
         private void OnLocalPlayerCameraTargetChanged(Transform target)
         {
             _followCamera.Target.TrackingTarget = target;
-            _cursorLock.SetCaptureAllowed(target != null);
+            _cursorLock.SetHasLocalPlayer(target != null);
         }
     }
 }

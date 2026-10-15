@@ -96,21 +96,29 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Networking | NetworkManager, conexión local (Unity Transport), admisión a sala, panel de depuración | Shared |
 | Player | Concursante: entrada, movimiento, mirada, nombre, punto de carga, red | Shared |
 | Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
-| Money | Libro de cuentas (Logic), sesión en red, objetos visibles con pool, mesa y bandejas interactivas | Shared |
+| Money | Libro de cuentas (Logic), sesión en red, objetos visibles con pool, mesa y bandejas interactivas, bloqueo y resolución de rondas | Shared |
+| Questions | Banco de preguntas (JSON en `Content/` importado y validado en edición), planificación y orden de opciones | Shared |
+| Match | Flujo de la partida en red (fases, verificación, revelación, victoria/derrota), textos de cabinas y pantalla | Shared, Questions, Money |
+| VerifyButton | Botón VERIFICAR interactivo | Shared, Match, Money, Questions |
+| HUD | Pregunta, opciones, estado, cuenta atrás y dinero del equipo | Shared, Match, Money, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
-| Booth, Table, Exchange, VerifyButton, Presenter, Stage | De momento solo constructores de prefabs (Editor) | Shared (Editor) |
+| Booth, Table, Exchange, Presenter, Stage | De momento solo constructores de prefabs (Editor) | Shared (Editor) |
 
-Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `CarrySocketRegistry`, `MoneyRuntime`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
+Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `CarrySocketRegistry`, `MoneyRuntime`, `MatchRuntime`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
 | App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
 
 Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-Módulos previstos aún sin crear: `SelfBet`, `Questions`, `Match`, `HUD`, `Results`, `Voice`.
+Módulos previstos aún sin crear: `SelfBet`, `Results`, `Voice`.
 
 ## 4. Flujo de trabajo con Unity
 
 - **Todo se construye por código en tiempo de edición.** Cada módulo tiene un constructor en `Scripts/Editor/*Builder.cs` que crea sus materiales y prefabs con primitivas. `App/ProjectBuilder` los ejecuta en orden y ensambla `Scenes/Stage.unity`. Los constructores son idempotentes: se pueden repetir sin duplicar nada.
-- No editar a mano prefabs o escenas generados: cambiar el constructor y volver a ejecutar **Tools > Trivias > Build All**.
+- No editar a mano prefabs o escenas generados: cambiar el constructor.
+- **La escena siempre debe estar lista para jugar.** `App/AutoBuild` guarda en `Settings/BuildStamp.txt` una huella del código y del contenido; si al compilar en el editor no coincide, reconstruye todo solo. El usuario nunca debería tener que ejecutar Build All.
+- **Antes de entregar cualquier cambio (obligatorio):** con Unity cerrado, ejecutar Build All en consola, luego los tests EditMode (incluyen `WiringTests`: ninguna referencia vacía en escena y prefabs, y huella al día) y PlayMode. Si Unity está abierto, pedir que lo cierre; no dar nada por bueno sin esta verificación.
+- Un campo `[SerializeField]` nuevo se asigna en el constructor del **prefab** que lo contiene (no solo en la escena), o `WiringTests` fallará.
+- La lógica de red solo se prueba aquí con el host (un proceso). Lo que dependa de clientes remotos hay que razonarlo con cuidado y avisar al usuario de que lo verifique con Multiplayer Play Mode.
 - Comandos en modo consola (Unity **cerrado**; si está abierto, usar el menú):
   - Construir: `Unity -batchmode -nographics -projectPath . -executeMethod Trivias.App.Editor.ProjectBuilder.BuildAllBatch -logFile <log>`
   - Tests EditMode: `Unity -batchmode -nographics -projectPath . -runTests -testPlatform EditMode -testResults <xml> -logFile <log>`

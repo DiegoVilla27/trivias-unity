@@ -47,6 +47,8 @@ namespace Trivias.Cameras.Editor
             thirdPerson.AvoidObstacles = obstacles;
 
             var cursorLock = root.AddComponent<CursorLockController>();
+            SerializedWiring.Set(cursorLock, "_controlGate", SharedAssets.PlayerControlGate());
+            SerializedWiring.Set(cursorLock, "_blockers", SharedAssets.CursorCaptureBlockers());
             var binder = root.AddComponent<LocalPlayerCameraBinder>();
             SerializedWiring.Set(binder, "_followCamera", cinemachineCamera);
             SerializedWiring.Set(binder, "_cursorLock", cursorLock);

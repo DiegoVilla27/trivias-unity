@@ -1,6 +1,7 @@
 using Trivias.Networking.Data;
 using Trivias.Networking.Logic;
 using Trivias.Shared.Diagnostics;
+using Trivias.Shared.Events;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace Trivias.Networking.Components
         [Tooltip("Objetos de red de la sesión que crea el host al abrir la sala (dinero, partida...). " +
                  "Networking no conoce sus tipos: los asigna el constructor de la escena.")]
         [SerializeField] private NetworkObject[] _sessionPrefabs = new NetworkObject[0];
+        [Tooltip("Se lanza en el host al empezar la partida; la escucha el módulo Match.")]
+        [SerializeField] private VoidEventChannel _matchStartRequested;
 
         private string _targetAddress;
 
@@ -95,6 +98,7 @@ namespace Trivias.Networking.Components
                 return false;
 
             MatchStarted = true;
+            _matchStartRequested.Raise();
             SetState(ConnectionState.Connected, $"Partida empezada con {ConnectedPlayers} jugador(es). La sala está cerrada.");
             return true;
         }

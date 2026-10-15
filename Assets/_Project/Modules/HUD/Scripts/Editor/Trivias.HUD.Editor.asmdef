@@ -1,0 +1,23 @@
+{
+    "name": "Trivias.HUD.Editor",
+    "rootNamespace": "Trivias.HUD.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.HUD",
+        "Trivias.Match",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

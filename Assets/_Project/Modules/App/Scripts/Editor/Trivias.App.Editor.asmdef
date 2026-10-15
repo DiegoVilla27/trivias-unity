@@ -20,7 +20,13 @@
         "Trivias.Interaction.Editor",
         "Trivias.Money.Editor",
         "Unity.TextMeshPro",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Trivias.Questions.Editor",
+        "Trivias.Match.Editor",
+        "Trivias.HUD.Editor",
+        "Trivias.Match",
+        "Trivias.Money",
+        "Trivias.Questions"
     ],
     "includePlatforms": [
         "Editor"

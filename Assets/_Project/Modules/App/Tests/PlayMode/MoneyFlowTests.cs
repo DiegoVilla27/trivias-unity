@@ -25,8 +25,12 @@ namespace Trivias.App.Tests
         public IEnumerator StartHost()
         {
             yield return SceneManager.LoadSceneAsync(STAGE_SCENE, LoadSceneMode.Single);
-            Assert.That(Object.FindAnyObjectByType<ConnectionService>().StartHost(), Is.True);
+            var connection = Object.FindAnyObjectByType<ConnectionService>();
+            Assert.That(connection.StartHost(), Is.True);
             yield return new WaitForSeconds(0.5f);
+            // El dinero solo se puede tocar con la partida empezada.
+            Assert.That(connection.TryStartMatch(), Is.True);
+            yield return null;
 
             _session = Object.FindAnyObjectByType<MoneySessionNetwork>();
             _player = NetworkManager.Singleton.LocalClient.PlayerObject;

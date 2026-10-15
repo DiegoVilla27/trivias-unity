@@ -2,7 +2,9 @@ using System.Collections;
 using NUnit.Framework;
 using Trivias.Interaction.Network;
 using Trivias.Networking.Components;
+using Trivias.Money.Network;
 using Trivias.Player.Components;
+using Trivias.Shared.Gameplay;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -57,6 +59,29 @@ namespace Trivias.App.Tests
             var followCamera = Object.FindAnyObjectByType<CinemachineCamera>();
             Assert.That(followCamera.Target.TrackingTarget, Is.EqualTo(player.transform.Find("CameraRoot")),
                 "La cámara no sigue al jugador local.");
+        }
+
+        [UnityTest]
+        public IEnumerator Lobby_BlocksMovementAndMoney_UntilMatchStarts()
+        {
+            var connection = Object.FindAnyObjectByType<ConnectionService>();
+            Assert.That(connection.StartHost(), Is.True);
+            yield return new WaitForSeconds(0.5f);
+
+            var player = NetworkManager.Singleton.LocalClient.PlayerObject;
+            var gate = (PlayerControlGate)typeof(PlayerMotor)
+                .GetField("_controlGate", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .GetValue(player.GetComponent<PlayerMotor>());
+            var money = Object.FindAnyObjectByType<MoneySessionNetwork>();
+
+            Assert.That(gate.CanMove, Is.False, "En la sala nadie debe poder moverse.");
+            Assert.That(money.IsLocked, Is.True, "En la sala el dinero debe estar bloqueado.");
+
+            Assert.That(connection.TryStartMatch(), Is.True);
+            yield return null;
+            yield return null;
+            Assert.That(gate.CanMove, Is.True, "Al empezar la partida se puede mover.");
+            Assert.That(money.IsLocked, Is.False, "Al empezar la partida se puede apostar.");
         }
 
         [UnityTest]

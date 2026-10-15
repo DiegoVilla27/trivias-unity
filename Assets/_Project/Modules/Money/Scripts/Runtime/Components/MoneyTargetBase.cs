@@ -68,6 +68,8 @@ namespace Trivias.Money.Components
             }
 
             Describe(session, out _prompt, out var label);
+            if (session.IsLocked)
+                _prompt = string.Empty; // Apuestas cerradas: el total se sigue viendo, pero no se puede interactuar.
             SetLabel(label);
         }
 

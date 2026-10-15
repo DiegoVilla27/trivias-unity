@@ -123,6 +123,7 @@ MonoBehaviour:
   _transport: {fileID: 1811170720014981065}
   _config: {fileID: 11400000, guid: d2b50ee0a74da42d98d4efd046a0d152, type: 2}
   _sessionPrefabs: []
+  _matchStartRequested: {fileID: 11400000, guid: 13bcfc86c73994acdb677241bf133aee, type: 2}
 --- !u!114 &7854950519340292887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Trivias.Networking::Trivias.Networking.Components.DebugConnectionPanel
   _connection: {fileID: 9119430091137105464}
+  _cursorBlockers: {fileID: 11400000, guid: c08967e58f5d44ad6a17da13670656b4, type: 2}

@@ -14,7 +14,7 @@ namespace Trivias.Money.Network
     /// solo el estado de cada objeto (NetworkList); los clientes mantienen una réplica del libro.
     /// Las posiciones visuales se calculan en cada cliente a partir del estado, sin sincronizar transforms.
     /// </summary>
-    public sealed class MoneySessionNetwork : NetworkBehaviour, IMoneySession
+    public sealed class MoneySessionNetwork : NetworkBehaviour, IMoneySession, IMoneyAuthority
     {
         [SerializeField] private MoneyConfig _config;
         [SerializeField] private MoneyLayout _layout;
@@ -22,11 +22,16 @@ namespace Trivias.Money.Network
         [SerializeField] private MoneyVisualPresenter _presenter;
 
         private NetworkList<MoneyItemNet> _items;
+        private readonly NetworkVariable<bool> _locked = new();
         private MoneyLedger _ledger;
         private readonly List<int> _changed = new(); // Reutilizada en cada operación: sin allocations.
+        private bool _notifyPending;
 
         public MoneyLedger Ledger => _ledger;
         public ulong LocalClientId => NetworkManager.LocalClientId;
+        public bool IsLocked => _locked.Value;
+        public long TotalInPlay => _ledger.TotalInPlay();
+        public long UnplacedTotal => _ledger.TotalAt(MoneyPlace.Table, 0) + CarriedTotal();
 
         private void Awake()
         {
@@ -40,6 +45,8 @@ namespace Trivias.Money.Network
 
             if (IsServer)
             {
+                // Hasta que empiece la partida no se puede tocar el dinero.
+                _locked.Value = true;
                 for (var i = 0; i < _config.StartingBundles; i++)
                     _items.Add(MoneyItemNet.From(_ledger.Items[_ledger.AddToTable(Denomination.Bundle)]));
                 NetworkManager.OnClientDisconnectCallback += OnClientDisconnected;
@@ -51,13 +58,15 @@ namespace Trivias.Money.Network
                 _items.OnListChanged += OnItemsChanged;
             }
 
+            _locked.OnValueChanged += OnLockedChanged;
             _presenter.RefreshAll();
-            _runtime.Attach(this);
+            _runtime.Attach(this, IsServer ? this : null);
             GameLog.Info($"[Dinero] Sesión lista: {_ledger.Count} objetos, {MoneyFormat.Amount(_ledger.TotalInPlay())} en juego.", this);
         }
 
         public override void OnNetworkDespawn()
         {
+            _locked.OnValueChanged -= OnLockedChanged;
             if (IsServer)
                 NetworkManager.OnClientDisconnectCallback -= OnClientDisconnected;
             else
@@ -82,7 +91,7 @@ namespace Trivias.Money.Network
         private void TableInteractionRpc(InteractionAction action, RpcParams rpcParams = default)
         {
             var client = rpcParams.Receive.SenderClientId;
-            if (!IsWithinReach(client, _layout.TableSurface, _config.TableReach))
+            if (_locked.Value || !IsWithinReach(client, _layout.TableSurface, _config.TableReach))
                 return;
 
             _changed.Clear();
@@ -106,7 +115,8 @@ namespace Trivias.Money.Network
         private void TrayInteractionRpc(byte tray, InteractionAction action, RpcParams rpcParams = default)
         {
             var client = rpcParams.Receive.SenderClientId;
-            if (tray >= _layout.TrayCount || !IsWithinReach(client, _layout.TraySurface(tray), _config.TrayReach))
+            if (_locked.Value || tray >= _layout.TrayCount ||
+                !IsWithinReach(client, _layout.TraySurface(tray), _config.TrayReach))
                 return;
 
             var count = action == InteractionAction.Secondary ? int.MaxValue : 1;
@@ -121,7 +131,39 @@ namespace Trivias.Money.Network
             CommitChanged();
         }
 
-        // ---- Autoridad ----
+        // ---- Autoridad (flujo de la partida) ----
+
+        public void SetLocked(bool locked)
+        {
+            if (IsServer)
+                _locked.Value = locked;
+        }
+
+        public RoundOutcome ResolveRound(int correctTray, int multiplier, bool loseUnplaced)
+        {
+            _changed.Clear();
+            var outcome = _ledger.ResolveRound(correctTray, multiplier, loseUnplaced, _changed);
+            CommitChanged();
+            GameLog.Info($"[Dinero] Ronda resuelta: perdido {MoneyFormat.Amount(outcome.Lost)}, " +
+                         $"conservado {MoneyFormat.Amount(outcome.Kept)}, bono {MoneyFormat.Amount(outcome.Bonus)}, " +
+                         $"total {MoneyFormat.Amount(outcome.Total)}.", this);
+            return outcome;
+        }
+
+        private long CarriedTotal()
+        {
+            long total = 0;
+            for (var i = 0; i < _ledger.Count; i++)
+            {
+                if (_ledger.Items[i].Place == MoneyPlace.Carried)
+                    total += _ledger.ValueOf(i);
+            }
+            return total;
+        }
+
+        private void OnLockedChanged(bool previous, bool current) => _notifyPending = true;
+
+        // ---- Autoridad (jugadores) ----
 
         private void OnClientDisconnected(ulong client)
         {
@@ -136,7 +178,12 @@ namespace Trivias.Money.Network
             for (var i = 0; i < _changed.Count; i++)
             {
                 var index = _changed[i];
-                _items[index] = MoneyItemNet.From(_ledger.Items[index]);
+                var state = MoneyItemNet.From(_ledger.Items[index]);
+                // Los objetos nuevos (bonos) amplían la lista; los demás actualizan su valor.
+                if (index < _items.Count)
+                    _items[index] = state;
+                else
+                    _items.Add(state);
                 Apply(index);
             }
         }
@@ -169,15 +216,29 @@ namespace Trivias.Money.Network
                     for (var i = 0; i < _items.Count; i++)
                         _ledger.Set(i, _items[i].ToItem());
                     _presenter.RefreshAll();
-                    _runtime.NotifyChanged(MoneyRuntime.ALL);
+                    _notifyPending = true;
                     break;
             }
         }
 
+        /// <summary>
+        /// Aplica un cambio al estado visible. La interfaz NO se avisa aquí: durante la lectura de un paquete de red
+        /// un error en la interfaz haría que NGO descartase el resto de cambios (y los jugadores se desincronizarían).
+        /// Se avisa una vez por frame en <see cref="LateUpdate"/>, con todo el paquete ya aplicado.
+        /// </summary>
         private void Apply(int index)
         {
             _presenter.Refresh(index);
-            _runtime.NotifyChanged(index);
+            _notifyPending = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (!_notifyPending)
+                return;
+
+            _notifyPending = false;
+            _runtime.NotifyChanged(MoneyRuntime.ALL);
         }
     }
 }

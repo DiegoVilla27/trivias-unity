@@ -1,0 +1,491 @@
+{
+  "language": "es",
+  "questions": [
+    {
+      "id": "geo-001",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es la capital de Francia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "París"
+        },
+        {
+          "id": "b",
+          "text": "Lyon"
+        },
+        {
+          "id": "c",
+          "text": "Marsella"
+        },
+        {
+          "id": "d",
+          "text": "Niza"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "París es la capital de Francia y su ciudad más poblada.",
+      "source": "https://es.wikipedia.org/wiki/París"
+    },
+    {
+      "id": "cie-001",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Qué planeta es conocido como el planeta rojo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Venus"
+        },
+        {
+          "id": "b",
+          "text": "Marte"
+        },
+        {
+          "id": "c",
+          "text": "Júpiter"
+        },
+        {
+          "id": "d",
+          "text": "Mercurio"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El óxido de hierro de su superficie le da a Marte su color rojizo.",
+      "source": "https://es.wikipedia.org/wiki/Marte_(planeta)"
+    },
+    {
+      "id": "nat-001",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Cuántas patas tiene una araña?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Seis"
+        },
+        {
+          "id": "b",
+          "text": "Diez"
+        },
+        {
+          "id": "c",
+          "text": "Ocho"
+        },
+        {
+          "id": "d",
+          "text": "Doce"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Las arañas son arácnidos: tienen ocho patas, a diferencia de los insectos, que tienen seis.",
+      "source": "https://es.wikipedia.org/wiki/Araneae"
+    },
+    {
+      "id": "geo-002",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es el océano más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Atlántico"
+        },
+        {
+          "id": "b",
+          "text": "Índico"
+        },
+        {
+          "id": "c",
+          "text": "Ártico"
+        },
+        {
+          "id": "d",
+          "text": "Pacífico"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El Pacífico cubre cerca de un tercio de la superficie de la Tierra.",
+      "source": "https://es.wikipedia.org/wiki/Océano_Pacífico"
+    },
+    {
+      "id": "art-001",
+      "category": "Arte",
+      "difficulty": 1,
+      "text": "¿Quién pintó la Mona Lisa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leonardo da Vinci"
+        },
+        {
+          "id": "b",
+          "text": "Miguel Ángel"
+        },
+        {
+          "id": "c",
+          "text": "Rafael"
+        },
+        {
+          "id": "d",
+          "text": "Botticelli"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Leonardo da Vinci la pintó a principios del siglo XVI; hoy está en el Museo del Louvre.",
+      "source": "https://es.wikipedia.org/wiki/La_Gioconda"
+    },
+    {
+      "id": "dep-001",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿Cuántos jugadores de cada equipo hay en el campo en un partido de fútbol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Diez"
+        },
+        {
+          "id": "b",
+          "text": "Once"
+        },
+        {
+          "id": "c",
+          "text": "Nueve"
+        },
+        {
+          "id": "d",
+          "text": "Doce"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Cada equipo alinea once jugadores, incluido el portero.",
+      "source": "https://es.wikipedia.org/wiki/Reglas_del_fútbol"
+    },
+    {
+      "id": "his-001",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿En qué año pisó el ser humano la Luna por primera vez?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1965"
+        },
+        {
+          "id": "b",
+          "text": "1972"
+        },
+        {
+          "id": "c",
+          "text": "1969"
+        },
+        {
+          "id": "d",
+          "text": "1959"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Neil Armstrong y Buzz Aldrin llegaron a la Luna con el Apolo 11 en julio de 1969.",
+      "source": "https://es.wikipedia.org/wiki/Apolo_11"
+    },
+    {
+      "id": "cie-002",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el símbolo químico del oro?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ag"
+        },
+        {
+          "id": "b",
+          "text": "Or"
+        },
+        {
+          "id": "c",
+          "text": "Go"
+        },
+        {
+          "id": "d",
+          "text": "Au"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Au viene del latín aurum. Ag es la plata.",
+      "source": "https://es.wikipedia.org/wiki/Oro"
+    },
+    {
+      "id": "mus-001",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿Qué compositor escribió «Las cuatro estaciones»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Antonio Vivaldi"
+        },
+        {
+          "id": "b",
+          "text": "Johann Sebastian Bach"
+        },
+        {
+          "id": "c",
+          "text": "Wolfgang Amadeus Mozart"
+        },
+        {
+          "id": "d",
+          "text": "Georg Friedrich Händel"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Vivaldi publicó estos cuatro conciertos para violín en 1725.",
+      "source": "https://es.wikipedia.org/wiki/Las_cuatro_estaciones"
+    },
+    {
+      "id": "cie-003",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el hueso más largo del cuerpo humano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tibia"
+        },
+        {
+          "id": "b",
+          "text": "Fémur"
+        },
+        {
+          "id": "c",
+          "text": "Húmero"
+        },
+        {
+          "id": "d",
+          "text": "Peroné"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El fémur, el hueso del muslo, es el más largo y resistente del cuerpo.",
+      "source": "https://es.wikipedia.org/wiki/Fémur"
+    },
+    {
+      "id": "lit-001",
+      "category": "Literatura",
+      "difficulty": 2,
+      "text": "¿Quién escribió «Cien años de soledad»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mario Vargas Llosa"
+        },
+        {
+          "id": "b",
+          "text": "Julio Cortázar"
+        },
+        {
+          "id": "c",
+          "text": "Gabriel García Márquez"
+        },
+        {
+          "id": "d",
+          "text": "Pablo Neruda"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gabriel García Márquez la publicó en 1967; recibió el Nobel de Literatura en 1982.",
+      "source": "https://es.wikipedia.org/wiki/Cien_años_de_soledad"
+    },
+    {
+      "id": "cie-004",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el gas más abundante en la atmósfera terrestre?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Oxígeno"
+        },
+        {
+          "id": "b",
+          "text": "Dióxido de carbono"
+        },
+        {
+          "id": "c",
+          "text": "Argón"
+        },
+        {
+          "id": "d",
+          "text": "Nitrógeno"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El nitrógeno es alrededor del 78 % del aire; el oxígeno, cerca del 21 %.",
+      "source": "https://es.wikipedia.org/wiki/Atmósfera_terrestre"
+    },
+    {
+      "id": "geo-003",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el río más largo de Europa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Volga"
+        },
+        {
+          "id": "b",
+          "text": "Danubio"
+        },
+        {
+          "id": "c",
+          "text": "Rin"
+        },
+        {
+          "id": "d",
+          "text": "Loira"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El Volga, en Rusia, mide unos 3.500 km y desemboca en el mar Caspio.",
+      "source": "https://es.wikipedia.org/wiki/Volga"
+    },
+    {
+      "id": "cie-005",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuál es el elemento químico más abundante en la corteza terrestre?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Silicio"
+        },
+        {
+          "id": "b",
+          "text": "Oxígeno"
+        },
+        {
+          "id": "c",
+          "text": "Aluminio"
+        },
+        {
+          "id": "d",
+          "text": "Hierro"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El oxígeno supone casi la mitad de la masa de la corteza, sobre todo en forma de silicatos y óxidos.",
+      "source": "https://es.wikipedia.org/wiki/Abundancia_de_los_elementos_químicos"
+    },
+    {
+      "id": "geo-004",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Qué país tiene más husos horarios, contando sus territorios de ultramar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rusia"
+        },
+        {
+          "id": "b",
+          "text": "Estados Unidos"
+        },
+        {
+          "id": "c",
+          "text": "Francia"
+        },
+        {
+          "id": "d",
+          "text": "Reino Unido"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gracias a sus territorios de ultramar, Francia abarca 12 husos horarios.",
+      "source": "https://es.wikipedia.org/wiki/Huso_horario"
+    },
+    {
+      "id": "geo-005",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es la capital de Australia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sídney"
+        },
+        {
+          "id": "b",
+          "text": "Melbourne"
+        },
+        {
+          "id": "c",
+          "text": "Perth"
+        },
+        {
+          "id": "d",
+          "text": "Canberra"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Canberra se construyó como capital en el siglo XX, como acuerdo entre Sídney y Melbourne.",
+      "source": "https://es.wikipedia.org/wiki/Canberra"
+    },
+    {
+      "id": "cie-006",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuántos huesos tiene el cuerpo humano adulto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "206"
+        },
+        {
+          "id": "b",
+          "text": "212"
+        },
+        {
+          "id": "c",
+          "text": "198"
+        },
+        {
+          "id": "d",
+          "text": "220"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Un adulto tiene 206 huesos; al nacer hay más, porque varios se fusionan con el crecimiento.",
+      "source": "https://es.wikipedia.org/wiki/Esqueleto_humano"
+    },
+    {
+      "id": "his-002",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿En qué año cayó el Muro de Berlín?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1987"
+        },
+        {
+          "id": "b",
+          "text": "1989"
+        },
+        {
+          "id": "c",
+          "text": "1991"
+        },
+        {
+          "id": "d",
+          "text": "1985"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El muro cayó el 9 de noviembre de 1989; la reunificación alemana llegó en 1990.",
+      "source": "https://es.wikipedia.org/wiki/Caída_del_Muro_de_Berlín"
+    }
+  ]
+}

@@ -160,6 +160,7 @@ MonoBehaviour:
   _controller: {fileID: 5706620353365889747}
   _animator: {fileID: 5481716589359831653}
   _cameraRoot: {fileID: 1262944636833804939}
+  _controlGate: {fileID: 11400000, guid: b2b72f57b756241328283c41f69705f5, type: 2}
 --- !u!114 &6031665447320869515
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using Trivias.Networking.Logic;
+using Trivias.Shared.Input;
 using UnityEngine;
 
 namespace Trivias.Networking.Components
@@ -6,13 +7,19 @@ namespace Trivias.Networking.Components
     /// <summary>
     /// Panel provisional para crear o unirse a una sala en local. Solo existe en editor y development builds;
     /// se sustituirá por el vestíbulo real. En builds de release el componente se elimina al arrancar.
+    /// Un clic sobre el panel no captura el ratón (lo registra en <see cref="CursorCaptureBlockers"/>).
     /// </summary>
-    public sealed class DebugConnectionPanel : MonoBehaviour
+    public sealed class DebugConnectionPanel : MonoBehaviour, ICursorCaptureBlocker
     {
         [SerializeField] private ConnectionService _connection;
+        [SerializeField] private CursorCaptureBlockers _cursorBlockers;
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        private const float MARGIN = 16f;
         private const float WIDTH = 320f;
+        private const float HEIGHT = 330f;
+
+        private static readonly Rect Area = new(MARGIN, MARGIN, WIDTH, HEIGHT);
 
         private string _address;
         private GUIStyle _wrapStyle;
@@ -20,12 +27,23 @@ namespace Trivias.Networking.Components
 
         private void Awake() => _address = _connection.Config.DefaultAddress;
 
+        private void OnEnable() => _cursorBlockers.Register(this);
+
+        private void OnDisable() => _cursorBlockers.Unregister(this);
+
+        public bool BlocksAt(Vector2 screenPosition)
+        {
+            // IMGUI tiene el origen arriba a la izquierda; el Input System, abajo a la izquierda.
+            var guiPoint = new Vector2(screenPosition.x, Screen.height - screenPosition.y);
+            return Area.Contains(guiPoint);
+        }
+
         private void OnGUI()
         {
             _wrapStyle ??= new GUIStyle(GUI.skin.label) { wordWrap = true };
             _richStyle ??= new GUIStyle(_wrapStyle) { richText = true };
 
-            GUILayout.BeginArea(new Rect(16f, 16f, WIDTH, 360f), GUI.skin.box);
+            GUILayout.BeginArea(Area, GUI.skin.box);
             GUILayout.Label("<b>Trivias — red local</b>", _richStyle);
 
             switch (_connection.State)
@@ -72,7 +90,7 @@ namespace Trivias.Networking.Components
             if (_connection.IsHost)
                 DrawHostMatchControls();
 
-            GUILayout.Label("Clic: capturar ratón · WASD: moverse · Ratón: mirar · Esc: soltar ratón", _wrapStyle);
+            GUILayout.Label("Partida: WASD moverse · ratón mirar · E/Q/R interactuar · Esc soltar el ratón · clic en la escena para capturarlo", _wrapStyle);
             if (GUILayout.Button("Salir de la sala"))
                 _connection.Leave();
         }
@@ -91,11 +109,13 @@ namespace Trivias.Networking.Components
                 : $"Se necesitan al menos {min} jugadores para empezar.", _wrapStyle);
 
             GUI.enabled = _connection.CanStartMatch;
-            if (GUILayout.Button("Empezar partida", GUILayout.Height(28f)))
+            if (GUILayout.Button("Empezar partida", GUILayout.Height(32f)))
                 _connection.TryStartMatch();
             GUI.enabled = true;
         }
 #else
+        public bool BlocksAt(Vector2 screenPosition) => false;
+
         private void Awake() => Destroy(this);
 #endif
     }

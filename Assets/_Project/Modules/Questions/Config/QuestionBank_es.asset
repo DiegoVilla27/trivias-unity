@@ -1,0 +1,232 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717acdf0a374c45d7a1abb91dda89b6c, type: 3}
+  m_Name: QuestionBank_es
+  m_EditorClassIdentifier: Trivias.Questions::Trivias.Questions.Data.QuestionBank
+  _language: es
+  _questions:
+  - _id: geo-001
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la capital de Francia?"
+    _options:
+    - "Par\xEDs"
+    - Lyon
+    - Marsella
+    - Niza
+    _correctOption: 0
+    _explanation: "Par\xEDs es la capital de Francia y su ciudad m\xE1s poblada."
+    _source: "https://es.wikipedia.org/wiki/Par\xEDs"
+  - _id: cie-001
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 planeta es conocido como el planeta rojo?"
+    _options:
+    - Venus
+    - Marte
+    - "J\xFApiter"
+    - Mercurio
+    _correctOption: 1
+    _explanation: "El \xF3xido de hierro de su superficie le da a Marte su color rojizo."
+    _source: https://es.wikipedia.org/wiki/Marte_(planeta)
+  - _id: nat-001
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntas patas tiene una ara\xF1a?"
+    _options:
+    - Seis
+    - Diez
+    - Ocho
+    - Doce
+    _correctOption: 2
+    _explanation: "Las ara\xF1as son ar\xE1cnidos: tienen ocho patas, a diferencia de los insectos, que tienen seis."
+    _source: https://es.wikipedia.org/wiki/Araneae
+  - _id: geo-002
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el oc\xE9ano m\xE1s grande del mundo?"
+    _options:
+    - "Atl\xE1ntico"
+    - "\xCDndico"
+    - "\xC1rtico"
+    - "Pac\xEDfico"
+    _correctOption: 3
+    _explanation: "El Pac\xEDfico cubre cerca de un tercio de la superficie de la Tierra."
+    _source: "https://es.wikipedia.org/wiki/Oc\xE9ano_Pac\xEDfico"
+  - _id: art-001
+    _category: Arte
+    _difficulty: 1
+    _text: "\xBFQui\xE9n pint\xF3 la Mona Lisa?"
+    _options:
+    - Leonardo da Vinci
+    - "Miguel \xC1ngel"
+    - Rafael
+    - Botticelli
+    _correctOption: 0
+    _explanation: "Leonardo da Vinci la pint\xF3 a principios del siglo XVI; hoy est\xE1 en el Museo del Louvre."
+    _source: https://es.wikipedia.org/wiki/La_Gioconda
+  - _id: dep-001
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos jugadores de cada equipo hay en el campo en un partido de f\xFAtbol?"
+    _options:
+    - Diez
+    - Once
+    - Nueve
+    - Doce
+    _correctOption: 1
+    _explanation: Cada equipo alinea once jugadores, incluido el portero.
+    _source: "https://es.wikipedia.org/wiki/Reglas_del_f\xFAtbol"
+  - _id: his-001
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 a\xF1o pis\xF3 el ser humano la Luna por primera vez?"
+    _options:
+    - 1965
+    - 1972
+    - 1969
+    - 1959
+    _correctOption: 2
+    _explanation: Neil Armstrong y Buzz Aldrin llegaron a la Luna con el Apolo 11 en julio de 1969.
+    _source: https://es.wikipedia.org/wiki/Apolo_11
+  - _id: cie-002
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el s\xEDmbolo qu\xEDmico del oro?"
+    _options:
+    - Ag
+    - Or
+    - Go
+    - Au
+    _correctOption: 3
+    _explanation: "Au viene del lat\xEDn aurum. Ag es la plata."
+    _source: https://es.wikipedia.org/wiki/Oro
+  - _id: mus-001
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 compositor escribi\xF3 \xABLas cuatro estaciones\xBB?"
+    _options:
+    - Antonio Vivaldi
+    - Johann Sebastian Bach
+    - Wolfgang Amadeus Mozart
+    - "Georg Friedrich H\xE4ndel"
+    _correctOption: 0
+    _explanation: "Vivaldi public\xF3 estos cuatro conciertos para viol\xEDn en 1725."
+    _source: https://es.wikipedia.org/wiki/Las_cuatro_estaciones
+  - _id: cie-003
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el hueso m\xE1s largo del cuerpo humano?"
+    _options:
+    - Tibia
+    - "F\xE9mur"
+    - "H\xFAmero"
+    - "Peron\xE9"
+    _correctOption: 1
+    _explanation: "El f\xE9mur, el hueso del muslo, es el m\xE1s largo y resistente del cuerpo."
+    _source: "https://es.wikipedia.org/wiki/F\xE9mur"
+  - _id: lit-001
+    _category: Literatura
+    _difficulty: 2
+    _text: "\xBFQui\xE9n escribi\xF3 \xABCien a\xF1os de soledad\xBB?"
+    _options:
+    - Mario Vargas Llosa
+    - "Julio Cort\xE1zar"
+    - "Gabriel Garc\xEDa M\xE1rquez"
+    - Pablo Neruda
+    _correctOption: 2
+    _explanation: "Gabriel Garc\xEDa M\xE1rquez la public\xF3 en 1967; recibi\xF3 el Nobel de Literatura en 1982."
+    _source: "https://es.wikipedia.org/wiki/Cien_a\xF1os_de_soledad"
+  - _id: cie-004
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el gas m\xE1s abundante en la atm\xF3sfera terrestre?"
+    _options:
+    - "Ox\xEDgeno"
+    - "Di\xF3xido de carbono"
+    - "Arg\xF3n"
+    - "Nitr\xF3geno"
+    _correctOption: 3
+    _explanation: "El nitr\xF3geno es alrededor del 78 % del aire; el ox\xEDgeno, cerca del 21 %."
+    _source: "https://es.wikipedia.org/wiki/Atm\xF3sfera_terrestre"
+  - _id: geo-003
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el r\xEDo m\xE1s largo de Europa?"
+    _options:
+    - Volga
+    - Danubio
+    - Rin
+    - Loira
+    _correctOption: 0
+    _explanation: El Volga, en Rusia, mide unos 3.500 km y desemboca en el mar Caspio.
+    _source: https://es.wikipedia.org/wiki/Volga
+  - _id: cie-005
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el elemento qu\xEDmico m\xE1s abundante en la corteza terrestre?"
+    _options:
+    - Silicio
+    - "Ox\xEDgeno"
+    - Aluminio
+    - Hierro
+    _correctOption: 1
+    _explanation: "El ox\xEDgeno supone casi la mitad de la masa de la corteza, sobre todo en forma de silicatos y \xF3xidos."
+    _source: "https://es.wikipedia.org/wiki/Abundancia_de_los_elementos_qu\xEDmicos"
+  - _id: geo-004
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pa\xEDs tiene m\xE1s husos horarios, contando sus territorios de ultramar?"
+    _options:
+    - Rusia
+    - Estados Unidos
+    - Francia
+    - Reino Unido
+    _correctOption: 2
+    _explanation: Gracias a sus territorios de ultramar, Francia abarca 12 husos horarios.
+    _source: https://es.wikipedia.org/wiki/Huso_horario
+  - _id: geo-005
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es la capital de Australia?"
+    _options:
+    - "S\xEDdney"
+    - Melbourne
+    - Perth
+    - Canberra
+    _correctOption: 3
+    _explanation: "Canberra se construy\xF3 como capital en el siglo XX, como acuerdo entre S\xEDdney y Melbourne."
+    _source: https://es.wikipedia.org/wiki/Canberra
+  - _id: cie-006
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos huesos tiene el cuerpo humano adulto?"
+    _options:
+    - 206
+    - 212
+    - 198
+    - 220
+    _correctOption: 0
+    _explanation: "Un adulto tiene 206 huesos; al nacer hay m\xE1s, porque varios se fusionan con el crecimiento."
+    _source: https://es.wikipedia.org/wiki/Esqueleto_humano
+  - _id: his-002
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o cay\xF3 el Muro de Berl\xEDn?"
+    _options:
+    - 1987
+    - 1989
+    - 1991
+    - 1985
+    _correctOption: 1
+    _explanation: "El muro cay\xF3 el 9 de noviembre de 1989; la reunificaci\xF3n alemana lleg\xF3 en 1990."
+    _source: "https://es.wikipedia.org/wiki/Ca\xEDda_del_Muro_de_Berl\xEDn"

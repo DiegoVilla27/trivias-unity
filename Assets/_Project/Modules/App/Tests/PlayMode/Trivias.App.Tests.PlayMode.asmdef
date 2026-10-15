@@ -11,7 +11,9 @@
         "Unity.Cinemachine",
         "Trivias.Money",
         "Unity.TextMeshPro",
-        "Trivias.Interaction"
+        "Trivias.Interaction",
+        "Trivias.Match",
+        "Trivias.Questions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

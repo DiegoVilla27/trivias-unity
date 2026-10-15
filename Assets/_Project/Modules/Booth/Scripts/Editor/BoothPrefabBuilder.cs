@@ -25,6 +25,7 @@ namespace Trivias.Booth.Editor
         public const string TRAY = "Tray";
         public const string TRAY_SURFACE = "Tray/Surface";
         public const string TRAY_TOTAL_LABEL = "TotalLabel";
+        public const string ANSWER_LABEL = "AnswerLabel";
 
         private static readonly (string Letter, Color Color)[] Answers =
         {
@@ -60,6 +61,14 @@ namespace Trivias.Booth.Editor
             var letter = EditorAssets.CreateWorldText(LETTER, t, "?", 14f, Color.white,
                 new Vector3(0f, 1.6f, 0.71f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.6f, 1.6f));
             letter.fontStyle = FontStyles.Bold;
+
+            // Texto de la respuesta sobre la cabina; lo rellena el módulo Match.
+            var answer = EditorAssets.CreateWorldText(ANSWER_LABEL, t, "?", 4f, Color.white,
+                new Vector3(0f, 3.05f, 0.8f), Quaternion.Euler(0f, 180f, 0f), new Vector2(4.2f, 0.9f));
+            answer.fontStyle = FontStyles.Bold;
+            answer.outlineWidth = 0.22f;
+            answer.outlineColor = Color.black;
+            answer.textWrappingMode = TextWrappingModes.Normal;
 
             var tray = EditorAssets.CreateEmpty(TRAY, t, new Vector3(-1.45f, 0f, 0.9f)).transform;
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Pedestal", tray, new Vector3(0f, 0.4f, 0f), new Vector3(1.0f, 0.8f, 0.6f), navy, layer, true);

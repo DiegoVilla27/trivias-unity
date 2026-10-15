@@ -19,9 +19,13 @@ namespace Trivias.Money.Data
 
         public IMoneySession Session { get; private set; }
 
-        public void Attach(IMoneySession session)
+        /// <summary>Solo en el host: control del dinero para el flujo de la partida (bloquear y resolver).</summary>
+        public IMoneyAuthority Authority { get; private set; }
+
+        public void Attach(IMoneySession session, IMoneyAuthority authority)
         {
             Session = session;
+            Authority = authority;
             Changed?.Invoke(ALL);
         }
 
@@ -30,12 +34,17 @@ namespace Trivias.Money.Data
             if (Session != session)
                 return;
             Session = null;
+            Authority = null;
             Changed?.Invoke(ALL);
         }
 
         public void NotifyChanged(int index) => Changed?.Invoke(index);
 
-        private void OnEnable() => Session = null;
+        private void OnEnable()
+        {
+            Session = null;
+            Authority = null;
+        }
     }
 
     /// <summary>Lo que mesa y bandejas necesitan del sistema de dinero en red.</summary>
@@ -43,7 +52,24 @@ namespace Trivias.Money.Data
     {
         MoneyLedger Ledger { get; }
         ulong LocalClientId { get; }
+
+        /// <summary>Apuestas cerradas: no se puede coger ni dejar dinero.</summary>
+        bool IsLocked { get; }
+
         void RequestTableInteraction(InteractionAction action);
         void RequestTrayInteraction(int tray, InteractionAction action);
+    }
+
+    /// <summary>Control del dinero que solo tiene el host (lo usa el módulo Match).</summary>
+    public interface IMoneyAuthority
+    {
+        long TotalInPlay { get; }
+
+        /// <summary>Dinero que se perdería al verificar ahora por no estar en una bandeja (regla provisional).</summary>
+        long UnplacedTotal { get; }
+
+        void SetLocked(bool locked);
+
+        RoundOutcome ResolveRound(int correctTray, int multiplier, bool loseUnplaced);
     }
 }
