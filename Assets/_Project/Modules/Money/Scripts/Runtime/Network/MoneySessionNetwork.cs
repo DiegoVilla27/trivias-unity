@@ -176,6 +176,17 @@ namespace Trivias.Money.Network
             return outcome;
         }
 
+        public void ResetForNewMatch()
+        {
+            if (!IsServer)
+                return;
+
+            _changed.Clear();
+            _ledger.ResetToStart(_config.StartingBundles, _changed);
+            CommitChanged();
+            _locked.Value = true;
+        }
+
         private long CarriedTotal()
         {
             long total = 0;

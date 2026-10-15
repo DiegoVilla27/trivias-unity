@@ -75,5 +75,8 @@ namespace Trivias.Money.Data
         void SetLocked(bool locked);
 
         RoundOutcome ResolveRound(int correctTray, int multiplier, bool loseUnplaced);
+
+        /// <summary>Vuelve al capital inicial en la mesa y bloquea el dinero (sala de espera).</summary>
+        void ResetForNewMatch();
     }
 }

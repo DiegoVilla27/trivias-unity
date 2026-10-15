@@ -110,6 +110,18 @@ namespace Trivias.Money.Logic
             return new RoundOutcome(lost, kept, bonus, TotalInPlay());
         }
 
+        /// <summary>Nueva partida: retira todo el dinero y vuelve a poner el capital inicial en fajos sobre la mesa.</summary>
+        public void ResetToStart(int startingBundles, List<int> changed)
+        {
+            for (var i = 0; i < _items.Count; i++)
+            {
+                if (_items[i].Place != MoneyPlace.Lost)
+                    Retire(i, changed);
+            }
+            for (var i = 0; i < startingBundles; i++)
+                changed.Add(AddToTable(Denomination.Bundle));
+        }
+
         // ---- Estación de cambio (GDD 4.2): conserva el valor exacto, sin comisión ----
 
         /// <summary>Cuántos objetos de la denominación anterior equivalen a uno de esta (10 en la configuración actual).</summary>

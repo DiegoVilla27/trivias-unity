@@ -30,6 +30,10 @@ namespace Trivias.Player.Network
         private readonly NetworkVariable<bool> _eliminated = new(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+        // Cada incremento pide al dueño volver a su punto de aparición (nueva partida).
+        private readonly NetworkVariable<byte> _respawnSequence = new(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
         // ---- IPlayerAvatar ----
 
         public ulong ClientId => OwnerClientId;
@@ -44,6 +48,14 @@ namespace Trivias.Player.Network
                 _eliminated.Value = true;
         }
 
+        public void Respawn()
+        {
+            if (!IsServer)
+                return;
+            _eliminated.Value = false;
+            _respawnSequence.Value++;
+        }
+
         // ---- Red ----
 
         public override void OnNetworkSpawn()
@@ -53,23 +65,30 @@ namespace Trivias.Player.Network
 
             _displayName.OnValueChanged += OnDisplayNameChanged;
             _eliminated.OnValueChanged += OnEliminatedChanged;
+            _respawnSequence.OnValueChanged += OnRespawnRequested;
             _nameTag.SetName(DisplayName);
             _avatars.Register(this);
 
             if (!IsOwner)
                 return;
 
-            _spawnPoints.Get((int)OwnerClientId, out var position, out var rotation);
-            _motor.Teleport(position, rotation);
+            PlaceAtSpawn();
             SetLocalControl(true);
             _nameTag.gameObject.SetActive(false);
             _localPlayerCameraTarget.Raise(_look.CameraRoot);
+        }
+
+        private void PlaceAtSpawn()
+        {
+            _spawnPoints.Get((int)OwnerClientId, out var position, out var rotation);
+            _motor.Teleport(position, rotation);
         }
 
         public override void OnNetworkDespawn()
         {
             _displayName.OnValueChanged -= OnDisplayNameChanged;
             _eliminated.OnValueChanged -= OnEliminatedChanged;
+            _respawnSequence.OnValueChanged -= OnRespawnRequested;
             _avatars.Unregister(OwnerClientId);
             if (!IsOwner)
                 return;
@@ -89,6 +108,18 @@ namespace Trivias.Player.Network
         {
             _nameTag.SetName(current.ToString());
             _avatars.NotifyChanged(OwnerClientId);
+        }
+
+        private void OnRespawnRequested(byte previous, byte current)
+        {
+            _expulsion.Restore(showNameTag: !IsOwner);
+            _avatars.NotifyChanged(OwnerClientId);
+            if (!IsOwner)
+                return;
+
+            PlaceAtSpawn();
+            SetLocalControl(true);
+            _localPlayerCameraTarget.Raise(_look.CameraRoot);
         }
 
         private void OnEliminatedChanged(bool previous, bool current)

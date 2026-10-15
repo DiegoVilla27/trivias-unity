@@ -38,6 +38,8 @@ namespace Trivias.Networking.Editor
             SerializedWiring.Set(connection, "_transport", transport);
             SerializedWiring.Set(connection, "_config", config);
             SerializedWiring.Set(connection, "_matchStartRequested", SharedAssets.MatchStartRequested());
+            SerializedWiring.Set(connection, "_returnedToLobby", SharedAssets.ReturnedToLobby());
+            SerializedWiring.Set(connection, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
 
             var panel = root.AddComponent<DebugConnectionPanel>();
             SerializedWiring.Set(panel, "_connection", connection);

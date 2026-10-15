@@ -14,6 +14,8 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +29,8 @@ namespace Trivias.App.Editor
         public GameObject CameraRig;
         public GameObject InteractionHud;
         public GameObject MatchHud;
+        public GameObject PresenterHud;
+        public GameObject ResultsScreen;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -71,6 +75,9 @@ namespace Trivias.App.Editor
             PlaceCameraRig(prefabs.CameraRig);
             PrefabUtility.InstantiatePrefab(prefabs.InteractionHud);
             PrefabUtility.InstantiatePrefab(prefabs.MatchHud);
+            PrefabUtility.InstantiatePrefab(prefabs.PresenterHud);
+            PrefabUtility.InstantiatePrefab(prefabs.ResultsScreen);
+            CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(SCENE_PATH, true) };
@@ -191,6 +198,14 @@ namespace Trivias.App.Editor
                 Quaternion.LookRotation(new Vector3(0f, 1.5f, 5f) - new Vector3(0f, 9f, -16f)));
             var mainCamera = rig.transform.Find("MainCamera");
             mainCamera.SetPositionAndRotation(overview.position, overview.rotation);
+        }
+
+        /// <summary>Necesario para los botones de interfaz (pantalla de resultados), con el Input System.</summary>
+        private static void CreateEventSystem()
+        {
+            var eventSystem = new GameObject("EventSystem");
+            eventSystem.AddComponent<EventSystem>();
+            eventSystem.AddComponent<InputSystemUIInputModule>();
         }
 
         private static void CreateLighting()

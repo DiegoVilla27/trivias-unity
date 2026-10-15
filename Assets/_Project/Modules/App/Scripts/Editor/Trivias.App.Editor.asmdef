@@ -28,7 +28,9 @@
         "Trivias.Money",
         "Trivias.Questions",
         "Trivias.SelfBet.Editor",
-        "Trivias.SelfBet"
+        "Trivias.SelfBet",
+        "Trivias.Results.Editor",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

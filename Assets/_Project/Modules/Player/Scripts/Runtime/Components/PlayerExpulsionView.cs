@@ -16,6 +16,25 @@ namespace Trivias.Player.Components
         [SerializeField, Min(0f)] private float _height = 8f;
         [SerializeField] private float _spinDegreesPerSecond = 720f;
 
+        private Vector3 _modelRestPosition;
+        private Quaternion _modelRestRotation;
+
+        private void Awake()
+        {
+            _modelRestPosition = _model.localPosition;
+            _modelRestRotation = _model.localRotation;
+        }
+
+        /// <summary>Deshace la expulsión para una nueva partida.</summary>
+        public void Restore(bool showNameTag)
+        {
+            StopAllCoroutines();
+            _model.gameObject.SetActive(true);
+            _model.SetLocalPositionAndRotation(_modelRestPosition, _modelRestRotation);
+            _controller.enabled = true;
+            _nameTag.SetActive(showNameTag);
+        }
+
         public void Play()
         {
             // Deja de ocupar sitio en el plató enseguida para no estorbar a los demás.

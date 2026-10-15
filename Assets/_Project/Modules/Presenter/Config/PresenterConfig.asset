@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120f0f76f0a13493a8533f32a1e0bdf4, type: 3}
+  m_Name: PresenterConfig
+  m_EditorClassIdentifier: Trivias.Presenter::Trivias.Presenter.Data.PresenterConfig
+  _lineSeconds: 6
+  _longDiscussionAfter: 45
+  _longDiscussionRepeat: 40
+  _selfBetCooldown: 10

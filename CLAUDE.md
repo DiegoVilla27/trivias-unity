@@ -98,18 +98,22 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
 | Money | Libro de cuentas (Logic), sesión en red, objetos visibles con pool, mesa y bandejas interactivas, bloqueo y resolución de rondas | Shared |
 | Questions | Banco de preguntas (JSON en `Content/` importado y validado en edición), planificación y orden de opciones | Shared |
-| Match | Flujo de la partida en red (fases, verificación, revelación, victoria/derrota), textos de cabinas y pantalla | Shared, Questions, Money |
+| Match | Flujo de la partida en red (fases, verificación, revelación, victoria/derrota, resultado, volver a jugar), textos de cabinas y pantalla | Shared, Questions, Money, SelfBet |
 | VerifyButton | Botón VERIFICAR interactivo | Shared, Match, Money, Questions |
-| HUD | Pregunta, opciones, estado, cuenta atrás y dinero del equipo | Shared, Match, Money, Questions |
+| HUD | Pregunta, opciones, estado, cuenta atrás, dinero del equipo y comodines | Shared, Match, Money, Questions, SelfBet |
+| Exchange | Estación de cambio interactiva (agrupar y dividir) | Shared, Money |
+| SelfBet | Comodines: reparto, reserva, zonas de apuesta, confinamiento, multiplicador y expulsión | Shared |
+| Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), elección por evento, bocadillo y subtítulo | Shared, Match, Money, SelfBet, Questions |
+| Results | Pantalla de resultados, volver a jugar y salir | Shared, Match, Money, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
-| Booth, Table, Exchange, Presenter, Stage | De momento solo constructores de prefabs (Editor) | Shared (Editor) |
+| Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
 
 Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `CarrySocketRegistry`, `MoneyRuntime`, `MatchRuntime`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
 | App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
 
 Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-Módulos previstos aún sin crear: `SelfBet`, `Results`, `Voice`.
+Módulos previstos aún sin crear: `Voice`, `Shop`, `Ranking`.
 
 ## 4. Flujo de trabajo con Unity
 

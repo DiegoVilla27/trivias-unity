@@ -10,6 +10,7 @@ using Trivias.Networking.Editor;
 using Trivias.Player.Editor;
 using Trivias.Presenter.Editor;
 using Trivias.Questions.Editor;
+using Trivias.Results.Editor;
 using Trivias.SelfBet.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Stage.Editor;
@@ -56,14 +57,19 @@ namespace Trivias.App.Editor
                 SharedAssets.MatchStartRequested());
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(matchSession);
 
+            var presenterSession = PresenterPrefabBuilder.BuildSession(matchRuntime, SelfBetBuilder.Runtime());
+            NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(presenterSession);
+
             var prefabs = new StageScenePrefabs
             {
                 NetworkManager = networkManager,
                 Player = player,
-                SessionPrefabs = new[] { moneySession, selfBetSession, matchSession },
+                SessionPrefabs = new[] { moneySession, selfBetSession, matchSession, presenterSession },
                 CameraRig = CameraRigPrefabBuilder.Build(cameraTarget),
                 InteractionHud = InteractionBuilder.BuildHud(),
                 MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime()),
+                PresenterHud = PresenterPrefabBuilder.BuildHud(),
+                ResultsScreen = ResultsPrefabBuilder.Build(matchRuntime),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),
@@ -71,7 +77,7 @@ namespace Trivias.App.Editor
                 Presenter = PresenterPrefabBuilder.Build(),
                 Environment = StageEnvironmentPrefabBuilder.Build(),
                 NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(
-                    player, moneySession, selfBetSession, matchSession),
+                    player, moneySession, selfBetSession, matchSession, presenterSession),
             };
 
             AssetDatabase.SaveAssets();

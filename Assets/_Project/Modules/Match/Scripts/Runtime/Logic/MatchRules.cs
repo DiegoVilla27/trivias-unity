@@ -25,6 +25,22 @@ namespace Trivias.Match.Logic
             _ => questionNumber > 0 ? questionNumber - 1 : 0,
         };
 
+        /// <summary>
+        /// Fichas para cada jugador (GDD 11): se entrega solo el tramo alcanzado. Cada tramo exige un mínimo de preguntas
+        /// superadas; el último (las 15) exige además la victoria. <paramref name="minQuestions"/> va en orden creciente.
+        /// </summary>
+        public static int TokensFor(int questionsPassed, bool victory, int[] minQuestions, int[] tokens, int totalQuestions)
+        {
+            var reward = 0;
+            for (var tier = 0; tier < minQuestions.Length; tier++)
+            {
+                var needsVictory = minQuestions[tier] >= totalQuestions;
+                if (questionsPassed >= minQuestions[tier] && (!needsVictory || victory))
+                    reward = tokens[tier];
+            }
+            return reward;
+        }
+
         public static bool AcceptsBets(MatchPhase phase) => phase == MatchPhase.Lobby || phase == MatchPhase.Betting;
 
         public static bool IsFinished(MatchPhase phase) => phase == MatchPhase.Victory || phase == MatchPhase.Defeat;

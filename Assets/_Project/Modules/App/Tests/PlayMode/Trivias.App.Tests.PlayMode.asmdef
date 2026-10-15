@@ -15,7 +15,9 @@
         "Trivias.Match",
         "Trivias.Questions",
         "Trivias.SelfBet",
-        "Trivias.Exchange"
+        "Trivias.Exchange",
+        "Trivias.Presenter",
+        "Trivias.Results"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

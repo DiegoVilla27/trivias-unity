@@ -73,6 +73,15 @@ namespace Trivias.Match.Data
         /// <summary>Dinero que se perdería al verificar ahora por estar fuera de las bandejas (regla provisional).</summary>
         long MoneyAtRisk { get; }
 
+        /// <summary>Resultado final (válido en Victoria o Derrota).</summary>
+        MatchResult Result { get; }
+
+        /// <summary>El jugador local es el host (quien puede volver a la sala tras la partida).</summary>
+        bool IsHost { get; }
+
         void RequestVerify();
+
+        /// <summary>Host, tras terminar: vuelve todo a la sala de espera para jugar otra partida.</summary>
+        void RequestReturnToLobby();
     }
 }

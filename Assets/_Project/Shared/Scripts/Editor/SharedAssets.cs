@@ -19,6 +19,8 @@ namespace Trivias.Shared.Editor
         private const string PLAYER_CONTROL_GATE_PATH = CONFIG_ROOT + "/Gameplay/PlayerControlGate.asset";
         private const string PLAYER_MOVEMENT_LIMIT_PATH = CONFIG_ROOT + "/Gameplay/PlayerMovementLimit.asset";
         private const string VERIFY_FROM_ZONE_PATH = CONFIG_ROOT + "/Events/VerifyFromZoneRequested.asset";
+        private const string RETURNED_TO_LOBBY_PATH = CONFIG_ROOT + "/Events/ReturnedToLobby.asset";
+        private const string LEAVE_ROOM_REQUESTED_PATH = CONFIG_ROOT + "/Events/LeaveRoomRequested.asset";
         private const string CURSOR_CAPTURE_BLOCKERS_PATH = CONFIG_ROOT + "/Input/CursorCaptureBlockers.asset";
 
         public static TransformEventChannel LocalPlayerCameraTarget() =>
@@ -33,6 +35,14 @@ namespace Trivias.Shared.Editor
         /// <summary>Petición local de verificar desde una zona de apuesta (cuando todos los activos están apostados).</summary>
         public static VoidEventChannel VerifyFromZoneRequested() =>
             EditorAssets.GetOrCreateAsset<VoidEventChannel>(VERIFY_FROM_ZONE_PATH);
+
+        /// <summary>Lo lanza el host al volver a la sala de espera tras una partida.</summary>
+        public static VoidEventChannel ReturnedToLobby() =>
+            EditorAssets.GetOrCreateAsset<VoidEventChannel>(RETURNED_TO_LOBBY_PATH);
+
+        /// <summary>Petición local de salir de la sala (p. ej. desde la pantalla de resultados).</summary>
+        public static VoidEventChannel LeaveRoomRequested() =>
+            EditorAssets.GetOrCreateAsset<VoidEventChannel>(LEAVE_ROOM_REQUESTED_PATH);
 
         public static CursorCaptureBlockers CursorCaptureBlockers() =>
             EditorAssets.GetOrCreateAsset<CursorCaptureBlockers>(CURSOR_CAPTURE_BLOCKERS_PATH);

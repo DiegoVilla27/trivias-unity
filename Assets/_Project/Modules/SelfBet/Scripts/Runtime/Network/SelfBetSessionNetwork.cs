@@ -109,6 +109,13 @@ namespace Trivias.SelfBet.Network
             return multiplier;
         }
 
+        public void ResetForNewMatch()
+        {
+            _open.Value = false;
+            _book.Start(System.Array.Empty<ulong>());
+            Publish();
+        }
+
         // ---- Validación del host ----
 
         private bool IsInZone(ulong client, int booth, float radius)

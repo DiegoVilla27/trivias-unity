@@ -1,0 +1,105 @@
+{
+  "language": "es",
+  "phrases": [
+    {
+      "id": "welcome-01",
+      "event": "welcome",
+      "text": "¡Bienvenidos a Trivias! Hoy el dinero es vuestro… por poco tiempo."
+    },
+    {
+      "id": "welcome-02",
+      "event": "welcome",
+      "text": "Quince preguntas, cien mil y un decorado que necesita financiación. ¡Empezamos!"
+    },
+    {
+      "id": "discussion-01",
+      "event": "long_discussion",
+      "text": "Tranquilos, el plató cobra por horas. Seguid debatiendo."
+    },
+    {
+      "id": "discussion-02",
+      "event": "long_discussion",
+      "text": "Llevo un rato esperando. El botón no se pulsa solo, aunque lo intente."
+    },
+    {
+      "id": "selfbet-01",
+      "event": "self_bet",
+      "text": "¡Alguien se ha subido a la cabina! Qué valor… o qué poca memoria."
+    },
+    {
+      "id": "selfbet-02",
+      "event": "self_bet",
+      "text": "Un concursante se apuesta a sí mismo. El tubo ya se está calentando."
+    },
+    {
+      "id": "selfbet-03",
+      "event": "self_bet",
+      "text": "Más gente en las cabinas. Me encanta cuando confían tanto."
+    },
+    {
+      "id": "countdown-01",
+      "event": "countdown",
+      "text": "Tres segundos para arrepentiros. Para cambiar, ya es tarde."
+    },
+    {
+      "id": "countdown-02",
+      "event": "countdown",
+      "text": "Apuestas cerradas. Respirad hondo, que el tubo no espera."
+    },
+    {
+      "id": "success-01",
+      "event": "success",
+      "text": "¡Correcto! Os quedan {premio}. No os acostumbréis."
+    },
+    {
+      "id": "success-02",
+      "event": "success",
+      "text": "Acierto en la pregunta {ronda}. La siguiente no será tan amable."
+    },
+    {
+      "id": "success-03",
+      "event": "success",
+      "text": "Multiplicador x{multiplicador}. El presupuesto del decorado está llorando."
+    },
+    {
+      "id": "loss-01",
+      "event": "loss",
+      "text": "Habéis perdido {cantidad}. El decorado os lo agradece."
+    },
+    {
+      "id": "loss-02",
+      "event": "loss",
+      "text": "Aquí nadie pierde dinero: financia el decorado. Hoy, {cantidad}."
+    },
+    {
+      "id": "loss-03",
+      "event": "loss",
+      "text": "El tubo tiene más certezas que vosotros."
+    },
+    {
+      "id": "loss-04",
+      "event": "loss",
+      "text": "Quedan {supervivientes} concursantes en pie. El tubo pide más."
+    },
+    {
+      "id": "victory-01",
+      "event": "victory",
+      "text": "¡Victoria! Os lleváis {premio}. Contad bien el cheque, que es de cartón."
+    },
+    {
+      "id": "victory-02",
+      "event": "victory",
+      "text": "Quince preguntas superadas. Me duele decirlo: lo habéis hecho bien."
+    },
+    {
+      "id": "defeat-01",
+      "event": "defeat",
+      "text": "Fin del concurso. Os habéis quedado sin nada, que es lo justo."
+    },
+    {
+      "id": "defeat-02",
+      "event": "defeat",
+      "text": "Derrota. El decorado ya tiene presupuesto para la próxima temporada."
+    }
+  ]
+}

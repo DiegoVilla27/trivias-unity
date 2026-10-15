@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b60f7bc59db410282f5307a5517ecc, type: 3}
+  m_Name: PresenterCatalog_es
+  m_EditorClassIdentifier: Trivias.Presenter::Trivias.Presenter.Data.PresenterCatalog
+  _language: es
+  _phrases:
+  - _id: welcome-01
+    _event: 0
+    _text: "\xA1Bienvenidos a Trivias! Hoy el dinero es vuestro\u2026 por poco tiempo."
+  - _id: welcome-02
+    _event: 0
+    _text: "Quince preguntas, cien mil y un decorado que necesita financiaci\xF3n. \xA1Empezamos!"
+  - _id: discussion-01
+    _event: 1
+    _text: "Tranquilos, el plat\xF3 cobra por horas. Seguid debatiendo."
+  - _id: discussion-02
+    _event: 1
+    _text: "Llevo un rato esperando. El bot\xF3n no se pulsa solo, aunque lo intente."
+  - _id: selfbet-01
+    _event: 2
+    _text: "\xA1Alguien se ha subido a la cabina! Qu\xE9 valor\u2026 o qu\xE9 poca memoria."
+  - _id: selfbet-02
+    _event: 2
+    _text: "Un concursante se apuesta a s\xED mismo. El tubo ya se est\xE1 calentando."
+  - _id: selfbet-03
+    _event: 2
+    _text: "M\xE1s gente en las cabinas. Me encanta cuando conf\xEDan tanto."
+  - _id: countdown-01
+    _event: 3
+    _text: Tres segundos para arrepentiros. Para cambiar, ya es tarde.
+  - _id: countdown-02
+    _event: 3
+    _text: Apuestas cerradas. Respirad hondo, que el tubo no espera.
+  - _id: success-01
+    _event: 4
+    _text: "\xA1Correcto! Os quedan {premio}. No os acostumbr\xE9is."
+  - _id: success-02
+    _event: 4
+    _text: "Acierto en la pregunta {ronda}. La siguiente no ser\xE1 tan amable."
+  - _id: success-03
+    _event: 4
+    _text: "Multiplicador x{multiplicador}. El presupuesto del decorado est\xE1 llorando."
+  - _id: loss-01
+    _event: 5
+    _text: "Hab\xE9is perdido {cantidad}. El decorado os lo agradece."
+  - _id: loss-02
+    _event: 5
+    _text: "Aqu\xED nadie pierde dinero: financia el decorado. Hoy, {cantidad}."
+  - _id: loss-03
+    _event: 5
+    _text: "El tubo tiene m\xE1s certezas que vosotros."
+  - _id: loss-04
+    _event: 5
+    _text: "Quedan {supervivientes} concursantes en pie. El tubo pide m\xE1s."
+  - _id: victory-01
+    _event: 6
+    _text: "\xA1Victoria! Os llev\xE1is {premio}. Contad bien el cheque, que es de cart\xF3n."
+  - _id: victory-02
+    _event: 6
+    _text: "Quince preguntas superadas. Me duele decirlo: lo hab\xE9is hecho bien."
+  - _id: defeat-01
+    _event: 7
+    _text: "Fin del concurso. Os hab\xE9is quedado sin nada, que es lo justo."
+  - _id: defeat-02
+    _event: 7
+    _text: "Derrota. El decorado ya tiene presupuesto para la pr\xF3xima temporada."

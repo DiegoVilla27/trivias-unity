@@ -33,6 +33,32 @@ namespace Trivias.Match.Tests
         public void Victory_CountsAllQuestions() =>
             Assert.That(MatchRules.QuestionsPassed(MatchPhase.Victory, 15), Is.EqualTo(15));
 
+        private static readonly int[] Tiers = { 3, 6, 11, 15 };
+        private static readonly int[] Rewards = { 50, 100, 150, 250 };
+
+        [TestCase(0, false, 0)]
+        [TestCase(2, false, 0)]
+        [TestCase(3, false, 50)]
+        [TestCase(5, false, 50)]
+        [TestCase(6, false, 100)]
+        [TestCase(10, false, 100)]
+        [TestCase(11, false, 150)]
+        [TestCase(14, false, 150)]
+        [TestCase(15, true, 250)]
+        public void Tokens_FollowGddTiers(int passed, bool victory, int expected) =>
+            Assert.That(MatchRules.TokensFor(passed, victory, Tiers, Rewards, 15), Is.EqualTo(expected));
+
+        [Test]
+        public void LosingOnQuestion15_Gives150Tokens() =>
+            Assert.That(MatchRules.TokensFor(MatchRules.QuestionsPassed(MatchPhase.Defeat, 15), false, Tiers, Rewards, 15),
+                Is.EqualTo(150));
+
+        [TestCase(0f, "00:00")]
+        [TestCase(65.9f, "01:05")]
+        [TestCase(754f, "12:34")]
+        public void Duration_IsMinutesAndSeconds(float seconds, string expected) =>
+            Assert.That(MatchResult.FormatDuration(seconds), Is.EqualTo(expected));
+
         [TestCase(MatchPhase.Lobby, true)]
         [TestCase(MatchPhase.Betting, true)]
         [TestCase(MatchPhase.Locked, false)]

@@ -124,6 +124,8 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: d2b50ee0a74da42d98d4efd046a0d152, type: 2}
   _sessionPrefabs: []
   _matchStartRequested: {fileID: 11400000, guid: 13bcfc86c73994acdb677241bf133aee, type: 2}
+  _returnedToLobby: {fileID: 11400000, guid: 0c5b8551d29224925bfafc6aebf05bfc, type: 2}
+  _leaveRoomRequested: {fileID: 11400000, guid: 0234aa05361ae4e0c92b548d6eabbfba, type: 2}
 --- !u!114 &7854950519340292887
 MonoBehaviour:
   m_ObjectHideFlags: 0

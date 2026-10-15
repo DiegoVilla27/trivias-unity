@@ -12,6 +12,7 @@ using Trivias.Shared.Diagnostics;
 using Trivias.Shared.Events;
 using Trivias.Shared.Gameplay;
 using Trivias.Shared.Players;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -35,6 +36,8 @@ namespace Trivias.Match.Network
         [SerializeField] private PlayerAvatarRegistry _avatars;
         [Tooltip("Petición local de verificar desde una zona de apuesta (todos los activos apostados).")]
         [SerializeField] private VoidEventChannel _verifyFromZoneRequested;
+        [Tooltip("Se lanza en el host al volver a la sala de espera; Networking reabre la sala.")]
+        [SerializeField] private VoidEventChannel _returnedToLobby;
 
         private readonly NetworkVariable<MatchPhase> _phase = new(MatchPhase.Lobby);
         private readonly NetworkVariable<byte> _questionNumber = new();
@@ -43,8 +46,10 @@ namespace Trivias.Match.Network
         private readonly NetworkVariable<sbyte> _correctBooth = new(NO_ANSWER);
         private readonly NetworkVariable<double> _phaseEndTime = new();
         private readonly NetworkVariable<RoundSummaryNet> _lastRound = new();
+        private readonly NetworkVariable<MatchResultNet> _result = new();
 
         private int[] _plan; // Solo en el host.
+        private double _startTime; // Solo en el host: inicio común del concurso (GDD 12.2).
         private readonly List<ulong> _eliminatedBuffer = new();
         private readonly List<ulong> _participants = new();
         private bool _notifyPending;
@@ -60,6 +65,16 @@ namespace Trivias.Match.Network
         public RoundOutcome LastRound => _lastRound.Value.ToOutcome();
         public int LastMultiplier => _lastRound.Value.Multiplier;
         public string LastEliminated => _lastRound.Value.Eliminated.ToString();
+
+        public MatchResult Result
+        {
+            get
+            {
+                var result = _result.Value;
+                return new MatchResult(result.Victory, result.QuestionsPassed, result.FinalMoney, result.DurationSeconds,
+                    result.TokensEach, result.Survivors.ToString(), result.Eliminated.ToString());
+            }
+        }
         public long TeamMoney => _money.Session?.Ledger.TotalInPlay() ?? 0;
 
         public long MoneyAtRisk
@@ -92,6 +107,8 @@ namespace Trivias.Match.Network
 
         public void RequestVerify() => VerifyRpc();
 
+        public void RequestReturnToLobby() => ReturnToLobbyRpc();
+
         // ---- Ciclo de red ----
 
         public override void OnNetworkSpawn()
@@ -102,6 +119,7 @@ namespace Trivias.Match.Network
             _optionOrder.OnValueChanged += OnByteChanged;
             _correctBooth.OnValueChanged += OnSByteChanged;
             _lastRound.OnValueChanged += OnRoundChanged;
+            _result.OnValueChanged += OnResultChanged;
             _money.Changed += OnMoneyChanged;
             _selfBet.Changed += OnSelfBetChanged;
             _verifyFromZoneRequested.Register(RequestVerify);
@@ -121,6 +139,7 @@ namespace Trivias.Match.Network
             _optionOrder.OnValueChanged -= OnByteChanged;
             _correctBooth.OnValueChanged -= OnSByteChanged;
             _lastRound.OnValueChanged -= OnRoundChanged;
+            _result.OnValueChanged -= OnResultChanged;
             _money.Changed -= OnMoneyChanged;
             _selfBet.Changed -= OnSelfBetChanged;
             _verifyFromZoneRequested.Unregister(RequestVerify);
@@ -152,7 +171,9 @@ namespace Trivias.Match.Network
                 return;
 
             _notifyPending = false;
-            _playerControl.SetCanMove(_phase.Value != MatchPhase.Lobby);
+            // Solo se juega durante las preguntas: en la sala de espera y en los resultados nadie se mueve.
+            var phase = _phase.Value;
+            _playerControl.SetCanMove(phase == MatchPhase.Betting || phase == MatchPhase.Locked || phase == MatchPhase.Reveal);
             _runtime.NotifyChanged();
         }
 
@@ -185,6 +206,7 @@ namespace Trivias.Match.Network
             _participants.Clear();
             _participants.AddRange(NetworkManager.ConnectedClientsIds);
             _selfBet.Authority.StartMatch(_participants);
+            _startTime = NetworkManager.ServerTime.Time;
             GameLog.Info($"[Partida] Empieza con {_plan.Length} preguntas.", this);
             ShowQuestion(1, random);
         }
@@ -235,8 +257,59 @@ namespace Trivias.Match.Network
                 return;
             }
 
+            _result.Value = BuildResult(next == MatchPhase.Victory);
             _phase.Value = next;
-            GameLog.Info($"[Partida] Fin: {next}.", this);
+            GameLog.Info($"[Partida] Fin: {next} · {MatchResult.FormatDuration(_result.Value.DurationSeconds)}.", this);
+        }
+
+        /// <summary>Tiempo total = fin − inicio, con todo lo que pasó entre medias (GDD 12.2).</summary>
+        private MatchResultNet BuildResult(bool victory)
+        {
+            var phase = victory ? MatchPhase.Victory : MatchPhase.Defeat;
+            var passed = MatchRules.QuestionsPassed(phase, _questionNumber.Value);
+            var tokens = MatchRules.TokensFor(passed, victory, _config.TokenTierMinQuestions, _config.TokenTierRewards,
+                _config.QuestionsPerMatch);
+
+            var survivors = new StringBuilder();
+            var eliminated = new StringBuilder();
+            foreach (var bettor in _selfBet.Session.Book.Bettors)
+            {
+                var names = bettor.IsEliminated ? eliminated : survivors;
+                names.Append(names.Length > 0 ? ", " : string.Empty).Append(_avatars.NameOf(bettor.ClientId));
+            }
+
+            var result = new MatchResultNet
+            {
+                Victory = victory,
+                QuestionsPassed = (byte)passed,
+                FinalMoney = _lastRound.Value.Total,
+                DurationSeconds = (float)(NetworkManager.ServerTime.Time - _startTime),
+                TokensEach = (short)tokens,
+            };
+            result.Survivors.CopyFromTruncated(survivors.ToString());
+            result.Eliminated.CopyFromTruncated(eliminated.ToString());
+            return result;
+        }
+
+        /// <summary>Volver a jugar: todo a la sala de espera (dinero, comodines, concursantes y sala abierta).</summary>
+        [Rpc(SendTo.Server)]
+        private void ReturnToLobbyRpc(RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != NetworkManager.ServerClientId || !MatchRules.IsFinished(_phase.Value))
+                return;
+
+            _money.Authority.ResetForNewMatch();
+            _selfBet.Authority.ResetForNewMatch();
+            foreach (var avatar in _avatars.All)
+                avatar.Respawn();
+
+            _questionNumber.Value = 0;
+            _correctBooth.Value = NO_ANSWER;
+            _lastRound.Value = default;
+            _result.Value = default;
+            _phase.Value = MatchPhase.Lobby;
+            _returnedToLobby.Raise();
+            GameLog.Info("[Partida] De vuelta en la sala de espera.", this);
         }
 
         private void ShowQuestion(int number, System.Random random)
@@ -268,6 +341,7 @@ namespace Trivias.Match.Network
         private void OnUShortChanged(ushort previous, ushort current) => _notifyPending = true;
         private void OnSByteChanged(sbyte previous, sbyte current) => _notifyPending = true;
         private void OnRoundChanged(RoundSummaryNet previous, RoundSummaryNet current) => _notifyPending = true;
+        private void OnResultChanged(MatchResultNet previous, MatchResultNet current) => _notifyPending = true;
         private void OnMoneyChanged(int _) => _notifyPending = true;
         private void OnSelfBetChanged() => _notifyPending = true;
     }

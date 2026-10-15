@@ -1,0 +1,22 @@
+{
+    "name": "Trivias.Presenter",
+    "rootNamespace": "Trivias.Presenter",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Match",
+        "Trivias.Money",
+        "Trivias.SelfBet",
+        "Trivias.Questions",
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

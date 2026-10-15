@@ -82,3 +82,4 @@ MonoBehaviour:
   _selfBet: {fileID: 11400000, guid: 4b88d5d5bbdb54b588074e0a670b51e7, type: 2}
   _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
   _verifyFromZoneRequested: {fileID: 11400000, guid: 17e710c9c2b0d432d88f53f8cad45099, type: 2}
+  _returnedToLobby: {fileID: 11400000, guid: 0c5b8551d29224925bfafc6aebf05bfc, type: 2}

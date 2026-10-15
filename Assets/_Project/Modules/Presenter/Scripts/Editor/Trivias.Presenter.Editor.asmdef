@@ -4,7 +4,12 @@
     "references": [
         "Trivias.Shared",
         "Trivias.Shared.Editor",
-        "Unity.TextMeshPro"
+        "Trivias.Presenter",
+        "Trivias.Match",
+        "Trivias.SelfBet",
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

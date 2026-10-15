@@ -40,6 +40,7 @@ namespace Trivias.Match.Editor
             SerializedWiring.Set(session, "_selfBet", selfBet);
             SerializedWiring.Set(session, "_avatars", SharedAssets.PlayerAvatars());
             SerializedWiring.Set(session, "_verifyFromZoneRequested", SharedAssets.VerifyFromZoneRequested());
+            SerializedWiring.Set(session, "_returnedToLobby", SharedAssets.ReturnedToLobby());
 
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }

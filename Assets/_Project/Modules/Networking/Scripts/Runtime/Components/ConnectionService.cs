@@ -25,6 +25,10 @@ namespace Trivias.Networking.Components
         [SerializeField] private NetworkObject[] _sessionPrefabs = new NetworkObject[0];
         [Tooltip("Se lanza en el host al empezar la partida; la escucha el módulo Match.")]
         [SerializeField] private VoidEventChannel _matchStartRequested;
+        [Tooltip("Lo lanza la partida al volver a la sala de espera: la sala se reabre a nuevos jugadores.")]
+        [SerializeField] private VoidEventChannel _returnedToLobby;
+        [Tooltip("Petición local de salir de la sala (pantalla de resultados).")]
+        [SerializeField] private VoidEventChannel _leaveRoomRequested;
 
         private string _targetAddress;
 
@@ -45,6 +49,8 @@ namespace Trivias.Networking.Components
             _networkManager.ConnectionApprovalCallback = ApproveConnection;
             _networkManager.OnClientConnectedCallback += OnClientConnected;
             _networkManager.OnClientDisconnectCallback += OnClientDisconnected;
+            _returnedToLobby.Register(OnReturnedToLobby);
+            _leaveRoomRequested.Register(Leave);
         }
 
         private void OnDestroy()
@@ -55,6 +61,16 @@ namespace Trivias.Networking.Components
             _networkManager.ConnectionApprovalCallback = null;
             _networkManager.OnClientConnectedCallback -= OnClientConnected;
             _networkManager.OnClientDisconnectCallback -= OnClientDisconnected;
+            _returnedToLobby.Unregister(OnReturnedToLobby);
+            _leaveRoomRequested.Unregister(Leave);
+        }
+
+        private void OnReturnedToLobby()
+        {
+            if (!_networkManager.IsHost)
+                return;
+            MatchStarted = false;
+            SetState(ConnectionState.Connected, "De vuelta en la sala. La sala vuelve a admitir jugadores.");
         }
 
         public bool StartHost()

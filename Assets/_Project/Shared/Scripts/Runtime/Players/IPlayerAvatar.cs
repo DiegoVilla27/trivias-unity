@@ -18,5 +18,8 @@ namespace Trivias.Shared.Players
 
         /// <summary>Solo en el host: elimina al concursante (se replica a todos y reproduce la expulsión).</summary>
         void Eliminate();
+
+        /// <summary>Solo en el host: nueva partida; vuelve a estar activo y a su punto de aparición.</summary>
+        void Respawn();
     }
 }

@@ -68,5 +68,8 @@ namespace Trivias.SelfBet.Data
 
         /// <summary>Resuelve: devuelve el multiplicador y elimina a los apostados en cabinas incorrectas.</summary>
         int Resolve(int correctBooth, List<ulong> eliminated);
+
+        /// <summary>Sala de espera: sin apuestas ni reparto hasta la próxima partida.</summary>
+        void ResetForNewMatch();
     }
 }
