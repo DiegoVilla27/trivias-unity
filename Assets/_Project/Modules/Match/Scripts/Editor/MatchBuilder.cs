@@ -53,11 +53,18 @@ namespace Trivias.Match.Editor
             SerializedWiring.Set(view, "_booth", boothIndex);
         }
 
-        public static void AttachQuestionScreen(GameObject screen, TextMeshPro title)
+        public static void AttachQuestionScreen(GameObject screen, GameObject content, TextMeshPro message,
+            TextMeshPro header, TextMeshPro question, TextMeshPro[] optionTexts, GameObject[] optionBoxes, TextMeshPro status)
         {
             var view = screen.AddComponent<QuestionScreenView>();
             SerializedWiring.Set(view, "_runtime", Runtime());
-            SerializedWiring.Set(view, "_title", title);
+            SerializedWiring.Set(view, "_content", content);
+            SerializedWiring.Set(view, "_message", message);
+            SerializedWiring.Set(view, "_header", header);
+            SerializedWiring.Set(view, "_question", question);
+            SerializedWiring.SetArray(view, "_optionTexts", optionTexts);
+            SerializedWiring.SetArray(view, "_optionBoxes", optionBoxes);
+            SerializedWiring.Set(view, "_status", status);
         }
     }
 }

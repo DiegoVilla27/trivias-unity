@@ -20,7 +20,8 @@
         "Trivias.Results",
         "Trivias.Menu",
         "Trivias.HUD",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Trivias.VerifyButton"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

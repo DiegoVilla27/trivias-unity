@@ -65,7 +65,8 @@ namespace Trivias.App.Editor
             var table = Place(prefabs.Table, Vector3.zero, 0f);
             var exchange = Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
             Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
-            Place(prefabs.Presenter, new Vector3(6.5f, 0f, 13f), 200f);
+            // A un lado de la pantalla, mirando al centro: no tapa las opciones.
+            Place(prefabs.Presenter, new Vector3(10f, 0f, 12.5f), 220f);
             var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
             ConnectMoney(table, exchange, booths);
@@ -157,9 +158,24 @@ namespace Trivias.App.Editor
                     booths[i].transform.Find(BoothPrefabBuilder.ANSWER_LABEL).GetComponent<TextMeshPro>());
             }
 
-            var screen = environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN);
-            MatchBuilder.AttachQuestionScreen(screen.gameObject,
-                environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN_TITLE).GetComponent<TextMeshPro>());
+            var env = environment.transform;
+            TextMeshPro FindText(string path) => env.Find(path).GetComponent<TextMeshPro>();
+
+            var optionTexts = new TextMeshPro[booths.Length];
+            var optionBoxes = new GameObject[booths.Length];
+            for (var i = 0; i < booths.Length; i++)
+            {
+                optionTexts[i] = FindText(StageEnvironmentPrefabBuilder.ScreenOptionText(i));
+                optionBoxes[i] = env.Find(StageEnvironmentPrefabBuilder.ScreenOptionBox(i)).gameObject;
+            }
+
+            MatchBuilder.AttachQuestionScreen(env.Find(StageEnvironmentPrefabBuilder.SCREEN).gameObject,
+                env.Find(StageEnvironmentPrefabBuilder.SCREEN_CONTENT).gameObject,
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_MESSAGE),
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_HEADER),
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_QUESTION),
+                optionTexts, optionBoxes,
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_STATUS));
         }
 
         /// <summary>Une las zonas de apuesta y los nombres de apostados de cada cabina con el módulo SelfBet.</summary>
@@ -197,7 +213,7 @@ namespace Trivias.App.Editor
             // Vista general del plató hasta que aparece el jugador local.
             var overview = rig.transform.Find("PlayerFollowCamera");
             overview.SetPositionAndRotation(new Vector3(0f, 9f, -16f),
-                Quaternion.LookRotation(new Vector3(0f, 1.5f, 5f) - new Vector3(0f, 9f, -16f)));
+                Quaternion.LookRotation(new Vector3(0f, 4f, 8f) - new Vector3(0f, 9f, -16f)));
             var mainCamera = rig.transform.Find("MainCamera");
             mainCamera.SetPositionAndRotation(overview.position, overview.rotation);
         }

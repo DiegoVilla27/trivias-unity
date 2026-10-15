@@ -27,22 +27,9 @@ namespace Trivias.HUD.Editor
             scaler.referenceResolution = new Vector2(1920f, 1080f);
             scaler.matchWidthOrHeight = 0.5f;
 
-            var panel = Panel("QuestionPanel", root.transform, new Vector2(0.5f, 1f), new Vector2(0f, -16f), new Vector2(1280f, 350f));
-            var header = Text("Header", panel, 24f, new Vector2(0f, -14f), new Vector2(1220f, 34f), FontStyles.Bold);
-            header.color = new Color(1f, 0.82f, 0.35f);
-            var question = Text("Question", panel, 38f, new Vector2(0f, -52f), new Vector2(1220f, 96f), FontStyles.Bold);
-
-            var options = new TextMeshProUGUI[4];
-            for (var i = 0; i < options.Length; i++)
-            {
-                var column = i % 2;
-                var row = i / 2;
-                options[i] = Text($"Option{(char)('A' + i)}", panel, 30f,
-                    new Vector2(column == 0 ? -305f : 305f, -156f - row * 44f), new Vector2(590f, 42f), FontStyles.Normal);
-                options[i].alignment = TextAlignmentOptions.Left;
-            }
-
-            var status = Text("Status", panel, 24f, new Vector2(0f, -246f), new Vector2(1220f, 96f), FontStyles.Normal);
+            // La pregunta y las opciones se leen en la pantalla grande del plató; aquí solo el estado de la ronda.
+            var panel = Panel("StatusPanel", root.transform, new Vector2(0.5f, 1f), new Vector2(0f, -16f), new Vector2(760f, 118f));
+            var status = Text("Status", panel, 28f, new Vector2(0f, -10f), new Vector2(720f, 100f), FontStyles.Normal);
 
             var moneyPanel = Panel("TeamMoney", root.transform, new Vector2(1f, 1f), new Vector2(-16f, -16f), new Vector2(300f, 92f));
             var money = Text("Amount", moneyPanel, 34f, new Vector2(0f, -10f), new Vector2(280f, 72f), FontStyles.Normal);
@@ -52,10 +39,7 @@ namespace Trivias.HUD.Editor
 
             var view = root.AddComponent<MatchHudView>();
             SerializedWiring.Set(view, "_runtime", runtime);
-            SerializedWiring.Set(view, "_questionPanel", panel.gameObject);
-            SerializedWiring.Set(view, "_header", header);
-            SerializedWiring.Set(view, "_question", question);
-            SerializedWiring.SetArray(view, "_options", options);
+            SerializedWiring.Set(view, "_statusPanel", panel.gameObject);
             SerializedWiring.Set(view, "_status", status);
             SerializedWiring.Set(view, "_teamMoney", money);
             SerializedWiring.Set(view, "_selfBet", selfBet);

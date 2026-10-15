@@ -56,7 +56,8 @@ namespace Trivias.Booth.Editor
 
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, BODY, t, new Vector3(0f, 1.3f, 0f), new Vector3(1.8f, 2.6f, 1.4f), neutral, layer, true);
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Crown", t, new Vector3(0f, 2.68f, 0f), new Vector3(2.0f, 0.16f, 1.55f), gold, layer, true);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, "Tube", t, new Vector3(0f, 3.9f, 0f), new Vector3(0.7f, 1.1f, 0.7f), gold, layer, true, keepCollider: false);
+            // Remate corto del tubo de expulsión (decorativo): bajo para no tapar la pantalla de preguntas.
+            EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, "Tube", t, new Vector3(0f, 3.16f, 0f), new Vector3(0.7f, 0.4f, 0.7f), gold, layer, true, keepCollider: false);
 
             // Texto mirando a +Z (hacia el centro del plató): TMP se lee mirando a su +Z, por eso gira 180°.
             var letter = EditorAssets.CreateWorldText(LETTER, t, "?", 14f, Color.white,

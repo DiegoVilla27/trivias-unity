@@ -3,7 +3,8 @@
     "rootNamespace": "Trivias.App.Tests",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "Trivias.Shared"
     ],
     "includePlatforms": [
         "Editor"
