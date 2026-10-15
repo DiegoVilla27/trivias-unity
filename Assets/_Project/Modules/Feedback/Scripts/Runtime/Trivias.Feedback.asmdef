@@ -6,7 +6,8 @@
         "Trivias.Match",
         "Trivias.Money",
         "Trivias.SelfBet",
-        "Trivias.Questions"
+        "Trivias.Questions",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

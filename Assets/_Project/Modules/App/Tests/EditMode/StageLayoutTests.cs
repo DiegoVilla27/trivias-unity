@@ -125,6 +125,49 @@ namespace Trivias.App.Tests
             Assert.That(rain.main.loop, Is.True, "Sigue lloviendo mientras se ven los resultados.");
         }
 
+        [Test]
+        public void VictoryPodium_StandsBetweenBoothsAndScreen_WithoutBlockingIt()
+        {
+            var podium = Find("VictoryPodium").transform.position;
+            var frame = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds;
+            Assert.That(podium.z, Is.GreaterThan(9.5f).And.LessThan(frame.min.z - 1f), "Delante de la pantalla, detrás de las cabinas.");
+            Assert.That(Mathf.Abs(podium.x), Is.LessThan(0.5f), "Centrado.");
+
+            var lift = Find("VictoryPodium/Podium/Lift").transform;
+            var top = float.MinValue;
+            foreach (var renderer in lift.GetComponentsInChildren<Renderer>(true))
+            {
+                if (renderer is MeshRenderer)
+                    top = Mathf.Max(top, lift.TransformPoint(renderer.transform.localPosition).y + renderer.transform.lossyScale.y * 0.5f);
+            }
+            Assert.That(top, Is.LessThan(frame.min.y - 1.5f), "El podio no debe tapar la pantalla.");
+            Assert.That(Find("VictoryPodium/Podium").activeSelf, Is.False, "Oculto hasta la victoria.");
+            Assert.That(lift.GetComponentsInChildren<Collider>(true), Is.Empty, "Sin colisiones: no empuja a nadie al subir.");
+        }
+
+        [Test]
+        public void VictoryCheck_FitsInsideTheScreen()
+        {
+            var panel = Find($"{SCREEN}/Panel").GetComponent<Renderer>().bounds;
+            var border = Find($"{SCREEN}/Check/Border").transform.lossyScale;
+            Assert.That(border.x, Is.LessThanOrEqualTo(panel.size.x));
+            Assert.That(border.y, Is.LessThanOrEqualTo(panel.size.y));
+            Assert.That(Find($"{SCREEN}/Check").activeSelf, Is.False, "El cheque solo sale al ganar.");
+        }
+
+        [Test]
+        public void StageSpotlights_PointDownAtTheStage()
+        {
+            var spots = Find("StageLighting").GetComponentsInChildren<Light>();
+            Assert.That(spots.Length, Is.GreaterThanOrEqualTo(4));
+            foreach (var spot in spots)
+            {
+                Assert.That(spot.type, Is.EqualTo(LightType.Spot));
+                Assert.That(spot.transform.forward.y, Is.LessThan(-0.4f), $"{spot.name} debe apuntar hacia el plató.");
+                Assert.That(spot.shadows, Is.EqualTo(LightShadows.None), "Sin sombras: baratos de dibujar.");
+            }
+        }
+
         // ---- Utilidades ----
 
         private GameObject Find(string path)

@@ -6,6 +6,7 @@ using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Data;
 using Trivias.SelfBet.Data;
+using Trivias.Shared.Settings;
 using UnityEngine;
 
 namespace Trivias.Feedback.Components
@@ -21,6 +22,8 @@ namespace Trivias.Feedback.Components
         [SerializeField] private MatchRuntime _match;
         [SerializeField] private MoneyRuntime _money;
         [SerializeField] private SelfBetRuntime _selfBet;
+        [Tooltip("Volúmenes del jugador (general, música, efectos).")]
+        [SerializeField] private GameSettings _settings;
         [SerializeField] private AudioSource _sfx;
         [Tooltip("Dos fuentes para el fundido entre pistas.")]
         [SerializeField] private AudioSource[] _musicSources = new AudioSource[2];
@@ -45,6 +48,8 @@ namespace Trivias.Feedback.Components
             _match.Changed += OnMatchChanged;
             _money.Changed += OnMoneyChanged;
             _selfBet.Changed += OnBetsChanged;
+            _settings.Changed += ApplyMasterVolume;
+            ApplyMasterVolume();
         }
 
         private void OnDisable()
@@ -52,7 +57,11 @@ namespace Trivias.Feedback.Components
             _match.Changed -= OnMatchChanged;
             _money.Changed -= OnMoneyChanged;
             _selfBet.Changed -= OnBetsChanged;
+            _settings.Changed -= ApplyMasterVolume;
         }
+
+        /// <summary>El volumen general afecta a todo lo que suena en el juego.</summary>
+        private void ApplyMasterVolume() => AudioListener.volume = _settings.MasterVolume;
 
         private void OnMatchChanged() => _matchDirty = true;
         private void OnMoneyChanged(int index) => _moneyDirty = true;
@@ -126,7 +135,7 @@ namespace Trivias.Feedback.Components
         {
             var clip = _library.Clip(cue);
             if (clip != null)
-                _sfx.PlayOneShot(clip, _library.Volume(cue));
+                _sfx.PlayOneShot(clip, _library.Volume(cue) * _settings.EffectsVolume);
             CuePlayed?.Invoke(cue);
         }
 
@@ -148,11 +157,12 @@ namespace Trivias.Feedback.Components
 
         private void FadeMusic(float deltaTime)
         {
+            var musicVolume = _library.MusicVolume * _settings.MusicVolume;
             var step = deltaTime * _library.MusicVolume / _library.MusicFadeSeconds;
             for (var i = 0; i < _musicSources.Length; i++)
             {
                 var source = _musicSources[i];
-                var target = i == _activeMusic && source.clip != null ? _library.MusicVolume : 0f;
+                var target = i == _activeMusic && source.clip != null ? musicVolume : 0f;
                 source.volume = Mathf.MoveTowards(source.volume, target, step);
                 if (target == 0f && source.volume <= 0f && source.isPlaying)
                     source.Stop();

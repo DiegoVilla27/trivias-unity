@@ -6,11 +6,16 @@ Referencia: [GDD](GDD.md), secciones 3–5, 9 y 11–12. Diseños de pantallas p
 
 | Pantalla | Información y acciones |
 | --- | --- |
-| Inicio/vestíbulo | Crear/unirse a sala, participantes, apariencia, empezar cuando estén preparados |
+| Menú principal | Crear sala · Unirme a una sala · Cómo se juega · Configuración · Salir |
+| Unirme a una sala | Dirección del host (recuerda la última), Conectar, Volver; valida el formato antes de intentarlo y explica los errores |
+| Sala de espera | Jugadores n/6, fichas, «Invita a tus amigos» (host: dirección a compartir y Copiar), Empezar partida (host), Tienda, Cómo se juega, Salir |
+| Cómo se juega | Tutorial de 6 páginas (objetivo, dinero, verificar, comodín, fichas y tienda, controles) con Anterior/Siguiente. Texto en `Menu/Content/howtoplay_es.json` |
+| Configuración | Volumen general, música y efectos; sensibilidad del ratón; invertir eje vertical; pantalla completa; Restablecer. Se aplica al momento y se guarda al cerrar |
+| Pausa (Esc en partida) | Continuar · Cómo se juega · Configuración · Salir de la sala (con confirmación). La partida sigue para los demás: tu concursante queda quieto y el ratón libre. Esc cierra primero el panel abierto |
 | Concurso | Pantalla del plató: pregunta, respuestas A-D en recuadros de color, ronda, reloj y explicación. HUD: estado de la ronda, dinero y comodines. Viñeta del presentador sobre su cabeza |
 | Conversión | Valor disponible y resultado de agrupar/dividir; acción manual |
 | Espectador | Partida observable y estado de eliminado, sin acciones de ayuda |
-| Resultados | Victoria/derrota, preguntas superadas, premio, tiempo total, supervivientes y fichas por persona |
+| Resultados | Victoria/derrota, preguntas superadas, premio, tiempo total, supervivientes y fichas por persona. Al ganar aparecen tras 5 s de celebración (cheque gigante en la pantalla, podio con placas, lluvia dorada) |
 | Tienda | Desde la sala de espera: fichas, precio, propiedad y comprar/equipar/quitar cosméticos. Se cierra al empezar la partida |
 | Ranking de salida | Categoría por tamaño inicial, dinero, tiempo y participantes |
 

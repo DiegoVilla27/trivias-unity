@@ -54,7 +54,8 @@ namespace Trivias.Match.Editor
         }
 
         public static void AttachQuestionScreen(GameObject screen, GameObject content, TextMeshPro message,
-            TextMeshPro header, TextMeshPro question, TextMeshPro[] optionTexts, GameObject[] optionBoxes, TextMeshPro status)
+            TextMeshPro header, TextMeshPro question, TextMeshPro[] optionTexts, GameObject[] optionBoxes, TextMeshPro status,
+            GameObject check, TextMeshPro checkPayee, TextMeshPro checkAmount)
         {
             var view = screen.AddComponent<QuestionScreenView>();
             SerializedWiring.Set(view, "_runtime", Runtime());
@@ -65,6 +66,9 @@ namespace Trivias.Match.Editor
             SerializedWiring.SetArray(view, "_optionTexts", optionTexts);
             SerializedWiring.SetArray(view, "_optionBoxes", optionBoxes);
             SerializedWiring.Set(view, "_status", status);
+            SerializedWiring.Set(view, "_check", check);
+            SerializedWiring.Set(view, "_checkPayee", checkPayee);
+            SerializedWiring.Set(view, "_checkAmount", checkAmount);
         }
     }
 }

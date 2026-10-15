@@ -61,7 +61,7 @@ El objetivo comercial es una premisa clara y situaciones memorables. La tienda y
 
 Cada pregunta acertada lanza confeti de colores a los lados de la pantalla. El presentador anuncia el resultado. Una victoria muestra una lluvia de confeti dorado en toda la sala, un cheque gigante, supervivientes en el podio y retratos de los eliminados. El resumen muestra preguntas superadas, dinero final, tiempo de ranking y fichas por persona. Se reúne la voz del grupo y todos regresan al vestíbulo para comprar, cambiar de atuendo o repetir.
 
-Las 15 preguntas se dividen en tres bloques de cinco: inicio accesible, dificultad intermedia y final más exigente. Cambian iluminación, música y comentarios; las reglas de apuesta permanecen iguales. (Prototipo: la música ya cambia por bloque; la iluminación aún no.) El tiempo por pregunta marca el ritmo; no hay otra duración máxima de partida.
+Las 15 preguntas se dividen en tres bloques de cinco: inicio accesible, dificultad intermedia y final más exigente. Cambian iluminación, música y comentarios; las reglas de apuesta permanecen iguales. (Prototipo: la música y la iluminación ya cambian por bloque.) El tiempo por pregunta marca el ritmo; no hay otra duración máxima de partida.
 
 ## 4. Dinero y apuestas
 
@@ -392,6 +392,8 @@ Pendientes prioritarios:
 - Abandonos durante la partida resueltos (comodín anulado, derrota sin activos, aviso del presentador) y build para compartir con un clic.
 - Sonido sintetizado por código (efectos de dinero, apuestas, cierre, cuenta atrás, resolución, victoria y derrota) y música por bloque de dificultad.
 - Confeti de colores a los lados de la pantalla en cada acierto y lluvia dorada en toda la sala en la victoria.
+- Menú principal completo (crear, unirse, cómo se juega, configuración, salir), invitación con la dirección a compartir, tutorial, opciones guardadas y menú de pausa con Esc.
+- Victoria con cheque gigante en la pantalla y podio con placas; iluminación del plató por bloque y momento.
 - Se añade tiempo límite para apostar en cada pregunta (90 s, configurable; 0 = sin límite), con cuenta atrás visible y verificación automática al agotarse. Se puede verificar antes.
 - El presentador avisa cuando quedan pocos segundos.
 - El panel de depuración se sustituye por un menú (pantalla principal y sala de espera) que desaparece al empezar la partida; el HUD se simplifica.

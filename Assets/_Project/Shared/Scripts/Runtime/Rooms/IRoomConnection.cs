@@ -17,6 +17,12 @@ namespace Trivias.Shared.Rooms
         bool CanStartMatch { get; }
         string DefaultAddress { get; }
 
+        /// <summary>
+        /// Host: direcciones de este ordenador para invitar a otros, la más útil primero (red virtual, luego local).
+        /// Vacío si no es host.
+        /// </summary>
+        System.Collections.Generic.IReadOnlyList<RoomAddress> ShareableAddresses { get; }
+
         void Host();
         void Join(string address);
         void Leave();

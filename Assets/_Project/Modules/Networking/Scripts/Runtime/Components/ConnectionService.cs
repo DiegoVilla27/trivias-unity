@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using Trivias.Networking.Data;
 using Trivias.Networking.Logic;
 using Trivias.Shared.Diagnostics;
@@ -34,6 +37,8 @@ namespace Trivias.Networking.Components
         [SerializeField] private RoomConnectionRuntime _roomRuntime;
 
         private string _targetAddress;
+        private static readonly IReadOnlyList<RoomAddress> NoAddresses = new RoomAddress[0];
+        private IReadOnlyList<RoomAddress> _shareable = NoAddresses;
 
         public NetworkSessionConfig Config => _config;
         public RoomConnectionState State { get; private set; } = RoomConnectionState.Disconnected;
@@ -76,6 +81,8 @@ namespace Trivias.Networking.Components
         public int MinPlayersToStart => _config.MinPlayersToStart;
         public string DefaultAddress => _config.DefaultAddress;
 
+        public IReadOnlyList<RoomAddress> ShareableAddresses => _networkManager.IsHost ? _shareable : NoAddresses;
+
         public void Host() => StartHost();
 
         public void Join(string address) => StartClient(string.IsNullOrWhiteSpace(address) ? _config.DefaultAddress : address.Trim());
@@ -97,7 +104,10 @@ namespace Trivias.Networking.Components
             _transport.SetConnectionData(_config.DefaultAddress, _config.Port, "0.0.0.0");
             var started = _networkManager.StartHost();
             if (started)
+            {
                 SpawnSessionObjects();
+                _shareable = HostAddressRanker.Rank(LocalAddresses()); // Una vez al abrir la sala.
+            }
             SetState(started ? RoomConnectionState.Connected : RoomConnectionState.Failed,
                 started
                     ? "Sala creada. Los demás jugadores deben pulsar «Unirse»."
@@ -148,6 +158,32 @@ namespace Trivias.Networking.Components
         {
             foreach (var prefab in _sessionPrefabs)
                 Instantiate(prefab).Spawn(destroyWithScene: true);
+        }
+
+        /// <summary>Direcciones IPv4 de los adaptadores activos de este ordenador.</summary>
+        private static IEnumerable<LocalInterfaceAddress> LocalAddresses()
+        {
+            NetworkInterface[] interfaces;
+            try
+            {
+                interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            }
+            catch (NetworkInformationException exception)
+            {
+                GameLog.Warning($"[Red] No se pudieron leer las redes de este equipo: {exception.Message}");
+                yield break;
+            }
+
+            foreach (var adapter in interfaces)
+            {
+                if (adapter.OperationalStatus != OperationalStatus.Up && adapter.OperationalStatus != OperationalStatus.Unknown)
+                    continue;
+                foreach (var unicast in adapter.GetIPProperties().UnicastAddresses)
+                {
+                    if (unicast.Address.AddressFamily == AddressFamily.InterNetwork)
+                        yield return new LocalInterfaceAddress(unicast.Address.ToString(), adapter.Name, adapter.Description);
+                }
+            }
         }
 
         private void ConfigureTimeouts()

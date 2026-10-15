@@ -5,6 +5,7 @@ using Trivias.Shared.Interaction;
 using Trivias.Shared.Players;
 using Trivias.Shared.Profile;
 using Trivias.Shared.Rooms;
+using Trivias.Shared.Settings;
 using Trivias.Shared.Spawning;
 
 namespace Trivias.Shared.Editor
@@ -25,6 +26,7 @@ namespace Trivias.Shared.Editor
         private const string LEAVE_ROOM_REQUESTED_PATH = CONFIG_ROOT + "/Events/LeaveRoomRequested.asset";
         private const string ROOM_CONNECTION_PATH = CONFIG_ROOT + "/Rooms/RoomConnectionRuntime.asset";
         private const string PLAYER_PROFILE_PATH = CONFIG_ROOT + "/Profile/PlayerProfile.asset";
+        private const string GAME_SETTINGS_PATH = CONFIG_ROOT + "/Settings/GameSettings.asset";
         private const string OPEN_SHOP_PATH = CONFIG_ROOT + "/Events/OpenShopRequested.asset";
         private const string CURSOR_CAPTURE_BLOCKERS_PATH = CONFIG_ROOT + "/Input/CursorCaptureBlockers.asset";
 
@@ -51,6 +53,9 @@ namespace Trivias.Shared.Editor
 
         public static PlayerProfile PlayerProfile() =>
             EditorAssets.GetOrCreateAsset<PlayerProfile>(PLAYER_PROFILE_PATH);
+
+        /// <summary>Opciones del jugador (volúmenes, ratón, pantalla).</summary>
+        public static GameSettings GameSettings() => EditorAssets.GetOrCreateAsset<GameSettings>(GAME_SETTINGS_PATH);
 
         /// <summary>Petición local de abrir la tienda (botón del vestíbulo).</summary>
         public static VoidEventChannel OpenShopRequested() =>

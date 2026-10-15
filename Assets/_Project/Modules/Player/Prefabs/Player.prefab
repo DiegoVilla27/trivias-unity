@@ -162,6 +162,7 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 5e4a7931aa80b45d0b8b48da2c0b3509, type: 2}
   _input: {fileID: 3044514291606150390}
   _cameraRoot: {fileID: 1262944636833804939}
+  _settings: {fileID: 11400000, guid: 70ba88f34f50648d599b8d4368f885be, type: 2}
 --- !u!114 &2658159104608627353
 MonoBehaviour:
   m_ObjectHideFlags: 0

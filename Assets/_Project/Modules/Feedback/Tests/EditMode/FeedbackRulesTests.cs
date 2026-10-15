@@ -100,6 +100,71 @@ namespace Trivias.Feedback.Tests
             Assert.That(FeedbackRules.CelebrationFor(At(MatchPhase.Reveal, kept: 9), At(MatchPhase.Reveal, kept: 9)),
                 Is.EqualTo(Celebration.None));
 
+        // ---- Ambiente de luz ----
+
+        [Test]
+        public void Mood_FollowsDifficultyWhileBetting()
+        {
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Betting, 1), 15), Is.EqualTo(StageMood.Easy));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Betting, 6), 15), Is.EqualTo(StageMood.Medium));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Betting, 15), 15), Is.EqualTo(StageMood.Hard));
+        }
+
+        [Test]
+        public void Mood_ReactsToEachMoment()
+        {
+            Assert.That(FeedbackRules.MoodFor(MatchSnapshot.Lobby, 15), Is.EqualTo(StageMood.Lobby));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Locked, 4), 15), Is.EqualTo(StageMood.Countdown));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Reveal, 4, kept: 10), 15), Is.EqualTo(StageMood.Correct));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Reveal, 4, kept: 0), 15), Is.EqualTo(StageMood.Wrong));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Victory, 15), 15), Is.EqualTo(StageMood.Victory));
+            Assert.That(FeedbackRules.MoodFor(At(MatchPhase.Defeat, 3), 15), Is.EqualTo(StageMood.Defeat));
+        }
+
+        [Test]
+        public void CountdownPulse_PeaksAtEachSecond()
+        {
+            Assert.That(FeedbackRules.CountdownPulse(3f), Is.EqualTo(1f));
+            Assert.That(FeedbackRules.CountdownPulse(2.5f), Is.EqualTo(0.5f).Within(0.001f));
+            Assert.That(FeedbackRules.CountdownPulse(2.01f), Is.LessThan(0.05f));
+            Assert.That(FeedbackRules.CountdownPulse(0f), Is.Zero);
+        }
+
+        // ---- Podio ----
+
+        [Test]
+        public void Podium_SurvivorsFirst_ThenEliminated()
+        {
+            var plaques = new List<PodiumPlaque>();
+            PodiumRules.Plaques("Ana, Luis", "Marta", plaques);
+            Assert.That(plaques.Count, Is.EqualTo(3));
+            Assert.That(plaques[0].Name, Is.EqualTo("Ana"));
+            Assert.That(plaques[0].Survived, Is.True);
+            Assert.That(plaques[1].Name, Is.EqualTo("Luis"));
+            Assert.That(plaques[2].Name, Is.EqualTo("Marta"));
+            Assert.That(plaques[2].Survived, Is.False);
+        }
+
+        [Test]
+        public void Podium_NoMoreThanSixPlaques_AndNoEmptyNames()
+        {
+            var plaques = new List<PodiumPlaque>();
+            PodiumRules.Plaques("A, B, C, D", "E, F, G", plaques);
+            Assert.That(plaques.Count, Is.EqualTo(PodiumRules.MAX_PLAQUES));
+            PodiumRules.Plaques("", null, plaques);
+            Assert.That(plaques, Is.Empty);
+        }
+
+        [Test]
+        public void Podium_RisesFromUnderTheFloor_AndStops()
+        {
+            Assert.That(PodiumRules.LiftHeight(0f, 1.6f, 1.8f), Is.EqualTo(-1.8f).Within(0.001f));
+            Assert.That(PodiumRules.LiftHeight(0.8f, 1.6f, 1.8f), Is.GreaterThan(-1.8f).And.LessThan(0f));
+            Assert.That(PodiumRules.LiftHeight(1.6f, 1.6f, 1.8f), Is.Zero);
+            Assert.That(PodiumRules.LiftHeight(5f, 1.6f, 1.8f), Is.Zero);
+            Assert.That(PodiumRules.LiftHeight(0.4f, 1.6f, 1.8f), Is.LessThan(PodiumRules.LiftHeight(0.8f, 1.6f, 1.8f)), "Siempre sube.");
+        }
+
         [Test]
         public void Money_PickAndDrop_OnlyWhileUnlocked()
         {

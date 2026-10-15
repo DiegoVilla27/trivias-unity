@@ -40,7 +40,8 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 6 Contenido | Hecho: 30 preguntas y 24 frases (incluye «alguien se fue»). Pendiente: micrófono (con Steam) |
 | 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 9 cosméticos sincronizados |
 | Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
-| Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti de colores por acierto y lluvia dorada en la victoria. Pendiente: volumen en opciones, iluminación por bloque |
+| Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
+| Menú y opciones | Hecho: menú principal, unirse con validación, invitar (dirección y copiar), tutorial, configuración guardada y pausa con Esc |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |
 
 Cada cambio se valida con Build All y la batería completa de pruebas (EditMode y PlayMode).

@@ -27,6 +27,12 @@ namespace Trivias.Results.Components
         [SerializeField] private Button _playAgainButton;
         [SerializeField] private TextMeshProUGUI _playAgainLabel;
         [SerializeField] private Button _leaveButton;
+        [Tooltip("Al ganar, segundos de celebración (cheque, podio, confeti) antes de mostrar los resultados.")]
+        [SerializeField, Min(0f)] private float _victoryCelebrationSeconds = 5f;
+
+        private float _showAt = -1f;
+
+        public bool IsShown => _panel.activeSelf;
 
         private void OnEnable()
         {
@@ -47,13 +53,21 @@ namespace Trivias.Results.Components
         {
             var session = _match.Session;
             var finished = session != null && MatchRules.IsFinished(session.Phase);
-            _panel.SetActive(finished);
             if (!finished)
+            {
+                _panel.SetActive(false);
+                _showAt = -1f;
                 return;
+            }
 
             var result = session.Result;
             // Las fichas se guardan en el perfil local una sola vez por partida (GDD 11).
             _profile.AwardMatch(result.MatchId.ToString(), result.TokensEach);
+
+            // Al ganar, primero se celebra en el plató; los resultados aparecen después.
+            if (!_panel.activeSelf && _showAt < 0f)
+                _showAt = Time.time + (result.Victory ? _victoryCelebrationSeconds : 0f);
+            _panel.SetActive(Time.time >= _showAt);
 
             _title.text = result.Victory ? "¡VICTORIA!" : "DERROTA";
             _title.color = result.Victory ? new Color(0.36f, 1f, 0.48f) : new Color(1f, 0.45f, 0.45f);
@@ -70,6 +84,12 @@ namespace Trivias.Results.Components
 
             _playAgainButton.interactable = session.IsHost;
             _playAgainLabel.text = session.IsHost ? "Volver a jugar" : "Esperando al host…";
+        }
+
+        private void Update()
+        {
+            if (_showAt >= 0f && !_panel.activeSelf && Time.time >= _showAt)
+                Refresh();
         }
 
         private void OnPlayAgain() => _match.Session?.RequestReturnToLobby();

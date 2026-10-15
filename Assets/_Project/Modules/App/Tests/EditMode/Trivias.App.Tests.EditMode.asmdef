@@ -10,7 +10,9 @@
         "Trivias.Money",
         "Trivias.Shop",
         "Trivias.App.Editor",
-        "Trivias.Feedback"
+        "Trivias.Feedback",
+        "Trivias.Menu",
+        "Trivias.Menu.Editor"
     ],
     "includePlatforms": [
         "Editor"

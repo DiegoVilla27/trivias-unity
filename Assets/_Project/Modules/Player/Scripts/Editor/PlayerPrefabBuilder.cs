@@ -77,6 +77,7 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(look, "_config", config);
             SerializedWiring.Set(look, "_input", input);
             SerializedWiring.Set(look, "_cameraRoot", cameraRoot.transform);
+            SerializedWiring.Set(look, "_settings", SharedAssets.GameSettings());
             look.enabled = false;
 
             var motor = root.AddComponent<PlayerMotor>();

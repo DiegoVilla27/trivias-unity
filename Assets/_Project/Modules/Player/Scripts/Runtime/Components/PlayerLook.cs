@@ -1,18 +1,20 @@
 using Trivias.Player.Data;
 using Trivias.Player.Logic;
+using Trivias.Shared.Settings;
 using UnityEngine;
 
 namespace Trivias.Player.Components
 {
     /// <summary>
     /// Orienta el objetivo de la cámara con el ratón. La cámara (módulo Camera) sigue a <see cref="CameraRoot"/>.
-    /// Solo lo activa el dueño.
+    /// Solo lo activa el dueño. Sensibilidad e inversión del eje vertical salen de las opciones del jugador.
     /// </summary>
     public sealed class PlayerLook : MonoBehaviour
     {
         [SerializeField] private PlayerConfig _config;
         [SerializeField] private PlayerInputReader _input;
         [SerializeField] private Transform _cameraRoot;
+        [SerializeField] private GameSettings _settings;
 
         private float _yaw;
         private float _pitch;
@@ -30,8 +32,9 @@ namespace Trivias.Player.Components
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 var look = _input.Look;
-                _yaw += look.x * _config.LookSensitivity;
-                _pitch -= look.y * _config.LookSensitivity;
+                var sensitivity = _config.LookSensitivity * _settings.MouseSensitivity;
+                _yaw += look.x * sensitivity;
+                _pitch -= SettingsRules.LookVertical(look.y, _settings.InvertY) * sensitivity;
             }
 
             _yaw = LookAngles.Wrap(_yaw);

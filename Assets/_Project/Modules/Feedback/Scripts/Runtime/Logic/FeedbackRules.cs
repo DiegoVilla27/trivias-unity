@@ -77,6 +77,38 @@ namespace Trivias.Feedback.Logic
         public static bool IsNewBet(int previousBets, int currentBets, MatchPhase phase) =>
             phase == MatchPhase.Betting && currentBets > previousBets;
 
+        /// <summary>
+        /// Ambiente de luz: por bloque de dificultad mientras se apuesta; latido en la cuenta atrás; verde o rojo al revelar;
+        /// dorado al ganar y apagado al perder.
+        /// </summary>
+        public static StageMood MoodFor(in MatchSnapshot match, int totalQuestions)
+        {
+            switch (match.Phase)
+            {
+                case MatchPhase.Locked: return StageMood.Countdown;
+                case MatchPhase.Reveal: return match.Kept > 0 ? StageMood.Correct : StageMood.Wrong;
+                case MatchPhase.Victory: return StageMood.Victory;
+                case MatchPhase.Defeat: return StageMood.Defeat;
+                case MatchPhase.Betting:
+                    return MusicBlock(match.Phase, match.Question, totalQuestions) switch
+                    {
+                        0 => StageMood.Easy,
+                        1 => StageMood.Medium,
+                        _ => StageMood.Hard,
+                    };
+                default: return StageMood.Lobby;
+            }
+        }
+
+        /// <summary>Latido de la cuenta atrás: 1 justo al cambiar de segundo y baja hasta 0 antes del siguiente.</summary>
+        public static float CountdownPulse(float secondsLeft)
+        {
+            if (secondsLeft <= 0f)
+                return 0f;
+            var fraction = secondsLeft - (float)System.Math.Floor(secondsLeft);
+            return fraction <= 0f ? 1f : fraction;
+        }
+
         /// <summary>Música por bloque de dificultad: preguntas fáciles (0), medias (1) y difíciles (2); sin música fuera de la partida.</summary>
         public static int MusicBlock(MatchPhase phase, int question, int totalQuestions)
         {

@@ -309,6 +309,7 @@ MonoBehaviour:
   _match: {fileID: 11400000, guid: 5d37e1be8915745e380c413acd95a791, type: 2}
   _money: {fileID: 11400000, guid: 6f4133998feb140af81920928091b588, type: 2}
   _selfBet: {fileID: 11400000, guid: 4b88d5d5bbdb54b588074e0a670b51e7, type: 2}
+  _settings: {fileID: 11400000, guid: 70ba88f34f50648d599b8d4368f885be, type: 2}
   _sfx: {fileID: 1635304231401771741}
   _musicSources:
   - {fileID: 6542706656376221982}

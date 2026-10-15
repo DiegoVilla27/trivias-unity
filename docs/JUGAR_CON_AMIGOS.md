@@ -33,8 +33,9 @@ Si todos usan Windows, **Radmin VPN** es más simple: uno crea una red y los dem
 
 1. **Voz:** usar **Discord** (la voz dentro del juego aún no existe).
 2. **Host:** abrir el juego → **Crear sala**. Si el sistema pregunta por **conexiones entrantes**, pulsar **Permitir**.
-3. **Los demás:** en «Dirección del host» borrar `127.0.0.1`, escribir la **IP de ZeroTier del host** → **Unirse**.
-4. En la sala de espera se ve «JUGADORES n/6». El host pulsa **Empezar partida**.
+3. En la sala de espera, el recuadro **«Invita a tus amigos»** muestra la dirección que hay que compartir (el juego detecta la red virtual —ZeroTier, Radmin, Tailscale, Hamachi— y la pone primero; si no hay, la de la red local). Pulsar **Copiar** y pasarla por WhatsApp o Discord.
+4. **Los demás:** **Unirme a una sala** → pegar la dirección → **Conectar**. El juego recuerda la última dirección usada.
+5. En la sala de espera se ve «JUGADORES n/6». Mientras esperáis, **Cómo se juega** explica las reglas. El host pulsa **Empezar partida**.
 
 ## Problemas frecuentes
 

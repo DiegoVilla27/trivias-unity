@@ -1,6 +1,7 @@
 using System.IO;
 using NUnit.Framework;
 using Trivias.Shared.Profile;
+using Trivias.Shared.Settings;
 
 namespace Trivias.App.Tests
 {
@@ -12,6 +13,7 @@ namespace Trivias.App.Tests
     public sealed class TemporaryProfileSetup
     {
         private const string PROFILE_ASSET = "Assets/_Project/Shared/Config/Profile/PlayerProfile.asset";
+        private const string SETTINGS_ASSET = "Assets/_Project/Shared/Config/Settings/GameSettings.asset";
         public static string Folder { get; private set; }
 
         [OneTimeSetUp]
@@ -19,6 +21,7 @@ namespace Trivias.App.Tests
         {
             Folder = Path.Combine(Path.GetTempPath(), "trivias-playmode-tests", Path.GetRandomFileName());
             Profile().UseStoragePath(Path.Combine(Folder, "profile.json"));
+            Settings().UseStoragePath(Path.Combine(Folder, "settings.json"));
         }
 
         [OneTimeTearDown]
@@ -35,6 +38,23 @@ namespace Trivias.App.Tests
 #else
             return null;
 #endif
+        }
+
+        public static GameSettings Settings()
+        {
+#if UNITY_EDITOR
+            return UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>(SETTINGS_ASSET);
+#else
+            return null;
+#endif
+        }
+
+        /// <summary>Opciones de fábrica en un archivo propio de la prueba.</summary>
+        public static GameSettings FreshSettings()
+        {
+            var settings = Settings();
+            settings.UseStoragePath(Path.Combine(Folder, Path.GetRandomFileName() + "-settings.json"));
+            return settings;
         }
 
         /// <summary>Empieza cada prueba con un perfil vacío y propio.</summary>

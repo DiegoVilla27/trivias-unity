@@ -35,6 +35,8 @@ namespace Trivias.App.Editor
         public GameObject AvatarCosmetics;
         public GameObject GameFeedback;
         public GameObject StageConfetti;
+        public GameObject VictoryPodium;
+        public GameObject StageLighting;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -86,6 +88,8 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.AvatarCosmetics);
             PrefabUtility.InstantiatePrefab(prefabs.GameFeedback);
             PrefabUtility.InstantiatePrefab(prefabs.StageConfetti);
+            PrefabUtility.InstantiatePrefab(prefabs.VictoryPodium);
+            PrefabUtility.InstantiatePrefab(prefabs.StageLighting);
             CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);
@@ -181,7 +185,10 @@ namespace Trivias.App.Editor
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_HEADER),
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_QUESTION),
                 optionTexts, optionBoxes,
-                FindText(StageEnvironmentPrefabBuilder.SCREEN_STATUS));
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_STATUS),
+                env.Find(StageEnvironmentPrefabBuilder.SCREEN_CHECK).gameObject,
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_CHECK_PAYEE),
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_CHECK_AMOUNT));
         }
 
         /// <summary>Une las zonas de apuesta y los nombres de apostados de cada cabina con el módulo SelfBet.</summary>

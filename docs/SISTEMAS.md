@@ -58,9 +58,19 @@ Voz: API de voz de Steam. Cada cliente captura y comprime su voz y la envía al 
 
 Los activos hablan entre sí; los eliminados entre sí. Todos se reúnen en resultados. No permitir nuevas incorporaciones como concursante a mitad de partida. Reconectar al mismo participante necesita una regla explícita.
 
+## Opciones del jugador
+
+`GameSettings` (Shared) guarda en `trivias-settings.json` (carpeta de datos del juego) volúmenes, sensibilidad e inversión del ratón, pantalla completa y la última dirección usada para unirse. Un archivo dañado vuelve a las opciones de fábrica. Lo leen el sonido (Feedback), la mirada del concursante (Player) y el menú, sin conocerse entre sí. El menú de pausa cierra `PlayerControlGate` (el concursante se queda quieto) sin pausar la partida para los demás.
+
+## Invitar a la sala
+
+Al crear la sala, el host calcula una vez sus direcciones IPv4 y las ordena (`HostAddressRanker`): primero redes virtuales (ZeroTier, Radmin VPN, Tailscale, Hamachi; reconocidas por el adaptador o el rango), después la red local; nunca la interna, autoasignada ni de multidifusión. Si no hay red, ofrece `127.0.0.1` (solo este ordenador). Quien se une escribe la dirección y se valida (IPv4 o nombre de equipo) antes de conectar.
+
 ## Sonido y celebraciones
 
-El módulo `Feedback` observa la partida, el dinero y los comodines sin intervenir: los avisos de red solo marcan qué cambió y el sonido se decide en `LateUpdate`, en cada equipo por separado (no viaja por red). Las reglas de qué suena (C# puro, probado) están en `FeedbackRules`. Coger/dejar dinero suena solo para quien lo hace; el resto lo oyen todos. Confeti (`StageConfetti`): de colores a los lados de la pantalla en cada acierto (el equipo conserva dinero) y lluvia dorada en toda la sala durante la victoria. Detalle en [RECURSOS](RECURSOS.md#sonido).
+El módulo `Feedback` observa la partida, el dinero y los comodines sin intervenir: los avisos de red solo marcan qué cambió y el sonido se decide en `LateUpdate`, en cada equipo por separado (no viaja por red). Las reglas de qué suena (C# puro, probado) están en `FeedbackRules`. Coger/dejar dinero suena solo para quien lo hace; el resto lo oyen todos. Confeti (`StageConfetti`): de colores a los lados de la pantalla en cada acierto (el equipo conserva dinero) y lluvia dorada en toda la sala durante la victoria. Victoria: cheque gigante en la pantalla (a nombre de los supervivientes, con el premio final), podio dorado que sube delante de la pantalla con una placa por concursante (dorada para supervivientes, gris para expulsados; sin colisiones) y resultados tras 5 s de celebración.
+
+Ambiente de luz (`StageLighting`): cuatro focos de colores, la luz ambiente y la principal cambian con fundido según el momento — sala neutra, preguntas fáciles cálidas, medias moradas, difíciles rojas y más oscuras, latido en la cuenta atrás, verde al acertar, rojo al fallar, dorado al ganar y apagado al perder. Valores en `Feedback/Config/StageMoodConfig.asset`. Detalle en [RECURSOS](RECURSOS.md#sonido).
 
 ## Verificaciones esenciales
 

@@ -80,6 +80,8 @@ namespace Trivias.App.Editor
                 AvatarCosmetics = ShopBuilder.BuildPresenter(cosmetics),
                 GameFeedback = FeedbackBuilder.BuildPlayer(feedbackLibrary, matchRuntime, MoneyBuilder.Runtime(), SelfBetBuilder.Runtime()),
                 StageConfetti = FeedbackBuilder.BuildStageConfetti(matchRuntime),
+                VictoryPodium = FeedbackBuilder.BuildPodium(matchRuntime),
+                StageLighting = FeedbackBuilder.BuildStageLighting(matchRuntime, FeedbackBuilder.BuildMoods()),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),

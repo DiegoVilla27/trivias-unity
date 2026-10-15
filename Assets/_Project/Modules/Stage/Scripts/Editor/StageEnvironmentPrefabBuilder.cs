@@ -21,6 +21,9 @@ namespace Trivias.Stage.Editor
         public const string SCREEN_HEADER = SCREEN_CONTENT + "/Header";
         public const string SCREEN_QUESTION = SCREEN_CONTENT + "/Question";
         public const string SCREEN_STATUS = SCREEN_CONTENT + "/Status";
+        public const string SCREEN_CHECK = SCREEN + "/Check";
+        public const string SCREEN_CHECK_PAYEE = SCREEN_CHECK + "/Payee";
+        public const string SCREEN_CHECK_AMOUNT = SCREEN_CHECK + "/Amount";
         public static string ScreenOptionBox(int booth) => $"{SCREEN_CONTENT}/Option{(char)('A' + booth)}/Box";
         public static string ScreenOptionText(int booth) => $"{SCREEN_CONTENT}/Option{(char)('A' + booth)}/Text";
 
@@ -120,6 +123,52 @@ namespace Trivias.Stage.Editor
             var status = EditorAssets.CreateWorldText("Status", content, string.Empty, 6.5f, Color.white,
                 new Vector3(0f, -2.95f, textZ), Quaternion.identity, new Vector2(13.6f, 1.3f));
             status.fontStyle = FontStyles.Bold;
+
+            BuildCheck(root, gold, layer);
+        }
+
+        /// <summary>Cheque gigante de la victoria (GDD 3.3): se muestra en la pantalla, que es lo que todos miran.</summary>
+        private static void BuildCheck(Transform screen, Material gold, int layer)
+        {
+            var check = EditorAssets.CreateEmpty("Check", screen, Vector3.zero).transform;
+            var paper = Mat("Stage_CheckPaper", new Color(0.96f, 0.93f, 0.80f), 0.3f);
+            var ink = new Color(0.12f, 0.12f, 0.28f);
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Border", check, new Vector3(0f, 0f, -0.25f),
+                new Vector3(12.8f, 6.1f, 0.02f), gold, layer, false, keepCollider: false);
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Paper", check, new Vector3(0f, 0f, -0.27f),
+                new Vector3(12.4f, 5.7f, 0.02f), paper, layer, false, keepCollider: false);
+
+            const float z = -0.32f;
+            var bank = EditorAssets.CreateWorldText("Bank", check, "BANCO TRIVIAS", 5f, ink, new Vector3(-2.6f, 2.15f, z),
+                Quaternion.identity, new Vector2(6.8f, 0.9f));
+            bank.fontStyle = FontStyles.Bold;
+            bank.alignment = TextAlignmentOptions.Left;
+            var number = EditorAssets.CreateWorldText("Number", check, "Nº 000015 · CHEQUE DE CAMPEONES", 2.6f, ink,
+                new Vector3(3.2f, 2.15f, z), Quaternion.identity, new Vector2(5.4f, 0.6f));
+            number.alignment = TextAlignmentOptions.Right;
+
+            var payeeLabel = EditorAssets.CreateWorldText("PayeeLabel", check, "PÁGUESE A:", 3f, ink, new Vector3(-4.6f, 0.95f, z),
+                Quaternion.identity, new Vector2(2.6f, 0.6f));
+            payeeLabel.alignment = TextAlignmentOptions.Left;
+            var payee = EditorAssets.CreateWorldText("Payee", check, "Los supervivientes", 4.2f, ink, new Vector3(1.4f, 0.95f, z),
+                Quaternion.identity, new Vector2(9.2f, 1f));
+            payee.fontStyle = FontStyles.Bold | FontStyles.Italic;
+            payee.alignment = TextAlignmentOptions.Left;
+
+            var amountLabel = EditorAssets.CreateWorldText("AmountLabel", check, "LA CANTIDAD DE:", 3f, ink, new Vector3(-4.6f, -0.45f, z),
+                Quaternion.identity, new Vector2(2.6f, 0.6f));
+            amountLabel.alignment = TextAlignmentOptions.Left;
+            var amount = EditorAssets.CreateWorldText("Amount", check, "0", 9f, new Color(0.10f, 0.45f, 0.20f), new Vector3(1.4f, -0.55f, z),
+                Quaternion.identity, new Vector2(9.2f, 1.6f));
+            amount.fontStyle = FontStyles.Bold;
+            amount.alignment = TextAlignmentOptions.Left;
+
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "SignatureLine", check, new Vector3(3.4f, -2.05f, -0.3f),
+                new Vector3(4.6f, 0.04f, 0.01f), Mat("Stage_CheckInk", ink, 0.2f), layer, false, keepCollider: false);
+            var signature = EditorAssets.CreateWorldText("Signature", check, "El Presentador", 4f, ink, new Vector3(3.4f, -1.65f, z),
+                Quaternion.identity, new Vector2(4.6f, 0.8f));
+            signature.fontStyle = FontStyles.Italic;
+            check.gameObject.SetActive(false);
         }
 
         private static Material Mat(string name, Color color, float smoothness) =>

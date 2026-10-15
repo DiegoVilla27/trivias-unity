@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using TMPro;
 using Trivias.Feedback.Components;
 using Trivias.Feedback.Data;
 using Trivias.Feedback.Logic;
@@ -71,6 +72,7 @@ namespace Trivias.Feedback.Editor
             SerializedWiring.Set(player, "_match", match);
             SerializedWiring.Set(player, "_money", money);
             SerializedWiring.Set(player, "_selfBet", selfBet);
+            SerializedWiring.Set(player, "_settings", SharedAssets.GameSettings());
             SerializedWiring.Set(player, "_sfx", sfx);
             SerializedWiring.SetArray(player, "_musicSources", new Object[] { musicA, musicB });
             return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/GameFeedback.prefab");
@@ -193,6 +195,128 @@ namespace Trivias.Feedback.Editor
                 colors.Select((c, i) => new GradientColorKey(c, (i + 1f) / colors.Length)).ToArray(),
                 new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f) });
             return gradient;
+        }
+
+        // ---- Podio de la victoria ----
+
+        public static readonly Vector3 PodiumPosition = new(0f, 0f, 12f);
+        public const float PODIUM_TOP = 1.35f;
+        private const float PLAQUE_SPACING = 1.5f;
+
+        /// <summary>Podio dorado delante de la pantalla con 6 placas; oculto hasta la victoria y sin colisiones.</summary>
+        public static GameObject BuildPodium(MatchRuntime match)
+        {
+            var root = new GameObject("VictoryPodium");
+            root.transform.position = PodiumPosition;
+            var podium = EditorAssets.CreateEmpty("Podium", root.transform, Vector3.zero);
+            var lift = EditorAssets.CreateEmpty("Lift", podium.transform, Vector3.zero).transform;
+
+            var gold = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Podium_Gold.mat", new Color(0.95f, 0.72f, 0.25f), 0.75f, 0.9f);
+            var dark = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Podium_Dark.mat", new Color(0.08f, 0.08f, 0.2f), 0.5f);
+            var survivor = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Plaque_Survivor.mat", new Color(0.80f, 0.55f, 0.12f), 0.7f, 0.8f);
+            var eliminated = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Plaque_Eliminated.mat", new Color(0.32f, 0.32f, 0.36f), 0.3f);
+
+            Part(lift, PrimitiveType.Cube, "Base", new Vector3(0f, 0.45f, 0f), new Vector3(9.4f, 0.9f, 2.2f), dark);
+            Part(lift, PrimitiveType.Cube, "Trim", new Vector3(0f, 0.92f, 0f), new Vector3(9.5f, 0.06f, 2.3f), gold);
+            Part(lift, PrimitiveType.Cube, "Top", new Vector3(0f, 1.13f, 0.1f), new Vector3(5.6f, 0.44f, 1.6f), gold);
+            var title = EditorAssets.CreateWorldText("Title", lift, "¡CAMPEONES!", 3.2f, new Color(0.08f, 0.08f, 0.2f),
+                new Vector3(0f, 1.13f, -0.72f), Quaternion.identity, new Vector2(5.4f, 0.45f));
+            title.fontStyle = FontStyles.Bold;
+
+            var plaques = new GameObject[PodiumRules.MAX_PLAQUES];
+            var names = new TextMeshPro[PodiumRules.MAX_PLAQUES];
+            var renderers = new Renderer[PodiumRules.MAX_PLAQUES];
+            for (var i = 0; i < plaques.Length; i++)
+            {
+                var x = (i - (plaques.Length - 1) * 0.5f) * PLAQUE_SPACING;
+                var plaque = EditorAssets.CreateEmpty($"Plaque{i + 1}", lift, new Vector3(x, 0.45f, -1.12f));
+                var board = Part(plaque.transform, PrimitiveType.Cube, "Board", Vector3.zero, new Vector3(1.38f, 0.5f, 0.04f), survivor);
+                var label = EditorAssets.CreateWorldText("Name", plaque.transform, $"Jugador {i + 1}", 2.2f, Color.white,
+                    new Vector3(0f, 0f, -0.04f), Quaternion.identity, new Vector2(1.3f, 0.45f));
+                label.fontStyle = FontStyles.Bold;
+                label.enableAutoSizing = true;
+                label.fontSizeMin = 1f;
+                label.fontSizeMax = 2.2f;
+                label.outlineWidth = 0.2f;
+                label.outlineColor = Color.black;
+                plaques[i] = plaque;
+                names[i] = label;
+                renderers[i] = board.GetComponent<Renderer>();
+            }
+
+            var view = root.AddComponent<VictoryPodium>();
+            SerializedWiring.Set(view, "_match", match);
+            SerializedWiring.Set(view, "_podium", podium);
+            SerializedWiring.Set(view, "_lift", lift);
+            SerializedWiring.SetArray(view, "_plaques", plaques);
+            SerializedWiring.SetArray(view, "_plaqueNames", names);
+            SerializedWiring.SetArray(view, "_plaqueRenderers", renderers);
+            SerializedWiring.Set(view, "_survivorMaterial", survivor);
+            SerializedWiring.Set(view, "_eliminatedMaterial", eliminated);
+            podium.SetActive(false);
+            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/VictoryPodium.prefab");
+        }
+
+        private static GameObject Part(Transform parent, PrimitiveType type, string name, Vector3 position, Vector3 scale, Material material) =>
+            EditorAssets.CreatePrimitive(type, name, parent, position, scale, material, 0, false, keepCollider: false);
+
+        // ---- Ambiente de luz ----
+
+        public const string MOODS_PATH = MODULE_ROOT + "/Config/StageMoodConfig.asset";
+        private static readonly Vector3 SpotTarget = new(0f, 0f, 5f);
+        private static readonly Vector3[] SpotPositions =
+        {
+            new(-10f, 11f, 1f), new(10f, 11f, 1f), new(-6f, 11.5f, 12f), new(6f, 11.5f, 12f),
+        };
+
+        /// <summary>Valores de fábrica de cada ambiente (luego se ajustan en el asset sin tocar código).</summary>
+        public static StageMoodConfig BuildMoods()
+        {
+            var moods = new MoodLight[StageMoods.COUNT];
+            moods[(int)StageMood.Lobby] = new MoodLight(new Color(1f, 0.95f, 0.85f), 30f, Color.white, 1f);
+            moods[(int)StageMood.Easy] = new MoodLight(new Color(1f, 0.72f, 0.32f), 55f, new Color(1f, 0.95f, 0.85f), 1f);
+            moods[(int)StageMood.Medium] = new MoodLight(new Color(0.55f, 0.42f, 1f), 60f, new Color(0.85f, 0.8f, 1f), 0.8f);
+            moods[(int)StageMood.Hard] = new MoodLight(new Color(1f, 0.22f, 0.2f), 65f, new Color(0.7f, 0.55f, 0.6f), 0.55f);
+            moods[(int)StageMood.Countdown] = new MoodLight(new Color(1f, 0.86f, 0.6f), 55f, new Color(0.65f, 0.6f, 0.6f), 0.5f);
+            moods[(int)StageMood.Correct] = new MoodLight(new Color(0.3f, 1f, 0.45f), 70f, new Color(0.85f, 1f, 0.85f), 0.9f);
+            moods[(int)StageMood.Wrong] = new MoodLight(new Color(1f, 0.15f, 0.15f), 70f, new Color(0.6f, 0.45f, 0.45f), 0.5f);
+            moods[(int)StageMood.Victory] = new MoodLight(new Color(1f, 0.82f, 0.3f), 85f, new Color(1f, 0.9f, 0.7f), 1.1f);
+            moods[(int)StageMood.Defeat] = new MoodLight(new Color(0.3f, 0.4f, 0.8f), 25f, new Color(0.5f, 0.5f, 0.6f), 0.4f);
+
+            var config = EditorAssets.GetOrCreateAsset<StageMoodConfig>(MOODS_PATH);
+            if (config.Count != StageMoods.COUNT || config.For(StageMood.Lobby).SpotIntensity <= 0f)
+            {
+                config.EditorSet(moods); // Solo la primera vez: si se ajustó a mano, se respeta.
+                EditorUtility.SetDirty(config);
+            }
+            return config;
+        }
+
+        public static GameObject BuildStageLighting(MatchRuntime match, StageMoodConfig moods)
+        {
+            var root = new GameObject("StageLighting");
+            var spots = new Light[SpotPositions.Length];
+            for (var i = 0; i < spots.Length; i++)
+            {
+                var go = new GameObject($"Spot{i + 1}");
+                go.transform.SetParent(root.transform, false);
+                go.transform.SetPositionAndRotation(SpotPositions[i], Quaternion.LookRotation(SpotTarget - SpotPositions[i]));
+                var spot = go.AddComponent<Light>();
+                spot.type = LightType.Spot;
+                spot.spotAngle = 60f;
+                spot.innerSpotAngle = 35f;
+                spot.range = 30f;
+                spot.shadows = LightShadows.None;
+                spot.color = moods.For(StageMood.Lobby).SpotColor;
+                spot.intensity = moods.For(StageMood.Lobby).SpotIntensity;
+                spots[i] = spot;
+            }
+
+            var lighting = root.AddComponent<StageLighting>();
+            SerializedWiring.Set(lighting, "_match", match);
+            SerializedWiring.Set(lighting, "_moods", moods);
+            SerializedWiring.SetArray(lighting, "_spots", spots);
+            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/StageLighting.prefab");
         }
 
         private static Material ConfettiMaterial()

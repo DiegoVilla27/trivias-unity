@@ -41,7 +41,8 @@ Priorizar paredes, suelo, techo básico y luces para construir el volumen del pl
 - Cabinas: bloqueo, acierto y pérdida; pueden resolverse con luces y efectos sencillos.
 - Dinero: coger, depositar, conversión y retirada, sin física compleja obligatoria.
 - Acierto: confeti de colores en dos chorros a los lados de la pantalla grande (implementado).
-- Victoria: lluvia de confeti dorado en toda la sala, continua mientras se ven los resultados y limpiada al volver a la sala (implementado); cheque pendiente. No necesita un nivel nuevo.
+- Victoria: lluvia de confeti dorado en toda la sala, cheque gigante en la pantalla (BANCO TRIVIAS, páguese a los supervivientes, cantidad, firma del Presentador) y podio dorado con placas de nombre (implementado, con primitivas). No necesita un nivel nuevo.
+- Iluminación: cuatro focos de colores por ambiente (sin sombras) además de la luz principal.
 
 ## Sonido
 

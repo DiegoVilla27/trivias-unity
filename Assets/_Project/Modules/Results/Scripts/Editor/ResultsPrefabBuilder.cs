@@ -45,6 +45,7 @@ namespace Trivias.Results.Editor
             SerializedWiring.Set(view, "_playAgainButton", playAgain);
             SerializedWiring.Set(view, "_playAgainLabel", playAgainLabel);
             SerializedWiring.Set(view, "_leaveButton", leave);
+            SerializedWiring.Set(view, "_victoryCelebrationSeconds", 5f);
 
             panel.gameObject.SetActive(false);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);

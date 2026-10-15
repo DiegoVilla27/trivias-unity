@@ -93,7 +93,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 
 | Módulo | Contenido | Puede depender de |
 | --- | --- | --- |
-| Shared | Canales de eventos, capas, logger, puntos de aparición, contratos (interacción, jugadores, sala), perfil del jugador (fichas y compras); utilidades de editor (`Shared.Editor`) | — |
+| Shared | Canales de eventos, capas, logger, puntos de aparición, contratos (interacción, jugadores, sala), perfil del jugador (fichas y compras), opciones del jugador (`GameSettings`); utilidades de editor (`Shared.Editor`) | — |
 | Networking | NetworkManager, conexión local (Unity Transport), admisión a sala; se publica como `IRoomConnection` | Shared |
 | Player | Concursante: entrada, movimiento, mirada, nombre, punto de carga, red | Shared |
 | Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
@@ -106,9 +106,9 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | SelfBet | Comodines: reparto, reserva, zonas de apuesta, confinamiento, multiplicador y expulsión | Shared |
 | Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), elección por evento, bocadillo y subtítulo | Shared, Match, Money, SelfBet, Questions |
 | Results | Pantalla de resultados, volver a jugar y salir | Shared, Match, Money, Questions |
-| Menu | Menú principal (crear/unirse) y sala de espera; se oculta durante la partida | Shared, Match, Money, Questions |
+| Menu | Menú principal (crear, unirse, cómo se juega, configuración, salir), invitación, tutorial (JSON en `Content/`), configuración, sala de espera y pausa (Esc) | Shared, Match, Money, Questions |
 | Shop | Tienda del vestíbulo, catálogo de cosméticos (primitivas) y presentador que viste a los concursantes | Shared |
-| Feedback | Sonido (efectos y música sintetizados en edición), reglas de qué suena y confeti (acierto y victoria) | Shared, Match, Money, SelfBet, Questions |
+| Feedback | Sonido (efectos y música sintetizados en edición), confeti, podio de la victoria y ambiente de luz por momento | Shared, Match, Money, SelfBet, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
 | Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
 

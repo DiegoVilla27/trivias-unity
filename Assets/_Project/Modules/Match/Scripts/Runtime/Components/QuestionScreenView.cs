@@ -1,6 +1,7 @@
 using TMPro;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
+using Trivias.Money.Logic;
 using UnityEngine;
 
 namespace Trivias.Match.Components
@@ -8,7 +9,8 @@ namespace Trivias.Match.Components
     /// <summary>
     /// Pantalla grande del plató: cabecera, pregunta, las 4 opciones (recuadros del color de su cabina) y estado
     /// (reloj, cierre o respuesta correcta). Al revelar solo queda encendido el recuadro correcto. Fuera de las preguntas
-    /// muestra un mensaje (¿PREPARADOS?, ¡VICTORIA!, DERROTA). Se redibuja por eventos; el reloj solo cada segundo.
+    /// muestra un mensaje (¿PREPARADOS?, DERROTA). Al ganar muestra el cheque gigante con los supervivientes y el premio.
+    /// Se redibuja por eventos; el reloj solo cada segundo.
     /// </summary>
     public sealed class QuestionScreenView : MonoBehaviour
     {
@@ -25,6 +27,12 @@ namespace Trivias.Match.Components
         [SerializeField] private TextMeshPro[] _optionTexts = new TextMeshPro[4];
         [SerializeField] private GameObject[] _optionBoxes = new GameObject[4];
         [SerializeField] private TextMeshPro _status;
+        [Header("Cheque de la victoria")]
+        [SerializeField] private GameObject _check;
+        [SerializeField] private TextMeshPro _checkPayee;
+        [SerializeField] private TextMeshPro _checkAmount;
+
+        public bool IsShowingCheck => _check.activeSelf;
 
         private int _shownSeconds = -1;
 
@@ -58,8 +66,17 @@ namespace Trivias.Match.Components
                                                      session.Phase == MatchPhase.Locked ||
                                                      session.Phase == MatchPhase.Reveal);
 
+            var victory = session != null && session.Phase == MatchPhase.Victory;
+            _check.SetActive(victory);
             _content.SetActive(showsQuestion);
-            _message.gameObject.SetActive(!showsQuestion);
+            _message.gameObject.SetActive(!showsQuestion && !victory);
+            if (victory)
+            {
+                var result = session.Result;
+                _checkPayee.text = string.IsNullOrEmpty(result.Survivors) ? "El equipo" : result.Survivors;
+                _checkAmount.text = MoneyFormat.Amount(result.FinalMoney);
+                return;
+            }
             if (!showsQuestion)
             {
                 _message.text = MessageFor(session);
