@@ -1,0 +1,19 @@
+{
+    "name": "Trivias.Shared.Editor",
+    "rootNamespace": "Trivias.Shared.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

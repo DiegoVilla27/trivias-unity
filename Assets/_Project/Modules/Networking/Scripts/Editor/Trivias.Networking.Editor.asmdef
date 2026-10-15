@@ -1,0 +1,22 @@
+{
+    "name": "Trivias.Networking.Editor",
+    "rootNamespace": "Trivias.Networking.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Networking",
+        "Unity.Netcode.Runtime",
+        "Unity.Netcode.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Trivias.App.Editor",
+    "rootNamespace": "Trivias.App.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Networking",
+        "Trivias.Networking.Editor",
+        "Trivias.Player.Editor",
+        "Trivias.Cameras",
+        "Trivias.Cameras.Editor",
+        "Trivias.Booth.Editor",
+        "Trivias.Table.Editor",
+        "Trivias.Exchange.Editor",
+        "Trivias.VerifyButton.Editor",
+        "Trivias.Presenter.Editor",
+        "Trivias.Stage.Editor",
+        "Unity.Netcode.Runtime",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

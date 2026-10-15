@@ -59,7 +59,7 @@ Reglas:
 4. **Dependencias:** un módulo puede referenciar `Trivias.Shared` y otros módulos **solo en una dirección y sin ciclos**, declarados en la tabla de la sección 3. Lo preferido es comunicarse por interfaces y canales de eventos en `Shared`. Nunca referenciar las clases internas de otro módulo "porque es rápido".
 5. **Logic = backend, Components = frontend.** Las reglas del juego (dinero, multiplicador, comodines, fichas, ranking) van en C# puro en `Logic/` y se prueban con tests EditMode. Los MonoBehaviour solo reciben eventos de Unity, leen/escriben estado y presentan.
 6. **Terceros no se tocan.** Si hay que adaptar un script de `ThirdParty/`, se envuelve o se copia al módulo propio y se modifica ahí.
-7. **Nombres en inglés** para carpetas, código y assets; documentación y comentarios para el usuario en español. Glosario en la sección 4.
+7. **Nombres en inglés** para carpetas, código y assets; documentación y comentarios para el usuario en español. Glosario en la sección 5.
 8. Prefabs: un prefab raíz por entidad (`Booth.prefab`), variantes con Prefab Variants, nunca duplicar prefabs para cambiar un color.
 
 ## 2. Build time vs. load time vs. runtime (rendimiento)
@@ -92,12 +92,32 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 
 | Módulo | Contenido | Puede depender de |
 | --- | --- | --- |
-| Shared | Eventos, interfaces, utilidades, constantes | — |
-| _(se rellena al crear cada módulo)_ | | |
+| Shared | Canales de eventos, capas, logger, puntos de aparición; utilidades de editor (`Shared.Editor`) | — |
+| Networking | NetworkManager, conexión local (Unity Transport), admisión a sala, panel de depuración | Shared |
+| Player | Concursante: entrada, movimiento, mirada, nombre, red | Shared |
+| Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
+| Booth, Table, Exchange, VerifyButton, Presenter, Stage | De momento solo constructores de prefabs (Editor) | Shared (Editor) |
+| App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
 
-Módulos previstos para el MVP: `Networking`, `Voice`, `Player`, `Camera`, `Interaction`, `Money`, `Exchange`, `Table`, `Booth`, `SelfBet`, `VerifyButton`, `Questions`, `Match`, `Presenter`, `Stage`, `HUD`, `Results`.
+Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-## 4. Glosario español → código
+Módulos previstos aún sin crear: `Interaction`, `Money`, `SelfBet`, `Questions`, `Match`, `HUD`, `Results`, `Voice`.
+
+## 4. Flujo de trabajo con Unity
+
+- **Todo se construye por código en tiempo de edición.** Cada módulo tiene un constructor en `Scripts/Editor/*Builder.cs` que crea sus materiales y prefabs con primitivas. `App/ProjectBuilder` los ejecuta en orden y ensambla `Scenes/Stage.unity`. Los constructores son idempotentes: se pueden repetir sin duplicar nada.
+- No editar a mano prefabs o escenas generados: cambiar el constructor y volver a ejecutar **Tools > Trivias > Build All**.
+- Comandos en modo consola (Unity **cerrado**; si está abierto, usar el menú):
+  - Construir: `Unity -batchmode -nographics -projectPath . -executeMethod Trivias.App.Editor.ProjectBuilder.BuildAllBatch -logFile <log>`
+  - Tests EditMode: `Unity -batchmode -nographics -projectPath . -runTests -testPlatform EditMode -testResults <xml> -logFile <log>`
+  - Tests PlayMode: igual con `-testPlatform PlayMode` (sin `-nographics`).
+  - Ruta de Unity: `/Applications/Unity/Hub/Editor/6000.6.0f1/Unity.app/Contents/MacOS/Unity`.
+- Después de cada cambio: compilar sin errores ni warnings, pasar los tests y revisar el log.
+- Prefabs de red: tras crearlos por código, llamar a `NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash` (si no, el hash queda en 0 y no aparecen en red). La lista de prefabs de red vive en `Networking/Config/DefaultNetworkPrefabs.asset`.
+- Pruebas multijugador en local: **Multiplayer Play Mode** (Window > Multiplayer > Multiplayer Play Mode).
+- Iluminación: de momento una luz direccional en tiempo real y luz ambiente. Precalcular la iluminación queda pendiente para el acabado.
+
+## 5. Glosario español → código
 
 | Diseño | Código |
 | --- | --- |
@@ -117,7 +137,7 @@ Módulos previstos para el MVP: `Networking`, `Voice`, `Player`, `Camera`, `Inte
 | Espectador / eliminado | `Spectator` / `Eliminated` |
 | Plató | `Stage` |
 
-## 5. Otras reglas
+## 6. Otras reglas
 
 - No hacer commits salvo que el usuario lo pida. Mensajes con Conventional Commits (skill `conventional-commits`).
 - No dejar valores de balance (capital, denominaciones, comodines, fichas) escritos en el código: van en ScriptableObjects de `Config/`.
