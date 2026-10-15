@@ -7,7 +7,11 @@ namespace Trivias.Presenter.Logic
         LongDiscussion = 1,
         SelfBet = 2,
         Countdown = 3,
+
+        /// <summary>Acierto con alguna pérdida (se conserva más de lo que se pierde).</summary>
         Success = 4,
+
+        /// <summary>Se pierde más de lo que se conserva, sin expulsiones.</summary>
         Loss = 5,
         Victory = 6,
         Defeat = 7,
@@ -17,11 +21,32 @@ namespace Trivias.Presenter.Logic
 
         /// <summary>Un concursante se ha desconectado a mitad de partida.</summary>
         PlayerLeft = 9,
+
+        /// <summary>Empieza el bloque de preguntas medias.</summary>
+        MediumBlock = 10,
+
+        /// <summary>Empieza el bloque de preguntas difíciles.</summary>
+        HardBlock = 11,
+
+        /// <summary>Empieza la última pregunta.</summary>
+        LastQuestion = 12,
+
+        /// <summary>Empieza una pregunta de matemáticas.</summary>
+        MathQuestion = 13,
+
+        /// <summary>Alguien apostado en una respuesta falsa ha sido expulsado.</summary>
+        Eliminated = 14,
+
+        /// <summary>Los apostados en la correcta han multiplicado el premio.</summary>
+        Multiplied = 15,
+
+        /// <summary>Acierto sin perder nada.</summary>
+        Perfect = 16,
     }
 
     public static class PresenterEvents
     {
-        public const int COUNT = 10;
+        public const int COUNT = 17;
 
         /// <summary>Clave del evento en el archivo de contenido.</summary>
         public static bool TryParse(string key, out PresenterEvent presenterEvent)
@@ -38,6 +63,13 @@ namespace Trivias.Presenter.Logic
                 case "defeat": presenterEvent = PresenterEvent.Defeat; return true;
                 case "time_running_out": presenterEvent = PresenterEvent.TimeRunningOut; return true;
                 case "player_left": presenterEvent = PresenterEvent.PlayerLeft; return true;
+                case "medium_block": presenterEvent = PresenterEvent.MediumBlock; return true;
+                case "hard_block": presenterEvent = PresenterEvent.HardBlock; return true;
+                case "last_question": presenterEvent = PresenterEvent.LastQuestion; return true;
+                case "math_question": presenterEvent = PresenterEvent.MathQuestion; return true;
+                case "eliminated": presenterEvent = PresenterEvent.Eliminated; return true;
+                case "multiplied": presenterEvent = PresenterEvent.Multiplied; return true;
+                case "perfect": presenterEvent = PresenterEvent.Perfect; return true;
                 default: presenterEvent = default; return false;
             }
         }

@@ -1,0 +1,63 @@
+newmtl PlayerPlatform_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_Inset
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_Underside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_Support
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+
+newmtl PlayerPlatform_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd PlayerPlatform_BaseColor.png
+

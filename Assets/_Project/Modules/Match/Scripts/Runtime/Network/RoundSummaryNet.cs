@@ -13,11 +13,11 @@ namespace Trivias.Match.Network
         public long Bonus;
         public long Total;
         public byte Multiplier;
-        public FixedString128Bytes Eliminated;
+        public FixedString512Bytes Eliminated;
 
         public static RoundSummaryNet From(in RoundOutcome outcome, int multiplier, string eliminated)
         {
-            var names = new FixedString128Bytes();
+            var names = new FixedString512Bytes();
             names.CopyFromTruncated(eliminated); // Nunca falla por un texto largo.
             return new RoundSummaryNet
             {

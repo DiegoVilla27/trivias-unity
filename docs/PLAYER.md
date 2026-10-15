@@ -16,7 +16,7 @@ Las variantes cambian atuendo, pelo, accesorios, colores y apariencia. Comparten
 - Modelo visual: esqueleto y animaciones comunes.
 - Apariencia: piezas y materiales de atuendo, pelo y accesorios.
 - Puntos de anclaje: mano para dinero y puntos comunes para accesorios.
-- Identificación visible: nombre y color del jugador.
+- Identificación visible: nombre y color del jugador. El nombre se elige en el menú principal (perfil local) y el host lo hace único en la sala; sin nombre, «Jugador N». Con Steam será el nombre de la cuenta.
 
 Esta estructura no confirma motor ni nombres de componentes. El objetivo es cambiar la apariencia sin duplicar lógica o crear diez controladores.
 

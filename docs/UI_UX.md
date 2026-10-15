@@ -6,7 +6,7 @@ Referencia: [GDD](GDD.md), secciones 3–5, 9 y 11–12. Diseños de pantallas p
 
 | Pantalla | Información y acciones |
 | --- | --- |
-| Menú principal | Crear sala · Unirme a una sala · Cómo se juega · Récords · Configuración · Salir |
+| Menú principal | Campo «Tu nombre» (hasta 16 caracteres; se guarda al crear o unirse, o al salir del campo, y muestra cómo lo verán los demás) · Crear sala · Unirme a una sala · Cómo se juega · Récords · Configuración · Salir |
 | Récords | Una pestaña por tamaño de grupo (2 a 6 jugadores) con las 10 mejores victorias de este ordenador: puesto (los empates lo comparten), premio, tiempo, fecha, participantes y supervivientes. Esc o Cerrar |
 | Unirme a una sala | Dirección del host (recuerda la última), Conectar, Volver; valida el formato antes de intentarlo y explica los errores |
 | Sala de espera | Jugadores n/6, fichas, «Invita a tus amigos» (host: dirección a compartir y Copiar), Empezar partida (host), Tienda, Cómo se juega, Salir |

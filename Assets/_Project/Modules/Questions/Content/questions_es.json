@@ -810,6 +810,7647 @@
       "correctOptionId": "a",
       "explanation": "El Kilimanjaro, en Tanzania, alcanza unos 5.895 metros.",
       "source": "https://es.wikipedia.org/wiki/Kilimanjaro"
+    },
+    {
+      "id": "geo-010",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es la capital de Italia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nápoles"
+        },
+        {
+          "id": "b",
+          "text": "Florencia"
+        },
+        {
+          "id": "c",
+          "text": "Milán"
+        },
+        {
+          "id": "d",
+          "text": "Roma"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Roma es la capital de Italia desde 1871.",
+      "source": "https://es.wikipedia.org/wiki/Roma"
+    },
+    {
+      "id": "geo-011",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es la capital de Japón?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tokio"
+        },
+        {
+          "id": "b",
+          "text": "Hiroshima"
+        },
+        {
+          "id": "c",
+          "text": "Kioto"
+        },
+        {
+          "id": "d",
+          "text": "Osaka"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Tokio es la capital de Japón y su mayor ciudad.",
+      "source": "https://es.wikipedia.org/wiki/Tokio"
+    },
+    {
+      "id": "geo-012",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿En qué país están las pirámides de Guiza?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Egipto"
+        },
+        {
+          "id": "b",
+          "text": "México"
+        },
+        {
+          "id": "c",
+          "text": "Perú"
+        },
+        {
+          "id": "d",
+          "text": "Sudán"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Las pirámides de Guiza están junto a El Cairo, en Egipto.",
+      "source": "https://es.wikipedia.org/wiki/Pirámides_de_Guiza"
+    },
+    {
+      "id": "geo-013",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es el continente más grande?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Europa"
+        },
+        {
+          "id": "b",
+          "text": "América"
+        },
+        {
+          "id": "c",
+          "text": "Asia"
+        },
+        {
+          "id": "d",
+          "text": "África"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Asia es el continente más extenso y el más poblado.",
+      "source": "https://es.wikipedia.org/wiki/Asia"
+    },
+    {
+      "id": "geo-014",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Qué río atraviesa Londres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Danubio"
+        },
+        {
+          "id": "b",
+          "text": "Rin"
+        },
+        {
+          "id": "c",
+          "text": "Sena"
+        },
+        {
+          "id": "d",
+          "text": "Támesis"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El Támesis cruza Londres antes de desembocar en el mar del Norte.",
+      "source": "https://es.wikipedia.org/wiki/Río_Támesis"
+    },
+    {
+      "id": "geo-015",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿En qué ciudad está la Torre Eiffel?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bruselas"
+        },
+        {
+          "id": "b",
+          "text": "Londres"
+        },
+        {
+          "id": "c",
+          "text": "París"
+        },
+        {
+          "id": "d",
+          "text": "Roma"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La Torre Eiffel se construyó en París para la Exposición Universal de 1889.",
+      "source": "https://es.wikipedia.org/wiki/Torre_Eiffel"
+    },
+    {
+      "id": "geo-016",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es la capital de España?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Valencia"
+        },
+        {
+          "id": "b",
+          "text": "Barcelona"
+        },
+        {
+          "id": "c",
+          "text": "Madrid"
+        },
+        {
+          "id": "d",
+          "text": "Sevilla"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Madrid es la capital de España.",
+      "source": "https://es.wikipedia.org/wiki/Madrid"
+    },
+    {
+      "id": "geo-017",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿En qué país se encuentra la Gran Muralla?",
+      "options": [
+        {
+          "id": "a",
+          "text": "China"
+        },
+        {
+          "id": "b",
+          "text": "India"
+        },
+        {
+          "id": "c",
+          "text": "Japón"
+        },
+        {
+          "id": "d",
+          "text": "Mongolia"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La Gran Muralla se levantó en el norte de China durante siglos.",
+      "source": "https://es.wikipedia.org/wiki/Gran_Muralla_china"
+    },
+    {
+      "id": "geo-018",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es el desierto cálido más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Gobi"
+        },
+        {
+          "id": "b",
+          "text": "Sáhara"
+        },
+        {
+          "id": "c",
+          "text": "Atacama"
+        },
+        {
+          "id": "d",
+          "text": "Kalahari"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El Sáhara es el mayor desierto cálido; los polares son aún más grandes.",
+      "source": "https://es.wikipedia.org/wiki/Desierto_del_Sahara"
+    },
+    {
+      "id": "geo-019",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Cuál es la capital de Argentina?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Montevideo"
+        },
+        {
+          "id": "b",
+          "text": "Córdoba"
+        },
+        {
+          "id": "c",
+          "text": "Buenos Aires"
+        },
+        {
+          "id": "d",
+          "text": "Rosario"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Buenos Aires es la capital de Argentina; Montevideo es la de Uruguay.",
+      "source": "https://es.wikipedia.org/wiki/Buenos_Aires"
+    },
+    {
+      "id": "geo-020",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿Qué país tiene forma de bota en el mapa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Croacia"
+        },
+        {
+          "id": "b",
+          "text": "Italia"
+        },
+        {
+          "id": "c",
+          "text": "Grecia"
+        },
+        {
+          "id": "d",
+          "text": "Portugal"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La península itálica recuerda a una bota que patea Sicilia.",
+      "source": "https://es.wikipedia.org/wiki/Italia"
+    },
+    {
+      "id": "his-004",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿Quién fue el primer presidente de Estados Unidos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "John Adams"
+        },
+        {
+          "id": "b",
+          "text": "Abraham Lincoln"
+        },
+        {
+          "id": "c",
+          "text": "George Washington"
+        },
+        {
+          "id": "d",
+          "text": "Thomas Jefferson"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "George Washington gobernó de 1789 a 1797.",
+      "source": "https://es.wikipedia.org/wiki/George_Washington"
+    },
+    {
+      "id": "his-005",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿En qué año llegó Cristóbal Colón a América?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1492"
+        },
+        {
+          "id": "b",
+          "text": "1498"
+        },
+        {
+          "id": "c",
+          "text": "1512"
+        },
+        {
+          "id": "d",
+          "text": "1453"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Colón llegó a las Bahamas el 12 de octubre de 1492.",
+      "source": "https://es.wikipedia.org/wiki/Cristóbal_Colón"
+    },
+    {
+      "id": "his-006",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿Qué emperador francés fue derrotado en la batalla de Waterloo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Luis XVI"
+        },
+        {
+          "id": "b",
+          "text": "Carlomagno"
+        },
+        {
+          "id": "c",
+          "text": "Luis XIV"
+        },
+        {
+          "id": "d",
+          "text": "Napoleón Bonaparte"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Napoleón fue derrotado en Waterloo en 1815.",
+      "source": "https://es.wikipedia.org/wiki/Batalla_de_Waterloo"
+    },
+    {
+      "id": "his-007",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿En qué ciudad de la antigua Grecia surgió la democracia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tebas"
+        },
+        {
+          "id": "b",
+          "text": "Corinto"
+        },
+        {
+          "id": "c",
+          "text": "Esparta"
+        },
+        {
+          "id": "d",
+          "text": "Atenas"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Atenas desarrolló la democracia en el siglo V a. C.",
+      "source": "https://es.wikipedia.org/wiki/Democracia_ateniense"
+    },
+    {
+      "id": "his-008",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿Qué famoso barco se hundió en 1912 tras chocar con un iceberg?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Titanic"
+        },
+        {
+          "id": "b",
+          "text": "Lusitania"
+        },
+        {
+          "id": "c",
+          "text": "Britannic"
+        },
+        {
+          "id": "d",
+          "text": "Queen Mary"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El Titanic se hundió en su viaje inaugural en abril de 1912.",
+      "source": "https://es.wikipedia.org/wiki/RMS_Titanic"
+    },
+    {
+      "id": "his-009",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿Cómo se llama la escritura del antiguo Egipto hecha con dibujos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Jeroglíficos"
+        },
+        {
+          "id": "b",
+          "text": "Cuneiforme"
+        },
+        {
+          "id": "c",
+          "text": "Runas"
+        },
+        {
+          "id": "d",
+          "text": "Alfabeto latino"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Los jeroglíficos combinaban signos que representaban ideas y sonidos.",
+      "source": "https://es.wikipedia.org/wiki/Jeroglífico_egipcio"
+    },
+    {
+      "id": "his-010",
+      "category": "Historia",
+      "difficulty": 1,
+      "text": "¿En qué antigua ciudad luchaban los gladiadores en el Coliseo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Atenas"
+        },
+        {
+          "id": "b",
+          "text": "Cartago"
+        },
+        {
+          "id": "c",
+          "text": "Alejandría"
+        },
+        {
+          "id": "d",
+          "text": "Roma"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El Coliseo de Roma se inauguró en el año 80.",
+      "source": "https://es.wikipedia.org/wiki/Coliseo"
+    },
+    {
+      "id": "cie-010",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Cuál es la fórmula química del agua?",
+      "options": [
+        {
+          "id": "a",
+          "text": "NaCl"
+        },
+        {
+          "id": "b",
+          "text": "O2"
+        },
+        {
+          "id": "c",
+          "text": "H2O"
+        },
+        {
+          "id": "d",
+          "text": "CO2"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Una molécula de agua tiene dos átomos de hidrógeno y uno de oxígeno.",
+      "source": "https://es.wikipedia.org/wiki/Agua"
+    },
+    {
+      "id": "cie-011",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Qué órgano bombea la sangre por todo el cuerpo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los pulmones"
+        },
+        {
+          "id": "b",
+          "text": "El corazón"
+        },
+        {
+          "id": "c",
+          "text": "El hígado"
+        },
+        {
+          "id": "d",
+          "text": "Los riñones"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El corazón es un músculo que impulsa la sangre por los vasos.",
+      "source": "https://es.wikipedia.org/wiki/Corazón"
+    },
+    {
+      "id": "cie-012",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Cuál es la estrella más cercana a la Tierra?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sirio"
+        },
+        {
+          "id": "b",
+          "text": "Alfa Centauri"
+        },
+        {
+          "id": "c",
+          "text": "El Sol"
+        },
+        {
+          "id": "d",
+          "text": "La estrella Polar"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El Sol es una estrella y está a unos 150 millones de kilómetros.",
+      "source": "https://es.wikipedia.org/wiki/Sol"
+    },
+    {
+      "id": "cie-013",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿A qué temperatura hierve el agua al nivel del mar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "100 °C"
+        },
+        {
+          "id": "b",
+          "text": "90 °C"
+        },
+        {
+          "id": "c",
+          "text": "120 °C"
+        },
+        {
+          "id": "d",
+          "text": "80 °C"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A presión normal, el agua pura hierve a 100 °C.",
+      "source": "https://es.wikipedia.org/wiki/Punto_de_ebullición"
+    },
+    {
+      "id": "cie-014",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Cuántos planetas tiene el sistema solar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ocho"
+        },
+        {
+          "id": "b",
+          "text": "Nueve"
+        },
+        {
+          "id": "c",
+          "text": "Diez"
+        },
+        {
+          "id": "d",
+          "text": "Siete"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Desde 2006 Plutón se considera planeta enano, así que quedan ocho.",
+      "source": "https://es.wikipedia.org/wiki/Sistema_solar"
+    },
+    {
+      "id": "cie-015",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Qué gas del aire necesitamos respirar para vivir?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Oxígeno"
+        },
+        {
+          "id": "b",
+          "text": "Nitrógeno"
+        },
+        {
+          "id": "c",
+          "text": "Hidrógeno"
+        },
+        {
+          "id": "d",
+          "text": "Helio"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Las células usan el oxígeno para obtener energía.",
+      "source": "https://es.wikipedia.org/wiki/Oxígeno"
+    },
+    {
+      "id": "cie-016",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Qué parte de la planta hace sobre todo la fotosíntesis?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Las flores"
+        },
+        {
+          "id": "b",
+          "text": "Las hojas"
+        },
+        {
+          "id": "c",
+          "text": "Las raíces"
+        },
+        {
+          "id": "d",
+          "text": "Las semillas"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Las hojas tienen la clorofila que capta la luz del sol.",
+      "source": "https://es.wikipedia.org/wiki/Fotosíntesis"
+    },
+    {
+      "id": "cie-017",
+      "category": "Ciencia",
+      "difficulty": 1,
+      "text": "¿Cuál es el satélite natural de la Tierra?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Europa"
+        },
+        {
+          "id": "b",
+          "text": "La Luna"
+        },
+        {
+          "id": "c",
+          "text": "Fobos"
+        },
+        {
+          "id": "d",
+          "text": "Titán"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La Luna es el único satélite natural de la Tierra.",
+      "source": "https://es.wikipedia.org/wiki/Luna"
+    },
+    {
+      "id": "nat-003",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Cuál es el animal más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiburón ballena"
+        },
+        {
+          "id": "b",
+          "text": "Elefante africano"
+        },
+        {
+          "id": "c",
+          "text": "Calamar gigante"
+        },
+        {
+          "id": "d",
+          "text": "Ballena azul"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "La ballena azul puede superar los 30 metros de largo.",
+      "source": "https://es.wikipedia.org/wiki/Balaenoptera_musculus"
+    },
+    {
+      "id": "nat-004",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Qué animal es conocido como el rey de la selva?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El elefante"
+        },
+        {
+          "id": "b",
+          "text": "El león"
+        },
+        {
+          "id": "c",
+          "text": "El tigre"
+        },
+        {
+          "id": "d",
+          "text": "El gorila"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Al león se le llama así aunque vive sobre todo en la sabana.",
+      "source": "https://es.wikipedia.org/wiki/Panthera_leo"
+    },
+    {
+      "id": "nat-005",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Cuántas patas tiene un insecto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Seis"
+        },
+        {
+          "id": "b",
+          "text": "Ocho"
+        },
+        {
+          "id": "c",
+          "text": "Diez"
+        },
+        {
+          "id": "d",
+          "text": "Cuatro"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Todos los insectos adultos tienen tres pares de patas.",
+      "source": "https://es.wikipedia.org/wiki/Insecta"
+    },
+    {
+      "id": "nat-006",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Qué come principalmente el panda gigante?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bambú"
+        },
+        {
+          "id": "b",
+          "text": "Eucalipto"
+        },
+        {
+          "id": "c",
+          "text": "Pescado"
+        },
+        {
+          "id": "d",
+          "text": "Fruta"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El bambú es casi toda la dieta del panda gigante.",
+      "source": "https://es.wikipedia.org/wiki/Ailuropoda_melanoleuca"
+    },
+    {
+      "id": "nat-007",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Qué tipo de animal es la ballena?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pez"
+        },
+        {
+          "id": "b",
+          "text": "Mamífero"
+        },
+        {
+          "id": "c",
+          "text": "Anfibio"
+        },
+        {
+          "id": "d",
+          "text": "Reptil"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Las ballenas respiran aire y amamantan a sus crías.",
+      "source": "https://es.wikipedia.org/wiki/Cetacea"
+    },
+    {
+      "id": "nat-008",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Cómo se llama la cría de la vaca?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ternero"
+        },
+        {
+          "id": "b",
+          "text": "Cabrito"
+        },
+        {
+          "id": "c",
+          "text": "Potro"
+        },
+        {
+          "id": "d",
+          "text": "Cordero"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El ternero es la cría de la vaca; el potro, la del caballo.",
+      "source": "https://es.wikipedia.org/wiki/Ternero"
+    },
+    {
+      "id": "nat-009",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Qué ave que no vuela vive en la Antártida?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Emú"
+        },
+        {
+          "id": "b",
+          "text": "Kiwi"
+        },
+        {
+          "id": "c",
+          "text": "Avestruz"
+        },
+        {
+          "id": "d",
+          "text": "Pingüino emperador"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El pingüino emperador cría en el hielo antártico.",
+      "source": "https://es.wikipedia.org/wiki/Aptenodytes_forsteri"
+    },
+    {
+      "id": "nat-010",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Qué tipo de animal es la tortuga?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mamífero"
+        },
+        {
+          "id": "b",
+          "text": "Anfibio"
+        },
+        {
+          "id": "c",
+          "text": "Reptil"
+        },
+        {
+          "id": "d",
+          "text": "Pez"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Las tortugas son reptiles con caparazón.",
+      "source": "https://es.wikipedia.org/wiki/Testudines"
+    },
+    {
+      "id": "cin-001",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿Cómo se llama el ratón más famoso de Disney?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Speedy González"
+        },
+        {
+          "id": "b",
+          "text": "Jerry"
+        },
+        {
+          "id": "c",
+          "text": "Mickey Mouse"
+        },
+        {
+          "id": "d",
+          "text": "Stuart Little"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Mickey Mouse apareció en 1928.",
+      "source": "https://es.wikipedia.org/wiki/Mickey_Mouse"
+    },
+    {
+      "id": "cin-002",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿Qué personaje dice «¡Hasta el infinito y más allá!»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rayo McQueen"
+        },
+        {
+          "id": "b",
+          "text": "Buzz Lightyear"
+        },
+        {
+          "id": "c",
+          "text": "Woody"
+        },
+        {
+          "id": "d",
+          "text": "Shrek"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Es la frase del guardián espacial de «Toy Story».",
+      "source": "https://es.wikipedia.org/wiki/Buzz_Lightyear"
+    },
+    {
+      "id": "cin-003",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿Cómo se llama el ogro verde de las películas de DreamWorks?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Shrek"
+        },
+        {
+          "id": "b",
+          "text": "Asno"
+        },
+        {
+          "id": "c",
+          "text": "Hulk"
+        },
+        {
+          "id": "d",
+          "text": "Grinch"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Shrek se estrenó en 2001; Asno es su amigo parlanchín.",
+      "source": "https://es.wikipedia.org/wiki/Shrek"
+    },
+    {
+      "id": "cin-004",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿En qué saga aparece Darth Vader?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Harry Potter"
+        },
+        {
+          "id": "b",
+          "text": "Star Wars"
+        },
+        {
+          "id": "c",
+          "text": "El señor de los anillos"
+        },
+        {
+          "id": "d",
+          "text": "Star Trek"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Darth Vader es el gran villano de la trilogía original de Star Wars.",
+      "source": "https://es.wikipedia.org/wiki/Darth_Vader"
+    },
+    {
+      "id": "cin-005",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿Qué superhéroe obtiene sus poderes por la picadura de una araña?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Superman"
+        },
+        {
+          "id": "b",
+          "text": "Batman"
+        },
+        {
+          "id": "c",
+          "text": "Flash"
+        },
+        {
+          "id": "d",
+          "text": "Spider-Man"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Peter Parker es picado por una araña modificada.",
+      "source": "https://es.wikipedia.org/wiki/Spider-Man"
+    },
+    {
+      "id": "cin-006",
+      "category": "Cine y televisión",
+      "difficulty": 1,
+      "text": "¿Cómo se llama la escuela de magia de Harry Potter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Durmstrang"
+        },
+        {
+          "id": "b",
+          "text": "Ilvermorny"
+        },
+        {
+          "id": "c",
+          "text": "Beauxbatons"
+        },
+        {
+          "id": "d",
+          "text": "Hogwarts"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Hogwarts es el colegio de magia y hechicería de Harry Potter.",
+      "source": "https://es.wikipedia.org/wiki/Hogwarts"
+    },
+    {
+      "id": "mus-003",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "¿Cuántas cuerdas tiene normalmente una guitarra española?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Doce"
+        },
+        {
+          "id": "b",
+          "text": "Cinco"
+        },
+        {
+          "id": "c",
+          "text": "Seis"
+        },
+        {
+          "id": "d",
+          "text": "Cuatro"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La guitarra clásica o española tiene seis cuerdas.",
+      "source": "https://es.wikipedia.org/wiki/Guitarra"
+    },
+    {
+      "id": "mus-004",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "¿De qué país eran The Beatles?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reino Unido"
+        },
+        {
+          "id": "b",
+          "text": "Estados Unidos"
+        },
+        {
+          "id": "c",
+          "text": "Australia"
+        },
+        {
+          "id": "d",
+          "text": "Irlanda"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Los Beatles se formaron en Liverpool, Inglaterra.",
+      "source": "https://es.wikipedia.org/wiki/The_Beatles"
+    },
+    {
+      "id": "mus-005",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "¿Quién era conocido como «el Rey del Pop»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prince"
+        },
+        {
+          "id": "b",
+          "text": "Freddie Mercury"
+        },
+        {
+          "id": "c",
+          "text": "Michael Jackson"
+        },
+        {
+          "id": "d",
+          "text": "Elvis Presley"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "A Elvis se le llamó «el Rey del Rock»; a Michael Jackson, «el Rey del Pop».",
+      "source": "https://es.wikipedia.org/wiki/Michael_Jackson"
+    },
+    {
+      "id": "mus-006",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "¿Qué instrumento tocaba sobre todo Ludwig van Beethoven?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Violín"
+        },
+        {
+          "id": "b",
+          "text": "Piano"
+        },
+        {
+          "id": "c",
+          "text": "Flauta"
+        },
+        {
+          "id": "d",
+          "text": "Trompeta"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Beethoven fue un pianista virtuoso además de compositor.",
+      "source": "https://es.wikipedia.org/wiki/Ludwig_van_Beethoven"
+    },
+    {
+      "id": "mus-007",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "En la escala do, re, mi…, ¿qué nota va después de «sol»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Si"
+        },
+        {
+          "id": "b",
+          "text": "La"
+        },
+        {
+          "id": "c",
+          "text": "Mi"
+        },
+        {
+          "id": "d",
+          "text": "Fa"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La escala es do, re, mi, fa, sol, la, si.",
+      "source": "https://es.wikipedia.org/wiki/Nota_musical"
+    },
+    {
+      "id": "dep-002",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿Cada cuántos años se celebran los Juegos Olímpicos de verano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tres"
+        },
+        {
+          "id": "b",
+          "text": "Dos"
+        },
+        {
+          "id": "c",
+          "text": "Cuatro"
+        },
+        {
+          "id": "d",
+          "text": "Cinco"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Los Juegos de verano se celebran cada cuatro años.",
+      "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos"
+    },
+    {
+      "id": "dep-003",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿En qué deporte se lanza el balón a una canasta?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Balonmano"
+        },
+        {
+          "id": "b",
+          "text": "Waterpolo"
+        },
+        {
+          "id": "c",
+          "text": "Baloncesto"
+        },
+        {
+          "id": "d",
+          "text": "Voleibol"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "En baloncesto se anota metiendo el balón por el aro.",
+      "source": "https://es.wikipedia.org/wiki/Baloncesto"
+    },
+    {
+      "id": "dep-004",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿Cuántos anillos tiene la bandera olímpica?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Seis"
+        },
+        {
+          "id": "b",
+          "text": "Cinco"
+        },
+        {
+          "id": "c",
+          "text": "Cuatro"
+        },
+        {
+          "id": "d",
+          "text": "Siete"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Los cinco anillos representan la unión de los continentes.",
+      "source": "https://es.wikipedia.org/wiki/Anillos_olímpicos"
+    },
+    {
+      "id": "dep-005",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿En qué deporte se habla de un «hoyo en uno»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bolos"
+        },
+        {
+          "id": "b",
+          "text": "Golf"
+        },
+        {
+          "id": "c",
+          "text": "Críquet"
+        },
+        {
+          "id": "d",
+          "text": "Billar"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Es meter la bola en el hoyo con un solo golpe.",
+      "source": "https://es.wikipedia.org/wiki/Golf"
+    },
+    {
+      "id": "dep-006",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "¿En qué deporte destacó Rafael Nadal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Golf"
+        },
+        {
+          "id": "b",
+          "text": "Fútbol"
+        },
+        {
+          "id": "c",
+          "text": "Pádel"
+        },
+        {
+          "id": "d",
+          "text": "Tenis"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Nadal ganó 22 torneos de Grand Slam de tenis.",
+      "source": "https://es.wikipedia.org/wiki/Rafael_Nadal"
+    },
+    {
+      "id": "dep-007",
+      "category": "Deportes",
+      "difficulty": 1,
+      "text": "En fútbol, ¿con qué no puede tocar el balón un jugador de campo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los muslos"
+        },
+        {
+          "id": "b",
+          "text": "El pecho"
+        },
+        {
+          "id": "c",
+          "text": "La cabeza"
+        },
+        {
+          "id": "d",
+          "text": "Las manos"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Solo el portero puede usar las manos, y dentro de su área.",
+      "source": "https://es.wikipedia.org/wiki/Fútbol"
+    },
+    {
+      "id": "art-002",
+      "category": "Arte",
+      "difficulty": 1,
+      "text": "¿Quién pintó «La noche estrellada»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pablo Picasso"
+        },
+        {
+          "id": "b",
+          "text": "Claude Monet"
+        },
+        {
+          "id": "c",
+          "text": "Salvador Dalí"
+        },
+        {
+          "id": "d",
+          "text": "Vincent van Gogh"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Van Gogh la pintó en 1889.",
+      "source": "https://es.wikipedia.org/wiki/La_noche_estrellada"
+    },
+    {
+      "id": "art-003",
+      "category": "Arte",
+      "difficulty": 1,
+      "text": "¿Qué pintor español es famoso por crear el cubismo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pablo Picasso"
+        },
+        {
+          "id": "b",
+          "text": "Salvador Dalí"
+        },
+        {
+          "id": "c",
+          "text": "Francisco de Goya"
+        },
+        {
+          "id": "d",
+          "text": "Joan Miró"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Picasso fundó el cubismo junto a Georges Braque.",
+      "source": "https://es.wikipedia.org/wiki/Pablo_Picasso"
+    },
+    {
+      "id": "art-004",
+      "category": "Arte",
+      "difficulty": 1,
+      "text": "¿Qué dos colores se mezclan en pintura para obtener el verde?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rojo y amarillo"
+        },
+        {
+          "id": "b",
+          "text": "Azul y amarillo"
+        },
+        {
+          "id": "c",
+          "text": "Rojo y azul"
+        },
+        {
+          "id": "d",
+          "text": "Blanco y negro"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Azul y amarillo dan verde; rojo y azul, morado.",
+      "source": "https://es.wikipedia.org/wiki/Color_secundario"
+    },
+    {
+      "id": "lit-002",
+      "category": "Literatura",
+      "difficulty": 1,
+      "text": "¿Quién escribió «Don Quijote de la Mancha»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Federico García Lorca"
+        },
+        {
+          "id": "b",
+          "text": "Miguel de Cervantes"
+        },
+        {
+          "id": "c",
+          "text": "Lope de Vega"
+        },
+        {
+          "id": "d",
+          "text": "Francisco de Quevedo"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Cervantes publicó la primera parte en 1605.",
+      "source": "https://es.wikipedia.org/wiki/Don_Quijote_de_la_Mancha"
+    },
+    {
+      "id": "lit-003",
+      "category": "Literatura",
+      "difficulty": 1,
+      "text": "¿Cómo se llama el escudero de don Quijote?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Dulcinea"
+        },
+        {
+          "id": "b",
+          "text": "Sancho Panza"
+        },
+        {
+          "id": "c",
+          "text": "Rocinante"
+        },
+        {
+          "id": "d",
+          "text": "Lázaro"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Rocinante es el caballo y Dulcinea, su amada imaginada.",
+      "source": "https://es.wikipedia.org/wiki/Sancho_Panza"
+    },
+    {
+      "id": "lit-004",
+      "category": "Literatura",
+      "difficulty": 1,
+      "text": "¿Qué personaje de cuento pierde un zapato de cristal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cenicienta"
+        },
+        {
+          "id": "b",
+          "text": "Blancanieves"
+        },
+        {
+          "id": "c",
+          "text": "Caperucita Roja"
+        },
+        {
+          "id": "d",
+          "text": "La Bella Durmiente"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Cenicienta pierde el zapato al huir del baile a medianoche.",
+      "source": "https://es.wikipedia.org/wiki/Cenicienta"
+    },
+    {
+      "id": "lit-005",
+      "category": "Literatura",
+      "difficulty": 1,
+      "text": "¿Quién escribió «Romeo y Julieta»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Charles Dickens"
+        },
+        {
+          "id": "b",
+          "text": "William Shakespeare"
+        },
+        {
+          "id": "c",
+          "text": "Oscar Wilde"
+        },
+        {
+          "id": "d",
+          "text": "Jane Austen"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Shakespeare escribió esta tragedia a finales del siglo XVI.",
+      "source": "https://es.wikipedia.org/wiki/Romeo_y_Julieta"
+    },
+    {
+      "id": "cur-003",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿Cuántos meses del año tienen 31 días?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ocho"
+        },
+        {
+          "id": "b",
+          "text": "Seis"
+        },
+        {
+          "id": "c",
+          "text": "Cinco"
+        },
+        {
+          "id": "d",
+          "text": "Siete"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Enero, marzo, mayo, julio, agosto, octubre y diciembre.",
+      "source": "https://es.wikipedia.org/wiki/Mes"
+    },
+    {
+      "id": "cur-004",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿Qué color sale al mezclar rojo y blanco?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Naranja"
+        },
+        {
+          "id": "b",
+          "text": "Morado"
+        },
+        {
+          "id": "c",
+          "text": "Marrón"
+        },
+        {
+          "id": "d",
+          "text": "Rosa"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El blanco aclara el rojo hasta el rosa.",
+      "source": "https://es.wikipedia.org/wiki/Rosa_(color)"
+    },
+    {
+      "id": "cur-005",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿Cuántos lados tiene un hexágono?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cinco"
+        },
+        {
+          "id": "b",
+          "text": "Siete"
+        },
+        {
+          "id": "c",
+          "text": "Ocho"
+        },
+        {
+          "id": "d",
+          "text": "Seis"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Hexa significa «seis» en griego.",
+      "source": "https://es.wikipedia.org/wiki/Hexágono"
+    },
+    {
+      "id": "cur-006",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿Qué día se celebra la Navidad?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24 de diciembre"
+        },
+        {
+          "id": "b",
+          "text": "25 de diciembre"
+        },
+        {
+          "id": "c",
+          "text": "1 de enero"
+        },
+        {
+          "id": "d",
+          "text": "6 de enero"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El 24 es Nochebuena; el 25, Navidad.",
+      "source": "https://es.wikipedia.org/wiki/Navidad"
+    },
+    {
+      "id": "cur-007",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿En qué juego de mesa hay alfiles y torres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Damas"
+        },
+        {
+          "id": "b",
+          "text": "Ajedrez"
+        },
+        {
+          "id": "c",
+          "text": "Parchís"
+        },
+        {
+          "id": "d",
+          "text": "Go"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Cada jugador de ajedrez empieza con dos alfiles y dos torres.",
+      "source": "https://es.wikipedia.org/wiki/Ajedrez"
+    },
+    {
+      "id": "tec-001",
+      "category": "Tecnología",
+      "difficulty": 1,
+      "text": "¿Qué empresa fabrica el iPhone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nokia"
+        },
+        {
+          "id": "b",
+          "text": "Apple"
+        },
+        {
+          "id": "c",
+          "text": "Google"
+        },
+        {
+          "id": "d",
+          "text": "Samsung"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Apple presentó el primer iPhone en 2007.",
+      "source": "https://es.wikipedia.org/wiki/IPhone"
+    },
+    {
+      "id": "tec-002",
+      "category": "Tecnología",
+      "difficulty": 1,
+      "text": "¿Qué significa «www» en las direcciones web?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Web World Wide"
+        },
+        {
+          "id": "b",
+          "text": "World Web Wide"
+        },
+        {
+          "id": "c",
+          "text": "World Wide Web"
+        },
+        {
+          "id": "d",
+          "text": "Wide World Web"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La World Wide Web es la red de páginas enlazadas de internet.",
+      "source": "https://es.wikipedia.org/wiki/World_Wide_Web"
+    },
+    {
+      "id": "tec-003",
+      "category": "Tecnología",
+      "difficulty": 1,
+      "text": "¿Con qué dispositivo se mueve normalmente el cursor de un ordenador?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ratón"
+        },
+        {
+          "id": "b",
+          "text": "Monitor"
+        },
+        {
+          "id": "c",
+          "text": "Teclado"
+        },
+        {
+          "id": "d",
+          "text": "Altavoz"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El ratón traduce el movimiento de la mano al cursor.",
+      "source": "https://es.wikipedia.org/wiki/Ratón_(informática)"
+    },
+    {
+      "id": "gas-001",
+      "category": "Gastronomía",
+      "difficulty": 1,
+      "text": "¿De qué país es originaria la pizza?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Grecia"
+        },
+        {
+          "id": "b",
+          "text": "Francia"
+        },
+        {
+          "id": "c",
+          "text": "Italia"
+        },
+        {
+          "id": "d",
+          "text": "España"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La pizza moderna nació en Nápoles.",
+      "source": "https://es.wikipedia.org/wiki/Pizza"
+    },
+    {
+      "id": "gas-002",
+      "category": "Gastronomía",
+      "difficulty": 1,
+      "text": "¿Cuál es el ingrediente principal del guacamole?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pepino"
+        },
+        {
+          "id": "b",
+          "text": "Tomate"
+        },
+        {
+          "id": "c",
+          "text": "Aguacate"
+        },
+        {
+          "id": "d",
+          "text": "Pimiento"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El guacamole es un puré de aguacate de origen mexicano.",
+      "source": "https://es.wikipedia.org/wiki/Guacamole"
+    },
+    {
+      "id": "gas-003",
+      "category": "Gastronomía",
+      "difficulty": 1,
+      "text": "¿De qué país es típico el sushi?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Japón"
+        },
+        {
+          "id": "b",
+          "text": "Corea del Sur"
+        },
+        {
+          "id": "c",
+          "text": "Tailandia"
+        },
+        {
+          "id": "d",
+          "text": "China"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El sushi combina arroz avinagrado con pescado u otros ingredientes.",
+      "source": "https://es.wikipedia.org/wiki/Sushi"
+    },
+    {
+      "id": "gas-004",
+      "category": "Gastronomía",
+      "difficulty": 1,
+      "text": "¿Qué se obtiene al secar una uva?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Una pasa"
+        },
+        {
+          "id": "b",
+          "text": "Un dátil"
+        },
+        {
+          "id": "c",
+          "text": "Una ciruela pasa"
+        },
+        {
+          "id": "d",
+          "text": "Un higo seco"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La pasa es una uva deshidratada.",
+      "source": "https://es.wikipedia.org/wiki/Uva_pasa"
+    },
+    {
+      "id": "gas-005",
+      "category": "Gastronomía",
+      "difficulty": 1,
+      "text": "¿De qué se hace principalmente el chocolate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vainilla"
+        },
+        {
+          "id": "b",
+          "text": "Café"
+        },
+        {
+          "id": "c",
+          "text": "Cacao"
+        },
+        {
+          "id": "d",
+          "text": "Avellana"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El chocolate se elabora con semillas de cacao.",
+      "source": "https://es.wikipedia.org/wiki/Chocolate"
+    },
+    {
+      "id": "geo-021",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Cuál es la capital de Canadá?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Montreal"
+        },
+        {
+          "id": "b",
+          "text": "Ottawa"
+        },
+        {
+          "id": "c",
+          "text": "Toronto"
+        },
+        {
+          "id": "d",
+          "text": "Vancouver"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Ottawa es la capital, aunque Toronto es la ciudad más grande.",
+      "source": "https://es.wikipedia.org/wiki/Ottawa"
+    },
+    {
+      "id": "geo-022",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Cuál es la capital de Brasil?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Río de Janeiro"
+        },
+        {
+          "id": "b",
+          "text": "Salvador"
+        },
+        {
+          "id": "c",
+          "text": "Brasilia"
+        },
+        {
+          "id": "d",
+          "text": "São Paulo"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Brasilia se fundó en 1960 para ser la nueva capital.",
+      "source": "https://es.wikipedia.org/wiki/Brasilia"
+    },
+    {
+      "id": "geo-023",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Qué país tiene más habitantes de América del Sur?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perú"
+        },
+        {
+          "id": "b",
+          "text": "Colombia"
+        },
+        {
+          "id": "c",
+          "text": "Brasil"
+        },
+        {
+          "id": "d",
+          "text": "Argentina"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Brasil reúne casi la mitad de la población de Sudamérica.",
+      "source": "https://es.wikipedia.org/wiki/Brasil"
+    },
+    {
+      "id": "geo-024",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿En qué país está el monte Fuji?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Japón"
+        },
+        {
+          "id": "b",
+          "text": "China"
+        },
+        {
+          "id": "c",
+          "text": "Corea del Sur"
+        },
+        {
+          "id": "d",
+          "text": "Filipinas"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El Fuji es el monte más alto de Japón.",
+      "source": "https://es.wikipedia.org/wiki/Monte_Fuji"
+    },
+    {
+      "id": "geo-025",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Qué estrecho separa España de Marruecos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Estrecho de Ormuz"
+        },
+        {
+          "id": "b",
+          "text": "Estrecho de Gibraltar"
+        },
+        {
+          "id": "c",
+          "text": "Estrecho de Magallanes"
+        },
+        {
+          "id": "d",
+          "text": "Estrecho de Bering"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El estrecho de Gibraltar une el Mediterráneo con el Atlántico.",
+      "source": "https://es.wikipedia.org/wiki/Estrecho_de_Gibraltar"
+    },
+    {
+      "id": "geo-026",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Cuál es el lago más grande de África?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lago Malaui"
+        },
+        {
+          "id": "b",
+          "text": "Lago Chad"
+        },
+        {
+          "id": "c",
+          "text": "Lago Tanganica"
+        },
+        {
+          "id": "d",
+          "text": "Lago Victoria"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El lago Victoria lo comparten Uganda, Kenia y Tanzania.",
+      "source": "https://es.wikipedia.org/wiki/Lago_Victoria"
+    },
+    {
+      "id": "geo-027",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Qué cordillera separa Francia de España?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los Alpes"
+        },
+        {
+          "id": "b",
+          "text": "Los Pirineos"
+        },
+        {
+          "id": "c",
+          "text": "Los Apeninos"
+        },
+        {
+          "id": "d",
+          "text": "Los Cárpatos"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Los Pirineos van del Cantábrico al Mediterráneo.",
+      "source": "https://es.wikipedia.org/wiki/Pirineos"
+    },
+    {
+      "id": "geo-028",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Cuál es la capital de Turquía?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Antalya"
+        },
+        {
+          "id": "b",
+          "text": "Estambul"
+        },
+        {
+          "id": "c",
+          "text": "Esmirna"
+        },
+        {
+          "id": "d",
+          "text": "Ankara"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Ankara es la capital desde 1923; Estambul es la ciudad más poblada.",
+      "source": "https://es.wikipedia.org/wiki/Ankara"
+    },
+    {
+      "id": "geo-029",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Por qué país discurre la mayor parte del río Amazonas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Brasil"
+        },
+        {
+          "id": "b",
+          "text": "Venezuela"
+        },
+        {
+          "id": "c",
+          "text": "Colombia"
+        },
+        {
+          "id": "d",
+          "text": "Perú"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Nace en Perú, pero la mayor parte de su curso está en Brasil.",
+      "source": "https://es.wikipedia.org/wiki/Río_Amazonas"
+    },
+    {
+      "id": "geo-030",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿Qué país sudamericano es largo y estrecho junto al Pacífico?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perú"
+        },
+        {
+          "id": "b",
+          "text": "Chile"
+        },
+        {
+          "id": "c",
+          "text": "Colombia"
+        },
+        {
+          "id": "d",
+          "text": "Ecuador"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Chile mide más de 4000 km de largo y muy poco de ancho.",
+      "source": "https://es.wikipedia.org/wiki/Chile"
+    },
+    {
+      "id": "geo-031",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿En qué océano están las islas Maldivas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Atlántico"
+        },
+        {
+          "id": "b",
+          "text": "Ártico"
+        },
+        {
+          "id": "c",
+          "text": "Pacífico"
+        },
+        {
+          "id": "d",
+          "text": "Índico"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Las Maldivas están al suroeste de la India.",
+      "source": "https://es.wikipedia.org/wiki/Maldivas"
+    },
+    {
+      "id": "his-011",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿En qué año empezó la Primera Guerra Mundial?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1918"
+        },
+        {
+          "id": "b",
+          "text": "1905"
+        },
+        {
+          "id": "c",
+          "text": "1914"
+        },
+        {
+          "id": "d",
+          "text": "1939"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Empezó en 1914 y terminó en 1918.",
+      "source": "https://es.wikipedia.org/wiki/Primera_Guerra_Mundial"
+    },
+    {
+      "id": "his-012",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿En qué año terminó la Segunda Guerra Mundial?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1946"
+        },
+        {
+          "id": "b",
+          "text": "1939"
+        },
+        {
+          "id": "c",
+          "text": "1944"
+        },
+        {
+          "id": "d",
+          "text": "1945"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Terminó en 1945, con la rendición de Alemania y después la de Japón.",
+      "source": "https://es.wikipedia.org/wiki/Segunda_Guerra_Mundial"
+    },
+    {
+      "id": "his-013",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿Qué faraón es famoso por su tumba casi intacta descubierta en 1922?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cleopatra"
+        },
+        {
+          "id": "b",
+          "text": "Ramsés II"
+        },
+        {
+          "id": "c",
+          "text": "Keops"
+        },
+        {
+          "id": "d",
+          "text": "Tutankamón"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Howard Carter descubrió la tumba de Tutankamón en 1922.",
+      "source": "https://es.wikipedia.org/wiki/Tutankamón"
+    },
+    {
+      "id": "his-014",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿Quién fue el primer emperador de Roma?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Julio César"
+        },
+        {
+          "id": "b",
+          "text": "Augusto"
+        },
+        {
+          "id": "c",
+          "text": "Calígula"
+        },
+        {
+          "id": "d",
+          "text": "Nerón"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Julio César fue dictador; Augusto, el primer emperador.",
+      "source": "https://es.wikipedia.org/wiki/Augusto"
+    },
+    {
+      "id": "his-015",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Quién dirigió la expedición de la primera vuelta al mundo, que completó Elcano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Américo Vespucio"
+        },
+        {
+          "id": "b",
+          "text": "Fernando de Magallanes"
+        },
+        {
+          "id": "c",
+          "text": "Cristóbal Colón"
+        },
+        {
+          "id": "d",
+          "text": "Vasco da Gama"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Magallanes murió en Filipinas y Elcano terminó el viaje en 1522.",
+      "source": "https://es.wikipedia.org/wiki/Expedición_de_Magallanes-Elcano"
+    },
+    {
+      "id": "his-016",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿En qué ciudad fue asesinado John F. Kennedy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Chicago"
+        },
+        {
+          "id": "b",
+          "text": "Dallas"
+        },
+        {
+          "id": "c",
+          "text": "Washington"
+        },
+        {
+          "id": "d",
+          "text": "Nueva York"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Kennedy fue asesinado en Dallas en 1963.",
+      "source": "https://es.wikipedia.org/wiki/Asesinato_de_John_F._Kennedy"
+    },
+    {
+      "id": "his-017",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿Qué pueblo nórdico hacía incursiones por mar en la Edad Media?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los hunos"
+        },
+        {
+          "id": "b",
+          "text": "Los visigodos"
+        },
+        {
+          "id": "c",
+          "text": "Los celtas"
+        },
+        {
+          "id": "d",
+          "text": "Los vikingos"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Los vikingos navegaban desde Escandinavia.",
+      "source": "https://es.wikipedia.org/wiki/Vikingo"
+    },
+    {
+      "id": "his-018",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿Quién lideró la independencia de la India con la resistencia no violenta?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Jawaharlal Nehru"
+        },
+        {
+          "id": "b",
+          "text": "Nelson Mandela"
+        },
+        {
+          "id": "c",
+          "text": "Mahatma Gandhi"
+        },
+        {
+          "id": "d",
+          "text": "Martin Luther King"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gandhi encabezó la lucha pacífica contra el dominio británico.",
+      "source": "https://es.wikipedia.org/wiki/Mahatma_Gandhi"
+    },
+    {
+      "id": "his-019",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué pueblo tenía su capital en Tenochtitlan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los incas"
+        },
+        {
+          "id": "b",
+          "text": "Los mayas"
+        },
+        {
+          "id": "c",
+          "text": "Los olmecas"
+        },
+        {
+          "id": "d",
+          "text": "Los aztecas"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Tenochtitlan, capital mexica, estaba donde hoy está Ciudad de México.",
+      "source": "https://es.wikipedia.org/wiki/Tenochtitlan"
+    },
+    {
+      "id": "cie-018",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el símbolo químico del hierro?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hi"
+        },
+        {
+          "id": "b",
+          "text": "Fr"
+        },
+        {
+          "id": "c",
+          "text": "Fe"
+        },
+        {
+          "id": "d",
+          "text": "Ir"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Fe viene del latín «ferrum».",
+      "source": "https://es.wikipedia.org/wiki/Hierro"
+    },
+    {
+      "id": "cie-019",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Qué científico propuso la evolución por selección natural?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Charles Darwin"
+        },
+        {
+          "id": "b",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "c",
+          "text": "Gregor Mendel"
+        },
+        {
+          "id": "d",
+          "text": "Louis Pasteur"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Darwin la expuso en «El origen de las especies» (1859).",
+      "source": "https://es.wikipedia.org/wiki/Charles_Darwin"
+    },
+    {
+      "id": "cie-020",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el planeta más cercano al Sol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La Tierra"
+        },
+        {
+          "id": "b",
+          "text": "Marte"
+        },
+        {
+          "id": "c",
+          "text": "Venus"
+        },
+        {
+          "id": "d",
+          "text": "Mercurio"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Mercurio es el primer planeta del sistema solar.",
+      "source": "https://es.wikipedia.org/wiki/Mercurio_(planeta)"
+    },
+    {
+      "id": "cie-021",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Qué grupo sanguíneo es el donante universal de glóbulos rojos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0 negativo"
+        },
+        {
+          "id": "b",
+          "text": "B negativo"
+        },
+        {
+          "id": "c",
+          "text": "A positivo"
+        },
+        {
+          "id": "d",
+          "text": "AB positivo"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El 0 negativo no tiene antígenos A, B ni Rh.",
+      "source": "https://es.wikipedia.org/wiki/Grupo_sanguíneo"
+    },
+    {
+      "id": "cie-022",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuántos cromosomas tiene normalmente una célula humana?",
+      "options": [
+        {
+          "id": "a",
+          "text": "23"
+        },
+        {
+          "id": "b",
+          "text": "46"
+        },
+        {
+          "id": "c",
+          "text": "48"
+        },
+        {
+          "id": "d",
+          "text": "44"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Son 23 pares: 46 en total.",
+      "source": "https://es.wikipedia.org/wiki/Cromosoma"
+    },
+    {
+      "id": "cie-023",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Qué vitamina produce la piel al recibir la luz del sol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vitamina D"
+        },
+        {
+          "id": "b",
+          "text": "Vitamina C"
+        },
+        {
+          "id": "c",
+          "text": "Vitamina B12"
+        },
+        {
+          "id": "d",
+          "text": "Vitamina A"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La luz ultravioleta activa la síntesis de vitamina D.",
+      "source": "https://es.wikipedia.org/wiki/Vitamina_D"
+    },
+    {
+      "id": "cie-024",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Quién descubrió la penicilina?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Alexander Fleming"
+        },
+        {
+          "id": "b",
+          "text": "Robert Koch"
+        },
+        {
+          "id": "c",
+          "text": "Louis Pasteur"
+        },
+        {
+          "id": "d",
+          "text": "Edward Jenner"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Fleming la descubrió en 1928.",
+      "source": "https://es.wikipedia.org/wiki/Penicilina"
+    },
+    {
+      "id": "cie-025",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Qué partícula del átomo tiene carga negativa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fotón"
+        },
+        {
+          "id": "b",
+          "text": "Protón"
+        },
+        {
+          "id": "c",
+          "text": "Neutrón"
+        },
+        {
+          "id": "d",
+          "text": "Electrón"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El protón es positivo y el neutrón no tiene carga.",
+      "source": "https://es.wikipedia.org/wiki/Electrón"
+    },
+    {
+      "id": "cie-026",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el órgano más grande del cuerpo humano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los pulmones"
+        },
+        {
+          "id": "b",
+          "text": "El intestino"
+        },
+        {
+          "id": "c",
+          "text": "El hígado"
+        },
+        {
+          "id": "d",
+          "text": "La piel"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "La piel cubre casi dos metros cuadrados en un adulto.",
+      "source": "https://es.wikipedia.org/wiki/Piel"
+    },
+    {
+      "id": "cie-027",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Qué planeta tiene los anillos más visibles?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Júpiter"
+        },
+        {
+          "id": "b",
+          "text": "Saturno"
+        },
+        {
+          "id": "c",
+          "text": "Neptuno"
+        },
+        {
+          "id": "d",
+          "text": "Urano"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Todos los gigantes tienen anillos, pero los de Saturno son los más brillantes.",
+      "source": "https://es.wikipedia.org/wiki/Saturno_(planeta)"
+    },
+    {
+      "id": "nat-011",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Cuál es el animal terrestre más rápido?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Guepardo"
+        },
+        {
+          "id": "b",
+          "text": "Caballo"
+        },
+        {
+          "id": "c",
+          "text": "León"
+        },
+        {
+          "id": "d",
+          "text": "Antílope"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El guepardo supera los 100 km/h en carreras cortas.",
+      "source": "https://es.wikipedia.org/wiki/Acinonyx_jubatus"
+    },
+    {
+      "id": "nat-012",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Cuántos corazones tiene un pulpo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ocho"
+        },
+        {
+          "id": "b",
+          "text": "Uno"
+        },
+        {
+          "id": "c",
+          "text": "Dos"
+        },
+        {
+          "id": "d",
+          "text": "Tres"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Dos bombean sangre a las branquias y uno al resto del cuerpo.",
+      "source": "https://es.wikipedia.org/wiki/Octopoda"
+    },
+    {
+      "id": "nat-013",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Cuál es el único mamífero capaz de volar de verdad, no solo planear?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El petauro del azúcar"
+        },
+        {
+          "id": "b",
+          "text": "El murciélago"
+        },
+        {
+          "id": "c",
+          "text": "El colugo"
+        },
+        {
+          "id": "d",
+          "text": "La ardilla voladora"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Los demás solo planean; el murciélago bate las alas.",
+      "source": "https://es.wikipedia.org/wiki/Chiroptera"
+    },
+    {
+      "id": "nat-014",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Qué animal produce la seda que más se usa en la industria?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La araña"
+        },
+        {
+          "id": "b",
+          "text": "La abeja"
+        },
+        {
+          "id": "c",
+          "text": "La oruga procesionaria"
+        },
+        {
+          "id": "d",
+          "text": "El gusano de seda"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El gusano de seda teje su capullo con un solo hilo muy largo.",
+      "source": "https://es.wikipedia.org/wiki/Bombyx_mori"
+    },
+    {
+      "id": "nat-015",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Cómo se llama el cambio de oruga a mariposa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mitosis"
+        },
+        {
+          "id": "b",
+          "text": "Fotosíntesis"
+        },
+        {
+          "id": "c",
+          "text": "Hibernación"
+        },
+        {
+          "id": "d",
+          "text": "Metamorfosis"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "En la metamorfosis el animal cambia de forma por completo.",
+      "source": "https://es.wikipedia.org/wiki/Metamorfosis_(biología)"
+    },
+    {
+      "id": "nat-016",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Qué árbol da bellotas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El roble"
+        },
+        {
+          "id": "b",
+          "text": "El pino"
+        },
+        {
+          "id": "c",
+          "text": "El olmo"
+        },
+        {
+          "id": "d",
+          "text": "El haya"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Las bellotas son el fruto de los robles y las encinas.",
+      "source": "https://es.wikipedia.org/wiki/Quercus"
+    },
+    {
+      "id": "nat-017",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Qué mamífero terrestre tiene la gestación más larga?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El rinoceronte"
+        },
+        {
+          "id": "b",
+          "text": "El hipopótamo"
+        },
+        {
+          "id": "c",
+          "text": "La jirafa"
+        },
+        {
+          "id": "d",
+          "text": "El elefante"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "La elefanta gesta durante unos 22 meses.",
+      "source": "https://es.wikipedia.org/wiki/Elephantidae"
+    },
+    {
+      "id": "nat-018",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿Cuál es el ave más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El avestruz"
+        },
+        {
+          "id": "b",
+          "text": "El albatros"
+        },
+        {
+          "id": "c",
+          "text": "El emú"
+        },
+        {
+          "id": "d",
+          "text": "El cóndor andino"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El avestruz puede medir más de 2,5 metros.",
+      "source": "https://es.wikipedia.org/wiki/Struthio_camelus"
+    },
+    {
+      "id": "cin-007",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Quién dirigió «Parque Jurásico» (1993)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "George Lucas"
+        },
+        {
+          "id": "b",
+          "text": "James Cameron"
+        },
+        {
+          "id": "c",
+          "text": "Steven Spielberg"
+        },
+        {
+          "id": "d",
+          "text": "Ridley Scott"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Spielberg adaptó la novela de Michael Crichton.",
+      "source": "https://es.wikipedia.org/wiki/Jurassic_Park_(película)"
+    },
+    {
+      "id": "cin-008",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Quién dirigió «Titanic» (1997)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Christopher Nolan"
+        },
+        {
+          "id": "b",
+          "text": "Martin Scorsese"
+        },
+        {
+          "id": "c",
+          "text": "James Cameron"
+        },
+        {
+          "id": "d",
+          "text": "Steven Spielberg"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Titanic ganó 11 Óscar, entre ellos el de mejor dirección.",
+      "source": "https://es.wikipedia.org/wiki/Titanic_(película_de_1997)"
+    },
+    {
+      "id": "cin-009",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Cómo se llama el hobbit que lleva el Anillo en «El señor de los anillos»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peregrin Tuk"
+        },
+        {
+          "id": "b",
+          "text": "Bilbo Bolsón"
+        },
+        {
+          "id": "c",
+          "text": "Samsagaz Gamyi"
+        },
+        {
+          "id": "d",
+          "text": "Frodo Bolsón"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Frodo hereda el Anillo de su tío Bilbo.",
+      "source": "https://es.wikipedia.org/wiki/Frodo_Bolsón"
+    },
+    {
+      "id": "cin-010",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿En qué ciudad viven Los Simpson?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Shelbyville"
+        },
+        {
+          "id": "b",
+          "text": "South Park"
+        },
+        {
+          "id": "c",
+          "text": "Springfield"
+        },
+        {
+          "id": "d",
+          "text": "Quahog"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Shelbyville es la ciudad rival de Springfield.",
+      "source": "https://es.wikipedia.org/wiki/Los_Simpson"
+    },
+    {
+      "id": "cin-011",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Qué actor interpretó a Jack Sparrow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Brad Pitt"
+        },
+        {
+          "id": "b",
+          "text": "Orlando Bloom"
+        },
+        {
+          "id": "c",
+          "text": "Leonardo DiCaprio"
+        },
+        {
+          "id": "d",
+          "text": "Johnny Depp"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Depp lo interpretó en «Piratas del Caribe» desde 2003.",
+      "source": "https://es.wikipedia.org/wiki/Jack_Sparrow"
+    },
+    {
+      "id": "cin-012",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Cómo se llama el pez cirujano azul y olvidadizo de «Buscando a Nemo»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Dory"
+        },
+        {
+          "id": "b",
+          "text": "Bruce"
+        },
+        {
+          "id": "c",
+          "text": "Marlin"
+        },
+        {
+          "id": "d",
+          "text": "Gill"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Marlin es el padre de Nemo y Dory le acompaña en la búsqueda.",
+      "source": "https://es.wikipedia.org/wiki/Buscando_a_Nemo"
+    },
+    {
+      "id": "cin-013",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Qué saga protagoniza un arqueólogo con látigo y sombrero?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La momia"
+        },
+        {
+          "id": "b",
+          "text": "La búsqueda"
+        },
+        {
+          "id": "c",
+          "text": "Indiana Jones"
+        },
+        {
+          "id": "d",
+          "text": "Tomb Raider"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Harrison Ford interpretó a Indiana Jones.",
+      "source": "https://es.wikipedia.org/wiki/Indiana_Jones"
+    },
+    {
+      "id": "mus-008",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿Qué compositor siguió componiendo tras quedarse sordo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Antonio Vivaldi"
+        },
+        {
+          "id": "b",
+          "text": "Ludwig van Beethoven"
+        },
+        {
+          "id": "c",
+          "text": "Frédéric Chopin"
+        },
+        {
+          "id": "d",
+          "text": "Johann Sebastian Bach"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Beethoven compuso su Novena Sinfonía ya sordo.",
+      "source": "https://es.wikipedia.org/wiki/Ludwig_van_Beethoven"
+    },
+    {
+      "id": "mus-009",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿Quién era el cantante de Queen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Freddie Mercury"
+        },
+        {
+          "id": "b",
+          "text": "David Bowie"
+        },
+        {
+          "id": "c",
+          "text": "Brian May"
+        },
+        {
+          "id": "d",
+          "text": "Mick Jagger"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Brian May era el guitarrista de Queen.",
+      "source": "https://es.wikipedia.org/wiki/Queen"
+    },
+    {
+      "id": "mus-010",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿De qué país es originario el tango?",
+      "options": [
+        {
+          "id": "a",
+          "text": "España"
+        },
+        {
+          "id": "b",
+          "text": "Brasil"
+        },
+        {
+          "id": "c",
+          "text": "Cuba"
+        },
+        {
+          "id": "d",
+          "text": "Argentina"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El tango nació en el Río de la Plata, entre Buenos Aires y Montevideo.",
+      "source": "https://es.wikipedia.org/wiki/Tango"
+    },
+    {
+      "id": "mus-011",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Cuántas teclas tiene un piano moderno estándar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "96"
+        },
+        {
+          "id": "b",
+          "text": "88"
+        },
+        {
+          "id": "c",
+          "text": "64"
+        },
+        {
+          "id": "d",
+          "text": "76"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "52 teclas blancas y 36 negras.",
+      "source": "https://es.wikipedia.org/wiki/Piano"
+    },
+    {
+      "id": "mus-012",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿Qué instrumento de metal tiene una vara deslizante?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Saxofón"
+        },
+        {
+          "id": "b",
+          "text": "Trombón"
+        },
+        {
+          "id": "c",
+          "text": "Tuba"
+        },
+        {
+          "id": "d",
+          "text": "Trompeta"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La vara del trombón cambia la longitud del tubo.",
+      "source": "https://es.wikipedia.org/wiki/Trombón"
+    },
+    {
+      "id": "mus-013",
+      "category": "Música",
+      "difficulty": 2,
+      "text": "¿De qué país es la samba?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Brasil"
+        },
+        {
+          "id": "b",
+          "text": "Cuba"
+        },
+        {
+          "id": "c",
+          "text": "Colombia"
+        },
+        {
+          "id": "d",
+          "text": "Portugal"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La samba es el ritmo del carnaval de Río de Janeiro.",
+      "source": "https://es.wikipedia.org/wiki/Samba"
+    },
+    {
+      "id": "dep-008",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿Cuánto mide un maratón?",
+      "options": [
+        {
+          "id": "a",
+          "text": "42,195 km"
+        },
+        {
+          "id": "b",
+          "text": "21,097 km"
+        },
+        {
+          "id": "c",
+          "text": "45,5 km"
+        },
+        {
+          "id": "d",
+          "text": "40 km"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "21,097 km es la media maratón.",
+      "source": "https://es.wikipedia.org/wiki/Maratón"
+    },
+    {
+      "id": "dep-009",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿En qué deporte se disputa el Tour de Francia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vela"
+        },
+        {
+          "id": "b",
+          "text": "Automovilismo"
+        },
+        {
+          "id": "c",
+          "text": "Ciclismo"
+        },
+        {
+          "id": "d",
+          "text": "Atletismo"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El Tour se corre cada verano desde 1903.",
+      "source": "https://es.wikipedia.org/wiki/Tour_de_Francia"
+    },
+    {
+      "id": "dep-010",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿Cuántos jugadores tiene en pista cada equipo de baloncesto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cinco"
+        },
+        {
+          "id": "b",
+          "text": "Cuatro"
+        },
+        {
+          "id": "c",
+          "text": "Seis"
+        },
+        {
+          "id": "d",
+          "text": "Siete"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Cada equipo juega con cinco y tiene suplentes en el banquillo.",
+      "source": "https://es.wikipedia.org/wiki/Baloncesto"
+    },
+    {
+      "id": "dep-011",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿En qué país se creó el judo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Japón"
+        },
+        {
+          "id": "b",
+          "text": "China"
+        },
+        {
+          "id": "c",
+          "text": "Corea del Sur"
+        },
+        {
+          "id": "d",
+          "text": "Tailandia"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Jigoro Kano creó el judo en Japón en 1882.",
+      "source": "https://es.wikipedia.org/wiki/Judo"
+    },
+    {
+      "id": "dep-012",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿Cuántos jugadores tiene en pista cada equipo de voleibol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Siete"
+        },
+        {
+          "id": "b",
+          "text": "Cuatro"
+        },
+        {
+          "id": "c",
+          "text": "Seis"
+        },
+        {
+          "id": "d",
+          "text": "Cinco"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "En voleibol juegan seis por equipo y rotan.",
+      "source": "https://es.wikipedia.org/wiki/Voleibol"
+    },
+    {
+      "id": "dep-013",
+      "category": "Deportes",
+      "difficulty": 3,
+      "text": "¿Qué atleta batió en 2009 el récord mundial de 100 metros lisos con 9,58 s?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Asafa Powell"
+        },
+        {
+          "id": "b",
+          "text": "Usain Bolt"
+        },
+        {
+          "id": "c",
+          "text": "Carl Lewis"
+        },
+        {
+          "id": "d",
+          "text": "Yohan Blake"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Usain Bolt lo logró en el Mundial de Berlín.",
+      "source": "https://es.wikipedia.org/wiki/Usain_Bolt"
+    },
+    {
+      "id": "art-005",
+      "category": "Arte",
+      "difficulty": 2,
+      "text": "¿Qué pintor español pintó «Las meninas»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Diego Velázquez"
+        },
+        {
+          "id": "b",
+          "text": "Francisco de Goya"
+        },
+        {
+          "id": "c",
+          "text": "Bartolomé Murillo"
+        },
+        {
+          "id": "d",
+          "text": "El Greco"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Velázquez la pintó en 1656; está en el Museo del Prado.",
+      "source": "https://es.wikipedia.org/wiki/Las_meninas"
+    },
+    {
+      "id": "art-006",
+      "category": "Arte",
+      "difficulty": 2,
+      "text": "¿En qué museo se expone la Mona Lisa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Museo del Prado"
+        },
+        {
+          "id": "b",
+          "text": "Museo Británico"
+        },
+        {
+          "id": "c",
+          "text": "Galería Uffizi"
+        },
+        {
+          "id": "d",
+          "text": "Museo del Louvre"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "La Gioconda está en el Louvre de París.",
+      "source": "https://es.wikipedia.org/wiki/Museo_del_Louvre"
+    },
+    {
+      "id": "art-007",
+      "category": "Arte",
+      "difficulty": 2,
+      "text": "¿Qué pintor surrealista pintó relojes blandos en «La persistencia de la memoria»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Max Ernst"
+        },
+        {
+          "id": "b",
+          "text": "Joan Miró"
+        },
+        {
+          "id": "c",
+          "text": "René Magritte"
+        },
+        {
+          "id": "d",
+          "text": "Salvador Dalí"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Dalí la pintó en 1931.",
+      "source": "https://es.wikipedia.org/wiki/La_persistencia_de_la_memoria"
+    },
+    {
+      "id": "art-008",
+      "category": "Arte",
+      "difficulty": 3,
+      "text": "¿Quién esculpió el «David» de mármol de Florencia terminado en 1504?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Donatello"
+        },
+        {
+          "id": "b",
+          "text": "Rodin"
+        },
+        {
+          "id": "c",
+          "text": "Miguel Ángel"
+        },
+        {
+          "id": "d",
+          "text": "Bernini"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Miguel Ángel lo talló en un solo bloque de mármol.",
+      "source": "https://es.wikipedia.org/wiki/David_(Miguel_Ángel)"
+    },
+    {
+      "id": "lit-006",
+      "category": "Literatura",
+      "difficulty": 2,
+      "text": "¿Quién escribió «La Odisea»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Virgilio"
+        },
+        {
+          "id": "b",
+          "text": "Platón"
+        },
+        {
+          "id": "c",
+          "text": "Sófocles"
+        },
+        {
+          "id": "d",
+          "text": "Homero"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "La Odisea narra el regreso de Ulises a Ítaca.",
+      "source": "https://es.wikipedia.org/wiki/Odisea"
+    },
+    {
+      "id": "lit-007",
+      "category": "Literatura",
+      "difficulty": 2,
+      "text": "¿Qué escritor creó a Sherlock Holmes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agatha Christie"
+        },
+        {
+          "id": "b",
+          "text": "Arthur Conan Doyle"
+        },
+        {
+          "id": "c",
+          "text": "Charles Dickens"
+        },
+        {
+          "id": "d",
+          "text": "Edgar Allan Poe"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Holmes apareció por primera vez en 1887.",
+      "source": "https://es.wikipedia.org/wiki/Sherlock_Holmes"
+    },
+    {
+      "id": "lit-008",
+      "category": "Literatura",
+      "difficulty": 2,
+      "text": "¿Quién escribió «El principito»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Victor Hugo"
+        },
+        {
+          "id": "b",
+          "text": "Antoine de Saint-Exupéry"
+        },
+        {
+          "id": "c",
+          "text": "Julio Verne"
+        },
+        {
+          "id": "d",
+          "text": "Albert Camus"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Saint-Exupéry, además de escritor, era aviador.",
+      "source": "https://es.wikipedia.org/wiki/El_principito"
+    },
+    {
+      "id": "lit-009",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Qué poeta chileno ganó el Nobel de Literatura en 1971?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Gabriela Mistral"
+        },
+        {
+          "id": "b",
+          "text": "Vicente Huidobro"
+        },
+        {
+          "id": "c",
+          "text": "Nicanor Parra"
+        },
+        {
+          "id": "d",
+          "text": "Pablo Neruda"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Gabriela Mistral lo había ganado antes, en 1945.",
+      "source": "https://es.wikipedia.org/wiki/Pablo_Neruda"
+    },
+    {
+      "id": "cur-008",
+      "category": "Curiosidades",
+      "difficulty": 2,
+      "text": "¿Cuántos años de casados se celebran en las bodas de oro?",
+      "options": [
+        {
+          "id": "a",
+          "text": "50"
+        },
+        {
+          "id": "b",
+          "text": "40"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "60"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Las bodas de plata son a los 25 años y las de oro a los 50.",
+      "source": "https://es.wikipedia.org/wiki/Aniversario_de_bodas"
+    },
+    {
+      "id": "cur-009",
+      "category": "Curiosidades",
+      "difficulty": 2,
+      "text": "¿Qué significa la sigla «ONU»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Organización de Naciones Unificadas"
+        },
+        {
+          "id": "b",
+          "text": "Orden de las Naciones Unidas"
+        },
+        {
+          "id": "c",
+          "text": "Organización de las Naciones Unidas"
+        },
+        {
+          "id": "d",
+          "text": "Oficina de las Naciones Unidas"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La ONU se fundó en 1945.",
+      "source": "https://es.wikipedia.org/wiki/Organización_de_las_Naciones_Unidas"
+    },
+    {
+      "id": "cur-010",
+      "category": "Curiosidades",
+      "difficulty": 2,
+      "text": "¿Cuántas casillas tiene un tablero de ajedrez?",
+      "options": [
+        {
+          "id": "a",
+          "text": "64"
+        },
+        {
+          "id": "b",
+          "text": "100"
+        },
+        {
+          "id": "c",
+          "text": "48"
+        },
+        {
+          "id": "d",
+          "text": "81"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Son 8 filas por 8 columnas.",
+      "source": "https://es.wikipedia.org/wiki/Tablero_de_ajedrez"
+    },
+    {
+      "id": "tec-004",
+      "category": "Tecnología",
+      "difficulty": 2,
+      "text": "¿Quién fundó Microsoft junto a Paul Allen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Larry Page"
+        },
+        {
+          "id": "b",
+          "text": "Bill Gates"
+        },
+        {
+          "id": "c",
+          "text": "Steve Jobs"
+        },
+        {
+          "id": "d",
+          "text": "Mark Zuckerberg"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Gates y Allen fundaron Microsoft en 1975.",
+      "source": "https://es.wikipedia.org/wiki/Microsoft"
+    },
+    {
+      "id": "tec-005",
+      "category": "Tecnología",
+      "difficulty": 2,
+      "text": "¿Qué significan las siglas «USB»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Unified System Board"
+        },
+        {
+          "id": "b",
+          "text": "Universal Storage Bus"
+        },
+        {
+          "id": "c",
+          "text": "Universal Serial Bus"
+        },
+        {
+          "id": "d",
+          "text": "User Serial Bridge"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "USB significa «bus universal en serie».",
+      "source": "https://es.wikipedia.org/wiki/Universal_Serial_Bus"
+    },
+    {
+      "id": "tec-006",
+      "category": "Tecnología",
+      "difficulty": 2,
+      "text": "¿Qué sistema de numeración usan los ordenadores internamente?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Binario"
+        },
+        {
+          "id": "b",
+          "text": "Romano"
+        },
+        {
+          "id": "c",
+          "text": "Decimal"
+        },
+        {
+          "id": "d",
+          "text": "Sexagesimal"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Los ordenadores trabajan con ceros y unos.",
+      "source": "https://es.wikipedia.org/wiki/Sistema_binario"
+    },
+    {
+      "id": "gas-006",
+      "category": "Gastronomía",
+      "difficulty": 2,
+      "text": "¿De qué región española es originaria la paella?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Galicia"
+        },
+        {
+          "id": "b",
+          "text": "Comunidad Valenciana"
+        },
+        {
+          "id": "c",
+          "text": "Cataluña"
+        },
+        {
+          "id": "d",
+          "text": "Andalucía"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La paella nació en los arrozales de Valencia.",
+      "source": "https://es.wikipedia.org/wiki/Paella"
+    },
+    {
+      "id": "gas-007",
+      "category": "Gastronomía",
+      "difficulty": 2,
+      "text": "¿Qué especia, sacada de una flor, es la más cara del mundo por peso?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cardamomo"
+        },
+        {
+          "id": "b",
+          "text": "Azafrán"
+        },
+        {
+          "id": "c",
+          "text": "Pimienta"
+        },
+        {
+          "id": "d",
+          "text": "Vainilla"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Hacen falta miles de flores para obtener un kilo de azafrán.",
+      "source": "https://es.wikipedia.org/wiki/Azafrán"
+    },
+    {
+      "id": "gas-008",
+      "category": "Gastronomía",
+      "difficulty": 2,
+      "text": "¿De qué planta se obtiene el tequila?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nopal"
+        },
+        {
+          "id": "b",
+          "text": "Maíz"
+        },
+        {
+          "id": "c",
+          "text": "Agave azul"
+        },
+        {
+          "id": "d",
+          "text": "Caña de azúcar"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El tequila se destila del agave azul.",
+      "source": "https://es.wikipedia.org/wiki/Tequila"
+    },
+    {
+      "id": "his-020",
+      "category": "Historia",
+      "difficulty": 2,
+      "text": "¿Qué reyes completaron la conquista de Granada en 1492?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Carlos I e Isabel de Portugal"
+        },
+        {
+          "id": "b",
+          "text": "Alfonso X y Violante de Aragón"
+        },
+        {
+          "id": "c",
+          "text": "Felipe II y María Tudor"
+        },
+        {
+          "id": "d",
+          "text": "Los Reyes Católicos"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Isabel de Castilla y Fernando de Aragón tomaron Granada en enero de 1492.",
+      "source": "https://es.wikipedia.org/wiki/Reyes_Católicos"
+    },
+    {
+      "id": "cie-028",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Qué científico formuló las tres leyes del movimiento?",
+      "options": [
+        {
+          "id": "a",
+          "text": "René Descartes"
+        },
+        {
+          "id": "b",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "c",
+          "text": "Galileo Galilei"
+        },
+        {
+          "id": "d",
+          "text": "Johannes Kepler"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Newton las publicó en 1687.",
+      "source": "https://es.wikipedia.org/wiki/Leyes_de_Newton"
+    },
+    {
+      "id": "nat-019",
+      "category": "Naturaleza",
+      "difficulty": 2,
+      "text": "¿De qué se alimentan principalmente los koalas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fruta"
+        },
+        {
+          "id": "b",
+          "text": "Hojas de eucalipto"
+        },
+        {
+          "id": "c",
+          "text": "Insectos"
+        },
+        {
+          "id": "d",
+          "text": "Bambú"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Los koalas comen casi solo hojas de eucalipto.",
+      "source": "https://es.wikipedia.org/wiki/Phascolarctos_cinereus"
+    },
+    {
+      "id": "cin-014",
+      "category": "Cine y televisión",
+      "difficulty": 2,
+      "text": "¿Qué actor interpretó a Neo en «Matrix»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tom Cruise"
+        },
+        {
+          "id": "b",
+          "text": "Will Smith"
+        },
+        {
+          "id": "c",
+          "text": "Keanu Reeves"
+        },
+        {
+          "id": "d",
+          "text": "Laurence Fishburne"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Laurence Fishburne era Morfeo.",
+      "source": "https://es.wikipedia.org/wiki/Matrix"
+    },
+    {
+      "id": "dep-014",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿En qué ciudad se celebraron los Juegos Olímpicos de 1992?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Atlanta"
+        },
+        {
+          "id": "b",
+          "text": "Seúl"
+        },
+        {
+          "id": "c",
+          "text": "Barcelona"
+        },
+        {
+          "id": "d",
+          "text": "Sídney"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Seúl fue en 1988 y Atlanta en 1996.",
+      "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Barcelona_1992"
+    },
+    {
+      "id": "dep-015",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿Cuánto mide de largo una piscina olímpica?",
+      "options": [
+        {
+          "id": "a",
+          "text": "50 metros"
+        },
+        {
+          "id": "b",
+          "text": "100 metros"
+        },
+        {
+          "id": "c",
+          "text": "25 metros"
+        },
+        {
+          "id": "d",
+          "text": "75 metros"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La de 25 metros es la piscina corta.",
+      "source": "https://es.wikipedia.org/wiki/Piscina_olímpica"
+    },
+    {
+      "id": "dep-016",
+      "category": "Deportes",
+      "difficulty": 2,
+      "text": "¿Sobre qué superficie se juega Roland Garros?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Moqueta"
+        },
+        {
+          "id": "b",
+          "text": "Pista dura"
+        },
+        {
+          "id": "c",
+          "text": "Hierba"
+        },
+        {
+          "id": "d",
+          "text": "Tierra batida"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Wimbledon es sobre hierba; Roland Garros, sobre tierra batida.",
+      "source": "https://es.wikipedia.org/wiki/Torneo_de_Roland_Garros"
+    },
+    {
+      "id": "art-009",
+      "category": "Arte",
+      "difficulty": 2,
+      "text": "¿Qué arquitecto diseñó la Sagrada Familia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lluís Domènech i Montaner"
+        },
+        {
+          "id": "b",
+          "text": "Santiago Calatrava"
+        },
+        {
+          "id": "c",
+          "text": "Antoni Gaudí"
+        },
+        {
+          "id": "d",
+          "text": "Rafael Moneo"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gaudí trabajó en ella desde 1883 hasta su muerte.",
+      "source": "https://es.wikipedia.org/wiki/Templo_Expiatorio_de_la_Sagrada_Familia"
+    },
+    {
+      "id": "art-010",
+      "category": "Arte",
+      "difficulty": 2,
+      "text": "¿En qué ciudad está el Museo Guggenheim de Frank Gehry?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bilbao"
+        },
+        {
+          "id": "b",
+          "text": "Madrid"
+        },
+        {
+          "id": "c",
+          "text": "Barcelona"
+        },
+        {
+          "id": "d",
+          "text": "Valencia"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Se inauguró en Bilbao en 1997.",
+      "source": "https://es.wikipedia.org/wiki/Museo_Guggenheim_Bilbao"
+    },
+    {
+      "id": "cur-011",
+      "category": "Curiosidades",
+      "difficulty": 2,
+      "text": "¿Qué número representa la «M» en los números romanos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cien"
+        },
+        {
+          "id": "b",
+          "text": "Cincuenta"
+        },
+        {
+          "id": "c",
+          "text": "Mil"
+        },
+        {
+          "id": "d",
+          "text": "Quinientos"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "C es cien, D quinientos y M mil.",
+      "source": "https://es.wikipedia.org/wiki/Numeración_romana"
+    },
+    {
+      "id": "tec-007",
+      "category": "Tecnología",
+      "difficulty": 2,
+      "text": "¿Cuántos bits tiene un byte?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Diez"
+        },
+        {
+          "id": "b",
+          "text": "Dieciséis"
+        },
+        {
+          "id": "c",
+          "text": "Cuatro"
+        },
+        {
+          "id": "d",
+          "text": "Ocho"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Un byte son 8 bits.",
+      "source": "https://es.wikipedia.org/wiki/Byte"
+    },
+    {
+      "id": "geo-032",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es la capital de Nueva Zelanda?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Auckland"
+        },
+        {
+          "id": "b",
+          "text": "Wellington"
+        },
+        {
+          "id": "c",
+          "text": "Queenstown"
+        },
+        {
+          "id": "d",
+          "text": "Christchurch"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Auckland es la ciudad más grande, pero la capital es Wellington.",
+      "source": "https://es.wikipedia.org/wiki/Wellington"
+    },
+    {
+      "id": "geo-033",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el país más grande de África?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Argelia"
+        },
+        {
+          "id": "b",
+          "text": "Sudán"
+        },
+        {
+          "id": "c",
+          "text": "Libia"
+        },
+        {
+          "id": "d",
+          "text": "República Democrática del Congo"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Argelia es el más extenso desde la división de Sudán en 2011.",
+      "source": "https://es.wikipedia.org/wiki/Argelia"
+    },
+    {
+      "id": "geo-034",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es la capital de Marruecos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rabat"
+        },
+        {
+          "id": "b",
+          "text": "Fez"
+        },
+        {
+          "id": "c",
+          "text": "Casablanca"
+        },
+        {
+          "id": "d",
+          "text": "Marrakech"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Casablanca es la mayor ciudad; Rabat, la capital.",
+      "source": "https://es.wikipedia.org/wiki/Rabat"
+    },
+    {
+      "id": "geo-035",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el punto más profundo conocido del océano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fosa de Java"
+        },
+        {
+          "id": "b",
+          "text": "Abismo Challenger"
+        },
+        {
+          "id": "c",
+          "text": "Fosa de Puerto Rico"
+        },
+        {
+          "id": "d",
+          "text": "Fosa de Tonga"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Está en la fosa de las Marianas, a casi 11 000 metros.",
+      "source": "https://es.wikipedia.org/wiki/Abismo_Challenger"
+    },
+    {
+      "id": "geo-036",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el lago más profundo del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mar Caspio"
+        },
+        {
+          "id": "b",
+          "text": "Lago Baikal"
+        },
+        {
+          "id": "c",
+          "text": "Lago Superior"
+        },
+        {
+          "id": "d",
+          "text": "Lago Tanganica"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El Baikal, en Siberia, supera los 1600 metros de profundidad.",
+      "source": "https://es.wikipedia.org/wiki/Lago_Baikal"
+    },
+    {
+      "id": "geo-037",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Qué dos países comparten la isla de La Española?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Haití y República Dominicana"
+        },
+        {
+          "id": "b",
+          "text": "Puerto Rico y República Dominicana"
+        },
+        {
+          "id": "c",
+          "text": "Cuba y Jamaica"
+        },
+        {
+          "id": "d",
+          "text": "Haití y Cuba"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Haití ocupa el oeste de la isla y República Dominicana el este.",
+      "source": "https://es.wikipedia.org/wiki/La_Española"
+    },
+    {
+      "id": "geo-038",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿En qué ciudad tiene su sede el gobierno federal de Suiza?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Zúrich"
+        },
+        {
+          "id": "b",
+          "text": "Ginebra"
+        },
+        {
+          "id": "c",
+          "text": "Berna"
+        },
+        {
+          "id": "d",
+          "text": "Basilea"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Berna es la «ciudad federal»; Zúrich es la más poblada.",
+      "source": "https://es.wikipedia.org/wiki/Berna"
+    },
+    {
+      "id": "geo-039",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Qué río atraviesa Bagdad?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Éufrates"
+        },
+        {
+          "id": "b",
+          "text": "Tigris"
+        },
+        {
+          "id": "c",
+          "text": "Jordán"
+        },
+        {
+          "id": "d",
+          "text": "Nilo"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Bagdad está a orillas del Tigris.",
+      "source": "https://es.wikipedia.org/wiki/Bagdad"
+    },
+    {
+      "id": "geo-040",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿En qué país está el salar de Uyuni?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bolivia"
+        },
+        {
+          "id": "b",
+          "text": "Argentina"
+        },
+        {
+          "id": "c",
+          "text": "Chile"
+        },
+        {
+          "id": "d",
+          "text": "Perú"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Es el mayor desierto de sal del mundo.",
+      "source": "https://es.wikipedia.org/wiki/Salar_de_Uyuni"
+    },
+    {
+      "id": "geo-041",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el país sin salida al mar más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bolivia"
+        },
+        {
+          "id": "b",
+          "text": "Chad"
+        },
+        {
+          "id": "c",
+          "text": "Mongolia"
+        },
+        {
+          "id": "d",
+          "text": "Kazajistán"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Kazajistán es además el noveno país más grande del mundo.",
+      "source": "https://es.wikipedia.org/wiki/Kazajistán"
+    },
+    {
+      "id": "geo-042",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Qué gran ciudad está a ambos lados del estrecho del Bósforo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ankara"
+        },
+        {
+          "id": "b",
+          "text": "Estambul"
+        },
+        {
+          "id": "c",
+          "text": "Atenas"
+        },
+        {
+          "id": "d",
+          "text": "Sofía"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Estambul tiene una parte en Europa y otra en Asia.",
+      "source": "https://es.wikipedia.org/wiki/Estambul"
+    },
+    {
+      "id": "his-021",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿En qué año se proclamó la Segunda República española?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1939"
+        },
+        {
+          "id": "b",
+          "text": "1923"
+        },
+        {
+          "id": "c",
+          "text": "1931"
+        },
+        {
+          "id": "d",
+          "text": "1936"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Se proclamó el 14 de abril de 1931.",
+      "source": "https://es.wikipedia.org/wiki/Segunda_República_española"
+    },
+    {
+      "id": "his-022",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué tratado de 1494 repartió entre Castilla y Portugal las tierras por descubrir?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Paz de Westfalia"
+        },
+        {
+          "id": "b",
+          "text": "Tratado de Tordesillas"
+        },
+        {
+          "id": "c",
+          "text": "Tratado de Versalles"
+        },
+        {
+          "id": "d",
+          "text": "Tratado de Utrecht"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Trazó una línea de polo a polo en el Atlántico.",
+      "source": "https://es.wikipedia.org/wiki/Tratado_de_Tordesillas"
+    },
+    {
+      "id": "his-023",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué reina británica reinó de 1837 a 1901?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Victoria"
+        },
+        {
+          "id": "b",
+          "text": "María II"
+        },
+        {
+          "id": "c",
+          "text": "Isabel I"
+        },
+        {
+          "id": "d",
+          "text": "Ana"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Su reinado dio nombre a la época victoriana.",
+      "source": "https://es.wikipedia.org/wiki/Victoria_del_Reino_Unido"
+    },
+    {
+      "id": "his-024",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿En qué año cayó Constantinopla en manos otomanas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1389"
+        },
+        {
+          "id": "b",
+          "text": "1453"
+        },
+        {
+          "id": "c",
+          "text": "1492"
+        },
+        {
+          "id": "d",
+          "text": "1517"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Su caída marca para muchos el fin de la Edad Media.",
+      "source": "https://es.wikipedia.org/wiki/Caída_de_Constantinopla"
+    },
+    {
+      "id": "his-025",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Quién gobernaba la URSS durante la crisis de los misiles de Cuba en 1962?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nikita Jrushchov"
+        },
+        {
+          "id": "b",
+          "text": "Iósif Stalin"
+        },
+        {
+          "id": "c",
+          "text": "Mijaíl Gorbachov"
+        },
+        {
+          "id": "d",
+          "text": "Leonid Brézhnev"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Jrushchov negoció con Kennedy la retirada de los misiles.",
+      "source": "https://es.wikipedia.org/wiki/Crisis_de_los_misiles_en_Cuba"
+    },
+    {
+      "id": "his-026",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué civilización desarrolló la escritura cuneiforme?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Los hititas"
+        },
+        {
+          "id": "b",
+          "text": "Los egipcios"
+        },
+        {
+          "id": "c",
+          "text": "Los sumerios"
+        },
+        {
+          "id": "d",
+          "text": "Los fenicios"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Los sumerios escribían en tablillas de arcilla con forma de cuña.",
+      "source": "https://es.wikipedia.org/wiki/Escritura_cuneiforme"
+    },
+    {
+      "id": "his-027",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué batalla naval de 1805 enfrentó a Nelson con la flota franco-española?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trafalgar"
+        },
+        {
+          "id": "b",
+          "text": "Midway"
+        },
+        {
+          "id": "c",
+          "text": "Jutlandia"
+        },
+        {
+          "id": "d",
+          "text": "Lepanto"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Nelson venció en Trafalgar, aunque murió en el combate.",
+      "source": "https://es.wikipedia.org/wiki/Batalla_de_Trafalgar"
+    },
+    {
+      "id": "his-028",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Quién fue la primera persona en viajar al espacio?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Valentina Tereshkova"
+        },
+        {
+          "id": "b",
+          "text": "Neil Armstrong"
+        },
+        {
+          "id": "c",
+          "text": "Yuri Gagarin"
+        },
+        {
+          "id": "d",
+          "text": "Alan Shepard"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gagarin orbitó la Tierra en 1961.",
+      "source": "https://es.wikipedia.org/wiki/Yuri_Gagarin"
+    },
+    {
+      "id": "cie-029",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuál es el símbolo químico del potasio?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Po"
+        },
+        {
+          "id": "b",
+          "text": "Pt"
+        },
+        {
+          "id": "c",
+          "text": "K"
+        },
+        {
+          "id": "d",
+          "text": "P"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "K viene del latín «kalium».",
+      "source": "https://es.wikipedia.org/wiki/Potasio"
+    },
+    {
+      "id": "cie-030",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuál es aproximadamente la velocidad de la luz en el vacío?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3.000.000 km/s"
+        },
+        {
+          "id": "b",
+          "text": "150.000 km/s"
+        },
+        {
+          "id": "c",
+          "text": "300.000 km/s"
+        },
+        {
+          "id": "d",
+          "text": "30.000 km/s"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Son 299.792 km por segundo.",
+      "source": "https://es.wikipedia.org/wiki/Velocidad_de_la_luz"
+    },
+    {
+      "id": "cie-031",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Qué elemento químico tiene número atómico 6?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Carbono"
+        },
+        {
+          "id": "b",
+          "text": "Oxígeno"
+        },
+        {
+          "id": "c",
+          "text": "Nitrógeno"
+        },
+        {
+          "id": "d",
+          "text": "Boro"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El carbono tiene seis protones.",
+      "source": "https://es.wikipedia.org/wiki/Carbono"
+    },
+    {
+      "id": "cie-032",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuál es el hueso más pequeño del cuerpo humano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El yunque"
+        },
+        {
+          "id": "b",
+          "text": "La rótula"
+        },
+        {
+          "id": "c",
+          "text": "El estribo"
+        },
+        {
+          "id": "d",
+          "text": "El martillo"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El estribo está en el oído medio y mide unos 3 mm.",
+      "source": "https://es.wikipedia.org/wiki/Estribo_(hueso)"
+    },
+    {
+      "id": "cie-033",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuántos litros de sangre tiene aproximadamente un adulto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "2"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Un adulto tiene entre 4,5 y 5,5 litros de sangre.",
+      "source": "https://es.wikipedia.org/wiki/Sangre"
+    },
+    {
+      "id": "cie-034",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Qué planeta gira «tumbado», con su eje casi horizontal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Venus"
+        },
+        {
+          "id": "b",
+          "text": "Urano"
+        },
+        {
+          "id": "c",
+          "text": "Neptuno"
+        },
+        {
+          "id": "d",
+          "text": "Saturno"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El eje de Urano está inclinado unos 98 grados.",
+      "source": "https://es.wikipedia.org/wiki/Urano_(planeta)"
+    },
+    {
+      "id": "cie-035",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Qué gas noble da el color rojo anaranjado a muchos letreros luminosos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Neón"
+        },
+        {
+          "id": "b",
+          "text": "Kriptón"
+        },
+        {
+          "id": "c",
+          "text": "Xenón"
+        },
+        {
+          "id": "d",
+          "text": "Argón"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El neón brilla en rojo anaranjado al pasar la corriente.",
+      "source": "https://es.wikipedia.org/wiki/Neón"
+    },
+    {
+      "id": "cie-036",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cuál es el pH del agua pura a 25 °C?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Un pH 7 es neutro: ni ácido ni básico.",
+      "source": "https://es.wikipedia.org/wiki/PH"
+    },
+    {
+      "id": "cie-037",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Cómo se llama la célula sin núcleo definido, como la de las bacterias?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Eucariota"
+        },
+        {
+          "id": "b",
+          "text": "Neurona"
+        },
+        {
+          "id": "c",
+          "text": "Célula vegetal"
+        },
+        {
+          "id": "d",
+          "text": "Procariota"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Las bacterias son procariotas.",
+      "source": "https://es.wikipedia.org/wiki/Célula_procariota"
+    },
+    {
+      "id": "nat-020",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Qué mamífero pone huevos y tiene pico de pato?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pangolín"
+        },
+        {
+          "id": "b",
+          "text": "Koala"
+        },
+        {
+          "id": "c",
+          "text": "Ornitorrinco"
+        },
+        {
+          "id": "d",
+          "text": "Armadillo"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El ornitorrinco y los equidnas son los únicos mamíferos que ponen huevos.",
+      "source": "https://es.wikipedia.org/wiki/Ornithorhynchus_anatinus"
+    },
+    {
+      "id": "nat-021",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿En cuántos compartimentos se divide el estómago de una vaca?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Uno"
+        },
+        {
+          "id": "b",
+          "text": "Cuatro"
+        },
+        {
+          "id": "c",
+          "text": "Tres"
+        },
+        {
+          "id": "d",
+          "text": "Dos"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Rumen, retículo, omaso y abomaso.",
+      "source": "https://es.wikipedia.org/wiki/Rumiante"
+    },
+    {
+      "id": "nat-022",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Qué especie de árbol es la más alta del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Baobab"
+        },
+        {
+          "id": "b",
+          "text": "Eucalipto"
+        },
+        {
+          "id": "c",
+          "text": "Secuoya roja"
+        },
+        {
+          "id": "d",
+          "text": "Abeto de Douglas"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Algunas secuoyas rojas de California superan los 115 metros.",
+      "source": "https://es.wikipedia.org/wiki/Sequoia_sempervirens"
+    },
+    {
+      "id": "nat-023",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Cuál es el felino más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leopardo"
+        },
+        {
+          "id": "b",
+          "text": "Jaguar"
+        },
+        {
+          "id": "c",
+          "text": "Tigre"
+        },
+        {
+          "id": "d",
+          "text": "León"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El tigre siberiano puede superar los 300 kilos.",
+      "source": "https://es.wikipedia.org/wiki/Panthera_tigris"
+    },
+    {
+      "id": "nat-024",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Qué anfibio mexicano conserva sus branquias de larva toda la vida?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tritón"
+        },
+        {
+          "id": "b",
+          "text": "Ajolote"
+        },
+        {
+          "id": "c",
+          "text": "Rana toro"
+        },
+        {
+          "id": "d",
+          "text": "Salamandra común"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El ajolote vive en los lagos de Xochimilco.",
+      "source": "https://es.wikipedia.org/wiki/Ambystoma_mexicanum"
+    },
+    {
+      "id": "nat-025",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Cuántos ojos tienen la mayoría de las arañas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cuatro"
+        },
+        {
+          "id": "b",
+          "text": "Ocho"
+        },
+        {
+          "id": "c",
+          "text": "Dos"
+        },
+        {
+          "id": "d",
+          "text": "Seis"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La mayoría tiene ocho, aunque algunas tienen menos.",
+      "source": "https://es.wikipedia.org/wiki/Araneae"
+    },
+    {
+      "id": "nat-026",
+      "category": "Naturaleza",
+      "difficulty": 3,
+      "text": "¿Cuál es el pez más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiburón ballena"
+        },
+        {
+          "id": "b",
+          "text": "Tiburón blanco"
+        },
+        {
+          "id": "c",
+          "text": "Pez luna"
+        },
+        {
+          "id": "d",
+          "text": "Mantarraya"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El tiburón ballena puede pasar de 12 metros y come plancton.",
+      "source": "https://es.wikipedia.org/wiki/Rhincodon_typus"
+    },
+    {
+      "id": "cin-015",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿Qué película ganó el primer Óscar a la mejor película?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Alas"
+        },
+        {
+          "id": "b",
+          "text": "El cantor de jazz"
+        },
+        {
+          "id": "c",
+          "text": "Lo que el viento se llevó"
+        },
+        {
+          "id": "d",
+          "text": "Metrópolis"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "«Alas» (1927) ganó en la primera ceremonia, en 1929.",
+      "source": "https://es.wikipedia.org/wiki/Alas_(película_de_1927)"
+    },
+    {
+      "id": "cin-016",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿Qué director ganó el Óscar a la mejor película extranjera con «Todo sobre mi madre»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pedro Almodóvar"
+        },
+        {
+          "id": "b",
+          "text": "Fernando Trueba"
+        },
+        {
+          "id": "c",
+          "text": "Alejandro Amenábar"
+        },
+        {
+          "id": "d",
+          "text": "Luis Buñuel"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Almodóvar lo recibió en el año 2000.",
+      "source": "https://es.wikipedia.org/wiki/Todo_sobre_mi_madre"
+    },
+    {
+      "id": "cin-017",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿En qué año se estrenó la primera película de «Star Wars»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1975"
+        },
+        {
+          "id": "b",
+          "text": "1977"
+        },
+        {
+          "id": "c",
+          "text": "1980"
+        },
+        {
+          "id": "d",
+          "text": "1983"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "«Una nueva esperanza» se estrenó en mayo de 1977.",
+      "source": "https://es.wikipedia.org/wiki/Star_Wars"
+    },
+    {
+      "id": "cin-018",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿Qué película de Hitchcock tiene una famosa escena en una ducha?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vértigo"
+        },
+        {
+          "id": "b",
+          "text": "Los pájaros"
+        },
+        {
+          "id": "c",
+          "text": "Psicosis"
+        },
+        {
+          "id": "d",
+          "text": "La ventana indiscreta"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Psicosis se estrenó en 1960.",
+      "source": "https://es.wikipedia.org/wiki/Psicosis_(película_de_1960)"
+    },
+    {
+      "id": "cin-019",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿Quién compuso la música de «Tiburón» y «La guerra de las galaxias»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "John Williams"
+        },
+        {
+          "id": "b",
+          "text": "Ennio Morricone"
+        },
+        {
+          "id": "c",
+          "text": "Hans Zimmer"
+        },
+        {
+          "id": "d",
+          "text": "Howard Shore"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "John Williams también compuso la de «Indiana Jones».",
+      "source": "https://es.wikipedia.org/wiki/John_Williams"
+    },
+    {
+      "id": "mus-014",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Quién compuso «La flauta mágica»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Richard Wagner"
+        },
+        {
+          "id": "b",
+          "text": "Giuseppe Verdi"
+        },
+        {
+          "id": "c",
+          "text": "Wolfgang Amadeus Mozart"
+        },
+        {
+          "id": "d",
+          "text": "Joseph Haydn"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Mozart la estrenó en Viena en 1791.",
+      "source": "https://es.wikipedia.org/wiki/La_flauta_mágica"
+    },
+    {
+      "id": "mus-015",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Qué compositor polaco es famoso por sus nocturnos para piano?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Frédéric Chopin"
+        },
+        {
+          "id": "b",
+          "text": "Franz Liszt"
+        },
+        {
+          "id": "c",
+          "text": "Claude Debussy"
+        },
+        {
+          "id": "d",
+          "text": "Robert Schumann"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Chopin escribió 21 nocturnos.",
+      "source": "https://es.wikipedia.org/wiki/Frédéric_Chopin"
+    },
+    {
+      "id": "mus-016",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Quién compuso la ópera «Carmen»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Giacomo Puccini"
+        },
+        {
+          "id": "b",
+          "text": "Gioachino Rossini"
+        },
+        {
+          "id": "c",
+          "text": "Georges Bizet"
+        },
+        {
+          "id": "d",
+          "text": "Giuseppe Verdi"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Carmen se estrenó en París en 1875.",
+      "source": "https://es.wikipedia.org/wiki/Carmen_(ópera)"
+    },
+    {
+      "id": "mus-017",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Cuántas sinfonías completó Beethoven?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Doce"
+        },
+        {
+          "id": "b",
+          "text": "Siete"
+        },
+        {
+          "id": "c",
+          "text": "Nueve"
+        },
+        {
+          "id": "d",
+          "text": "Cinco"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "La Novena incluye el «Himno a la alegría».",
+      "source": "https://es.wikipedia.org/wiki/Sinfonía_n.º_9_(Beethoven)"
+    },
+    {
+      "id": "mus-018",
+      "category": "Música",
+      "difficulty": 3,
+      "text": "¿Qué compositor español escribió el «Concierto de Aranjuez»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Manuel de Falla"
+        },
+        {
+          "id": "b",
+          "text": "Joaquín Rodrigo"
+        },
+        {
+          "id": "c",
+          "text": "Isaac Albéniz"
+        },
+        {
+          "id": "d",
+          "text": "Enrique Granados"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Rodrigo lo compuso en 1939 para guitarra y orquesta.",
+      "source": "https://es.wikipedia.org/wiki/Concierto_de_Aranjuez"
+    },
+    {
+      "id": "dep-017",
+      "category": "Deportes",
+      "difficulty": 3,
+      "text": "¿En qué año se jugó el primer Mundial de fútbol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1930"
+        },
+        {
+          "id": "b",
+          "text": "1950"
+        },
+        {
+          "id": "c",
+          "text": "1934"
+        },
+        {
+          "id": "d",
+          "text": "1924"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Se jugó en Uruguay en 1930.",
+      "source": "https://es.wikipedia.org/wiki/Copa_Mundial_de_Fútbol_de_1930"
+    },
+    {
+      "id": "dep-018",
+      "category": "Deportes",
+      "difficulty": 3,
+      "text": "¿Qué selección ganó el primer Mundial de fútbol?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Italia"
+        },
+        {
+          "id": "b",
+          "text": "Uruguay"
+        },
+        {
+          "id": "c",
+          "text": "Argentina"
+        },
+        {
+          "id": "d",
+          "text": "Brasil"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Uruguay venció a Argentina 4-2 en la final de 1930.",
+      "source": "https://es.wikipedia.org/wiki/Copa_Mundial_de_Fútbol_de_1930"
+    },
+    {
+      "id": "dep-019",
+      "category": "Deportes",
+      "difficulty": 3,
+      "text": "¿Cuántos jugadores tiene en el campo cada equipo de rugby a quince?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trece"
+        },
+        {
+          "id": "b",
+          "text": "Doce"
+        },
+        {
+          "id": "c",
+          "text": "Once"
+        },
+        {
+          "id": "d",
+          "text": "Quince"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "El rugby a trece es otra modalidad.",
+      "source": "https://es.wikipedia.org/wiki/Rugby"
+    },
+    {
+      "id": "art-011",
+      "category": "Arte",
+      "difficulty": 3,
+      "text": "¿Quién pintó «El jardín de las delicias»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El Bosco"
+        },
+        {
+          "id": "b",
+          "text": "Pieter Brueghel"
+        },
+        {
+          "id": "c",
+          "text": "Rembrandt"
+        },
+        {
+          "id": "d",
+          "text": "Jan van Eyck"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El tríptico del Bosco está en el Museo del Prado.",
+      "source": "https://es.wikipedia.org/wiki/El_jardín_de_las_delicias"
+    },
+    {
+      "id": "art-012",
+      "category": "Arte",
+      "difficulty": 3,
+      "text": "¿Qué pintor pintó «El grito»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Gustav Klimt"
+        },
+        {
+          "id": "b",
+          "text": "Paul Gauguin"
+        },
+        {
+          "id": "c",
+          "text": "Egon Schiele"
+        },
+        {
+          "id": "d",
+          "text": "Edvard Munch"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Munch, noruego, pintó varias versiones desde 1893.",
+      "source": "https://es.wikipedia.org/wiki/El_grito"
+    },
+    {
+      "id": "art-013",
+      "category": "Arte",
+      "difficulty": 3,
+      "text": "¿Qué pintor neerlandés pintó «La joven de la perla»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Frans Hals"
+        },
+        {
+          "id": "b",
+          "text": "Vincent van Gogh"
+        },
+        {
+          "id": "c",
+          "text": "Rembrandt"
+        },
+        {
+          "id": "d",
+          "text": "Johannes Vermeer"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Vermeer la pintó hacia 1665.",
+      "source": "https://es.wikipedia.org/wiki/La_joven_de_la_perla"
+    },
+    {
+      "id": "lit-010",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Quién escribió «En busca del tiempo perdido»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Honoré de Balzac"
+        },
+        {
+          "id": "b",
+          "text": "Marcel Proust"
+        },
+        {
+          "id": "c",
+          "text": "Émile Zola"
+        },
+        {
+          "id": "d",
+          "text": "Gustave Flaubert"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Es una novela en siete volúmenes publicada entre 1913 y 1927.",
+      "source": "https://es.wikipedia.org/wiki/En_busca_del_tiempo_perdido"
+    },
+    {
+      "id": "lit-011",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Qué escritor ruso escribió «Crimen y castigo»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fiódor Dostoyevski"
+        },
+        {
+          "id": "b",
+          "text": "Antón Chéjov"
+        },
+        {
+          "id": "c",
+          "text": "Nikolái Gógol"
+        },
+        {
+          "id": "d",
+          "text": "León Tolstói"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Dostoyevski la publicó en 1866.",
+      "source": "https://es.wikipedia.org/wiki/Crimen_y_castigo"
+    },
+    {
+      "id": "lit-012",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Qué poeta escribió «Poeta en Nueva York»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Federico García Lorca"
+        },
+        {
+          "id": "b",
+          "text": "Miguel Hernández"
+        },
+        {
+          "id": "c",
+          "text": "Rafael Alberti"
+        },
+        {
+          "id": "d",
+          "text": "Antonio Machado"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Lorca la escribió tras su viaje a Nueva York en 1929.",
+      "source": "https://es.wikipedia.org/wiki/Poeta_en_Nueva_York"
+    },
+    {
+      "id": "lit-013",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Quién escribió la novela «1984»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "George Orwell"
+        },
+        {
+          "id": "b",
+          "text": "Aldous Huxley"
+        },
+        {
+          "id": "c",
+          "text": "H. G. Wells"
+        },
+        {
+          "id": "d",
+          "text": "Ray Bradbury"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Orwell la publicó en 1949; de ella viene el «Gran Hermano».",
+      "source": "https://es.wikipedia.org/wiki/1984_(novela)"
+    },
+    {
+      "id": "lit-014",
+      "category": "Literatura",
+      "difficulty": 3,
+      "text": "¿Qué escritor argentino escribió «El Aleph»?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adolfo Bioy Casares"
+        },
+        {
+          "id": "b",
+          "text": "Ernesto Sabato"
+        },
+        {
+          "id": "c",
+          "text": "Jorge Luis Borges"
+        },
+        {
+          "id": "d",
+          "text": "Julio Cortázar"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Borges publicó «El Aleph» en 1949.",
+      "source": "https://es.wikipedia.org/wiki/El_Aleph"
+    },
+    {
+      "id": "cur-012",
+      "category": "Curiosidades",
+      "difficulty": 3,
+      "text": "¿Qué idioma tiene más hablantes nativos del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hindi"
+        },
+        {
+          "id": "b",
+          "text": "Español"
+        },
+        {
+          "id": "c",
+          "text": "Chino mandarín"
+        },
+        {
+          "id": "d",
+          "text": "Inglés"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El inglés tiene más hablantes en total, pero no nativos.",
+      "source": "https://es.wikipedia.org/wiki/Chino_mandarín"
+    },
+    {
+      "id": "cur-013",
+      "category": "Curiosidades",
+      "difficulty": 3,
+      "text": "¿Cuántas caras tiene un dodecaedro?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ocho"
+        },
+        {
+          "id": "b",
+          "text": "Veinte"
+        },
+        {
+          "id": "c",
+          "text": "Diez"
+        },
+        {
+          "id": "d",
+          "text": "Doce"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "«Dodeca» significa doce; el de veinte caras es el icosaedro.",
+      "source": "https://es.wikipedia.org/wiki/Dodecaedro"
+    },
+    {
+      "id": "tec-008",
+      "category": "Tecnología",
+      "difficulty": 3,
+      "text": "¿Quién es considerado el creador de la World Wide Web?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Alan Turing"
+        },
+        {
+          "id": "b",
+          "text": "Linus Torvalds"
+        },
+        {
+          "id": "c",
+          "text": "Tim Berners-Lee"
+        },
+        {
+          "id": "d",
+          "text": "Vint Cerf"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Berners-Lee la propuso en el CERN en 1989.",
+      "source": "https://es.wikipedia.org/wiki/Tim_Berners-Lee"
+    },
+    {
+      "id": "tec-009",
+      "category": "Tecnología",
+      "difficulty": 3,
+      "text": "¿Qué matemático británico, pionero de la informática, ayudó a descifrar la máquina Enigma?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Claude Shannon"
+        },
+        {
+          "id": "b",
+          "text": "Charles Babbage"
+        },
+        {
+          "id": "c",
+          "text": "Alan Turing"
+        },
+        {
+          "id": "d",
+          "text": "John von Neumann"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Turing trabajó en Bletchley Park durante la Segunda Guerra Mundial.",
+      "source": "https://es.wikipedia.org/wiki/Alan_Turing"
+    },
+    {
+      "id": "gas-009",
+      "category": "Gastronomía",
+      "difficulty": 3,
+      "text": "¿De qué país es originario el queso feta?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Francia"
+        },
+        {
+          "id": "b",
+          "text": "Turquía"
+        },
+        {
+          "id": "c",
+          "text": "Grecia"
+        },
+        {
+          "id": "d",
+          "text": "Italia"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El feta es un queso griego de oveja, a veces con cabra.",
+      "source": "https://es.wikipedia.org/wiki/Feta"
+    },
+    {
+      "id": "gas-010",
+      "category": "Gastronomía",
+      "difficulty": 3,
+      "text": "¿Con qué cereal se elabora el sake japonés?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Maíz"
+        },
+        {
+          "id": "b",
+          "text": "Arroz"
+        },
+        {
+          "id": "c",
+          "text": "Cebada"
+        },
+        {
+          "id": "d",
+          "text": "Trigo"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El sake es una bebida fermentada de arroz.",
+      "source": "https://es.wikipedia.org/wiki/Sake"
+    },
+    {
+      "id": "his-029",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué emperador romano legalizó el cristianismo con el Edicto de Milán (313)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Constantino"
+        },
+        {
+          "id": "b",
+          "text": "Nerón"
+        },
+        {
+          "id": "c",
+          "text": "Trajano"
+        },
+        {
+          "id": "d",
+          "text": "Diocleciano"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Constantino y Licinio firmaron el Edicto de Milán en 313.",
+      "source": "https://es.wikipedia.org/wiki/Edicto_de_Milán"
+    },
+    {
+      "id": "his-030",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿Qué general cartaginés cruzó los Alpes con elefantes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Asdrúbal"
+        },
+        {
+          "id": "b",
+          "text": "Escipión"
+        },
+        {
+          "id": "c",
+          "text": "Amílcar"
+        },
+        {
+          "id": "d",
+          "text": "Aníbal"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Aníbal invadió Italia en la segunda guerra púnica.",
+      "source": "https://es.wikipedia.org/wiki/Aníbal"
+    },
+    {
+      "id": "cie-038",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Qué científico propuso que la Tierra gira alrededor del Sol en el siglo XVI?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Claudio Ptolomeo"
+        },
+        {
+          "id": "b",
+          "text": "Nicolás Copérnico"
+        },
+        {
+          "id": "c",
+          "text": "Aristóteles"
+        },
+        {
+          "id": "d",
+          "text": "Tycho Brahe"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Copérnico publicó su teoría heliocéntrica en 1543.",
+      "source": "https://es.wikipedia.org/wiki/Nicolás_Copérnico"
+    },
+    {
+      "id": "geo-043",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es la capital de Islandia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reikiavik"
+        },
+        {
+          "id": "b",
+          "text": "Oslo"
+        },
+        {
+          "id": "c",
+          "text": "Helsinki"
+        },
+        {
+          "id": "d",
+          "text": "Copenhague"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Reikiavik es la capital más septentrional de un país soberano.",
+      "source": "https://es.wikipedia.org/wiki/Reikiavik"
+    },
+    {
+      "id": "cin-020",
+      "category": "Cine y televisión",
+      "difficulty": 3,
+      "text": "¿Cómo se llama el robot protagonista de la película de Pixar de 2008 que limpia la Tierra?",
+      "options": [
+        {
+          "id": "a",
+          "text": "R2-D2"
+        },
+        {
+          "id": "b",
+          "text": "WALL·E"
+        },
+        {
+          "id": "c",
+          "text": "Baymax"
+        },
+        {
+          "id": "d",
+          "text": "EVA"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "EVA es la robot de la que se enamora WALL·E.",
+      "source": "https://es.wikipedia.org/wiki/WALL-E"
+    },
+    {
+      "id": "mat-001",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 7 × 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "48"
+        },
+        {
+          "id": "b",
+          "text": "63"
+        },
+        {
+          "id": "c",
+          "text": "54"
+        },
+        {
+          "id": "d",
+          "text": "56"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "7 × 8 = 56.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-002",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 9 × 6?",
+      "options": [
+        {
+          "id": "a",
+          "text": "45"
+        },
+        {
+          "id": "b",
+          "text": "56"
+        },
+        {
+          "id": "c",
+          "text": "63"
+        },
+        {
+          "id": "d",
+          "text": "54"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "9 × 6 = 54.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-003",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 12 × 4?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "48"
+        },
+        {
+          "id": "c",
+          "text": "44"
+        },
+        {
+          "id": "d",
+          "text": "52"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "12 × 4 = 48.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-004",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 56 ÷ 7?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "56 ÷ 7 = 8, porque 7 × 8 = 56.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-005",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 81 ÷ 9?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "81 ÷ 9 = 9, porque 9 × 9 = 81.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-006",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 45 + 38?",
+      "options": [
+        {
+          "id": "a",
+          "text": "93"
+        },
+        {
+          "id": "b",
+          "text": "82"
+        },
+        {
+          "id": "c",
+          "text": "83"
+        },
+        {
+          "id": "d",
+          "text": "73"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "45 + 38 = 83.",
+      "source": "https://es.wikipedia.org/wiki/Adición"
+    },
+    {
+      "id": "mat-007",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 25 + 47?",
+      "options": [
+        {
+          "id": "a",
+          "text": "72"
+        },
+        {
+          "id": "b",
+          "text": "71"
+        },
+        {
+          "id": "c",
+          "text": "82"
+        },
+        {
+          "id": "d",
+          "text": "62"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "25 + 47 = 72.",
+      "source": "https://es.wikipedia.org/wiki/Adición"
+    },
+    {
+      "id": "mat-008",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 100 - 37?",
+      "options": [
+        {
+          "id": "a",
+          "text": "67"
+        },
+        {
+          "id": "b",
+          "text": "63"
+        },
+        {
+          "id": "c",
+          "text": "53"
+        },
+        {
+          "id": "d",
+          "text": "73"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "100 - 37 = 63.",
+      "source": "https://es.wikipedia.org/wiki/Sustracción"
+    },
+    {
+      "id": "mat-009",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 63 - 28?",
+      "options": [
+        {
+          "id": "a",
+          "text": "35"
+        },
+        {
+          "id": "b",
+          "text": "45"
+        },
+        {
+          "id": "c",
+          "text": "31"
+        },
+        {
+          "id": "d",
+          "text": "25"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "63 - 28 = 35.",
+      "source": "https://es.wikipedia.org/wiki/Sustracción"
+    },
+    {
+      "id": "mat-010",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuál es la mitad de 90?",
+      "options": [
+        {
+          "id": "a",
+          "text": "40"
+        },
+        {
+          "id": "b",
+          "text": "45"
+        },
+        {
+          "id": "c",
+          "text": "35"
+        },
+        {
+          "id": "d",
+          "text": "55"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "90 ÷ 2 = 45.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-011",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuál es el doble de 35?",
+      "options": [
+        {
+          "id": "a",
+          "text": "70"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "65"
+        },
+        {
+          "id": "d",
+          "text": "75"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "35 × 2 = 70.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-012",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "Tienes 3 cajas con 8 bombones cada una. ¿Cuántos bombones tienes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "21"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "32"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "3 × 8 = 24 bombones.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-013",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 15 + 15 + 15?",
+      "options": [
+        {
+          "id": "a",
+          "text": "55"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "45"
+        },
+        {
+          "id": "d",
+          "text": "35"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "15 × 3 = 45.",
+      "source": "https://es.wikipedia.org/wiki/Adición"
+    },
+    {
+      "id": "mat-014",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 11 × 11?",
+      "options": [
+        {
+          "id": "a",
+          "text": "111"
+        },
+        {
+          "id": "b",
+          "text": "121"
+        },
+        {
+          "id": "c",
+          "text": "122"
+        },
+        {
+          "id": "d",
+          "text": "112"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "11 × 11 = 121.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-015",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 1000 - 1?",
+      "options": [
+        {
+          "id": "a",
+          "text": "990"
+        },
+        {
+          "id": "b",
+          "text": "899"
+        },
+        {
+          "id": "c",
+          "text": "9999"
+        },
+        {
+          "id": "d",
+          "text": "999"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "1000 - 1 = 999.",
+      "source": "https://es.wikipedia.org/wiki/Sustracción"
+    },
+    {
+      "id": "mat-016",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuántos minutos hay en 3 horas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "300"
+        },
+        {
+          "id": "b",
+          "text": "120"
+        },
+        {
+          "id": "c",
+          "text": "180"
+        },
+        {
+          "id": "d",
+          "text": "160"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "3 × 60 = 180 minutos.",
+      "source": "https://es.wikipedia.org/wiki/Minuto"
+    },
+    {
+      "id": "mat-017",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 5 × 5 × 2?",
+      "options": [
+        {
+          "id": "a",
+          "text": "25"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "100"
+        },
+        {
+          "id": "d",
+          "text": "50"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "5 × 5 = 25 y 25 × 2 = 50.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-018",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 72 ÷ 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "72 ÷ 8 = 9.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-019",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "¿Cuánto es 3 al cuadrado (3²)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "27"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "3² = 3 × 3 = 9.",
+      "source": "https://es.wikipedia.org/wiki/Cuadrado_(álgebra)"
+    },
+    {
+      "id": "mat-020",
+      "category": "Matemáticas",
+      "difficulty": 1,
+      "text": "Si compras algo de 7 € y pagas con un billete de 20 €, ¿cuánto te devuelven?",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "17"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "20 - 7 = 13 €.",
+      "source": "https://es.wikipedia.org/wiki/Sustracción"
+    },
+    {
+      "id": "mat-021",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 3 + 4 × 5?",
+      "options": [
+        {
+          "id": "a",
+          "text": "35"
+        },
+        {
+          "id": "b",
+          "text": "27"
+        },
+        {
+          "id": "c",
+          "text": "23"
+        },
+        {
+          "id": "d",
+          "text": "60"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Primero se multiplica: 4 × 5 = 20, y luego 3 + 20 = 23.",
+      "source": "https://es.wikipedia.org/wiki/Orden_de_evaluación"
+    },
+    {
+      "id": "mat-022",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es el 25 % de 80?",
+      "options": [
+        {
+          "id": "a",
+          "text": "16"
+        },
+        {
+          "id": "b",
+          "text": "20"
+        },
+        {
+          "id": "c",
+          "text": "40"
+        },
+        {
+          "id": "d",
+          "text": "25"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El 25 % es la cuarta parte: 80 ÷ 4 = 20.",
+      "source": "https://es.wikipedia.org/wiki/Porcentaje"
+    },
+    {
+      "id": "mat-023",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es el 15 % de 200?",
+      "options": [
+        {
+          "id": "a",
+          "text": "30"
+        },
+        {
+          "id": "b",
+          "text": "45"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "20"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El 10 % es 20 y el 5 % es 10: en total, 30.",
+      "source": "https://es.wikipedia.org/wiki/Porcentaje"
+    },
+    {
+      "id": "mat-024",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 13²?",
+      "options": [
+        {
+          "id": "a",
+          "text": "196"
+        },
+        {
+          "id": "b",
+          "text": "139"
+        },
+        {
+          "id": "c",
+          "text": "156"
+        },
+        {
+          "id": "d",
+          "text": "169"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "13 × 13 = 169.",
+      "source": "https://es.wikipedia.org/wiki/Cuadrado_(álgebra)"
+    },
+    {
+      "id": "mat-025",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 144 ÷ 12?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "144 ÷ 12 = 12, porque 12 × 12 = 144.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-026",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto son 3/4 de 120?",
+      "options": [
+        {
+          "id": "a",
+          "text": "90"
+        },
+        {
+          "id": "b",
+          "text": "40"
+        },
+        {
+          "id": "c",
+          "text": "80"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "120 ÷ 4 = 30 y 30 × 3 = 90.",
+      "source": "https://es.wikipedia.org/wiki/Fracción"
+    },
+    {
+      "id": "mat-027",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuántos minutos son dos horas y media?",
+      "options": [
+        {
+          "id": "a",
+          "text": "120"
+        },
+        {
+          "id": "b",
+          "text": "250"
+        },
+        {
+          "id": "c",
+          "text": "130"
+        },
+        {
+          "id": "d",
+          "text": "150"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "2 × 60 + 30 = 150 minutos.",
+      "source": "https://es.wikipedia.org/wiki/Minuto"
+    },
+    {
+      "id": "mat-028",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 250 ÷ 5?",
+      "options": [
+        {
+          "id": "a",
+          "text": "40"
+        },
+        {
+          "id": "b",
+          "text": "55"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "50"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "250 ÷ 5 = 50, porque 5 × 50 = 250.",
+      "source": "https://es.wikipedia.org/wiki/División_(matemática)"
+    },
+    {
+      "id": "mat-029",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 7 × 8 - 9?",
+      "options": [
+        {
+          "id": "a",
+          "text": "56"
+        },
+        {
+          "id": "b",
+          "text": "49"
+        },
+        {
+          "id": "c",
+          "text": "43"
+        },
+        {
+          "id": "d",
+          "text": "47"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "7 × 8 = 56 y 56 - 9 = 47.",
+      "source": "https://es.wikipedia.org/wiki/Orden_de_evaluación"
+    },
+    {
+      "id": "mat-030",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 1000 - 357?",
+      "options": [
+        {
+          "id": "a",
+          "text": "743"
+        },
+        {
+          "id": "b",
+          "text": "657"
+        },
+        {
+          "id": "c",
+          "text": "753"
+        },
+        {
+          "id": "d",
+          "text": "643"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "1000 - 357 = 643.",
+      "source": "https://es.wikipedia.org/wiki/Sustracción"
+    },
+    {
+      "id": "mat-031",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 24 × 5?",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "120"
+        },
+        {
+          "id": "c",
+          "text": "125"
+        },
+        {
+          "id": "d",
+          "text": "110"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "24 × 5 = 24 × 10 ÷ 2 = 120.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-032",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es (6 + 4) × (9 - 3)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "40"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "70"
+        },
+        {
+          "id": "d",
+          "text": "52"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "10 × 6 = 60.",
+      "source": "https://es.wikipedia.org/wiki/Orden_de_evaluación"
+    },
+    {
+      "id": "mat-033",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 2 elevado a 6?",
+      "options": [
+        {
+          "id": "a",
+          "text": "32"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "36"
+        },
+        {
+          "id": "d",
+          "text": "64"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "2 × 2 × 2 × 2 × 2 × 2 = 64.",
+      "source": "https://es.wikipedia.org/wiki/Potenciación"
+    },
+    {
+      "id": "mat-034",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "Un tren sale a las 9:45 y tarda 50 minutos. ¿A qué hora llega?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10:45"
+        },
+        {
+          "id": "b",
+          "text": "10:25"
+        },
+        {
+          "id": "c",
+          "text": "10:05"
+        },
+        {
+          "id": "d",
+          "text": "10:35"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "9:45 + 15 min = 10:00, y quedan 35 minutos: 10:35.",
+      "source": "https://es.wikipedia.org/wiki/Hora"
+    },
+    {
+      "id": "mat-035",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Qué número sigue en la serie 3, 6, 12, 24…?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "72"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Cada número es el doble del anterior: 24 × 2 = 48.",
+      "source": "https://es.wikipedia.org/wiki/Progresión_geométrica"
+    },
+    {
+      "id": "mat-036",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "Si 4 cafés cuestan 6 €, ¿cuánto cuestan 10 cafés?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "18"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Cada café cuesta 1,50 €: 10 × 1,50 = 15 €.",
+      "source": "https://es.wikipedia.org/wiki/Proporcionalidad"
+    },
+    {
+      "id": "mat-037",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 0,5 + 0,25?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0,75"
+        },
+        {
+          "id": "b",
+          "text": "0,525"
+        },
+        {
+          "id": "c",
+          "text": "0,7"
+        },
+        {
+          "id": "d",
+          "text": "0,30"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Medio más un cuarto son tres cuartos: 0,75.",
+      "source": "https://es.wikipedia.org/wiki/Número_decimal"
+    },
+    {
+      "id": "mat-038",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuánto es 18 × 3 + 6?",
+      "options": [
+        {
+          "id": "a",
+          "text": "60"
+        },
+        {
+          "id": "b",
+          "text": "54"
+        },
+        {
+          "id": "c",
+          "text": "66"
+        },
+        {
+          "id": "d",
+          "text": "72"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "18 × 3 = 54 y 54 + 6 = 60.",
+      "source": "https://es.wikipedia.org/wiki/Orden_de_evaluación"
+    },
+    {
+      "id": "mat-039",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "¿Cuántos segundos hay en una hora?",
+      "options": [
+        {
+          "id": "a",
+          "text": "600"
+        },
+        {
+          "id": "b",
+          "text": "3600"
+        },
+        {
+          "id": "c",
+          "text": "6000"
+        },
+        {
+          "id": "d",
+          "text": "360"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "60 minutos × 60 segundos = 3600.",
+      "source": "https://es.wikipedia.org/wiki/Segundo"
+    },
+    {
+      "id": "mat-040",
+      "category": "Matemáticas",
+      "difficulty": 2,
+      "text": "Un pantalón de 40 € tiene un 20 % de descuento. ¿Cuánto cuesta?",
+      "options": [
+        {
+          "id": "a",
+          "text": "30"
+        },
+        {
+          "id": "b",
+          "text": "32"
+        },
+        {
+          "id": "c",
+          "text": "20"
+        },
+        {
+          "id": "d",
+          "text": "36"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El 20 % de 40 es 8: 40 - 8 = 32 €.",
+      "source": "https://es.wikipedia.org/wiki/Porcentaje"
+    },
+    {
+      "id": "mat-041",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 17 × 23?",
+      "options": [
+        {
+          "id": "a",
+          "text": "381"
+        },
+        {
+          "id": "b",
+          "text": "401"
+        },
+        {
+          "id": "c",
+          "text": "391"
+        },
+        {
+          "id": "d",
+          "text": "371"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "17 × 23 = 17 × 20 + 17 × 3 = 340 + 51 = 391.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-042",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 25² - 15²?",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "300"
+        },
+        {
+          "id": "c",
+          "text": "400"
+        },
+        {
+          "id": "d",
+          "text": "450"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "625 - 225 = 400.",
+      "source": "https://es.wikipedia.org/wiki/Cuadrado_(álgebra)"
+    },
+    {
+      "id": "mat-043",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 2 elevado a 10?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1024"
+        },
+        {
+          "id": "b",
+          "text": "1000"
+        },
+        {
+          "id": "c",
+          "text": "512"
+        },
+        {
+          "id": "d",
+          "text": "2048"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "2 elevado a 10 = 1024, el «kilo» de la informática.",
+      "source": "https://es.wikipedia.org/wiki/Potenciación"
+    },
+    {
+      "id": "mat-044",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 999 × 7?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7003"
+        },
+        {
+          "id": "b",
+          "text": "6993"
+        },
+        {
+          "id": "c",
+          "text": "7993"
+        },
+        {
+          "id": "d",
+          "text": "6893"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "999 × 7 = 7000 - 7 = 6993.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-045",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto son 3/8 de 640?",
+      "options": [
+        {
+          "id": "a",
+          "text": "260"
+        },
+        {
+          "id": "b",
+          "text": "180"
+        },
+        {
+          "id": "c",
+          "text": "240"
+        },
+        {
+          "id": "d",
+          "text": "320"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "640 ÷ 8 = 80 y 80 × 3 = 240.",
+      "source": "https://es.wikipedia.org/wiki/Fracción"
+    },
+    {
+      "id": "mat-046",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 7 × 7 × 7?",
+      "options": [
+        {
+          "id": "a",
+          "text": "441"
+        },
+        {
+          "id": "b",
+          "text": "349"
+        },
+        {
+          "id": "c",
+          "text": "294"
+        },
+        {
+          "id": "d",
+          "text": "343"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "7 × 7 = 49 y 49 × 7 = 343.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-047",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 12² + 13²?",
+      "options": [
+        {
+          "id": "a",
+          "text": "323"
+        },
+        {
+          "id": "b",
+          "text": "313"
+        },
+        {
+          "id": "c",
+          "text": "289"
+        },
+        {
+          "id": "d",
+          "text": "303"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "144 + 169 = 313.",
+      "source": "https://es.wikipedia.org/wiki/Cuadrado_(álgebra)"
+    },
+    {
+      "id": "mat-048",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto suman los números del 1 al 20?",
+      "options": [
+        {
+          "id": "a",
+          "text": "210"
+        },
+        {
+          "id": "b",
+          "text": "220"
+        },
+        {
+          "id": "c",
+          "text": "200"
+        },
+        {
+          "id": "d",
+          "text": "190"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Se suman parejas: 20 × 21 ÷ 2 = 210.",
+      "source": "https://es.wikipedia.org/wiki/Número_triangular"
+    },
+    {
+      "id": "mat-049",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuál de estos números es primo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "87"
+        },
+        {
+          "id": "b",
+          "text": "51"
+        },
+        {
+          "id": "c",
+          "text": "91"
+        },
+        {
+          "id": "d",
+          "text": "97"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "91 = 7 × 13, 87 = 3 × 29 y 51 = 3 × 17; 97 solo es divisible por 1 y por sí mismo.",
+      "source": "https://es.wikipedia.org/wiki/Número_primo"
+    },
+    {
+      "id": "mat-050",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Qué número sigue en la serie 2, 6, 12, 20, 30…?",
+      "options": [
+        {
+          "id": "a",
+          "text": "44"
+        },
+        {
+          "id": "b",
+          "text": "40"
+        },
+        {
+          "id": "c",
+          "text": "36"
+        },
+        {
+          "id": "d",
+          "text": "42"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Se suma 4, 6, 8, 10 y luego 12: 30 + 12 = 42.",
+      "source": "https://es.wikipedia.org/wiki/Sucesión_matemática"
+    },
+    {
+      "id": "mat-051",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es el 15 % de 360?",
+      "options": [
+        {
+          "id": "a",
+          "text": "64"
+        },
+        {
+          "id": "b",
+          "text": "54"
+        },
+        {
+          "id": "c",
+          "text": "45"
+        },
+        {
+          "id": "d",
+          "text": "36"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El 10 % es 36 y el 5 % es 18: 36 + 18 = 54.",
+      "source": "https://es.wikipedia.org/wiki/Porcentaje"
+    },
+    {
+      "id": "mat-052",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 48 ÷ 4 × 3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "16"
+        },
+        {
+          "id": "c",
+          "text": "144"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Se opera de izquierda a derecha: 48 ÷ 4 = 12 y 12 × 3 = 36.",
+      "source": "https://es.wikipedia.org/wiki/Orden_de_evaluación"
+    },
+    {
+      "id": "mat-053",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 125 × 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1250"
+        },
+        {
+          "id": "b",
+          "text": "800"
+        },
+        {
+          "id": "c",
+          "text": "1025"
+        },
+        {
+          "id": "d",
+          "text": "1000"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "125 × 8 = 1000.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-054",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuántos segundos hay en un día?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36.000"
+        },
+        {
+          "id": "b",
+          "text": "8640"
+        },
+        {
+          "id": "c",
+          "text": "86.400"
+        },
+        {
+          "id": "d",
+          "text": "864.000"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "24 × 60 × 60 = 86.400 segundos.",
+      "source": "https://es.wikipedia.org/wiki/Día"
+    },
+    {
+      "id": "mat-055",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "Un precio sube un 10 % y después baja un 10 %. Si empezó en 100 €, ¿cuánto cuesta al final?",
+      "options": [
+        {
+          "id": "a",
+          "text": "90"
+        },
+        {
+          "id": "b",
+          "text": "101"
+        },
+        {
+          "id": "c",
+          "text": "99"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "100 + 10 % = 110; 110 - 10 % = 110 - 11 = 99 €.",
+      "source": "https://es.wikipedia.org/wiki/Porcentaje"
+    },
+    {
+      "id": "mat-056",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 1/2 + 1/3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5/6"
+        },
+        {
+          "id": "b",
+          "text": "1/6"
+        },
+        {
+          "id": "c",
+          "text": "2/6"
+        },
+        {
+          "id": "d",
+          "text": "2/5"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Con denominador común 6: 3/6 + 2/6 = 5/6.",
+      "source": "https://es.wikipedia.org/wiki/Fracción"
+    },
+    {
+      "id": "mat-057",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 37 × 3 × 3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "303"
+        },
+        {
+          "id": "b",
+          "text": "323"
+        },
+        {
+          "id": "c",
+          "text": "333"
+        },
+        {
+          "id": "d",
+          "text": "343"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "37 × 9 = 333.",
+      "source": "https://es.wikipedia.org/wiki/Multiplicación"
+    },
+    {
+      "id": "mat-058",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "Si 5 máquinas hacen 5 piezas en 5 minutos, ¿cuántos minutos tardan 100 máquinas en hacer 100 piezas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "20"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Cada máquina hace una pieza en 5 minutos, así que 100 máquinas hacen 100 piezas en 5 minutos.",
+      "source": "https://es.wikipedia.org/wiki/Proporcionalidad"
+    },
+    {
+      "id": "mat-059",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuánto es 19 × 19?",
+      "options": [
+        {
+          "id": "a",
+          "text": "371"
+        },
+        {
+          "id": "b",
+          "text": "381"
+        },
+        {
+          "id": "c",
+          "text": "351"
+        },
+        {
+          "id": "d",
+          "text": "361"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "19² = (20 - 1)² = 400 - 40 + 1 = 361.",
+      "source": "https://es.wikipedia.org/wiki/Cuadrado_(álgebra)"
+    },
+    {
+      "id": "mat-060",
+      "category": "Matemáticas",
+      "difficulty": 3,
+      "text": "¿Cuál es el mínimo común múltiplo de 6 y 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24"
+        },
+        {
+          "id": "b",
+          "text": "48"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Múltiplos de 8: 8, 16, 24; 24 es el primero que también es múltiplo de 6.",
+      "source": "https://es.wikipedia.org/wiki/Mínimo_común_múltiplo"
     }
   ]
 }

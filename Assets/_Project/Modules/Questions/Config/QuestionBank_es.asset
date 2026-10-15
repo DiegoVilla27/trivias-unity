@@ -374,3 +374,3399 @@ MonoBehaviour:
     _correctOption: 0
     _explanation: El Kilimanjaro, en Tanzania, alcanza unos 5.895 metros.
     _source: https://es.wikipedia.org/wiki/Kilimanjaro
+  - _id: geo-010
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la capital de Italia?"
+    _options:
+    - "N\xE1poles"
+    - Florencia
+    - "Mil\xE1n"
+    - Roma
+    _correctOption: 3
+    _explanation: Roma es la capital de Italia desde 1871.
+    _source: https://es.wikipedia.org/wiki/Roma
+  - _id: geo-011
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la capital de Jap\xF3n?"
+    _options:
+    - Tokio
+    - Hiroshima
+    - Kioto
+    - Osaka
+    _correctOption: 0
+    _explanation: "Tokio es la capital de Jap\xF3n y su mayor ciudad."
+    _source: https://es.wikipedia.org/wiki/Tokio
+  - _id: geo-012
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 pa\xEDs est\xE1n las pir\xE1mides de Guiza?"
+    _options:
+    - Egipto
+    - "M\xE9xico"
+    - "Per\xFA"
+    - "Sud\xE1n"
+    _correctOption: 0
+    _explanation: "Las pir\xE1mides de Guiza est\xE1n junto a El Cairo, en Egipto."
+    _source: "https://es.wikipedia.org/wiki/Pir\xE1mides_de_Guiza"
+  - _id: geo-013
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el continente m\xE1s grande?"
+    _options:
+    - Europa
+    - "Am\xE9rica"
+    - Asia
+    - "\xC1frica"
+    _correctOption: 2
+    _explanation: "Asia es el continente m\xE1s extenso y el m\xE1s poblado."
+    _source: https://es.wikipedia.org/wiki/Asia
+  - _id: geo-014
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 r\xEDo atraviesa Londres?"
+    _options:
+    - Danubio
+    - Rin
+    - Sena
+    - "T\xE1mesis"
+    _correctOption: 3
+    _explanation: "El T\xE1mesis cruza Londres antes de desembocar en el mar del Norte."
+    _source: "https://es.wikipedia.org/wiki/R\xEDo_T\xE1mesis"
+  - _id: geo-015
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 ciudad est\xE1 la Torre Eiffel?"
+    _options:
+    - Bruselas
+    - Londres
+    - "Par\xEDs"
+    - Roma
+    _correctOption: 2
+    _explanation: "La Torre Eiffel se construy\xF3 en Par\xEDs para la Exposici\xF3n Universal de 1889."
+    _source: https://es.wikipedia.org/wiki/Torre_Eiffel
+  - _id: geo-016
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la capital de Espa\xF1a?"
+    _options:
+    - Valencia
+    - Barcelona
+    - Madrid
+    - Sevilla
+    _correctOption: 2
+    _explanation: "Madrid es la capital de Espa\xF1a."
+    _source: https://es.wikipedia.org/wiki/Madrid
+  - _id: geo-017
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 pa\xEDs se encuentra la Gran Muralla?"
+    _options:
+    - China
+    - India
+    - "Jap\xF3n"
+    - Mongolia
+    _correctOption: 0
+    _explanation: "La Gran Muralla se levant\xF3 en el norte de China durante siglos."
+    _source: https://es.wikipedia.org/wiki/Gran_Muralla_china
+  - _id: geo-018
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el desierto c\xE1lido m\xE1s grande del mundo?"
+    _options:
+    - Gobi
+    - "S\xE1hara"
+    - Atacama
+    - Kalahari
+    _correctOption: 1
+    _explanation: "El S\xE1hara es el mayor desierto c\xE1lido; los polares son a\xFAn m\xE1s grandes."
+    _source: https://es.wikipedia.org/wiki/Desierto_del_Sahara
+  - _id: geo-019
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la capital de Argentina?"
+    _options:
+    - Montevideo
+    - "C\xF3rdoba"
+    - Buenos Aires
+    - Rosario
+    _correctOption: 2
+    _explanation: Buenos Aires es la capital de Argentina; Montevideo es la de Uruguay.
+    _source: https://es.wikipedia.org/wiki/Buenos_Aires
+  - _id: geo-020
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 pa\xEDs tiene forma de bota en el mapa?"
+    _options:
+    - Croacia
+    - Italia
+    - Grecia
+    - Portugal
+    _correctOption: 1
+    _explanation: "La pen\xEDnsula it\xE1lica recuerda a una bota que patea Sicilia."
+    _source: https://es.wikipedia.org/wiki/Italia
+  - _id: his-004
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFQui\xE9n fue el primer presidente de Estados Unidos?"
+    _options:
+    - John Adams
+    - Abraham Lincoln
+    - George Washington
+    - Thomas Jefferson
+    _correctOption: 2
+    _explanation: "George Washington gobern\xF3 de 1789 a 1797."
+    _source: https://es.wikipedia.org/wiki/George_Washington
+  - _id: his-005
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 a\xF1o lleg\xF3 Crist\xF3bal Col\xF3n a Am\xE9rica?"
+    _options:
+    - 1492
+    - 1498
+    - 1512
+    - 1453
+    _correctOption: 0
+    _explanation: "Col\xF3n lleg\xF3 a las Bahamas el 12 de octubre de 1492."
+    _source: "https://es.wikipedia.org/wiki/Crist\xF3bal_Col\xF3n"
+  - _id: his-006
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 emperador franc\xE9s fue derrotado en la batalla de Waterloo?"
+    _options:
+    - Luis XVI
+    - Carlomagno
+    - Luis XIV
+    - "Napole\xF3n Bonaparte"
+    _correctOption: 3
+    _explanation: "Napole\xF3n fue derrotado en Waterloo en 1815."
+    _source: https://es.wikipedia.org/wiki/Batalla_de_Waterloo
+  - _id: his-007
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 ciudad de la antigua Grecia surgi\xF3 la democracia?"
+    _options:
+    - Tebas
+    - Corinto
+    - Esparta
+    - Atenas
+    _correctOption: 3
+    _explanation: "Atenas desarroll\xF3 la democracia en el siglo V a. C."
+    _source: https://es.wikipedia.org/wiki/Democracia_ateniense
+  - _id: his-008
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 famoso barco se hundi\xF3 en 1912 tras chocar con un iceberg?"
+    _options:
+    - Titanic
+    - Lusitania
+    - Britannic
+    - Queen Mary
+    _correctOption: 0
+    _explanation: "El Titanic se hundi\xF3 en su viaje inaugural en abril de 1912."
+    _source: https://es.wikipedia.org/wiki/RMS_Titanic
+  - _id: his-009
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama la escritura del antiguo Egipto hecha con dibujos?"
+    _options:
+    - "Jerogl\xEDficos"
+    - Cuneiforme
+    - Runas
+    - Alfabeto latino
+    _correctOption: 0
+    _explanation: "Los jerogl\xEDficos combinaban signos que representaban ideas y sonidos."
+    _source: "https://es.wikipedia.org/wiki/Jerogl\xEDfico_egipcio"
+  - _id: his-010
+    _category: Historia
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 antigua ciudad luchaban los gladiadores en el Coliseo?"
+    _options:
+    - Atenas
+    - Cartago
+    - "Alejandr\xEDa"
+    - Roma
+    _correctOption: 3
+    _explanation: "El Coliseo de Roma se inaugur\xF3 en el a\xF1o 80."
+    _source: https://es.wikipedia.org/wiki/Coliseo
+  - _id: cie-010
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la f\xF3rmula qu\xEDmica del agua?"
+    _options:
+    - NaCl
+    - O2
+    - H2O
+    - CO2
+    _correctOption: 2
+    _explanation: "Una mol\xE9cula de agua tiene dos \xE1tomos de hidr\xF3geno y uno de ox\xEDgeno."
+    _source: https://es.wikipedia.org/wiki/Agua
+  - _id: cie-011
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 \xF3rgano bombea la sangre por todo el cuerpo?"
+    _options:
+    - Los pulmones
+    - "El coraz\xF3n"
+    - "El h\xEDgado"
+    - "Los ri\xF1ones"
+    _correctOption: 1
+    _explanation: "El coraz\xF3n es un m\xFAsculo que impulsa la sangre por los vasos."
+    _source: "https://es.wikipedia.org/wiki/Coraz\xF3n"
+  - _id: cie-012
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la estrella m\xE1s cercana a la Tierra?"
+    _options:
+    - Sirio
+    - Alfa Centauri
+    - El Sol
+    - La estrella Polar
+    _correctOption: 2
+    _explanation: "El Sol es una estrella y est\xE1 a unos 150 millones de kil\xF3metros."
+    _source: https://es.wikipedia.org/wiki/Sol
+  - _id: cie-013
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFA qu\xE9 temperatura hierve el agua al nivel del mar?"
+    _options:
+    - "100 \xB0C"
+    - "90 \xB0C"
+    - "120 \xB0C"
+    - "80 \xB0C"
+    _correctOption: 0
+    _explanation: "A presi\xF3n normal, el agua pura hierve a 100 \xB0C."
+    _source: "https://es.wikipedia.org/wiki/Punto_de_ebullici\xF3n"
+  - _id: cie-014
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos planetas tiene el sistema solar?"
+    _options:
+    - Ocho
+    - Nueve
+    - Diez
+    - Siete
+    _correctOption: 0
+    _explanation: "Desde 2006 Plut\xF3n se considera planeta enano, as\xED que quedan ocho."
+    _source: https://es.wikipedia.org/wiki/Sistema_solar
+  - _id: cie-015
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 gas del aire necesitamos respirar para vivir?"
+    _options:
+    - "Ox\xEDgeno"
+    - "Nitr\xF3geno"
+    - "Hidr\xF3geno"
+    - Helio
+    _correctOption: 0
+    _explanation: "Las c\xE9lulas usan el ox\xEDgeno para obtener energ\xEDa."
+    _source: "https://es.wikipedia.org/wiki/Ox\xEDgeno"
+  - _id: cie-016
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFQu\xE9 parte de la planta hace sobre todo la fotos\xEDntesis?"
+    _options:
+    - Las flores
+    - Las hojas
+    - "Las ra\xEDces"
+    - Las semillas
+    _correctOption: 1
+    _explanation: Las hojas tienen la clorofila que capta la luz del sol.
+    _source: "https://es.wikipedia.org/wiki/Fotos\xEDntesis"
+  - _id: cie-017
+    _category: Ciencia
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el sat\xE9lite natural de la Tierra?"
+    _options:
+    - Europa
+    - La Luna
+    - Fobos
+    - "Tit\xE1n"
+    _correctOption: 1
+    _explanation: "La Luna es el \xFAnico sat\xE9lite natural de la Tierra."
+    _source: https://es.wikipedia.org/wiki/Luna
+  - _id: nat-003
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el animal m\xE1s grande del mundo?"
+    _options:
+    - "Tibur\xF3n ballena"
+    - Elefante africano
+    - Calamar gigante
+    - Ballena azul
+    _correctOption: 3
+    _explanation: La ballena azul puede superar los 30 metros de largo.
+    _source: https://es.wikipedia.org/wiki/Balaenoptera_musculus
+  - _id: nat-004
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFQu\xE9 animal es conocido como el rey de la selva?"
+    _options:
+    - El elefante
+    - "El le\xF3n"
+    - El tigre
+    - El gorila
+    _correctOption: 1
+    _explanation: "Al le\xF3n se le llama as\xED aunque vive sobre todo en la sabana."
+    _source: https://es.wikipedia.org/wiki/Panthera_leo
+  - _id: nat-005
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntas patas tiene un insecto?"
+    _options:
+    - Seis
+    - Ocho
+    - Diez
+    - Cuatro
+    _correctOption: 0
+    _explanation: Todos los insectos adultos tienen tres pares de patas.
+    _source: https://es.wikipedia.org/wiki/Insecta
+  - _id: nat-006
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFQu\xE9 come principalmente el panda gigante?"
+    _options:
+    - "Bamb\xFA"
+    - Eucalipto
+    - Pescado
+    - Fruta
+    _correctOption: 0
+    _explanation: "El bamb\xFA es casi toda la dieta del panda gigante."
+    _source: https://es.wikipedia.org/wiki/Ailuropoda_melanoleuca
+  - _id: nat-007
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFQu\xE9 tipo de animal es la ballena?"
+    _options:
+    - Pez
+    - "Mam\xEDfero"
+    - Anfibio
+    - Reptil
+    _correctOption: 1
+    _explanation: "Las ballenas respiran aire y amamantan a sus cr\xEDas."
+    _source: https://es.wikipedia.org/wiki/Cetacea
+  - _id: nat-008
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama la cr\xEDa de la vaca?"
+    _options:
+    - Ternero
+    - Cabrito
+    - Potro
+    - Cordero
+    _correctOption: 0
+    _explanation: "El ternero es la cr\xEDa de la vaca; el potro, la del caballo."
+    _source: https://es.wikipedia.org/wiki/Ternero
+  - _id: nat-009
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFQu\xE9 ave que no vuela vive en la Ant\xE1rtida?"
+    _options:
+    - "Em\xFA"
+    - Kiwi
+    - Avestruz
+    - "Ping\xFCino emperador"
+    _correctOption: 3
+    _explanation: "El ping\xFCino emperador cr\xEDa en el hielo ant\xE1rtico."
+    _source: https://es.wikipedia.org/wiki/Aptenodytes_forsteri
+  - _id: nat-010
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFQu\xE9 tipo de animal es la tortuga?"
+    _options:
+    - "Mam\xEDfero"
+    - Anfibio
+    - Reptil
+    - Pez
+    _correctOption: 2
+    _explanation: "Las tortugas son reptiles con caparaz\xF3n."
+    _source: https://es.wikipedia.org/wiki/Testudines
+  - _id: cin-001
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama el rat\xF3n m\xE1s famoso de Disney?"
+    _options:
+    - "Speedy Gonz\xE1lez"
+    - Jerry
+    - Mickey Mouse
+    - Stuart Little
+    _correctOption: 2
+    _explanation: "Mickey Mouse apareci\xF3 en 1928."
+    _source: https://es.wikipedia.org/wiki/Mickey_Mouse
+  - _id: cin-002
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 personaje dice \xAB\xA1Hasta el infinito y m\xE1s all\xE1!\xBB?"
+    _options:
+    - Rayo McQueen
+    - Buzz Lightyear
+    - Woody
+    - Shrek
+    _correctOption: 1
+    _explanation: "Es la frase del guardi\xE1n espacial de \xABToy Story\xBB."
+    _source: https://es.wikipedia.org/wiki/Buzz_Lightyear
+  - _id: cin-003
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama el ogro verde de las pel\xEDculas de DreamWorks?"
+    _options:
+    - Shrek
+    - Asno
+    - Hulk
+    - Grinch
+    _correctOption: 0
+    _explanation: "Shrek se estren\xF3 en 2001; Asno es su amigo parlanch\xEDn."
+    _source: https://es.wikipedia.org/wiki/Shrek
+  - _id: cin-004
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 saga aparece Darth Vader?"
+    _options:
+    - Harry Potter
+    - Star Wars
+    - "El se\xF1or de los anillos"
+    - Star Trek
+    _correctOption: 1
+    _explanation: "Darth Vader es el gran villano de la trilog\xEDa original de Star Wars."
+    _source: https://es.wikipedia.org/wiki/Darth_Vader
+  - _id: cin-005
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 superh\xE9roe obtiene sus poderes por la picadura de una ara\xF1a?"
+    _options:
+    - Superman
+    - Batman
+    - Flash
+    - Spider-Man
+    _correctOption: 3
+    _explanation: "Peter Parker es picado por una ara\xF1a modificada."
+    _source: https://es.wikipedia.org/wiki/Spider-Man
+  - _id: cin-006
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama la escuela de magia de Harry Potter?"
+    _options:
+    - Durmstrang
+    - Ilvermorny
+    - Beauxbatons
+    - Hogwarts
+    _correctOption: 3
+    _explanation: "Hogwarts es el colegio de magia y hechicer\xEDa de Harry Potter."
+    _source: https://es.wikipedia.org/wiki/Hogwarts
+  - _id: mus-003
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntas cuerdas tiene normalmente una guitarra espa\xF1ola?"
+    _options:
+    - Doce
+    - Cinco
+    - Seis
+    - Cuatro
+    _correctOption: 2
+    _explanation: "La guitarra cl\xE1sica o espa\xF1ola tiene seis cuerdas."
+    _source: https://es.wikipedia.org/wiki/Guitarra
+  - _id: mus-004
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "\xBFDe qu\xE9 pa\xEDs eran The Beatles?"
+    _options:
+    - Reino Unido
+    - Estados Unidos
+    - Australia
+    - Irlanda
+    _correctOption: 0
+    _explanation: Los Beatles se formaron en Liverpool, Inglaterra.
+    _source: https://es.wikipedia.org/wiki/The_Beatles
+  - _id: mus-005
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "\xBFQui\xE9n era conocido como \xABel Rey del Pop\xBB?"
+    _options:
+    - Prince
+    - Freddie Mercury
+    - Michael Jackson
+    - Elvis Presley
+    _correctOption: 2
+    _explanation: "A Elvis se le llam\xF3 \xABel Rey del Rock\xBB; a Michael Jackson, \xABel Rey del Pop\xBB."
+    _source: https://es.wikipedia.org/wiki/Michael_Jackson
+  - _id: mus-006
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 instrumento tocaba sobre todo Ludwig van Beethoven?"
+    _options:
+    - "Viol\xEDn"
+    - Piano
+    - Flauta
+    - Trompeta
+    _correctOption: 1
+    _explanation: "Beethoven fue un pianista virtuoso adem\xE1s de compositor."
+    _source: https://es.wikipedia.org/wiki/Ludwig_van_Beethoven
+  - _id: mus-007
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "En la escala do, re, mi\u2026, \xBFqu\xE9 nota va despu\xE9s de \xABsol\xBB?"
+    _options:
+    - Si
+    - La
+    - Mi
+    - Fa
+    _correctOption: 1
+    _explanation: La escala es do, re, mi, fa, sol, la, si.
+    _source: https://es.wikipedia.org/wiki/Nota_musical
+  - _id: dep-002
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFCada cu\xE1ntos a\xF1os se celebran los Juegos Ol\xEDmpicos de verano?"
+    _options:
+    - Tres
+    - Dos
+    - Cuatro
+    - Cinco
+    _correctOption: 2
+    _explanation: "Los Juegos de verano se celebran cada cuatro a\xF1os."
+    _source: "https://es.wikipedia.org/wiki/Juegos_Ol\xEDmpicos"
+  - _id: dep-003
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 deporte se lanza el bal\xF3n a una canasta?"
+    _options:
+    - Balonmano
+    - Waterpolo
+    - Baloncesto
+    - Voleibol
+    _correctOption: 2
+    _explanation: "En baloncesto se anota metiendo el bal\xF3n por el aro."
+    _source: https://es.wikipedia.org/wiki/Baloncesto
+  - _id: dep-004
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos anillos tiene la bandera ol\xEDmpica?"
+    _options:
+    - Seis
+    - Cinco
+    - Cuatro
+    - Siete
+    _correctOption: 1
+    _explanation: "Los cinco anillos representan la uni\xF3n de los continentes."
+    _source: "https://es.wikipedia.org/wiki/Anillos_ol\xEDmpicos"
+  - _id: dep-005
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 deporte se habla de un \xABhoyo en uno\xBB?"
+    _options:
+    - Bolos
+    - Golf
+    - "Cr\xEDquet"
+    - Billar
+    _correctOption: 1
+    _explanation: Es meter la bola en el hoyo con un solo golpe.
+    _source: https://es.wikipedia.org/wiki/Golf
+  - _id: dep-006
+    _category: Deportes
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 deporte destac\xF3 Rafael Nadal?"
+    _options:
+    - Golf
+    - "F\xFAtbol"
+    - "P\xE1del"
+    - Tenis
+    _correctOption: 3
+    _explanation: "Nadal gan\xF3 22 torneos de Grand Slam de tenis."
+    _source: https://es.wikipedia.org/wiki/Rafael_Nadal
+  - _id: dep-007
+    _category: Deportes
+    _difficulty: 1
+    _text: "En f\xFAtbol, \xBFcon qu\xE9 no puede tocar el bal\xF3n un jugador de campo?"
+    _options:
+    - Los muslos
+    - El pecho
+    - La cabeza
+    - Las manos
+    _correctOption: 3
+    _explanation: "Solo el portero puede usar las manos, y dentro de su \xE1rea."
+    _source: "https://es.wikipedia.org/wiki/F\xFAtbol"
+  - _id: art-002
+    _category: Arte
+    _difficulty: 1
+    _text: "\xBFQui\xE9n pint\xF3 \xABLa noche estrellada\xBB?"
+    _options:
+    - Pablo Picasso
+    - Claude Monet
+    - "Salvador Dal\xED"
+    - Vincent van Gogh
+    _correctOption: 3
+    _explanation: "Van Gogh la pint\xF3 en 1889."
+    _source: https://es.wikipedia.org/wiki/La_noche_estrellada
+  - _id: art-003
+    _category: Arte
+    _difficulty: 1
+    _text: "\xBFQu\xE9 pintor espa\xF1ol es famoso por crear el cubismo?"
+    _options:
+    - Pablo Picasso
+    - "Salvador Dal\xED"
+    - Francisco de Goya
+    - "Joan Mir\xF3"
+    _correctOption: 0
+    _explanation: "Picasso fund\xF3 el cubismo junto a Georges Braque."
+    _source: https://es.wikipedia.org/wiki/Pablo_Picasso
+  - _id: art-004
+    _category: Arte
+    _difficulty: 1
+    _text: "\xBFQu\xE9 dos colores se mezclan en pintura para obtener el verde?"
+    _options:
+    - Rojo y amarillo
+    - Azul y amarillo
+    - Rojo y azul
+    - Blanco y negro
+    _correctOption: 1
+    _explanation: Azul y amarillo dan verde; rojo y azul, morado.
+    _source: https://es.wikipedia.org/wiki/Color_secundario
+  - _id: lit-002
+    _category: Literatura
+    _difficulty: 1
+    _text: "\xBFQui\xE9n escribi\xF3 \xABDon Quijote de la Mancha\xBB?"
+    _options:
+    - "Federico Garc\xEDa Lorca"
+    - Miguel de Cervantes
+    - Lope de Vega
+    - Francisco de Quevedo
+    _correctOption: 1
+    _explanation: "Cervantes public\xF3 la primera parte en 1605."
+    _source: https://es.wikipedia.org/wiki/Don_Quijote_de_la_Mancha
+  - _id: lit-003
+    _category: Literatura
+    _difficulty: 1
+    _text: "\xBFC\xF3mo se llama el escudero de don Quijote?"
+    _options:
+    - Dulcinea
+    - Sancho Panza
+    - Rocinante
+    - "L\xE1zaro"
+    _correctOption: 1
+    _explanation: Rocinante es el caballo y Dulcinea, su amada imaginada.
+    _source: https://es.wikipedia.org/wiki/Sancho_Panza
+  - _id: lit-004
+    _category: Literatura
+    _difficulty: 1
+    _text: "\xBFQu\xE9 personaje de cuento pierde un zapato de cristal?"
+    _options:
+    - Cenicienta
+    - Blancanieves
+    - Caperucita Roja
+    - La Bella Durmiente
+    _correctOption: 0
+    _explanation: Cenicienta pierde el zapato al huir del baile a medianoche.
+    _source: https://es.wikipedia.org/wiki/Cenicienta
+  - _id: lit-005
+    _category: Literatura
+    _difficulty: 1
+    _text: "\xBFQui\xE9n escribi\xF3 \xABRomeo y Julieta\xBB?"
+    _options:
+    - Charles Dickens
+    - William Shakespeare
+    - Oscar Wilde
+    - Jane Austen
+    _correctOption: 1
+    _explanation: "Shakespeare escribi\xF3 esta tragedia a finales del siglo XVI."
+    _source: https://es.wikipedia.org/wiki/Romeo_y_Julieta
+  - _id: cur-003
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos meses del a\xF1o tienen 31 d\xEDas?"
+    _options:
+    - Ocho
+    - Seis
+    - Cinco
+    - Siete
+    _correctOption: 3
+    _explanation: Enero, marzo, mayo, julio, agosto, octubre y diciembre.
+    _source: https://es.wikipedia.org/wiki/Mes
+  - _id: cur-004
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFQu\xE9 color sale al mezclar rojo y blanco?"
+    _options:
+    - Naranja
+    - Morado
+    - "Marr\xF3n"
+    - Rosa
+    _correctOption: 3
+    _explanation: El blanco aclara el rojo hasta el rosa.
+    _source: https://es.wikipedia.org/wiki/Rosa_(color)
+  - _id: cur-005
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos lados tiene un hex\xE1gono?"
+    _options:
+    - Cinco
+    - Siete
+    - Ocho
+    - Seis
+    _correctOption: 3
+    _explanation: "Hexa significa \xABseis\xBB en griego."
+    _source: "https://es.wikipedia.org/wiki/Hex\xE1gono"
+  - _id: cur-006
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFQu\xE9 d\xEDa se celebra la Navidad?"
+    _options:
+    - 24 de diciembre
+    - 25 de diciembre
+    - 1 de enero
+    - 6 de enero
+    _correctOption: 1
+    _explanation: El 24 es Nochebuena; el 25, Navidad.
+    _source: https://es.wikipedia.org/wiki/Navidad
+  - _id: cur-007
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 juego de mesa hay alfiles y torres?"
+    _options:
+    - Damas
+    - Ajedrez
+    - "Parch\xEDs"
+    - Go
+    _correctOption: 1
+    _explanation: Cada jugador de ajedrez empieza con dos alfiles y dos torres.
+    _source: https://es.wikipedia.org/wiki/Ajedrez
+  - _id: tec-001
+    _category: "Tecnolog\xEDa"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 empresa fabrica el iPhone?"
+    _options:
+    - Nokia
+    - Apple
+    - Google
+    - Samsung
+    _correctOption: 1
+    _explanation: "Apple present\xF3 el primer iPhone en 2007."
+    _source: https://es.wikipedia.org/wiki/IPhone
+  - _id: tec-002
+    _category: "Tecnolog\xEDa"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 significa \xABwww\xBB en las direcciones web?"
+    _options:
+    - Web World Wide
+    - World Web Wide
+    - World Wide Web
+    - Wide World Web
+    _correctOption: 2
+    _explanation: "La World Wide Web es la red de p\xE1ginas enlazadas de internet."
+    _source: https://es.wikipedia.org/wiki/World_Wide_Web
+  - _id: tec-003
+    _category: "Tecnolog\xEDa"
+    _difficulty: 1
+    _text: "\xBFCon qu\xE9 dispositivo se mueve normalmente el cursor de un ordenador?"
+    _options:
+    - "Rat\xF3n"
+    - Monitor
+    - Teclado
+    - Altavoz
+    _correctOption: 0
+    _explanation: "El rat\xF3n traduce el movimiento de la mano al cursor."
+    _source: "https://es.wikipedia.org/wiki/Rat\xF3n_(inform\xE1tica)"
+  - _id: gas-001
+    _category: "Gastronom\xEDa"
+    _difficulty: 1
+    _text: "\xBFDe qu\xE9 pa\xEDs es originaria la pizza?"
+    _options:
+    - Grecia
+    - Francia
+    - Italia
+    - "Espa\xF1a"
+    _correctOption: 2
+    _explanation: "La pizza moderna naci\xF3 en N\xE1poles."
+    _source: https://es.wikipedia.org/wiki/Pizza
+  - _id: gas-002
+    _category: "Gastronom\xEDa"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el ingrediente principal del guacamole?"
+    _options:
+    - Pepino
+    - Tomate
+    - Aguacate
+    - Pimiento
+    _correctOption: 2
+    _explanation: "El guacamole es un pur\xE9 de aguacate de origen mexicano."
+    _source: https://es.wikipedia.org/wiki/Guacamole
+  - _id: gas-003
+    _category: "Gastronom\xEDa"
+    _difficulty: 1
+    _text: "\xBFDe qu\xE9 pa\xEDs es t\xEDpico el sushi?"
+    _options:
+    - "Jap\xF3n"
+    - Corea del Sur
+    - Tailandia
+    - China
+    _correctOption: 0
+    _explanation: El sushi combina arroz avinagrado con pescado u otros ingredientes.
+    _source: https://es.wikipedia.org/wiki/Sushi
+  - _id: gas-004
+    _category: "Gastronom\xEDa"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 se obtiene al secar una uva?"
+    _options:
+    - Una pasa
+    - "Un d\xE1til"
+    - Una ciruela pasa
+    - Un higo seco
+    _correctOption: 0
+    _explanation: La pasa es una uva deshidratada.
+    _source: https://es.wikipedia.org/wiki/Uva_pasa
+  - _id: gas-005
+    _category: "Gastronom\xEDa"
+    _difficulty: 1
+    _text: "\xBFDe qu\xE9 se hace principalmente el chocolate?"
+    _options:
+    - Vainilla
+    - "Caf\xE9"
+    - Cacao
+    - Avellana
+    _correctOption: 2
+    _explanation: El chocolate se elabora con semillas de cacao.
+    _source: https://es.wikipedia.org/wiki/Chocolate
+  - _id: geo-021
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es la capital de Canad\xE1?"
+    _options:
+    - Montreal
+    - Ottawa
+    - Toronto
+    - Vancouver
+    _correctOption: 1
+    _explanation: "Ottawa es la capital, aunque Toronto es la ciudad m\xE1s grande."
+    _source: https://es.wikipedia.org/wiki/Ottawa
+  - _id: geo-022
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es la capital de Brasil?"
+    _options:
+    - "R\xEDo de Janeiro"
+    - Salvador
+    - Brasilia
+    - "S\xE3o Paulo"
+    _correctOption: 2
+    _explanation: "Brasilia se fund\xF3 en 1960 para ser la nueva capital."
+    _source: https://es.wikipedia.org/wiki/Brasilia
+  - _id: geo-023
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 pa\xEDs tiene m\xE1s habitantes de Am\xE9rica del Sur?"
+    _options:
+    - "Per\xFA"
+    - Colombia
+    - Brasil
+    - Argentina
+    _correctOption: 2
+    _explanation: "Brasil re\xFAne casi la mitad de la poblaci\xF3n de Sudam\xE9rica."
+    _source: https://es.wikipedia.org/wiki/Brasil
+  - _id: geo-024
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 pa\xEDs est\xE1 el monte Fuji?"
+    _options:
+    - "Jap\xF3n"
+    - China
+    - Corea del Sur
+    - Filipinas
+    _correctOption: 0
+    _explanation: "El Fuji es el monte m\xE1s alto de Jap\xF3n."
+    _source: https://es.wikipedia.org/wiki/Monte_Fuji
+  - _id: geo-025
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 estrecho separa Espa\xF1a de Marruecos?"
+    _options:
+    - Estrecho de Ormuz
+    - Estrecho de Gibraltar
+    - Estrecho de Magallanes
+    - Estrecho de Bering
+    _correctOption: 1
+    _explanation: "El estrecho de Gibraltar une el Mediterr\xE1neo con el Atl\xE1ntico."
+    _source: https://es.wikipedia.org/wiki/Estrecho_de_Gibraltar
+  - _id: geo-026
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el lago m\xE1s grande de \xC1frica?"
+    _options:
+    - Lago Malaui
+    - Lago Chad
+    - Lago Tanganica
+    - Lago Victoria
+    _correctOption: 3
+    _explanation: El lago Victoria lo comparten Uganda, Kenia y Tanzania.
+    _source: https://es.wikipedia.org/wiki/Lago_Victoria
+  - _id: geo-027
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 cordillera separa Francia de Espa\xF1a?"
+    _options:
+    - Los Alpes
+    - Los Pirineos
+    - Los Apeninos
+    - "Los C\xE1rpatos"
+    _correctOption: 1
+    _explanation: "Los Pirineos van del Cant\xE1brico al Mediterr\xE1neo."
+    _source: https://es.wikipedia.org/wiki/Pirineos
+  - _id: geo-028
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es la capital de Turqu\xEDa?"
+    _options:
+    - Antalya
+    - Estambul
+    - Esmirna
+    - Ankara
+    _correctOption: 3
+    _explanation: "Ankara es la capital desde 1923; Estambul es la ciudad m\xE1s poblada."
+    _source: https://es.wikipedia.org/wiki/Ankara
+  - _id: geo-029
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFPor qu\xE9 pa\xEDs discurre la mayor parte del r\xEDo Amazonas?"
+    _options:
+    - Brasil
+    - Venezuela
+    - Colombia
+    - "Per\xFA"
+    _correctOption: 0
+    _explanation: "Nace en Per\xFA, pero la mayor parte de su curso est\xE1 en Brasil."
+    _source: "https://es.wikipedia.org/wiki/R\xEDo_Amazonas"
+  - _id: geo-030
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 pa\xEDs sudamericano es largo y estrecho junto al Pac\xEDfico?"
+    _options:
+    - "Per\xFA"
+    - Chile
+    - Colombia
+    - Ecuador
+    _correctOption: 1
+    _explanation: "Chile mide m\xE1s de 4000 km de largo y muy poco de ancho."
+    _source: https://es.wikipedia.org/wiki/Chile
+  - _id: geo-031
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 oc\xE9ano est\xE1n las islas Maldivas?"
+    _options:
+    - "Atl\xE1ntico"
+    - "\xC1rtico"
+    - "Pac\xEDfico"
+    - "\xCDndico"
+    _correctOption: 3
+    _explanation: "Las Maldivas est\xE1n al suroeste de la India."
+    _source: https://es.wikipedia.org/wiki/Maldivas
+  - _id: his-011
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 a\xF1o empez\xF3 la Primera Guerra Mundial?"
+    _options:
+    - 1918
+    - 1905
+    - 1914
+    - 1939
+    _correctOption: 2
+    _explanation: "Empez\xF3 en 1914 y termin\xF3 en 1918."
+    _source: https://es.wikipedia.org/wiki/Primera_Guerra_Mundial
+  - _id: his-012
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 a\xF1o termin\xF3 la Segunda Guerra Mundial?"
+    _options:
+    - 1946
+    - 1939
+    - 1944
+    - 1945
+    _correctOption: 3
+    _explanation: "Termin\xF3 en 1945, con la rendici\xF3n de Alemania y despu\xE9s la de Jap\xF3n."
+    _source: https://es.wikipedia.org/wiki/Segunda_Guerra_Mundial
+  - _id: his-013
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 fara\xF3n es famoso por su tumba casi intacta descubierta en 1922?"
+    _options:
+    - Cleopatra
+    - "Rams\xE9s II"
+    - Keops
+    - "Tutankam\xF3n"
+    _correctOption: 3
+    _explanation: "Howard Carter descubri\xF3 la tumba de Tutankam\xF3n en 1922."
+    _source: "https://es.wikipedia.org/wiki/Tutankam\xF3n"
+  - _id: his-014
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFQui\xE9n fue el primer emperador de Roma?"
+    _options:
+    - "Julio C\xE9sar"
+    - Augusto
+    - "Cal\xEDgula"
+    - "Ner\xF3n"
+    _correctOption: 1
+    _explanation: "Julio C\xE9sar fue dictador; Augusto, el primer emperador."
+    _source: https://es.wikipedia.org/wiki/Augusto
+  - _id: his-015
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQui\xE9n dirigi\xF3 la expedici\xF3n de la primera vuelta al mundo, que complet\xF3 Elcano?"
+    _options:
+    - "Am\xE9rico Vespucio"
+    - Fernando de Magallanes
+    - "Crist\xF3bal Col\xF3n"
+    - Vasco da Gama
+    _correctOption: 1
+    _explanation: "Magallanes muri\xF3 en Filipinas y Elcano termin\xF3 el viaje en 1522."
+    _source: "https://es.wikipedia.org/wiki/Expedici\xF3n_de_Magallanes-Elcano"
+  - _id: his-016
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 ciudad fue asesinado John F. Kennedy?"
+    _options:
+    - Chicago
+    - Dallas
+    - Washington
+    - Nueva York
+    _correctOption: 1
+    _explanation: Kennedy fue asesinado en Dallas en 1963.
+    _source: https://es.wikipedia.org/wiki/Asesinato_de_John_F._Kennedy
+  - _id: his-017
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 pueblo n\xF3rdico hac\xEDa incursiones por mar en la Edad Media?"
+    _options:
+    - Los hunos
+    - Los visigodos
+    - Los celtas
+    - Los vikingos
+    _correctOption: 3
+    _explanation: Los vikingos navegaban desde Escandinavia.
+    _source: https://es.wikipedia.org/wiki/Vikingo
+  - _id: his-018
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFQui\xE9n lider\xF3 la independencia de la India con la resistencia no violenta?"
+    _options:
+    - Jawaharlal Nehru
+    - Nelson Mandela
+    - Mahatma Gandhi
+    - Martin Luther King
+    _correctOption: 2
+    _explanation: "Gandhi encabez\xF3 la lucha pac\xEDfica contra el dominio brit\xE1nico."
+    _source: https://es.wikipedia.org/wiki/Mahatma_Gandhi
+  - _id: his-019
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pueblo ten\xEDa su capital en Tenochtitlan?"
+    _options:
+    - Los incas
+    - Los mayas
+    - Los olmecas
+    - Los aztecas
+    _correctOption: 3
+    _explanation: "Tenochtitlan, capital mexica, estaba donde hoy est\xE1 Ciudad de M\xE9xico."
+    _source: https://es.wikipedia.org/wiki/Tenochtitlan
+  - _id: cie-018
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el s\xEDmbolo qu\xEDmico del hierro?"
+    _options:
+    - Hi
+    - Fr
+    - Fe
+    - Ir
+    _correctOption: 2
+    _explanation: "Fe viene del lat\xEDn \xABferrum\xBB."
+    _source: https://es.wikipedia.org/wiki/Hierro
+  - _id: cie-019
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 cient\xEDfico propuso la evoluci\xF3n por selecci\xF3n natural?"
+    _options:
+    - Charles Darwin
+    - Isaac Newton
+    - Gregor Mendel
+    - Louis Pasteur
+    _correctOption: 0
+    _explanation: "Darwin la expuso en \xABEl origen de las especies\xBB (1859)."
+    _source: https://es.wikipedia.org/wiki/Charles_Darwin
+  - _id: cie-020
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el planeta m\xE1s cercano al Sol?"
+    _options:
+    - La Tierra
+    - Marte
+    - Venus
+    - Mercurio
+    _correctOption: 3
+    _explanation: Mercurio es el primer planeta del sistema solar.
+    _source: https://es.wikipedia.org/wiki/Mercurio_(planeta)
+  - _id: cie-021
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 grupo sangu\xEDneo es el donante universal de gl\xF3bulos rojos?"
+    _options:
+    - 0 negativo
+    - B negativo
+    - A positivo
+    - AB positivo
+    _correctOption: 0
+    _explanation: "El 0 negativo no tiene ant\xEDgenos A, B ni Rh."
+    _source: "https://es.wikipedia.org/wiki/Grupo_sangu\xEDneo"
+  - _id: cie-022
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos cromosomas tiene normalmente una c\xE9lula humana?"
+    _options:
+    - 23
+    - 46
+    - 48
+    - 44
+    _correctOption: 1
+    _explanation: 'Son 23 pares: 46 en total.'
+    _source: https://es.wikipedia.org/wiki/Cromosoma
+  - _id: cie-023
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 vitamina produce la piel al recibir la luz del sol?"
+    _options:
+    - Vitamina D
+    - Vitamina C
+    - Vitamina B12
+    - Vitamina A
+    _correctOption: 0
+    _explanation: "La luz ultravioleta activa la s\xEDntesis de vitamina D."
+    _source: https://es.wikipedia.org/wiki/Vitamina_D
+  - _id: cie-024
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQui\xE9n descubri\xF3 la penicilina?"
+    _options:
+    - Alexander Fleming
+    - Robert Koch
+    - Louis Pasteur
+    - Edward Jenner
+    _correctOption: 0
+    _explanation: "Fleming la descubri\xF3 en 1928."
+    _source: https://es.wikipedia.org/wiki/Penicilina
+  - _id: cie-025
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 part\xEDcula del \xE1tomo tiene carga negativa?"
+    _options:
+    - "Fot\xF3n"
+    - "Prot\xF3n"
+    - "Neutr\xF3n"
+    - "Electr\xF3n"
+    _correctOption: 3
+    _explanation: "El prot\xF3n es positivo y el neutr\xF3n no tiene carga."
+    _source: "https://es.wikipedia.org/wiki/Electr\xF3n"
+  - _id: cie-026
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el \xF3rgano m\xE1s grande del cuerpo humano?"
+    _options:
+    - Los pulmones
+    - El intestino
+    - "El h\xEDgado"
+    - La piel
+    _correctOption: 3
+    _explanation: La piel cubre casi dos metros cuadrados en un adulto.
+    _source: https://es.wikipedia.org/wiki/Piel
+  - _id: cie-027
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 planeta tiene los anillos m\xE1s visibles?"
+    _options:
+    - "J\xFApiter"
+    - Saturno
+    - Neptuno
+    - Urano
+    _correctOption: 1
+    _explanation: "Todos los gigantes tienen anillos, pero los de Saturno son los m\xE1s brillantes."
+    _source: https://es.wikipedia.org/wiki/Saturno_(planeta)
+  - _id: nat-011
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el animal terrestre m\xE1s r\xE1pido?"
+    _options:
+    - Guepardo
+    - Caballo
+    - "Le\xF3n"
+    - "Ant\xEDlope"
+    _correctOption: 0
+    _explanation: El guepardo supera los 100 km/h en carreras cortas.
+    _source: https://es.wikipedia.org/wiki/Acinonyx_jubatus
+  - _id: nat-012
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos corazones tiene un pulpo?"
+    _options:
+    - Ocho
+    - Uno
+    - Dos
+    - Tres
+    _correctOption: 3
+    _explanation: Dos bombean sangre a las branquias y uno al resto del cuerpo.
+    _source: https://es.wikipedia.org/wiki/Octopoda
+  - _id: nat-013
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el \xFAnico mam\xEDfero capaz de volar de verdad, no solo planear?"
+    _options:
+    - "El petauro del az\xFAcar"
+    - "El murci\xE9lago"
+    - El colugo
+    - La ardilla voladora
+    _correctOption: 1
+    _explanation: "Los dem\xE1s solo planean; el murci\xE9lago bate las alas."
+    _source: https://es.wikipedia.org/wiki/Chiroptera
+  - _id: nat-014
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFQu\xE9 animal produce la seda que m\xE1s se usa en la industria?"
+    _options:
+    - "La ara\xF1a"
+    - La abeja
+    - La oruga procesionaria
+    - El gusano de seda
+    _correctOption: 3
+    _explanation: El gusano de seda teje su capullo con un solo hilo muy largo.
+    _source: https://es.wikipedia.org/wiki/Bombyx_mori
+  - _id: nat-015
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFC\xF3mo se llama el cambio de oruga a mariposa?"
+    _options:
+    - Mitosis
+    - "Fotos\xEDntesis"
+    - "Hibernaci\xF3n"
+    - Metamorfosis
+    _correctOption: 3
+    _explanation: En la metamorfosis el animal cambia de forma por completo.
+    _source: "https://es.wikipedia.org/wiki/Metamorfosis_(biolog\xEDa)"
+  - _id: nat-016
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFQu\xE9 \xE1rbol da bellotas?"
+    _options:
+    - El roble
+    - El pino
+    - El olmo
+    - El haya
+    _correctOption: 0
+    _explanation: Las bellotas son el fruto de los robles y las encinas.
+    _source: https://es.wikipedia.org/wiki/Quercus
+  - _id: nat-017
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFQu\xE9 mam\xEDfero terrestre tiene la gestaci\xF3n m\xE1s larga?"
+    _options:
+    - El rinoceronte
+    - "El hipop\xF3tamo"
+    - La jirafa
+    - El elefante
+    _correctOption: 3
+    _explanation: La elefanta gesta durante unos 22 meses.
+    _source: https://es.wikipedia.org/wiki/Elephantidae
+  - _id: nat-018
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el ave m\xE1s grande del mundo?"
+    _options:
+    - El avestruz
+    - El albatros
+    - "El em\xFA"
+    - "El c\xF3ndor andino"
+    _correctOption: 0
+    _explanation: "El avestruz puede medir m\xE1s de 2,5 metros."
+    _source: https://es.wikipedia.org/wiki/Struthio_camelus
+  - _id: cin-007
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFQui\xE9n dirigi\xF3 \xABParque Jur\xE1sico\xBB (1993)?"
+    _options:
+    - George Lucas
+    - James Cameron
+    - Steven Spielberg
+    - Ridley Scott
+    _correctOption: 2
+    _explanation: "Spielberg adapt\xF3 la novela de Michael Crichton."
+    _source: "https://es.wikipedia.org/wiki/Jurassic_Park_(pel\xEDcula)"
+  - _id: cin-008
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFQui\xE9n dirigi\xF3 \xABTitanic\xBB (1997)?"
+    _options:
+    - Christopher Nolan
+    - Martin Scorsese
+    - James Cameron
+    - Steven Spielberg
+    _correctOption: 2
+    _explanation: "Titanic gan\xF3 11 \xD3scar, entre ellos el de mejor direcci\xF3n."
+    _source: "https://es.wikipedia.org/wiki/Titanic_(pel\xEDcula_de_1997)"
+  - _id: cin-009
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFC\xF3mo se llama el hobbit que lleva el Anillo en \xABEl se\xF1or de los anillos\xBB?"
+    _options:
+    - Peregrin Tuk
+    - "Bilbo Bols\xF3n"
+    - Samsagaz Gamyi
+    - "Frodo Bols\xF3n"
+    _correctOption: 3
+    _explanation: "Frodo hereda el Anillo de su t\xEDo Bilbo."
+    _source: "https://es.wikipedia.org/wiki/Frodo_Bols\xF3n"
+  - _id: cin-010
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 ciudad viven Los Simpson?"
+    _options:
+    - Shelbyville
+    - South Park
+    - Springfield
+    - Quahog
+    _correctOption: 2
+    _explanation: Shelbyville es la ciudad rival de Springfield.
+    _source: https://es.wikipedia.org/wiki/Los_Simpson
+  - _id: cin-011
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 actor interpret\xF3 a Jack Sparrow?"
+    _options:
+    - Brad Pitt
+    - Orlando Bloom
+    - Leonardo DiCaprio
+    - Johnny Depp
+    _correctOption: 3
+    _explanation: "Depp lo interpret\xF3 en \xABPiratas del Caribe\xBB desde 2003."
+    _source: https://es.wikipedia.org/wiki/Jack_Sparrow
+  - _id: cin-012
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFC\xF3mo se llama el pez cirujano azul y olvidadizo de \xABBuscando a Nemo\xBB?"
+    _options:
+    - Dory
+    - Bruce
+    - Marlin
+    - Gill
+    _correctOption: 0
+    _explanation: "Marlin es el padre de Nemo y Dory le acompa\xF1a en la b\xFAsqueda."
+    _source: https://es.wikipedia.org/wiki/Buscando_a_Nemo
+  - _id: cin-013
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 saga protagoniza un arque\xF3logo con l\xE1tigo y sombrero?"
+    _options:
+    - La momia
+    - "La b\xFAsqueda"
+    - Indiana Jones
+    - Tomb Raider
+    _correctOption: 2
+    _explanation: "Harrison Ford interpret\xF3 a Indiana Jones."
+    _source: https://es.wikipedia.org/wiki/Indiana_Jones
+  - _id: mus-008
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 compositor sigui\xF3 componiendo tras quedarse sordo?"
+    _options:
+    - Antonio Vivaldi
+    - Ludwig van Beethoven
+    - "Fr\xE9d\xE9ric Chopin"
+    - Johann Sebastian Bach
+    _correctOption: 1
+    _explanation: "Beethoven compuso su Novena Sinfon\xEDa ya sordo."
+    _source: https://es.wikipedia.org/wiki/Ludwig_van_Beethoven
+  - _id: mus-009
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFQui\xE9n era el cantante de Queen?"
+    _options:
+    - Freddie Mercury
+    - David Bowie
+    - Brian May
+    - Mick Jagger
+    _correctOption: 0
+    _explanation: Brian May era el guitarrista de Queen.
+    _source: https://es.wikipedia.org/wiki/Queen
+  - _id: mus-010
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFDe qu\xE9 pa\xEDs es originario el tango?"
+    _options:
+    - "Espa\xF1a"
+    - Brasil
+    - Cuba
+    - Argentina
+    _correctOption: 3
+    _explanation: "El tango naci\xF3 en el R\xEDo de la Plata, entre Buenos Aires y Montevideo."
+    _source: https://es.wikipedia.org/wiki/Tango
+  - _id: mus-011
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntas teclas tiene un piano moderno est\xE1ndar?"
+    _options:
+    - 96
+    - 88
+    - 64
+    - 76
+    _correctOption: 1
+    _explanation: 52 teclas blancas y 36 negras.
+    _source: https://es.wikipedia.org/wiki/Piano
+  - _id: mus-012
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 instrumento de metal tiene una vara deslizante?"
+    _options:
+    - "Saxof\xF3n"
+    - "Tromb\xF3n"
+    - Tuba
+    - Trompeta
+    _correctOption: 1
+    _explanation: "La vara del tromb\xF3n cambia la longitud del tubo."
+    _source: "https://es.wikipedia.org/wiki/Tromb\xF3n"
+  - _id: mus-013
+    _category: "M\xFAsica"
+    _difficulty: 2
+    _text: "\xBFDe qu\xE9 pa\xEDs es la samba?"
+    _options:
+    - Brasil
+    - Cuba
+    - Colombia
+    - Portugal
+    _correctOption: 0
+    _explanation: "La samba es el ritmo del carnaval de R\xEDo de Janeiro."
+    _source: https://es.wikipedia.org/wiki/Samba
+  - _id: dep-008
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto mide un marat\xF3n?"
+    _options:
+    - 42,195 km
+    - 21,097 km
+    - 45,5 km
+    - 40 km
+    _correctOption: 0
+    _explanation: "21,097 km es la media marat\xF3n."
+    _source: "https://es.wikipedia.org/wiki/Marat\xF3n"
+  - _id: dep-009
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 deporte se disputa el Tour de Francia?"
+    _options:
+    - Vela
+    - Automovilismo
+    - Ciclismo
+    - Atletismo
+    _correctOption: 2
+    _explanation: El Tour se corre cada verano desde 1903.
+    _source: https://es.wikipedia.org/wiki/Tour_de_Francia
+  - _id: dep-010
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos jugadores tiene en pista cada equipo de baloncesto?"
+    _options:
+    - Cinco
+    - Cuatro
+    - Seis
+    - Siete
+    _correctOption: 0
+    _explanation: Cada equipo juega con cinco y tiene suplentes en el banquillo.
+    _source: https://es.wikipedia.org/wiki/Baloncesto
+  - _id: dep-011
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 pa\xEDs se cre\xF3 el judo?"
+    _options:
+    - "Jap\xF3n"
+    - China
+    - Corea del Sur
+    - Tailandia
+    _correctOption: 0
+    _explanation: "Jigoro Kano cre\xF3 el judo en Jap\xF3n en 1882."
+    _source: https://es.wikipedia.org/wiki/Judo
+  - _id: dep-012
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos jugadores tiene en pista cada equipo de voleibol?"
+    _options:
+    - Siete
+    - Cuatro
+    - Seis
+    - Cinco
+    _correctOption: 2
+    _explanation: En voleibol juegan seis por equipo y rotan.
+    _source: https://es.wikipedia.org/wiki/Voleibol
+  - _id: dep-013
+    _category: Deportes
+    _difficulty: 3
+    _text: "\xBFQu\xE9 atleta bati\xF3 en 2009 el r\xE9cord mundial de 100 metros lisos con 9,58 s?"
+    _options:
+    - Asafa Powell
+    - Usain Bolt
+    - Carl Lewis
+    - Yohan Blake
+    _correctOption: 1
+    _explanation: "Usain Bolt lo logr\xF3 en el Mundial de Berl\xEDn."
+    _source: https://es.wikipedia.org/wiki/Usain_Bolt
+  - _id: art-005
+    _category: Arte
+    _difficulty: 2
+    _text: "\xBFQu\xE9 pintor espa\xF1ol pint\xF3 \xABLas meninas\xBB?"
+    _options:
+    - "Diego Vel\xE1zquez"
+    - Francisco de Goya
+    - "Bartolom\xE9 Murillo"
+    - El Greco
+    _correctOption: 0
+    _explanation: "Vel\xE1zquez la pint\xF3 en 1656; est\xE1 en el Museo del Prado."
+    _source: https://es.wikipedia.org/wiki/Las_meninas
+  - _id: art-006
+    _category: Arte
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 museo se expone la Mona Lisa?"
+    _options:
+    - Museo del Prado
+    - "Museo Brit\xE1nico"
+    - "Galer\xEDa Uffizi"
+    - Museo del Louvre
+    _correctOption: 3
+    _explanation: "La Gioconda est\xE1 en el Louvre de Par\xEDs."
+    _source: https://es.wikipedia.org/wiki/Museo_del_Louvre
+  - _id: art-007
+    _category: Arte
+    _difficulty: 2
+    _text: "\xBFQu\xE9 pintor surrealista pint\xF3 relojes blandos en \xABLa persistencia de la memoria\xBB?"
+    _options:
+    - Max Ernst
+    - "Joan Mir\xF3"
+    - "Ren\xE9 Magritte"
+    - "Salvador Dal\xED"
+    _correctOption: 3
+    _explanation: "Dal\xED la pint\xF3 en 1931."
+    _source: https://es.wikipedia.org/wiki/La_persistencia_de_la_memoria
+  - _id: art-008
+    _category: Arte
+    _difficulty: 3
+    _text: "\xBFQui\xE9n esculpi\xF3 el \xABDavid\xBB de m\xE1rmol de Florencia terminado en 1504?"
+    _options:
+    - Donatello
+    - Rodin
+    - "Miguel \xC1ngel"
+    - Bernini
+    _correctOption: 2
+    _explanation: "Miguel \xC1ngel lo tall\xF3 en un solo bloque de m\xE1rmol."
+    _source: "https://es.wikipedia.org/wiki/David_(Miguel_\xC1ngel)"
+  - _id: lit-006
+    _category: Literatura
+    _difficulty: 2
+    _text: "\xBFQui\xE9n escribi\xF3 \xABLa Odisea\xBB?"
+    _options:
+    - Virgilio
+    - "Plat\xF3n"
+    - "S\xF3focles"
+    - Homero
+    _correctOption: 3
+    _explanation: "La Odisea narra el regreso de Ulises a \xCDtaca."
+    _source: https://es.wikipedia.org/wiki/Odisea
+  - _id: lit-007
+    _category: Literatura
+    _difficulty: 2
+    _text: "\xBFQu\xE9 escritor cre\xF3 a Sherlock Holmes?"
+    _options:
+    - Agatha Christie
+    - Arthur Conan Doyle
+    - Charles Dickens
+    - Edgar Allan Poe
+    _correctOption: 1
+    _explanation: "Holmes apareci\xF3 por primera vez en 1887."
+    _source: https://es.wikipedia.org/wiki/Sherlock_Holmes
+  - _id: lit-008
+    _category: Literatura
+    _difficulty: 2
+    _text: "\xBFQui\xE9n escribi\xF3 \xABEl principito\xBB?"
+    _options:
+    - Victor Hugo
+    - "Antoine de Saint-Exup\xE9ry"
+    - Julio Verne
+    - Albert Camus
+    _correctOption: 1
+    _explanation: "Saint-Exup\xE9ry, adem\xE1s de escritor, era aviador."
+    _source: https://es.wikipedia.org/wiki/El_principito
+  - _id: lit-009
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQu\xE9 poeta chileno gan\xF3 el Nobel de Literatura en 1971?"
+    _options:
+    - Gabriela Mistral
+    - Vicente Huidobro
+    - Nicanor Parra
+    - Pablo Neruda
+    _correctOption: 3
+    _explanation: "Gabriela Mistral lo hab\xEDa ganado antes, en 1945."
+    _source: https://es.wikipedia.org/wiki/Pablo_Neruda
+  - _id: cur-008
+    _category: Curiosidades
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos a\xF1os de casados se celebran en las bodas de oro?"
+    _options:
+    - 50
+    - 40
+    - 25
+    - 60
+    _correctOption: 0
+    _explanation: "Las bodas de plata son a los 25 a\xF1os y las de oro a los 50."
+    _source: https://es.wikipedia.org/wiki/Aniversario_de_bodas
+  - _id: cur-009
+    _category: Curiosidades
+    _difficulty: 2
+    _text: "\xBFQu\xE9 significa la sigla \xABONU\xBB?"
+    _options:
+    - "Organizaci\xF3n de Naciones Unificadas"
+    - Orden de las Naciones Unidas
+    - "Organizaci\xF3n de las Naciones Unidas"
+    - Oficina de las Naciones Unidas
+    _correctOption: 2
+    _explanation: "La ONU se fund\xF3 en 1945."
+    _source: "https://es.wikipedia.org/wiki/Organizaci\xF3n_de_las_Naciones_Unidas"
+  - _id: cur-010
+    _category: Curiosidades
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntas casillas tiene un tablero de ajedrez?"
+    _options:
+    - 64
+    - 100
+    - 48
+    - 81
+    _correctOption: 0
+    _explanation: Son 8 filas por 8 columnas.
+    _source: https://es.wikipedia.org/wiki/Tablero_de_ajedrez
+  - _id: tec-004
+    _category: "Tecnolog\xEDa"
+    _difficulty: 2
+    _text: "\xBFQui\xE9n fund\xF3 Microsoft junto a Paul Allen?"
+    _options:
+    - Larry Page
+    - Bill Gates
+    - Steve Jobs
+    - Mark Zuckerberg
+    _correctOption: 1
+    _explanation: Gates y Allen fundaron Microsoft en 1975.
+    _source: https://es.wikipedia.org/wiki/Microsoft
+  - _id: tec-005
+    _category: "Tecnolog\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 significan las siglas \xABUSB\xBB?"
+    _options:
+    - Unified System Board
+    - Universal Storage Bus
+    - Universal Serial Bus
+    - User Serial Bridge
+    _correctOption: 2
+    _explanation: "USB significa \xABbus universal en serie\xBB."
+    _source: https://es.wikipedia.org/wiki/Universal_Serial_Bus
+  - _id: tec-006
+    _category: "Tecnolog\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 sistema de numeraci\xF3n usan los ordenadores internamente?"
+    _options:
+    - Binario
+    - Romano
+    - Decimal
+    - Sexagesimal
+    _correctOption: 0
+    _explanation: Los ordenadores trabajan con ceros y unos.
+    _source: https://es.wikipedia.org/wiki/Sistema_binario
+  - _id: gas-006
+    _category: "Gastronom\xEDa"
+    _difficulty: 2
+    _text: "\xBFDe qu\xE9 regi\xF3n espa\xF1ola es originaria la paella?"
+    _options:
+    - Galicia
+    - Comunidad Valenciana
+    - "Catalu\xF1a"
+    - "Andaluc\xEDa"
+    _correctOption: 1
+    _explanation: "La paella naci\xF3 en los arrozales de Valencia."
+    _source: https://es.wikipedia.org/wiki/Paella
+  - _id: gas-007
+    _category: "Gastronom\xEDa"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 especia, sacada de una flor, es la m\xE1s cara del mundo por peso?"
+    _options:
+    - Cardamomo
+    - "Azafr\xE1n"
+    - Pimienta
+    - Vainilla
+    _correctOption: 1
+    _explanation: "Hacen falta miles de flores para obtener un kilo de azafr\xE1n."
+    _source: "https://es.wikipedia.org/wiki/Azafr\xE1n"
+  - _id: gas-008
+    _category: "Gastronom\xEDa"
+    _difficulty: 2
+    _text: "\xBFDe qu\xE9 planta se obtiene el tequila?"
+    _options:
+    - Nopal
+    - "Ma\xEDz"
+    - Agave azul
+    - "Ca\xF1a de az\xFAcar"
+    _correctOption: 2
+    _explanation: El tequila se destila del agave azul.
+    _source: https://es.wikipedia.org/wiki/Tequila
+  - _id: his-020
+    _category: Historia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 reyes completaron la conquista de Granada en 1492?"
+    _options:
+    - Carlos I e Isabel de Portugal
+    - "Alfonso X y Violante de Arag\xF3n"
+    - "Felipe II y Mar\xEDa Tudor"
+    - "Los Reyes Cat\xF3licos"
+    _correctOption: 3
+    _explanation: "Isabel de Castilla y Fernando de Arag\xF3n tomaron Granada en enero de 1492."
+    _source: "https://es.wikipedia.org/wiki/Reyes_Cat\xF3licos"
+  - _id: cie-028
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQu\xE9 cient\xEDfico formul\xF3 las tres leyes del movimiento?"
+    _options:
+    - "Ren\xE9 Descartes"
+    - Isaac Newton
+    - Galileo Galilei
+    - Johannes Kepler
+    _correctOption: 1
+    _explanation: "Newton las public\xF3 en 1687."
+    _source: https://es.wikipedia.org/wiki/Leyes_de_Newton
+  - _id: nat-019
+    _category: Naturaleza
+    _difficulty: 2
+    _text: "\xBFDe qu\xE9 se alimentan principalmente los koalas?"
+    _options:
+    - Fruta
+    - Hojas de eucalipto
+    - Insectos
+    - "Bamb\xFA"
+    _correctOption: 1
+    _explanation: Los koalas comen casi solo hojas de eucalipto.
+    _source: https://es.wikipedia.org/wiki/Phascolarctos_cinereus
+  - _id: cin-014
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 actor interpret\xF3 a Neo en \xABMatrix\xBB?"
+    _options:
+    - Tom Cruise
+    - Will Smith
+    - Keanu Reeves
+    - Laurence Fishburne
+    _correctOption: 2
+    _explanation: Laurence Fishburne era Morfeo.
+    _source: https://es.wikipedia.org/wiki/Matrix
+  - _id: dep-014
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 ciudad se celebraron los Juegos Ol\xEDmpicos de 1992?"
+    _options:
+    - Atlanta
+    - "Se\xFAl"
+    - Barcelona
+    - "S\xEDdney"
+    _correctOption: 2
+    _explanation: "Se\xFAl fue en 1988 y Atlanta en 1996."
+    _source: "https://es.wikipedia.org/wiki/Juegos_Ol\xEDmpicos_de_Barcelona_1992"
+  - _id: dep-015
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto mide de largo una piscina ol\xEDmpica?"
+    _options:
+    - 50 metros
+    - 100 metros
+    - 25 metros
+    - 75 metros
+    _correctOption: 0
+    _explanation: La de 25 metros es la piscina corta.
+    _source: "https://es.wikipedia.org/wiki/Piscina_ol\xEDmpica"
+  - _id: dep-016
+    _category: Deportes
+    _difficulty: 2
+    _text: "\xBFSobre qu\xE9 superficie se juega Roland Garros?"
+    _options:
+    - Moqueta
+    - Pista dura
+    - Hierba
+    - Tierra batida
+    _correctOption: 3
+    _explanation: Wimbledon es sobre hierba; Roland Garros, sobre tierra batida.
+    _source: https://es.wikipedia.org/wiki/Torneo_de_Roland_Garros
+  - _id: art-009
+    _category: Arte
+    _difficulty: 2
+    _text: "\xBFQu\xE9 arquitecto dise\xF1\xF3 la Sagrada Familia?"
+    _options:
+    - "Llu\xEDs Dom\xE8nech i Montaner"
+    - Santiago Calatrava
+    - "Antoni Gaud\xED"
+    - Rafael Moneo
+    _correctOption: 2
+    _explanation: "Gaud\xED trabaj\xF3 en ella desde 1883 hasta su muerte."
+    _source: https://es.wikipedia.org/wiki/Templo_Expiatorio_de_la_Sagrada_Familia
+  - _id: art-010
+    _category: Arte
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 ciudad est\xE1 el Museo Guggenheim de Frank Gehry?"
+    _options:
+    - Bilbao
+    - Madrid
+    - Barcelona
+    - Valencia
+    _correctOption: 0
+    _explanation: "Se inaugur\xF3 en Bilbao en 1997."
+    _source: https://es.wikipedia.org/wiki/Museo_Guggenheim_Bilbao
+  - _id: cur-011
+    _category: Curiosidades
+    _difficulty: 2
+    _text: "\xBFQu\xE9 n\xFAmero representa la \xABM\xBB en los n\xFAmeros romanos?"
+    _options:
+    - Cien
+    - Cincuenta
+    - Mil
+    - Quinientos
+    _correctOption: 2
+    _explanation: C es cien, D quinientos y M mil.
+    _source: "https://es.wikipedia.org/wiki/Numeraci\xF3n_romana"
+  - _id: tec-007
+    _category: "Tecnolog\xEDa"
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos bits tiene un byte?"
+    _options:
+    - Diez
+    - "Diecis\xE9is"
+    - Cuatro
+    - Ocho
+    _correctOption: 3
+    _explanation: Un byte son 8 bits.
+    _source: https://es.wikipedia.org/wiki/Byte
+  - _id: geo-032
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es la capital de Nueva Zelanda?"
+    _options:
+    - Auckland
+    - Wellington
+    - Queenstown
+    - Christchurch
+    _correctOption: 1
+    _explanation: "Auckland es la ciudad m\xE1s grande, pero la capital es Wellington."
+    _source: https://es.wikipedia.org/wiki/Wellington
+  - _id: geo-033
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el pa\xEDs m\xE1s grande de \xC1frica?"
+    _options:
+    - Argelia
+    - "Sud\xE1n"
+    - Libia
+    - "Rep\xFAblica Democr\xE1tica del Congo"
+    _correctOption: 0
+    _explanation: "Argelia es el m\xE1s extenso desde la divisi\xF3n de Sud\xE1n en 2011."
+    _source: https://es.wikipedia.org/wiki/Argelia
+  - _id: geo-034
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es la capital de Marruecos?"
+    _options:
+    - Rabat
+    - Fez
+    - Casablanca
+    - Marrakech
+    _correctOption: 0
+    _explanation: Casablanca es la mayor ciudad; Rabat, la capital.
+    _source: https://es.wikipedia.org/wiki/Rabat
+  - _id: geo-035
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el punto m\xE1s profundo conocido del oc\xE9ano?"
+    _options:
+    - Fosa de Java
+    - Abismo Challenger
+    - Fosa de Puerto Rico
+    - Fosa de Tonga
+    _correctOption: 1
+    _explanation: "Est\xE1 en la fosa de las Marianas, a casi 11 000 metros."
+    _source: https://es.wikipedia.org/wiki/Abismo_Challenger
+  - _id: geo-036
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el lago m\xE1s profundo del mundo?"
+    _options:
+    - Mar Caspio
+    - Lago Baikal
+    - Lago Superior
+    - Lago Tanganica
+    _correctOption: 1
+    _explanation: El Baikal, en Siberia, supera los 1600 metros de profundidad.
+    _source: https://es.wikipedia.org/wiki/Lago_Baikal
+  - _id: geo-037
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 dos pa\xEDses comparten la isla de La Espa\xF1ola?"
+    _options:
+    - "Hait\xED y Rep\xFAblica Dominicana"
+    - "Puerto Rico y Rep\xFAblica Dominicana"
+    - Cuba y Jamaica
+    - "Hait\xED y Cuba"
+    _correctOption: 0
+    _explanation: "Hait\xED ocupa el oeste de la isla y Rep\xFAblica Dominicana el este."
+    _source: "https://es.wikipedia.org/wiki/La_Espa\xF1ola"
+  - _id: geo-038
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 ciudad tiene su sede el gobierno federal de Suiza?"
+    _options:
+    - "Z\xFArich"
+    - Ginebra
+    - Berna
+    - Basilea
+    _correctOption: 2
+    _explanation: "Berna es la \xABciudad federal\xBB; Z\xFArich es la m\xE1s poblada."
+    _source: https://es.wikipedia.org/wiki/Berna
+  - _id: geo-039
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 r\xEDo atraviesa Bagdad?"
+    _options:
+    - "\xC9ufrates"
+    - Tigris
+    - "Jord\xE1n"
+    - Nilo
+    _correctOption: 1
+    _explanation: "Bagdad est\xE1 a orillas del Tigris."
+    _source: https://es.wikipedia.org/wiki/Bagdad
+  - _id: geo-040
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 pa\xEDs est\xE1 el salar de Uyuni?"
+    _options:
+    - Bolivia
+    - Argentina
+    - Chile
+    - "Per\xFA"
+    _correctOption: 0
+    _explanation: Es el mayor desierto de sal del mundo.
+    _source: https://es.wikipedia.org/wiki/Salar_de_Uyuni
+  - _id: geo-041
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el pa\xEDs sin salida al mar m\xE1s grande del mundo?"
+    _options:
+    - Bolivia
+    - Chad
+    - Mongolia
+    - "Kazajist\xE1n"
+    _correctOption: 3
+    _explanation: "Kazajist\xE1n es adem\xE1s el noveno pa\xEDs m\xE1s grande del mundo."
+    _source: "https://es.wikipedia.org/wiki/Kazajist\xE1n"
+  - _id: geo-042
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 gran ciudad est\xE1 a ambos lados del estrecho del B\xF3sforo?"
+    _options:
+    - Ankara
+    - Estambul
+    - Atenas
+    - "Sof\xEDa"
+    _correctOption: 1
+    _explanation: Estambul tiene una parte en Europa y otra en Asia.
+    _source: https://es.wikipedia.org/wiki/Estambul
+  - _id: his-021
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o se proclam\xF3 la Segunda Rep\xFAblica espa\xF1ola?"
+    _options:
+    - 1939
+    - 1923
+    - 1931
+    - 1936
+    _correctOption: 2
+    _explanation: "Se proclam\xF3 el 14 de abril de 1931."
+    _source: "https://es.wikipedia.org/wiki/Segunda_Rep\xFAblica_espa\xF1ola"
+  - _id: his-022
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 tratado de 1494 reparti\xF3 entre Castilla y Portugal las tierras por descubrir?"
+    _options:
+    - Paz de Westfalia
+    - Tratado de Tordesillas
+    - Tratado de Versalles
+    - Tratado de Utrecht
+    _correctOption: 1
+    _explanation: "Traz\xF3 una l\xEDnea de polo a polo en el Atl\xE1ntico."
+    _source: https://es.wikipedia.org/wiki/Tratado_de_Tordesillas
+  - _id: his-023
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 reina brit\xE1nica rein\xF3 de 1837 a 1901?"
+    _options:
+    - Victoria
+    - "Mar\xEDa II"
+    - Isabel I
+    - Ana
+    _correctOption: 0
+    _explanation: "Su reinado dio nombre a la \xE9poca victoriana."
+    _source: https://es.wikipedia.org/wiki/Victoria_del_Reino_Unido
+  - _id: his-024
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o cay\xF3 Constantinopla en manos otomanas?"
+    _options:
+    - 1389
+    - 1453
+    - 1492
+    - 1517
+    _correctOption: 1
+    _explanation: "Su ca\xEDda marca para muchos el fin de la Edad Media."
+    _source: "https://es.wikipedia.org/wiki/Ca\xEDda_de_Constantinopla"
+  - _id: his-025
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQui\xE9n gobernaba la URSS durante la crisis de los misiles de Cuba en 1962?"
+    _options:
+    - Nikita Jrushchov
+    - "I\xF3sif Stalin"
+    - "Mija\xEDl Gorbachov"
+    - "Leonid Br\xE9zhnev"
+    _correctOption: 0
+    _explanation: "Jrushchov negoci\xF3 con Kennedy la retirada de los misiles."
+    _source: https://es.wikipedia.org/wiki/Crisis_de_los_misiles_en_Cuba
+  - _id: his-026
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 civilizaci\xF3n desarroll\xF3 la escritura cuneiforme?"
+    _options:
+    - Los hititas
+    - Los egipcios
+    - Los sumerios
+    - Los fenicios
+    _correctOption: 2
+    _explanation: "Los sumerios escrib\xEDan en tablillas de arcilla con forma de cu\xF1a."
+    _source: https://es.wikipedia.org/wiki/Escritura_cuneiforme
+  - _id: his-027
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 batalla naval de 1805 enfrent\xF3 a Nelson con la flota franco-espa\xF1ola?"
+    _options:
+    - Trafalgar
+    - Midway
+    - Jutlandia
+    - Lepanto
+    _correctOption: 0
+    _explanation: "Nelson venci\xF3 en Trafalgar, aunque muri\xF3 en el combate."
+    _source: https://es.wikipedia.org/wiki/Batalla_de_Trafalgar
+  - _id: his-028
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQui\xE9n fue la primera persona en viajar al espacio?"
+    _options:
+    - Valentina Tereshkova
+    - Neil Armstrong
+    - Yuri Gagarin
+    - Alan Shepard
+    _correctOption: 2
+    _explanation: "Gagarin orbit\xF3 la Tierra en 1961."
+    _source: https://es.wikipedia.org/wiki/Yuri_Gagarin
+  - _id: cie-029
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el s\xEDmbolo qu\xEDmico del potasio?"
+    _options:
+    - Po
+    - Pt
+    - K
+    - P
+    _correctOption: 2
+    _explanation: "K viene del lat\xEDn \xABkalium\xBB."
+    _source: https://es.wikipedia.org/wiki/Potasio
+  - _id: cie-030
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es aproximadamente la velocidad de la luz en el vac\xEDo?"
+    _options:
+    - 3.000.000 km/s
+    - 150.000 km/s
+    - 300.000 km/s
+    - 30.000 km/s
+    _correctOption: 2
+    _explanation: Son 299.792 km por segundo.
+    _source: https://es.wikipedia.org/wiki/Velocidad_de_la_luz
+  - _id: cie-031
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 elemento qu\xEDmico tiene n\xFAmero at\xF3mico 6?"
+    _options:
+    - Carbono
+    - "Ox\xEDgeno"
+    - "Nitr\xF3geno"
+    - Boro
+    _correctOption: 0
+    _explanation: El carbono tiene seis protones.
+    _source: https://es.wikipedia.org/wiki/Carbono
+  - _id: cie-032
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el hueso m\xE1s peque\xF1o del cuerpo humano?"
+    _options:
+    - El yunque
+    - "La r\xF3tula"
+    - El estribo
+    - El martillo
+    _correctOption: 2
+    _explanation: "El estribo est\xE1 en el o\xEDdo medio y mide unos 3 mm."
+    _source: https://es.wikipedia.org/wiki/Estribo_(hueso)
+  - _id: cie-033
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos litros de sangre tiene aproximadamente un adulto?"
+    _options:
+    - 12
+    - 5
+    - 8
+    - 2
+    _correctOption: 1
+    _explanation: Un adulto tiene entre 4,5 y 5,5 litros de sangre.
+    _source: https://es.wikipedia.org/wiki/Sangre
+  - _id: cie-034
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 planeta gira \xABtumbado\xBB, con su eje casi horizontal?"
+    _options:
+    - Venus
+    - Urano
+    - Neptuno
+    - Saturno
+    _correctOption: 1
+    _explanation: "El eje de Urano est\xE1 inclinado unos 98 grados."
+    _source: https://es.wikipedia.org/wiki/Urano_(planeta)
+  - _id: cie-035
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 gas noble da el color rojo anaranjado a muchos letreros luminosos?"
+    _options:
+    - "Ne\xF3n"
+    - "Kript\xF3n"
+    - "Xen\xF3n"
+    - "Arg\xF3n"
+    _correctOption: 0
+    _explanation: "El ne\xF3n brilla en rojo anaranjado al pasar la corriente."
+    _source: "https://es.wikipedia.org/wiki/Ne\xF3n"
+  - _id: cie-036
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el pH del agua pura a 25 \xB0C?"
+    _options:
+    - 0
+    - 5
+    - 7
+    - 14
+    _correctOption: 2
+    _explanation: "Un pH 7 es neutro: ni \xE1cido ni b\xE1sico."
+    _source: https://es.wikipedia.org/wiki/PH
+  - _id: cie-037
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFC\xF3mo se llama la c\xE9lula sin n\xFAcleo definido, como la de las bacterias?"
+    _options:
+    - Eucariota
+    - Neurona
+    - "C\xE9lula vegetal"
+    - Procariota
+    _correctOption: 3
+    _explanation: Las bacterias son procariotas.
+    _source: "https://es.wikipedia.org/wiki/C\xE9lula_procariota"
+  - _id: nat-020
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFQu\xE9 mam\xEDfero pone huevos y tiene pico de pato?"
+    _options:
+    - "Pangol\xEDn"
+    - Koala
+    - Ornitorrinco
+    - Armadillo
+    _correctOption: 2
+    _explanation: "El ornitorrinco y los equidnas son los \xFAnicos mam\xEDferos que ponen huevos."
+    _source: https://es.wikipedia.org/wiki/Ornithorhynchus_anatinus
+  - _id: nat-021
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFEn cu\xE1ntos compartimentos se divide el est\xF3mago de una vaca?"
+    _options:
+    - Uno
+    - Cuatro
+    - Tres
+    - Dos
+    _correctOption: 1
+    _explanation: "Rumen, ret\xEDculo, omaso y abomaso."
+    _source: https://es.wikipedia.org/wiki/Rumiante
+  - _id: nat-022
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFQu\xE9 especie de \xE1rbol es la m\xE1s alta del mundo?"
+    _options:
+    - Baobab
+    - Eucalipto
+    - Secuoya roja
+    - Abeto de Douglas
+    _correctOption: 2
+    _explanation: Algunas secuoyas rojas de California superan los 115 metros.
+    _source: https://es.wikipedia.org/wiki/Sequoia_sempervirens
+  - _id: nat-023
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el felino m\xE1s grande del mundo?"
+    _options:
+    - Leopardo
+    - Jaguar
+    - Tigre
+    - "Le\xF3n"
+    _correctOption: 2
+    _explanation: El tigre siberiano puede superar los 300 kilos.
+    _source: https://es.wikipedia.org/wiki/Panthera_tigris
+  - _id: nat-024
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFQu\xE9 anfibio mexicano conserva sus branquias de larva toda la vida?"
+    _options:
+    - "Trit\xF3n"
+    - Ajolote
+    - Rana toro
+    - "Salamandra com\xFAn"
+    _correctOption: 1
+    _explanation: El ajolote vive en los lagos de Xochimilco.
+    _source: https://es.wikipedia.org/wiki/Ambystoma_mexicanum
+  - _id: nat-025
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos ojos tienen la mayor\xEDa de las ara\xF1as?"
+    _options:
+    - Cuatro
+    - Ocho
+    - Dos
+    - Seis
+    _correctOption: 1
+    _explanation: "La mayor\xEDa tiene ocho, aunque algunas tienen menos."
+    _source: https://es.wikipedia.org/wiki/Araneae
+  - _id: nat-026
+    _category: Naturaleza
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el pez m\xE1s grande del mundo?"
+    _options:
+    - "Tibur\xF3n ballena"
+    - "Tibur\xF3n blanco"
+    - Pez luna
+    - Mantarraya
+    _correctOption: 0
+    _explanation: "El tibur\xF3n ballena puede pasar de 12 metros y come plancton."
+    _source: https://es.wikipedia.org/wiki/Rhincodon_typus
+  - _id: cin-015
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pel\xEDcula gan\xF3 el primer \xD3scar a la mejor pel\xEDcula?"
+    _options:
+    - Alas
+    - El cantor de jazz
+    - "Lo que el viento se llev\xF3"
+    - "Metr\xF3polis"
+    _correctOption: 0
+    _explanation: "\xABAlas\xBB (1927) gan\xF3 en la primera ceremonia, en 1929."
+    _source: "https://es.wikipedia.org/wiki/Alas_(pel\xEDcula_de_1927)"
+  - _id: cin-016
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 director gan\xF3 el \xD3scar a la mejor pel\xEDcula extranjera con \xABTodo sobre mi madre\xBB?"
+    _options:
+    - "Pedro Almod\xF3var"
+    - Fernando Trueba
+    - "Alejandro Amen\xE1bar"
+    - "Luis Bu\xF1uel"
+    _correctOption: 0
+    _explanation: "Almod\xF3var lo recibi\xF3 en el a\xF1o 2000."
+    _source: https://es.wikipedia.org/wiki/Todo_sobre_mi_madre
+  - _id: cin-017
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o se estren\xF3 la primera pel\xEDcula de \xABStar Wars\xBB?"
+    _options:
+    - 1975
+    - 1977
+    - 1980
+    - 1983
+    _correctOption: 1
+    _explanation: "\xABUna nueva esperanza\xBB se estren\xF3 en mayo de 1977."
+    _source: https://es.wikipedia.org/wiki/Star_Wars
+  - _id: cin-018
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pel\xEDcula de Hitchcock tiene una famosa escena en una ducha?"
+    _options:
+    - "V\xE9rtigo"
+    - "Los p\xE1jaros"
+    - Psicosis
+    - La ventana indiscreta
+    _correctOption: 2
+    _explanation: "Psicosis se estren\xF3 en 1960."
+    _source: "https://es.wikipedia.org/wiki/Psicosis_(pel\xEDcula_de_1960)"
+  - _id: cin-019
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFQui\xE9n compuso la m\xFAsica de \xABTibur\xF3n\xBB y \xABLa guerra de las galaxias\xBB?"
+    _options:
+    - John Williams
+    - Ennio Morricone
+    - Hans Zimmer
+    - Howard Shore
+    _correctOption: 0
+    _explanation: "John Williams tambi\xE9n compuso la de \xABIndiana Jones\xBB."
+    _source: https://es.wikipedia.org/wiki/John_Williams
+  - _id: mus-014
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFQui\xE9n compuso \xABLa flauta m\xE1gica\xBB?"
+    _options:
+    - Richard Wagner
+    - Giuseppe Verdi
+    - Wolfgang Amadeus Mozart
+    - Joseph Haydn
+    _correctOption: 2
+    _explanation: "Mozart la estren\xF3 en Viena en 1791."
+    _source: "https://es.wikipedia.org/wiki/La_flauta_m\xE1gica"
+  - _id: mus-015
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 compositor polaco es famoso por sus nocturnos para piano?"
+    _options:
+    - "Fr\xE9d\xE9ric Chopin"
+    - Franz Liszt
+    - Claude Debussy
+    - Robert Schumann
+    _correctOption: 0
+    _explanation: "Chopin escribi\xF3 21 nocturnos."
+    _source: "https://es.wikipedia.org/wiki/Fr\xE9d\xE9ric_Chopin"
+  - _id: mus-016
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFQui\xE9n compuso la \xF3pera \xABCarmen\xBB?"
+    _options:
+    - Giacomo Puccini
+    - Gioachino Rossini
+    - Georges Bizet
+    - Giuseppe Verdi
+    _correctOption: 2
+    _explanation: "Carmen se estren\xF3 en Par\xEDs en 1875."
+    _source: "https://es.wikipedia.org/wiki/Carmen_(\xF3pera)"
+  - _id: mus-017
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntas sinfon\xEDas complet\xF3 Beethoven?"
+    _options:
+    - Doce
+    - Siete
+    - Nueve
+    - Cinco
+    _correctOption: 2
+    _explanation: "La Novena incluye el \xABHimno a la alegr\xEDa\xBB."
+    _source: "https://es.wikipedia.org/wiki/Sinfon\xEDa_n.\xBA_9_(Beethoven)"
+  - _id: mus-018
+    _category: "M\xFAsica"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 compositor espa\xF1ol escribi\xF3 el \xABConcierto de Aranjuez\xBB?"
+    _options:
+    - Manuel de Falla
+    - "Joaqu\xEDn Rodrigo"
+    - "Isaac Alb\xE9niz"
+    - Enrique Granados
+    _correctOption: 1
+    _explanation: Rodrigo lo compuso en 1939 para guitarra y orquesta.
+    _source: https://es.wikipedia.org/wiki/Concierto_de_Aranjuez
+  - _id: dep-017
+    _category: Deportes
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o se jug\xF3 el primer Mundial de f\xFAtbol?"
+    _options:
+    - 1930
+    - 1950
+    - 1934
+    - 1924
+    _correctOption: 0
+    _explanation: "Se jug\xF3 en Uruguay en 1930."
+    _source: "https://es.wikipedia.org/wiki/Copa_Mundial_de_F\xFAtbol_de_1930"
+  - _id: dep-018
+    _category: Deportes
+    _difficulty: 3
+    _text: "\xBFQu\xE9 selecci\xF3n gan\xF3 el primer Mundial de f\xFAtbol?"
+    _options:
+    - Italia
+    - Uruguay
+    - Argentina
+    - Brasil
+    _correctOption: 1
+    _explanation: "Uruguay venci\xF3 a Argentina 4-2 en la final de 1930."
+    _source: "https://es.wikipedia.org/wiki/Copa_Mundial_de_F\xFAtbol_de_1930"
+  - _id: dep-019
+    _category: Deportes
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos jugadores tiene en el campo cada equipo de rugby a quince?"
+    _options:
+    - Trece
+    - Doce
+    - Once
+    - Quince
+    _correctOption: 3
+    _explanation: El rugby a trece es otra modalidad.
+    _source: https://es.wikipedia.org/wiki/Rugby
+  - _id: art-011
+    _category: Arte
+    _difficulty: 3
+    _text: "\xBFQui\xE9n pint\xF3 \xABEl jard\xEDn de las delicias\xBB?"
+    _options:
+    - El Bosco
+    - Pieter Brueghel
+    - Rembrandt
+    - Jan van Eyck
+    _correctOption: 0
+    _explanation: "El tr\xEDptico del Bosco est\xE1 en el Museo del Prado."
+    _source: "https://es.wikipedia.org/wiki/El_jard\xEDn_de_las_delicias"
+  - _id: art-012
+    _category: Arte
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pintor pint\xF3 \xABEl grito\xBB?"
+    _options:
+    - Gustav Klimt
+    - Paul Gauguin
+    - Egon Schiele
+    - Edvard Munch
+    _correctOption: 3
+    _explanation: "Munch, noruego, pint\xF3 varias versiones desde 1893."
+    _source: https://es.wikipedia.org/wiki/El_grito
+  - _id: art-013
+    _category: Arte
+    _difficulty: 3
+    _text: "\xBFQu\xE9 pintor neerland\xE9s pint\xF3 \xABLa joven de la perla\xBB?"
+    _options:
+    - Frans Hals
+    - Vincent van Gogh
+    - Rembrandt
+    - Johannes Vermeer
+    _correctOption: 3
+    _explanation: "Vermeer la pint\xF3 hacia 1665."
+    _source: https://es.wikipedia.org/wiki/La_joven_de_la_perla
+  - _id: lit-010
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQui\xE9n escribi\xF3 \xABEn busca del tiempo perdido\xBB?"
+    _options:
+    - "Honor\xE9 de Balzac"
+    - Marcel Proust
+    - "\xC9mile Zola"
+    - Gustave Flaubert
+    _correctOption: 1
+    _explanation: "Es una novela en siete vol\xFAmenes publicada entre 1913 y 1927."
+    _source: https://es.wikipedia.org/wiki/En_busca_del_tiempo_perdido
+  - _id: lit-011
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQu\xE9 escritor ruso escribi\xF3 \xABCrimen y castigo\xBB?"
+    _options:
+    - "Fi\xF3dor Dostoyevski"
+    - "Ant\xF3n Ch\xE9jov"
+    - "Nikol\xE1i G\xF3gol"
+    - "Le\xF3n Tolst\xF3i"
+    _correctOption: 0
+    _explanation: "Dostoyevski la public\xF3 en 1866."
+    _source: https://es.wikipedia.org/wiki/Crimen_y_castigo
+  - _id: lit-012
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQu\xE9 poeta escribi\xF3 \xABPoeta en Nueva York\xBB?"
+    _options:
+    - "Federico Garc\xEDa Lorca"
+    - "Miguel Hern\xE1ndez"
+    - Rafael Alberti
+    - Antonio Machado
+    _correctOption: 0
+    _explanation: "Lorca la escribi\xF3 tras su viaje a Nueva York en 1929."
+    _source: https://es.wikipedia.org/wiki/Poeta_en_Nueva_York
+  - _id: lit-013
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQui\xE9n escribi\xF3 la novela \xAB1984\xBB?"
+    _options:
+    - George Orwell
+    - Aldous Huxley
+    - H. G. Wells
+    - Ray Bradbury
+    _correctOption: 0
+    _explanation: "Orwell la public\xF3 en 1949; de ella viene el \xABGran Hermano\xBB."
+    _source: https://es.wikipedia.org/wiki/1984_(novela)
+  - _id: lit-014
+    _category: Literatura
+    _difficulty: 3
+    _text: "\xBFQu\xE9 escritor argentino escribi\xF3 \xABEl Aleph\xBB?"
+    _options:
+    - Adolfo Bioy Casares
+    - Ernesto Sabato
+    - Jorge Luis Borges
+    - "Julio Cort\xE1zar"
+    _correctOption: 2
+    _explanation: "Borges public\xF3 \xABEl Aleph\xBB en 1949."
+    _source: https://es.wikipedia.org/wiki/El_Aleph
+  - _id: cur-012
+    _category: Curiosidades
+    _difficulty: 3
+    _text: "\xBFQu\xE9 idioma tiene m\xE1s hablantes nativos del mundo?"
+    _options:
+    - Hindi
+    - "Espa\xF1ol"
+    - "Chino mandar\xEDn"
+    - "Ingl\xE9s"
+    _correctOption: 2
+    _explanation: "El ingl\xE9s tiene m\xE1s hablantes en total, pero no nativos."
+    _source: "https://es.wikipedia.org/wiki/Chino_mandar\xEDn"
+  - _id: cur-013
+    _category: Curiosidades
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntas caras tiene un dodecaedro?"
+    _options:
+    - Ocho
+    - Veinte
+    - Diez
+    - Doce
+    _correctOption: 3
+    _explanation: "\xABDodeca\xBB significa doce; el de veinte caras es el icosaedro."
+    _source: https://es.wikipedia.org/wiki/Dodecaedro
+  - _id: tec-008
+    _category: "Tecnolog\xEDa"
+    _difficulty: 3
+    _text: "\xBFQui\xE9n es considerado el creador de la World Wide Web?"
+    _options:
+    - Alan Turing
+    - Linus Torvalds
+    - Tim Berners-Lee
+    - Vint Cerf
+    _correctOption: 2
+    _explanation: Berners-Lee la propuso en el CERN en 1989.
+    _source: https://es.wikipedia.org/wiki/Tim_Berners-Lee
+  - _id: tec-009
+    _category: "Tecnolog\xEDa"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 matem\xE1tico brit\xE1nico, pionero de la inform\xE1tica, ayud\xF3 a descifrar la m\xE1quina Enigma?"
+    _options:
+    - Claude Shannon
+    - Charles Babbage
+    - Alan Turing
+    - John von Neumann
+    _correctOption: 2
+    _explanation: "Turing trabaj\xF3 en Bletchley Park durante la Segunda Guerra Mundial."
+    _source: https://es.wikipedia.org/wiki/Alan_Turing
+  - _id: gas-009
+    _category: "Gastronom\xEDa"
+    _difficulty: 3
+    _text: "\xBFDe qu\xE9 pa\xEDs es originario el queso feta?"
+    _options:
+    - Francia
+    - "Turqu\xEDa"
+    - Grecia
+    - Italia
+    _correctOption: 2
+    _explanation: El feta es un queso griego de oveja, a veces con cabra.
+    _source: https://es.wikipedia.org/wiki/Feta
+  - _id: gas-010
+    _category: "Gastronom\xEDa"
+    _difficulty: 3
+    _text: "\xBFCon qu\xE9 cereal se elabora el sake japon\xE9s?"
+    _options:
+    - "Ma\xEDz"
+    - Arroz
+    - Cebada
+    - Trigo
+    _correctOption: 1
+    _explanation: El sake es una bebida fermentada de arroz.
+    _source: https://es.wikipedia.org/wiki/Sake
+  - _id: his-029
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 emperador romano legaliz\xF3 el cristianismo con el Edicto de Mil\xE1n (313)?"
+    _options:
+    - Constantino
+    - "Ner\xF3n"
+    - Trajano
+    - Diocleciano
+    _correctOption: 0
+    _explanation: "Constantino y Licinio firmaron el Edicto de Mil\xE1n en 313."
+    _source: "https://es.wikipedia.org/wiki/Edicto_de_Mil\xE1n"
+  - _id: his-030
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 general cartagin\xE9s cruz\xF3 los Alpes con elefantes?"
+    _options:
+    - "Asdr\xFAbal"
+    - "Escipi\xF3n"
+    - "Am\xEDlcar"
+    - "An\xEDbal"
+    _correctOption: 3
+    _explanation: "An\xEDbal invadi\xF3 Italia en la segunda guerra p\xFAnica."
+    _source: "https://es.wikipedia.org/wiki/An\xEDbal"
+  - _id: cie-038
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQu\xE9 cient\xEDfico propuso que la Tierra gira alrededor del Sol en el siglo XVI?"
+    _options:
+    - Claudio Ptolomeo
+    - "Nicol\xE1s Cop\xE9rnico"
+    - "Arist\xF3teles"
+    - Tycho Brahe
+    _correctOption: 1
+    _explanation: "Cop\xE9rnico public\xF3 su teor\xEDa helioc\xE9ntrica en 1543."
+    _source: "https://es.wikipedia.org/wiki/Nicol\xE1s_Cop\xE9rnico"
+  - _id: geo-043
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es la capital de Islandia?"
+    _options:
+    - Reikiavik
+    - Oslo
+    - Helsinki
+    - Copenhague
+    _correctOption: 0
+    _explanation: "Reikiavik es la capital m\xE1s septentrional de un pa\xEDs soberano."
+    _source: https://es.wikipedia.org/wiki/Reikiavik
+  - _id: cin-020
+    _category: "Cine y televisi\xF3n"
+    _difficulty: 3
+    _text: "\xBFC\xF3mo se llama el robot protagonista de la pel\xEDcula de Pixar de 2008 que limpia la Tierra?"
+    _options:
+    - R2-D2
+    - "WALL\xB7E"
+    - Baymax
+    - EVA
+    _correctOption: 1
+    _explanation: "EVA es la robot de la que se enamora WALL\xB7E."
+    _source: https://es.wikipedia.org/wiki/WALL-E
+  - _id: mat-001
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 7 \xD7 8?"
+    _options:
+    - 48
+    - 63
+    - 54
+    - 56
+    _correctOption: 3
+    _explanation: "7 \xD7 8 = 56."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-002
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 9 \xD7 6?"
+    _options:
+    - 45
+    - 56
+    - 63
+    - 54
+    _correctOption: 3
+    _explanation: "9 \xD7 6 = 54."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-003
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 12 \xD7 4?"
+    _options:
+    - 36
+    - 48
+    - 44
+    - 52
+    _correctOption: 1
+    _explanation: "12 \xD7 4 = 48."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-004
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 56 \xF7 7?"
+    _options:
+    - 6
+    - 8
+    - 9
+    - 7
+    _correctOption: 1
+    _explanation: "56 \xF7 7 = 8, porque 7 \xD7 8 = 56."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-005
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 81 \xF7 9?"
+    _options:
+    - 11
+    - 7
+    - 8
+    - 9
+    _correctOption: 3
+    _explanation: "81 \xF7 9 = 9, porque 9 \xD7 9 = 81."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-006
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 45 + 38?"
+    _options:
+    - 93
+    - 82
+    - 83
+    - 73
+    _correctOption: 2
+    _explanation: 45 + 38 = 83.
+    _source: "https://es.wikipedia.org/wiki/Adici\xF3n"
+  - _id: mat-007
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 25 + 47?"
+    _options:
+    - 72
+    - 71
+    - 82
+    - 62
+    _correctOption: 0
+    _explanation: 25 + 47 = 72.
+    _source: "https://es.wikipedia.org/wiki/Adici\xF3n"
+  - _id: mat-008
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 100 - 37?"
+    _options:
+    - 67
+    - 63
+    - 53
+    - 73
+    _correctOption: 1
+    _explanation: 100 - 37 = 63.
+    _source: "https://es.wikipedia.org/wiki/Sustracci\xF3n"
+  - _id: mat-009
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 63 - 28?"
+    _options:
+    - 35
+    - 45
+    - 31
+    - 25
+    _correctOption: 0
+    _explanation: 63 - 28 = 35.
+    _source: "https://es.wikipedia.org/wiki/Sustracci\xF3n"
+  - _id: mat-010
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es la mitad de 90?"
+    _options:
+    - 40
+    - 45
+    - 35
+    - 55
+    _correctOption: 1
+    _explanation: "90 \xF7 2 = 45."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-011
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el doble de 35?"
+    _options:
+    - 70
+    - 60
+    - 65
+    - 75
+    _correctOption: 0
+    _explanation: "35 \xD7 2 = 70."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-012
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "Tienes 3 cajas con 8 bombones cada una. \xBFCu\xE1ntos bombones tienes?"
+    _options:
+    - 21
+    - 11
+    - 24
+    - 32
+    _correctOption: 2
+    _explanation: "3 \xD7 8 = 24 bombones."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-013
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 15 + 15 + 15?"
+    _options:
+    - 55
+    - 30
+    - 45
+    - 35
+    _correctOption: 2
+    _explanation: "15 \xD7 3 = 45."
+    _source: "https://es.wikipedia.org/wiki/Adici\xF3n"
+  - _id: mat-014
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 11 \xD7 11?"
+    _options:
+    - 111
+    - 121
+    - 122
+    - 112
+    _correctOption: 1
+    _explanation: "11 \xD7 11 = 121."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-015
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 1000 - 1?"
+    _options:
+    - 990
+    - 899
+    - 9999
+    - 999
+    _correctOption: 3
+    _explanation: 1000 - 1 = 999.
+    _source: "https://es.wikipedia.org/wiki/Sustracci\xF3n"
+  - _id: mat-016
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos minutos hay en 3 horas?"
+    _options:
+    - 300
+    - 120
+    - 180
+    - 160
+    _correctOption: 2
+    _explanation: "3 \xD7 60 = 180 minutos."
+    _source: https://es.wikipedia.org/wiki/Minuto
+  - _id: mat-017
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 5 \xD7 5 \xD7 2?"
+    _options:
+    - 25
+    - 30
+    - 100
+    - 50
+    _correctOption: 3
+    _explanation: "5 \xD7 5 = 25 y 25 \xD7 2 = 50."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-018
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 72 \xF7 8?"
+    _options:
+    - 9
+    - 12
+    - 8
+    - 7
+    _correctOption: 0
+    _explanation: "72 \xF7 8 = 9."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-019
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "\xBFCu\xE1nto es 3 al cuadrado (3\xB2)?"
+    _options:
+    - 12
+    - 6
+    - 9
+    - 27
+    _correctOption: 2
+    _explanation: "3\xB2 = 3 \xD7 3 = 9."
+    _source: "https://es.wikipedia.org/wiki/Cuadrado_(\xE1lgebra)"
+  - _id: mat-020
+    _category: "Matem\xE1ticas"
+    _difficulty: 1
+    _text: "Si compras algo de 7 \u20AC y pagas con un billete de 20 \u20AC, \xBFcu\xE1nto te devuelven?"
+    _options:
+    - 13
+    - 17
+    - 12
+    - 3
+    _correctOption: 0
+    _explanation: "20 - 7 = 13 \u20AC."
+    _source: "https://es.wikipedia.org/wiki/Sustracci\xF3n"
+  - _id: mat-021
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 3 + 4 \xD7 5?"
+    _options:
+    - 35
+    - 27
+    - 23
+    - 60
+    _correctOption: 2
+    _explanation: "Primero se multiplica: 4 \xD7 5 = 20, y luego 3 + 20 = 23."
+    _source: "https://es.wikipedia.org/wiki/Orden_de_evaluaci\xF3n"
+  - _id: mat-022
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es el 25 % de 80?"
+    _options:
+    - 16
+    - 20
+    - 40
+    - 25
+    _correctOption: 1
+    _explanation: "El 25 % es la cuarta parte: 80 \xF7 4 = 20."
+    _source: https://es.wikipedia.org/wiki/Porcentaje
+  - _id: mat-023
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es el 15 % de 200?"
+    _options:
+    - 30
+    - 45
+    - 15
+    - 20
+    _correctOption: 0
+    _explanation: 'El 10 % es 20 y el 5 % es 10: en total, 30.'
+    _source: https://es.wikipedia.org/wiki/Porcentaje
+  - _id: mat-024
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 13\xB2?"
+    _options:
+    - 196
+    - 139
+    - 156
+    - 169
+    _correctOption: 3
+    _explanation: "13 \xD7 13 = 169."
+    _source: "https://es.wikipedia.org/wiki/Cuadrado_(\xE1lgebra)"
+  - _id: mat-025
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 144 \xF7 12?"
+    _options:
+    - 11
+    - 12
+    - 24
+    - 14
+    _correctOption: 1
+    _explanation: "144 \xF7 12 = 12, porque 12 \xD7 12 = 144."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-026
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto son 3/4 de 120?"
+    _options:
+    - 90
+    - 40
+    - 80
+    - 100
+    _correctOption: 0
+    _explanation: "120 \xF7 4 = 30 y 30 \xD7 3 = 90."
+    _source: "https://es.wikipedia.org/wiki/Fracci\xF3n"
+  - _id: mat-027
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos minutos son dos horas y media?"
+    _options:
+    - 120
+    - 250
+    - 130
+    - 150
+    _correctOption: 3
+    _explanation: "2 \xD7 60 + 30 = 150 minutos."
+    _source: https://es.wikipedia.org/wiki/Minuto
+  - _id: mat-028
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 250 \xF7 5?"
+    _options:
+    - 40
+    - 55
+    - 25
+    - 50
+    _correctOption: 3
+    _explanation: "250 \xF7 5 = 50, porque 5 \xD7 50 = 250."
+    _source: "https://es.wikipedia.org/wiki/Divisi\xF3n_(matem\xE1tica)"
+  - _id: mat-029
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 7 \xD7 8 - 9?"
+    _options:
+    - 56
+    - 49
+    - 43
+    - 47
+    _correctOption: 3
+    _explanation: "7 \xD7 8 = 56 y 56 - 9 = 47."
+    _source: "https://es.wikipedia.org/wiki/Orden_de_evaluaci\xF3n"
+  - _id: mat-030
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 1000 - 357?"
+    _options:
+    - 743
+    - 657
+    - 753
+    - 643
+    _correctOption: 3
+    _explanation: 1000 - 357 = 643.
+    _source: "https://es.wikipedia.org/wiki/Sustracci\xF3n"
+  - _id: mat-031
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 24 \xD7 5?"
+    _options:
+    - 100
+    - 120
+    - 125
+    - 110
+    _correctOption: 1
+    _explanation: "24 \xD7 5 = 24 \xD7 10 \xF7 2 = 120."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-032
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es (6 + 4) \xD7 (9 - 3)?"
+    _options:
+    - 40
+    - 60
+    - 70
+    - 52
+    _correctOption: 1
+    _explanation: "10 \xD7 6 = 60."
+    _source: "https://es.wikipedia.org/wiki/Orden_de_evaluaci\xF3n"
+  - _id: mat-033
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 2 elevado a 6?"
+    _options:
+    - 32
+    - 12
+    - 36
+    - 64
+    _correctOption: 3
+    _explanation: "2 \xD7 2 \xD7 2 \xD7 2 \xD7 2 \xD7 2 = 64."
+    _source: "https://es.wikipedia.org/wiki/Potenciaci\xF3n"
+  - _id: mat-034
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "Un tren sale a las 9:45 y tarda 50 minutos. \xBFA qu\xE9 hora llega?"
+    _options:
+    - 10:45
+    - 10:25
+    - 10:05
+    - 10:35
+    _correctOption: 3
+    _explanation: '9:45 + 15 min = 10:00, y quedan 35 minutos: 10:35.'
+    _source: https://es.wikipedia.org/wiki/Hora
+  - _id: mat-035
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFQu\xE9 n\xFAmero sigue en la serie 3, 6, 12, 24\u2026?"
+    _options:
+    - 36
+    - 30
+    - 72
+    - 48
+    _correctOption: 3
+    _explanation: "Cada n\xFAmero es el doble del anterior: 24 \xD7 2 = 48."
+    _source: "https://es.wikipedia.org/wiki/Progresi\xF3n_geom\xE9trica"
+  - _id: mat-036
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "Si 4 caf\xE9s cuestan 6 \u20AC, \xBFcu\xE1nto cuestan 10 caf\xE9s?"
+    _options:
+    - 24
+    - 12
+    - 18
+    - 15
+    _correctOption: 3
+    _explanation: "Cada caf\xE9 cuesta 1,50 \u20AC: 10 \xD7 1,50 = 15 \u20AC."
+    _source: https://es.wikipedia.org/wiki/Proporcionalidad
+  - _id: mat-037
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 0,5 + 0,25?"
+    _options:
+    - 0,75
+    - 0,525
+    - 0,7
+    - 0,30
+    _correctOption: 0
+    _explanation: "Medio m\xE1s un cuarto son tres cuartos: 0,75."
+    _source: "https://es.wikipedia.org/wiki/N\xFAmero_decimal"
+  - _id: mat-038
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1nto es 18 \xD7 3 + 6?"
+    _options:
+    - 60
+    - 54
+    - 66
+    - 72
+    _correctOption: 0
+    _explanation: "18 \xD7 3 = 54 y 54 + 6 = 60."
+    _source: "https://es.wikipedia.org/wiki/Orden_de_evaluaci\xF3n"
+  - _id: mat-039
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "\xBFCu\xE1ntos segundos hay en una hora?"
+    _options:
+    - 600
+    - 3600
+    - 6000
+    - 360
+    _correctOption: 1
+    _explanation: "60 minutos \xD7 60 segundos = 3600."
+    _source: https://es.wikipedia.org/wiki/Segundo
+  - _id: mat-040
+    _category: "Matem\xE1ticas"
+    _difficulty: 2
+    _text: "Un pantal\xF3n de 40 \u20AC tiene un 20 % de descuento. \xBFCu\xE1nto cuesta?"
+    _options:
+    - 30
+    - 32
+    - 20
+    - 36
+    _correctOption: 1
+    _explanation: "El 20 % de 40 es 8: 40 - 8 = 32 \u20AC."
+    _source: https://es.wikipedia.org/wiki/Porcentaje
+  - _id: mat-041
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 17 \xD7 23?"
+    _options:
+    - 381
+    - 401
+    - 391
+    - 371
+    _correctOption: 2
+    _explanation: "17 \xD7 23 = 17 \xD7 20 + 17 \xD7 3 = 340 + 51 = 391."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-042
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 25\xB2 - 15\xB2?"
+    _options:
+    - 100
+    - 300
+    - 400
+    - 450
+    _correctOption: 2
+    _explanation: 625 - 225 = 400.
+    _source: "https://es.wikipedia.org/wiki/Cuadrado_(\xE1lgebra)"
+  - _id: mat-043
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 2 elevado a 10?"
+    _options:
+    - 1024
+    - 1000
+    - 512
+    - 2048
+    _correctOption: 0
+    _explanation: "2 elevado a 10 = 1024, el \xABkilo\xBB de la inform\xE1tica."
+    _source: "https://es.wikipedia.org/wiki/Potenciaci\xF3n"
+  - _id: mat-044
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 999 \xD7 7?"
+    _options:
+    - 7003
+    - 6993
+    - 7993
+    - 6893
+    _correctOption: 1
+    _explanation: "999 \xD7 7 = 7000 - 7 = 6993."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-045
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto son 3/8 de 640?"
+    _options:
+    - 260
+    - 180
+    - 240
+    - 320
+    _correctOption: 2
+    _explanation: "640 \xF7 8 = 80 y 80 \xD7 3 = 240."
+    _source: "https://es.wikipedia.org/wiki/Fracci\xF3n"
+  - _id: mat-046
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 7 \xD7 7 \xD7 7?"
+    _options:
+    - 441
+    - 349
+    - 294
+    - 343
+    _correctOption: 3
+    _explanation: "7 \xD7 7 = 49 y 49 \xD7 7 = 343."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-047
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 12\xB2 + 13\xB2?"
+    _options:
+    - 323
+    - 313
+    - 289
+    - 303
+    _correctOption: 1
+    _explanation: 144 + 169 = 313.
+    _source: "https://es.wikipedia.org/wiki/Cuadrado_(\xE1lgebra)"
+  - _id: mat-048
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto suman los n\xFAmeros del 1 al 20?"
+    _options:
+    - 210
+    - 220
+    - 200
+    - 190
+    _correctOption: 0
+    _explanation: "Se suman parejas: 20 \xD7 21 \xF7 2 = 210."
+    _source: "https://es.wikipedia.org/wiki/N\xFAmero_triangular"
+  - _id: mat-049
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l de estos n\xFAmeros es primo?"
+    _options:
+    - 87
+    - 51
+    - 91
+    - 97
+    _correctOption: 3
+    _explanation: "91 = 7 \xD7 13, 87 = 3 \xD7 29 y 51 = 3 \xD7 17; 97 solo es divisible por 1 y por s\xED mismo."
+    _source: "https://es.wikipedia.org/wiki/N\xFAmero_primo"
+  - _id: mat-050
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFQu\xE9 n\xFAmero sigue en la serie 2, 6, 12, 20, 30\u2026?"
+    _options:
+    - 44
+    - 40
+    - 36
+    - 42
+    _correctOption: 3
+    _explanation: 'Se suma 4, 6, 8, 10 y luego 12: 30 + 12 = 42.'
+    _source: "https://es.wikipedia.org/wiki/Sucesi\xF3n_matem\xE1tica"
+  - _id: mat-051
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es el 15 % de 360?"
+    _options:
+    - 64
+    - 54
+    - 45
+    - 36
+    _correctOption: 1
+    _explanation: 'El 10 % es 36 y el 5 % es 18: 36 + 18 = 54.'
+    _source: https://es.wikipedia.org/wiki/Porcentaje
+  - _id: mat-052
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 48 \xF7 4 \xD7 3?"
+    _options:
+    - 36
+    - 16
+    - 144
+    - 4
+    _correctOption: 0
+    _explanation: "Se opera de izquierda a derecha: 48 \xF7 4 = 12 y 12 \xD7 3 = 36."
+    _source: "https://es.wikipedia.org/wiki/Orden_de_evaluaci\xF3n"
+  - _id: mat-053
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 125 \xD7 8?"
+    _options:
+    - 1250
+    - 800
+    - 1025
+    - 1000
+    _correctOption: 3
+    _explanation: "125 \xD7 8 = 1000."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-054
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1ntos segundos hay en un d\xEDa?"
+    _options:
+    - 36.000
+    - 8640
+    - 86.400
+    - 864.000
+    _correctOption: 2
+    _explanation: "24 \xD7 60 \xD7 60 = 86.400 segundos."
+    _source: "https://es.wikipedia.org/wiki/D\xEDa"
+  - _id: mat-055
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "Un precio sube un 10 % y despu\xE9s baja un 10 %. Si empez\xF3 en 100 \u20AC, \xBFcu\xE1nto cuesta al final?"
+    _options:
+    - 90
+    - 101
+    - 99
+    - 100
+    _correctOption: 2
+    _explanation: "100 + 10 % = 110; 110 - 10 % = 110 - 11 = 99 \u20AC."
+    _source: https://es.wikipedia.org/wiki/Porcentaje
+  - _id: mat-056
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 1/2 + 1/3?"
+    _options:
+    - 5/6
+    - 1/6
+    - 2/6
+    - 2/5
+    _correctOption: 0
+    _explanation: "Con denominador com\xFAn 6: 3/6 + 2/6 = 5/6."
+    _source: "https://es.wikipedia.org/wiki/Fracci\xF3n"
+  - _id: mat-057
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 37 \xD7 3 \xD7 3?"
+    _options:
+    - 303
+    - 323
+    - 333
+    - 343
+    _correctOption: 2
+    _explanation: "37 \xD7 9 = 333."
+    _source: "https://es.wikipedia.org/wiki/Multiplicaci\xF3n"
+  - _id: mat-058
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "Si 5 m\xE1quinas hacen 5 piezas en 5 minutos, \xBFcu\xE1ntos minutos tardan 100 m\xE1quinas en hacer 100 piezas?"
+    _options:
+    - 1
+    - 20
+    - 5
+    - 100
+    _correctOption: 2
+    _explanation: "Cada m\xE1quina hace una pieza en 5 minutos, as\xED que 100 m\xE1quinas hacen 100 piezas en 5 minutos."
+    _source: https://es.wikipedia.org/wiki/Proporcionalidad
+  - _id: mat-059
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1nto es 19 \xD7 19?"
+    _options:
+    - 371
+    - 381
+    - 351
+    - 361
+    _correctOption: 3
+    _explanation: "19\xB2 = (20 - 1)\xB2 = 400 - 40 + 1 = 361."
+    _source: "https://es.wikipedia.org/wiki/Cuadrado_(\xE1lgebra)"
+  - _id: mat-060
+    _category: "Matem\xE1ticas"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el m\xEDnimo com\xFAn m\xFAltiplo de 6 y 8?"
+    _options:
+    - 24
+    - 48
+    - 14
+    - 12
+    _correctOption: 0
+    _explanation: "M\xFAltiplos de 8: 8, 16, 24; 24 es el primero que tambi\xE9n es m\xFAltiplo de 6."
+    _source: "https://es.wikipedia.org/wiki/M\xEDnimo_com\xFAn_m\xFAltiplo"

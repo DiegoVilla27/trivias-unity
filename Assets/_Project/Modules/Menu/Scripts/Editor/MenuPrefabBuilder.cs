@@ -8,6 +8,7 @@ using Trivias.Menu.Data;
 using Trivias.Ranking.Editor;
 using Trivias.Ranking.Logic;
 using Trivias.Shared.Editor;
+using Trivias.Shared.Profile;
 using Trivias.Shared.Settings;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,7 @@ using UnityEngine.UI;
 namespace Trivias.Menu.Editor
 {
     /// <summary>
-    /// Construye el menú: principal (crear, unirme, cómo se juega, récords, configuración, salir), unirme a una sala,
+    /// Construye el menú: principal (tu nombre, crear, unirme, cómo se juega, récords, configuración, salir), unirme a una sala,
     /// sala de espera (con «Invita a tus amigos»), tutorial, récords, configuración y menú de pausa (Esc).
     /// </summary>
     public static class MenuPrefabBuilder
@@ -78,17 +79,20 @@ namespace Trivias.Menu.Editor
             root.AddComponent<GraphicRaycaster>();
 
             // ---- Pantalla principal ----
-            var main = CreatePanel("MainMenu", root.transform, new Vector2(620f, 750f));
+            var main = CreatePanel("MainMenu", root.transform, new Vector2(620f, 850f));
             CreateLabel("Title", main, "TRIVIAS", 84f, new Vector2(0f, -40f), new Vector2(560f, 100f), FontStyles.Bold, Gold);
             CreateLabel("Subtitle", main, "El concurso donde tus amigos también son la apuesta", 24f,
                 new Vector2(0f, -140f), new Vector2(560f, 40f), FontStyles.Italic, Color.white);
-            var host = CreateButton("Host", main, "Crear sala", new Vector2(0f, -210f));
-            var joinMenu = CreateButton("JoinMenu", main, "Unirme a una sala", new Vector2(0f, -300f));
-            var howToPlay = CreateButton("HowToPlay", main, "Cómo se juega", new Vector2(0f, -395f), secondary: true);
-            var recordsButton = CreateButton("Records", main, "Récords", new Vector2(0f, -460f), secondary: true);
-            var settingsButton = CreateButton("Settings", main, "Configuración", new Vector2(0f, -525f), secondary: true);
-            var quit = CreateButton("Quit", main, "Salir", new Vector2(0f, -590f), secondary: true);
-            var mainStatus = CreateLabel("Status", main, string.Empty, 22f, new Vector2(0f, -665f), new Vector2(560f, 60f),
+            CreateLabel("NameLabel", main, "Tu nombre", 24f, new Vector2(0f, -190f), new Vector2(420f, 32f), FontStyles.Normal, Muted);
+            var playerName = CreateInputField("PlayerName", main, new Vector2(0f, -225f), "Escribe tu nombre",
+                PlayerNameRules.MAX_LENGTH);
+            var host = CreateButton("Host", main, "Crear sala", new Vector2(0f, -310f));
+            var joinMenu = CreateButton("JoinMenu", main, "Unirme a una sala", new Vector2(0f, -400f));
+            var howToPlay = CreateButton("HowToPlay", main, "Cómo se juega", new Vector2(0f, -495f), secondary: true);
+            var recordsButton = CreateButton("Records", main, "Récords", new Vector2(0f, -560f), secondary: true);
+            var settingsButton = CreateButton("Settings", main, "Configuración", new Vector2(0f, -625f), secondary: true);
+            var quit = CreateButton("Quit", main, "Salir", new Vector2(0f, -690f), secondary: true);
+            var mainStatus = CreateLabel("Status", main, string.Empty, 22f, new Vector2(0f, -765f), new Vector2(560f, 60f),
                 FontStyles.Normal, Color.white);
 
             // ---- Unirme a una sala ----
@@ -96,7 +100,7 @@ namespace Trivias.Menu.Editor
             CreateLabel("Title", join, "UNIRME A UNA SALA", 48f, new Vector2(0f, -40f), new Vector2(560f, 64f), FontStyles.Bold, Gold);
             CreateLabel("AddressLabel", join, "Dirección del host", 24f, new Vector2(0f, -135f), new Vector2(420f, 32f),
                 FontStyles.Normal, Muted);
-            var address = CreateInputField("Address", join, new Vector2(0f, -175f));
+            var address = CreateInputField("Address", join, new Vector2(0f, -175f), "p. ej. 10.147.17.5", 64);
             var connect = CreateButton("Connect", join, "Conectar", new Vector2(0f, -255f));
             var joinBack = CreateButton("Back", join, "Volver", new Vector2(0f, -345f), secondary: true);
             var joinStatus = CreateLabel("Status", join, string.Empty, 22f, new Vector2(0f, -415f), new Vector2(560f, 70f),
@@ -244,6 +248,7 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(view, "_settingsView", settingsView);
             SerializedWiring.Set(view, "_recordsView", recordsView);
             SerializedWiring.Set(view, "_mainPanel", main.gameObject);
+            SerializedWiring.Set(view, "_playerName", playerName);
             SerializedWiring.Set(view, "_hostButton", host);
             SerializedWiring.Set(view, "_joinMenuButton", joinMenu);
             SerializedWiring.Set(view, "_howToPlayButton", howToPlay);
@@ -415,7 +420,8 @@ namespace Trivias.Menu.Editor
         }
 
         /// <summary>Campo de texto TMP (área con máscara, texto y marcador de posición).</summary>
-        private static TMP_InputField CreateInputField(string name, Transform parent, Vector2 position)
+        private static TMP_InputField CreateInputField(string name, Transform parent, Vector2 position, string hint,
+            int characterLimit)
         {
             var rect = CreateRect(name, parent, new Vector2(0.5f, 1f), position, new Vector2(420f, 60f));
             var background = rect.gameObject.AddComponent<Image>();
@@ -429,7 +435,7 @@ namespace Trivias.Menu.Editor
             areaRect.offsetMin = new Vector2(14f, 6f);
             areaRect.offsetMax = new Vector2(-14f, -6f);
 
-            var placeholder = CreateFill("Placeholder", areaRect, "p. ej. 10.147.17.5", new Color(0f, 0f, 0f, 0.35f));
+            var placeholder = CreateFill("Placeholder", areaRect, hint, new Color(0f, 0f, 0f, 0.35f));
             var text = CreateFill("Text", areaRect, string.Empty, DarkText);
 
             var field = rect.gameObject.AddComponent<TMP_InputField>();
@@ -437,7 +443,7 @@ namespace Trivias.Menu.Editor
             field.textComponent = text;
             field.placeholder = placeholder;
             field.targetGraphic = background;
-            field.characterLimit = 64;
+            field.characterLimit = characterLimit;
             return field;
         }
 

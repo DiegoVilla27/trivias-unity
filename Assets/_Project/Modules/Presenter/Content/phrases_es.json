@@ -12,6 +12,31 @@
       "text": "Quince preguntas, {premio} y un decorado que necesita financiación. ¡Empezamos!"
     },
     {
+      "id": "welcome-03",
+      "event": "welcome",
+      "text": "Silencio en el plató. Quince preguntas os separan de {premio}. O de nada."
+    },
+    {
+      "id": "welcome-04",
+      "event": "welcome",
+      "text": "Bienvenidos, valientes. Las cabinas están limpias y el tubo, con hambre."
+    },
+    {
+      "id": "welcome-05",
+      "event": "welcome",
+      "text": "Empieza Trivias. El dinero que apostéis mal acabará pagando mi decorado."
+    },
+    {
+      "id": "welcome-06",
+      "event": "welcome",
+      "text": "Hoy tenéis {premio} encima de la mesa. Mañana, ya veremos."
+    },
+    {
+      "id": "welcome-07",
+      "event": "welcome",
+      "text": "¡Arrancamos! Pensad en equipo, apostad con cabeza y no miréis al tubo."
+    },
+    {
       "id": "discussion-01",
       "event": "long_discussion",
       "text": "Tranquilos, el plató cobra por horas. Seguid debatiendo."
@@ -20,6 +45,46 @@
       "id": "discussion-02",
       "event": "long_discussion",
       "text": "Llevo un rato esperando. El botón no se pulsa solo, aunque lo intente."
+    },
+    {
+      "id": "discussion-03",
+      "event": "long_discussion",
+      "text": "Debatir está muy bien. Responder, todavía mejor."
+    },
+    {
+      "id": "discussion-04",
+      "event": "long_discussion",
+      "text": "Si queréis, os traigo café. Lo descuento del premio, claro."
+    },
+    {
+      "id": "discussion-05",
+      "event": "long_discussion",
+      "text": "El público se ha ido a cenar. Volverá para ver el final."
+    },
+    {
+      "id": "discussion-06",
+      "event": "long_discussion",
+      "text": "Cuanto más lo pensáis, más dudo de que lo sepáis."
+    },
+    {
+      "id": "discussion-07",
+      "event": "long_discussion",
+      "text": "Os doy una pista: la respuesta está en una de las cuatro cabinas."
+    },
+    {
+      "id": "discussion-08",
+      "event": "long_discussion",
+      "text": "El reloj no corre, pero mi paciencia sí."
+    },
+    {
+      "id": "discussion-09",
+      "event": "long_discussion",
+      "text": "Tanta reunión parece un consejo de administración. De uno arruinado."
+    },
+    {
+      "id": "discussion-10",
+      "event": "long_discussion",
+      "text": "Os recuerdo que existe un botón de VERIFICAR. Está deseando que lo pulséis."
     },
     {
       "id": "selfbet-01",
@@ -37,6 +102,31 @@
       "text": "Más gente en las cabinas. Me encanta cuando confían tanto."
     },
     {
+      "id": "selfbet-04",
+      "event": "self_bet",
+      "text": "Otro concursante apostado. A esto lo llamo yo confianza ciega."
+    },
+    {
+      "id": "selfbet-05",
+      "event": "self_bet",
+      "text": "Apostarse a uno mismo: la inversión más arriesgada del mercado."
+    },
+    {
+      "id": "selfbet-06",
+      "event": "self_bet",
+      "text": "Si acertáis, se multiplica el premio. Si no, el tubo os manda saludos."
+    },
+    {
+      "id": "selfbet-07",
+      "event": "self_bet",
+      "text": "Cabina ocupada. Espero que esa persona sepa lo que hace, porque yo no."
+    },
+    {
+      "id": "selfbet-08",
+      "event": "self_bet",
+      "text": "Me encantan los concursantes con fe. Duran poco, pero se recuerdan."
+    },
+    {
       "id": "countdown-01",
       "event": "countdown",
       "text": "Tres segundos para arrepentiros. Para cambiar, ya es tarde."
@@ -45,6 +135,146 @@
       "id": "countdown-02",
       "event": "countdown",
       "text": "Apuestas cerradas. Respirad hondo, que el tubo no espera."
+    },
+    {
+      "id": "countdown-03",
+      "event": "countdown",
+      "text": "¡Verificado! Ya no hay vuelta atrás."
+    },
+    {
+      "id": "countdown-04",
+      "event": "countdown",
+      "text": "Bandejas cerradas. Que la suerte reparta lo que la cabeza no supo."
+    },
+    {
+      "id": "countdown-05",
+      "event": "countdown",
+      "text": "Tres, dos, uno… Disfrutad de estos últimos segundos de esperanza."
+    },
+    {
+      "id": "countdown-06",
+      "event": "countdown",
+      "text": "Nadie toca nada. El dinero está donde lo dejasteis, para bien o para mal."
+    },
+    {
+      "id": "countdown-07",
+      "event": "countdown",
+      "text": "Bloqueado. Ahora solo queda mirar la pantalla y cruzar los dedos."
+    },
+    {
+      "id": "time-01",
+      "event": "time_running_out",
+      "text": "¡Diez segundos! El dinero no se mueve solo."
+    },
+    {
+      "id": "time-02",
+      "event": "time_running_out",
+      "text": "Se acaba el tiempo. El tubo ya está contando con vosotros."
+    },
+    {
+      "id": "time-03",
+      "event": "time_running_out",
+      "text": "¡Que se acaba! Moved el dinero o lo moverá el destino."
+    },
+    {
+      "id": "time-04",
+      "event": "time_running_out",
+      "text": "Últimos segundos. Si dudáis, dudad rápido."
+    },
+    {
+      "id": "time-05",
+      "event": "time_running_out",
+      "text": "Tic, tac. Decidid ya o decidirá el reloj."
+    },
+    {
+      "id": "medium-01",
+      "event": "medium_block",
+      "text": "Se acabaron las fáciles. Ahora empieza el concurso de verdad."
+    },
+    {
+      "id": "medium-02",
+      "event": "medium_block",
+      "text": "Pregunta {ronda}: subimos la dificultad. Agarrad bien el dinero."
+    },
+    {
+      "id": "medium-03",
+      "event": "medium_block",
+      "text": "Bloque intermedio. Ya no vale responder lo primero que suene."
+    },
+    {
+      "id": "medium-04",
+      "event": "medium_block",
+      "text": "Hasta aquí el calentamiento. Tenéis {premio}; veamos cuánto os dura."
+    },
+    {
+      "id": "hard-01",
+      "event": "hard_block",
+      "text": "Llegan las difíciles. Aquí es donde el tubo come bien."
+    },
+    {
+      "id": "hard-02",
+      "event": "hard_block",
+      "text": "Último bloque. Preguntas que ni yo sé. Bueno, yo tengo la tarjeta."
+    },
+    {
+      "id": "hard-03",
+      "event": "hard_block",
+      "text": "Pregunta {ronda}. Ahora sí, nivel experto. Vais a necesitar suerte."
+    },
+    {
+      "id": "hard-04",
+      "event": "hard_block",
+      "text": "Las cinco últimas son las peores. Os lo digo con cariño."
+    },
+    {
+      "id": "last-01",
+      "event": "last_question",
+      "text": "Última pregunta. Todo o nada por {premio}."
+    },
+    {
+      "id": "last-02",
+      "event": "last_question",
+      "text": "Pregunta quince. Respirad hondo: aquí se ganan o se pierden los cheques."
+    },
+    {
+      "id": "last-03",
+      "event": "last_question",
+      "text": "La última. Solo una respuesta os separa de llevaros {premio}."
+    },
+    {
+      "id": "last-04",
+      "event": "last_question",
+      "text": "Llegamos al final. Que nadie tiemble… demasiado."
+    },
+    {
+      "id": "math-01",
+      "event": "math_question",
+      "text": "Pregunta de matemáticas. Sin calculadora, que esto es un concurso serio."
+    },
+    {
+      "id": "math-02",
+      "event": "math_question",
+      "text": "Toca hacer cuentas. Los dedos de las manos están permitidos."
+    },
+    {
+      "id": "math-03",
+      "event": "math_question",
+      "text": "Números, mi parte favorita. Sobre todo cuando os equivocáis."
+    },
+    {
+      "id": "math-04",
+      "event": "math_question",
+      "text": "Matemáticas. Tranquilos, los números no muerden. Casi nunca."
+    },
+    {
+      "id": "math-05",
+      "event": "math_question",
+      "text": "Una operación. Que alguien del grupo haga de calculadora."
+    },
+    {
+      "id": "math-06",
+      "event": "math_question",
+      "text": "Cálculo mental. Y luego decíais en el colegio que no servía para nada."
     },
     {
       "id": "success-01",
@@ -62,6 +292,81 @@
       "text": "Acierto. El presupuesto del decorado está llorando."
     },
     {
+      "id": "success-04",
+      "event": "success",
+      "text": "Bien hecho, aunque algo se ha quedado por el camino. Os quedan {premio}."
+    },
+    {
+      "id": "success-05",
+      "event": "success",
+      "text": "Pregunta {ronda} superada. El tubo se queda con hambre."
+    },
+    {
+      "id": "success-06",
+      "event": "success",
+      "text": "Correcto. No ha sido limpio, pero ha sido suficiente."
+    },
+    {
+      "id": "success-07",
+      "event": "success",
+      "text": "Aprobados por la mínima. Seguís teniendo {premio} en juego."
+    },
+    {
+      "id": "perfect-01",
+      "event": "perfect",
+      "text": "¡Pleno! Ni un billete perdido. Esto no estaba en el guion."
+    },
+    {
+      "id": "perfect-02",
+      "event": "perfect",
+      "text": "Todo el dinero en la respuesta buena. Me estáis arruinando el decorado."
+    },
+    {
+      "id": "perfect-03",
+      "event": "perfect",
+      "text": "Perfecto. Seguís con {premio} y yo, con cara de póker."
+    },
+    {
+      "id": "perfect-04",
+      "event": "perfect",
+      "text": "Ni una moneda al tubo. ¿Habéis estudiado o es pura suerte?"
+    },
+    {
+      "id": "perfect-05",
+      "event": "perfect",
+      "text": "Pregunta {ronda}, limpia como una patena."
+    },
+    {
+      "id": "perfect-06",
+      "event": "perfect",
+      "text": "Impecable. Disfrutadlo, que la siguiente será más difícil."
+    },
+    {
+      "id": "multiplied-01",
+      "event": "multiplied",
+      "text": "¡El comodín ha salido bien! Premio multiplicado por {multiplicador}."
+    },
+    {
+      "id": "multiplied-02",
+      "event": "multiplied",
+      "text": "Por {multiplicador}. Qué valor y qué suerte: ahora tenéis {premio}."
+    },
+    {
+      "id": "multiplied-03",
+      "event": "multiplied",
+      "text": "Apostarse y acertar. Ojalá mis inversiones salieran así."
+    },
+    {
+      "id": "multiplied-04",
+      "event": "multiplied",
+      "text": "Multiplicador por {multiplicador}. El decorado tendrá que esperar."
+    },
+    {
+      "id": "multiplied-05",
+      "event": "multiplied",
+      "text": "La cabina ha pagado bien. {premio} y subiendo."
+    },
+    {
       "id": "loss-01",
       "event": "loss",
       "text": "Habéis perdido {cantidad}. El decorado os lo agradece."
@@ -77,9 +382,84 @@
       "text": "El tubo tiene más certezas que vosotros."
     },
     {
-      "id": "loss-04",
+      "id": "loss-05",
       "event": "loss",
+      "text": "Más dinero fuera que dentro. El tubo se relame."
+    },
+    {
+      "id": "loss-06",
+      "event": "loss",
+      "text": "{cantidad} menos. Con eso pintamos el plató de nuevo."
+    },
+    {
+      "id": "loss-07",
+      "event": "loss",
+      "text": "Mala ronda. Os quedan {premio}; cuidadlos mejor."
+    },
+    {
+      "id": "loss-08",
+      "event": "loss",
+      "text": "Ay, ay, ay. {cantidad} que se van y no vuelven."
+    },
+    {
+      "id": "loss-09",
+      "event": "loss",
+      "text": "La sabiduría no estaba en esa bandeja. Y el dinero tampoco."
+    },
+    {
+      "id": "loss-04",
+      "event": "eliminated",
       "text": "Quedan {supervivientes} concursantes en pie. El tubo pide más."
+    },
+    {
+      "id": "eliminated-01",
+      "event": "eliminated",
+      "text": "Alguien se apostó a la respuesta equivocada. El tubo no perdona."
+    },
+    {
+      "id": "eliminated-02",
+      "event": "eliminated",
+      "text": "Un concursante menos. Los demás seguirán… con más espacio."
+    },
+    {
+      "id": "eliminated-03",
+      "event": "eliminated",
+      "text": "¡Expulsión! La fe es bonita, pero no siempre acierta."
+    },
+    {
+      "id": "eliminated-04",
+      "event": "eliminated",
+      "text": "Quedan {supervivientes} en pie. El resto, a la grada."
+    },
+    {
+      "id": "eliminated-05",
+      "event": "eliminated",
+      "text": "Despedimos a un valiente. Bueno, a un valiente equivocado."
+    },
+    {
+      "id": "eliminated-06",
+      "event": "eliminated",
+      "text": "El tubo ha comido. Y aún queda concurso."
+    },
+    {
+      "id": "left-01",
+      "event": "player_left",
+      "text": "Un concursante ha huido del plató. El tubo lo echará de menos."
+    },
+    {
+      "id": "left-02",
+      "event": "player_left",
+      "text": "Uno menos. Más protagonismo para los valientes que quedan."
+    },
+    {
+      "id": "left-03",
+      "event": "player_left",
+      "text": "Alguien ha abandonado el plató. El espectáculo continúa."
+    },
+    {
+      "id": "left-04",
+      "event": "player_left",
+      "text": "Un concursante se ha marchado sin despedirse. Qué poca educación."
     },
     {
       "id": "victory-01",
@@ -92,6 +472,26 @@
       "text": "Quince preguntas superadas. Me duele decirlo: lo habéis hecho bien."
     },
     {
+      "id": "victory-03",
+      "event": "victory",
+      "text": "¡Lo habéis conseguido! {premio} y mi respeto, que vale bastante menos."
+    },
+    {
+      "id": "victory-04",
+      "event": "victory",
+      "text": "Quince de quince. Avisad al banco, que se va a llevar un susto."
+    },
+    {
+      "id": "victory-05",
+      "event": "victory",
+      "text": "Campeones. El decorado tendrá que esperar a un grupo menos listo."
+    },
+    {
+      "id": "victory-06",
+      "event": "victory",
+      "text": "Victoria con {supervivientes} supervivientes. El tubo se va a dormir sin cenar."
+    },
+    {
       "id": "defeat-01",
       "event": "defeat",
       "text": "Fin del concurso. Os habéis quedado sin nada, que es lo justo."
@@ -102,24 +502,24 @@
       "text": "Derrota. El decorado ya tiene presupuesto para la próxima temporada."
     },
     {
-      "id": "time-01",
-      "event": "time_running_out",
-      "text": "¡Diez segundos! El dinero no se mueve solo."
+      "id": "defeat-03",
+      "event": "defeat",
+      "text": "Se acabó. El dinero vuelve a casa, es decir, a mí."
     },
     {
-      "id": "time-02",
-      "event": "time_running_out",
-      "text": "Se acaba el tiempo. El tubo ya está contando con vosotros."
+      "id": "defeat-04",
+      "event": "defeat",
+      "text": "Derrota en la pregunta {ronda}. Os esperamos en la revancha."
     },
     {
-      "id": "left-01",
-      "event": "player_left",
-      "text": "Un concursante ha huido del plató. El tubo lo echará de menos."
+      "id": "defeat-05",
+      "event": "defeat",
+      "text": "Cero. Ni para el autobús. Gracias por financiar el plató."
     },
     {
-      "id": "left-02",
-      "event": "player_left",
-      "text": "Uno menos. Más protagonismo para los valientes que quedan."
+      "id": "defeat-06",
+      "event": "defeat",
+      "text": "Fin del sueño. Ha sido bonito mientras duró, que fue poco."
     }
   ]
 }

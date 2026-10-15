@@ -119,14 +119,17 @@ namespace Trivias.Presenter.Network
                     _timeWarningGiven = false;
                     if (previous == MatchPhase.Lobby)
                         Speak(PresenterEvent.Welcome, CurrentVariables());
+                    else if (PresenterMoments.TryQuestionStart(session.QuestionNumber, session.TotalQuestions,
+                                 session.CurrentQuestion != null && session.CurrentQuestion.IsMath, out var questionEvent))
+                        Speak(questionEvent, CurrentVariables());
                     break;
                 case MatchPhase.Locked:
                     Speak(PresenterEvent.Countdown, CurrentVariables());
                     break;
                 case MatchPhase.Reveal:
                     var round = session.LastRound;
-                    var badRound = !string.IsNullOrEmpty(session.LastEliminated) || round.Lost > round.Kept;
-                    Speak(badRound ? PresenterEvent.Loss : PresenterEvent.Success, CurrentVariables());
+                    Speak(PresenterMoments.Reveal(!string.IsNullOrEmpty(session.LastEliminated), round.Lost, round.Kept, round.Bonus),
+                        CurrentVariables());
                     break;
                 case MatchPhase.Victory:
                     Speak(PresenterEvent.Victory, CurrentVariables());

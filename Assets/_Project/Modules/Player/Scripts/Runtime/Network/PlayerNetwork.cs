@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Trivias.Player.Components;
 using Trivias.Shared.Events;
 using Trivias.Shared.Players;
@@ -11,7 +12,8 @@ namespace Trivias.Player.Network
 {
     /// <summary>
     /// Une el concursante con la red: activa control y cámara solo para el dueño, lo coloca en su punto de aparición,
-    /// sincroniza su nombre y su eliminación (escritos por el host) y lo registra para el resto de módulos.
+    /// sincroniza su nombre (lo pide el dueño desde su perfil; el host lo limpia y lo hace único) y su eliminación
+    /// (escritos por el host) y lo registra para el resto de módulos.
     /// </summary>
     public sealed class PlayerNetwork : NetworkBehaviour, IPlayerAvatar
     {
@@ -28,7 +30,7 @@ namespace Trivias.Player.Network
         [SerializeField] private Transform _headAnchor;
         [SerializeField] private Renderer[] _bodyRenderers;
 
-        private readonly NetworkVariable<FixedString32Bytes> _displayName = new(
+        private readonly NetworkVariable<FixedString64Bytes> _displayName = new(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private readonly NetworkVariable<bool> _eliminated = new(
@@ -48,6 +50,8 @@ namespace Trivias.Player.Network
         private bool _eliminationPending;
         private bool _respawnPending;
         private bool _notifyPending;
+        private string _publishedName; // Solo en el dueño: último nombre pedido al host.
+        private readonly List<string> _takenNames = new(); // Solo en el host.
 
         // ---- IPlayerAvatar ----
 
@@ -81,7 +85,7 @@ namespace Trivias.Player.Network
         public override void OnNetworkSpawn()
         {
             if (IsServer)
-                _displayName.Value = new FixedString32Bytes($"Jugador {OwnerClientId + 1}");
+                _displayName.Value = new FixedString64Bytes(PlayerNameRules.DefaultName(OwnerClientId));
 
             _displayName.OnValueChanged += OnDisplayNameChanged;
             _eliminated.OnValueChanged += OnEliminatedChanged;
@@ -98,9 +102,43 @@ namespace Trivias.Player.Network
             _nameTag.gameObject.SetActive(false);
             _localPlayerCameraTarget.Raise(_look.CameraRoot);
 
-            // Lo que lleva puesto sale del perfil local; se actualiza al equipar en la tienda.
-            _profile.Changed += PublishLoadout;
+            // El nombre y lo que lleva puesto salen del perfil local; se actualizan al cambiarlos.
+            _profile.Changed += OnProfileChanged;
+            _publishedName = null;
+            OnProfileChanged();
+        }
+
+        private void OnProfileChanged()
+        {
             PublishLoadout();
+            PublishName();
+        }
+
+        private void PublishName()
+        {
+            var name = _profile.PlayerName;
+            if (name == _publishedName)
+                return;
+            _publishedName = name;
+            RequestNameRpc(new FixedString64Bytes(name));
+        }
+
+        /// <summary>El host acepta el nombre limpio y sin repetir; vacío, «Jugador N».</summary>
+        [Rpc(SendTo.Server)]
+        private void RequestNameRpc(FixedString64Bytes requested, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId)
+                return;
+
+            _takenNames.Clear();
+            foreach (var avatar in _avatars.All)
+            {
+                if (avatar.ClientId != OwnerClientId)
+                    _takenNames.Add(avatar.DisplayName);
+            }
+            var name = PlayerNameRules.Unique(
+                PlayerNameRules.DisplayName(PlayerNameRules.Sanitize(requested.ToString()), OwnerClientId), _takenNames);
+            _displayName.Value = new FixedString64Bytes(name);
         }
 
         private void PublishLoadout()
@@ -128,7 +166,7 @@ namespace Trivias.Player.Network
             if (!IsOwner)
                 return;
 
-            _profile.Changed -= PublishLoadout;
+            _profile.Changed -= OnProfileChanged;
 
             SetLocalControl(false);
             _localPlayerCameraTarget.Raise(null);
@@ -141,7 +179,7 @@ namespace Trivias.Player.Network
             _look.enabled = isEnabled;
         }
 
-        private void OnDisplayNameChanged(FixedString32Bytes previous, FixedString32Bytes current) => _namePending = true;
+        private void OnDisplayNameChanged(FixedString64Bytes previous, FixedString64Bytes current) => _namePending = true;
 
         private void LateUpdate()
         {

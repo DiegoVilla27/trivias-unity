@@ -28,6 +28,8 @@ namespace Trivias.Match.Network
 
         [SerializeField] private MatchConfig _config;
         [SerializeField] private QuestionBank _bank;
+        [Tooltip("Historial de preguntas vistas del grupo (mismo objeto de red).")]
+        [SerializeField] private QuestionHistoryNetwork _questionHistory;
         [SerializeField] private MatchRuntime _runtime;
         [SerializeField] private MoneyRuntime _money;
         [SerializeField] private VoidEventChannel _matchStartRequested;
@@ -219,16 +221,19 @@ namespace Trivias.Match.Network
             if (_phase.Value != MatchPhase.Lobby)
                 return;
 
+            // El reparto de comodines se fija con el tamaño inicial del grupo (GDD 5.1).
+            _participants.Clear();
+            _participants.AddRange(NetworkManager.ConnectedClientsIds);
+
             var difficulties = new int[_bank.Count];
             for (var i = 0; i < _bank.Count; i++)
                 difficulties[i] = _bank[i].Difficulty;
 
+            // Primero las preguntas que nadie del grupo ha visto, sin dos seguidas de la misma categoría.
             var random = new System.Random(Environment.TickCount);
-            _plan = QuestionPlanner.Plan(difficulties, _config.QuestionsPerMatch, random);
+            _plan = QuestionPlanner.Plan(difficulties, _bank.CategoryNumbers(), _questionHistory.GroupPenalties(_participants),
+                _config.QuestionsPerMatch, random);
 
-            // El reparto de comodines se fija con el tamaño inicial del grupo (GDD 5.1).
-            _participants.Clear();
-            _participants.AddRange(NetworkManager.ConnectedClientsIds);
             _selfBet.Authority.StartMatch(_participants);
             _startTime = NetworkManager.ServerTime.Time;
             _matchId = (uint)random.Next(1, int.MaxValue);

@@ -15,7 +15,8 @@ namespace Trivias.Menu.Components
 {
     /// <summary>
     /// Menú del juego:
-    /// - Principal: crear sala, unirme a una sala, cómo se juega, récords, configuración, salir.
+    /// - Principal: tu nombre (se guarda en el perfil), crear sala, unirme a una sala, cómo se juega, récords,
+    ///   configuración, salir.
     /// - Unirme: dirección del host (recuerda la última) y conectar.
     /// - Sala de espera: jugadores, «Invita a tus amigos» con la dirección para compartir (host), empezar, tienda, salir.
     /// Desaparece al empezar la partida y vuelve al regresar a la sala. Se redibuja solo por eventos.
@@ -36,6 +37,7 @@ namespace Trivias.Menu.Components
 
         [Header("Pantalla principal")]
         [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private TMP_InputField _playerName;
         [SerializeField] private Button _hostButton;
         [SerializeField] private Button _joinMenuButton;
         [SerializeField] private Button _howToPlayButton;
@@ -78,6 +80,8 @@ namespace Trivias.Menu.Components
             _match.Changed += Refresh;
             _avatars.Changed += OnAvatarChanged;
             _profile.Changed += Refresh;
+            _playerName.onEndEdit.AddListener(OnNameEdited);
+            _playerName.SetTextWithoutNotify(_profile.PlayerName);
             _hostButton.onClick.AddListener(OnHost);
             _joinMenuButton.onClick.AddListener(OpenJoin);
             _howToPlayButton.onClick.AddListener(_howToPlay.Open);
@@ -101,6 +105,7 @@ namespace Trivias.Menu.Components
             _match.Changed -= Refresh;
             _avatars.Changed -= OnAvatarChanged;
             _profile.Changed -= Refresh;
+            _playerName.onEndEdit.RemoveListener(OnNameEdited);
             _hostButton.onClick.RemoveListener(OnHost);
             _joinMenuButton.onClick.RemoveListener(OpenJoin);
             _howToPlayButton.onClick.RemoveListener(_howToPlay.Open);
@@ -200,14 +205,27 @@ namespace Trivias.Menu.Components
                 : "Esperando a que el host empiece la partida…");
         }
 
+        public string PlayerNameText => _playerName.text;
+
+        /// <summary>Guarda el nombre limpio y lo muestra tal como lo verán los demás.</summary>
+        private void OnNameEdited(string _) => SaveName();
+
+        private void SaveName()
+        {
+            _profile.SetName(_playerName.text);
+            _playerName.SetTextWithoutNotify(_profile.PlayerName);
+        }
+
         private void OnHost()
         {
+            SaveName();
             _copyLabel.text = "Copiar";
             _room.Connection?.Host();
         }
 
         private void OpenJoin()
         {
+            SaveName();
             _joinOpen = true;
             _joinError = null;
             _address.text = string.IsNullOrEmpty(_settings.LastAddress) ? string.Empty : _settings.LastAddress;

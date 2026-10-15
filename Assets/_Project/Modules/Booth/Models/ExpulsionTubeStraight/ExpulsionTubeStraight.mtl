@@ -1,0 +1,63 @@
+newmtl ExpulsionTubeStraight_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_Glass
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 0.24
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_Underside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_Support
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+
+newmtl ExpulsionTubeStraight_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExpulsionTubeStraight_BaseColor.png
+

@@ -6,7 +6,7 @@ Referencia: [GDD](GDD.md), secciones 3–5 y 10–12.
 
 Flujo propuesto: preparación → inicio → pregunta/apuestas → bloqueo de tres segundos → resolución → siguiente pregunta o fin → resultados.
 
-Hay 15 preguntas, cada una con tiempo límite para apostar (configurable); al agotarse se verifica sola. Resolver puede producir derrota anticipada por dinero cero o ausencia de jugadores activos. Victoria exige resolver las 15 con dinero y supervivientes. El reloj total empieza al inicio común del concurso y termina al resolver el resultado final; incluye discusión, animaciones y cuentas atrás.
+Hay 15 preguntas, cada una con tiempo límite para apostar (configurable); al agotarse se verifica sola. Las elige el host al empezar (`QuestionPlanner`, C# puro): tres bloques de dificultad, primero las que nadie del grupo ha visto según el historial (`QuestionHistory` en cada ordenador, combinado por `QuestionHistoryNetwork`) y sin dos seguidas de la misma categoría entre las igual de nuevas. Detalle en [CONTENIDO](CONTENIDO.md). Resolver puede producir derrota anticipada por dinero cero o ausencia de jugadores activos. Victoria exige resolver las 15 con dinero y supervivientes. El reloj total empieza al inicio común del concurso y termina al resolver el resultado final; incluye discusión, animaciones y cuentas atrás.
 
 ## Dinero
 
@@ -55,6 +55,8 @@ Primero resultado y récord local; servicio global después. Implementado el ré
 Tecnología: Netcode for GameObjects sobre Facepunch.Steamworks con transporte de la comunidad (relay de Steam, sin exponer IP). Un jugador actúa como host y es la autoridad de partida: valida conversiones, propiedad de objetos, cierre, consumo de usos, resolución y tiempo. Los demás jugadores muestran el mismo estado. En desarrollo se usa el AppID de pruebas 480.
 
 Voz: API de voz de Steam. Cada cliente captura y comprime su voz y la envía al host, que la reenvía solo a los jugadores de su mismo canal. Desconexiones durante la partida: el dinero que llevaba vuelve a la mesa; su comodín se anula (si usaba la reserva y aún no se había verificado, el uso vuelve al equipo); deja de contar como activo y no figura como superviviente ni expulsado; el reparto de comodines no se recalcula. Si no queda ningún activo, la partida termina en derrota. Si se va el host, la sala se cierra y todos vuelven al menú con un aviso.
+
+Nombre del concursante: lo pide el dueño desde su perfil (`PlayerProfile.PlayerName`) y el host lo acepta solo tras limpiarlo y hacerlo único (`PlayerNameRules`, C# puro: letras latinas, números, espacios y «- _ .», 16 caracteres como máximo; sin nombre, «Jugador N»; si se repite, « 2», « 3»…). Con Steam se tomará el nombre de la cuenta en lugar del perfil. Las listas de nombres en red (supervivientes y expulsados) usan textos de 512 bytes y se recortan sin fallar.
 
 Los activos hablan entre sí; los eliminados entre sí. Todos se reúnen en resultados. No permitir nuevas incorporaciones como concursante a mitad de partida. Reconectar al mismo participante necesita una regla explícita.
 

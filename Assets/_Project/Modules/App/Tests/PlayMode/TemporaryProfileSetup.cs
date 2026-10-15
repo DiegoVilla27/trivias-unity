@@ -1,5 +1,6 @@
 using System.IO;
 using NUnit.Framework;
+using Trivias.Questions.Data;
 using Trivias.Ranking.Data;
 using Trivias.Shared.Profile;
 using Trivias.Shared.Settings;
@@ -7,8 +8,8 @@ using Trivias.Shared.Settings;
 namespace Trivias.App.Tests
 {
     /// <summary>
-    /// Antes de cualquier prueba en juego, el perfil (fichas, compras), las opciones y los récords se guardan en una
-    /// carpeta temporal: las pruebas nunca tocan los datos reales del jugador.
+    /// Antes de cualquier prueba en juego, el perfil (nombre, fichas, compras), las opciones, los récords y el historial
+    /// de preguntas se guardan en una carpeta temporal: las pruebas nunca tocan los datos reales del jugador.
     /// </summary>
     [SetUpFixture]
     public sealed class TemporaryProfileSetup
@@ -16,6 +17,7 @@ namespace Trivias.App.Tests
         private const string PROFILE_ASSET = "Assets/_Project/Shared/Config/Profile/PlayerProfile.asset";
         private const string SETTINGS_ASSET = "Assets/_Project/Shared/Config/Settings/GameSettings.asset";
         private const string RECORDS_ASSET = "Assets/_Project/Modules/Ranking/Config/LocalRecords.asset";
+        private const string HISTORY_ASSET = "Assets/_Project/Modules/Questions/Config/QuestionHistory.asset";
         public static string Folder { get; private set; }
 
         [OneTimeSetUp]
@@ -25,6 +27,7 @@ namespace Trivias.App.Tests
             Profile().UseStoragePath(Path.Combine(Folder, "profile.json"));
             Settings().UseStoragePath(Path.Combine(Folder, "settings.json"));
             Records().UseStoragePath(Path.Combine(Folder, "records.json"));
+            History().UseStoragePath(Path.Combine(Folder, "questions-seen.json"));
         }
 
         [OneTimeTearDown]
@@ -59,6 +62,23 @@ namespace Trivias.App.Tests
 #else
             return null;
 #endif
+        }
+
+        public static QuestionHistory History()
+        {
+#if UNITY_EDITOR
+            return UnityEditor.AssetDatabase.LoadAssetAtPath<QuestionHistory>(HISTORY_ASSET);
+#else
+            return null;
+#endif
+        }
+
+        /// <summary>Historial de preguntas vacío en un archivo propio de la prueba.</summary>
+        public static QuestionHistory FreshHistory()
+        {
+            var history = History();
+            history.UseStoragePath(Path.Combine(Folder, Path.GetRandomFileName() + "-seen.json"));
+            return history;
         }
 
         /// <summary>Récords vacíos en un archivo propio de la prueba.</summary>

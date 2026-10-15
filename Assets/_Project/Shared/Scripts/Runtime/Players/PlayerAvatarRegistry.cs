@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Trivias.Shared.Profile;
 using UnityEngine;
 
 namespace Trivias.Shared.Players
@@ -37,7 +38,7 @@ namespace Trivias.Shared.Players
         public bool IsEliminated(ulong clientId) => _avatars.TryGetValue(clientId, out var avatar) && avatar.IsEliminated;
 
         public string NameOf(ulong clientId) =>
-            _avatars.TryGetValue(clientId, out var avatar) ? avatar.DisplayName : $"Jugador {clientId + 1}";
+            _avatars.TryGetValue(clientId, out var avatar) ? avatar.DisplayName : PlayerNameRules.DefaultName(clientId);
 
         private void OnEnable() => _avatars.Clear();
     }

@@ -13,8 +13,8 @@ namespace Trivias.Match.Network
         public long FinalMoney;
         public float DurationSeconds;
         public short TokensEach;
-        public FixedString128Bytes Survivors;
-        public FixedString128Bytes Eliminated;
+        public FixedString512Bytes Survivors;
+        public FixedString512Bytes Eliminated;
         public byte StartingPlayers;
         public bool StartedAtFirstQuestion;
 

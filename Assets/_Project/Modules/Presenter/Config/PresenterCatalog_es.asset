@@ -20,12 +20,51 @@ MonoBehaviour:
   - _id: welcome-02
     _event: 0
     _text: "Quince preguntas, {premio} y un decorado que necesita financiaci\xF3n. \xA1Empezamos!"
+  - _id: welcome-03
+    _event: 0
+    _text: "Silencio en el plat\xF3. Quince preguntas os separan de {premio}. O de nada."
+  - _id: welcome-04
+    _event: 0
+    _text: "Bienvenidos, valientes. Las cabinas est\xE1n limpias y el tubo, con hambre."
+  - _id: welcome-05
+    _event: 0
+    _text: "Empieza Trivias. El dinero que apost\xE9is mal acabar\xE1 pagando mi decorado."
+  - _id: welcome-06
+    _event: 0
+    _text: "Hoy ten\xE9is {premio} encima de la mesa. Ma\xF1ana, ya veremos."
+  - _id: welcome-07
+    _event: 0
+    _text: "\xA1Arrancamos! Pensad en equipo, apostad con cabeza y no mir\xE9is al tubo."
   - _id: discussion-01
     _event: 1
     _text: "Tranquilos, el plat\xF3 cobra por horas. Seguid debatiendo."
   - _id: discussion-02
     _event: 1
     _text: "Llevo un rato esperando. El bot\xF3n no se pulsa solo, aunque lo intente."
+  - _id: discussion-03
+    _event: 1
+    _text: "Debatir est\xE1 muy bien. Responder, todav\xEDa mejor."
+  - _id: discussion-04
+    _event: 1
+    _text: "Si quer\xE9is, os traigo caf\xE9. Lo descuento del premio, claro."
+  - _id: discussion-05
+    _event: 1
+    _text: "El p\xFAblico se ha ido a cenar. Volver\xE1 para ver el final."
+  - _id: discussion-06
+    _event: 1
+    _text: "Cuanto m\xE1s lo pens\xE1is, m\xE1s dudo de que lo sep\xE1is."
+  - _id: discussion-07
+    _event: 1
+    _text: "Os doy una pista: la respuesta est\xE1 en una de las cuatro cabinas."
+  - _id: discussion-08
+    _event: 1
+    _text: "El reloj no corre, pero mi paciencia s\xED."
+  - _id: discussion-09
+    _event: 1
+    _text: "Tanta reuni\xF3n parece un consejo de administraci\xF3n. De uno arruinado."
+  - _id: discussion-10
+    _event: 1
+    _text: "Os recuerdo que existe un bot\xF3n de VERIFICAR. Est\xE1 deseando que lo puls\xE9is."
   - _id: selfbet-01
     _event: 2
     _text: "\xA1Alguien se ha subido a la cabina! Qu\xE9 valor\u2026 o qu\xE9 poca memoria."
@@ -35,12 +74,111 @@ MonoBehaviour:
   - _id: selfbet-03
     _event: 2
     _text: "M\xE1s gente en las cabinas. Me encanta cuando conf\xEDan tanto."
+  - _id: selfbet-04
+    _event: 2
+    _text: Otro concursante apostado. A esto lo llamo yo confianza ciega.
+  - _id: selfbet-05
+    _event: 2
+    _text: "Apostarse a uno mismo: la inversi\xF3n m\xE1s arriesgada del mercado."
+  - _id: selfbet-06
+    _event: 2
+    _text: "Si acert\xE1is, se multiplica el premio. Si no, el tubo os manda saludos."
+  - _id: selfbet-07
+    _event: 2
+    _text: Cabina ocupada. Espero que esa persona sepa lo que hace, porque yo no.
+  - _id: selfbet-08
+    _event: 2
+    _text: Me encantan los concursantes con fe. Duran poco, pero se recuerdan.
   - _id: countdown-01
     _event: 3
     _text: Tres segundos para arrepentiros. Para cambiar, ya es tarde.
   - _id: countdown-02
     _event: 3
     _text: Apuestas cerradas. Respirad hondo, que el tubo no espera.
+  - _id: countdown-03
+    _event: 3
+    _text: "\xA1Verificado! Ya no hay vuelta atr\xE1s."
+  - _id: countdown-04
+    _event: 3
+    _text: Bandejas cerradas. Que la suerte reparta lo que la cabeza no supo.
+  - _id: countdown-05
+    _event: 3
+    _text: "Tres, dos, uno\u2026 Disfrutad de estos \xFAltimos segundos de esperanza."
+  - _id: countdown-06
+    _event: 3
+    _text: "Nadie toca nada. El dinero est\xE1 donde lo dejasteis, para bien o para mal."
+  - _id: countdown-07
+    _event: 3
+    _text: Bloqueado. Ahora solo queda mirar la pantalla y cruzar los dedos.
+  - _id: time-01
+    _event: 8
+    _text: "\xA1Diez segundos! El dinero no se mueve solo."
+  - _id: time-02
+    _event: 8
+    _text: "Se acaba el tiempo. El tubo ya est\xE1 contando con vosotros."
+  - _id: time-03
+    _event: 8
+    _text: "\xA1Que se acaba! Moved el dinero o lo mover\xE1 el destino."
+  - _id: time-04
+    _event: 8
+    _text: "\xDAltimos segundos. Si dud\xE1is, dudad r\xE1pido."
+  - _id: time-05
+    _event: 8
+    _text: "Tic, tac. Decidid ya o decidir\xE1 el reloj."
+  - _id: medium-01
+    _event: 10
+    _text: "Se acabaron las f\xE1ciles. Ahora empieza el concurso de verdad."
+  - _id: medium-02
+    _event: 10
+    _text: 'Pregunta {ronda}: subimos la dificultad. Agarrad bien el dinero.'
+  - _id: medium-03
+    _event: 10
+    _text: Bloque intermedio. Ya no vale responder lo primero que suene.
+  - _id: medium-04
+    _event: 10
+    _text: "Hasta aqu\xED el calentamiento. Ten\xE9is {premio}; veamos cu\xE1nto os dura."
+  - _id: hard-01
+    _event: 11
+    _text: "Llegan las dif\xEDciles. Aqu\xED es donde el tubo come bien."
+  - _id: hard-02
+    _event: 11
+    _text: "\xDAltimo bloque. Preguntas que ni yo s\xE9. Bueno, yo tengo la tarjeta."
+  - _id: hard-03
+    _event: 11
+    _text: "Pregunta {ronda}. Ahora s\xED, nivel experto. Vais a necesitar suerte."
+  - _id: hard-04
+    _event: 11
+    _text: "Las cinco \xFAltimas son las peores. Os lo digo con cari\xF1o."
+  - _id: last-01
+    _event: 12
+    _text: "\xDAltima pregunta. Todo o nada por {premio}."
+  - _id: last-02
+    _event: 12
+    _text: "Pregunta quince. Respirad hondo: aqu\xED se ganan o se pierden los cheques."
+  - _id: last-03
+    _event: 12
+    _text: "La \xFAltima. Solo una respuesta os separa de llevaros {premio}."
+  - _id: last-04
+    _event: 12
+    _text: "Llegamos al final. Que nadie tiemble\u2026 demasiado."
+  - _id: math-01
+    _event: 13
+    _text: "Pregunta de matem\xE1ticas. Sin calculadora, que esto es un concurso serio."
+  - _id: math-02
+    _event: 13
+    _text: "Toca hacer cuentas. Los dedos de las manos est\xE1n permitidos."
+  - _id: math-03
+    _event: 13
+    _text: "N\xFAmeros, mi parte favorita. Sobre todo cuando os equivoc\xE1is."
+  - _id: math-04
+    _event: 13
+    _text: "Matem\xE1ticas. Tranquilos, los n\xFAmeros no muerden. Casi nunca."
+  - _id: math-05
+    _event: 13
+    _text: "Una operaci\xF3n. Que alguien del grupo haga de calculadora."
+  - _id: math-06
+    _event: 13
+    _text: "C\xE1lculo mental. Y luego dec\xEDais en el colegio que no serv\xEDa para nada."
   - _id: success-01
     _event: 4
     _text: "\xA1Correcto! Os quedan {premio}. No os acostumbr\xE9is."
@@ -50,6 +188,51 @@ MonoBehaviour:
   - _id: success-03
     _event: 4
     _text: "Acierto. El presupuesto del decorado est\xE1 llorando."
+  - _id: success-04
+    _event: 4
+    _text: Bien hecho, aunque algo se ha quedado por el camino. Os quedan {premio}.
+  - _id: success-05
+    _event: 4
+    _text: Pregunta {ronda} superada. El tubo se queda con hambre.
+  - _id: success-06
+    _event: 4
+    _text: Correcto. No ha sido limpio, pero ha sido suficiente.
+  - _id: success-07
+    _event: 4
+    _text: "Aprobados por la m\xEDnima. Segu\xEDs teniendo {premio} en juego."
+  - _id: perfect-01
+    _event: 16
+    _text: "\xA1Pleno! Ni un billete perdido. Esto no estaba en el guion."
+  - _id: perfect-02
+    _event: 16
+    _text: "Todo el dinero en la respuesta buena. Me est\xE1is arruinando el decorado."
+  - _id: perfect-03
+    _event: 16
+    _text: "Perfecto. Segu\xEDs con {premio} y yo, con cara de p\xF3ker."
+  - _id: perfect-04
+    _event: 16
+    _text: "Ni una moneda al tubo. \xBFHab\xE9is estudiado o es pura suerte?"
+  - _id: perfect-05
+    _event: 16
+    _text: Pregunta {ronda}, limpia como una patena.
+  - _id: perfect-06
+    _event: 16
+    _text: "Impecable. Disfrutadlo, que la siguiente ser\xE1 m\xE1s dif\xEDcil."
+  - _id: multiplied-01
+    _event: 15
+    _text: "\xA1El comod\xEDn ha salido bien! Premio multiplicado por {multiplicador}."
+  - _id: multiplied-02
+    _event: 15
+    _text: "Por {multiplicador}. Qu\xE9 valor y qu\xE9 suerte: ahora ten\xE9is {premio}."
+  - _id: multiplied-03
+    _event: 15
+    _text: "Apostarse y acertar. Ojal\xE1 mis inversiones salieran as\xED."
+  - _id: multiplied-04
+    _event: 15
+    _text: "Multiplicador por {multiplicador}. El decorado tendr\xE1 que esperar."
+  - _id: multiplied-05
+    _event: 15
+    _text: La cabina ha pagado bien. {premio} y subiendo.
   - _id: loss-01
     _event: 5
     _text: "Hab\xE9is perdido {cantidad}. El decorado os lo agradece."
@@ -59,30 +242,87 @@ MonoBehaviour:
   - _id: loss-03
     _event: 5
     _text: "El tubo tiene m\xE1s certezas que vosotros."
-  - _id: loss-04
+  - _id: loss-05
     _event: 5
+    _text: "M\xE1s dinero fuera que dentro. El tubo se relame."
+  - _id: loss-06
+    _event: 5
+    _text: "{cantidad} menos. Con eso pintamos el plat\xF3 de nuevo."
+  - _id: loss-07
+    _event: 5
+    _text: Mala ronda. Os quedan {premio}; cuidadlos mejor.
+  - _id: loss-08
+    _event: 5
+    _text: Ay, ay, ay. {cantidad} que se van y no vuelven.
+  - _id: loss-09
+    _event: 5
+    _text: "La sabidur\xEDa no estaba en esa bandeja. Y el dinero tampoco."
+  - _id: loss-04
+    _event: 14
     _text: "Quedan {supervivientes} concursantes en pie. El tubo pide m\xE1s."
-  - _id: victory-01
-    _event: 6
-    _text: "\xA1Victoria! Os llev\xE1is {premio}. Contad bien el cheque, que es de cart\xF3n."
-  - _id: victory-02
-    _event: 6
-    _text: "Quince preguntas superadas. Me duele decirlo: lo hab\xE9is hecho bien."
-  - _id: defeat-01
-    _event: 7
-    _text: "Fin del concurso. Os hab\xE9is quedado sin nada, que es lo justo."
-  - _id: defeat-02
-    _event: 7
-    _text: "Derrota. El decorado ya tiene presupuesto para la pr\xF3xima temporada."
-  - _id: time-01
-    _event: 8
-    _text: "\xA1Diez segundos! El dinero no se mueve solo."
-  - _id: time-02
-    _event: 8
-    _text: "Se acaba el tiempo. El tubo ya est\xE1 contando con vosotros."
+  - _id: eliminated-01
+    _event: 14
+    _text: "Alguien se apost\xF3 a la respuesta equivocada. El tubo no perdona."
+  - _id: eliminated-02
+    _event: 14
+    _text: "Un concursante menos. Los dem\xE1s seguir\xE1n\u2026 con m\xE1s espacio."
+  - _id: eliminated-03
+    _event: 14
+    _text: "\xA1Expulsi\xF3n! La fe es bonita, pero no siempre acierta."
+  - _id: eliminated-04
+    _event: 14
+    _text: Quedan {supervivientes} en pie. El resto, a la grada.
+  - _id: eliminated-05
+    _event: 14
+    _text: Despedimos a un valiente. Bueno, a un valiente equivocado.
+  - _id: eliminated-06
+    _event: 14
+    _text: "El tubo ha comido. Y a\xFAn queda concurso."
   - _id: left-01
     _event: 9
     _text: "Un concursante ha huido del plat\xF3. El tubo lo echar\xE1 de menos."
   - _id: left-02
     _event: 9
     _text: "Uno menos. M\xE1s protagonismo para los valientes que quedan."
+  - _id: left-03
+    _event: 9
+    _text: "Alguien ha abandonado el plat\xF3. El espect\xE1culo contin\xFAa."
+  - _id: left-04
+    _event: 9
+    _text: "Un concursante se ha marchado sin despedirse. Qu\xE9 poca educaci\xF3n."
+  - _id: victory-01
+    _event: 6
+    _text: "\xA1Victoria! Os llev\xE1is {premio}. Contad bien el cheque, que es de cart\xF3n."
+  - _id: victory-02
+    _event: 6
+    _text: "Quince preguntas superadas. Me duele decirlo: lo hab\xE9is hecho bien."
+  - _id: victory-03
+    _event: 6
+    _text: "\xA1Lo hab\xE9is conseguido! {premio} y mi respeto, que vale bastante menos."
+  - _id: victory-04
+    _event: 6
+    _text: Quince de quince. Avisad al banco, que se va a llevar un susto.
+  - _id: victory-05
+    _event: 6
+    _text: "Campeones. El decorado tendr\xE1 que esperar a un grupo menos listo."
+  - _id: victory-06
+    _event: 6
+    _text: Victoria con {supervivientes} supervivientes. El tubo se va a dormir sin cenar.
+  - _id: defeat-01
+    _event: 7
+    _text: "Fin del concurso. Os hab\xE9is quedado sin nada, que es lo justo."
+  - _id: defeat-02
+    _event: 7
+    _text: "Derrota. El decorado ya tiene presupuesto para la pr\xF3xima temporada."
+  - _id: defeat-03
+    _event: 7
+    _text: "Se acab\xF3. El dinero vuelve a casa, es decir, a m\xED."
+  - _id: defeat-04
+    _event: 7
+    _text: Derrota en la pregunta {ronda}. Os esperamos en la revancha.
+  - _id: defeat-05
+    _event: 7
+    _text: "Cero. Ni para el autob\xFAs. Gracias por financiar el plat\xF3."
+  - _id: defeat-06
+    _event: 7
+    _text: "Fin del sue\xF1o. Ha sido bonito mientras dur\xF3, que fue poco."

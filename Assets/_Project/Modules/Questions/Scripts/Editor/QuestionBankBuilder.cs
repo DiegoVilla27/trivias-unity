@@ -19,6 +19,10 @@ namespace Trivias.Questions.Editor
         public const string MODULE_ROOT = "Assets/_Project/Modules/Questions";
         private const string SOURCE_PATH = MODULE_ROOT + "/Content/questions_es.json";
         public const string BANK_PATH = MODULE_ROOT + "/Config/QuestionBank_es.asset";
+        public const string HISTORY_PATH = MODULE_ROOT + "/Config/QuestionHistory.asset";
+
+        /// <summary>Anclaje del historial de preguntas vistas en este ordenador.</summary>
+        public static QuestionHistory History() => EditorAssets.GetOrCreateAsset<QuestionHistory>(HISTORY_PATH);
 
         [Serializable] private sealed class OptionDto { public string id; public string text; }
 

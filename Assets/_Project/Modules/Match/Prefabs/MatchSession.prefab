@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5733367754534444919}
   - component: {fileID: 3171777823196708549}
+  - component: {fileID: 8290636523379811102}
   - component: {fileID: 6724916434258428135}
   m_Layer: 0
   m_Name: MatchSession
@@ -60,6 +61,22 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &8290636523379811102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101134782954818526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1ae3f2500b246079b25510d651f301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.Match::Trivias.Match.Network.QuestionHistoryNetwork
+  ShowTopMostFoldoutHeaderGroup: 1
+  _history: {fileID: 11400000, guid: db1fe4a5697104caab07bab2b5d2bc37, type: 2}
+  _bank: {fileID: 11400000, guid: 1458e11e20ccd4d31acba07952a8dc3b, type: 2}
+  _runtime: {fileID: 11400000, guid: 5d37e1be8915745e380c413acd95a791, type: 2}
 --- !u!114 &6724916434258428135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +92,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _config: {fileID: 11400000, guid: 4c38585987c73498aafa577649c01fe9, type: 2}
   _bank: {fileID: 11400000, guid: 1458e11e20ccd4d31acba07952a8dc3b, type: 2}
+  _questionHistory: {fileID: 8290636523379811102}
   _runtime: {fileID: 11400000, guid: 5d37e1be8915745e380c413acd95a791, type: 2}
   _money: {fileID: 11400000, guid: 6f4133998feb140af81920928091b588, type: 2}
   _matchStartRequested: {fileID: 11400000, guid: 13bcfc86c73994acdb677241bf133aee, type: 2}

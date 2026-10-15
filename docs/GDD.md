@@ -2,8 +2,8 @@
 
 ## Estado del documento
 
-- Versión: 0.12 — tiempo límite para apostar (configurable).
-- Última actualización: 15 de octubre de 2026.
+- Versión: 0.13 — 313 preguntas con cálculo mental, historial de preguntas vistas, 104 frases del presentador y nombre del jugador.
+- Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
 - Formato: cooperativo, de 2 a 6 jugadores, con dinero compartido.
@@ -161,11 +161,13 @@ La eliminación permanente dentro de la partida se mantiene como decisión de di
 
 ## 6. Cultura general y contenido
 
-**La salida tendrá únicamente cultura general:** preguntas preparadas, cuatro opciones y una única respuesta correcta verificada. No hay experimentos físicos, balanzas, comparaciones de objetos ni demostraciones interactivas en el alcance de salida.
+**La salida tendrá cultura general y cálculo mental:** preguntas preparadas, cuatro opciones y una única respuesta correcta verificada. Las operaciones matemáticas (fáciles, medias y difíciles, sin raíces) se resuelven de cabeza y en grupo; dan variedad sin depender de saber datos. No hay experimentos físicos, balanzas, comparaciones de objetos ni demostraciones interactivas en el alcance de salida.
 
 Cada pregunta incluye identificador, texto, cuatro respuestas, respuesta correcta, categoría, dificultad y explicación breve. Las fuentes de verificación se guardan para revisión editorial. Evitar ambigüedades y datos que cambien rápidamente sin actualizar el contenido.
 
-Seleccionar 15 preguntas de dificultad progresiva y categorías variadas. No repetir preguntas dentro de una partida. Mezclar posiciones de respuestas conservando la respuesta correcta. El prototipo tendrá un banco de **30 preguntas** y la salida un banco inicial de **200 preguntas revisadas**. Cada partida sigue usando 15. Cuando sea posible, evitar preguntas vistas recientemente por el grupo; el historial y la selección entre sesiones quedan por concretar. Ampliar el banco si la repetición entre jugadores habituales reduce la diversión.
+Seleccionar 15 preguntas de dificultad progresiva y categorías variadas. No repetir preguntas dentro de una partida. Mezclar posiciones de respuestas conservando la respuesta correcta. El banco tiene **313 preguntas** (unas 100 por dificultad; 60 son operaciones, 20 por dificultad) en 13 categorías. Cada partida sigue usando 15, así que un grupo puede jugar unas 20 partidas sin repetir pregunta. Ampliar el banco si la repetición entre jugadores habituales reduce la diversión.
+
+Historial de preguntas vistas (implementado): cada jugador apunta en su ordenador las preguntas que ve. Al empezar una partida, el host combina los historiales de los participantes y elige primero las que nadie ha visto; si no quedan, las que vieron menos jugadores y hace más tiempo. Entre preguntas igual de nuevas evita dos seguidas de la misma categoría, pero nunca repite una pregunta más vista solo por variar.
 
 Guardar preguntas y frases en archivos de contenido editables, por ejemplo JSON, separados del código del juego. Son contenidos preparados y locales; no hace falta modificar lógica para añadirlos o corregirlos.
 
@@ -205,22 +207,30 @@ Acciones de salida: coger/soltar dinero, convertirlo, activar comodín y verific
 
 ### 9.1 Implementación inicial
 
-Catálogo local de **20 frases para el prototipo** y **50 frases para la salida**, en archivos de contenido y seleccionadas por evento, no al azar sin contexto.
-
-Distribución inicial de las 50 frases:
+Catálogo local de **104 frases** en archivos de contenido, seleccionadas por evento, no al azar sin contexto. Así el presentador habla de todo un poco sin repetirse.
 
 | Evento | Frases |
 | --- | --- |
-| Bienvenida e inicio | 5 |
-| Discusión prolongada | 8 |
+| Bienvenida e inicio | 7 |
+| Discusión prolongada | 10 |
 | Activación de comodín | 8 |
-| Cuenta atrás | 5 |
-| Acierto y aumento del premio | 8 |
-| Pérdida de dinero o expulsión | 10 |
-| Victoria o derrota | 6 |
-| **Total** | **50** |
+| Cuenta atrás | 7 |
+| Pocos segundos para apostar | 5 |
+| Empieza el bloque medio / difícil | 4 + 4 |
+| Última pregunta | 4 |
+| Pregunta de matemáticas | 6 |
+| Pleno (no se pierde nada) | 6 |
+| Acierto con alguna pérdida | 7 |
+| Premio multiplicado por comodines | 5 |
+| Pérdida mayor que lo conservado | 8 |
+| Expulsión | 7 |
+| Alguien abandona | 4 |
+| Victoria / derrota | 6 + 6 |
+| **Total** | **104** |
 
-Usar variables como cantidad perdida, premio y supervivientes para adaptar textos. Ejemplo: «Habéis perdido {cantidad}. El decorado os lo agradece». Evitar repetir las últimas frases utilizadas y no mostrar un comentario por cada interacción menor.
+Al empezar una pregunta solo comenta la última, el inicio de un bloque o una de matemáticas, en ese orden; las demás empiezan en silencio. Al revelar elige por orden: expulsión, pérdida, multiplicador, pleno o acierto.
+
+Usar variables como cantidad perdida, premio y supervivientes para adaptar textos. Ejemplo: «Habéis perdido {cantidad}. El decorado os lo agradece». No repetir ninguna frase de un evento hasta haber dicho todas las de ese evento, y no mostrar un comentario por cada interacción menor.
 
 El presentador se comunica mediante texto en una viñeta sobre su cabeza, en el plató (no en la interfaz): tanto las frases predefinidas como las generadas por IA. No incluye voz, síntesis de voz ni reconocimiento del micrófono. Usar un catálogo que permita añadir frases sin modificar la lógica de ronda. Evitar repeticiones consecutivas y espaciar comentarios sin ocultar preguntas o respuestas. Con tiempo límite, el presentador avisa cuando quedan pocos segundos; sin límite, comenta las discusiones largas sin forzar el cierre.
 
@@ -274,6 +284,8 @@ Abandonos (implementado): quien se desconecta a mitad de partida deja de contar 
 
 El tamaño inicial determina comodines y categoría de ranking. Una salida no convierte a un equipo de seis en uno de dos ni concede comodines extra.
 
+Nombre del jugador (implementado): se escribe en el menú principal y se guarda en el perfil local (hasta 16 caracteres: letras, números, espacios y «- _ .»). Sin nombre, «Jugador N». El host lo limpia y, si otro concursante ya se llama igual, añade un número («Ana 2»). Se ve sobre el concursante, en la sala de espera, en los rótulos de las cabinas, en los resultados y en los récords. Con Steam se usará el nombre de la cuenta de Steam.
+
 ## 11. Fichas, tienda y objetivos
 
 Dinero y fichas son recursos separados: el dinero sirve para apostar y registrar premios; las fichas se guardan para comprar cosméticos.
@@ -305,7 +317,7 @@ Implementación del prototipo: las fichas y compras se guardan en un perfil loca
 
 Solo las partidas que superan las 15 preguntas y ganan registran resultado. El ranking se divide por tamaño inicial: 2, 3, 4, 5 y 6 jugadores. Las fichas no intervienen.
 
-Implementación del prototipo (récords locales): cada jugador guarda en su ordenador las 10 mejores victorias de cada tamaño de grupo, con el orden de 12.1 y el tiempo en milisegundos. Las partidas de prueba que no empiezan en la pregunta 1 y las de un solo jugador no cuentan. Los resultados dicen el puesto conseguido y el menú principal muestra la tabla. Mientras todos se llamen «Jugador N» no se distingue un grupo de otro, así que la regla de guardar solo la mejor victoria de cada conjunto de participantes se aplicará en el ranking global, con identidades de Steam.
+Implementación del prototipo (récords locales): cada jugador guarda en su ordenador las 10 mejores victorias de cada tamaño de grupo, con el orden de 12.1 y el tiempo en milisegundos. Las partidas de prueba que no empiezan en la pregunta 1 y las de un solo jugador no cuentan. Los resultados dicen el puesto conseguido y el menú principal muestra la tabla. Los nombres elegidos en el menú son locales y pueden repetirse o cambiar, así que no sirven para distinguir un grupo de otro: la regla de guardar solo la mejor victoria de cada conjunto de participantes se aplicará en el ranking global, con identidades de Steam.
 
 ### 12.1 Orden propuesto
 
@@ -338,16 +350,16 @@ Los resultados publicados necesitan validación. Cambios de balance requieren se
 - Una sala y un personaje basado en el prefab definitivo.
 - Cuatro cabinas con zona de apuesta y texto de apostados, bandejas, expulsión animada y cámara de espectador.
 - Dinero, estación manual, conversión y colocación sin simulación compleja.
-- Banco de 30 preguntas de cultura general; se seleccionan 15 por partida.
+- Banco de 313 preguntas de cultura general y cálculo mental; se seleccionan 15 por partida, priorizando las que el grupo no ha visto.
 - Botón de verificación y bloqueo de tres segundos; tiempo límite por pregunta con verificación automática.
 - Propuesta de seis comodines totales según tamaño de grupo.
 - Multijugador, micrófono y separación de eliminados.
-- Presentador textual con 20 frases locales seleccionadas por evento.
+- Presentador textual con 104 frases locales seleccionadas por evento.
 - Victoria, derrota, fichas por tramo y resultado local con dinero y tiempo.
 
 ### Preparación de salida
 
-- Ampliar a 200 preguntas revisadas y 50 frases del presentador, guardadas como contenido editable.
+- Revisar el banco de preguntas y las frases del presentador (ya por encima de las 200 y 50 previstas) con pruebas de grupo.
 - Crear los diez personajes sobre el mismo prefab y una selección de atuendos/accesorios.
 - Tienda y guardado de fichas/compras.
 - Invitaciones, estabilidad de salas y tratamiento de desconexiones.
@@ -379,12 +391,19 @@ Pendientes prioritarios:
 2. Confirmar capital y denominaciones propuestos.
 3. Probar el transporte de Steam para Netcode for GameObjects y la voz de Steam enrutada por el host.
 4. Diseñar el prefab base y sus puntos de personalización.
-5. Definir categorías, dificultades y selección entre partidas para bancos de 30 preguntas de prototipo y 200 de salida.
+5. Revisar con pruebas de grupo el reparto de categorías y dificultades del banco (selección entre partidas ya resuelta con el historial).
 6. Concretar desconexiones y condiciones de ranking válido.
 7. Dar nombre al juego y fijar personalidad, catálogo y presentación de texto del presentador.
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.13 — 16 de octubre de 2026
+
+- El banco pasa a 313 preguntas en 13 categorías, con 60 operaciones de cálculo mental (20 fáciles, 20 medias y 20 difíciles, sin raíces). La salida deja de ser «únicamente cultura general».
+- Historial de preguntas vistas por jugador; el host combina los del grupo y elige primero las que nadie ha visto, sin dos seguidas de la misma categoría.
+- El presentador pasa a 104 frases y comenta también el inicio de los bloques medio y difícil, la última pregunta, las de matemáticas, los plenos, los premios multiplicados y las expulsiones. No repite frase hasta decir todas las de ese momento.
+- Nombre del jugador elegido en el menú principal y guardado en el perfil; único en la sala. Con Steam se usará el nombre de la cuenta.
 
 ### Versión 0.12 — 15 de octubre de 2026
 

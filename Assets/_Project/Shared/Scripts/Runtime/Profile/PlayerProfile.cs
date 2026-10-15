@@ -5,8 +5,9 @@ using UnityEngine;
 namespace Trivias.Shared.Profile
 {
     /// <summary>
-    /// Perfil del jugador local (fichas, compras y equipamiento), cargado una vez y guardado en cada cambio.
-    /// Lo usan la pantalla de resultados (entregar fichas), la tienda (comprar y equipar) y el concursante (lo que lleva).
+    /// Perfil del jugador local (nombre, fichas, compras y equipamiento), cargado una vez y guardado en cada cambio.
+    /// Lo usan el menú (nombre), la pantalla de resultados (entregar fichas), la tienda (comprar y equipar) y el
+    /// concursante (cómo se llama y lo que lleva).
     /// </summary>
     [CreateAssetMenu(menuName = "Trivias/Profile/Player Profile", fileName = "PlayerProfile")]
     public sealed class PlayerProfile : ScriptableObject
@@ -27,6 +28,8 @@ namespace Trivias.Shared.Profile
             }
         }
 
+        /// <summary>Nombre elegido (ya limpio), o vacío si no ha elegido ninguno.</summary>
+        public string PlayerName => Data.name;
         public int Tokens => Data.tokens;
         public CosmeticLoadout Loadout => Data.Loadout;
 
@@ -37,6 +40,16 @@ namespace Trivias.Shared.Profile
             _data = null;
             EnsureLoaded();
             Changed?.Invoke();
+        }
+
+        /// <summary>Guarda el nombre limpio (<see cref="PlayerNameRules.Sanitize"/>). Devuelve false si no cambia.</summary>
+        public bool SetName(string raw)
+        {
+            var name = PlayerNameRules.Sanitize(raw);
+            if (name == Data.name)
+                return false;
+            _data.name = name;
+            return Apply(true);
         }
 
         public bool AwardMatch(string matchId, int tokens) => Apply(ProfileRules.AwardMatch(Data, matchId, tokens));

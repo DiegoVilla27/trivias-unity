@@ -23,16 +23,22 @@ namespace Trivias.Match.Editor
         public static MatchConfig Config() => EditorAssets.GetOrCreateAsset<MatchConfig>($"{CONFIG}/MatchConfig.asset");
         public static MatchRuntime Runtime() => EditorAssets.GetOrCreateAsset<MatchRuntime>($"{CONFIG}/MatchRuntime.asset");
 
-        public static GameObject Build(QuestionBank bank, MoneyRuntime money, SelfBetRuntime selfBet,
+        public static GameObject Build(QuestionBank bank, QuestionHistory history, MoneyRuntime money, SelfBetRuntime selfBet,
             VoidEventChannel matchStartRequested)
         {
             EditorUtility.SetDirty(Config());
 
             var root = new GameObject("MatchSession");
             root.AddComponent<NetworkObject>();
+            var questionHistory = root.AddComponent<QuestionHistoryNetwork>();
+            SerializedWiring.Set(questionHistory, "_history", history);
+            SerializedWiring.Set(questionHistory, "_bank", bank);
+            SerializedWiring.Set(questionHistory, "_runtime", Runtime());
+
             var session = root.AddComponent<MatchSessionNetwork>();
             SerializedWiring.Set(session, "_config", Config());
             SerializedWiring.Set(session, "_bank", bank);
+            SerializedWiring.Set(session, "_questionHistory", questionHistory);
             SerializedWiring.Set(session, "_runtime", Runtime());
             SerializedWiring.Set(session, "_money", money);
             SerializedWiring.Set(session, "_matchStartRequested", matchStartRequested);

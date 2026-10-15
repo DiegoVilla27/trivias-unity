@@ -28,7 +28,7 @@ MVP: todo el arte con primitivas de Unity (cubos, cilindros, esferas, cápsulas)
 
 Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga después. Se puede probar una ronda antes de producir las 30 preguntas. No estimar semanas hasta conocer motor, recursos y equipo de desarrollo.
 
-## Estado (15 de octubre de 2026)
+## Estado (16 de octubre de 2026)
 
 | Hito | Estado |
 | --- | --- |
@@ -37,7 +37,8 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 2 Una pregunta completa | Hecho: pantalla grande, tiempo límite, verificar, cuenta atrás, resolución |
 | 3 Cambio y comodines | Hecho: estación de cambio, comodín con zona, multiplicador y expulsión |
 | 4 Partida de 15 preguntas | Hecho: victoria/derrota, resultados, fichas por tramo, volver a jugar, presentador |
-| 6 Contenido | Hecho: 30 preguntas y 24 frases (incluye «alguien se fue»). Pendiente: micrófono (con Steam) |
+| 6 Contenido | Hecho: 313 preguntas (60 de cálculo mental) con historial de vistas del grupo y 104 frases en 17 momentos. Pendiente: micrófono (con Steam) |
+| Nombre del jugador | Hecho: se elige en el menú, se guarda en el perfil y es único en la sala. Con Steam, el de la cuenta |
 | 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 9 cosméticos sincronizados |
 | Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
 | Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
@@ -73,9 +74,9 @@ Cada cambio se valida con Build All y la batería completa de pruebas (EditMode 
 | Dinero fuera de bandejas al cerrar | Pérdida propuesta, por validar |
 | Emisión de bonos grandes | Confirmado: denominación más grande posible |
 | Abandonos/reconexiones | Pendientes para fichas, usos y ranking |
-| Selección de preguntas e historial | Pendiente; cantidades 30/200 acordadas |
+| Selección de preguntas e historial | Hecho: historial por jugador combinado por el host; 313 preguntas |
 | Ranking comparable y validación | Récords locales hechos; ranking global, identidad del equipo y validación pendientes |
-| Nombre, atuendos y catálogo de tienda | Pendientes |
+| Nombre del juego, atuendos y catálogo de tienda | Pendientes (el nombre del jugador ya está hecho) |
 
 ## Aplazado
 

@@ -1,0 +1,72 @@
+newmtl BoothCabinet_A_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_Red
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_Interior
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_RedShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_BlueGray
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_Bulb
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+
+newmtl BoothCabinet_A_Ivory
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd BoothCabinet_A_BaseColor.png
+

@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace Trivias.Questions.Data
 {
-    /// <summary>Una pregunta de cultura general (CONTENIDO.md). Las opciones están en su orden original.</summary>
+    /// <summary>Una pregunta de cultura general o de cálculo (CONTENIDO.md). Las opciones están en su orden original.</summary>
     [Serializable]
     public sealed class QuestionData
     {
         public const int OPTION_COUNT = 4;
+
+        /// <summary>Categoría de las operaciones matemáticas (el presentador las comenta).</summary>
+        public const string MATH_CATEGORY = "Matemáticas";
 
         [SerializeField] private string _id;
         [SerializeField] private string _category;
@@ -33,6 +36,7 @@ namespace Trivias.Questions.Data
 
         public string Id => _id;
         public string Category => _category;
+        public bool IsMath => _category == MATH_CATEGORY;
         public int Difficulty => _difficulty;
         public string Text => _text;
         public string Option(int originalIndex) => _options[originalIndex];

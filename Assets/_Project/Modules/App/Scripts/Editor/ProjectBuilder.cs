@@ -57,8 +57,8 @@ namespace Trivias.App.Editor
             var selfBetSession = SelfBetBuilder.Build();
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(selfBetSession);
 
-            var matchSession = MatchBuilder.Build(questionBank, MoneyBuilder.Runtime(), SelfBetBuilder.Runtime(),
-                SharedAssets.MatchStartRequested());
+            var matchSession = MatchBuilder.Build(questionBank, QuestionBankBuilder.History(), MoneyBuilder.Runtime(),
+                SelfBetBuilder.Runtime(), SharedAssets.MatchStartRequested());
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(matchSession);
 
             var presenterSession = PresenterPrefabBuilder.BuildSession(matchRuntime, SelfBetBuilder.Runtime());
