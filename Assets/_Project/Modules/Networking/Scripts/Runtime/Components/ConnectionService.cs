@@ -129,7 +129,10 @@ namespace Trivias.Networking.Components
             }
             else if (State == ConnectionState.Connected)
             {
-                SetState(ConnectionState.Disconnected, string.IsNullOrEmpty(reason) ? "Se cerró la sala." : reason);
+                // El motivo que da NGO al cerrarse la sala es técnico; al jugador le basta con saber qué pasó.
+                SetState(ConnectionState.Disconnected, _networkManager.IsServer
+                    ? string.Empty
+                    : "Se cerró la sala o se perdió la conexión con el host.");
             }
         }
 

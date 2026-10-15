@@ -4,6 +4,7 @@ using Trivias.Networking.Components;
 using Trivias.Player.Components;
 using Unity.Cinemachine;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -54,6 +55,24 @@ namespace Trivias.App.Tests
             var followCamera = Object.FindAnyObjectByType<CinemachineCamera>();
             Assert.That(followCamera.Target.TrackingTarget, Is.EqualTo(player.transform.Find("CameraRoot")),
                 "La cámara no sigue al jugador local.");
+        }
+
+        [UnityTest]
+        public IEnumerator Host_CanStartSoloInTestModeAndClosesRoom()
+        {
+            var connection = Object.FindAnyObjectByType<ConnectionService>();
+            Assert.That(connection.StartHost(), Is.True);
+            yield return new WaitForSeconds(0.5f);
+
+            var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            Assert.That(transport.DisconnectTimeoutMS, Is.EqualTo(connection.Config.DisconnectTimeoutSeconds * 1000),
+                "El tiempo de desconexión no se aplicó al transporte.");
+
+            Assert.That(connection.Config.MinPlayersToStart, Is.EqualTo(1), "En editor con modo prueba el mínimo debe ser 1.");
+            Assert.That(connection.CanStartMatch, Is.True, "El host solo debería poder empezar en modo prueba.");
+            Assert.That(connection.TryStartMatch(), Is.True);
+            Assert.That(connection.MatchStarted, Is.True);
+            Assert.That(connection.CanStartMatch, Is.False, "No se debe poder empezar dos veces.");
         }
     }
 }
