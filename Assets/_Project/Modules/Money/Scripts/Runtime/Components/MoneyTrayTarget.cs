@@ -30,9 +30,9 @@ namespace Trivias.Money.Components
             if (carried > 0)
             {
                 var top = ledger.FindCarriedBy(client);
-                prompt = $"E: dejar {MoneyFormat.Name(ledger.Items[top].Denomination)} en {Letter}";
+                prompt = PromptText.Key("E", $"Dejar {MoneyFormat.Name(ledger.Items[top].Denomination)} en {Letter}");
                 if (carried > 1)
-                    prompt += $"{SEPARATOR}Q: dejar todo en {Letter} ({MoneyFormat.Amount(ledger.CarriedValue(client))})";
+                    prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Dejar todo ({MoneyFormat.Amount(ledger.CarriedValue(client))})"));
                 return;
             }
 
@@ -44,10 +44,10 @@ namespace Trivias.Money.Components
             }
 
             var last = ledger.FindTopAt(MoneyPlace.Tray, _trayIndex, preferSmallest: false);
-            prompt = $"E: recuperar {MoneyFormat.Name(ledger.Items[last].Denomination)} de {Letter}";
+            prompt = PromptText.Key("E", $"Recuperar {MoneyFormat.Name(ledger.Items[last].Denomination)}");
             var batch = ledger.CountPickable(client, MoneyPlace.Tray, _trayIndex, preferSmallest: false);
             if (batch > 1)
-                prompt += $"{SEPARATOR}Q: recuperar {batch}";
+                prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Recuperar {batch}"));
         }
     }
 }

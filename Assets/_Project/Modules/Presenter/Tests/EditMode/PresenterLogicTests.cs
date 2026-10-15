@@ -53,7 +53,7 @@ namespace Trivias.Presenter.Tests
         public void Validator_AcceptsValidCatalog()
         {
             var phrases = new List<(string, string, string)>();
-            foreach (var key in new[] { "welcome", "long_discussion", "self_bet", "countdown", "success", "loss", "victory", "defeat" })
+            foreach (var key in new[] { "welcome", "long_discussion", "self_bet", "countdown", "success", "loss", "victory", "defeat", "time_running_out" })
                 phrases.Add(($"{key}-01", key, "Texto con {premio}."));
             Assert.That(PhraseValidator.Validate(phrases), Is.Empty);
         }

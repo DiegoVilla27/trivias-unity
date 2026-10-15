@@ -32,6 +32,7 @@ namespace Trivias.Presenter.Network
         private float _bettingSince;
         private float _lastLineTime = float.NegativeInfinity;
         private float _lastSelfBetLine = float.NegativeInfinity;
+        private bool _timeWarningGiven;
 
         // ---- En todos ----
         private float _silenceAt;
@@ -76,9 +77,22 @@ namespace Trivias.Presenter.Network
                 _runtime.Say(string.Empty);
             }
 
-            // Host: comentario si la discusión se alarga (sin forzar el cierre: no hay límite de tiempo).
-            if (!IsServer || _lastPhase != MatchPhase.Betting)
+            if (!IsServer || _lastPhase != MatchPhase.Betting || _match.Session == null)
                 return;
+
+            var session = _match.Session;
+            if (session.IsBettingTimed)
+            {
+                // Con tiempo: un aviso cuando quedan pocos segundos.
+                if (!_timeWarningGiven && session.PhaseSecondsLeft <= _config.TimeWarningSeconds)
+                {
+                    _timeWarningGiven = true;
+                    Speak(PresenterEvent.TimeRunningOut, CurrentVariables());
+                }
+                return;
+            }
+
+            // Sin tiempo: comentario si la discusión se alarga (no fuerza el cierre).
             var now = Time.time;
             if (now - _bettingSince >= _config.LongDiscussionAfter && now - _lastLineTime >= _config.LongDiscussionRepeat)
                 Speak(PresenterEvent.LongDiscussion, CurrentVariables());
@@ -101,6 +115,7 @@ namespace Trivias.Presenter.Network
                 case MatchPhase.Betting:
                     _bettingSince = Time.time;
                     _lastBetCount = 0;
+                    _timeWarningGiven = false;
                     if (previous == MatchPhase.Lobby)
                         Speak(PresenterEvent.Welcome, CurrentVariables());
                     break;

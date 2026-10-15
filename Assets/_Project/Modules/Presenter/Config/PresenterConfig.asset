@@ -15,4 +15,5 @@ MonoBehaviour:
   _lineSeconds: 6
   _longDiscussionAfter: 45
   _longDiscussionRepeat: 40
+  _timeWarningSeconds: 10
   _selfBetCooldown: 10

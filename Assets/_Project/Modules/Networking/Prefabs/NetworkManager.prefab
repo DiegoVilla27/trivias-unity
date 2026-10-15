@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6531565581324784772}
   - component: {fileID: 1811170720014981065}
   - component: {fileID: 9119430091137105464}
-  - component: {fileID: 7854950519340292887}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -126,17 +125,4 @@ MonoBehaviour:
   _matchStartRequested: {fileID: 11400000, guid: 13bcfc86c73994acdb677241bf133aee, type: 2}
   _returnedToLobby: {fileID: 11400000, guid: 0c5b8551d29224925bfafc6aebf05bfc, type: 2}
   _leaveRoomRequested: {fileID: 11400000, guid: 0234aa05361ae4e0c92b548d6eabbfba, type: 2}
---- !u!114 &7854950519340292887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5805861606224517093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b2d83faa48c45be973e5e0ddc2a8b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Trivias.Networking::Trivias.Networking.Components.DebugConnectionPanel
-  _connection: {fileID: 9119430091137105464}
-  _cursorBlockers: {fileID: 11400000, guid: c08967e58f5d44ad6a17da13670656b4, type: 2}
+  _roomRuntime: {fileID: 11400000, guid: 0c38d9c434f2543959a87c8df698d3f9, type: 2}

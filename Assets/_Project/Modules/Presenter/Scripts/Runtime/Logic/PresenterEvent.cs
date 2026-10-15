@@ -11,11 +11,14 @@ namespace Trivias.Presenter.Logic
         Loss = 5,
         Victory = 6,
         Defeat = 7,
+
+        /// <summary>Quedan pocos segundos para apostar (solo con límite de tiempo).</summary>
+        TimeRunningOut = 8,
     }
 
     public static class PresenterEvents
     {
-        public const int COUNT = 8;
+        public const int COUNT = 9;
 
         /// <summary>Clave del evento en el archivo de contenido.</summary>
         public static bool TryParse(string key, out PresenterEvent presenterEvent)
@@ -30,6 +33,7 @@ namespace Trivias.Presenter.Logic
                 case "loss": presenterEvent = PresenterEvent.Loss; return true;
                 case "victory": presenterEvent = PresenterEvent.Victory; return true;
                 case "defeat": presenterEvent = PresenterEvent.Defeat; return true;
+                case "time_running_out": presenterEvent = PresenterEvent.TimeRunningOut; return true;
                 default: presenterEvent = default; return false;
             }
         }

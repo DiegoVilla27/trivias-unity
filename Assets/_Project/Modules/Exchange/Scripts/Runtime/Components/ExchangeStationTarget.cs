@@ -12,8 +12,6 @@ namespace Trivias.Exchange.Components
     /// </summary>
     public sealed class ExchangeStationTarget : MonoBehaviour, IInteractable
     {
-        private const string SEPARATOR = "     ";
-
         [SerializeField] private MoneyConfig _config;
         [SerializeField] private MoneyRuntime _runtime;
         [SerializeField] private InteractableRegistry _registry;
@@ -71,14 +69,14 @@ namespace Trivias.Exchange.Components
         private static string DescribeSplit(MoneyLedger ledger, ulong client, Denomination carried)
         {
             if (carried == Denomination.Bundle)
-                return "Los fajos no se dividen. Déjalos en la mesa para agruparlos.";
+                return "Los fajos no se dividen: déjalos en la mesa para agruparlos";
 
             var into = carried - 1;
             var ratio = ledger.ExchangeRatio(carried);
-            var prompt = $"E: dividir {MoneyFormat.Name(carried)} en {ratio} {Plural(into)}";
+            var prompt = PromptText.Key("E", $"Dividir {MoneyFormat.Name(carried)} → {ratio} {Plural(into)}");
             var count = ledger.CountCarriedBy(client);
             if (count > 1)
-                prompt += $"{SEPARATOR}Q: dividir las {count}";
+                prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Dividir las {count}"));
             return prompt;
         }
 
@@ -90,11 +88,11 @@ namespace Trivias.Exchange.Components
             var canGroupBags = ledger.CountAt(MoneyPlace.Table, 0, Denomination.Bag) >= barRatio;
 
             if (!canGroupBundles && !canGroupBags)
-                return $"Para agrupar hacen falta {bagRatio} fajos o {barRatio} bolsas en la mesa.";
+                return $"Agrupar: hacen falta {bagRatio} fajos o {barRatio} bolsas en la mesa";
 
-            var prompt = canGroupBundles ? $"E: agrupar {bagRatio} fajos en 1 bolsa" : string.Empty;
+            var prompt = canGroupBundles ? PromptText.Key("E", $"Agrupar {bagRatio} fajos → bolsa") : string.Empty;
             if (canGroupBags)
-                prompt += $"{(prompt.Length > 0 ? SEPARATOR : string.Empty)}Q: agrupar {barRatio} bolsas en 1 lingote";
+                prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Agrupar {barRatio} bolsas → lingote"));
             return prompt;
         }
 

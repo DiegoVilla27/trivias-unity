@@ -1,0 +1,21 @@
+{
+    "name": "Trivias.Menu",
+    "rootNamespace": "Trivias.Menu",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Match",
+        "Trivias.Money",
+        "Trivias.Questions",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

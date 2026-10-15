@@ -31,6 +31,7 @@ namespace Trivias.App.Editor
         public GameObject MatchHud;
         public GameObject PresenterHud;
         public GameObject ResultsScreen;
+        public GameObject Menu;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -77,6 +78,7 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.MatchHud);
             PrefabUtility.InstantiatePrefab(prefabs.PresenterHud);
             PrefabUtility.InstantiatePrefab(prefabs.ResultsScreen);
+            PrefabUtility.InstantiatePrefab(prefabs.Menu);
             CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);

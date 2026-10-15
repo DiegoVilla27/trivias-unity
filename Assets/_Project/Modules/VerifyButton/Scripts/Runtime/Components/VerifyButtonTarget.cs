@@ -75,8 +75,8 @@ namespace Trivias.VerifyButton.Components
 
             var atRisk = session.MoneyAtRisk;
             _prompt = atRisk > 0
-                ? $"E: VERIFICAR — cuidado: se perderán {MoneyFormat.Amount(atRisk)} fuera de las bandejas"
-                : "E: VERIFICAR (cierra las apuestas)";
+                ? $"{PromptText.Key("E", "VERIFICAR")}   <color=#FF6B6B>se perderán {MoneyFormat.Amount(atRisk)}</color>"
+                : PromptText.Key("E", "VERIFICAR");
         }
     }
 }

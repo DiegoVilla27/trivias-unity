@@ -5,6 +5,7 @@ using Trivias.Exchange.Editor;
 using Trivias.HUD.Editor;
 using Trivias.Interaction.Editor;
 using Trivias.Match.Editor;
+using Trivias.Menu.Editor;
 using Trivias.Money.Editor;
 using Trivias.Networking.Editor;
 using Trivias.Player.Editor;
@@ -70,6 +71,7 @@ namespace Trivias.App.Editor
                 MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime()),
                 PresenterHud = PresenterPrefabBuilder.BuildHud(),
                 ResultsScreen = ResultsPrefabBuilder.Build(matchRuntime),
+                Menu = MenuPrefabBuilder.Build(matchRuntime),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),

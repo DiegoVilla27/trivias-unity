@@ -44,21 +44,20 @@ namespace Trivias.Money.Components
             prompt = string.Empty;
             if (pickable > 0)
             {
-                prompt = $"E: coger {MoneyFormat.Name(type)} ({MoneyFormat.Amount(ledger.ValueOfDenomination(type))})";
+                prompt = PromptText.Key("E", $"Coger {MoneyFormat.Name(type)} ({MoneyFormat.Amount(ledger.ValueOfDenomination(type))})");
                 if (pickable > 1)
-                    prompt += $"{SEPARATOR}Q: coger {pickable}";
+                    prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Coger {pickable}"));
             }
 
             if (carriedTop >= 0)
             {
-                var giveBack = $"R: devolver {ledger.CountCarriedBy(client)} ({MoneyFormat.Amount(ledger.CarriedValue(client))})";
-                prompt = prompt.Length > 0 ? $"{prompt}{SEPARATOR}{giveBack}" : giveBack;
+                prompt = PromptText.Join(prompt, PromptText.Key("R", $"Devolver {ledger.CountCarriedBy(client)}"));
                 return;
             }
 
             var next = NextAvailable(ledger, _selected);
             if (next != _selected)
-                prompt += $"{(prompt.Length > 0 ? SEPARATOR : string.Empty)}R: cambiar a {Plural(next)}";
+                prompt = PromptText.Join(prompt, PromptText.Key("R", $"Cambiar a {Plural(next)}"));
         }
 
         private void EnsureSelectionAvailable(MoneyLedger ledger)

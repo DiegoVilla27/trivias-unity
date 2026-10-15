@@ -50,8 +50,6 @@ namespace Trivias.Money.Components
 
         protected abstract void SendRequest(IMoneySession session, InteractionAction action);
 
-        protected const string SEPARATOR = "     ";
-
         /// <summary>Devuelve el aviso y el texto del total para el estado actual.</summary>
         protected abstract void Describe(IMoneySession session, out string prompt, out string totalLabel);
 

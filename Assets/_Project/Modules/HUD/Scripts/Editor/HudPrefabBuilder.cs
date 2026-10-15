@@ -27,7 +27,7 @@ namespace Trivias.HUD.Editor
             scaler.referenceResolution = new Vector2(1920f, 1080f);
             scaler.matchWidthOrHeight = 0.5f;
 
-            var panel = Panel("QuestionPanel", root.transform, new Vector2(0.5f, 1f), new Vector2(0f, -16f), new Vector2(1280f, 330f));
+            var panel = Panel("QuestionPanel", root.transform, new Vector2(0.5f, 1f), new Vector2(0f, -16f), new Vector2(1280f, 350f));
             var header = Text("Header", panel, 24f, new Vector2(0f, -14f), new Vector2(1220f, 34f), FontStyles.Bold);
             header.color = new Color(1f, 0.82f, 0.35f);
             var question = Text("Question", panel, 38f, new Vector2(0f, -52f), new Vector2(1220f, 96f), FontStyles.Bold);
@@ -42,7 +42,7 @@ namespace Trivias.HUD.Editor
                 options[i].alignment = TextAlignmentOptions.Left;
             }
 
-            var status = Text("Status", panel, 24f, new Vector2(0f, -250f), new Vector2(1220f, 72f), FontStyles.Normal);
+            var status = Text("Status", panel, 24f, new Vector2(0f, -246f), new Vector2(1220f, 96f), FontStyles.Normal);
 
             var moneyPanel = Panel("TeamMoney", root.transform, new Vector2(1f, 1f), new Vector2(-16f, -16f), new Vector2(300f, 92f));
             var money = Text("Amount", moneyPanel, 34f, new Vector2(0f, -10f), new Vector2(280f, 72f), FontStyles.Normal);

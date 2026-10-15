@@ -17,7 +17,10 @@
         "Trivias.SelfBet",
         "Trivias.Exchange",
         "Trivias.Presenter",
-        "Trivias.Results"
+        "Trivias.Results",
+        "Trivias.Menu",
+        "Trivias.HUD",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

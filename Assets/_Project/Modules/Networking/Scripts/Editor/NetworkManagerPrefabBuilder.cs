@@ -40,10 +40,8 @@ namespace Trivias.Networking.Editor
             SerializedWiring.Set(connection, "_matchStartRequested", SharedAssets.MatchStartRequested());
             SerializedWiring.Set(connection, "_returnedToLobby", SharedAssets.ReturnedToLobby());
             SerializedWiring.Set(connection, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
+            SerializedWiring.Set(connection, "_roomRuntime", SharedAssets.RoomConnection());
 
-            var panel = root.AddComponent<DebugConnectionPanel>();
-            SerializedWiring.Set(panel, "_connection", connection);
-            SerializedWiring.Set(panel, "_cursorBlockers", SharedAssets.CursorCaptureBlockers());
 
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }

@@ -94,11 +94,16 @@ namespace Trivias.Match.Network
             }
         }
 
+        public bool IsBettingTimed => _config.HasBettingTimer;
+
         public float PhaseSecondsLeft
         {
             get
             {
-                if (_phase.Value != MatchPhase.Locked && _phase.Value != MatchPhase.Reveal)
+                var phase = _phase.Value;
+                var timed = phase == MatchPhase.Locked || phase == MatchPhase.Reveal ||
+                            (phase == MatchPhase.Betting && IsBettingTimed);
+                if (!timed)
                     return 0f;
                 var left = _phaseEndTime.Value - NetworkManager.ServerTime.Time;
                 return left > 0 ? (float)left : 0f;
@@ -180,14 +185,24 @@ namespace Trivias.Match.Network
         private void TickDeadlines()
         {
             var phase = _phase.Value;
-            if ((phase != MatchPhase.Locked && phase != MatchPhase.Reveal) ||
-                NetworkManager.ServerTime.Time < _phaseEndTime.Value)
+            var timed = phase == MatchPhase.Locked || phase == MatchPhase.Reveal ||
+                        (phase == MatchPhase.Betting && _config.HasBettingTimer);
+            if (!timed || NetworkManager.ServerTime.Time < _phaseEndTime.Value)
                 return;
 
-            if (phase == MatchPhase.Locked)
-                Reveal();
-            else
-                AdvanceAfterReveal();
+            switch (phase)
+            {
+                case MatchPhase.Betting:
+                    // Se acabó el tiempo: se verifica sola con lo que haya en las bandejas.
+                    LockBets("tiempo agotado");
+                    break;
+                case MatchPhase.Locked:
+                    Reveal();
+                    break;
+                default:
+                    AdvanceAfterReveal();
+                    break;
+            }
         }
 
         private void StartMatch()
@@ -223,12 +238,17 @@ namespace Trivias.Match.Network
             if (bets.HasBet(sender) && !bets.AllActiveHaveBet)
                 return;
 
-            // Bloqueo inmediato: desde aquí no se acepta ningún cambio de dinero ni de comodines (GDD 4.3).
+            LockBets($"jugador {sender}");
+        }
+
+        /// <summary>Bloqueo inmediato (GDD 4.3): desde aquí no se acepta ningún cambio de dinero ni de comodines.</summary>
+        private void LockBets(string reason)
+        {
             _money.Authority?.SetLocked(true);
             _selfBet.Authority.LockBets();
             _phaseEndTime.Value = NetworkManager.ServerTime.Time + _config.LockCountdownSeconds;
             _phase.Value = MatchPhase.Locked;
-            GameLog.Info($"[Partida] Verificado por el jugador {rpcParams.Receive.SenderClientId}.", this);
+            GameLog.Info($"[Partida] Verificado ({reason}).", this);
         }
 
         private void Reveal()
@@ -320,6 +340,7 @@ namespace Trivias.Match.Network
             _questionNumber.Value = (byte)number;
             _money.Authority?.SetLocked(false);
             _selfBet.Authority.SetOpen(true);
+            _phaseEndTime.Value = _config.HasBettingTimer ? NetworkManager.ServerTime.Time + _config.BettingSeconds : 0;
             _phase.Value = MatchPhase.Betting;
         }
 

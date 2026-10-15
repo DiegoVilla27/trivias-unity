@@ -1,0 +1,23 @@
+{
+    "name": "Trivias.Menu.Editor",
+    "rootNamespace": "Trivias.Menu.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Menu",
+        "Trivias.Match",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

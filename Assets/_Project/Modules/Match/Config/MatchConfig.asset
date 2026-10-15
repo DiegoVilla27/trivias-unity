@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MatchConfig
   m_EditorClassIdentifier: Trivias.Match::Trivias.Match.Data.MatchConfig
   _questionsPerMatch: 15
+  _bettingSeconds: 90
   _lockCountdownSeconds: 3
   _revealSeconds: 7
   _loseUnplacedMoney: 1

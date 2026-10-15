@@ -66,7 +66,7 @@ namespace Trivias.App.Tests
             table.Interact(new InteractionContext(_client, InteractionAction.Tertiary));
             yield return null;
             Assert.That(table.TryGetPrompt(default, out var prompt), Is.True);
-            Assert.That(prompt, Does.Contain("coger bolsa"));
+            Assert.That(prompt, Does.Contain("Coger bolsa"));
             table.Interact(new InteractionContext(_client, InteractionAction.Primary));
             yield return null;
             Assert.That(ledger.Items[ledger.FindCarriedBy(_client)].Denomination, Is.EqualTo(Denomination.Bag));

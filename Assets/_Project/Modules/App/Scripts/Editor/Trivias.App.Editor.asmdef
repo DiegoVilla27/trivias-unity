@@ -30,7 +30,8 @@
         "Trivias.SelfBet.Editor",
         "Trivias.SelfBet",
         "Trivias.Results.Editor",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Trivias.Menu.Editor"
     ],
     "includePlatforms": [
         "Editor"

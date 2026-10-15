@@ -64,8 +64,11 @@ namespace Trivias.Match.Data
         /// <summary>Nombres de los expulsados en la última ronda, o vacío.</summary>
         string LastEliminated { get; }
 
-        /// <summary>Segundos que quedan de la fase actual (cuenta atrás o revelación); 0 si no tiene tiempo.</summary>
+        /// <summary>Segundos que quedan de la fase actual (apuestas con tiempo, cuenta atrás o revelación); 0 si no tiene tiempo.</summary>
         float PhaseSecondsLeft { get; }
+
+        /// <summary>Las apuestas tienen tiempo límite (al acabar se verifica sola).</summary>
+        bool IsBettingTimed { get; }
 
         /// <summary>Dinero total del equipo.</summary>
         long TeamMoney { get; }

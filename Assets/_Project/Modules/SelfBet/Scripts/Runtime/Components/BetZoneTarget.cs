@@ -83,23 +83,21 @@ namespace Trivias.SelfBet.Components
             if (bettor.Booth == _booth)
             {
                 _prompt = CanVerifyFromHere(session)
-                    ? $"E: cancelar mi apuesta en {Letter}     Q: VERIFICAR (estáis todos apostados)"
-                    : $"E: cancelar mi apuesta en {Letter}";
+                    ? PromptText.Join(PromptText.Key("E", "Cancelar apuesta"), PromptText.Key("Q", "VERIFICAR"))
+                    : PromptText.Key("E", "Cancelar apuesta");
                 return;
             }
 
             if (bettor.HasBet)
             {
-                _prompt = $"E: cambiar mi apuesta a {Letter}";
+                _prompt = PromptText.Key("E", $"Cambiar apuesta a {Letter}");
                 return;
             }
 
             var uses = book.AvailableUses(session.LocalClientId);
             _prompt = uses > 0
-                ? bettor.PersonalUses > 0
-                    ? $"E: apostarme en {Letter} (comodines: {uses})"
-                    : $"E: apostarme en {Letter} (reserva del equipo: {uses})"
-                : "Sin comodines disponibles";
+                ? PromptText.Key("E", bettor.PersonalUses > 0 ? $"Apostarme en {Letter}" : $"Apostarme en {Letter} (reserva)")
+                : "Sin comodines";
         }
     }
 }

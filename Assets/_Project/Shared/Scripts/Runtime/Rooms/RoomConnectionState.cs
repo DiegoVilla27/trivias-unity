@@ -1,6 +1,6 @@
-namespace Trivias.Networking.Logic
+namespace Trivias.Shared.Rooms
 {
-    public enum ConnectionState
+    public enum RoomConnectionState
     {
         Disconnected,
         Connecting,

@@ -7,6 +7,8 @@ namespace Trivias.Match.Data
     public sealed class MatchConfig : ScriptableObject
     {
         [SerializeField, Range(1, 30)] private int _questionsPerMatch = 15;
+        [Tooltip("Segundos para repartir el dinero en cada pregunta. Al llegar a 0 se verifica sola. 0 = sin límite.")]
+        [SerializeField, Range(0, 300)] private int _bettingSeconds = 90;
         [Tooltip("Cuenta atrás tras pulsar VERIFICAR (GDD: 3 segundos).")]
         [SerializeField, Range(1f, 10f)] private float _lockCountdownSeconds = 3f;
         [Tooltip("Tiempo mostrando la respuesta y el resultado antes de la siguiente pregunta.")]
@@ -21,6 +23,8 @@ namespace Trivias.Match.Data
         [SerializeField] private int[] _tokenTierRewards = { 50, 100, 150, 250 };
 
         public int QuestionsPerMatch => _questionsPerMatch;
+        public int BettingSeconds => _bettingSeconds;
+        public bool HasBettingTimer => _bettingSeconds > 0;
         public float LockCountdownSeconds => _lockCountdownSeconds;
         public float RevealSeconds => _revealSeconds;
         public bool LoseUnplacedMoney => _loseUnplacedMoney;

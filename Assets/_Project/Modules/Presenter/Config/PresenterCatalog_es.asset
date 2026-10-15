@@ -74,3 +74,9 @@ MonoBehaviour:
   - _id: defeat-02
     _event: 7
     _text: "Derrota. El decorado ya tiene presupuesto para la pr\xF3xima temporada."
+  - _id: time-01
+    _event: 8
+    _text: "\xA1Diez segundos! El dinero no se mueve solo."
+  - _id: time-02
+    _event: 8
+    _text: "Se acaba el tiempo. El tubo ya est\xE1 contando con vosotros."

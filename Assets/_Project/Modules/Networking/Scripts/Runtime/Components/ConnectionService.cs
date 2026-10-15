@@ -2,6 +2,7 @@ using Trivias.Networking.Data;
 using Trivias.Networking.Logic;
 using Trivias.Shared.Diagnostics;
 using Trivias.Shared.Events;
+using Trivias.Shared.Rooms;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Trivias.Networking.Components
     /// queda oculto detrás de este servicio. Expone el estado de la conexión para la interfaz.
     /// </summary>
     [RequireComponent(typeof(NetworkManager))]
-    public sealed class ConnectionService : MonoBehaviour
+    public sealed class ConnectionService : MonoBehaviour, IRoomConnection
     {
         private const int CONNECT_ATTEMPT_MS = 1000;
 
@@ -29,11 +30,13 @@ namespace Trivias.Networking.Components
         [SerializeField] private VoidEventChannel _returnedToLobby;
         [Tooltip("Petición local de salir de la sala (pantalla de resultados).")]
         [SerializeField] private VoidEventChannel _leaveRoomRequested;
+        [Tooltip("Publica esta conexión para el menú (que no conoce el módulo de red).")]
+        [SerializeField] private RoomConnectionRuntime _roomRuntime;
 
         private string _targetAddress;
 
         public NetworkSessionConfig Config => _config;
-        public ConnectionState State { get; private set; } = ConnectionState.Disconnected;
+        public RoomConnectionState State { get; private set; } = RoomConnectionState.Disconnected;
         public string StatusMessage { get; private set; } = string.Empty;
         public bool IsHost => _networkManager.IsHost;
         public int ConnectedPlayers => _networkManager.IsServer ? _networkManager.ConnectedClientsIds.Count : 0;
@@ -51,6 +54,7 @@ namespace Trivias.Networking.Components
             _networkManager.OnClientDisconnectCallback += OnClientDisconnected;
             _returnedToLobby.Register(OnReturnedToLobby);
             _leaveRoomRequested.Register(Leave);
+            _roomRuntime.Attach(this);
         }
 
         private void OnDestroy()
@@ -63,14 +67,27 @@ namespace Trivias.Networking.Components
             _networkManager.OnClientDisconnectCallback -= OnClientDisconnected;
             _returnedToLobby.Unregister(OnReturnedToLobby);
             _leaveRoomRequested.Unregister(Leave);
+            _roomRuntime.Detach(this);
         }
+
+        // ---- IRoomConnection (menú) ----
+
+        public int MaxPlayers => _config.MaxPlayers;
+        public int MinPlayersToStart => _config.MinPlayersToStart;
+        public string DefaultAddress => _config.DefaultAddress;
+
+        public void Host() => StartHost();
+
+        public void Join(string address) => StartClient(string.IsNullOrWhiteSpace(address) ? _config.DefaultAddress : address.Trim());
+
+        public void StartMatch() => TryStartMatch();
 
         private void OnReturnedToLobby()
         {
             if (!_networkManager.IsHost)
                 return;
             MatchStarted = false;
-            SetState(ConnectionState.Connected, "De vuelta en la sala. La sala vuelve a admitir jugadores.");
+            SetState(RoomConnectionState.Connected, "De vuelta en la sala. La sala vuelve a admitir jugadores.");
         }
 
         public bool StartHost()
@@ -81,7 +98,7 @@ namespace Trivias.Networking.Components
             var started = _networkManager.StartHost();
             if (started)
                 SpawnSessionObjects();
-            SetState(started ? ConnectionState.Connected : ConnectionState.Failed,
+            SetState(started ? RoomConnectionState.Connected : RoomConnectionState.Failed,
                 started
                     ? "Sala creada. Los demás jugadores deben pulsar «Unirse»."
                     : $"No se pudo crear la sala. ¿Hay otra sala abierta en el puerto {_config.Port}?");
@@ -95,7 +112,7 @@ namespace Trivias.Networking.Components
             _transport.SetConnectionData(address, _config.Port);
 
             var started = _networkManager.StartClient();
-            SetState(started ? ConnectionState.Connecting : ConnectionState.Failed,
+            SetState(started ? RoomConnectionState.Connecting : RoomConnectionState.Failed,
                 started ? $"Buscando la sala en {address}..." : "No se pudo iniciar la conexión.");
             return started;
         }
@@ -104,7 +121,7 @@ namespace Trivias.Networking.Components
         {
             _networkManager.Shutdown();
             MatchStarted = false;
-            SetState(ConnectionState.Disconnected, string.Empty);
+            SetState(RoomConnectionState.Disconnected, string.Empty);
         }
 
         /// <summary>Host: empieza la partida si se cumple el mínimo de jugadores y cierra la sala a nuevas entradas.</summary>
@@ -115,7 +132,7 @@ namespace Trivias.Networking.Components
 
             MatchStarted = true;
             _matchStartRequested.Raise();
-            SetState(ConnectionState.Connected, $"Partida empezada con {ConnectedPlayers} jugador(es). La sala está cerrada.");
+            SetState(RoomConnectionState.Connected, $"Partida empezada con {ConnectedPlayers} jugador(es). La sala está cerrada.");
             return true;
         }
 
@@ -142,36 +159,39 @@ namespace Trivias.Networking.Components
 
         private void OnClientConnected(ulong clientId)
         {
+            _roomRuntime.NotifyChanged(); // El host ve cambiar el número de jugadores.
             if (clientId == _networkManager.LocalClientId && !_networkManager.IsHost)
-                SetState(ConnectionState.Connected, "Conectado a la sala.");
+                SetState(RoomConnectionState.Connected, "Conectado a la sala.");
         }
 
         private void OnClientDisconnected(ulong clientId)
         {
+            _roomRuntime.NotifyChanged();
             // En el host este evento también llega cuando se va otro jugador: solo nos importa la conexión propia.
             if (_networkManager.IsServer && clientId != NetworkManager.ServerClientId)
                 return;
 
             var reason = _networkManager.DisconnectReason;
-            if (State == ConnectionState.Connecting)
+            if (State == RoomConnectionState.Connecting)
             {
-                SetState(ConnectionState.Failed, string.IsNullOrEmpty(reason)
+                SetState(RoomConnectionState.Failed, string.IsNullOrEmpty(reason)
                     ? $"No hay ninguna sala en {_targetAddress}. Primero alguien debe pulsar «Crear sala»."
                     : reason);
             }
-            else if (State == ConnectionState.Connected)
+            else if (State == RoomConnectionState.Connected)
             {
                 // El motivo que da NGO al cerrarse la sala es técnico; al jugador le basta con saber qué pasó.
-                SetState(ConnectionState.Disconnected, _networkManager.IsServer
+                SetState(RoomConnectionState.Disconnected, _networkManager.IsServer
                     ? string.Empty
                     : "Se cerró la sala o se perdió la conexión con el host.");
             }
         }
 
-        private void SetState(ConnectionState state, string message)
+        private void SetState(RoomConnectionState state, string message)
         {
             State = state;
             StatusMessage = message;
+            _roomRuntime.NotifyChanged();
             GameLog.Info($"[Red] {state}: {message}", this);
         }
 

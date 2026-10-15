@@ -100,6 +100,16 @@
       "id": "defeat-02",
       "event": "defeat",
       "text": "Derrota. El decorado ya tiene presupuesto para la próxima temporada."
+    },
+    {
+      "id": "time-01",
+      "event": "time_running_out",
+      "text": "¡Diez segundos! El dinero no se mueve solo."
+    },
+    {
+      "id": "time-02",
+      "event": "time_running_out",
+      "text": "Se acaba el tiempo. El tubo ya está contando con vosotros."
     }
   ]
 }
