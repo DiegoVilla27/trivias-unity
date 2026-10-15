@@ -486,6 +486,330 @@
       "correctOptionId": "b",
       "explanation": "El muro cayó el 9 de noviembre de 1989; la reunificación alemana llegó en 1990.",
       "source": "https://es.wikipedia.org/wiki/Caída_del_Muro_de_Berlín"
+    },
+    {
+      "id": "nat-002",
+      "category": "Naturaleza",
+      "difficulty": 1,
+      "text": "¿Cuál es el animal terrestre más grande del mundo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rinoceronte blanco"
+        },
+        {
+          "id": "b",
+          "text": "Elefante africano"
+        },
+        {
+          "id": "c",
+          "text": "Hipopótamo"
+        },
+        {
+          "id": "d",
+          "text": "Jirafa"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "El elefante africano de sabana puede superar las seis toneladas.",
+      "source": "https://es.wikipedia.org/wiki/Loxodonta_africana"
+    },
+    {
+      "id": "cur-001",
+      "category": "Curiosidades",
+      "difficulty": 1,
+      "text": "¿Cuántos días tiene un año bisiesto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "365"
+        },
+        {
+          "id": "b",
+          "text": "364"
+        },
+        {
+          "id": "c",
+          "text": "366"
+        },
+        {
+          "id": "d",
+          "text": "360"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "El año bisiesto añade el 29 de febrero, así que tiene 366 días.",
+      "source": "https://es.wikipedia.org/wiki/Año_bisiesto"
+    },
+    {
+      "id": "geo-006",
+      "category": "Geografía",
+      "difficulty": 1,
+      "text": "¿En qué continente está la mayor parte de Egipto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Asia"
+        },
+        {
+          "id": "b",
+          "text": "Europa"
+        },
+        {
+          "id": "c",
+          "text": "Oceanía"
+        },
+        {
+          "id": "d",
+          "text": "África"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Egipto está en el noreste de África; solo la península del Sinaí está en Asia.",
+      "source": "https://es.wikipedia.org/wiki/Egipto"
+    },
+    {
+      "id": "mus-002",
+      "category": "Música",
+      "difficulty": 1,
+      "text": "¿Qué instrumento tiene teclas blancas y negras?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Piano"
+        },
+        {
+          "id": "b",
+          "text": "Violín"
+        },
+        {
+          "id": "c",
+          "text": "Trompeta"
+        },
+        {
+          "id": "d",
+          "text": "Arpa"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El piano tiene 52 teclas blancas y 36 negras en su versión estándar de 88 teclas.",
+      "source": "https://es.wikipedia.org/wiki/Piano"
+    },
+    {
+      "id": "cie-007",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Cuál es el planeta más grande del sistema solar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Saturno"
+        },
+        {
+          "id": "b",
+          "text": "Júpiter"
+        },
+        {
+          "id": "c",
+          "text": "Neptuno"
+        },
+        {
+          "id": "d",
+          "text": "Urano"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Júpiter tiene más del doble de masa que todos los demás planetas juntos.",
+      "source": "https://es.wikipedia.org/wiki/Júpiter_(planeta)"
+    },
+    {
+      "id": "geo-007",
+      "category": "Geografía",
+      "difficulty": 2,
+      "text": "¿En qué país se encuentra Machu Picchu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bolivia"
+        },
+        {
+          "id": "b",
+          "text": "Chile"
+        },
+        {
+          "id": "c",
+          "text": "Perú"
+        },
+        {
+          "id": "d",
+          "text": "Ecuador"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Machu Picchu es una ciudadela inca en los Andes de Perú, cerca de Cuzco.",
+      "source": "https://es.wikipedia.org/wiki/Machu_Picchu"
+    },
+    {
+      "id": "cie-008",
+      "category": "Ciencia",
+      "difficulty": 2,
+      "text": "¿Quién formuló la teoría de la relatividad?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "b",
+          "text": "Galileo Galilei"
+        },
+        {
+          "id": "c",
+          "text": "Niels Bohr"
+        },
+        {
+          "id": "d",
+          "text": "Albert Einstein"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Einstein publicó la relatividad especial en 1905 y la general en 1915.",
+      "source": "https://es.wikipedia.org/wiki/Teoría_de_la_relatividad"
+    },
+    {
+      "id": "cur-002",
+      "category": "Curiosidades",
+      "difficulty": 2,
+      "text": "¿Cuál es la moneda oficial de Japón?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yen"
+        },
+        {
+          "id": "b",
+          "text": "Won"
+        },
+        {
+          "id": "c",
+          "text": "Yuan"
+        },
+        {
+          "id": "d",
+          "text": "Rupia"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El yen es la moneda de Japón; el won es de Corea y el yuan, de China.",
+      "source": "https://es.wikipedia.org/wiki/Yen"
+    },
+    {
+      "id": "geo-008",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es el país más pequeño del mundo por superficie?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mónaco"
+        },
+        {
+          "id": "b",
+          "text": "Ciudad del Vaticano"
+        },
+        {
+          "id": "c",
+          "text": "San Marino"
+        },
+        {
+          "id": "d",
+          "text": "Liechtenstein"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "La Ciudad del Vaticano mide unas 44 hectáreas, dentro de Roma.",
+      "source": "https://es.wikipedia.org/wiki/Ciudad_del_Vaticano"
+    },
+    {
+      "id": "his-003",
+      "category": "Historia",
+      "difficulty": 3,
+      "text": "¿En qué año comenzó la Revolución francesa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1776"
+        },
+        {
+          "id": "b",
+          "text": "1799"
+        },
+        {
+          "id": "c",
+          "text": "1789"
+        },
+        {
+          "id": "d",
+          "text": "1815"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Suele situarse su inicio en 1789, con la toma de la Bastilla el 14 de julio.",
+      "source": "https://es.wikipedia.org/wiki/Revolución_francesa"
+    },
+    {
+      "id": "cie-009",
+      "category": "Ciencia",
+      "difficulty": 3,
+      "text": "¿Quién fue la primera persona en ganar dos premios Nobel?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rosalind Franklin"
+        },
+        {
+          "id": "b",
+          "text": "Lise Meitner"
+        },
+        {
+          "id": "c",
+          "text": "Ada Lovelace"
+        },
+        {
+          "id": "d",
+          "text": "Marie Curie"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Marie Curie ganó el Nobel de Física en 1903 y el de Química en 1911.",
+      "source": "https://es.wikipedia.org/wiki/Marie_Curie"
+    },
+    {
+      "id": "geo-009",
+      "category": "Geografía",
+      "difficulty": 3,
+      "text": "¿Cuál es la montaña más alta de África?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kilimanjaro"
+        },
+        {
+          "id": "b",
+          "text": "Monte Kenia"
+        },
+        {
+          "id": "c",
+          "text": "Monte Stanley"
+        },
+        {
+          "id": "d",
+          "text": "Toubkal"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "El Kilimanjaro, en Tanzania, alcanza unos 5.895 metros.",
+      "source": "https://es.wikipedia.org/wiki/Kilimanjaro"
     }
   ]
 }

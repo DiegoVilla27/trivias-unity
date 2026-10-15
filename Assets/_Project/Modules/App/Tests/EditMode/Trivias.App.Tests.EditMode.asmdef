@@ -4,7 +4,11 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Trivias.Shared"
+        "Trivias.Shared",
+        "Trivias.Questions",
+        "Trivias.Presenter",
+        "Trivias.Money",
+        "Trivias.Shop"
     ],
     "includePlatforms": [
         "Editor"

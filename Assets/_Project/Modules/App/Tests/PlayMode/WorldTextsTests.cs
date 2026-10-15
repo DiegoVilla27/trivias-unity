@@ -124,15 +124,18 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void PresenterBubble_ShowsTheCurrentLine()
+        public void PresenterSpeaks_OnlyInTheBubbleAboveHisHead()
         {
-            var view = Object.FindObjectsByType<PresenterLineView>(FindObjectsInactive.Exclude);
-            Assert.That(view.Length, Is.EqualTo(2), "Bocadillo en el plató y subtítulo en pantalla.");
-            foreach (var line in view)
-            {
-                Assert.That(Field<GameObject>(line, "_container").activeSelf, Is.True, "Al empezar, el presentador habla.");
-                Assert.That(Field<TMP_Text>(line, "_label").text, Is.Not.Empty);
-            }
+            var views = Object.FindObjectsByType<PresenterLineView>(FindObjectsInactive.Include);
+            Assert.That(views.Length, Is.EqualTo(1), "El presentador habla solo en su viñeta (ni subtítulos ni HUD).");
+            var view = views[0];
+            Assert.That(view.GetComponentInParent<Canvas>(), Is.Null, "La viñeta está en el plató, no en la interfaz.");
+            Assert.That(view.name, Is.EqualTo("Presenter"));
+
+            var bubble = Field<GameObject>(view, "_container");
+            Assert.That(bubble.activeSelf, Is.True, "Al empezar, el presentador da la bienvenida.");
+            Assert.That(bubble.transform.position.y, Is.GreaterThan(view.transform.position.y + 3f), "La viñeta va sobre su cabeza.");
+            Assert.That(Field<TMP_Text>(view, "_label").text, Is.Not.Empty);
         }
 
         [Test]

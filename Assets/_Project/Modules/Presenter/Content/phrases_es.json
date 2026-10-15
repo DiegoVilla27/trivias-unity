@@ -9,7 +9,7 @@
     {
       "id": "welcome-02",
       "event": "welcome",
-      "text": "Quince preguntas, cien mil y un decorado que necesita financiación. ¡Empezamos!"
+      "text": "Quince preguntas, {premio} y un decorado que necesita financiación. ¡Empezamos!"
     },
     {
       "id": "discussion-01",
@@ -59,7 +59,7 @@
     {
       "id": "success-03",
       "event": "success",
-      "text": "Multiplicador x{multiplicador}. El presupuesto del decorado está llorando."
+      "text": "Acierto. El presupuesto del decorado está llorando."
     },
     {
       "id": "loss-01",

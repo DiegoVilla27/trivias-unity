@@ -1,3 +1,4 @@
+using Trivias.Shared.Profile;
 using UnityEngine;
 
 namespace Trivias.Shared.Players
@@ -12,6 +13,15 @@ namespace Trivias.Shared.Players
         string DisplayName { get; }
         Vector3 Position { get; }
         Transform CarryPoint { get; }
+
+        /// <summary>Hueso de la cabeza: ahí se colocan gorras, gafas, coronas...</summary>
+        Transform HeadAnchor { get; }
+
+        /// <summary>Mallas del cuerpo, para teñir el traje con el color equipado.</summary>
+        Renderer[] BodyRenderers { get; }
+
+        /// <summary>Cosméticos que lleva puestos (iguales en todos los clientes).</summary>
+        CosmeticLoadout Loadout { get; }
 
         /// <summary>Eliminado hasta la siguiente partida (GDD 5.3): ni se mueve, ni toca dinero, ni verifica.</summary>
         bool IsEliminated { get; }

@@ -5,7 +5,8 @@ Estas reglas se cumplen siempre, sin excepción. Si una regla de `.agents/AGENTS
 ## 0. Contexto
 
 - Juego: concurso de trivias cooperativo 2–6 jugadores, PC/Steam. Unity 6 (6000.6) + URP, tercera persona con Cinemachine, Input System, Netcode for GameObjects + Facepunch.Steamworks, voz de Steam enrutada por el host.
-- Diseño: `~/Desktop/Trivias/GDD.md` (referencia principal) y `~/Desktop/Trivias/docs/*.md`. Bocetos en `~/Desktop/Trivias/docs/bocetos/`. Una regla de juego nueva va primero al GDD y luego a los docs afectados.
+- Diseño: `docs/GDD.md` (referencia principal) y `docs/*.md` en la raíz del repositorio. Bocetos en `docs/bocetos/`.
+- **Documentación siempre al día (regla del usuario):** todo cambio de reglas, contenido, interfaz o arquitectura se refleja en el mismo trabajo en el GDD (con entrada en su historial) y en los docs afectados (`LEVEL`, `PLAYER`, `SISTEMAS`, `CONTENIDO`, `UI_UX`, `RECURSOS`, `DESARROLLO`). Comprobar que los enlaces internos siguen funcionando.
 - Fase actual: **MVP**. Todo el arte son primitivas de Unity (cubo, cilindro, esfera, cápsula, plano) con materiales simples. Única excepción: el personaje `PlayerArmature` de Starter Assets.
 - Agente y skills: `.agents/AGENTS.md` (importado abajo, siempre en contexto) y `.agents/skills/` (enlazadas en `.claude/skills/`, invocables con la herramienta Skill). Antes de trabajar en un área, **cargar la skill correspondiente** (p. ej. `unity-networking-multiplayer`, `unity-camera-systems`, `unity-scriptable-objects`, `unity-performance-profiling`, `unity-core-architecture`).
 
@@ -92,7 +93,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 
 | Módulo | Contenido | Puede depender de |
 | --- | --- | --- |
-| Shared | Canales de eventos, capas, logger, puntos de aparición; utilidades de editor (`Shared.Editor`) | — |
+| Shared | Canales de eventos, capas, logger, puntos de aparición, contratos (interacción, jugadores, sala), perfil del jugador (fichas y compras); utilidades de editor (`Shared.Editor`) | — |
 | Networking | NetworkManager, conexión local (Unity Transport), admisión a sala; se publica como `IRoomConnection` | Shared |
 | Player | Concursante: entrada, movimiento, mirada, nombre, punto de carga, red | Shared |
 | Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
@@ -106,6 +107,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), elección por evento, bocadillo y subtítulo | Shared, Match, Money, SelfBet, Questions |
 | Results | Pantalla de resultados, volver a jugar y salir | Shared, Match, Money, Questions |
 | Menu | Menú principal (crear/unirse) y sala de espera; se oculta durante la partida | Shared, Match, Money, Questions |
+| Shop | Tienda del vestíbulo, catálogo de cosméticos (primitivas) y presentador que viste a los concursantes | Shared |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
 | Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
 
@@ -114,7 +116,7 @@ Comunicación entre módulos sin referencias directas: contratos en `Shared` (`I
 
 Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-Módulos previstos aún sin crear: `Voice`, `Shop`, `Ranking`.
+Módulos previstos aún sin crear: `Voice`, `Ranking`.
 
 ## 4. Flujo de trabajo con Unity
 

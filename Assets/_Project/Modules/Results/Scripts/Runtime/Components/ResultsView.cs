@@ -3,6 +3,7 @@ using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Logic;
 using Trivias.Shared.Events;
+using Trivias.Shared.Profile;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ namespace Trivias.Results.Components
 
         [SerializeField] private MatchRuntime _match;
         [SerializeField] private VoidEventChannel _leaveRoomRequested;
+        [SerializeField] private PlayerProfile _profile;
         [SerializeField] private GameObject _panel;
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _details;
@@ -50,6 +52,9 @@ namespace Trivias.Results.Components
                 return;
 
             var result = session.Result;
+            // Las fichas se guardan en el perfil local una sola vez por partida (GDD 11).
+            _profile.AwardMatch(result.MatchId.ToString(), result.TokensEach);
+
             _title.text = result.Victory ? "¡VICTORIA!" : "DERROTA";
             _title.color = result.Victory ? new Color(0.36f, 1f, 0.48f) : new Color(1f, 0.45f, 0.45f);
 
@@ -59,7 +64,8 @@ namespace Trivias.Results.Components
                 $"Preguntas superadas: <b>{result.QuestionsPassed} / {session.TotalQuestions}</b>\n" +
                 $"Dinero final: <b>{MoneyFormat.Amount(result.FinalMoney)}</b>\n" +
                 $"Tiempo total: <b>{MatchResult.FormatDuration(result.DurationSeconds)}</b>\n\n" +
-                $"<color={GOLD}><b>{result.TokensEach} fichas para cada jugador</b></color>\n\n" +
+                $"<color={GOLD}><b>{result.TokensEach} fichas para cada jugador</b></color>\n" +
+                $"<size=80%>Tienes {_profile.Tokens} fichas · gástalas en la tienda</size>\n\n" +
                 $"Supervivientes: {survivors}\n<color={MUTED}>Expulsados: {eliminated}</color>";
 
             _playAgainButton.interactable = session.IsHost;

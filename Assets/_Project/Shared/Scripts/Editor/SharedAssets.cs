@@ -3,6 +3,7 @@ using Trivias.Shared.Gameplay;
 using Trivias.Shared.Input;
 using Trivias.Shared.Interaction;
 using Trivias.Shared.Players;
+using Trivias.Shared.Profile;
 using Trivias.Shared.Rooms;
 using Trivias.Shared.Spawning;
 
@@ -23,6 +24,8 @@ namespace Trivias.Shared.Editor
         private const string RETURNED_TO_LOBBY_PATH = CONFIG_ROOT + "/Events/ReturnedToLobby.asset";
         private const string LEAVE_ROOM_REQUESTED_PATH = CONFIG_ROOT + "/Events/LeaveRoomRequested.asset";
         private const string ROOM_CONNECTION_PATH = CONFIG_ROOT + "/Rooms/RoomConnectionRuntime.asset";
+        private const string PLAYER_PROFILE_PATH = CONFIG_ROOT + "/Profile/PlayerProfile.asset";
+        private const string OPEN_SHOP_PATH = CONFIG_ROOT + "/Events/OpenShopRequested.asset";
         private const string CURSOR_CAPTURE_BLOCKERS_PATH = CONFIG_ROOT + "/Input/CursorCaptureBlockers.asset";
 
         public static TransformEventChannel LocalPlayerCameraTarget() =>
@@ -45,6 +48,13 @@ namespace Trivias.Shared.Editor
         /// <summary>Petición local de salir de la sala (p. ej. desde la pantalla de resultados).</summary>
         public static VoidEventChannel LeaveRoomRequested() =>
             EditorAssets.GetOrCreateAsset<VoidEventChannel>(LEAVE_ROOM_REQUESTED_PATH);
+
+        public static PlayerProfile PlayerProfile() =>
+            EditorAssets.GetOrCreateAsset<PlayerProfile>(PLAYER_PROFILE_PATH);
+
+        /// <summary>Petición local de abrir la tienda (botón del vestíbulo).</summary>
+        public static VoidEventChannel OpenShopRequested() =>
+            EditorAssets.GetOrCreateAsset<VoidEventChannel>(OPEN_SHOP_PATH);
 
         public static RoomConnectionRuntime RoomConnection() =>
             EditorAssets.GetOrCreateAsset<RoomConnectionRuntime>(ROOM_CONNECTION_PATH);

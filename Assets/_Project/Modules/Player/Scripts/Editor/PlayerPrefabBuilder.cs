@@ -32,6 +32,7 @@ namespace Trivias.Player.Editor
         private const string SFX_FOLDER = STARTER_CHARACTER + "/Sfx";
 
         private const float CAMERA_ROOT_HEIGHT = 1.375f;
+        private const string HEAD_BONE = "Head";
         private const float NAME_TAG_HEIGHT = 2.15f;
         private static readonly Vector3 CarryPointPosition = new(0f, 1.05f, 0.38f);
 
@@ -110,6 +111,9 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_carrySocket", carrySocket);
             SerializedWiring.Set(playerNetwork, "_expulsion", expulsion);
             SerializedWiring.Set(playerNetwork, "_avatars", SharedAssets.PlayerAvatars());
+            SerializedWiring.Set(playerNetwork, "_profile", SharedAssets.PlayerProfile());
+            SerializedWiring.Set(playerNetwork, "_headAnchor", FindDeep(animator.transform, HEAD_BONE));
+            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers", animator.GetComponentsInChildren<SkinnedMeshRenderer>(true));
 
             foreach (var extend in extensions)
                 extend(root);
@@ -174,6 +178,19 @@ namespace Trivias.Player.Editor
                 .OrderBy(p => p)
                 .Select(AssetDatabase.LoadAssetAtPath<AudioClip>)
                 .ToArray();
+
+        private static Transform FindDeep(Transform parent, string name)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child.name == name)
+                    return child;
+                var found = FindDeep(child, name);
+                if (found != null)
+                    return found;
+            }
+            return null;
+        }
 
         private static void SetLayerRecursively(GameObject go, int layer)
         {

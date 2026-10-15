@@ -1,6 +1,7 @@
 using Trivias.Player.Components;
 using Trivias.Shared.Events;
 using Trivias.Shared.Players;
+using Trivias.Shared.Profile;
 using Trivias.Shared.Spawning;
 using Unity.Collections;
 using Unity.Netcode;
@@ -23,6 +24,9 @@ namespace Trivias.Player.Network
         [SerializeField] private SpawnPointSet _spawnPoints;
         [SerializeField] private TransformEventChannel _localPlayerCameraTarget;
         [SerializeField] private PlayerAvatarRegistry _avatars;
+        [SerializeField] private PlayerProfile _profile;
+        [SerializeField] private Transform _headAnchor;
+        [SerializeField] private Renderer[] _bodyRenderers;
 
         private readonly NetworkVariable<FixedString32Bytes> _displayName = new(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -30,9 +34,20 @@ namespace Trivias.Player.Network
         private readonly NetworkVariable<bool> _eliminated = new(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+        // Lo escribe el dueño desde su perfil (lo que compró y equipó en la tienda).
+        private readonly NetworkVariable<LoadoutNet> _loadout = new(
+            default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         // Cada incremento pide al dueño volver a su punto de aparición (nueva partida).
         private readonly NetworkVariable<byte> _respawnSequence = new(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        // Lo recibido por red se aplica en LateUpdate, fuera de la lectura del paquete (un error aquí no debe
+        // interrumpir la sincronización del resto).
+        private bool _namePending;
+        private bool _eliminationPending;
+        private bool _respawnPending;
+        private bool _notifyPending;
 
         // ---- IPlayerAvatar ----
 
@@ -41,6 +56,9 @@ namespace Trivias.Player.Network
         public Vector3 Position => transform.position;
         public Transform CarryPoint => _carrySocket.CarryPoint;
         public bool IsEliminated => _eliminated.Value;
+        public Transform HeadAnchor => _headAnchor;
+        public Renderer[] BodyRenderers => _bodyRenderers;
+        public CosmeticLoadout Loadout => _loadout.Value.ToLoadout();
 
         public void Eliminate()
         {
@@ -66,6 +84,7 @@ namespace Trivias.Player.Network
             _displayName.OnValueChanged += OnDisplayNameChanged;
             _eliminated.OnValueChanged += OnEliminatedChanged;
             _respawnSequence.OnValueChanged += OnRespawnRequested;
+            _loadout.OnValueChanged += OnLoadoutChanged;
             _nameTag.SetName(DisplayName);
             _avatars.Register(this);
 
@@ -76,7 +95,20 @@ namespace Trivias.Player.Network
             SetLocalControl(true);
             _nameTag.gameObject.SetActive(false);
             _localPlayerCameraTarget.Raise(_look.CameraRoot);
+
+            // Lo que lleva puesto sale del perfil local; se actualiza al equipar en la tienda.
+            _profile.Changed += PublishLoadout;
+            PublishLoadout();
         }
+
+        private void PublishLoadout()
+        {
+            var loadout = LoadoutNet.From(_profile.Loadout);
+            if (!_loadout.Value.Equals(loadout))
+                _loadout.Value = loadout;
+        }
+
+        private void OnLoadoutChanged(LoadoutNet previous, LoadoutNet current) => _notifyPending = true;
 
         private void PlaceAtSpawn()
         {
@@ -89,9 +121,12 @@ namespace Trivias.Player.Network
             _displayName.OnValueChanged -= OnDisplayNameChanged;
             _eliminated.OnValueChanged -= OnEliminatedChanged;
             _respawnSequence.OnValueChanged -= OnRespawnRequested;
+            _loadout.OnValueChanged -= OnLoadoutChanged;
             _avatars.Unregister(OwnerClientId);
             if (!IsOwner)
                 return;
+
+            _profile.Changed -= PublishLoadout;
 
             SetLocalControl(false);
             _localPlayerCameraTarget.Raise(null);
@@ -104,16 +139,42 @@ namespace Trivias.Player.Network
             _look.enabled = isEnabled;
         }
 
-        private void OnDisplayNameChanged(FixedString32Bytes previous, FixedString32Bytes current)
+        private void OnDisplayNameChanged(FixedString32Bytes previous, FixedString32Bytes current) => _namePending = true;
+
+        private void LateUpdate()
         {
-            _nameTag.SetName(current.ToString());
-            _avatars.NotifyChanged(OwnerClientId);
+            if (_namePending)
+            {
+                _namePending = false;
+                _nameTag.SetName(DisplayName);
+                _notifyPending = true;
+            }
+
+            if (_eliminationPending)
+            {
+                _eliminationPending = false;
+                ApplyElimination();
+            }
+
+            if (_respawnPending)
+            {
+                _respawnPending = false;
+                ApplyRespawn();
+            }
+
+            if (_notifyPending)
+            {
+                _notifyPending = false;
+                _avatars.NotifyChanged(OwnerClientId);
+            }
         }
 
-        private void OnRespawnRequested(byte previous, byte current)
+        private void OnRespawnRequested(byte previous, byte current) => _respawnPending = true;
+
+        private void ApplyRespawn()
         {
             _expulsion.Restore(showNameTag: !IsOwner);
-            _avatars.NotifyChanged(OwnerClientId);
+            _notifyPending = true;
             if (!IsOwner)
                 return;
 
@@ -124,11 +185,14 @@ namespace Trivias.Player.Network
 
         private void OnEliminatedChanged(bool previous, bool current)
         {
-            if (!current)
-                return;
+            if (current)
+                _eliminationPending = true;
+        }
 
+        private void ApplyElimination()
+        {
             _expulsion.Play();
-            _avatars.NotifyChanged(OwnerClientId);
+            _notifyPending = true;
 
             if (!IsOwner)
                 return;

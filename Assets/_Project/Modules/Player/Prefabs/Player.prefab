@@ -316,6 +316,10 @@ MonoBehaviour:
   _spawnPoints: {fileID: 11400000, guid: 6332717e6265746b2937dc409714703d, type: 2}
   _localPlayerCameraTarget: {fileID: 11400000, guid: 19727193bfff446868b41f3e39b8954a, type: 2}
   _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
+  _profile: {fileID: 11400000, guid: 9d4ce40dc22c14f2f9c650663a2d32c2, type: 2}
+  _headAnchor: {fileID: 6390864205601537782}
+  _bodyRenderers:
+  - {fileID: 6824218075464240429}
 --- !u!114 &4373783049091285153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,5 +1074,15 @@ Transform:
 --- !u!95 &5481716589359831653 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_PrefabInstance: {fileID: 2123567724711389172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6390864205601537782 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4194957117132941054, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_PrefabInstance: {fileID: 2123567724711389172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6824218075464240429 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
   m_PrefabInstance: {fileID: 2123567724711389172}
   m_PrefabAsset: {fileID: 0}

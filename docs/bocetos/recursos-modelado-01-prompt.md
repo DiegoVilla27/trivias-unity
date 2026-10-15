@@ -1,0 +1,14 @@
+# Prompt — recursos-modelado-01
+
+Herramienta integrada de generación de imágenes. Referencia de estilo e identidad: concepto-01.png. Fondo opaco.
+
+```text
+Use case: stylized-concept. Asset type: 3D modeling reference sheet, not a game screenshot. The attached image is a STYLE AND IDENTITY REFERENCE ONLY; create a NEW dedicated reference sheet, do not reuse its panel layout. Preserve the charming rounded vinyl toy 3D aesthetic, clean chunky forms, soft matte surfaces and restrained gold trim. Landscape high-resolution board, neutral off-white background, evenly lit, minimal shadows, no dramatic perspective in turnarounds. Full objects and bodies visible with margins, views clearly separated, matching scale within each turnaround, consistent design across views. Accurate readable Spanish short labels. Show usable modeling silhouettes, no scenery, no crowds, no interface overlays or branding.
+Subject: modular game show level prop modeling reference sheet based closely on the answer booth, rounded central table, manual conversion mechanism and red verify button from reference.
+Organize clean rows with generous separation and clear panel borders.
+LARGE TOP SECTION: ONE red answer booth with gold edge trim, blue-gray base, front accessible sloped money tray, separate circular player standing pad adjoining the chamber, overhead transparent curved pneumatic ejection tube with gold connector collars. Display orthographic front, true side and back at matching scale, plus small isometric assembled view. Tube's entrance must connect coherently to the player's standing chamber; do not put a closed wall between standing chamber and tube. Keep modular chunky shapes easily modelable. Label CABINA: FRENTE, PERFIL, ESPALDA. Only booth letter A, no detailed question text.
+SECOND SECTION: simple exploded modular view showing enclosure, money tray, player pad, straight tube, elbow tube and connector collar, do not add hidden machinery. Label MODULOS. Include small color swatches red blue yellow green to show booth reuse, not four new booths.
+LOWER SECTION: central rounded table and simple hand-operated conversion station in isolated front and side view; separate red domed pushbutton on short pedestal, front and side, label VERIFICAR on its plaque; rectangular banknote bundle with paper band front side top; tied cloth money bag front side; trapezoidal gold ingot front side top; flat show screen and a simple small winners podium/giant blank cheque prop. Labels MESA, CAMBIO MANUAL, BOTON, FAJO, BOLSA, LINGOTE, PANTALLA, PODIO.
+Prioritize geometry and silhouettes over decorative microdetail. No numerical currency values, no measurements, no casino objects, no audience, no trapdoors, no wheels or carts, no character figures. Money bag is easy to carry in one hand; props share the same rounded style. Do not reproduce complete studio; this sheet is isolated construction references.
+```
+

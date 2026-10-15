@@ -38,6 +38,7 @@ namespace Trivias.Results.Editor
             var view = root.AddComponent<ResultsView>();
             SerializedWiring.Set(view, "_match", match);
             SerializedWiring.Set(view, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
+            SerializedWiring.Set(view, "_profile", SharedAssets.PlayerProfile());
             SerializedWiring.Set(view, "_panel", panel.gameObject);
             SerializedWiring.Set(view, "_title", title);
             SerializedWiring.Set(view, "_details", details);

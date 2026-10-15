@@ -3,6 +3,8 @@ namespace Trivias.Match.Logic
     /// <summary>Resultado final de la partida para la interfaz.</summary>
     public readonly struct MatchResult
     {
+        /// <summary>Identificador único de la partida (para entregar las fichas una sola vez).</summary>
+        public readonly uint MatchId;
         public readonly bool Victory;
         public readonly int QuestionsPassed;
         public readonly long FinalMoney;
@@ -11,9 +13,10 @@ namespace Trivias.Match.Logic
         public readonly string Survivors;
         public readonly string Eliminated;
 
-        public MatchResult(bool victory, int questionsPassed, long finalMoney, float durationSeconds, int tokensEach,
-            string survivors, string eliminated)
+        public MatchResult(uint matchId, bool victory, int questionsPassed, long finalMoney, float durationSeconds,
+            int tokensEach, string survivors, string eliminated)
         {
+            MatchId = matchId;
             Victory = victory;
             QuestionsPassed = questionsPassed;
             FinalMoney = finalMoney;

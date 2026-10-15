@@ -1,0 +1,20 @@
+# Personaje y presentador — Poses de modelado
+
+15 de octubre de 2026. Cuatro láminas nuevas, generadas con la herramienta integrada a partir de las referencias de personaje y presentador ya aprobadas.
+
+| Sujeto | Pose | Lámina final | Prompt |
+| --- | --- | --- | --- |
+| Personaje | T-pose | [Imagen](personaje-t-pose-v2.png) | [Prompt](personaje-t-pose-prompt.md) y [corrección](personaje-t-pose-correccion-prompt.md) |
+| Personaje | A-pose | [Imagen](personaje-a-pose.png) | [Prompt](personaje-a-pose-prompt.md) |
+| Presentador | T-pose | [Imagen](presentador-t-pose.png) | [Prompt](presentador-t-pose-prompt.md) |
+| Presentador | A-pose | [Imagen](presentador-a-pose-v2.png) | [Prompt](presentador-a-pose-prompt.md) y [corrección](presentador-a-pose-correccion-prompt.md) |
+
+Cada lámina contiene frente, espalda, perfiles opuestos, vista superior, inferior y tres cuartos delantero/trasero. Los perfiles repetidos de los primeros intentos del personaje T y presentador A se corrigieron en versiones v2; usar las finales indicadas arriba.
+
+[Paquete de las cuatro láminas finales y prompts](../personajes-poses-01.zip).
+
+## Uso para modelado
+
+Elegir una sola pose neutra para construir/riggear y usar la otra como referencia de postura. Alinear altura y proporciones en un único modelo. Estas imágenes son bocetos generados, no turnarounds dimensionalmente exactos: superior/inferior y tres cuartos tienen proyección aproximada y no se deben trazar como planos ortográficos certificados. En perfiles exactos la segunda mano o brazo pueden quedar ocultos por el primero.
+
+El presentador mantiene su identidad visual y comunica solo mediante texto. No incluye micrófono ni nueva función de voz. No cambian acciones o reglas del GDD.

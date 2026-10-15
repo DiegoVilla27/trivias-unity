@@ -50,6 +50,7 @@ namespace Trivias.Match.Network
 
         private int[] _plan; // Solo en el host.
         private double _startTime; // Solo en el host: inicio común del concurso (GDD 12.2).
+        private uint _matchId;     // Solo en el host: identifica la partida para entregar las fichas una vez.
         private readonly List<ulong> _eliminatedBuffer = new();
         private readonly List<ulong> _participants = new();
         private bool _notifyPending;
@@ -71,7 +72,7 @@ namespace Trivias.Match.Network
             get
             {
                 var result = _result.Value;
-                return new MatchResult(result.Victory, result.QuestionsPassed, result.FinalMoney, result.DurationSeconds,
+                return new MatchResult(result.MatchId, result.Victory, result.QuestionsPassed, result.FinalMoney, result.DurationSeconds,
                     result.TokensEach, result.Survivors.ToString(), result.Eliminated.ToString());
             }
         }
@@ -222,6 +223,7 @@ namespace Trivias.Match.Network
             _participants.AddRange(NetworkManager.ConnectedClientsIds);
             _selfBet.Authority.StartMatch(_participants);
             _startTime = NetworkManager.ServerTime.Time;
+            _matchId = (uint)random.Next(1, int.MaxValue);
             GameLog.Info($"[Partida] Empieza con {_plan.Length} preguntas.", this);
             ShowQuestion(1, random);
         }
@@ -300,6 +302,7 @@ namespace Trivias.Match.Network
 
             var result = new MatchResultNet
             {
+                MatchId = _matchId,
                 Victory = victory,
                 QuestionsPassed = (byte)passed,
                 FinalMoney = _lastRound.Value.Total,

@@ -29,9 +29,10 @@ namespace Trivias.App.Editor
         public GameObject CameraRig;
         public GameObject InteractionHud;
         public GameObject MatchHud;
-        public GameObject PresenterHud;
         public GameObject ResultsScreen;
         public GameObject Menu;
+        public GameObject ShopUi;
+        public GameObject AvatarCosmetics;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -65,8 +66,8 @@ namespace Trivias.App.Editor
             var table = Place(prefabs.Table, Vector3.zero, 0f);
             var exchange = Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
             Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
-            // A un lado de la pantalla, mirando al centro: no tapa las opciones.
-            Place(prefabs.Presenter, new Vector3(10f, 0f, 12.5f), 220f);
+            // A un lado de la pantalla, mirando al centro: ni él ni su viñeta tapan la pregunta.
+            Place(prefabs.Presenter, new Vector3(12.5f, 0f, 12f), 225f);
             var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
             ConnectMoney(table, exchange, booths);
@@ -77,9 +78,10 @@ namespace Trivias.App.Editor
             PlaceCameraRig(prefabs.CameraRig);
             PrefabUtility.InstantiatePrefab(prefabs.InteractionHud);
             PrefabUtility.InstantiatePrefab(prefabs.MatchHud);
-            PrefabUtility.InstantiatePrefab(prefabs.PresenterHud);
             PrefabUtility.InstantiatePrefab(prefabs.ResultsScreen);
             PrefabUtility.InstantiatePrefab(prefabs.Menu);
+            PrefabUtility.InstantiatePrefab(prefabs.ShopUi);
+            PrefabUtility.InstantiatePrefab(prefabs.AvatarCosmetics);
             CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);

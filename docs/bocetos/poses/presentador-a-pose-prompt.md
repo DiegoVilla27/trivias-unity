@@ -1,0 +1,11 @@
+# PRESENTADOR — A-POSE
+
+15 de octubre de 2026. Generación integrada. Referencia: presentador-modelado-01.png.
+
+```text
+Use case: stylized-concept. Asset type: dedicated 3D character modeling turnaround reference, not a mixed action sheet. The attached image is a reference ONLY for character identity and style. Create a NEW landscape sheet of the exact character, ONLY A-pose in every view. Title "PRESENTADOR — A-POSE". Same large-headed vinyl-style theatrical male host: salt-and-pepper pompadour, thick brows, curled dark moustache, burgundy tuxedo with subtle fine material sparkle, black lapels, white shirt, black bowtie, black pants and black rounded dress shoes. No microphone, no headset, no props.
+Pose: Neutral symmetrical A-pose, both arms straight angled downward 45 degrees below horizontal, elbows straight, palms oriented toward thighs, wrists neutral, legs straight with feet hip-width apart. Do not mix T-pose into this sheet. Neutral closed-mouth expression and head forward. Maintain identical posture, hair geometry, outfit and proportions in all views.
+Layout: upper row four matching-scale full-body pure orthographic views FRENTE, ESPALDA, PERFIL IZQUIERDO, PERFIL DERECHO, feet on common baseline, faint horizontal alignment guides at crown, shoulders and soles. Side views must really be 90-degree side projections, no turning face toward camera. A forearm may naturally be occluded in exact side projection; do not change pose to show it. Lower row: SUPERIOR viewed vertically down from directly above, INFERIOR viewed vertically up from directly below with shoe soles visible; plus smaller TRES CUARTOS DELANTERO and TRES CUARTOS TRASERO in same pose. Do not substitute frontal views for top/bottom: top shows crown and shoulders, underside shows soles and underside of hands, large head may obscure body naturally.
+Clean warm off-white background, minimal soft shadows, evenly lit high-quality rounded stylized 3D rendering. Generous margins, full hands/feet visible, no clipping or cropping. No scenery, no floor platform, no equipment, no extra poses, no measurements or skeleton diagrams, no logos/watermarks. Short accurate Spanish view labels. Prioritize consistent model proportions and clear silhouettes for Blender modeling, avoid perspective distortion in the six orthographic views.
+```
+

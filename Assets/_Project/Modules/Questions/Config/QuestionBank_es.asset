@@ -230,3 +230,147 @@ MonoBehaviour:
     _correctOption: 1
     _explanation: "El muro cay\xF3 el 9 de noviembre de 1989; la reunificaci\xF3n alemana lleg\xF3 en 1990."
     _source: "https://es.wikipedia.org/wiki/Ca\xEDda_del_Muro_de_Berl\xEDn"
+  - _id: nat-002
+    _category: Naturaleza
+    _difficulty: 1
+    _text: "\xBFCu\xE1l es el animal terrestre m\xE1s grande del mundo?"
+    _options:
+    - Rinoceronte blanco
+    - Elefante africano
+    - "Hipop\xF3tamo"
+    - Jirafa
+    _correctOption: 1
+    _explanation: El elefante africano de sabana puede superar las seis toneladas.
+    _source: https://es.wikipedia.org/wiki/Loxodonta_africana
+  - _id: cur-001
+    _category: Curiosidades
+    _difficulty: 1
+    _text: "\xBFCu\xE1ntos d\xEDas tiene un a\xF1o bisiesto?"
+    _options:
+    - 365
+    - 364
+    - 366
+    - 360
+    _correctOption: 2
+    _explanation: "El a\xF1o bisiesto a\xF1ade el 29 de febrero, as\xED que tiene 366 d\xEDas."
+    _source: "https://es.wikipedia.org/wiki/A\xF1o_bisiesto"
+  - _id: geo-006
+    _category: "Geograf\xEDa"
+    _difficulty: 1
+    _text: "\xBFEn qu\xE9 continente est\xE1 la mayor parte de Egipto?"
+    _options:
+    - Asia
+    - Europa
+    - "Ocean\xEDa"
+    - "\xC1frica"
+    _correctOption: 3
+    _explanation: "Egipto est\xE1 en el noreste de \xC1frica; solo la pen\xEDnsula del Sina\xED est\xE1 en Asia."
+    _source: https://es.wikipedia.org/wiki/Egipto
+  - _id: mus-002
+    _category: "M\xFAsica"
+    _difficulty: 1
+    _text: "\xBFQu\xE9 instrumento tiene teclas blancas y negras?"
+    _options:
+    - Piano
+    - "Viol\xEDn"
+    - Trompeta
+    - Arpa
+    _correctOption: 0
+    _explanation: "El piano tiene 52 teclas blancas y 36 negras en su versi\xF3n est\xE1ndar de 88 teclas."
+    _source: https://es.wikipedia.org/wiki/Piano
+  - _id: cie-007
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es el planeta m\xE1s grande del sistema solar?"
+    _options:
+    - Saturno
+    - "J\xFApiter"
+    - Neptuno
+    - Urano
+    _correctOption: 1
+    _explanation: "J\xFApiter tiene m\xE1s del doble de masa que todos los dem\xE1s planetas juntos."
+    _source: "https://es.wikipedia.org/wiki/J\xFApiter_(planeta)"
+  - _id: geo-007
+    _category: "Geograf\xEDa"
+    _difficulty: 2
+    _text: "\xBFEn qu\xE9 pa\xEDs se encuentra Machu Picchu?"
+    _options:
+    - Bolivia
+    - Chile
+    - "Per\xFA"
+    - Ecuador
+    _correctOption: 2
+    _explanation: "Machu Picchu es una ciudadela inca en los Andes de Per\xFA, cerca de Cuzco."
+    _source: https://es.wikipedia.org/wiki/Machu_Picchu
+  - _id: cie-008
+    _category: Ciencia
+    _difficulty: 2
+    _text: "\xBFQui\xE9n formul\xF3 la teor\xEDa de la relatividad?"
+    _options:
+    - Isaac Newton
+    - Galileo Galilei
+    - Niels Bohr
+    - Albert Einstein
+    _correctOption: 3
+    _explanation: "Einstein public\xF3 la relatividad especial en 1905 y la general en 1915."
+    _source: "https://es.wikipedia.org/wiki/Teor\xEDa_de_la_relatividad"
+  - _id: cur-002
+    _category: Curiosidades
+    _difficulty: 2
+    _text: "\xBFCu\xE1l es la moneda oficial de Jap\xF3n?"
+    _options:
+    - Yen
+    - Won
+    - Yuan
+    - Rupia
+    _correctOption: 0
+    _explanation: "El yen es la moneda de Jap\xF3n; el won es de Corea y el yuan, de China."
+    _source: https://es.wikipedia.org/wiki/Yen
+  - _id: geo-008
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es el pa\xEDs m\xE1s peque\xF1o del mundo por superficie?"
+    _options:
+    - "M\xF3naco"
+    - Ciudad del Vaticano
+    - San Marino
+    - Liechtenstein
+    _correctOption: 1
+    _explanation: "La Ciudad del Vaticano mide unas 44 hect\xE1reas, dentro de Roma."
+    _source: https://es.wikipedia.org/wiki/Ciudad_del_Vaticano
+  - _id: his-003
+    _category: Historia
+    _difficulty: 3
+    _text: "\xBFEn qu\xE9 a\xF1o comenz\xF3 la Revoluci\xF3n francesa?"
+    _options:
+    - 1776
+    - 1799
+    - 1789
+    - 1815
+    _correctOption: 2
+    _explanation: Suele situarse su inicio en 1789, con la toma de la Bastilla el 14 de julio.
+    _source: "https://es.wikipedia.org/wiki/Revoluci\xF3n_francesa"
+  - _id: cie-009
+    _category: Ciencia
+    _difficulty: 3
+    _text: "\xBFQui\xE9n fue la primera persona en ganar dos premios Nobel?"
+    _options:
+    - Rosalind Franklin
+    - Lise Meitner
+    - Ada Lovelace
+    - Marie Curie
+    _correctOption: 3
+    _explanation: "Marie Curie gan\xF3 el Nobel de F\xEDsica en 1903 y el de Qu\xEDmica en 1911."
+    _source: https://es.wikipedia.org/wiki/Marie_Curie
+  - _id: geo-009
+    _category: "Geograf\xEDa"
+    _difficulty: 3
+    _text: "\xBFCu\xE1l es la monta\xF1a m\xE1s alta de \xC1frica?"
+    _options:
+    - Kilimanjaro
+    - Monte Kenia
+    - Monte Stanley
+    - Toubkal
+    _correctOption: 0
+    _explanation: El Kilimanjaro, en Tanzania, alcanza unos 5.895 metros.
+    _source: https://es.wikipedia.org/wiki/Kilimanjaro

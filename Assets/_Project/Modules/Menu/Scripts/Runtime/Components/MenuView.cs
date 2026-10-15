@@ -2,7 +2,9 @@ using System.Text;
 using TMPro;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
+using Trivias.Shared.Events;
 using Trivias.Shared.Players;
+using Trivias.Shared.Profile;
 using Trivias.Shared.Rooms;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +36,9 @@ namespace Trivias.Menu.Components
         [SerializeField] private TextMeshProUGUI _lobbyInfo;
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _leaveButton;
+        [SerializeField] private Button _shopButton;
+        [SerializeField] private VoidEventChannel _openShopRequested;
+        [SerializeField] private PlayerProfile _profile;
 
         private readonly StringBuilder _builder = new();
 
@@ -46,6 +51,8 @@ namespace Trivias.Menu.Components
             _joinButton.onClick.AddListener(OnJoin);
             _startButton.onClick.AddListener(OnStart);
             _leaveButton.onClick.AddListener(OnLeave);
+            _shopButton.onClick.AddListener(OnShop);
+            _profile.Changed += Refresh;
             Refresh();
         }
 
@@ -58,6 +65,8 @@ namespace Trivias.Menu.Components
             _joinButton.onClick.RemoveListener(OnJoin);
             _startButton.onClick.RemoveListener(OnStart);
             _leaveButton.onClick.RemoveListener(OnLeave);
+            _shopButton.onClick.RemoveListener(OnShop);
+            _profile.Changed -= Refresh;
         }
 
         private void OnAvatarChanged(ulong _) => Refresh();
@@ -115,11 +124,11 @@ namespace Trivias.Menu.Components
 
             _startButton.gameObject.SetActive(connection.IsHost);
             _startButton.interactable = connection.CanStartMatch;
-            _lobbyInfo.text = connection.IsHost
+            _lobbyInfo.text = $"Tienes {_profile.Tokens} fichas\n" + (connection.IsHost
                 ? connection.MinPlayersToStart > 1
                     ? $"Se necesitan al menos {connection.MinPlayersToStart} jugadores."
                     : "Modo prueba: se puede empezar solo."
-                : "Esperando a que el host empiece la partida…";
+                : "Esperando a que el host empiece la partida…");
         }
 
         private void OnHost() => _room.Connection?.Host();
@@ -129,5 +138,7 @@ namespace Trivias.Menu.Components
         private void OnStart() => _room.Connection?.StartMatch();
 
         private void OnLeave() => _room.Connection?.Leave();
+
+        private void OnShop() => _openShopRequested.Raise();
     }
 }

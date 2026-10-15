@@ -1,0 +1,17 @@
+# Prompt — Ambiente modular 01
+
+Herramienta integrada de generación de imágenes. Referencia de estilo: concepto-01.png. Fondo opaco.
+
+```text
+Use case: stylized-concept.
+Asset type: environment asset modeling reference sheet for a small cooperative 3D game show videogame.
+Input image: reference for style, colors, rounded geometry and studio identity ONLY. Generate a new dedicated environment modular-kit board, not a screenshot and not a copy of the reference layout.
+Beautiful high resolution LANDSCAPE reference board, neutral warm off-white background with clearly separated panels and minimal Spanish captions. Isolated 3D prop renders with clean silhouettes, no cropping, front and side or top views for important assets, mild isometric view only for showing assembly. Soft uniform studio lighting, no heavy shadows, crisp readable surfaces. Stylized chunky toy aesthetic with rounded edges, deep blue and purple enamel, warm gold trim, burgundy fabric, dark structural metal, simple low-complexity shapes suitable for indie 3D modeling. No characters, no audience, no money, no answer booths. This sheet covers ENVIRONMENT EXTRAS ONLY.
+Arrange four rows of clearly framed groups:
+ROW 1 "CAMARAS Y LUCES": original chunky television studio camera on stable three-leg tripod, orthographic front and side with large lens and rear handle, simple recognizable geometry, no brand; ceiling spotlight with barn doors front and side; smaller rounded hanging spotlight; short horizontal strip of six warm bulbs on a dark housing. Cameras are decorative studio props, no surveillance HUD.
+ROW 2 "PAREDES Y CORTINAS": modular wall panel front and side, blue lower section with gold horizontal trim and purple upper section; wall corner module; simple matching short column; burgundy straight curtain module front and side showing large sculptable folds; a burgundy gathered side curtain with tieback; compact upper draped valance. Each curtain is a separate fabric module, not a gigantic assembled stage.
+ROW 3 "PISO Y ESCENARIO": square floor tile top and side, glossy-but-not-mirror blue-purple surface; a gold straight floor inlay strip and gold curved quarter-ring inlay; short rounded stage edge module with thin gold trim; one simple small three-step stair module; low gold/dark-blue decorative railing segment. Show a small clear top-view example assembling straight and curved gold inlay on the same floor tiles. Use geometric inserts, not detailed marble texture.
+ROW 4 "TECHO Y ESTRUCTURA": dark metal modular straight overhead truss, corner truss connector and hanging spotlight clamp, each separated, an isolated simple rectangular ceiling panel front and side, a hanging cable loop simplified as smooth curves, small speaker cabinet front and side, a simple wall-mounted ventilation grille. Include a small isometric ceiling assembly vignette only in this panel to show how beams and hanging lights connect.
+Spacing: enough room to see outlines, large parts in their own panels. No numerical dimensions, no arrows pretending to be engineering tolerances, no exploded clutter. Views agree in shape and materials. Modular construction and modelability more important than microdetails. Minimal exact Spanish short labels for groups and props: CAMARA, FOCO, TIRA DE LUCES, PARED, ESQUINA, COLUMNA, CORTINA, PISO, BORDE, ESCALERA, BARANDILLA, TECHO, ESTRUCTURA, ALTAVOZ, REJILLA. No additional gadgets, no microphones, no fake logos, no trapdoors, no roulette or casino imagery. Show all props fully inside margins.
+```
+

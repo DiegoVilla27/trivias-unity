@@ -19,7 +19,7 @@ MonoBehaviour:
     _text: "\xA1Bienvenidos a Trivias! Hoy el dinero es vuestro\u2026 por poco tiempo."
   - _id: welcome-02
     _event: 0
-    _text: "Quince preguntas, cien mil y un decorado que necesita financiaci\xF3n. \xA1Empezamos!"
+    _text: "Quince preguntas, {premio} y un decorado que necesita financiaci\xF3n. \xA1Empezamos!"
   - _id: discussion-01
     _event: 1
     _text: "Tranquilos, el plat\xF3 cobra por horas. Seguid debatiendo."
@@ -49,7 +49,7 @@ MonoBehaviour:
     _text: "Acierto en la pregunta {ronda}. La siguiente no ser\xE1 tan amable."
   - _id: success-03
     _event: 4
-    _text: "Multiplicador x{multiplicador}. El presupuesto del decorado est\xE1 llorando."
+    _text: "Acierto. El presupuesto del decorado est\xE1 llorando."
   - _id: loss-01
     _event: 5
     _text: "Hab\xE9is perdido {cantidad}. El decorado os lo agradece."

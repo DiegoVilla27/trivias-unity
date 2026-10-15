@@ -7,6 +7,7 @@ namespace Trivias.Match.Network
     /// <summary>Resultado final de la partida (GDD 3.3), igual para todos los jugadores.</summary>
     public struct MatchResultNet : INetworkSerializable, IEquatable<MatchResultNet>
     {
+        public uint MatchId;
         public bool Victory;
         public byte QuestionsPassed;
         public long FinalMoney;
@@ -17,6 +18,7 @@ namespace Trivias.Match.Network
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
+            serializer.SerializeValue(ref MatchId);
             serializer.SerializeValue(ref Victory);
             serializer.SerializeValue(ref QuestionsPassed);
             serializer.SerializeValue(ref FinalMoney);
@@ -27,13 +29,13 @@ namespace Trivias.Match.Network
         }
 
         public bool Equals(MatchResultNet other) =>
-            Victory == other.Victory && QuestionsPassed == other.QuestionsPassed && FinalMoney == other.FinalMoney &&
+            MatchId == other.MatchId && Victory == other.Victory && QuestionsPassed == other.QuestionsPassed && FinalMoney == other.FinalMoney &&
             DurationSeconds.Equals(other.DurationSeconds) && TokensEach == other.TokensEach &&
             Survivors.Equals(other.Survivors) && Eliminated.Equals(other.Eliminated);
 
         public override bool Equals(object obj) => obj is MatchResultNet other && Equals(other);
 
         public override int GetHashCode() =>
-            HashCode.Combine(Victory, QuestionsPassed, FinalMoney, DurationSeconds, TokensEach, Survivors, Eliminated);
+            HashCode.Combine(MatchId, Victory, QuestionsPassed, FinalMoney, DurationSeconds, TokensEach, Survivors, Eliminated);
     }
 }

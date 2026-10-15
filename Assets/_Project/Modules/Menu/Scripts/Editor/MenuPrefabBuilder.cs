@@ -43,14 +43,15 @@ namespace Trivias.Menu.Editor
                 FontStyles.Normal, Color.white);
 
             // ---- Sala de espera ----
-            var lobby = CreatePanel("Lobby", root.transform, new Vector2(620f, 600f));
+            var lobby = CreatePanel("Lobby", root.transform, new Vector2(620f, 680f));
             CreateLabel("Title", lobby, "SALA DE ESPERA", 54f, new Vector2(0f, -40f), new Vector2(560f, 70f), FontStyles.Bold, Gold);
             var players = CreateLabel("Players", lobby, string.Empty, 32f, new Vector2(0f, -130f), new Vector2(520f, 260f),
                 FontStyles.Normal, Color.white);
-            var lobbyInfo = CreateLabel("Info", lobby, string.Empty, 22f, new Vector2(0f, -400f), new Vector2(560f, 40f),
+            var lobbyInfo = CreateLabel("Info", lobby, string.Empty, 22f, new Vector2(0f, -385f), new Vector2(560f, 60f),
                 FontStyles.Italic, new Color(1f, 1f, 1f, 0.75f));
-            var start = CreateButton("Start", lobby, "Empezar partida", new Vector2(0f, -450f));
-            var leave = CreateButton("Leave", lobby, "Salir", new Vector2(0f, -525f), small: true);
+            var start = CreateButton("Start", lobby, "Empezar partida", new Vector2(0f, -455f));
+            var shop = CreateButton("Shop", lobby, "Tienda", new Vector2(0f, -540f), small: true);
+            var leave = CreateButton("Leave", lobby, "Salir", new Vector2(0f, -605f), small: true);
 
             var view = root.AddComponent<MenuView>();
             SerializedWiring.Set(view, "_room", SharedAssets.RoomConnection());
@@ -66,6 +67,9 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(view, "_lobbyInfo", lobbyInfo);
             SerializedWiring.Set(view, "_startButton", start);
             SerializedWiring.Set(view, "_leaveButton", leave);
+            SerializedWiring.Set(view, "_shopButton", shop);
+            SerializedWiring.Set(view, "_openShopRequested", SharedAssets.OpenShopRequested());
+            SerializedWiring.Set(view, "_profile", SharedAssets.PlayerProfile());
 
             lobby.gameObject.SetActive(false);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);

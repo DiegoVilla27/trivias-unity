@@ -15,20 +15,21 @@ using Trivias.Shared.Presentation;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Trivias.Presenter.Editor
 {
     /// <summary>
-    /// Construye el presentador (figura con primitivas y bocadillo), importa y valida su catálogo de frases,
-    /// y crea su sesión de red y el subtítulo en pantalla. Solo se comunica por texto.
+    /// Construye el presentador (figura con primitivas y viñeta sobre la cabeza), importa y valida su catálogo
+    /// de frases y crea su sesión de red. Solo se comunica por texto en su viñeta.
     /// </summary>
     public static class PresenterPrefabBuilder
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Presenter";
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/Presenter.prefab";
         public const string SESSION_PREFAB_PATH = MODULE_ROOT + "/Prefabs/PresenterSession.prefab";
-        public const string HUD_PREFAB_PATH = MODULE_ROOT + "/Prefabs/PresenterHud.prefab";
+        public const string BUBBLE = "Bubble";
+        public const float BUBBLE_HEIGHT = 4.3f;
+        public static readonly Vector2 BubbleSize = new(7f, 2.6f);
         private const string CONFIG = MODULE_ROOT + "/Config";
         private const string CONTENT_PATH = MODULE_ROOT + "/Content/phrases_es.json";
 
@@ -53,18 +54,29 @@ namespace Trivias.Presenter.Editor
             EditorAssets.CreateWorldText("Label", t, "PRESENTADOR", 2.5f, Color.white,
                 new Vector3(0f, 2.75f, 0f), Quaternion.Euler(0f, 180f, 0f), new Vector2(2.5f, 0.5f));
 
-            // Bocadillo: siempre de cara a la cámara para leerlo desde cualquier lado.
-            var bubble = EditorAssets.CreateWorldText("Speech", t, string.Empty, 3.2f, Color.white,
-                new Vector3(0f, 3.6f, 0f), Quaternion.identity, new Vector2(6f, 2f));
-            bubble.outlineWidth = 0.25f;
-            bubble.outlineColor = Color.black;
-            bubble.fontStyle = FontStyles.Italic;
-            bubble.gameObject.AddComponent<Billboard>();
-            // La vista vive en la raíz (siempre activa); el bocadillo es lo que se muestra u oculta.
+            // Viñeta sobre la cabeza (GDD 9): el presentador solo se comunica por aquí. Siempre de cara a la cámara.
+            var bubbleMaterial = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Bubble.mat",
+                new Color(0.97f, 0.96f, 0.92f), 0.2f, emission: new Color(0.45f, 0.45f, 0.43f));
+            var bubble = EditorAssets.CreateEmpty(BUBBLE, t, new Vector3(0f, BUBBLE_HEIGHT, 0f));
+            bubble.AddComponent<Billboard>();
+            // El texto se lee mirando a su +Z: el fondo va detrás (+Z) y la punta hacia la cabeza.
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Background", bubble.transform, new Vector3(0f, 0f, 0.06f),
+                new Vector3(BubbleSize.x, BubbleSize.y, 0.05f), bubbleMaterial, layer, false, keepCollider: false);
+            var tail = EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Tail", bubble.transform,
+                new Vector3(0f, -BubbleSize.y * 0.5f - 0.15f, 0.06f), new Vector3(0.45f, 0.45f, 0.05f), bubbleMaterial, layer, false,
+                keepCollider: false);
+            tail.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
+
+            var text = EditorAssets.CreateWorldText("Text", bubble.transform, string.Empty, 4.4f, new Color(0.08f, 0.08f, 0.18f),
+                Vector3.zero, Quaternion.identity, new Vector2(BubbleSize.x - 0.5f, BubbleSize.y - 0.3f));
+            text.fontStyle = FontStyles.Bold;
+
+            // La vista vive en la raíz (siempre activa); la viñeta es lo que se muestra u oculta.
             var speech = root.AddComponent<PresenterLineView>();
             SerializedWiring.Set(speech, "_runtime", Runtime());
-            SerializedWiring.Set(speech, "_label", bubble);
-            SerializedWiring.Set(speech, "_container", bubble.gameObject);
+            SerializedWiring.Set(speech, "_label", text);
+            SerializedWiring.Set(speech, "_container", bubble);
+            bubble.SetActive(false);
 
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
@@ -84,54 +96,6 @@ namespace Trivias.Presenter.Editor
             SerializedWiring.Set(session, "_match", match);
             SerializedWiring.Set(session, "_selfBet", selfBet);
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
-        }
-
-        /// <summary>Subtítulo en pantalla con la frase del presentador, encima del aviso de interacción.</summary>
-        public static GameObject BuildHud()
-        {
-            var root = new GameObject("PresenterHud", typeof(RectTransform));
-            var canvas = root.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 6;
-            var scaler = root.AddComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920f, 1080f);
-            scaler.matchWidthOrHeight = 0.5f;
-
-            var panel = new GameObject("Panel", typeof(RectTransform));
-            panel.transform.SetParent(root.transform, false);
-            var panelRect = (RectTransform)panel.transform;
-            panelRect.anchorMin = panelRect.anchorMax = new Vector2(0.5f, 0f);
-            panelRect.pivot = new Vector2(0.5f, 0f);
-            panelRect.anchoredPosition = new Vector2(0f, 220f);
-            panelRect.sizeDelta = new Vector2(1200f, 70f);
-            var background = panel.AddComponent<Image>();
-            background.color = new Color(0.25f, 0.05f, 0.1f, 0.8f);
-            background.raycastTarget = false;
-
-            var labelGo = new GameObject("Label", typeof(RectTransform));
-            labelGo.transform.SetParent(panel.transform, false);
-            var labelRect = (RectTransform)labelGo.transform;
-            labelRect.anchorMin = Vector2.zero;
-            labelRect.anchorMax = Vector2.one;
-            labelRect.offsetMin = new Vector2(18f, 4f);
-            labelRect.offsetMax = new Vector2(-18f, -4f);
-            var label = labelGo.AddComponent<TextMeshProUGUI>();
-            label.fontSize = 28f;
-            label.fontStyle = FontStyles.Italic;
-            label.alignment = TextAlignmentOptions.Center;
-            label.textWrappingMode = TextWrappingModes.Normal;
-            label.richText = true;
-            label.raycastTarget = false;
-            label.color = Color.white;
-
-            var view = root.AddComponent<PresenterLineView>();
-            SerializedWiring.Set(view, "_runtime", Runtime());
-            SerializedWiring.Set(view, "_label", label);
-            SerializedWiring.Set(view, "_container", panel);
-            SerializedWiring.Set(view, "_prefix", "<b>PRESENTADOR:</b> ");
-
-            return EditorAssets.SaveAsPrefab(root, HUD_PREFAB_PATH);
         }
 
         [Serializable] private sealed class PhraseDto { public string id; public string @event; public string text; }

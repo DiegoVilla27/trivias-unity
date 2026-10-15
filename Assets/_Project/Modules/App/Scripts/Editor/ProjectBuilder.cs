@@ -13,6 +13,7 @@ using Trivias.Presenter.Editor;
 using Trivias.Questions.Editor;
 using Trivias.Results.Editor;
 using Trivias.SelfBet.Editor;
+using Trivias.Shop.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Stage.Editor;
 using Trivias.Table.Editor;
@@ -61,6 +62,8 @@ namespace Trivias.App.Editor
             var presenterSession = PresenterPrefabBuilder.BuildSession(matchRuntime, SelfBetBuilder.Runtime());
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(presenterSession);
 
+            var cosmetics = ShopBuilder.BuildCatalog();
+
             var prefabs = new StageScenePrefabs
             {
                 NetworkManager = networkManager,
@@ -69,9 +72,10 @@ namespace Trivias.App.Editor
                 CameraRig = CameraRigPrefabBuilder.Build(cameraTarget),
                 InteractionHud = InteractionBuilder.BuildHud(),
                 MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime()),
-                PresenterHud = PresenterPrefabBuilder.BuildHud(),
                 ResultsScreen = ResultsPrefabBuilder.Build(matchRuntime),
                 Menu = MenuPrefabBuilder.Build(matchRuntime),
+                ShopUi = ShopBuilder.BuildShopUi(cosmetics),
+                AvatarCosmetics = ShopBuilder.BuildPresenter(cosmetics),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),

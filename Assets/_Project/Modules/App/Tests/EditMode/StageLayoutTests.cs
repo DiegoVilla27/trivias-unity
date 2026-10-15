@@ -80,6 +80,15 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void PresenterBubble_DoesNotOverlapTheScreen()
+        {
+            var bubble = Find("Presenter/Bubble/Background").transform;
+            var bubbleLeftEdge = bubble.position.x - bubble.lossyScale.x * 0.5f;
+            var screenHalfWidth = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds.extents.x;
+            Assert.That(bubbleLeftEdge, Is.GreaterThan(screenHalfWidth), "La viñeta del presentador no debe tapar la pantalla.");
+        }
+
+        [Test]
         public void Presenter_StandsBesideTheScreen()
         {
             var presenter = Find("Presenter").transform.position;
