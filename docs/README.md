@@ -12,6 +12,7 @@ Documentos derivados del [GDD](GDD.md), versión 0.12, el 15 de octubre de 2026.
 | [UI_UX.md](UI_UX.md) | Pantallas, información visible y respuestas a las acciones |
 | [DESARROLLO.md](DESARROLLO.md) | Orden de construcción, verificaciones y decisiones pendientes |
 | [Bocetos visuales](bocetos/README.md) | Concepto del plató y láminas para modelado de personaje, presentador y recursos |
+| [JUGAR_CON_AMIGOS.md](JUGAR_CON_AMIGOS.md) | Cómo probar el juego con otras personas gratis (build + VPN gratuita) |
 
 ## Cómo mantenerlos
 
