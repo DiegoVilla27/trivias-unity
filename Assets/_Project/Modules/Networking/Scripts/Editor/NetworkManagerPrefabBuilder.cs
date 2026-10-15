@@ -62,6 +62,15 @@ namespace Trivias.Networking.Editor
             return list;
         }
 
+        /// <summary>Objetos de red que el host crea al abrir la sala (en la instancia de la escena).</summary>
+        public static void SetSessionPrefabs(ConnectionService connection, GameObject[] prefabs)
+        {
+            var networkObjects = new Object[prefabs.Length];
+            for (var i = 0; i < prefabs.Length; i++)
+                networkObjects[i] = prefabs[i].GetComponent<NetworkObject>();
+            SerializedWiring.SetArray(connection, "_sessionPrefabs", networkObjects);
+        }
+
         /// <summary>
         /// Calcula el GlobalObjectIdHash de un prefab de red ya guardado. NGO solo lo genera al validar el asset,
         /// y un prefab recién creado por código (sobre todo en modo consola) puede quedar con hash 0 y no aparecer en red.

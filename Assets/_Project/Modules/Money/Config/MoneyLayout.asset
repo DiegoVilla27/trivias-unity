@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59af4b07429c94994b053f90dbc665c0, type: 3}
+  m_Name: MoneyLayout
+  m_EditorClassIdentifier: Trivias.Money::Trivias.Money.Data.MoneyLayout
+  _tableSurface: {x: 0, y: 0.95, z: 0}
+  _tableColumns: 5
+  _tableRows: 4
+  _tableSpacing: {x: 0.36, y: 0.24}
+  _traySurfaces:
+  - {x: -4.9937944, y: 0.85999995, z: 5.909697}
+  - {x: -0.8353827, y: 0.85999995, z: 7.6918554}
+  - {x: 3.608667, y: 0.85999995, z: 6.843977}
+  - {x: 6.818824, y: 0.85999995, z: 3.6559734}
+  _trayYaw:
+  - 129
+  - 163
+  - 197
+  - 231
+  _trayColumns: 3
+  _trayRows: 2
+  _traySpacing: {x: 0.34, y: 0.24}
+  _layerHeight: 0.09
+  _carryOrigin:
+  - {x: 0, y: 0, z: 0}
+  - {x: -0.16, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  _carryStep:
+  - {x: 0, y: 0.075, z: 0}
+  - {x: 0.32, y: 0, z: 0}
+  - {x: 0, y: 0.085, z: 0}

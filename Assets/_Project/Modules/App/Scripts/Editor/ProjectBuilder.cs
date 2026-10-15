@@ -2,6 +2,8 @@ using System;
 using Trivias.Booth.Editor;
 using Trivias.Cameras.Editor;
 using Trivias.Exchange.Editor;
+using Trivias.Interaction.Editor;
+using Trivias.Money.Editor;
 using Trivias.Networking.Editor;
 using Trivias.Player.Editor;
 using Trivias.Presenter.Editor;
@@ -25,23 +27,35 @@ namespace Trivias.App.Editor
         {
             var cameraTarget = SharedAssets.LocalPlayerCameraTarget();
             var spawnPoints = SharedAssets.StageSpawnPoints();
+            var interactables = SharedAssets.InteractableRegistry();
 
             var networkManager = NetworkManagerPrefabBuilder.Build();
-            var player = PlayerPrefabBuilder.Build(spawnPoints, cameraTarget);
+
+            // Player no conoce Interaction: la composición le añade el interactor como extensión.
+            var player = PlayerPrefabBuilder.Build(spawnPoints, cameraTarget,
+                root => InteractionBuilder.AttachInteractor(root, interactables,
+                    PlayerPrefabBuilder.GetActionReference("Interact"),
+                    PlayerPrefabBuilder.GetActionReference("InteractSecondary"),
+                    PlayerPrefabBuilder.GetActionReference("InteractTertiary")));
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(player);
+
+            var moneySession = MoneyBuilder.Build();
+            NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(moneySession);
 
             var prefabs = new StageScenePrefabs
             {
                 NetworkManager = networkManager,
                 Player = player,
+                SessionPrefabs = new[] { moneySession },
                 CameraRig = CameraRigPrefabBuilder.Build(cameraTarget),
+                InteractionHud = InteractionBuilder.BuildHud(),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(),
                 VerifyButton = VerifyButtonPrefabBuilder.Build(),
                 Presenter = PresenterPrefabBuilder.Build(),
                 Environment = StageEnvironmentPrefabBuilder.Build(),
-                NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(player),
+                NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(player, moneySession),
             };
 
             AssetDatabase.SaveAssets();

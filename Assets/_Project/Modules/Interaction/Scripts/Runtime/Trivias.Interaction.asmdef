@@ -1,0 +1,19 @@
+{
+    "name": "Trivias.Interaction",
+    "rootNamespace": "Trivias.Interaction",
+    "references": [
+        "Trivias.Shared",
+        "Unity.Netcode.Runtime",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

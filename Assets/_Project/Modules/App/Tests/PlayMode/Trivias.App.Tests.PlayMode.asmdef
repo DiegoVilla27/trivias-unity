@@ -8,7 +8,10 @@
         "Trivias.Networking",
         "Trivias.Player",
         "Unity.Netcode.Runtime",
-        "Unity.Cinemachine"
+        "Unity.Cinemachine",
+        "Trivias.Money",
+        "Unity.TextMeshPro",
+        "Trivias.Interaction"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

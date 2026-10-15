@@ -22,6 +22,9 @@ namespace Trivias.Booth.Editor
         private const string BODY = "Body";
         private const string LETTER = "Letter";
         private const string BET_ZONE = "BetZone";
+        public const string TRAY = "Tray";
+        public const string TRAY_SURFACE = "Tray/Surface";
+        public const string TRAY_TOTAL_LABEL = "TotalLabel";
 
         private static readonly (string Letter, Color Color)[] Answers =
         {
@@ -58,9 +61,14 @@ namespace Trivias.Booth.Editor
                 new Vector3(0f, 1.6f, 0.71f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.6f, 1.6f));
             letter.fontStyle = FontStyles.Bold;
 
-            var tray = EditorAssets.CreateEmpty("Tray", t, new Vector3(-1.45f, 0f, 0.9f)).transform;
+            var tray = EditorAssets.CreateEmpty(TRAY, t, new Vector3(-1.45f, 0f, 0.9f)).transform;
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Pedestal", tray, new Vector3(0f, 0.4f, 0f), new Vector3(1.0f, 0.8f, 0.6f), navy, layer, true);
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Surface", tray, new Vector3(0f, 0.83f, 0f), new Vector3(1.1f, 0.06f, 0.7f), gold, layer, true);
+            var trayTotal = EditorAssets.CreateWorldText(TRAY_TOTAL_LABEL, tray, string.Empty, 3.2f, StagePalette.Gold,
+                new Vector3(0f, 1.45f, 0f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.6f, 0.5f));
+            trayTotal.fontStyle = FontStyles.Bold;
+            trayTotal.outlineWidth = 0.2f;
+            trayTotal.outlineColor = Color.black;
 
             EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, BET_ZONE, t, new Vector3(0.6f, 0.01f, 2.1f), new Vector3(2.6f, 0.01f, 2.6f), zone, layer, true, keepCollider: false);
 

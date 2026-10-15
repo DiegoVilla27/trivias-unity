@@ -1,0 +1,24 @@
+{
+    "name": "Trivias.Interaction.Editor",
+    "rootNamespace": "Trivias.Interaction.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Interaction",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Unity.Netcode.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

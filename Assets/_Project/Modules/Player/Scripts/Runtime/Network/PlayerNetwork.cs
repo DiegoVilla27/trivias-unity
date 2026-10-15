@@ -1,4 +1,5 @@
 using Trivias.Player.Components;
+using Trivias.Shared.Carrying;
 using Trivias.Shared.Events;
 using Trivias.Shared.Spawning;
 using Unity.Collections;
@@ -19,6 +20,8 @@ namespace Trivias.Player.Network
         [SerializeField] private PlayerNameTag _nameTag;
         [SerializeField] private SpawnPointSet _spawnPoints;
         [SerializeField] private TransformEventChannel _localPlayerCameraTarget;
+        [SerializeField] private PlayerCarrySocket _carrySocket;
+        [SerializeField] private CarrySocketRegistry _carrySockets;
 
         private readonly NetworkVariable<FixedString32Bytes> _displayName = new(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -32,6 +35,7 @@ namespace Trivias.Player.Network
 
             _displayName.OnValueChanged += OnDisplayNameChanged;
             _nameTag.SetName(DisplayName);
+            _carrySockets.Register(OwnerClientId, _carrySocket);
 
             if (!IsOwner)
                 return;
@@ -46,6 +50,7 @@ namespace Trivias.Player.Network
         public override void OnNetworkDespawn()
         {
             _displayName.OnValueChanged -= OnDisplayNameChanged;
+            _carrySockets.Unregister(OwnerClientId);
             if (!IsOwner)
                 return;
 

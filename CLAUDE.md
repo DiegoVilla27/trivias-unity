@@ -94,14 +94,18 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | --- | --- | --- |
 | Shared | Canales de eventos, capas, logger, puntos de aparición; utilidades de editor (`Shared.Editor`) | — |
 | Networking | NetworkManager, conexión local (Unity Transport), admisión a sala, panel de depuración | Shared |
-| Player | Concursante: entrada, movimiento, mirada, nombre, red | Shared |
+| Player | Concursante: entrada, movimiento, mirada, nombre, punto de carga, red | Shared |
+| Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
+| Money | Libro de cuentas (Logic), sesión en red, objetos visibles con pool, mesa y bandejas interactivas | Shared |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
 | Booth, Table, Exchange, VerifyButton, Presenter, Stage | De momento solo constructores de prefabs (Editor) | Shared (Editor) |
+
+Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `CarrySocketRegistry`, `MoneyRuntime`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
 | App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
 
 Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-Módulos previstos aún sin crear: `Interaction`, `Money`, `SelfBet`, `Questions`, `Match`, `HUD`, `Results`, `Voice`.
+Módulos previstos aún sin crear: `SelfBet`, `Questions`, `Match`, `HUD`, `Results`, `Voice`.
 
 ## 4. Flujo de trabajo con Unity
 

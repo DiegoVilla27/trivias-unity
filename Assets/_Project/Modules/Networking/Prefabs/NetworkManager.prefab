@@ -122,6 +122,7 @@ MonoBehaviour:
   _networkManager: {fileID: 6531565581324784772}
   _transport: {fileID: 1811170720014981065}
   _config: {fileID: 11400000, guid: d2b50ee0a74da42d98d4efd046a0d152, type: 2}
+  _sessionPrefabs: []
 --- !u!114 &7854950519340292887
 MonoBehaviour:
   m_ObjectHideFlags: 0

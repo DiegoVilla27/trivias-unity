@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2928912063689812330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5044305232181080670}
+  - component: {fileID: 8853423833593238809}
+  - component: {fileID: 8524035233363453620}
+  - component: {fileID: 9092891558055254000}
+  m_Layer: 0
+  m_Name: MoneySession
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5044305232181080670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928912063689812330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8853423833593238809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928912063689812330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1677761867
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  m_InScenePlacedDisabledByDefault: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  m_InScenePlaced: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &8524035233363453620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928912063689812330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991e1676362a247fba86d17d9f097cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.Money::Trivias.Money.Components.MoneyVisualPresenter
+  _bundlePrefab: {fileID: 2424808957075290808, guid: 0c7b94b4f8ea847bc857fe189971c321, type: 3}
+  _bagPrefab: {fileID: 8793939040916445702, guid: a496a929c60774e23b8d082ec61aaaea, type: 3}
+  _goldBarPrefab: {fileID: 6263617572949204866, guid: 74e2a474321d44b2ba511f34327a0ffa, type: 3}
+  _carrySockets: {fileID: 11400000, guid: 1e3bdf479de7e4fd4b36b92e9ae21231, type: 2}
+--- !u!114 &9092891558055254000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928912063689812330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7cf8b00377094c1d99a21b23795786a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.Money::Trivias.Money.Network.MoneySessionNetwork
+  ShowTopMostFoldoutHeaderGroup: 1
+  _config: {fileID: 11400000, guid: 878e6c031a33c4c85b9af32e9c2b2b1a, type: 2}
+  _layout: {fileID: 11400000, guid: 330b549d9a2ac40618cacf6899165075, type: 2}
+  _runtime: {fileID: 11400000, guid: 6f4133998feb140af81920928091b588, type: 2}
+  _presenter: {fileID: 8524035233363453620}

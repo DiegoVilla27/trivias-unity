@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_text
       value: B
       objectReference: {fileID: 0}
+    - target: {fileID: 1173890676062122752, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1594943758028866909, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1704465447024059570, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

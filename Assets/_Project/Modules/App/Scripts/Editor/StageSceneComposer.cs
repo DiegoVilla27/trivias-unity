@@ -1,5 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
+using Trivias.Booth.Editor;
+using Trivias.Money.Editor;
+using Trivias.Networking.Components;
+using Trivias.Networking.Editor;
 using Trivias.Shared.Spawning;
+using Trivias.Table.Editor;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -13,7 +19,9 @@ namespace Trivias.App.Editor
     {
         public GameObject NetworkManager;
         public GameObject Player;
+        public GameObject[] SessionPrefabs;
         public GameObject CameraRig;
+        public GameObject InteractionHud;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -44,15 +52,17 @@ namespace Trivias.App.Editor
 
             CreateLighting();
             Place(prefabs.Environment, Vector3.zero, 0f);
-            Place(prefabs.Table, Vector3.zero, 0f);
+            var table = Place(prefabs.Table, Vector3.zero, 0f);
             Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
             Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
             Place(prefabs.Presenter, new Vector3(6.5f, 0f, 13f), 200f);
-            PlaceBooths(prefabs.Booths);
+            var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
+            ConnectMoney(table, booths);
 
             PlaceNetworkManager(prefabs);
             PlaceCameraRig(prefabs.CameraRig);
+            PrefabUtility.InstantiatePrefab(prefabs.InteractionHud);
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(SCENE_PATH, true) };
@@ -65,17 +75,45 @@ namespace Trivias.App.Editor
             return instance;
         }
 
-        private static void PlaceBooths(IReadOnlyList<GameObject> booths)
+        private static GameObject[] PlaceBooths(IReadOnlyList<GameObject> booths)
         {
             var parent = new GameObject("Booths").transform;
+            var instances = new GameObject[booths.Count];
             for (var i = 0; i < booths.Count; i++)
             {
                 var angle = BoothAngles[i];
                 var radians = angle * Mathf.Deg2Rad;
                 var position = new Vector3(Mathf.Sin(radians), 0f, Mathf.Cos(radians)) * BOOTH_RADIUS;
                 // El frente de la cabina (+Z local) mira al centro del plató.
-                Place(booths[i], position, angle + 180f).transform.SetParent(parent, true);
+                instances[i] = Place(booths[i], position, angle + 180f);
+                instances[i].transform.SetParent(parent, true);
             }
+            return instances;
+        }
+
+        /// <summary>
+        /// Une mesa y bandejas con el módulo Money: guarda sus posiciones (datos de build) y añade los puntos interactivos.
+        /// </summary>
+        private static void ConnectMoney(GameObject table, GameObject[] booths)
+        {
+            var tableSurface = table.transform.position + Vector3.up * TablePrefabBuilder.SURFACE_HEIGHT;
+            MoneyBuilder.AttachTableTarget(table,
+                table.transform.Find(TablePrefabBuilder.TOTAL_LABEL).GetComponent<TextMeshPro>());
+
+            var traySurfaces = new Vector3[booths.Length];
+            var trayYaw = new float[booths.Length];
+            for (var i = 0; i < booths.Length; i++)
+            {
+                var surface = booths[i].transform.Find(BoothPrefabBuilder.TRAY_SURFACE);
+                traySurfaces[i] = surface.position + Vector3.up * (surface.lossyScale.y * 0.5f);
+                trayYaw[i] = booths[i].transform.eulerAngles.y;
+
+                var tray = booths[i].transform.Find(BoothPrefabBuilder.TRAY);
+                MoneyBuilder.AttachTrayTarget(tray.gameObject, i,
+                    tray.Find(BoothPrefabBuilder.TRAY_TOTAL_LABEL).GetComponent<TextMeshPro>());
+            }
+
+            MoneyBuilder.WriteLayout(tableSurface, traySurfaces, trayYaw);
         }
 
         private static void WriteSpawnPoints(SpawnPointSet spawnPoints)
@@ -104,6 +142,7 @@ namespace Trivias.App.Editor
                 lists.Add(prefabs.NetworkPrefabs);
 
             PrefabUtility.RecordPrefabInstancePropertyModifications(networkManager);
+            NetworkManagerPrefabBuilder.SetSessionPrefabs(instance.GetComponent<ConnectionService>(), prefabs.SessionPrefabs);
         }
 
         private static void PlaceCameraRig(GameObject cameraRigPrefab)

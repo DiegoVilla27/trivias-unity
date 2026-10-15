@@ -5,6 +5,7 @@ using Trivias.Player.Network;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Events;
 using Trivias.Shared.Physics;
+using Trivias.Shared.Presentation;
 using Trivias.Shared.Spawning;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -32,12 +33,15 @@ namespace Trivias.Player.Editor
 
         private const float CAMERA_ROOT_HEIGHT = 1.375f;
         private const float NAME_TAG_HEIGHT = 2.15f;
+        private static readonly Vector3 CarryPointPosition = new(0f, 1.05f, 0.38f);
 
         [MenuItem("Tools/Trivias/Build/Player")]
         public static GameObject BuildFromMenu() =>
             Build(SharedAssets.StageSpawnPoints(), SharedAssets.LocalPlayerCameraTarget());
 
-        public static GameObject Build(SpawnPointSet spawnPoints, TransformEventChannel localPlayerCameraTarget)
+        /// <param name="extensions">Otros módulos añaden sus componentes al concursante (p. ej. Interaction) sin que Player los conozca.</param>
+        public static GameObject Build(SpawnPointSet spawnPoints, TransformEventChannel localPlayerCameraTarget,
+            params System.Action<GameObject>[] extensions)
         {
             var config = EditorAssets.GetOrCreateAsset<PlayerConfig>(CONFIG_PATH);
             var root = new GameObject("Player");
@@ -54,6 +58,10 @@ namespace Trivias.Player.Editor
             var animator = CreateModel(root.transform);
             var cameraRoot = EditorAssets.CreateEmpty("CameraRoot", root.transform, Vector3.up * CAMERA_ROOT_HEIGHT);
             var nameTag = CreateNameTag(root.transform);
+
+            var carryPoint = EditorAssets.CreateEmpty("CarryPoint", root.transform, CarryPointPosition);
+            var carrySocket = root.AddComponent<PlayerCarrySocket>();
+            SerializedWiring.Set(carrySocket, "_carryPoint", carryPoint.transform);
 
             var input = root.AddComponent<PlayerInputReader>();
             WireInput(input);
@@ -92,6 +100,11 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_nameTag", nameTag);
             SerializedWiring.Set(playerNetwork, "_spawnPoints", spawnPoints);
             SerializedWiring.Set(playerNetwork, "_localPlayerCameraTarget", localPlayerCameraTarget);
+            SerializedWiring.Set(playerNetwork, "_carrySocket", carrySocket);
+            SerializedWiring.Set(playerNetwork, "_carrySockets", SharedAssets.CarrySocketRegistry());
+
+            foreach (var extend in extensions)
+                extend(root);
 
             SetLayerRecursively(root, GameLayers.PLAYER);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
@@ -127,6 +140,7 @@ namespace Trivias.Player.Editor
                 Vector3.up * NAME_TAG_HEIGHT, Quaternion.identity, new Vector2(3f, 0.6f));
             label.outlineWidth = 0.2f;
             label.outlineColor = Color.black;
+            label.gameObject.AddComponent<Billboard>();
             var nameTag = label.gameObject.AddComponent<PlayerNameTag>();
             SerializedWiring.Set(nameTag, "_label", label);
             return nameTag;
@@ -137,8 +151,11 @@ namespace Trivias.Player.Editor
             var references = AssetDatabase.LoadAllAssetsAtPath(CONTROLS_PATH).OfType<InputActionReference>().ToArray();
             SerializedWiring.Set(input, "_move", FindAction(references, "Move"));
             SerializedWiring.Set(input, "_look", FindAction(references, "Look"));
-            SerializedWiring.Set(input, "_interact", FindAction(references, "Interact"));
         }
+
+        /// <summary>Referencia a una acción de los controles del concursante, para otros módulos (p. ej. Interact).</summary>
+        public static InputActionReference GetActionReference(string actionName) =>
+            FindAction(AssetDatabase.LoadAllAssetsAtPath(CONTROLS_PATH).OfType<InputActionReference>().ToArray(), actionName);
 
         private static InputActionReference FindAction(InputActionReference[] references, string actionName) =>
             references.First(r => r.action.name == actionName);

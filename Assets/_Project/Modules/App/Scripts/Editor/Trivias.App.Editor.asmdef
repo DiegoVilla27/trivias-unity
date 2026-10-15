@@ -16,7 +16,11 @@
         "Trivias.Presenter.Editor",
         "Trivias.Stage.Editor",
         "Unity.Netcode.Runtime",
-        "Unity.Cinemachine"
+        "Unity.Cinemachine",
+        "Trivias.Interaction.Editor",
+        "Trivias.Money.Editor",
+        "Unity.TextMeshPro",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"

@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using Trivias.Interaction.Network;
 using Trivias.Networking.Components;
 using Trivias.Player.Components;
 using Unity.Cinemachine;
@@ -51,6 +52,7 @@ namespace Trivias.App.Tests
 
             Assert.That(player.GetComponent<PlayerMotor>().enabled, Is.True, "El movimiento no está activo para el dueño.");
             Assert.That(player.GetComponent<PlayerInputReader>().enabled, Is.True, "La entrada no está activa para el dueño.");
+            Assert.That(player.GetComponent<PlayerInteractor>().enabled, Is.True, "La interacción no está activa para el dueño.");
 
             var followCamera = Object.FindAnyObjectByType<CinemachineCamera>();
             Assert.That(followCamera.Target.TrackingTarget, Is.EqualTo(player.transform.Find("CameraRoot")),

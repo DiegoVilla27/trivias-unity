@@ -19,6 +19,9 @@ namespace Trivias.Networking.Components
         [SerializeField] private NetworkManager _networkManager;
         [SerializeField] private UnityTransport _transport;
         [SerializeField] private NetworkSessionConfig _config;
+        [Tooltip("Objetos de red de la sesión que crea el host al abrir la sala (dinero, partida...). " +
+                 "Networking no conoce sus tipos: los asigna el constructor de la escena.")]
+        [SerializeField] private NetworkObject[] _sessionPrefabs = new NetworkObject[0];
 
         private string _targetAddress;
 
@@ -57,6 +60,8 @@ namespace Trivias.Networking.Components
             ConfigureTimeouts();
             _transport.SetConnectionData(_config.DefaultAddress, _config.Port, "0.0.0.0");
             var started = _networkManager.StartHost();
+            if (started)
+                SpawnSessionObjects();
             SetState(started ? ConnectionState.Connected : ConnectionState.Failed,
                 started
                     ? "Sala creada. Los demás jugadores deben pulsar «Unirse»."
@@ -99,6 +104,13 @@ namespace Trivias.Networking.Components
         {
             if (_networkManager != null && _networkManager.IsListening)
                 _networkManager.Shutdown();
+        }
+
+        // Se ejecuta una vez al abrir la sala (tiempo de carga), nunca durante la partida.
+        private void SpawnSessionObjects()
+        {
+            foreach (var prefab in _sessionPrefabs)
+                Instantiate(prefab).Spawn(destroyWithScene: true);
         }
 
         private void ConfigureTimeouts()
