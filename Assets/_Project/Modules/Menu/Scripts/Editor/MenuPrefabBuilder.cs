@@ -5,6 +5,8 @@ using TMPro;
 using Trivias.Match.Data;
 using Trivias.Menu.Components;
 using Trivias.Menu.Data;
+using Trivias.Ranking.Editor;
+using Trivias.Ranking.Logic;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Settings;
 using UnityEditor;
@@ -14,8 +16,8 @@ using UnityEngine.UI;
 namespace Trivias.Menu.Editor
 {
     /// <summary>
-    /// Construye el menú: principal (crear, unirme, cómo se juega, configuración, salir), unirme a una sala,
-    /// sala de espera (con «Invita a tus amigos»), tutorial, configuración y menú de pausa (Esc).
+    /// Construye el menú: principal (crear, unirme, cómo se juega, récords, configuración, salir), unirme a una sala,
+    /// sala de espera (con «Invita a tus amigos»), tutorial, récords, configuración y menú de pausa (Esc).
     /// </summary>
     public static class MenuPrefabBuilder
     {
@@ -76,16 +78,17 @@ namespace Trivias.Menu.Editor
             root.AddComponent<GraphicRaycaster>();
 
             // ---- Pantalla principal ----
-            var main = CreatePanel("MainMenu", root.transform, new Vector2(620f, 700f));
+            var main = CreatePanel("MainMenu", root.transform, new Vector2(620f, 750f));
             CreateLabel("Title", main, "TRIVIAS", 84f, new Vector2(0f, -40f), new Vector2(560f, 100f), FontStyles.Bold, Gold);
             CreateLabel("Subtitle", main, "El concurso donde tus amigos también son la apuesta", 24f,
                 new Vector2(0f, -140f), new Vector2(560f, 40f), FontStyles.Italic, Color.white);
             var host = CreateButton("Host", main, "Crear sala", new Vector2(0f, -210f));
             var joinMenu = CreateButton("JoinMenu", main, "Unirme a una sala", new Vector2(0f, -300f));
-            var howToPlay = CreateButton("HowToPlay", main, "Cómo se juega", new Vector2(0f, -400f), secondary: true);
-            var settingsButton = CreateButton("Settings", main, "Configuración", new Vector2(0f, -470f), secondary: true);
-            var quit = CreateButton("Quit", main, "Salir", new Vector2(0f, -540f), secondary: true);
-            var mainStatus = CreateLabel("Status", main, string.Empty, 22f, new Vector2(0f, -620f), new Vector2(560f, 60f),
+            var howToPlay = CreateButton("HowToPlay", main, "Cómo se juega", new Vector2(0f, -395f), secondary: true);
+            var recordsButton = CreateButton("Records", main, "Récords", new Vector2(0f, -460f), secondary: true);
+            var settingsButton = CreateButton("Settings", main, "Configuración", new Vector2(0f, -525f), secondary: true);
+            var quit = CreateButton("Quit", main, "Salir", new Vector2(0f, -590f), secondary: true);
+            var mainStatus = CreateLabel("Status", main, string.Empty, 22f, new Vector2(0f, -665f), new Vector2(560f, 60f),
                 FontStyles.Normal, Color.white);
 
             // ---- Unirme a una sala ----
@@ -148,6 +151,24 @@ namespace Trivias.Menu.Editor
             var next = CreateButton("Next", tutorialPanel, "Siguiente", new Vector2(330f, -660f), out var nextLabel);
             var tutorialClose = CreateButton("Close", tutorialPanel, "Cerrar", new Vector2(450f, -30f), secondary: true, width: 180f);
 
+            // ---- Récords: una pestaña por tamaño de grupo ----
+            var recordsOverlay = CreateOverlay("Records", root.transform, new Vector2(1200f, 880f), out var recordsPanel);
+            CreateLabel("Title", recordsPanel, "RÉCORDS", 52f, new Vector2(0f, -30f), new Vector2(700f, 70f), FontStyles.Bold, Gold);
+            CreateLabel("Subtitle", recordsPanel, "Victorias en este ordenador · más dinero primero; si empatan, menos tiempo", 22f,
+                new Vector2(0f, -100f), new Vector2(1100f, 32f), FontStyles.Italic, Muted);
+            var tabCount = RankingRules.MAX_GROUP - RankingRules.MIN_GROUP + 1;
+            var tabs = new Button[tabCount];
+            for (var i = 0; i < tabCount; i++)
+            {
+                var size = RankingRules.MIN_GROUP + i;
+                tabs[i] = CreateButton($"Tab{size}", recordsPanel, RecordText.Category(size),
+                    new Vector2((i - (tabCount - 1) * 0.5f) * 215f, -145f), secondary: true, width: 200f);
+            }
+            var recordsList = CreateLabel("List", recordsPanel, string.Empty, 24f, new Vector2(0f, -225f), new Vector2(1080f, 630f),
+                FontStyles.Normal, Color.white);
+            recordsList.alignment = TextAlignmentOptions.TopLeft;
+            var recordsClose = CreateButton("Close", recordsPanel, "Cerrar", new Vector2(480f, -24f), secondary: true, width: 180f);
+
             // ---- Configuración ----
             var settingsOverlay = CreateOverlay("Settings", root.transform, new Vector2(820f, 720f), out var settingsPanel);
             CreateLabel("Title", settingsPanel, "CONFIGURACIÓN", 52f, new Vector2(0f, -36f), new Vector2(760f, 70f), FontStyles.Bold, Gold);
@@ -189,12 +210,20 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(settingsView, "_resetButton", reset);
             SerializedWiring.Set(settingsView, "_closeButton", settingsClose);
 
+            var recordsView = root.AddComponent<RecordsView>();
+            SerializedWiring.Set(recordsView, "_records", RankingBuilder.LocalRecords());
+            SerializedWiring.Set(recordsView, "_panel", recordsOverlay);
+            SerializedWiring.SetArray(recordsView, "_tabs", tabs);
+            SerializedWiring.Set(recordsView, "_list", recordsList);
+            SerializedWiring.Set(recordsView, "_closeButton", recordsClose);
+
             var pauseView = root.AddComponent<PauseMenuView>();
             SerializedWiring.Set(pauseView, "_match", match);
             SerializedWiring.Set(pauseView, "_controlGate", SharedAssets.PlayerControlGate());
             SerializedWiring.Set(pauseView, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
             SerializedWiring.Set(pauseView, "_howToPlay", howToPlayView);
             SerializedWiring.Set(pauseView, "_settingsView", settingsView);
+            SerializedWiring.Set(pauseView, "_recordsView", recordsView);
             SerializedWiring.Set(pauseView, "_panel", pause);
             SerializedWiring.Set(pauseView, "_resumeButton", resume);
             SerializedWiring.Set(pauseView, "_howToPlayButton", pauseHowToPlay);
@@ -213,10 +242,12 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(view, "_openShopRequested", SharedAssets.OpenShopRequested());
             SerializedWiring.Set(view, "_howToPlay", howToPlayView);
             SerializedWiring.Set(view, "_settingsView", settingsView);
+            SerializedWiring.Set(view, "_recordsView", recordsView);
             SerializedWiring.Set(view, "_mainPanel", main.gameObject);
             SerializedWiring.Set(view, "_hostButton", host);
             SerializedWiring.Set(view, "_joinMenuButton", joinMenu);
             SerializedWiring.Set(view, "_howToPlayButton", howToPlay);
+            SerializedWiring.Set(view, "_recordsButton", recordsButton);
             SerializedWiring.Set(view, "_settingsButton", settingsButton);
             SerializedWiring.Set(view, "_quitButton", quit);
             SerializedWiring.Set(view, "_mainStatus", mainStatus);
@@ -243,6 +274,7 @@ namespace Trivias.Menu.Editor
             confirm.SetActive(false);
             tutorial.SetActive(false);
             settingsOverlay.SetActive(false);
+            recordsOverlay.SetActive(false);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
 

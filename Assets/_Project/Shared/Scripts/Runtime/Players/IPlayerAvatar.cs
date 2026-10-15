@@ -23,6 +23,12 @@ namespace Trivias.Shared.Players
         /// <summary>Cosméticos que lleva puestos (iguales en todos los clientes).</summary>
         CosmeticLoadout Loadout { get; }
 
+        /// <summary>Es el concursante de este ordenador.</summary>
+        bool IsLocal { get; }
+
+        /// <summary>Punto que sigue la cámara en tercera persona (también la del espectador que lo mira).</summary>
+        Transform ViewTarget { get; }
+
         /// <summary>Eliminado hasta la siguiente partida (GDD 5.3): ni se mueve, ni toca dinero, ni verifica.</summary>
         bool IsEliminated { get; }
 

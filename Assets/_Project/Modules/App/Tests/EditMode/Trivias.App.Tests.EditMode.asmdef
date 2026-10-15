@@ -12,7 +12,8 @@
         "Trivias.App.Editor",
         "Trivias.Feedback",
         "Trivias.Menu",
-        "Trivias.Menu.Editor"
+        "Trivias.Menu.Editor",
+        "Trivias.Spectator"
     ],
     "includePlatforms": [
         "Editor"

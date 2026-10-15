@@ -1,0 +1,19 @@
+{
+    "name": "Trivias.Spectator",
+    "rootNamespace": "Trivias.Spectator",
+    "references": [
+        "Trivias.Shared",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

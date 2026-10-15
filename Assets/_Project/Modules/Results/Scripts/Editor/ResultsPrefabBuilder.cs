@@ -1,5 +1,6 @@
 using TMPro;
 using Trivias.Match.Data;
+using Trivias.Ranking.Editor;
 using Trivias.Results.Components;
 using Trivias.Shared.Editor;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace Trivias.Results.Editor
             background.color = new Color(0.05f, 0.06f, 0.16f, 0.94f);
 
             var title = CreateText("Title", panel, 64f, new Vector2(0f, -30f), new Vector2(700f, 80f), FontStyles.Bold);
-            var details = CreateText("Details", panel, 30f, new Vector2(0f, -130f), new Vector2(680f, 340f), FontStyles.Normal);
+            var details = CreateText("Details", panel, 28f, new Vector2(0f, -125f), new Vector2(680f, 400f), FontStyles.Normal);
 
             var playAgain = CreateButton("PlayAgain", panel, new Vector2(-170f, -540f), "Volver a jugar", out var playAgainLabel);
             var leave = CreateButton("Leave", panel, new Vector2(170f, -540f), "Salir de la sala", out _);
@@ -39,6 +40,7 @@ namespace Trivias.Results.Editor
             SerializedWiring.Set(view, "_match", match);
             SerializedWiring.Set(view, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
             SerializedWiring.Set(view, "_profile", SharedAssets.PlayerProfile());
+            SerializedWiring.Set(view, "_records", RankingBuilder.LocalRecords());
             SerializedWiring.Set(view, "_panel", panel.gameObject);
             SerializedWiring.Set(view, "_title", title);
             SerializedWiring.Set(view, "_details", details);

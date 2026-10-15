@@ -45,7 +45,7 @@ No hay señalar, gestos, salto, sprint o empujones confirmados. No introducir nu
 | Apuesta preparada | Activo con apuesta voluntaria todavía cancelable |
 | Apuesta bloqueada | Respuesta comprometida, uso consumido, sin cambiar apuesta |
 | Expulsión | Animación breve, el personaje sale disparado hacia arriba; no entra en el tubo |
-| Espectador | Observa; sin interactuar ni comunicarse con activos |
+| Espectador | Observa por encima del hombro de un activo (A/D o flechas cambian, Espacio vista general); sin interactuar ni comunicarse con activos |
 | Resultados | Voz del grupo reunida, recompensa de equipo y regreso al vestíbulo |
 
 Los usos de comodín son un contador separado del estado: acertar puede dejar al personaje activo con usos disponibles o gastados. Fallar elimina aunque queden usos personales; estos no se transfieren.

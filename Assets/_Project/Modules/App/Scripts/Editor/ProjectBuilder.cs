@@ -13,6 +13,7 @@ using Trivias.Presenter.Editor;
 using Trivias.Questions.Editor;
 using Trivias.Results.Editor;
 using Trivias.SelfBet.Editor;
+using Trivias.Spectator.Editor;
 using Trivias.Shop.Editor;
 using Trivias.Feedback.Editor;
 using Trivias.Shared.Editor;
@@ -82,6 +83,7 @@ namespace Trivias.App.Editor
                 StageConfetti = FeedbackBuilder.BuildStageConfetti(matchRuntime),
                 VictoryPodium = FeedbackBuilder.BuildPodium(matchRuntime),
                 StageLighting = FeedbackBuilder.BuildStageLighting(matchRuntime, FeedbackBuilder.BuildMoods()),
+                Spectator = SpectatorPrefabBuilder.Build(),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),

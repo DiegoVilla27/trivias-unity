@@ -48,7 +48,7 @@ Las fichas se guardan en un perfil local por jugador (JSON en la carpeta de dato
 
 Solo victorias, por tamaño inicial de grupo. Orden: dinero descendente, tiempo total ascendente; empate exacto comparte puesto. Animaciones y conversación cuentan. Menús o demoras no detienen el reloj. La ceremonia posterior al resultado no cuenta.
 
-Primero resultado y récord local; servicio global después. Identidad del equipo, tratamiento de preguntas de distinta dificultad, versionado de reglas, reconexión y validación de resultados pendientes.
+Primero resultado y récord local; servicio global después. Implementado el récord local (módulo `Ranking`): `LocalRecords` guarda en `trivias-records.json` las 10 mejores victorias de cada tamaño de grupo; `RankingRules` (C# puro, probado) decide quién entra (victoria desde la pregunta 1, de 2 a 6 jugadores), ordena por dinero y tiempo en milisegundos y hace que los empates exactos compartan puesto. Los resultados presentan cada partida una sola vez y muestran el puesto; el menú tiene la tabla por categorías. Identidad del equipo, tratamiento de preguntas de distinta dificultad, versionado de reglas, reconexión y validación de resultados pendientes.
 
 ## Red y comunicación
 
@@ -57,6 +57,10 @@ Tecnología: Netcode for GameObjects sobre Facepunch.Steamworks con transporte d
 Voz: API de voz de Steam. Cada cliente captura y comprime su voz y la envía al host, que la reenvía solo a los jugadores de su mismo canal. Desconexiones durante la partida: el dinero que llevaba vuelve a la mesa; su comodín se anula (si usaba la reserva y aún no se había verificado, el uso vuelve al equipo); deja de contar como activo y no figura como superviviente ni expulsado; el reparto de comodines no se recalcula. Si no queda ningún activo, la partida termina en derrota. Si se va el host, la sala se cierra y todos vuelven al menú con un aviso.
 
 Los activos hablan entre sí; los eliminados entre sí. Todos se reúnen en resultados. No permitir nuevas incorporaciones como concursante a mitad de partida. Reconectar al mismo participante necesita una regla explícita.
+
+## Espectador
+
+El módulo `Spectator` actúa cuando el concursante local queda eliminado. Tras 2,5 s (para ver la expulsión) mueve la cámara al hombro de un activo por el mismo canal que usa el concursante local. A/D o flechas cambian de activo y Espacio alterna con la vista general. Si el que mira cae o se va, pasa al siguiente; si no queda nadie, vista general. El rótulo solo se ve mientras se juega (no en resultados) y todo se deshace al volver a la sala. Las restricciones del eliminado (no toca dinero, cabinas ni botón) siguen en Interaction, Match y SelfBet.
 
 ## Opciones del jugador
 

@@ -170,6 +170,21 @@ namespace Trivias.App.Tests
 
         // ---- Utilidades ----
 
+        [Test]
+        public void SpectatorBanner_IsHidden_AtTheBottom_AndDoesNotBlockClicks()
+        {
+            var spectator = Find("Spectator");
+            Assert.That(spectator, Is.Not.Null, "Falta el espectador en la escena.");
+            Assert.That(spectator.GetComponent<Trivias.Spectator.Components.SpectatorController>(), Is.Not.Null);
+            Assert.That(spectator.GetComponent<UnityEngine.UI.GraphicRaycaster>(), Is.Null, "El rótulo no debe capturar clics.");
+
+            var banner = (RectTransform)spectator.transform.Find("Banner");
+            Assert.That(banner.gameObject.activeSelf, Is.False, "Solo aparece al quedar eliminado.");
+            Assert.That(banner.anchorMin.y, Is.Zero, "Abajo, sin tapar la pantalla de preguntas.");
+            foreach (var graphic in banner.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
+                Assert.That(graphic.raycastTarget, Is.False, graphic.name);
+        }
+
         private GameObject Find(string path)
         {
             var parts = path.Split('/');

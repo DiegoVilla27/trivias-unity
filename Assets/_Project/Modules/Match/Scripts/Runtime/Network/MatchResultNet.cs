@@ -15,6 +15,8 @@ namespace Trivias.Match.Network
         public short TokensEach;
         public FixedString128Bytes Survivors;
         public FixedString128Bytes Eliminated;
+        public byte StartingPlayers;
+        public bool StartedAtFirstQuestion;
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
@@ -26,16 +28,20 @@ namespace Trivias.Match.Network
             serializer.SerializeValue(ref TokensEach);
             serializer.SerializeValue(ref Survivors);
             serializer.SerializeValue(ref Eliminated);
+            serializer.SerializeValue(ref StartingPlayers);
+            serializer.SerializeValue(ref StartedAtFirstQuestion);
         }
 
         public bool Equals(MatchResultNet other) =>
             MatchId == other.MatchId && Victory == other.Victory && QuestionsPassed == other.QuestionsPassed && FinalMoney == other.FinalMoney &&
             DurationSeconds.Equals(other.DurationSeconds) && TokensEach == other.TokensEach &&
-            Survivors.Equals(other.Survivors) && Eliminated.Equals(other.Eliminated);
+            Survivors.Equals(other.Survivors) && Eliminated.Equals(other.Eliminated) &&
+            StartingPlayers == other.StartingPlayers && StartedAtFirstQuestion == other.StartedAtFirstQuestion;
 
         public override bool Equals(object obj) => obj is MatchResultNet other && Equals(other);
 
         public override int GetHashCode() =>
-            HashCode.Combine(MatchId, Victory, QuestionsPassed, FinalMoney, DurationSeconds, TokensEach, Survivors, Eliminated);
+            HashCode.Combine(HashCode.Combine(MatchId, Victory, QuestionsPassed, FinalMoney, DurationSeconds, TokensEach, Survivors,
+                Eliminated), StartingPlayers, StartedAtFirstQuestion);
     }
 }

@@ -1,0 +1,20 @@
+{
+    "name": "Trivias.Ranking.Editor",
+    "rootNamespace": "Trivias.Ranking.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Ranking"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

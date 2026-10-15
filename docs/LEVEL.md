@@ -35,7 +35,7 @@ Mesa en el centro y cabinas en semicírculo frente a ella. Presentador y pantall
 
 ## Ciclo visual
 
-Durante apuestas, se distinguen objetos disponibles, valores de bandejas y jugadores comprometidos. Al verificar, señal de bloqueo y cuenta atrás visible. En resolución, respuesta correcta claramente marcada y expulsiones breves: el personaje sale disparado hacia arriba y pasa a espectador. Entre rondas, el dinero vuelve a la mesa.
+Durante apuestas, se distinguen objetos disponibles, valores de bandejas y jugadores comprometidos. Al verificar, señal de bloqueo y cuenta atrás visible. En resolución, respuesta correcta claramente marcada y expulsiones breves: el personaje sale disparado hacia arriba y pasa a espectador (su cámara sigue después a un activo). Entre rondas, el dinero vuelve a la mesa.
 
 Bloques 1–5, 6–10 y 11–15 cambian iluminación, música y ambiente, usando la misma geometría y reglas (implementado: focos cálidos, morados y rojos; el plató se oscurece en las difíciles). Victoria: podio dorado centrado delante de la pantalla (z ≈ 12, entre cabinas y pantalla, por debajo de la línea de visión) y cheque gigante en la propia pantalla. Todos esos cambios cuentan dentro del tiempo total de partida.
 

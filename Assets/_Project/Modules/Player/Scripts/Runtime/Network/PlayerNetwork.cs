@@ -56,6 +56,8 @@ namespace Trivias.Player.Network
         public Vector3 Position => transform.position;
         public Transform CarryPoint => _carrySocket.CarryPoint;
         public bool IsEliminated => _eliminated.Value;
+        public bool IsLocal => IsOwner;
+        public Transform ViewTarget => _look.CameraRoot;
         public Transform HeadAnchor => _headAnchor;
         public Renderer[] BodyRenderers => _bodyRenderers;
         public CosmeticLoadout Loadout => _loadout.Value.ToLoadout();

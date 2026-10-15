@@ -1,0 +1,16 @@
+{
+    "name": "Trivias.Ranking",
+    "rootNamespace": "Trivias.Ranking",
+    "references": [
+        "Trivias.Shared"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

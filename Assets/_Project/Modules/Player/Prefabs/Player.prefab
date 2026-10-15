@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b3ae01b5d874bfaae69329f4087852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Trivias.Player::Trivias.Player.Components.PlayerInputReader
-  _move: {fileID: 6617374115520764352, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
-  _look: {fileID: -3670211711064513919, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _move: {fileID: -1246895598473198080, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _look: {fileID: 6940538419726410420, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
 --- !u!114 &6980080390388521248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,9 +337,9 @@ MonoBehaviour:
   _registry: {fileID: 11400000, guid: d5a8b26083ae84dd38542015a8cf8ada, type: 2}
   _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
   _promptChannel: {fileID: 11400000, guid: 3780ed2c168984f83a49dbb7fd461191, type: 2}
-  _primaryAction: {fileID: -5086971558642222778, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
-  _secondaryAction: {fileID: 1318727362496293935, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
-  _tertiaryAction: {fileID: 7481738892540804143, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _primaryAction: {fileID: -5548793354506133487, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _secondaryAction: {fileID: 2014889262538210301, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _tertiaryAction: {fileID: -2755922021289670157, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
   _scanInterval: 0.1
 --- !u!1 &5072060575748486107
 GameObject:

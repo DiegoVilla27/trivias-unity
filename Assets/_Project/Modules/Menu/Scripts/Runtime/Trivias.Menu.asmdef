@@ -8,7 +8,8 @@
         "Trivias.Questions",
         "Unity.TextMeshPro",
         "UnityEngine.UI",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Trivias.Ranking"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

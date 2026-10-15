@@ -37,6 +37,7 @@ namespace Trivias.App.Editor
         public GameObject StageConfetti;
         public GameObject VictoryPodium;
         public GameObject StageLighting;
+        public GameObject Spectator;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -90,6 +91,7 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.StageConfetti);
             PrefabUtility.InstantiatePrefab(prefabs.VictoryPodium);
             PrefabUtility.InstantiatePrefab(prefabs.StageLighting);
+            PrefabUtility.InstantiatePrefab(prefabs.Spectator);
             CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);

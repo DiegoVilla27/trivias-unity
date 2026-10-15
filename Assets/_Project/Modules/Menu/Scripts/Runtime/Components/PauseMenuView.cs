@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Trivias.Menu.Components
 {
     /// <summary>
-    /// Esc: cierra el panel abierto (tutorial, configuración) o, durante la partida, abre el menú de pausa
+    /// Esc: cierra el panel abierto (tutorial, configuración, récords) o, durante la partida, abre el menú de pausa
     /// (continuar, cómo se juega, configuración, salir de la sala). El juego no se detiene para los demás:
     /// solo tu concursante se queda quieto y el ratón queda libre.
     /// </summary>
@@ -20,6 +20,7 @@ namespace Trivias.Menu.Components
         [SerializeField] private VoidEventChannel _leaveRoomRequested;
         [SerializeField] private HowToPlayView _howToPlay;
         [SerializeField] private SettingsView _settingsView;
+        [SerializeField] private RecordsView _recordsView;
         [SerializeField] private GameObject _panel;
         [SerializeField] private Button _resumeButton;
         [SerializeField] private Button _howToPlayButton;
@@ -80,6 +81,8 @@ namespace Trivias.Menu.Components
                 _howToPlay.Close();
             else if (_settingsView.IsOpen)
                 _settingsView.Close();
+            else if (_recordsView.IsOpen)
+                _recordsView.Close();
             else if (_confirmPanel.activeSelf)
                 CancelLeave();
             else if (IsOpen)

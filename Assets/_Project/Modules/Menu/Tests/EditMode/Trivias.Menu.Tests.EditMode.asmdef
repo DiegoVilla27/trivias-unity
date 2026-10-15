@@ -5,7 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Trivias.Menu",
-        "Trivias.Shared"
+        "Trivias.Shared",
+        "Trivias.Ranking",
+        "Trivias.Money"
     ],
     "includePlatforms": [
         "Editor"

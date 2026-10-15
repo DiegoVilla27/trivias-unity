@@ -53,12 +53,13 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void MainMenu_HasTheFiveOptions()
+        public void MainMenu_HasItsOptions()
         {
             Assert.That(_menu.IsMainOpen, Is.True);
             Assert.That(Caption(MenuButton("_hostButton")), Is.EqualTo("Crear sala"));
             Assert.That(Caption(MenuButton("_joinMenuButton")), Is.EqualTo("Unirme a una sala"));
             Assert.That(Caption(MenuButton("_howToPlayButton")), Is.EqualTo("Cómo se juega"));
+            Assert.That(Caption(MenuButton("_recordsButton")), Is.EqualTo("Récords"));
             Assert.That(Caption(MenuButton("_settingsButton")), Is.EqualTo("Configuración"));
             Assert.That(Caption(MenuButton("_quitButton")), Is.EqualTo("Salir"));
         }

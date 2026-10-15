@@ -35,7 +35,9 @@
         "Trivias.Shop.Editor",
         "Trivias.Shop",
         "Trivias.Feedback.Editor",
-        "Trivias.Feedback"
+        "Trivias.Feedback",
+        "Trivias.Spectator.Editor",
+        "Trivias.Ranking.Editor"
     ],
     "includePlatforms": [
         "Editor"

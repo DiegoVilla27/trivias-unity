@@ -51,6 +51,7 @@ namespace Trivias.Match.Network
         private int[] _plan; // Solo en el host.
         private double _startTime; // Solo en el host: inicio común del concurso (GDD 12.2).
         private uint _matchId;     // Solo en el host: identifica la partida para entregar las fichas una vez.
+        private int _firstQuestion = 1; // Solo en el host: pregunta con la que empezó (récords solo si es la 1).
         private readonly List<ulong> _eliminatedBuffer = new();
         private readonly List<ulong> _participants = new();
         private bool _notifyPending;
@@ -73,7 +74,8 @@ namespace Trivias.Match.Network
             {
                 var result = _result.Value;
                 return new MatchResult(result.MatchId, result.Victory, result.QuestionsPassed, result.FinalMoney, result.DurationSeconds,
-                    result.TokensEach, result.Survivors.ToString(), result.Eliminated.ToString());
+                    result.TokensEach, result.Survivors.ToString(), result.Eliminated.ToString(), result.StartingPlayers,
+                    result.StartedAtFirstQuestion);
             }
         }
         public long TeamMoney => _money.Session?.Ledger.TotalInPlay() ?? 0;
@@ -231,6 +233,7 @@ namespace Trivias.Match.Network
             _startTime = NetworkManager.ServerTime.Time;
             _matchId = (uint)random.Next(1, int.MaxValue);
             var first = MatchRules.StartQuestion(_config.TestStartQuestion, _plan.Length);
+            _firstQuestion = first;
             if (first > 1)
                 GameLog.Warning($"[Partida] MODO PRUEBA: empieza en la pregunta {first} de {_plan.Length} " +
                                  "(MatchConfig → «Empezar en la pregunta»; vuelve a 1 para jugar normal).", this);
@@ -343,6 +346,8 @@ namespace Trivias.Match.Network
                 FinalMoney = _money.Authority?.TotalInPlay ?? _lastRound.Value.Total,
                 DurationSeconds = (float)(NetworkManager.ServerTime.Time - _startTime),
                 TokensEach = (short)tokens,
+                StartingPlayers = (byte)_participants.Count,
+                StartedAtFirstQuestion = _firstQuestion == 1,
             };
             result.Survivors.CopyFromTruncated(survivors.ToString());
             result.Eliminated.CopyFromTruncated(eliminated.ToString());

@@ -155,6 +155,8 @@ El eliminado permanece como espectador hasta la siguiente partida. No hay rescat
 
 Su voz y cualquier canal de texto del juego se separan de los activos. Puede hablar con otros eliminados. En resultados se reúne el grupo. Una llamada externa como Discord puede mantener la comunicación; el juego solo controla sus canales.
 
+Implementación del prototipo: tras ver su expulsión, el eliminado mira la partida por encima del hombro de un concursante activo (A/D o flechas para cambiar, Espacio para la vista general del plató); si el que mira cae o se va, pasa solo al siguiente. Un rótulo abajo recuerda que es espectador hasta la siguiente partida.
+
 La eliminación permanente dentro de la partida se mantiene como decisión de diseño. Se mide la espera en las pruebas para conocer su impacto, sin introducir reapariciones como parte del alcance.
 
 ## 6. Cultura general y contenido
@@ -303,6 +305,8 @@ Implementación del prototipo: las fichas y compras se guardan en un perfil loca
 
 Solo las partidas que superan las 15 preguntas y ganan registran resultado. El ranking se divide por tamaño inicial: 2, 3, 4, 5 y 6 jugadores. Las fichas no intervienen.
 
+Implementación del prototipo (récords locales): cada jugador guarda en su ordenador las 10 mejores victorias de cada tamaño de grupo, con el orden de 12.1 y el tiempo en milisegundos. Las partidas de prueba que no empiezan en la pregunta 1 y las de un solo jugador no cuentan. Los resultados dicen el puesto conseguido y el menú principal muestra la tabla. Mientras todos se llamen «Jugador N» no se distingue un grupo de otro, así que la regla de guardar solo la mejor victoria de cada conjunto de participantes se aplicará en el ranking global, con identidades de Steam.
+
 ### 12.1 Orden propuesto
 
 1. **Dinero final, de mayor a menor.**
@@ -394,6 +398,8 @@ Pendientes prioritarios:
 - Confeti de colores a los lados de la pantalla en cada acierto y lluvia dorada en toda la sala en la victoria.
 - Menú principal completo (crear, unirse, cómo se juega, configuración, salir), invitación con la dirección a compartir, tutorial, opciones guardadas y menú de pausa con Esc.
 - Victoria con cheque gigante en la pantalla y podio con placas; iluminación del plató por bloque y momento.
+- Récords locales de victorias por tamaño de grupo (botón «Récords» en el menú y puesto conseguido en los resultados). La mejor victoria por conjunto de participantes se aplaza al ranking global, cuando haya identidades de Steam.
+- Cámara de espectador para el eliminado: sigue a los activos por encima del hombro (A/D o flechas para cambiar, Espacio para la vista general) con un rótulo que recuerda que es espectador.
 - Se añade tiempo límite para apostar en cada pregunta (90 s, configurable; 0 = sin límite), con cuenta atrás visible y verificación automática al agotarse. Se puede verificar antes.
 - El presentador avisa cuando quedan pocos segundos.
 - El panel de depuración se sustituye por un menú (pantalla principal y sala de espera) que desaparece al empezar la partida; el HUD se simplifica.

@@ -2,6 +2,8 @@ using TMPro;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Logic;
+using Trivias.Ranking.Data;
+using Trivias.Ranking.Logic;
 using Trivias.Shared.Events;
 using Trivias.Shared.Profile;
 using UnityEngine;
@@ -11,7 +13,8 @@ namespace Trivias.Results.Components
 {
     /// <summary>
     /// Pantalla de resultados (GDD 3.3): victoria o derrota, preguntas superadas, dinero final, tiempo total, fichas para
-    /// cada jugador, supervivientes y expulsados. El host puede volver a la sala para otra partida; todos pueden salir.
+    /// cada jugador, supervivientes y expulsados. Las victorias se presentan a los récords locales (GDD 12) y se dice en qué
+    /// puesto quedan. El host puede volver a la sala para otra partida; todos pueden salir.
     /// </summary>
     public sealed class ResultsView : MonoBehaviour
     {
@@ -21,6 +24,7 @@ namespace Trivias.Results.Components
         [SerializeField] private MatchRuntime _match;
         [SerializeField] private VoidEventChannel _leaveRoomRequested;
         [SerializeField] private PlayerProfile _profile;
+        [SerializeField] private LocalRecords _records;
         [SerializeField] private GameObject _panel;
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _details;
@@ -33,6 +37,9 @@ namespace Trivias.Results.Components
         private float _showAt = -1f;
 
         public bool IsShown => _panel.activeSelf;
+
+        /// <summary>Lo que respondieron los récords a la última partida mostrada.</summary>
+        public RecordOutcome LastRecord { get; private set; }
 
         private void OnEnable()
         {
@@ -63,6 +70,16 @@ namespace Trivias.Results.Components
             var result = session.Result;
             // Las fichas se guardan en el perfil local una sola vez por partida (GDD 11).
             _profile.AwardMatch(result.MatchId.ToString(), result.TokensEach);
+            // Cada jugador guarda la victoria en sus récords (una vez por partida; repetir devuelve lo mismo).
+            LastRecord = _records.Submit(
+                RankingRules.Entry(result.MatchId.ToString(), result.StartingPlayers, result.FinalMoney, result.DurationSeconds,
+                    result.Survivors, result.Eliminated, System.DateTime.Now),
+                RankingRules.Eligibility(result.Victory, result.StartedAtFirstQuestion, result.StartingPlayers));
+            var record = RecordText.Outcome(LastRecord);
+            if (record.Length > 0)
+                record = LastRecord.Kind == RecordResultKind.NotEligible
+                    ? $"<size=80%><color={MUTED}>{record}</color></size>\n"
+                    : $"<color={GOLD}><b>{record}</b></color>\n";
 
             // Al ganar, primero se celebra en el plató; los resultados aparecen después.
             if (!_panel.activeSelf && _showAt < 0f)
@@ -77,7 +94,8 @@ namespace Trivias.Results.Components
             _details.text =
                 $"Preguntas superadas: <b>{result.QuestionsPassed} / {session.TotalQuestions}</b>\n" +
                 $"Dinero final: <b>{MoneyFormat.Amount(result.FinalMoney)}</b>\n" +
-                $"Tiempo total: <b>{MatchResult.FormatDuration(result.DurationSeconds)}</b>\n\n" +
+                $"Tiempo total: <b>{MatchResult.FormatDuration(result.DurationSeconds)}</b>\n" +
+                record + "\n" +
                 $"<color={GOLD}><b>{result.TokensEach} fichas para cada jugador</b></color>\n" +
                 $"<size=80%>Tienes {_profile.Tokens} fichas · gástalas en la tienda</size>\n\n" +
                 $"Supervivientes: {survivors}\n<color={MUTED}>Expulsados: {eliminated}</color>";

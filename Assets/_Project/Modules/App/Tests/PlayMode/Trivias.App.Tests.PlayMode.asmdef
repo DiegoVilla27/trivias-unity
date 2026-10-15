@@ -23,7 +23,10 @@
         "UnityEngine.UI",
         "Trivias.VerifyButton",
         "Trivias.Shop",
-        "Trivias.Feedback"
+        "Trivias.Feedback",
+        "Trivias.Ranking",
+        "Trivias.Spectator",
+        "Trivias.Cameras"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

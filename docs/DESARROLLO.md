@@ -42,6 +42,8 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
 | Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
 | Menú y opciones | Hecho: menú principal, unirse con validación, invitar (dirección y copiar), tutorial, configuración guardada y pausa con Esc |
+| Espectador | Hecho: cámara que sigue a los activos, cambiar con A/D, vista general con Espacio y rótulo |
+| 10 Ranking | Récords locales hechos (por tamaño de grupo, dinero y tiempo, empates compartidos). Ranking global pendiente (con Steam) |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |
 
 Cada cambio se valida con Build All y la batería completa de pruebas (EditMode y PlayMode).
@@ -72,7 +74,7 @@ Cada cambio se valida con Build All y la batería completa de pruebas (EditMode 
 | Emisión de bonos grandes | Confirmado: denominación más grande posible |
 | Abandonos/reconexiones | Pendientes para fichas, usos y ranking |
 | Selección de preguntas e historial | Pendiente; cantidades 30/200 acordadas |
-| Ranking comparable y validación | Pendiente de implementación |
+| Ranking comparable y validación | Récords locales hechos; ranking global, identidad del equipo y validación pendientes |
 | Nombre, atuendos y catálogo de tienda | Pendientes |
 
 ## Aplazado

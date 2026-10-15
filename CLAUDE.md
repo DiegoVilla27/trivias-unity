@@ -105,19 +105,21 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Exchange | Estación de cambio interactiva (agrupar y dividir) | Shared, Money |
 | SelfBet | Comodines: reparto, reserva, zonas de apuesta, confinamiento, multiplicador y expulsión | Shared |
 | Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), elección por evento, bocadillo y subtítulo | Shared, Match, Money, SelfBet, Questions |
-| Results | Pantalla de resultados, volver a jugar y salir | Shared, Match, Money, Questions |
-| Menu | Menú principal (crear, unirse, cómo se juega, configuración, salir), invitación, tutorial (JSON en `Content/`), configuración, sala de espera y pausa (Esc) | Shared, Match, Money, Questions |
+| Results | Pantalla de resultados (con el puesto en los récords), volver a jugar y salir | Shared, Match, Money, Questions, Ranking |
+| Menu | Menú principal (crear, unirse, cómo se juega, récords, configuración, salir), invitación, tutorial (JSON en `Content/`), tabla de récords, configuración, sala de espera y pausa (Esc) | Shared, Match, Money, Questions, Ranking |
+| Ranking | Récords locales de victorias (C# puro: quién entra, orden y empates) guardados en JSON | Shared |
+| Spectator | Cámara de espectador del eliminado (sigue a los activos) y su rótulo | Shared |
 | Shop | Tienda del vestíbulo, catálogo de cosméticos (primitivas) y presentador que viste a los concursantes | Shared |
 | Feedback | Sonido (efectos y música sintetizados en edición), confeti, podio de la victoria y ambiente de luz por momento | Shared, Match, Money, SelfBet, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
 | Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
 
-Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `PlayerAvatarRegistry`, `RoomConnectionRuntime`, `MoneyRuntime`, `MatchRuntime`, `SelfBetRuntime`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
+Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `PlayerAvatarRegistry`, `RoomConnectionRuntime`, `MoneyRuntime`, `MatchRuntime`, `SelfBetRuntime`, `LocalRecords`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
 | App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
 
 Excepción de nombre: el módulo `Camera` usa el namespace `Trivias.Cameras` porque `Trivias.Camera` choca con `UnityEngine.Camera`.
 
-Módulos previstos aún sin crear: `Voice`, `Ranking`.
+Módulos previstos aún sin crear: `Voice`.
 
 ## 4. Flujo de trabajo con Unity
 

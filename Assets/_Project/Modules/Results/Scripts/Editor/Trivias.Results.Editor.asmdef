@@ -7,7 +7,9 @@
         "Trivias.Results",
         "Trivias.Match",
         "Unity.TextMeshPro",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Trivias.Ranking.Editor",
+        "Trivias.Ranking"
     ],
     "includePlatforms": [
         "Editor"

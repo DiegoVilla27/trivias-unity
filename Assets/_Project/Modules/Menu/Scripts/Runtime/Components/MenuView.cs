@@ -15,7 +15,7 @@ namespace Trivias.Menu.Components
 {
     /// <summary>
     /// Menú del juego:
-    /// - Principal: crear sala, unirme a una sala, cómo se juega, configuración, salir.
+    /// - Principal: crear sala, unirme a una sala, cómo se juega, récords, configuración, salir.
     /// - Unirme: dirección del host (recuerda la última) y conectar.
     /// - Sala de espera: jugadores, «Invita a tus amigos» con la dirección para compartir (host), empezar, tienda, salir.
     /// Desaparece al empezar la partida y vuelve al regresar a la sala. Se redibuja solo por eventos.
@@ -32,12 +32,14 @@ namespace Trivias.Menu.Components
         [SerializeField] private VoidEventChannel _openShopRequested;
         [SerializeField] private HowToPlayView _howToPlay;
         [SerializeField] private SettingsView _settingsView;
+        [SerializeField] private RecordsView _recordsView;
 
         [Header("Pantalla principal")]
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private Button _hostButton;
         [SerializeField] private Button _joinMenuButton;
         [SerializeField] private Button _howToPlayButton;
+        [SerializeField] private Button _recordsButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
         [SerializeField] private TextMeshProUGUI _mainStatus;
@@ -79,6 +81,7 @@ namespace Trivias.Menu.Components
             _hostButton.onClick.AddListener(OnHost);
             _joinMenuButton.onClick.AddListener(OpenJoin);
             _howToPlayButton.onClick.AddListener(_howToPlay.Open);
+            _recordsButton.onClick.AddListener(_recordsView.Open);
             _settingsButton.onClick.AddListener(_settingsView.Open);
             _quitButton.onClick.AddListener(GameQuit.Quit);
             _connectButton.onClick.AddListener(OnConnect);
@@ -101,6 +104,7 @@ namespace Trivias.Menu.Components
             _hostButton.onClick.RemoveListener(OnHost);
             _joinMenuButton.onClick.RemoveListener(OpenJoin);
             _howToPlayButton.onClick.RemoveListener(_howToPlay.Open);
+            _recordsButton.onClick.RemoveListener(_recordsView.Open);
             _settingsButton.onClick.RemoveListener(_settingsView.Open);
             _quitButton.onClick.RemoveListener(GameQuit.Quit);
             _connectButton.onClick.RemoveListener(OnConnect);

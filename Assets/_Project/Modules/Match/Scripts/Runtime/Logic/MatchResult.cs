@@ -13,8 +13,14 @@ namespace Trivias.Match.Logic
         public readonly string Survivors;
         public readonly string Eliminated;
 
+        /// <summary>Tamaño inicial del grupo (categoría de récords, GDD 12).</summary>
+        public readonly int StartingPlayers;
+
+        /// <summary>Empezó en la pregunta 1 (las partidas de prueba que empiezan más tarde no cuentan para récords).</summary>
+        public readonly bool StartedAtFirstQuestion;
+
         public MatchResult(uint matchId, bool victory, int questionsPassed, long finalMoney, float durationSeconds,
-            int tokensEach, string survivors, string eliminated)
+            int tokensEach, string survivors, string eliminated, int startingPlayers, bool startedAtFirstQuestion)
         {
             MatchId = matchId;
             Victory = victory;
@@ -24,6 +30,8 @@ namespace Trivias.Match.Logic
             TokensEach = tokensEach;
             Survivors = survivors;
             Eliminated = eliminated;
+            StartingPlayers = startingPlayers;
+            StartedAtFirstQuestion = startedAtFirstQuestion;
         }
 
         /// <summary>Tiempo en formato mm:ss.</summary>
