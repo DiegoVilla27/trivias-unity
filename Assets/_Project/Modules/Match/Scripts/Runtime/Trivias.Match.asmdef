@@ -6,7 +6,9 @@
         "Trivias.Questions",
         "Trivias.Money",
         "Unity.Netcode.Runtime",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Trivias.SelfBet",
+        "Unity.Collections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

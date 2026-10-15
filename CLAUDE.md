@@ -117,6 +117,9 @@ Módulos previstos aún sin crear: `SelfBet`, `Results`, `Voice`.
 - No editar a mano prefabs o escenas generados: cambiar el constructor.
 - **La escena siempre debe estar lista para jugar.** `App/AutoBuild` guarda en `Settings/BuildStamp.txt` una huella del código y del contenido; si al compilar en el editor no coincide, reconstruye todo solo. El usuario nunca debería tener que ejecutar Build All.
 - **Antes de entregar cualquier cambio (obligatorio):** con Unity cerrado, ejecutar Build All en consola, luego los tests EditMode (incluyen `WiringTests`: ninguna referencia vacía en escena y prefabs, y huella al día) y PlayMode. Si Unity está abierto, pedir que lo cierre; no dar nada por bueno sin esta verificación.
+- **Cero errores y cero avisos:** revisar en cada log toda línea de `Assets/` con `error` o `warning` (no solo `CS`: también analizadores como `UAC`). Comando: `grep -E "Assets/.*(error|warning)" <log>`.
+- **Nunca pedir al usuario que abra Unity o pruebe** hasta que compilación, Build All y todos los tests estén en verde. Si hay cambios sin verificar y Unity está abierto, avisar de que se recompilará con código no verificado.
+- Evitar nombres que choquen con namespaces del proyecto (`Exchange`, `Table`, `Camera`...) en métodos y variables: prefijos claros (`FindTable()`).
 - Un campo `[SerializeField]` nuevo se asigna en el constructor del **prefab** que lo contiene (no solo en la escena), o `WiringTests` fallará.
 - La lógica de red solo se prueba aquí con el host (un proceso). Lo que dependa de clientes remotos hay que razonarlo con cuidado y avisar al usuario de que lo verifique con Multiplayer Play Mode.
 - Comandos en modo consola (Unity **cerrado**; si está abierto, usar el menú):

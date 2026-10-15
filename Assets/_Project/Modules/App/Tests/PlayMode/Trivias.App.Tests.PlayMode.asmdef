@@ -13,7 +13,9 @@
         "Unity.TextMeshPro",
         "Trivias.Interaction",
         "Trivias.Match",
-        "Trivias.Questions"
+        "Trivias.Questions",
+        "Trivias.SelfBet",
+        "Trivias.Exchange"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

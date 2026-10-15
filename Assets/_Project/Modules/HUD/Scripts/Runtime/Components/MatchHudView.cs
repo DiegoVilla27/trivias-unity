@@ -2,6 +2,8 @@ using TMPro;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Logic;
+using Trivias.SelfBet.Data;
+using Trivias.Shared.Players;
 using UnityEngine;
 
 namespace Trivias.HUD.Components
@@ -24,6 +26,9 @@ namespace Trivias.HUD.Components
         [SerializeField] private TextMeshProUGUI[] _options = new TextMeshProUGUI[4];
         [SerializeField] private TextMeshProUGUI _status;
         [SerializeField] private TextMeshProUGUI _teamMoney;
+        [SerializeField] private SelfBetRuntime _selfBet;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
+        [SerializeField] private TextMeshProUGUI _selfBetInfo;
 
         private int _shownSeconds = -1;
         private string _statusPrefix = string.Empty;
@@ -31,10 +36,19 @@ namespace Trivias.HUD.Components
         private void OnEnable()
         {
             _runtime.Changed += Refresh;
+            _selfBet.Changed += Refresh;
+            _avatars.Changed += OnAvatarChanged;
             Refresh();
         }
 
-        private void OnDisable() => _runtime.Changed -= Refresh;
+        private void OnDisable()
+        {
+            _runtime.Changed -= Refresh;
+            _selfBet.Changed -= Refresh;
+            _avatars.Changed -= OnAvatarChanged;
+        }
+
+        private void OnAvatarChanged(ulong _) => Refresh();
 
         private void Update()
         {
@@ -57,8 +71,11 @@ namespace Trivias.HUD.Components
             var session = _runtime.Session;
             _questionPanel.SetActive(session != null);
             _teamMoney.gameObject.SetActive(session != null);
+            _selfBetInfo.transform.parent.gameObject.SetActive(session != null);
             if (session == null)
                 return;
+
+            RefreshSelfBetInfo(session.Phase);
 
             _teamMoney.text = $"<size=70%>DINERO DEL EQUIPO</size>\n<b>{MoneyFormat.Amount(session.TeamMoney)}</b>";
             _shownSeconds = -1;
@@ -120,14 +137,45 @@ namespace Trivias.HUD.Components
                     break;
                 case MatchPhase.Reveal:
                     var round = session.LastRound;
-                    var bonus = round.Bonus > 0 ? $" · Bono {MoneyFormat.Amount(round.Bonus)}" : string.Empty;
+                    var bonus = round.Bonus > 0
+                        ? $" · <b>x{session.LastMultiplier}</b> bono {MoneyFormat.Amount(round.Bonus)}"
+                        : string.Empty;
+                    var expelled = string.IsNullOrEmpty(session.LastEliminated)
+                        ? string.Empty
+                        : $"\n<color={WARNING_COLOR}>Expulsados: {session.LastEliminated}</color>";
                     _statusPrefix =
                         $"<color={CORRECT_COLOR}><b>Correcta: {(char)('A' + correct)}</b></color>  ·  " +
-                        $"Perdido {MoneyFormat.Amount(round.Lost)} · Conservado {MoneyFormat.Amount(round.Kept)}{bonus}\n" +
-                        $"<size=85%><i>{question.Explanation}</i></size>";
+                        $"Perdido {MoneyFormat.Amount(round.Lost)} · Conservado {MoneyFormat.Amount(round.Kept)}{bonus}" +
+                        $"{expelled}\n<size=85%><i>{question.Explanation}</i></size>";
                     _status.text = _statusPrefix;
                     break;
             }
+        }
+
+        /// <summary>Comodines del jugador local y de la reserva, o el aviso de expulsado.</summary>
+        private void RefreshSelfBetInfo(MatchPhase phase)
+        {
+            var bets = _selfBet.Session;
+            if (bets == null || phase == MatchPhase.Lobby)
+            {
+                _selfBetInfo.text = "<size=70%>COMODINES</size>\nal empezar";
+                return;
+            }
+
+            var me = bets.LocalClientId;
+            if (_avatars.IsEliminated(me))
+            {
+                _selfBetInfo.text = $"<color={WARNING_COLOR}><b>EXPULSADO</b></color>\n<size=70%>espectador hasta la próxima partida</size>";
+                return;
+            }
+
+            var book = bets.Book;
+            var index = book.IndexOf(me);
+            var personal = index >= 0 ? book.Bettors[index].PersonalUses : 0;
+            var betText = index >= 0 && book.Bettors[index].HasBet
+                ? $"\n<color={CORRECT_COLOR}>Apostado en {(char)('A' + book.Bettors[index].Booth)}</color>"
+                : string.Empty;
+            _selfBetInfo.text = $"<size=70%>COMODINES</size>\nTuyos: <b>{personal}</b> · Reserva: <b>{book.Reserve}</b>{betText}";
         }
 
         private void ShowMessage(string header, string message, string status)

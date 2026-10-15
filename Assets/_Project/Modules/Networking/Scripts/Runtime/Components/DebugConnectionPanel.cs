@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Trivias.Networking.Components
 {
     /// <summary>
-    /// Panel provisional para crear o unirse a una sala en local. Solo existe en editor y development builds;
+    /// Panel provisional para crear o unirse a una sala en local. Solo existe en editor y builds de depuración;
     /// se sustituirá por el vestíbulo real. En builds de release el componente se elimina al arrancar.
     /// Un clic sobre el panel no captura el ratón (lo registra en <see cref="CursorCaptureBlockers"/>).
     /// </summary>
@@ -14,7 +14,7 @@ namespace Trivias.Networking.Components
         [SerializeField] private ConnectionService _connection;
         [SerializeField] private CursorCaptureBlockers _cursorBlockers;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         private const float MARGIN = 16f;
         private const float WIDTH = 320f;
         private const float HEIGHT = 330f;

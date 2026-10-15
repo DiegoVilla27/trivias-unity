@@ -8,7 +8,8 @@
         "Trivias.Money",
         "Trivias.Questions",
         "Unity.Netcode.Runtime",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Trivias.SelfBet"
     ],
     "includePlatforms": [
         "Editor"

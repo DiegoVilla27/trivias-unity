@@ -21,6 +21,7 @@ MonoBehaviour:
   _maxCarriedGoldBars: 5
   _tableReach: 2.4
   _trayReach: 1.6
+  _exchangeReach: 1.6
   _serverReachTolerance: 1
   _bundlePool: 40
   _bagPool: 20

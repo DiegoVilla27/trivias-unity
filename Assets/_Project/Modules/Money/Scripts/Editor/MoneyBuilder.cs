@@ -49,22 +49,23 @@ namespace Trivias.Money.Editor
             SerializedWiring.Set(presenter, "_bundlePrefab", bundle);
             SerializedWiring.Set(presenter, "_bagPrefab", bag);
             SerializedWiring.Set(presenter, "_goldBarPrefab", goldBar);
-            SerializedWiring.Set(presenter, "_carrySockets", SharedAssets.CarrySocketRegistry());
+            SerializedWiring.Set(presenter, "_avatars", SharedAssets.PlayerAvatars());
 
             var session = root.AddComponent<MoneySessionNetwork>();
             SerializedWiring.Set(session, "_config", Config());
             SerializedWiring.Set(session, "_layout", Layout());
             SerializedWiring.Set(session, "_runtime", Runtime());
             SerializedWiring.Set(session, "_presenter", presenter);
+            SerializedWiring.Set(session, "_avatars", SharedAssets.PlayerAvatars());
 
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }
 
         /// <summary>Guarda dónde están la superficie de la mesa y la de cada bandeja (escrito por el constructor de la escena).</summary>
-        public static void WriteLayout(Vector3 tableSurface, Vector3[] traySurfaces, float[] trayYaw)
+        public static void WriteLayout(Vector3 tableSurface, Vector3 exchangeStation, Vector3[] traySurfaces, float[] trayYaw)
         {
             var layout = Layout();
-            layout.EditorSet(tableSurface, traySurfaces, trayYaw);
+            layout.EditorSet(tableSurface, exchangeStation, traySurfaces, trayYaw);
             EditorUtility.SetDirty(layout);
         }
 

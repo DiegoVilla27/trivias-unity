@@ -4,6 +4,7 @@ using Trivias.Match.Data;
 using Trivias.Match.Network;
 using Trivias.Money.Data;
 using Trivias.Questions.Data;
+using Trivias.SelfBet.Data;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Events;
 using Unity.Netcode;
@@ -22,7 +23,8 @@ namespace Trivias.Match.Editor
         public static MatchConfig Config() => EditorAssets.GetOrCreateAsset<MatchConfig>($"{CONFIG}/MatchConfig.asset");
         public static MatchRuntime Runtime() => EditorAssets.GetOrCreateAsset<MatchRuntime>($"{CONFIG}/MatchRuntime.asset");
 
-        public static GameObject Build(QuestionBank bank, MoneyRuntime money, VoidEventChannel matchStartRequested)
+        public static GameObject Build(QuestionBank bank, MoneyRuntime money, SelfBetRuntime selfBet,
+            VoidEventChannel matchStartRequested)
         {
             EditorUtility.SetDirty(Config());
 
@@ -35,6 +37,9 @@ namespace Trivias.Match.Editor
             SerializedWiring.Set(session, "_money", money);
             SerializedWiring.Set(session, "_matchStartRequested", matchStartRequested);
             SerializedWiring.Set(session, "_playerControl", SharedAssets.PlayerControlGate());
+            SerializedWiring.Set(session, "_selfBet", selfBet);
+            SerializedWiring.Set(session, "_avatars", SharedAssets.PlayerAvatars());
+            SerializedWiring.Set(session, "_verifyFromZoneRequested", SharedAssets.VerifyFromZoneRequested());
 
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }

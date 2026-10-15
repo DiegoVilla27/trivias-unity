@@ -24,6 +24,7 @@ namespace Trivias.Money.Data
         [Header("Interacción")]
         [SerializeField, Min(0.5f)] private float _tableReach = 2.4f;
         [SerializeField, Min(0.5f)] private float _trayReach = 1.6f;
+        [SerializeField, Min(0.5f)] private float _exchangeReach = 1.6f;
         [Tooltip("Margen extra que acepta el host al validar la distancia (latencia de red).")]
         [SerializeField, Min(0f)] private float _serverReachTolerance = 1.0f;
 
@@ -36,6 +37,7 @@ namespace Trivias.Money.Data
 
         public float TableReach => _tableReach;
         public float TrayReach => _trayReach;
+        public float ExchangeReach => _exchangeReach;
         public float ServerReachTolerance => _serverReachTolerance;
 
         /// <summary>El capital inicial se entrega solo en fajos (GDD 3.1).</summary>

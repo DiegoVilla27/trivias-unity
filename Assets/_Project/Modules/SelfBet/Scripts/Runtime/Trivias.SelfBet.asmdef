@@ -1,0 +1,18 @@
+{
+    "name": "Trivias.SelfBet",
+    "rootNamespace": "Trivias.SelfBet",
+    "references": [
+        "Trivias.Shared",
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

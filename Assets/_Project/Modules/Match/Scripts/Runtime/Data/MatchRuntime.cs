@@ -58,6 +58,12 @@ namespace Trivias.Match.Data
 
         RoundOutcome LastRound { get; }
 
+        /// <summary>Multiplicador de la última ronda (1 + apostados en la correcta).</summary>
+        int LastMultiplier { get; }
+
+        /// <summary>Nombres de los expulsados en la última ronda, o vacío.</summary>
+        string LastEliminated { get; }
+
         /// <summary>Segundos que quedan de la fase actual (cuenta atrás o revelación); 0 si no tiene tiempo.</summary>
         float PhaseSecondsLeft { get; }
 

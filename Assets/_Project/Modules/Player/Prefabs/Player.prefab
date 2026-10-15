@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4461979245019890226}
   - component: {fileID: 5706620353365889747}
   - component: {fileID: 5528357428477694617}
+  - component: {fileID: 6842478350295832452}
   - component: {fileID: 3044514291606150390}
   - component: {fileID: 6980080390388521248}
   - component: {fileID: 2658159104608627353}
@@ -114,6 +115,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Trivias.Player::Trivias.Player.Components.PlayerCarrySocket
   _carryPoint: {fileID: 5482767859026902609}
+--- !u!114 &6842478350295832452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774773343051009152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88f5c2a873c54f9085ba150f0c23e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.Player::Trivias.Player.Components.PlayerExpulsionView
+  _model: {fileID: 1941848470727245855}
+  _nameTag: {fileID: 5072060575748486107}
+  _controller: {fileID: 5706620353365889747}
+  _duration: 1.2
+  _height: 8
+  _spinDegreesPerSecond: 720
 --- !u!114 &3044514291606150390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +180,7 @@ MonoBehaviour:
   _animator: {fileID: 5481716589359831653}
   _cameraRoot: {fileID: 1262944636833804939}
   _controlGate: {fileID: 11400000, guid: b2b72f57b756241328283c41f69705f5, type: 2}
+  _movementLimit: {fileID: 11400000, guid: 6f8ceda02fbae47299e03037e368afa5, type: 2}
 --- !u!114 &6031665447320869515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,10 +311,11 @@ MonoBehaviour:
   _motor: {fileID: 2658159104608627353}
   _look: {fileID: 6980080390388521248}
   _nameTag: {fileID: 2175279478632957321}
+  _carrySocket: {fileID: 5528357428477694617}
+  _expulsion: {fileID: 6842478350295832452}
   _spawnPoints: {fileID: 11400000, guid: 6332717e6265746b2937dc409714703d, type: 2}
   _localPlayerCameraTarget: {fileID: 11400000, guid: 19727193bfff446868b41f3e39b8954a, type: 2}
-  _carrySocket: {fileID: 5528357428477694617}
-  _carrySockets: {fileID: 11400000, guid: 1e3bdf479de7e4fd4b36b92e9ae21231, type: 2}
+  _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
 --- !u!114 &4373783049091285153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Trivias.Interaction::Trivias.Interaction.Network.PlayerInteractor
   ShowTopMostFoldoutHeaderGroup: 1
   _registry: {fileID: 11400000, guid: d5a8b26083ae84dd38542015a8cf8ada, type: 2}
+  _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
   _promptChannel: {fileID: 11400000, guid: 3780ed2c168984f83a49dbb7fd461191, type: 2}
   _primaryAction: {fileID: -5086971558642222778, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
   _secondaryAction: {fileID: 1318727362496293935, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}

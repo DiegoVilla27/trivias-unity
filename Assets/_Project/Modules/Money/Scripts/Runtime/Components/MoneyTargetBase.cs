@@ -57,7 +57,8 @@ namespace Trivias.Money.Components
 
         private void OnMoneyChanged(int _) => Recalculate();
 
-        private void Recalculate()
+        /// <summary>Recalcula aviso y total tras un cambio local (p. ej. elegir otro tipo de dinero).</summary>
+        protected void Recalculate()
         {
             var session = Session;
             if (session == null)

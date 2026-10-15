@@ -1,6 +1,7 @@
 using TMPro;
 using Trivias.HUD.Components;
 using Trivias.Match.Data;
+using Trivias.SelfBet.Data;
 using Trivias.Shared.Editor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ namespace Trivias.HUD.Editor
 
         private static readonly Color PanelColor = new(0.05f, 0.06f, 0.16f, 0.82f);
 
-        public static GameObject Build(MatchRuntime runtime)
+        public static GameObject Build(MatchRuntime runtime, SelfBetRuntime selfBet)
         {
             var root = new GameObject("MatchHud", typeof(RectTransform));
             var canvas = root.AddComponent<Canvas>();
@@ -46,6 +47,9 @@ namespace Trivias.HUD.Editor
             var moneyPanel = Panel("TeamMoney", root.transform, new Vector2(1f, 1f), new Vector2(-16f, -16f), new Vector2(300f, 92f));
             var money = Text("Amount", moneyPanel, 34f, new Vector2(0f, -10f), new Vector2(280f, 72f), FontStyles.Normal);
 
+            var selfBetPanel = Panel("SelfBet", root.transform, new Vector2(1f, 1f), new Vector2(-16f, -120f), new Vector2(300f, 100f));
+            var selfBetInfo = Text("Info", selfBetPanel, 26f, new Vector2(0f, -8f), new Vector2(280f, 86f), FontStyles.Normal);
+
             var view = root.AddComponent<MatchHudView>();
             SerializedWiring.Set(view, "_runtime", runtime);
             SerializedWiring.Set(view, "_questionPanel", panel.gameObject);
@@ -54,6 +58,9 @@ namespace Trivias.HUD.Editor
             SerializedWiring.SetArray(view, "_options", options);
             SerializedWiring.Set(view, "_status", status);
             SerializedWiring.Set(view, "_teamMoney", money);
+            SerializedWiring.Set(view, "_selfBet", selfBet);
+            SerializedWiring.Set(view, "_avatars", SharedAssets.PlayerAvatars());
+            SerializedWiring.Set(view, "_selfBetInfo", selfBetInfo);
 
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }

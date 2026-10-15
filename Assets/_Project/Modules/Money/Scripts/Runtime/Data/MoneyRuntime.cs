@@ -56,8 +56,12 @@ namespace Trivias.Money.Data
         /// <summary>Apuestas cerradas: no se puede coger ni dejar dinero.</summary>
         bool IsLocked { get; }
 
-        void RequestTableInteraction(InteractionAction action);
+        /// <param name="preferred">Tipo elegido por el jugador para coger con las manos vacías.</param>
+        void RequestTableInteraction(InteractionAction action, Denomination preferred);
         void RequestTrayInteraction(int tray, InteractionAction action);
+
+        /// <summary>Estación de cambio: con las manos vacías E/Q agrupan; llevando bolsas o lingotes E/Q los dividen.</summary>
+        void RequestExchange(InteractionAction action);
     }
 
     /// <summary>Control del dinero que solo tiene el host (lo usa el módulo Match).</summary>

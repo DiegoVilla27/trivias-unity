@@ -63,6 +63,11 @@ namespace Trivias.Player.Editor
             var carrySocket = root.AddComponent<PlayerCarrySocket>();
             SerializedWiring.Set(carrySocket, "_carryPoint", carryPoint.transform);
 
+            var expulsion = root.AddComponent<PlayerExpulsionView>();
+            SerializedWiring.Set(expulsion, "_model", animator.transform);
+            SerializedWiring.Set(expulsion, "_nameTag", nameTag.gameObject);
+            SerializedWiring.Set(expulsion, "_controller", controller);
+
             var input = root.AddComponent<PlayerInputReader>();
             WireInput(input);
             input.enabled = false;
@@ -80,6 +85,7 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(motor, "_animator", animator);
             SerializedWiring.Set(motor, "_cameraRoot", cameraRoot.transform);
             SerializedWiring.Set(motor, "_controlGate", SharedAssets.PlayerControlGate());
+            SerializedWiring.Set(motor, "_movementLimit", SharedAssets.PlayerMovementLimit());
             motor.enabled = false;
 
             root.AddComponent<NetworkObject>();
@@ -102,7 +108,8 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_spawnPoints", spawnPoints);
             SerializedWiring.Set(playerNetwork, "_localPlayerCameraTarget", localPlayerCameraTarget);
             SerializedWiring.Set(playerNetwork, "_carrySocket", carrySocket);
-            SerializedWiring.Set(playerNetwork, "_carrySockets", SharedAssets.CarrySocketRegistry());
+            SerializedWiring.Set(playerNetwork, "_expulsion", expulsion);
+            SerializedWiring.Set(playerNetwork, "_avatars", SharedAssets.PlayerAvatars());
 
             foreach (var extend in extensions)
                 extend(root);

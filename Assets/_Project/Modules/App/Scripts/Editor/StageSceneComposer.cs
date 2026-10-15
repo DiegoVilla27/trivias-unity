@@ -5,6 +5,7 @@ using Trivias.Match.Editor;
 using Trivias.Money.Editor;
 using Trivias.Networking.Components;
 using Trivias.Networking.Editor;
+using Trivias.SelfBet.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Spawning;
 using Trivias.Stage.Editor;
@@ -57,13 +58,14 @@ namespace Trivias.App.Editor
             CreateLighting();
             var environment = Place(prefabs.Environment, Vector3.zero, 0f);
             var table = Place(prefabs.Table, Vector3.zero, 0f);
-            Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
+            var exchange = Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
             Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
             Place(prefabs.Presenter, new Vector3(6.5f, 0f, 13f), 200f);
             var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
-            ConnectMoney(table, booths);
+            ConnectMoney(table, exchange, booths);
             ConnectMatch(environment, booths);
+            ConnectSelfBet(booths);
 
             PlaceNetworkManager(prefabs);
             PlaceCameraRig(prefabs.CameraRig);
@@ -100,7 +102,7 @@ namespace Trivias.App.Editor
         /// <summary>
         /// Une mesa y bandejas con el módulo Money: guarda sus posiciones (datos de build) y añade los puntos interactivos.
         /// </summary>
-        private static void ConnectMoney(GameObject table, GameObject[] booths)
+        private static void ConnectMoney(GameObject table, GameObject exchange, GameObject[] booths)
         {
             var tableSurface = table.transform.position + Vector3.up * TablePrefabBuilder.SURFACE_HEIGHT;
             MoneyBuilder.AttachTableTarget(table,
@@ -119,7 +121,7 @@ namespace Trivias.App.Editor
                     tray.Find(BoothPrefabBuilder.TRAY_TOTAL_LABEL).GetComponent<TextMeshPro>());
             }
 
-            MoneyBuilder.WriteLayout(tableSurface, traySurfaces, trayYaw);
+            MoneyBuilder.WriteLayout(tableSurface, exchange.transform.position, traySurfaces, trayYaw);
         }
 
         private static void WriteSpawnPoints(SpawnPointSet spawnPoints)
@@ -149,6 +151,20 @@ namespace Trivias.App.Editor
             var screen = environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN);
             MatchBuilder.AttachQuestionScreen(screen.gameObject,
                 environment.transform.Find(StageEnvironmentPrefabBuilder.SCREEN_TITLE).GetComponent<TextMeshPro>());
+        }
+
+        /// <summary>Une las zonas de apuesta y los nombres de apostados de cada cabina con el módulo SelfBet.</summary>
+        private static void ConnectSelfBet(GameObject[] booths)
+        {
+            var zoneCenters = new Vector3[booths.Length];
+            for (var i = 0; i < booths.Length; i++)
+            {
+                var zone = booths[i].transform.Find(BoothPrefabBuilder.BET_ZONE);
+                zoneCenters[i] = zone.position;
+                SelfBetBuilder.AttachToBooth(zone.gameObject, booths[i], i,
+                    booths[i].transform.Find(BoothPrefabBuilder.BETTORS_LABEL).GetComponent<TextMeshPro>());
+            }
+            SelfBetBuilder.WriteLayout(zoneCenters);
         }
 
         private static void PlaceNetworkManager(StageScenePrefabs prefabs)

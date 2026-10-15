@@ -72,6 +72,7 @@ namespace Trivias.Interaction.Editor
         {
             var interactor = playerRoot.AddComponent<PlayerInteractor>();
             SerializedWiring.Set(interactor, "_registry", registry);
+            SerializedWiring.Set(interactor, "_avatars", SharedAssets.PlayerAvatars());
             SerializedWiring.Set(interactor, "_promptChannel", PromptChannel());
             SerializedWiring.Set(interactor, "_primaryAction", primary);
             SerializedWiring.Set(interactor, "_secondaryAction", secondary);

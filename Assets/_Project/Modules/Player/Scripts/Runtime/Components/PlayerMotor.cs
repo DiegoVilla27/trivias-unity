@@ -29,6 +29,8 @@ namespace Trivias.Player.Components
         [SerializeField] private Transform _cameraRoot;
         [Tooltip("Cerrado en la sala de espera: el concursante no se mueve hasta que empieza la partida.")]
         [SerializeField] private PlayerControlGate _controlGate;
+        [Tooltip("Círculo del que no puede salir (p. ej. apostado en una cabina).")]
+        [SerializeField] private PlayerMovementLimit _movementLimit;
 
         private float _speed;
         private float _animationBlend;
@@ -117,7 +119,15 @@ namespace Trivias.Player.Components
             }
 
             var direction = Quaternion.Euler(0f, _targetYaw, 0f) * Vector3.forward;
-            _controller.Move(direction * (_speed * deltaTime) + Vector3.up * (_verticalVelocity * deltaTime));
+            var horizontal = direction * (_speed * deltaTime);
+            if (_movementLimit.HasZone)
+            {
+                var position = transform.position;
+                var center = _movementLimit.Center;
+                MovementLimits.ClampMove(position.x, position.z, ref horizontal.x, ref horizontal.z,
+                    center.x, center.z, _movementLimit.Radius);
+            }
+            _controller.Move(horizontal + Vector3.up * (_verticalVelocity * deltaTime));
 
             _animator.SetFloat(SpeedId, _animationBlend);
             _animator.SetFloat(MotionSpeedId, inputMagnitude);

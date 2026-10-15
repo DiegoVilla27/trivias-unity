@@ -1,6 +1,6 @@
 using Trivias.Player.Components;
-using Trivias.Shared.Carrying;
 using Trivias.Shared.Events;
+using Trivias.Shared.Players;
 using Trivias.Shared.Spawning;
 using Unity.Collections;
 using Unity.Netcode;
@@ -9,24 +9,42 @@ using UnityEngine;
 namespace Trivias.Player.Network
 {
     /// <summary>
-    /// Une el concursante con la red: activa control y cámara solo para el dueño, lo coloca en su punto
-    /// de aparición y sincroniza su nombre (escrito por el host).
+    /// Une el concursante con la red: activa control y cámara solo para el dueño, lo coloca en su punto de aparición,
+    /// sincroniza su nombre y su eliminación (escritos por el host) y lo registra para el resto de módulos.
     /// </summary>
-    public sealed class PlayerNetwork : NetworkBehaviour
+    public sealed class PlayerNetwork : NetworkBehaviour, IPlayerAvatar
     {
         [SerializeField] private PlayerInputReader _input;
         [SerializeField] private PlayerMotor _motor;
         [SerializeField] private PlayerLook _look;
         [SerializeField] private PlayerNameTag _nameTag;
+        [SerializeField] private PlayerCarrySocket _carrySocket;
+        [SerializeField] private PlayerExpulsionView _expulsion;
         [SerializeField] private SpawnPointSet _spawnPoints;
         [SerializeField] private TransformEventChannel _localPlayerCameraTarget;
-        [SerializeField] private PlayerCarrySocket _carrySocket;
-        [SerializeField] private CarrySocketRegistry _carrySockets;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
 
         private readonly NetworkVariable<FixedString32Bytes> _displayName = new(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+        private readonly NetworkVariable<bool> _eliminated = new(
+            false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        // ---- IPlayerAvatar ----
+
+        public ulong ClientId => OwnerClientId;
         public string DisplayName => _displayName.Value.ToString();
+        public Vector3 Position => transform.position;
+        public Transform CarryPoint => _carrySocket.CarryPoint;
+        public bool IsEliminated => _eliminated.Value;
+
+        public void Eliminate()
+        {
+            if (IsServer)
+                _eliminated.Value = true;
+        }
+
+        // ---- Red ----
 
         public override void OnNetworkSpawn()
         {
@@ -34,8 +52,9 @@ namespace Trivias.Player.Network
                 _displayName.Value = new FixedString32Bytes($"Jugador {OwnerClientId + 1}");
 
             _displayName.OnValueChanged += OnDisplayNameChanged;
+            _eliminated.OnValueChanged += OnEliminatedChanged;
             _nameTag.SetName(DisplayName);
-            _carrySockets.Register(OwnerClientId, _carrySocket);
+            _avatars.Register(this);
 
             if (!IsOwner)
                 return;
@@ -50,7 +69,8 @@ namespace Trivias.Player.Network
         public override void OnNetworkDespawn()
         {
             _displayName.OnValueChanged -= OnDisplayNameChanged;
-            _carrySockets.Unregister(OwnerClientId);
+            _eliminated.OnValueChanged -= OnEliminatedChanged;
+            _avatars.Unregister(OwnerClientId);
             if (!IsOwner)
                 return;
 
@@ -65,7 +85,26 @@ namespace Trivias.Player.Network
             _look.enabled = isEnabled;
         }
 
-        private void OnDisplayNameChanged(FixedString32Bytes previous, FixedString32Bytes current) =>
+        private void OnDisplayNameChanged(FixedString32Bytes previous, FixedString32Bytes current)
+        {
             _nameTag.SetName(current.ToString());
+            _avatars.NotifyChanged(OwnerClientId);
+        }
+
+        private void OnEliminatedChanged(bool previous, bool current)
+        {
+            if (!current)
+                return;
+
+            _expulsion.Play();
+            _avatars.NotifyChanged(OwnerClientId);
+
+            if (!IsOwner)
+                return;
+
+            // El eliminado pasa a espectador: sin control y con la cámara en la vista general del plató.
+            SetLocalControl(false);
+            _localPlayerCameraTarget.Raise(null);
+        }
     }
 }

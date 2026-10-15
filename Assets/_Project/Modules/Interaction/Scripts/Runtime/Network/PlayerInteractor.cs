@@ -1,6 +1,7 @@
 using Trivias.Interaction.Logic;
 using Trivias.Shared.Events;
 using Trivias.Shared.Interaction;
+using Trivias.Shared.Players;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,7 @@ namespace Trivias.Interaction.Network
     public sealed class PlayerInteractor : NetworkBehaviour
     {
         [SerializeField] private InteractableRegistry _registry;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
         [SerializeField] private StringEventChannel _promptChannel;
         [SerializeField] private InputActionReference _primaryAction;
         [SerializeField] private InputActionReference _secondaryAction;
@@ -89,6 +91,14 @@ namespace Trivias.Interaction.Network
 
         private void Refresh()
         {
+            // Un concursante eliminado es espectador: no interactúa con nada.
+            if (_avatars.IsEliminated(OwnerClientId))
+            {
+                _focused = null;
+                PublishPrompt(string.Empty);
+                return;
+            }
+
             _focused = InteractionSelector.FindClosest(_registry.Items, transform.position);
             var context = new InteractionContext(OwnerClientId);
             if (_focused == null || !_focused.TryGetPrompt(context, out var prompt))

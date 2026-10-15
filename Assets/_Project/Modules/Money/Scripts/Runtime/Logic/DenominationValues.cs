@@ -11,6 +11,9 @@ namespace Trivias.Money.Logic
         {
             if (bundle <= 0 || bag <= bundle || goldBar <= bag)
                 throw new ArgumentException("Las denominaciones deben ser positivas y crecientes.");
+            // La estación de cambio debe conservar el valor exacto: cada denominación es múltiplo de la anterior.
+            if (bag % bundle != 0 || goldBar % bag != 0)
+                throw new ArgumentException("Cada denominación debe ser múltiplo exacto de la anterior.");
             _values = new[] { bundle, bag, goldBar };
         }
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Trivias.Money.Data;
 using Trivias.Money.Logic;
-using Trivias.Shared.Carrying;
+using Trivias.Shared.Players;
 using Trivias.Shared.Pooling;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Trivias.Money.Components
         [SerializeField] private GameObject _bundlePrefab;
         [SerializeField] private GameObject _bagPrefab;
         [SerializeField] private GameObject _goldBarPrefab;
-        [SerializeField] private CarrySocketRegistry _carrySockets;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
 
         private readonly List<GameObject> _visuals = new();
         private readonly List<Denomination> _visualDenominations = new();
@@ -39,9 +39,9 @@ namespace Trivias.Money.Components
             };
         }
 
-        private void OnEnable() => _carrySockets.Changed += OnCarrySocketChanged;
+        private void OnEnable() => _avatars.Changed += OnAvatarChanged;
 
-        private void OnDisable() => _carrySockets.Changed -= OnCarrySocketChanged;
+        private void OnDisable() => _avatars.Changed -= OnAvatarChanged;
 
         public void RefreshAll()
         {
@@ -85,9 +85,9 @@ namespace Trivias.Money.Components
                 case MoneyPlace.Carried:
                     // Si el concursante aún no ha aparecido en este cliente, se oculta hasta que se registre.
                     // Si se va, se recupera antes de que el concursante se destruya (no se pierde la instancia del pool).
-                    if (_carrySockets.TryGet(item.Holder, out var socket))
+                    if (_avatars.TryGet(item.Holder, out var avatar))
                     {
-                        visual.SetParent(socket.CarryPoint, false);
+                        visual.SetParent(avatar.CarryPoint, false);
                         visual.SetLocalPositionAndRotation(_layout.CarryOffset((int)item.Denomination, item.Slot), Quaternion.identity);
                         visual.gameObject.SetActive(true);
                     }
@@ -100,7 +100,7 @@ namespace Trivias.Money.Components
             }
         }
 
-        private void OnCarrySocketChanged(ulong clientId)
+        private void OnAvatarChanged(ulong clientId)
         {
             if (_ledger == null)
                 return;

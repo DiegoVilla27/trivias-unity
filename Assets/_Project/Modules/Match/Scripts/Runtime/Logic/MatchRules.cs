@@ -3,10 +3,13 @@ namespace Trivias.Match.Logic
     /// <summary>Reglas de victoria y derrota (GDD 3.2). C# puro, cubierto por tests.</summary>
     public static class MatchRules
     {
-        /// <summary>Qué pasa tras revelar la pregunta <paramref name="questionNumber"/> (empezando en 1).</summary>
-        public static MatchPhase AfterReveal(long teamMoney, int questionNumber, int totalQuestions)
+        /// <summary>
+        /// Qué pasa tras revelar la pregunta <paramref name="questionNumber"/> (empezando en 1): derrota sin dinero o sin
+        /// concursantes activos; victoria al resolver la última con ambos; si no, siguiente pregunta.
+        /// </summary>
+        public static MatchPhase AfterReveal(long teamMoney, int activePlayers, int questionNumber, int totalQuestions)
         {
-            if (teamMoney <= 0)
+            if (teamMoney <= 0 || activePlayers <= 0)
                 return MatchPhase.Defeat;
             return questionNumber >= totalQuestions ? MatchPhase.Victory : MatchPhase.Betting;
         }

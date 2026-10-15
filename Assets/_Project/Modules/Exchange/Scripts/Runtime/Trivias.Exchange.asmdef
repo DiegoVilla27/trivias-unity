@@ -1,0 +1,17 @@
+{
+    "name": "Trivias.Exchange",
+    "rootNamespace": "Trivias.Exchange",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Money"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

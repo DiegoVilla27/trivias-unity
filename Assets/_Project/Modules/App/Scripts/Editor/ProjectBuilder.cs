@@ -10,6 +10,7 @@ using Trivias.Networking.Editor;
 using Trivias.Player.Editor;
 using Trivias.Presenter.Editor;
 using Trivias.Questions.Editor;
+using Trivias.SelfBet.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Stage.Editor;
 using Trivias.Table.Editor;
@@ -48,24 +49,29 @@ namespace Trivias.App.Editor
             // El contenido se importa y valida aquí: si una pregunta está mal, el build se detiene.
             var questionBank = QuestionBankBuilder.Build();
             var matchRuntime = MatchBuilder.Runtime();
-            var matchSession = MatchBuilder.Build(questionBank, MoneyBuilder.Runtime(), SharedAssets.MatchStartRequested());
+            var selfBetSession = SelfBetBuilder.Build();
+            NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(selfBetSession);
+
+            var matchSession = MatchBuilder.Build(questionBank, MoneyBuilder.Runtime(), SelfBetBuilder.Runtime(),
+                SharedAssets.MatchStartRequested());
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(matchSession);
 
             var prefabs = new StageScenePrefabs
             {
                 NetworkManager = networkManager,
                 Player = player,
-                SessionPrefabs = new[] { moneySession, matchSession },
+                SessionPrefabs = new[] { moneySession, selfBetSession, matchSession },
                 CameraRig = CameraRigPrefabBuilder.Build(cameraTarget),
                 InteractionHud = InteractionBuilder.BuildHud(),
-                MatchHud = HudPrefabBuilder.Build(matchRuntime),
+                MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime()),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
-                ExchangeStation = ExchangeStationPrefabBuilder.Build(),
+                ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),
                 VerifyButton = VerifyButtonPrefabBuilder.Build(matchRuntime, interactables),
                 Presenter = PresenterPrefabBuilder.Build(),
                 Environment = StageEnvironmentPrefabBuilder.Build(),
-                NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(player, moneySession, matchSession),
+                NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(
+                    player, moneySession, selfBetSession, matchSession),
             };
 
             AssetDatabase.SaveAssets();

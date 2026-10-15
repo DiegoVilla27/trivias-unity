@@ -10,7 +10,7 @@ namespace Trivias.Networking.Data
         [SerializeField, Range(2, 6)] private int _minPlayers = 2;
         [SerializeField, Range(2, 6)] private int _maxPlayers = 6;
 
-        [Header("Solo editor y development builds")]
+        [Header("Solo editor y builds de depuración")]
         [Tooltip("Permite empezar la partida con un único jugador para probar. Nunca se aplica en builds de release.")]
         [SerializeField] private bool _allowSoloForTesting = true;
 
@@ -33,7 +33,7 @@ namespace Trivias.Networking.Data
         {
             get
             {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
                 if (_allowSoloForTesting)
                     return 1;
 #endif

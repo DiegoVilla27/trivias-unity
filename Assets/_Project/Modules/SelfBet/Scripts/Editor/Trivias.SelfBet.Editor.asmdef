@@ -1,0 +1,22 @@
+{
+    "name": "Trivias.SelfBet.Editor",
+    "rootNamespace": "Trivias.SelfBet.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.SelfBet",
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Data;
 using Trivias.Money.Logic;
 using Trivias.Questions.Data;
 using Trivias.Questions.Logic;
+using Trivias.SelfBet.Data;
 using Trivias.Shared.Diagnostics;
 using Trivias.Shared.Events;
 using Trivias.Shared.Gameplay;
+using Trivias.Shared.Players;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -27,6 +31,10 @@ namespace Trivias.Match.Network
         [SerializeField] private MoneyRuntime _money;
         [SerializeField] private VoidEventChannel _matchStartRequested;
         [SerializeField] private PlayerControlGate _playerControl;
+        [SerializeField] private SelfBetRuntime _selfBet;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
+        [Tooltip("Petición local de verificar desde una zona de apuesta (todos los activos apostados).")]
+        [SerializeField] private VoidEventChannel _verifyFromZoneRequested;
 
         private readonly NetworkVariable<MatchPhase> _phase = new(MatchPhase.Lobby);
         private readonly NetworkVariable<byte> _questionNumber = new();
@@ -37,6 +45,8 @@ namespace Trivias.Match.Network
         private readonly NetworkVariable<RoundSummaryNet> _lastRound = new();
 
         private int[] _plan; // Solo en el host.
+        private readonly List<ulong> _eliminatedBuffer = new();
+        private readonly List<ulong> _participants = new();
         private bool _notifyPending;
 
         // ---- IMatchSession ----
@@ -48,6 +58,8 @@ namespace Trivias.Match.Network
         public OptionOrder Order => new(_optionOrder.Value);
         public int CorrectBooth => _correctBooth.Value;
         public RoundOutcome LastRound => _lastRound.Value.ToOutcome();
+        public int LastMultiplier => _lastRound.Value.Multiplier;
+        public string LastEliminated => _lastRound.Value.Eliminated.ToString();
         public long TeamMoney => _money.Session?.Ledger.TotalInPlay() ?? 0;
 
         public long MoneyAtRisk
@@ -91,6 +103,8 @@ namespace Trivias.Match.Network
             _correctBooth.OnValueChanged += OnSByteChanged;
             _lastRound.OnValueChanged += OnRoundChanged;
             _money.Changed += OnMoneyChanged;
+            _selfBet.Changed += OnSelfBetChanged;
+            _verifyFromZoneRequested.Register(RequestVerify);
 
             if (IsServer)
                 _matchStartRequested.Register(StartMatch);
@@ -108,6 +122,8 @@ namespace Trivias.Match.Network
             _correctBooth.OnValueChanged -= OnSByteChanged;
             _lastRound.OnValueChanged -= OnRoundChanged;
             _money.Changed -= OnMoneyChanged;
+            _selfBet.Changed -= OnSelfBetChanged;
+            _verifyFromZoneRequested.Unregister(RequestVerify);
 
             if (IsServer)
                 _matchStartRequested.Unregister(StartMatch);
@@ -164,6 +180,11 @@ namespace Trivias.Match.Network
 
             var random = new System.Random(Environment.TickCount);
             _plan = QuestionPlanner.Plan(difficulties, _config.QuestionsPerMatch, random);
+
+            // El reparto de comodines se fija con el tamaño inicial del grupo (GDD 5.1).
+            _participants.Clear();
+            _participants.AddRange(NetworkManager.ConnectedClientsIds);
+            _selfBet.Authority.StartMatch(_participants);
             GameLog.Info($"[Partida] Empieza con {_plan.Length} preguntas.", this);
             ShowQuestion(1, random);
         }
@@ -171,11 +192,18 @@ namespace Trivias.Match.Network
         [Rpc(SendTo.Server)]
         private void VerifyRpc(RpcParams rpcParams = default)
         {
-            if (_phase.Value != MatchPhase.Betting)
+            var sender = rpcParams.Receive.SenderClientId;
+            if (_phase.Value != MatchPhase.Betting || _avatars.IsEliminated(sender))
                 return;
 
-            // Bloqueo inmediato: desde aquí no se acepta ningún cambio de dinero (GDD 4.3).
+            // Un apostado solo puede verificar (desde su zona) si no queda nadie libre para pulsar el botón.
+            var bets = _selfBet.Authority;
+            if (bets.HasBet(sender) && !bets.AllActiveHaveBet)
+                return;
+
+            // Bloqueo inmediato: desde aquí no se acepta ningún cambio de dinero ni de comodines (GDD 4.3).
             _money.Authority?.SetLocked(true);
+            _selfBet.Authority.LockBets();
             _phaseEndTime.Value = NetworkManager.ServerTime.Time + _config.LockCountdownSeconds;
             _phase.Value = MatchPhase.Locked;
             GameLog.Info($"[Partida] Verificado por el jugador {rpcParams.Receive.SenderClientId}.", this);
@@ -185,10 +213,13 @@ namespace Trivias.Match.Network
         {
             var question = CurrentQuestion;
             var correctBooth = Order.BoothOf(question.CorrectOption);
-            // Sin comodines todavía: multiplicador x1 (hito 3 añade los apostados).
-            var outcome = _money.Authority.ResolveRound(correctBooth, multiplier: 1, _config.LoseUnplacedMoney);
 
-            _lastRound.Value = RoundSummaryNet.From(outcome);
+            // Comodines: multiplicador = 1 + apostados en la correcta; los apostados en otras cabinas quedan expulsados.
+            _eliminatedBuffer.Clear();
+            var multiplier = _selfBet.Authority.Resolve(correctBooth, _eliminatedBuffer);
+            var outcome = _money.Authority.ResolveRound(correctBooth, multiplier, _config.LoseUnplacedMoney);
+
+            _lastRound.Value = RoundSummaryNet.From(outcome, multiplier, NamesOf(_eliminatedBuffer));
             _correctBooth.Value = (sbyte)correctBooth;
             _phaseEndTime.Value = NetworkManager.ServerTime.Time + _config.RevealSeconds;
             _phase.Value = MatchPhase.Reveal;
@@ -196,7 +227,8 @@ namespace Trivias.Match.Network
 
         private void AdvanceAfterReveal()
         {
-            var next = MatchRules.AfterReveal(_lastRound.Value.Total, _questionNumber.Value, _config.QuestionsPerMatch);
+            var next = MatchRules.AfterReveal(_lastRound.Value.Total, _selfBet.Authority.ActivePlayers,
+                _questionNumber.Value, _config.QuestionsPerMatch);
             if (next == MatchPhase.Betting)
             {
                 ShowQuestion(_questionNumber.Value + 1, new System.Random(Environment.TickCount));
@@ -214,7 +246,19 @@ namespace Trivias.Match.Network
             _correctBooth.Value = NO_ANSWER;
             _questionNumber.Value = (byte)number;
             _money.Authority?.SetLocked(false);
+            _selfBet.Authority.SetOpen(true);
             _phase.Value = MatchPhase.Betting;
+        }
+
+        private string NamesOf(List<ulong> clients)
+        {
+            if (clients.Count == 0)
+                return string.Empty;
+
+            var names = new StringBuilder();
+            foreach (var client in clients)
+                names.Append(names.Length > 0 ? ", " : string.Empty).Append(_avatars.NameOf(client));
+            return names.ToString();
         }
 
         // ---- Avisos de cambio (toda la interfaz se actualiza por eventos) ----
@@ -225,5 +269,6 @@ namespace Trivias.Match.Network
         private void OnSByteChanged(sbyte previous, sbyte current) => _notifyPending = true;
         private void OnRoundChanged(RoundSummaryNet previous, RoundSummaryNet current) => _notifyPending = true;
         private void OnMoneyChanged(int _) => _notifyPending = true;
+        private void OnSelfBetChanged() => _notifyPending = true;
     }
 }

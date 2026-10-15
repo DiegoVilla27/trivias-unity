@@ -21,7 +21,8 @@ namespace Trivias.Booth.Editor
 
         private const string BODY = "Body";
         private const string LETTER = "Letter";
-        private const string BET_ZONE = "BetZone";
+        public const string BET_ZONE = "BetZone";
+        public const string BETTORS_LABEL = "BettorsLabel";
         public const string TRAY = "Tray";
         public const string TRAY_SURFACE = "Tray/Surface";
         public const string TRAY_TOTAL_LABEL = "TotalLabel";
@@ -69,6 +70,14 @@ namespace Trivias.Booth.Editor
             answer.outlineWidth = 0.22f;
             answer.outlineColor = Color.black;
             answer.textWrappingMode = TextWrappingModes.Normal;
+
+            // Nombres de los apostados en esta cabina; los rellena el módulo SelfBet.
+            var bettors = EditorAssets.CreateWorldText(BETTORS_LABEL, t, string.Empty, 3f, StagePalette.Yellow,
+                new Vector3(0f, 3.75f, 0.8f), Quaternion.Euler(0f, 180f, 0f), new Vector2(4.2f, 0.9f));
+            bettors.fontStyle = FontStyles.Bold;
+            bettors.outlineWidth = 0.22f;
+            bettors.outlineColor = Color.black;
+            bettors.textWrappingMode = TextWrappingModes.Normal;
 
             var tray = EditorAssets.CreateEmpty(TRAY, t, new Vector3(-1.45f, 0f, 0.9f)).transform;
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Pedestal", tray, new Vector3(0f, 0.4f, 0f), new Vector3(1.0f, 0.8f, 0.6f), navy, layer, true);

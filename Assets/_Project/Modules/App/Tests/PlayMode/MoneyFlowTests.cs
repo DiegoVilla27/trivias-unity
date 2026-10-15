@@ -90,7 +90,7 @@ namespace Trivias.App.Tests
             MoveNextTo(table.Position + new Vector3(0f, 0f, -9f));
             yield return null;
 
-            _session.RequestTableInteraction(InteractionAction.Primary);
+            _session.RequestTableInteraction(InteractionAction.Primary, Denomination.Bundle);
             yield return null;
             Assert.That(_session.Ledger.FindCarriedBy(_player.OwnerClientId), Is.EqualTo(-1),
                 "El host aceptó coger dinero desde demasiado lejos.");

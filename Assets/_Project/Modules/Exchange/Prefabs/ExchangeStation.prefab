@@ -392,6 +392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8675637312101047342}
+  - component: {fileID: 4696132779307224477}
   m_Layer: 9
   m_Name: ExchangeStation
   m_TagString: Untagged
@@ -419,6 +420,21 @@ Transform:
   - {fileID: 7410477992794429344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4696132779307224477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316298167965840245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b570483db964590a1b176924c2723a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Trivias.Exchange::Trivias.Exchange.Components.ExchangeStationTarget
+  _config: {fileID: 11400000, guid: 878e6c031a33c4c85b9af32e9c2b2b1a, type: 2}
+  _runtime: {fileID: 11400000, guid: 6f4133998feb140af81920928091b588, type: 2}
+  _registry: {fileID: 11400000, guid: d5a8b26083ae84dd38542015a8cf8ada, type: 2}
 --- !u!1 &7392192717700015228
 GameObject:
   m_ObjectHideFlags: 0

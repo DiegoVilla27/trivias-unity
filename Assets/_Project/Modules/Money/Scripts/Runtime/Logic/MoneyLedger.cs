@@ -31,6 +31,8 @@ namespace Trivias.Money.Logic
 
         public long ValueOf(int index) => _values.Of(_items[index].Denomination);
 
+        public long ValueOfDenomination(Denomination denomination) => _values.Of(denomination);
+
         // ---- Réplica (clientes) ----
 
         public void Clear() => _items.Clear();
@@ -108,6 +110,65 @@ namespace Trivias.Money.Logic
             return new RoundOutcome(lost, kept, bonus, TotalInPlay());
         }
 
+        // ---- Estación de cambio (GDD 4.2): conserva el valor exacto, sin comisión ----
+
+        /// <summary>Cuántos objetos de la denominación anterior equivalen a uno de esta (10 en la configuración actual).</summary>
+        public int ExchangeRatio(Denomination larger) =>
+            (int)(_values.Of(larger) / _values.Of(larger - 1));
+
+        /// <summary>
+        /// Agrupa en la mesa los objetos de <paramref name="from"/> necesarios para formar uno de la denominación
+        /// siguiente. Devuelve false si no hay suficientes (no se modifica nada).
+        /// </summary>
+        public bool GroupOnTable(Denomination from, List<int> changed)
+        {
+            if (from >= Denomination.GoldBar)
+                return false;
+
+            var to = from + 1;
+            var ratio = ExchangeRatio(to);
+            if (CountAt(MoneyPlace.Table, 0, from) < ratio)
+                return false;
+
+            for (var n = 0; n < ratio; n++)
+            {
+                var index = FindTopAt(MoneyPlace.Table, 0, preferSmallest: true, (int)from);
+                Retire(index, changed);
+            }
+            changed.Add(AddToTable(to));
+            return true;
+        }
+
+        /// <summary>
+        /// Divide hasta <paramref name="count"/> objetos que lleva el concursante (bolsas o lingotes) en la denominación
+        /// anterior, que se dejan en la mesa. Devuelve cuántos dividió.
+        /// </summary>
+        public int SplitCarried(ulong client, int count, List<int> changed)
+        {
+            var split = 0;
+            while (split < count)
+            {
+                var index = FindCarriedBy(client);
+                if (index < 0 || _items[index].Denomination == Denomination.Bundle)
+                    break;
+
+                var to = _items[index].Denomination - 1;
+                var ratio = ExchangeRatio(_items[index].Denomination);
+                Retire(index, changed);
+                for (var n = 0; n < ratio; n++)
+                    changed.Add(AddToTable(to));
+                split++;
+            }
+            return split;
+        }
+
+        /// <summary>Saca un objeto del juego al convertirlo (su índice queda libre para reutilizarse).</summary>
+        private void Retire(int index, List<int> changed)
+        {
+            _items[index] = _items[index].With(MoneyPlace.Lost, 0, 0, 0);
+            changed.Add(index);
+        }
+
         /// <summary>Pone una cantidad en la mesa usando el menor número de objetos (lingotes, luego bolsas, luego fajos).</summary>
         public long EmitToTable(long amount, List<int> changed)
         {
@@ -130,14 +191,22 @@ namespace Trivias.Money.Logic
         /// si no, de la denominación más pequeña disponible.
         /// </summary>
         public int PickFromTable(ulong client, int count, List<int> changed) =>
-            PickUp(client, MoneyPlace.Table, 0, preferSmallest: true, count, changed);
+            PickUp(client, MoneyPlace.Table, 0, preferSmallest: true, count, changed, ANY_DENOMINATION);
+
+        /// <summary>
+        /// Igual, pero con las manos vacías intenta coger la denominación elegida por el jugador
+        /// (si no queda de ese tipo, la más pequeña disponible).
+        /// </summary>
+        public int PickFromTable(ulong client, int count, Denomination preferred, List<int> changed) =>
+            PickUp(client, MoneyPlace.Table, 0, preferSmallest: true, count, changed,
+                CountAt(MoneyPlace.Table, 0, preferred) > 0 ? (int)preferred : ANY_DENOMINATION);
 
         /// <summary>
         /// Recupera de una bandeja hasta <paramref name="count"/> objetos, empezando por el último depositado
         /// y parando cuando el siguiente es de otra denominación.
         /// </summary>
         public int PickFromTray(ulong client, int tray, int count, List<int> changed) =>
-            PickUp(client, MoneyPlace.Tray, tray, preferSmallest: false, count, changed);
+            PickUp(client, MoneyPlace.Tray, tray, preferSmallest: false, count, changed, ANY_DENOMINATION);
 
         /// <summary>Deja en una bandeja hasta <paramref name="count"/> objetos, empezando por el de arriba de la pila.</summary>
         public int DepositToTray(ulong client, int tray, int count, List<int> changed) =>
@@ -146,11 +215,13 @@ namespace Trivias.Money.Logic
         public int ReturnToTable(ulong client, int count, List<int> changed) =>
             PutDown(client, MoneyPlace.Table, 0, count, changed);
 
-        private int PickUp(ulong client, MoneyPlace from, int fromIndex, bool preferSmallest, int count, List<int> changed)
+        private int PickUp(ulong client, MoneyPlace from, int fromIndex, bool preferSmallest, int count,
+            List<int> changed, int preferredDenomination)
         {
             var carried = CountCarriedBy(client);
             var carriedTop = FindCarriedBy(client);
-            var denomination = carriedTop >= 0 ? (int)_items[carriedTop].Denomination : ANY_DENOMINATION;
+            // Llevando algo, solo ese tipo; con las manos vacías, el preferido (o cualquiera).
+            var denomination = carriedTop >= 0 ? (int)_items[carriedTop].Denomination : preferredDenomination;
             var moved = 0;
 
             while (moved < count)
@@ -234,6 +305,18 @@ namespace Trivias.Money.Logic
 
             var free = _limits.For(runDenomination) - carried;
             return run < free ? run : free;
+        }
+
+        /// <summary>
+        /// Cuántos objetos movería Q en la mesa con el tipo elegido por el jugador (si no lleva nada) o con el que lleva.
+        /// </summary>
+        public int CountPickableFromTable(ulong client, Denomination preferred)
+        {
+            var carriedTop = FindCarriedBy(client);
+            var denomination = carriedTop >= 0 ? _items[carriedTop].Denomination : preferred;
+            var available = CountAt(MoneyPlace.Table, 0, denomination);
+            var room = _limits.For(denomination) - CountCarriedBy(client);
+            return available < room ? available : room;
         }
 
         /// <summary>Objeto de arriba de la pila que lleva un concursante, o -1 si no lleva nada.</summary>

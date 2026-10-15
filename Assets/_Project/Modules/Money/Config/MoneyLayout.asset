@@ -16,6 +16,7 @@ MonoBehaviour:
   _tableColumns: 5
   _tableRows: 4
   _tableSpacing: {x: 0.36, y: 0.24}
+  _exchangeStation: {x: -3.4, y: 0, z: -0.5}
   _traySurfaces:
   - {x: -4.9937944, y: 0.85999995, z: 5.909697}
   - {x: -0.8353827, y: 0.85999995, z: 7.6918554}

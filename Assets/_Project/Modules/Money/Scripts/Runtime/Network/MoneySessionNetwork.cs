@@ -4,6 +4,7 @@ using Trivias.Money.Logic;
 using System.Collections.Generic;
 using Trivias.Shared.Diagnostics;
 using Trivias.Shared.Interaction;
+using Trivias.Shared.Players;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Trivias.Money.Network
         [SerializeField] private MoneyLayout _layout;
         [SerializeField] private MoneyRuntime _runtime;
         [SerializeField] private MoneyVisualPresenter _presenter;
+        [SerializeField] private PlayerAvatarRegistry _avatars;
 
         private NetworkList<MoneyItemNet> _items;
         private readonly NetworkVariable<bool> _locked = new();
@@ -79,16 +81,40 @@ namespace Trivias.Money.Network
 
         // ---- Peticiones de los jugadores (se ejecutan en el host) ----
 
-        public void RequestTableInteraction(InteractionAction action) => TableInteractionRpc(action);
+        public void RequestTableInteraction(InteractionAction action, Denomination preferred) =>
+            TableInteractionRpc(action, preferred);
 
         public void RequestTrayInteraction(int tray, InteractionAction action) => TrayInteractionRpc((byte)tray, action);
 
+        public void RequestExchange(InteractionAction action) => ExchangeRpc(action);
+
         /// <summary>
-        /// Mesa: E coge uno, Q coge hasta el límite de ese tipo, R devuelve todo lo que se lleva.
-        /// Solo se coge la denominación que ya se lleva (un tipo por viaje).
+        /// Estación de cambio (GDD 4.2). Llevando bolsas o lingotes: E divide uno, Q todos (resultado en la mesa).
+        /// Con las manos vacías: E agrupa 10 fajos en una bolsa, Q agrupa 10 bolsas en un lingote.
         /// </summary>
         [Rpc(SendTo.Server)]
-        private void TableInteractionRpc(InteractionAction action, RpcParams rpcParams = default)
+        private void ExchangeRpc(InteractionAction action, RpcParams rpcParams = default)
+        {
+            var client = rpcParams.Receive.SenderClientId;
+            if (_locked.Value || action == InteractionAction.Tertiary ||
+                !IsWithinReach(client, _layout.ExchangeStation, _config.ExchangeReach))
+                return;
+
+            _changed.Clear();
+            var carried = _ledger.FindCarriedBy(client);
+            if (carried >= 0)
+                _ledger.SplitCarried(client, action == InteractionAction.Secondary ? int.MaxValue : 1, _changed);
+            else
+                _ledger.GroupOnTable(action == InteractionAction.Secondary ? Denomination.Bag : Denomination.Bundle, _changed);
+            CommitChanged();
+        }
+
+        /// <summary>
+        /// Mesa: E coge uno, Q coge hasta el límite de ese tipo, R devuelve todo lo que se lleva.
+        /// Llevando dinero solo se coge esa denominación (un tipo por viaje); con las manos vacías, la elegida.
+        /// </summary>
+        [Rpc(SendTo.Server)]
+        private void TableInteractionRpc(InteractionAction action, Denomination preferred, RpcParams rpcParams = default)
         {
             var client = rpcParams.Receive.SenderClientId;
             if (_locked.Value || !IsWithinReach(client, _layout.TableSurface, _config.TableReach))
@@ -98,10 +124,10 @@ namespace Trivias.Money.Network
             switch (action)
             {
                 case InteractionAction.Primary:
-                    _ledger.PickFromTable(client, 1, _changed);
+                    _ledger.PickFromTable(client, 1, preferred, _changed);
                     break;
                 case InteractionAction.Secondary:
-                    _ledger.PickFromTable(client, int.MaxValue, _changed);
+                    _ledger.PickFromTable(client, int.MaxValue, preferred, _changed);
                     break;
                 case InteractionAction.Tertiary:
                     _ledger.ReturnToTable(client, int.MaxValue, _changed);
@@ -188,8 +214,12 @@ namespace Trivias.Money.Network
             }
         }
 
+        /// <summary>Validación del host: el jugador existe, no está eliminado y está cerca del objetivo.</summary>
         private bool IsWithinReach(ulong client, Vector3 target, float reach)
         {
+            if (_avatars.IsEliminated(client))
+                return false;
+
             if (!NetworkManager.ConnectedClients.TryGetValue(client, out var connected) || connected.PlayerObject == null)
                 return false;
 

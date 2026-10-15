@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2588050764046707495, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2660344671241527864, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
       propertyPath: m_Name
       value: Booth_A
@@ -68,6 +72,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ea0f2ddb2b96846edaed2ad77a3e15a9, type: 2}
+    - target: {fileID: 5552455999885848632, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7095076366992924867, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

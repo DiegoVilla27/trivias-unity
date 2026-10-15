@@ -16,6 +16,9 @@ namespace Trivias.Money.Data
         [SerializeField, Min(1)] private int _tableRows = 4;
         [SerializeField] private Vector2 _tableSpacing = new(0.36f, 0.24f);
 
+        [Header("Estación de cambio")]
+        [SerializeField] private Vector3 _exchangeStation;
+
         [Header("Bandejas")]
         [SerializeField] private Vector3[] _traySurfaces = new Vector3[0];
         [SerializeField] private float[] _trayYaw = new float[0];
@@ -34,6 +37,7 @@ namespace Trivias.Money.Data
 
         public int TrayCount => _traySurfaces.Length;
         public Vector3 TableSurface => _tableSurface;
+        public Vector3 ExchangeStation => _exchangeStation;
         public Vector3 TraySurface(int tray) => _traySurfaces[tray];
 
         public Vector3 TableSlot(int slot) =>
@@ -64,9 +68,10 @@ namespace Trivias.Money.Data
         }
 
 #if UNITY_EDITOR
-        public void EditorSet(Vector3 tableSurface, Vector3[] traySurfaces, float[] trayYaw)
+        public void EditorSet(Vector3 tableSurface, Vector3 exchangeStation, Vector3[] traySurfaces, float[] trayYaw)
         {
             _tableSurface = tableSurface;
+            _exchangeStation = exchangeStation;
             _traySurfaces = traySurfaces;
             _trayYaw = trayYaw;
         }

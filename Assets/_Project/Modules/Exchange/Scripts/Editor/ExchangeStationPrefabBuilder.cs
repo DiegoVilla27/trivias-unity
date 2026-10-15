@@ -1,4 +1,7 @@
+using Trivias.Exchange.Components;
+using Trivias.Money.Data;
 using Trivias.Shared.Editor;
+using Trivias.Shared.Interaction;
 using Trivias.Shared.Physics;
 using UnityEditor;
 using UnityEngine;
@@ -11,8 +14,7 @@ namespace Trivias.Exchange.Editor
         public const string MODULE_ROOT = "Assets/_Project/Modules/Exchange";
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/ExchangeStation.prefab";
 
-        [MenuItem("Tools/Trivias/Build/Exchange Station")]
-        public static GameObject Build()
+        public static GameObject Build(MoneyConfig moneyConfig, MoneyRuntime moneyRuntime, InteractableRegistry registry)
         {
             var navy = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Exchange_Base.mat", StagePalette.Navy, 0.4f);
             var gold = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Exchange_Gold.mat", StagePalette.Gold, 0.7f, 0.8f);
@@ -30,6 +32,11 @@ namespace Trivias.Exchange.Editor
 
             EditorAssets.CreateWorldText("Label", t, "CAMBIO", 3f, StagePalette.Gold,
                 new Vector3(0f, 0.55f, 0.36f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.3f, 0.4f));
+
+            var target = root.AddComponent<ExchangeStationTarget>();
+            SerializedWiring.Set(target, "_config", moneyConfig);
+            SerializedWiring.Set(target, "_runtime", moneyRuntime);
+            SerializedWiring.Set(target, "_registry", registry);
 
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }

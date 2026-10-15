@@ -4,7 +4,9 @@
     "references": [
         "Trivias.Shared",
         "Trivias.Shared.Editor",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Trivias.Exchange",
+        "Trivias.Money"
     ],
     "includePlatforms": [
         "Editor"
