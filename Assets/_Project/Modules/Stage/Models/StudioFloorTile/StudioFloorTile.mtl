@@ -1,0 +1,63 @@
+newmtl StudioFloorTile_Base
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_Ceramic
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_Support
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_Rim
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_TileBacking
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_Underside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+
+newmtl StudioFloorTile_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioFloorTile_BaseColor.png
+

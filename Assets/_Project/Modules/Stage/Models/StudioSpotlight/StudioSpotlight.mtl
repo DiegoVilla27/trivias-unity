@@ -1,0 +1,63 @@
+newmtl StudioSpotlight_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Body
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Door
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Lens
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Groove
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+
+newmtl StudioSpotlight_Accent
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpotlight_BaseColor.png
+

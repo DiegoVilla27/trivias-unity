@@ -1,0 +1,63 @@
+newmtl StudioLightStrip_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Body
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Trim
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Lens
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Groove
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+
+newmtl StudioLightStrip_Accent
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioLightStrip_BaseColor.png
+

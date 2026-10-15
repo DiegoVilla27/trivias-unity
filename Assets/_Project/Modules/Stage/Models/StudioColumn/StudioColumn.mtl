@@ -1,0 +1,63 @@
+newmtl StudioColumn_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_BlueHighlight
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_Dark
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_Accent
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+
+newmtl StudioColumn_Rear
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioColumn_BaseColor.png
+

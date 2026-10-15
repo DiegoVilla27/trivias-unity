@@ -1,0 +1,63 @@
+newmtl StageStairs_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_Recess
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_Underside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_Support
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+
+newmtl StageStairs_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StageStairs_BaseColor.png
+

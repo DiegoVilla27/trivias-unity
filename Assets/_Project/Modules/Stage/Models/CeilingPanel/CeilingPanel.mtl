@@ -1,0 +1,63 @@
+newmtl CeilingPanel_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_Recess
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_Underside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_Support
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+
+newmtl CeilingPanel_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd CeilingPanel_BaseColor.png
+

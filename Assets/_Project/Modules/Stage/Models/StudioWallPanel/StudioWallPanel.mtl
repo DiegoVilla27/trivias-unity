@@ -1,0 +1,63 @@
+newmtl StudioWallPanel_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Purple
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Dark
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Accent
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+
+newmtl StudioWallPanel_Rear
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioWallPanel_BaseColor.png
+

@@ -1,0 +1,63 @@
+newmtl StudioSpeaker_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_Metal
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_Recess
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_Back
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_Fastener
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+
+newmtl StudioSpeaker_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd StudioSpeaker_BaseColor.png
+

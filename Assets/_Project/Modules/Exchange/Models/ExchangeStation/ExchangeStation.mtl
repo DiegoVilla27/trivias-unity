@@ -1,0 +1,54 @@
+newmtl ExchangeStation_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+
+newmtl ExchangeStation_Navy
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+
+newmtl ExchangeStation_Silver
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+
+newmtl ExchangeStation_Dark
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+
+newmtl ExchangeStation_Red
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+
+newmtl ExchangeStation_Blue
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd ExchangeStation_BaseColor.png
+

@@ -1,0 +1,63 @@
+newmtl SideCurtain_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_Velvet
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_Loop
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_Hem
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_Seam
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+
+newmtl SideCurtain_Inside
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SideCurtain_BaseColor.png
+

@@ -1,0 +1,63 @@
+newmtl SmallSpotlight_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Body
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Trim
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Lens
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Groove
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+
+newmtl SmallSpotlight_Accent
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SmallSpotlight_BaseColor.png
+

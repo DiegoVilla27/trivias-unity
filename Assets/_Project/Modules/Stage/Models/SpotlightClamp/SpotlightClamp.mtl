@@ -1,0 +1,63 @@
+newmtl SpotlightClamp_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_Metal
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_Recess
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_Back
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_Fastener
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+
+newmtl SpotlightClamp_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd SpotlightClamp_BaseColor.png
+

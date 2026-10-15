@@ -1,0 +1,63 @@
+newmtl TrussCornerConnector_Gold
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_Metal
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_Recess
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_GoldShade
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_Back
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_Fastener
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
+newmtl TrussCornerConnector_Rubber
+Ka 0.1 0.1 0.1
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+Ns 80
+d 1
+illum 2
+map_Kd TrussCornerConnector_BaseColor.png
+
