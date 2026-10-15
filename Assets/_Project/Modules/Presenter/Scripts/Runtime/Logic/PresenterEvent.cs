@@ -14,11 +14,14 @@ namespace Trivias.Presenter.Logic
 
         /// <summary>Quedan pocos segundos para apostar (solo con límite de tiempo).</summary>
         TimeRunningOut = 8,
+
+        /// <summary>Un concursante se ha desconectado a mitad de partida.</summary>
+        PlayerLeft = 9,
     }
 
     public static class PresenterEvents
     {
-        public const int COUNT = 9;
+        public const int COUNT = 10;
 
         /// <summary>Clave del evento en el archivo de contenido.</summary>
         public static bool TryParse(string key, out PresenterEvent presenterEvent)
@@ -34,6 +37,7 @@ namespace Trivias.Presenter.Logic
                 case "victory": presenterEvent = PresenterEvent.Victory; return true;
                 case "defeat": presenterEvent = PresenterEvent.Defeat; return true;
                 case "time_running_out": presenterEvent = PresenterEvent.TimeRunningOut; return true;
+                case "player_left": presenterEvent = PresenterEvent.PlayerLeft; return true;
                 default: presenterEvent = default; return false;
             }
         }

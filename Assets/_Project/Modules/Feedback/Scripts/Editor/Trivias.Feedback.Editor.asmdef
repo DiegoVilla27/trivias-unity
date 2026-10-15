@@ -1,0 +1,23 @@
+{
+    "name": "Trivias.Feedback.Editor",
+    "rootNamespace": "Trivias.Feedback.Editor",
+    "references": [
+        "Trivias.Shared",
+        "Trivias.Shared.Editor",
+        "Trivias.Feedback",
+        "Trivias.Match",
+        "Trivias.Money",
+        "Trivias.SelfBet"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

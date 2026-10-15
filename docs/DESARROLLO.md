@@ -37,8 +37,10 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 2 Una pregunta completa | Hecho: pantalla grande, tiempo límite, verificar, cuenta atrás, resolución |
 | 3 Cambio y comodines | Hecho: estación de cambio, comodín con zona, multiplicador y expulsión |
 | 4 Partida de 15 preguntas | Hecho: victoria/derrota, resultados, fichas por tramo, volver a jugar, presentador |
-| 6 Contenido | Hecho: 30 preguntas y 22 frases. Pendiente: micrófono (con Steam) |
+| 6 Contenido | Hecho: 30 preguntas y 24 frases (incluye «alguien se fue»). Pendiente: micrófono (con Steam) |
 | 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 9 cosméticos sincronizados |
+| Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
+| Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti de colores por acierto y lluvia dorada en la victoria. Pendiente: volumen en opciones, iluminación por bloque |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |
 
 Cada cambio se valida con Build All y la batería completa de pruebas (EditMode y PlayMode).
@@ -79,3 +81,14 @@ IA textual en vivo es opcional después del catálogo local. Observación, memor
 ## Mantenimiento de documentación
 
 Al cerrar un pendiente, actualizar el GDD y los documentos afectados. Registrar cambios de alcance y no confundir un hito planificado con una funcionalidad terminada.
+
+## Probar una pregunta concreta
+
+Para saltar directamente a una pregunta (p. ej. la última, para ver la victoria):
+
+1. Con Unity abierto, seleccionar `Assets/_Project/Modules/Match/Config/MatchConfig.asset`.
+2. En el Inspector, sección **Pruebas**, poner **Test Start Question** en el número deseado (1 = normal, 15 = la última).
+3. Play → Crear sala → Empezar partida. La consola avisa «MODO PRUEBA: empieza en la pregunta N».
+4. Al terminar, volver a ponerlo en **1**.
+
+Las preguntas siguen yendo de fácil a difícil (la 15 es difícil). Solo funciona en el editor y en builds de desarrollo: la build para compartir (Tools → Trivias → Crear build) lo ignora y siempre empieza en la 1. Build All conserva el valor. Las fichas se entregan como en una partida normal (sirve para probar la tienda).

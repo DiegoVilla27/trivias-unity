@@ -50,7 +50,7 @@ namespace Trivias.SelfBet.Logic
         public int AvailableUses(ulong client)
         {
             var i = IndexOf(client);
-            if (i < 0 || _bettors[i].IsEliminated)
+            if (i < 0 || !_bettors[i].IsActive)
                 return 0;
             return _bettors[i].PersonalUses > 0 ? _bettors[i].PersonalUses : Reserve;
         }
@@ -63,7 +63,7 @@ namespace Trivias.SelfBet.Logic
                 return false;
 
             var bettor = _bettors[i];
-            if (bettor.IsEliminated || bettor.IsLocked)
+            if (!bettor.IsActive || bettor.IsLocked)
                 return false;
 
             if (bettor.Booth != NO_BOOTH)
@@ -117,7 +117,7 @@ namespace Trivias.SelfBet.Logic
             var count = 0;
             foreach (var bettor in _bettors)
             {
-                if (bettor.Booth == booth && !bettor.IsEliminated)
+                if (bettor.Booth == booth && bettor.IsActive)
                     count++;
             }
             return count;
@@ -137,7 +137,7 @@ namespace Trivias.SelfBet.Logic
                 var any = false;
                 foreach (var bettor in _bettors)
                 {
-                    if (bettor.IsEliminated)
+                    if (!bettor.IsActive)
                         continue;
                     if (!bettor.HasBet)
                         return false;
@@ -154,11 +154,28 @@ namespace Trivias.SelfBet.Logic
                 var count = 0;
                 foreach (var bettor in _bettors)
                 {
-                    if (!bettor.IsEliminated)
+                    if (bettor.IsActive)
                         count++;
                 }
                 return count;
             }
+        }
+
+        /// <summary>
+        /// Un concursante se desconecta durante la partida: su apuesta se anula (si usaba la reserva y aún no se había
+        /// verificado, el uso vuelve al equipo), pierde sus usos y deja de contar. El reparto no se recalcula (GDD 10).
+        /// </summary>
+        public bool RemovePlayer(ulong client)
+        {
+            var i = IndexOf(client);
+            if (i < 0 || _bettors[i].HasLeft)
+                return false;
+
+            var bettor = _bettors[i];
+            if (bettor.HasBet && bettor.UsesReserve && !bettor.IsLocked)
+                Reserve++;
+            _bettors[i] = new Bettor(client, 0, NO_BOOTH, false, false, bettor.IsEliminated, hasLeft: true);
+            return true;
         }
 
         /// <summary>
@@ -171,7 +188,7 @@ namespace Trivias.SelfBet.Logic
             for (var i = 0; i < _bettors.Count; i++)
             {
                 var bettor = _bettors[i];
-                if (!bettor.IsLocked)
+                if (!bettor.IsLocked || bettor.HasLeft)
                     continue;
 
                 if (bettor.Booth == correctBooth)

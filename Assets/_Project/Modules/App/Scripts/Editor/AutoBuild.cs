@@ -50,7 +50,7 @@ namespace Trivias.App.Editor
             }
 
             Debug.Log("[Trivias] El código cambió: reconstruyendo prefabs y escena automáticamente...");
-            ProjectBuilder.BuildAll();
+            OpenScenesKeeper.Run(ProjectBuilder.BuildAll);
         }
 
         /// <summary>Huella de lo que determina prefabs y escena: scripts, contenido y controles.</summary>

@@ -131,7 +131,10 @@ namespace Trivias.Match.Network
             _verifyFromZoneRequested.Register(RequestVerify);
 
             if (IsServer)
+            {
                 _matchStartRequested.Register(StartMatch);
+                NetworkManager.OnClientDisconnectCallback += OnClientLeft;
+            }
 
             _runtime.Attach(this);
             _notifyPending = true;
@@ -151,7 +154,10 @@ namespace Trivias.Match.Network
             _verifyFromZoneRequested.Unregister(RequestVerify);
 
             if (IsServer)
+            {
                 _matchStartRequested.Unregister(StartMatch);
+                NetworkManager.OnClientDisconnectCallback -= OnClientLeft;
+            }
 
             _runtime.Detach(this);
             _playerControl.SetCanMove(false);
@@ -224,8 +230,12 @@ namespace Trivias.Match.Network
             _selfBet.Authority.StartMatch(_participants);
             _startTime = NetworkManager.ServerTime.Time;
             _matchId = (uint)random.Next(1, int.MaxValue);
+            var first = MatchRules.StartQuestion(_config.TestStartQuestion, _plan.Length);
+            if (first > 1)
+                GameLog.Warning($"[Partida] MODO PRUEBA: empieza en la pregunta {first} de {_plan.Length} " +
+                                 "(MatchConfig → «Empezar en la pregunta»; vuelve a 1 para jugar normal).", this);
             GameLog.Info($"[Partida] Empieza con {_plan.Length} preguntas.", this);
-            ShowQuestion(1, random);
+            ShowQuestion(first, random);
         }
 
         [Rpc(SendTo.Server)]
@@ -279,9 +289,32 @@ namespace Trivias.Match.Network
                 return;
             }
 
-            _result.Value = BuildResult(next == MatchPhase.Victory);
-            _phase.Value = next;
-            GameLog.Info($"[Partida] Fin: {next} · {MatchResult.FormatDuration(_result.Value.DurationSeconds)}.", this);
+            Finish(next);
+        }
+
+        private void Finish(MatchPhase outcome)
+        {
+            _money.Authority?.SetLocked(true);
+            _selfBet.Authority.SetOpen(false);
+            _result.Value = BuildResult(outcome == MatchPhase.Victory);
+            _phase.Value = outcome;
+            GameLog.Info($"[Partida] Fin: {outcome} · {MatchResult.FormatDuration(_result.Value.DurationSeconds)}.", this);
+        }
+
+        /// <summary>
+        /// Un jugador se desconecta a mitad de partida (GDD 10): su comodín se anula y deja de contar como activo
+        /// (el dinero que llevaba ya vuelve a la mesa en el módulo Money). Si no queda nadie activo, es derrota.
+        /// </summary>
+        private void OnClientLeft(ulong client)
+        {
+            var phase = _phase.Value;
+            if (client == NetworkManager.ServerClientId || phase == MatchPhase.Lobby || MatchRules.IsFinished(phase))
+                return;
+
+            _selfBet.Authority.RemovePlayer(client);
+            GameLog.Info($"[Partida] El jugador {client} se ha ido.", this);
+            if (_selfBet.Authority.ActivePlayers == 0)
+                Finish(MatchPhase.Defeat);
         }
 
         /// <summary>Tiempo total = fin − inicio, con todo lo que pasó entre medias (GDD 12.2).</summary>
@@ -296,6 +329,8 @@ namespace Trivias.Match.Network
             var eliminated = new StringBuilder();
             foreach (var bettor in _selfBet.Session.Book.Bettors)
             {
+                if (bettor.HasLeft)
+                    continue; // Quien se fue no es superviviente ni expulsado.
                 var names = bettor.IsEliminated ? eliminated : survivors;
                 names.Append(names.Length > 0 ? ", " : string.Empty).Append(_avatars.NameOf(bettor.ClientId));
             }
@@ -305,7 +340,7 @@ namespace Trivias.Match.Network
                 MatchId = _matchId,
                 Victory = victory,
                 QuestionsPassed = (byte)passed,
-                FinalMoney = _lastRound.Value.Total,
+                FinalMoney = _money.Authority?.TotalInPlay ?? _lastRound.Value.Total,
                 DurationSeconds = (float)(NetworkManager.ServerTime.Time - _startTime),
                 TokensEach = (short)tokens,
             };

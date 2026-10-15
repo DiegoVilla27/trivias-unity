@@ -10,6 +10,7 @@ namespace Trivias.SelfBet.Network
         private const byte RESERVE = 1;
         private const byte LOCKED = 2;
         private const byte ELIMINATED = 4;
+        private const byte LEFT = 8;
 
         public ulong ClientId;
         public byte PersonalUses;
@@ -22,11 +23,11 @@ namespace Trivias.SelfBet.Network
             PersonalUses = (byte)bettor.PersonalUses,
             Booth = (sbyte)bettor.Booth,
             Flags = (byte)((bettor.UsesReserve ? RESERVE : 0) | (bettor.IsLocked ? LOCKED : 0) |
-                           (bettor.IsEliminated ? ELIMINATED : 0)),
+                           (bettor.IsEliminated ? ELIMINATED : 0) | (bettor.HasLeft ? LEFT : 0)),
         };
 
         public Bettor ToBettor() => new(ClientId, PersonalUses, Booth, (Flags & RESERVE) != 0,
-            (Flags & LOCKED) != 0, (Flags & ELIMINATED) != 0);
+            (Flags & LOCKED) != 0, (Flags & ELIMINATED) != 0, (Flags & LEFT) != 0);
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {

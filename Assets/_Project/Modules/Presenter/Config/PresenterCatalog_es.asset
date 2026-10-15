@@ -80,3 +80,9 @@ MonoBehaviour:
   - _id: time-02
     _event: 8
     _text: "Se acaba el tiempo. El tubo ya est\xE1 contando con vosotros."
+  - _id: left-01
+    _event: 9
+    _text: "Un concursante ha huido del plat\xF3. El tubo lo echar\xE1 de menos."
+  - _id: left-02
+    _event: 9
+    _text: "Uno menos. M\xE1s protagonismo para los valientes que quedan."

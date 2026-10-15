@@ -59,9 +59,9 @@ El objetivo comercial es una premisa clara y situaciones memorables. La tienda y
 
 ### 3.3 Final y ritmo
 
-El presentador anuncia el resultado. Una victoria muestra confeti, un cheque gigante, supervivientes en el podio y retratos de los eliminados. El resumen muestra preguntas superadas, dinero final, tiempo de ranking y fichas por persona. Se reúne la voz del grupo y todos regresan al vestíbulo para comprar, cambiar de atuendo o repetir.
+Cada pregunta acertada lanza confeti de colores a los lados de la pantalla. El presentador anuncia el resultado. Una victoria muestra una lluvia de confeti dorado en toda la sala, un cheque gigante, supervivientes en el podio y retratos de los eliminados. El resumen muestra preguntas superadas, dinero final, tiempo de ranking y fichas por persona. Se reúne la voz del grupo y todos regresan al vestíbulo para comprar, cambiar de atuendo o repetir.
 
-Las 15 preguntas se dividen en tres bloques de cinco: inicio accesible, dificultad intermedia y final más exigente. Cambian iluminación, música y comentarios; las reglas de apuesta permanecen iguales. El tiempo por pregunta marca el ritmo; no hay otra duración máxima de partida.
+Las 15 preguntas se dividen en tres bloques de cinco: inicio accesible, dificultad intermedia y final más exigente. Cambian iluminación, música y comentarios; las reglas de apuesta permanecen iguales. (Prototipo: la música ya cambia por bloque; la iluminación aún no.) El tiempo por pregunta marca el ritmo; no hay otra duración máxima de partida.
 
 ## 4. Dinero y apuestas
 
@@ -266,7 +266,9 @@ Tecnología elegida, toda gratuita:
 
 Modelo de autoridad: un jugador actúa como host y es la autoridad de partida. Durante el desarrollo se usa el AppID de pruebas de Steam (480); el AppID propio requiere Steam Direct al publicar. Se descartan Vivox (sin tope de gasto al superar 5.000 usuarios simultáneos) y Dissonance (de pago).
 
-El transporte de Steam para NGO es código de la comunidad, no de Unity: debe probarse pronto con Unity 6. Invitaciones, abandonos y reconexiones quedan pendientes.
+El transporte de Steam para NGO es código de la comunidad, no de Unity: debe probarse pronto con Unity 6. Invitaciones y reconexiones quedan pendientes.
+
+Abandonos (implementado): quien se desconecta a mitad de partida deja de contar como activo y su comodín se anula sin recalcular el reparto; el dinero que llevaba vuelve a la mesa; si no queda ningún activo, es derrota. Si se va el host, todos vuelven al menú. No se puede volver a entrar en la misma partida.
 
 El tamaño inicial determina comodines y categoría de ranking. Una salida no convierte a un equipo de seis en uno de dos ni concede comodines extra.
 
@@ -387,6 +389,9 @@ Pendientes prioritarios:
 - Banco del prototipo completo: 30 preguntas (10 por dificultad).
 - La documentación pasa a la carpeta `docs/` del repositorio.
 - Tienda en la sala de espera y fichas guardadas en un perfil local (entrega única por partida); los cosméticos equipados se sincronizan entre jugadores.
+- Abandonos durante la partida resueltos (comodín anulado, derrota sin activos, aviso del presentador) y build para compartir con un clic.
+- Sonido sintetizado por código (efectos de dinero, apuestas, cierre, cuenta atrás, resolución, victoria y derrota) y música por bloque de dificultad.
+- Confeti de colores a los lados de la pantalla en cada acierto y lluvia dorada en toda la sala en la victoria.
 - Se añade tiempo límite para apostar en cada pregunta (90 s, configurable; 0 = sin límite), con cuenta atrás visible y verificación automática al agotarse. Se puede verificar antes.
 - El presentador avisa cuando quedan pocos segundos.
 - El panel de depuración se sustituye por un menú (pantalla principal y sala de espera) que desaparece al empezar la partida; el HUD se simplifica.

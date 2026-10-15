@@ -33,6 +33,8 @@ namespace Trivias.App.Editor
         public GameObject Menu;
         public GameObject ShopUi;
         public GameObject AvatarCosmetics;
+        public GameObject GameFeedback;
+        public GameObject StageConfetti;
         public IReadOnlyList<GameObject> Booths;
         public GameObject Table;
         public GameObject ExchangeStation;
@@ -82,6 +84,8 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.Menu);
             PrefabUtility.InstantiatePrefab(prefabs.ShopUi);
             PrefabUtility.InstantiatePrefab(prefabs.AvatarCosmetics);
+            PrefabUtility.InstantiatePrefab(prefabs.GameFeedback);
+            PrefabUtility.InstantiatePrefab(prefabs.StageConfetti);
             CreateEventSystem();
 
             EditorSceneManager.SaveScene(scene, SCENE_PATH);

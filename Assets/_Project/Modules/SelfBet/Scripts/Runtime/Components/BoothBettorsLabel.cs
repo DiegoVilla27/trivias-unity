@@ -39,7 +39,7 @@ namespace Trivias.SelfBet.Components
             {
                 foreach (var bettor in session.Book.Bettors)
                 {
-                    if (bettor.Booth != _booth || bettor.IsEliminated)
+                    if (bettor.Booth != _booth || !bettor.IsActive)
                         continue;
                     _builder.Append(_builder.Length == 0 ? "APOSTADOS\n" : " · ").Append(_avatars.NameOf(bettor.ClientId));
                 }

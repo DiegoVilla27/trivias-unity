@@ -19,3 +19,4 @@ MonoBehaviour:
   _loseUnplacedMoney: 1
   _tokenTierMinQuestions: 03000000060000000b0000000f000000i
   _tokenTierRewards: 320000006400000096000000fa000000i
+  _testStartQuestion: 1

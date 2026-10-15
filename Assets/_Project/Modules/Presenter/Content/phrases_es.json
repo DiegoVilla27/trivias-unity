@@ -110,6 +110,16 @@
       "id": "time-02",
       "event": "time_running_out",
       "text": "Se acaba el tiempo. El tubo ya está contando con vosotros."
+    },
+    {
+      "id": "left-01",
+      "event": "player_left",
+      "text": "Un concursante ha huido del plató. El tubo lo echará de menos."
+    },
+    {
+      "id": "left-02",
+      "event": "player_left",
+      "text": "Uno menos. Más protagonismo para los valientes que quedan."
     }
   ]
 }

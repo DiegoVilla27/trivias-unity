@@ -9,7 +9,7 @@ Referencia: [GDD](GDD.md), secciones 6 y 9.
 | Prototipo | 30 | 20 |
 | Salida | 200 | 50 |
 
-Cada partida selecciona 15 preguntas sin repetición interna. Archivos editables (JSON) separados de la lógica, importados y validados al construir: `Assets/_Project/Modules/Questions/Content/questions_es.json` (30 preguntas: 10 fáciles, 10 medias, 10 difíciles) y `Assets/_Project/Modules/Presenter/Content/phrases_es.json` (22 frases).
+Cada partida selecciona 15 preguntas sin repetición interna. Archivos editables (JSON) separados de la lógica, importados y validados al construir: `Assets/_Project/Modules/Questions/Content/questions_es.json` (30 preguntas: 10 fáciles, 10 medias, 10 difíciles) y `Assets/_Project/Modules/Presenter/Content/phrases_es.json` (24 frases, incluido el evento `player_left` cuando un concursante se desconecta).
 
 ## Preguntas
 

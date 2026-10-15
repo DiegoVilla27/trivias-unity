@@ -170,6 +170,73 @@ namespace Trivias.SelfBet.Tests
             Assert.That(book.AllActiveHaveBet, Is.True);
         }
 
+        // ---- Desconexiones ----
+
+        [Test]
+        public void RemovedPlayer_IsNoLongerActive_NorEliminated()
+        {
+            var book = BookWith(3);
+            Assert.That(book.RemovePlayer(1), Is.True);
+            Assert.That(book.ActivePlayers, Is.EqualTo(2));
+            Assert.That(book.Bettors[1].HasLeft, Is.True);
+            Assert.That(book.Bettors[1].IsEliminated, Is.False, "Irse no es lo mismo que ser expulsado.");
+            Assert.That(book.RemovePlayer(1), Is.False, "No se cuenta dos veces.");
+        }
+
+        [Test]
+        public void RemovedPlayer_DoesNotMultiplyEvenIfLockedOnCorrectBooth()
+        {
+            var book = BookWith(2);
+            book.Prepare(0, A);
+            book.Prepare(1, A);
+            book.LockAll();
+            book.RemovePlayer(1);
+            Assert.That(book.Resolve(A, _eliminated), Is.EqualTo(2), "Solo cuenta el que sigue: x2, no x3.");
+            Assert.That(_eliminated, Is.Empty);
+        }
+
+        [Test]
+        public void RemovedPlayer_OnWrongBooth_IsNotExpelled()
+        {
+            var book = BookWith(2);
+            book.Prepare(1, B);
+            book.LockAll();
+            book.RemovePlayer(1);
+            book.Resolve(A, _eliminated);
+            Assert.That(_eliminated, Is.Empty);
+        }
+
+        [Test]
+        public void RemovedPlayer_ReturnsReservedUseToTheTeam()
+        {
+            var book = BookWith(4); // 1 personal + 2 de reserva
+            book.Prepare(0, A);
+            book.LockAll();
+            book.Resolve(A, _eliminated);       // el 0 gasta su uso personal
+            book.Prepare(0, B);                 // ahora usa la reserva (queda 1)
+            Assert.That(book.Reserve, Is.EqualTo(1));
+            book.RemovePlayer(0);
+            Assert.That(book.Reserve, Is.EqualTo(2), "El uso reservado y no gastado vuelve al equipo.");
+        }
+
+        [Test]
+        public void RemovedPlayer_DoesNotRecalculateOthersUses()
+        {
+            var book = BookWith(2); // 3 cada uno
+            book.RemovePlayer(1);
+            Assert.That(book.Bettors[0].PersonalUses, Is.EqualTo(3), "El reparto no se recalcula al irse alguien.");
+        }
+
+        [Test]
+        public void RemovedPlayer_CannotBet_AndDoesNotBlockVerifyFromZone()
+        {
+            var book = BookWith(2);
+            book.RemovePlayer(1);
+            Assert.That(book.Prepare(1, A), Is.False);
+            book.Prepare(0, A);
+            Assert.That(book.AllActiveHaveBet, Is.True, "Quien se fue no cuenta como libre para pulsar el botón.");
+        }
+
         [Test]
         public void Elimination_DoesNotIncreaseReserve()
         {

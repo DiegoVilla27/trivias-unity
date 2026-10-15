@@ -108,6 +108,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Results | Pantalla de resultados, volver a jugar y salir | Shared, Match, Money, Questions |
 | Menu | Menú principal (crear/unirse) y sala de espera; se oculta durante la partida | Shared, Match, Money, Questions |
 | Shop | Tienda del vestíbulo, catálogo de cosméticos (primitivas) y presentador que viste a los concursantes | Shared |
+| Feedback | Sonido (efectos y música sintetizados en edición), reglas de qué suena y confeti (acierto y victoria) | Shared, Match, Money, SelfBet, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
 | Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
 
@@ -122,7 +123,7 @@ Módulos previstos aún sin crear: `Voice`, `Ranking`.
 
 - **Todo se construye por código en tiempo de edición.** Cada módulo tiene un constructor en `Scripts/Editor/*Builder.cs` que crea sus materiales y prefabs con primitivas. `App/ProjectBuilder` los ejecuta en orden y ensambla `Scenes/Stage.unity`. Los constructores son idempotentes: se pueden repetir sin duplicar nada.
 - No editar a mano prefabs o escenas generados: cambiar el constructor.
-- **La escena siempre debe estar lista para jugar.** `App/AutoBuild` guarda en `Settings/BuildStamp.txt` una huella del código y del contenido; si al compilar en el editor no coincide, reconstruye todo solo. El usuario nunca debería tener que ejecutar Build All.
+- **La escena siempre debe estar lista para jugar.** `App/AutoBuild` guarda en `Settings/BuildStamp.txt` una huella del código y del contenido; si al compilar en el editor no coincide, reconstruye todo solo. El usuario nunca debería tener que ejecutar Build All. La reconstrucción automática **nunca cambia la escena que el usuario tiene abierta** (`OpenScenesKeeper` la restaura). Para no provocar recompilaciones mientras el usuario trabaja, el código se cambia preferiblemente con Unity cerrado.
 - **Pruebas en cada cambio (regla del usuario, sin excepciones):** todo lo nuevo o modificado lleva pruebas nuevas que lo cubran (lógica en EditMode; comportamiento en juego, escena y textos en PlayMode; distribución del plató en `StageLayoutTests`). Después se ejecuta **la batería completa**, nuevas y anteriores, EditMode y PlayMode, nunca solo las nuevas. Si una prueba antigua falla, se arregla la causa antes de entregar.
 - **Antes de entregar cualquier cambio (obligatorio):** con Unity cerrado, ejecutar Build All en consola, luego los tests EditMode (incluyen `WiringTests`: ninguna referencia vacía en escena y prefabs, y huella al día) y PlayMode. Si Unity está abierto, pedir que lo cierre; no dar nada por bueno sin esta verificación.
 - **Cero errores y cero avisos:** revisar en cada log toda línea de `Assets/` con `error` o `warning` (no solo `CS`: también analizadores como `UAC`). Comando: `grep -E "Assets/.*(error|warning)" <log>`.

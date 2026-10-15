@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c7b094bfdc1470a91e1562c8aa3229, type: 3}
+  m_Name: FeedbackLibrary
+  m_EditorClassIdentifier: Trivias.Feedback::Trivias.Feedback.Data.FeedbackLibrary
+  _cues:
+  - {fileID: 8300000, guid: 06f5314704c9143ecb8595ad4f46c252, type: 3}
+  - {fileID: 8300000, guid: 7b4b3f57040404967ae3cad1ce3f4d25, type: 3}
+  - {fileID: 8300000, guid: 279dc048faf07413e9e6576185da3380, type: 3}
+  - {fileID: 8300000, guid: e8484c0769c9e4013954241540541cac, type: 3}
+  - {fileID: 8300000, guid: ac2f597a43b4b4336b4ca285fb629ad2, type: 3}
+  - {fileID: 8300000, guid: 38e00715d9e334760a63054033bbb59a, type: 3}
+  - {fileID: 8300000, guid: 0228b0d70892e4db8ab90294dbb53aba, type: 3}
+  - {fileID: 8300000, guid: a69908c46a2b34d19a9faff1bf3bc596, type: 3}
+  - {fileID: 8300000, guid: 50c31d880d1bb4fd8a5d16acf93e8bb3, type: 3}
+  - {fileID: 8300000, guid: df4cba78f71904146b6d38511d9a5020, type: 3}
+  - {fileID: 8300000, guid: cf155027f6a674c75be5602502a8a243, type: 3}
+  - {fileID: 8300000, guid: ec6eac7064abe4d2b92b0566f0ca3e23, type: 3}
+  - {fileID: 8300000, guid: fa91641ac17b94f31a038272259f701b, type: 3}
+  - {fileID: 8300000, guid: fa062720e5bfa413db8c238050d7ea97, type: 3}
+  _cueVolumes:
+  - 0.6
+  - 0.7
+  - 0.9
+  - 0.9
+  - 0.45
+  - 0.9
+  - 0.6
+  - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  _music:
+  - {fileID: 8300000, guid: 250f75e50433c4aee99bba003969fedd, type: 3}
+  - {fileID: 8300000, guid: 39526761a6e7c4953a5d851de154f8a9, type: 3}
+  - {fileID: 8300000, guid: 95e30528630df4367b710b2ca558d149, type: 3}
+  _musicVolume: 0.22
+  _musicFadeSeconds: 0.8

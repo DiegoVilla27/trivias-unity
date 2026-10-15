@@ -33,7 +33,9 @@
         "UnityEngine.UI",
         "Trivias.Menu.Editor",
         "Trivias.Shop.Editor",
-        "Trivias.Shop"
+        "Trivias.Shop",
+        "Trivias.Feedback.Editor",
+        "Trivias.Feedback"
     ],
     "includePlatforms": [
         "Editor"

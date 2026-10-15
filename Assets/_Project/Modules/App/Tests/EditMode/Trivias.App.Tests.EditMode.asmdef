@@ -8,7 +8,9 @@
         "Trivias.Questions",
         "Trivias.Presenter",
         "Trivias.Money",
-        "Trivias.Shop"
+        "Trivias.Shop",
+        "Trivias.App.Editor",
+        "Trivias.Feedback"
     ],
     "includePlatforms": [
         "Editor"

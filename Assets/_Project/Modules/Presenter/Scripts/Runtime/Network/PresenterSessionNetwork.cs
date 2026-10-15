@@ -33,6 +33,7 @@ namespace Trivias.Presenter.Network
         private float _lastLineTime = float.NegativeInfinity;
         private float _lastSelfBetLine = float.NegativeInfinity;
         private bool _timeWarningGiven;
+        private int _lastLeftCount;
 
         // ---- En todos ----
         private float _silenceAt;
@@ -134,6 +135,7 @@ namespace Trivias.Presenter.Network
                     Speak(PresenterEvent.Defeat, CurrentVariables());
                     break;
                 case MatchPhase.Lobby:
+                    _lastLeftCount = 0;
                     Silence();
                     break;
             }
@@ -142,7 +144,25 @@ namespace Trivias.Presenter.Network
         private void OnSelfBetChanged()
         {
             var bets = _selfBet.Session;
-            if (bets == null || _lastPhase != MatchPhase.Betting)
+            if (bets == null)
+                return;
+
+            // Alguien se ha ido a mitad de partida.
+            var left = 0;
+            foreach (var bettor in bets.Book.Bettors)
+            {
+                if (bettor.HasLeft)
+                    left++;
+            }
+            var someoneLeft = left > _lastLeftCount;
+            _lastLeftCount = left;
+            if (someoneLeft && !MatchRules.IsFinished(_lastPhase) && _lastPhase != MatchPhase.Lobby)
+            {
+                Speak(PresenterEvent.PlayerLeft, CurrentVariables());
+                return;
+            }
+
+            if (_lastPhase != MatchPhase.Betting)
                 return;
 
             var count = 0;
@@ -170,7 +190,7 @@ namespace Trivias.Presenter.Network
             {
                 foreach (var bettor in bets.Book.Bettors)
                 {
-                    if (!bettor.IsEliminated)
+                    if (bettor.IsActive)
                         survivors++;
                 }
             }

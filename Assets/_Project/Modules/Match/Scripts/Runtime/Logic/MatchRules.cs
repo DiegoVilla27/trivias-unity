@@ -14,6 +14,10 @@ namespace Trivias.Match.Logic
             return questionNumber >= totalQuestions ? MatchPhase.Victory : MatchPhase.Betting;
         }
 
+        /// <summary>Pregunta con la que empieza la partida (pruebas): siempre entre 1 y el total.</summary>
+        public static int StartQuestion(int requested, int totalQuestions) =>
+            totalQuestions <= 0 ? 1 : requested < 1 ? 1 : requested > totalQuestions ? totalQuestions : requested;
+
         /// <summary>
         /// Preguntas superadas: las resueltas dejando dinero. Perder en la pregunta 15 cuenta como 14 (GDD 11).
         /// </summary>

@@ -109,6 +109,12 @@ namespace Trivias.SelfBet.Network
             return multiplier;
         }
 
+        public void RemovePlayer(ulong client)
+        {
+            if (_book.RemovePlayer(client))
+                Publish();
+        }
+
         public void ResetForNewMatch()
         {
             _open.Value = false;

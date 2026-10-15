@@ -14,6 +14,7 @@ using Trivias.Questions.Editor;
 using Trivias.Results.Editor;
 using Trivias.SelfBet.Editor;
 using Trivias.Shop.Editor;
+using Trivias.Feedback.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Stage.Editor;
 using Trivias.Table.Editor;
@@ -63,6 +64,7 @@ namespace Trivias.App.Editor
             NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash(presenterSession);
 
             var cosmetics = ShopBuilder.BuildCatalog();
+            var feedbackLibrary = FeedbackBuilder.BuildLibrary();
 
             var prefabs = new StageScenePrefabs
             {
@@ -76,6 +78,8 @@ namespace Trivias.App.Editor
                 Menu = MenuPrefabBuilder.Build(matchRuntime),
                 ShopUi = ShopBuilder.BuildShopUi(cosmetics),
                 AvatarCosmetics = ShopBuilder.BuildPresenter(cosmetics),
+                GameFeedback = FeedbackBuilder.BuildPlayer(feedbackLibrary, matchRuntime, MoneyBuilder.Runtime(), SelfBetBuilder.Runtime()),
+                StageConfetti = FeedbackBuilder.BuildStageConfetti(matchRuntime),
                 Booths = BoothPrefabBuilder.Build(),
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),

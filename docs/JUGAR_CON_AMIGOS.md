@@ -8,12 +8,12 @@ Guía para probar el juego con otras personas sin pagar nada, mientras no esté 
 
 Los demás no necesitan Unity, solo el juego compilado.
 
-1. En Unity: **File → Build Profiles**.
-2. Elegir la plataforma del amigo:
-   - **Mac:** «macOS» → *Switch Platform* → **Build** (por ejemplo en `Builds/Mac`).
-   - **Windows:** primero instalar el módulo gratuito en **Unity Hub → Installs → ⚙ de Unity 6000.6 → Add modules → «Windows Build Support (Mono)»**; después «Windows» → *Switch Platform* → **Build**.
-3. Comprobar que en la lista de escenas solo está **`Stage`**.
-4. Comprimir la carpeta en un **.zip** y compartirla (Google Drive, WeTransfer…).
+1. En Unity: **Tools → Trivias → Crear build → macOS** o **→ Windows** (según el ordenador del amigo).
+   - Para Windows hace falta una vez el módulo gratuito: **Unity Hub → Installs → ⚙ de Unity 6000.6 → Add modules → «Windows Build Support (Mono)»**. Si falta, Unity avisa.
+2. Al terminar se abre la carpeta con el zip listo: `Builds/Trivias-Mac.zip` o `Builds/Trivias-Windows.zip`.
+3. Compartir el zip (Google Drive, WeTransfer…). En Mac se comprime con `ditto` para conservar los permisos de la app.
+
+Alternativa manual: **File → Build Profiles** → plataforma → *Switch Platform* → **Build** (solo la escena `Stage`).
 
 En las builds normales hacen falta **2 jugadores** para empezar (GDD). El modo «jugar solo» solo existe en el editor.
 

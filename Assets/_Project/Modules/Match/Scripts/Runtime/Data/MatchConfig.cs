@@ -22,6 +22,11 @@ namespace Trivias.Match.Data
         [Tooltip("Fichas para cada jugador en cada tramo.")]
         [SerializeField] private int[] _tokenTierRewards = { 50, 100, 150, 250 };
 
+        [Header("Pruebas (solo en el editor y en builds de desarrollo)")]
+        [Tooltip("Para probar: la partida empieza directamente en esta pregunta (1 = normal; 15 = la última). " +
+                 "Las preguntas siguen yendo de fácil a difícil. En la build para compartir se ignora y siempre es 1.")]
+        [SerializeField, Range(1, 30)] private int _testStartQuestion = 1;
+
         public int QuestionsPerMatch => _questionsPerMatch;
         public int BettingSeconds => _bettingSeconds;
         public bool HasBettingTimer => _bettingSeconds > 0;
@@ -30,6 +35,19 @@ namespace Trivias.Match.Data
         public bool LoseUnplacedMoney => _loseUnplacedMoney;
         public int[] TokenTierMinQuestions => _tokenTierMinQuestions;
         public int[] TokenTierRewards => _tokenTierRewards;
+
+        /// <summary>Pregunta de inicio pedida para pruebas; en builds de lanzamiento siempre 1.</summary>
+        public int TestStartQuestion
+        {
+            get
+            {
+#if UNITY_EDITOR || DEBUG
+                return _testStartQuestion;
+#else
+                return 1;
+#endif
+            }
+        }
 
         private void OnValidate()
         {

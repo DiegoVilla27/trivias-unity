@@ -21,7 +21,11 @@ namespace Trivias.SelfBet.Logic
 
         public readonly bool IsEliminated;
 
-        public Bettor(ulong clientId, int personalUses, int booth, bool usesReserve, bool isLocked, bool isEliminated)
+        /// <summary>Se desconectó durante la partida: no cuenta como activo, ni multiplica, ni es expulsado.</summary>
+        public readonly bool HasLeft;
+
+        public Bettor(ulong clientId, int personalUses, int booth, bool usesReserve, bool isLocked, bool isEliminated,
+            bool hasLeft = false)
         {
             ClientId = clientId;
             PersonalUses = personalUses;
@@ -29,20 +33,26 @@ namespace Trivias.SelfBet.Logic
             UsesReserve = usesReserve;
             IsLocked = isLocked;
             IsEliminated = isEliminated;
+            HasLeft = hasLeft;
         }
 
         public bool HasBet => Booth >= 0;
 
-        public Bettor WithBooth(int booth) => new(ClientId, PersonalUses, booth, UsesReserve, IsLocked, IsEliminated);
+        /// <summary>Sigue jugando: ni expulsado ni desconectado.</summary>
+        public bool IsActive => !IsEliminated && !HasLeft;
 
-        public Bettor WithReserve(bool usesReserve) => new(ClientId, PersonalUses, Booth, usesReserve, IsLocked, IsEliminated);
+        public Bettor WithBooth(int booth) => new(ClientId, PersonalUses, booth, UsesReserve, IsLocked, IsEliminated, HasLeft);
+
+        public Bettor WithReserve(bool usesReserve) => new(ClientId, PersonalUses, Booth, usesReserve, IsLocked, IsEliminated, HasLeft);
 
         public bool Equals(Bettor other) =>
             ClientId == other.ClientId && PersonalUses == other.PersonalUses && Booth == other.Booth &&
-            UsesReserve == other.UsesReserve && IsLocked == other.IsLocked && IsEliminated == other.IsEliminated;
+            UsesReserve == other.UsesReserve && IsLocked == other.IsLocked && IsEliminated == other.IsEliminated &&
+            HasLeft == other.HasLeft;
 
         public override bool Equals(object obj) => obj is Bettor other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(ClientId, PersonalUses, Booth, UsesReserve, IsLocked, IsEliminated);
+        public override int GetHashCode() =>
+            HashCode.Combine(ClientId, PersonalUses, Booth, UsesReserve, IsLocked, IsEliminated, HasLeft);
     }
 }

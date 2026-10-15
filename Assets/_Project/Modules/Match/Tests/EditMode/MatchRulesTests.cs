@@ -65,5 +65,15 @@ namespace Trivias.Match.Tests
         [TestCase(MatchPhase.Reveal, false)]
         public void Bets_AreOnlyAcceptedBeforeLocking(MatchPhase phase, bool expected) =>
             Assert.That(MatchRules.AcceptsBets(phase), Is.EqualTo(expected));
+
+        [Test]
+        public void StartQuestion_IsClampedToTheMatch()
+        {
+            Assert.That(MatchRules.StartQuestion(1, 15), Is.EqualTo(1));
+            Assert.That(MatchRules.StartQuestion(15, 15), Is.EqualTo(15));
+            Assert.That(MatchRules.StartQuestion(30, 15), Is.EqualTo(15), "Nunca más allá de la última.");
+            Assert.That(MatchRules.StartQuestion(0, 15), Is.EqualTo(1));
+            Assert.That(MatchRules.StartQuestion(-3, 15), Is.EqualTo(1));
+        }
     }
 }

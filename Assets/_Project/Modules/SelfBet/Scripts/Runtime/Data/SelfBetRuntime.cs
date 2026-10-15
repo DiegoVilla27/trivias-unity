@@ -71,5 +71,8 @@ namespace Trivias.SelfBet.Data
 
         /// <summary>Sala de espera: sin apuestas ni reparto hasta la próxima partida.</summary>
         void ResetForNewMatch();
+
+        /// <summary>Un concursante se desconecta durante la partida (ver <see cref="SelfBetBook.RemovePlayer"/>).</summary>
+        void RemovePlayer(ulong client);
     }
 }

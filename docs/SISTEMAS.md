@@ -54,7 +54,13 @@ Primero resultado y récord local; servicio global después. Identidad del equip
 
 Tecnología: Netcode for GameObjects sobre Facepunch.Steamworks con transporte de la comunidad (relay de Steam, sin exponer IP). Un jugador actúa como host y es la autoridad de partida: valida conversiones, propiedad de objetos, cierre, consumo de usos, resolución y tiempo. Los demás jugadores muestran el mismo estado. En desarrollo se usa el AppID de pruebas 480.
 
-Voz: API de voz de Steam. Cada cliente captura y comprime su voz y la envía al host, que la reenvía solo a los jugadores de su mismo canal. Los activos hablan entre sí; los eliminados entre sí. Todos se reúnen en resultados. No permitir nuevas incorporaciones como concursante a mitad de partida. Reconectar al mismo participante necesita una regla explícita.
+Voz: API de voz de Steam. Cada cliente captura y comprime su voz y la envía al host, que la reenvía solo a los jugadores de su mismo canal. Desconexiones durante la partida: el dinero que llevaba vuelve a la mesa; su comodín se anula (si usaba la reserva y aún no se había verificado, el uso vuelve al equipo); deja de contar como activo y no figura como superviviente ni expulsado; el reparto de comodines no se recalcula. Si no queda ningún activo, la partida termina en derrota. Si se va el host, la sala se cierra y todos vuelven al menú con un aviso.
+
+Los activos hablan entre sí; los eliminados entre sí. Todos se reúnen en resultados. No permitir nuevas incorporaciones como concursante a mitad de partida. Reconectar al mismo participante necesita una regla explícita.
+
+## Sonido y celebraciones
+
+El módulo `Feedback` observa la partida, el dinero y los comodines sin intervenir: los avisos de red solo marcan qué cambió y el sonido se decide en `LateUpdate`, en cada equipo por separado (no viaja por red). Las reglas de qué suena (C# puro, probado) están en `FeedbackRules`. Coger/dejar dinero suena solo para quien lo hace; el resto lo oyen todos. Confeti (`StageConfetti`): de colores a los lados de la pantalla en cada acierto (el equipo conserva dinero) y lluvia dorada en toda la sala durante la victoria. Detalle en [RECURSOS](RECURSOS.md#sonido).
 
 ## Verificaciones esenciales
 

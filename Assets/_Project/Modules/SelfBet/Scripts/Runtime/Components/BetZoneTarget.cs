@@ -73,7 +73,7 @@ namespace Trivias.SelfBet.Components
 
             var book = session.Book;
             var index = book.IndexOf(session.LocalClientId);
-            if (index < 0 || book.Bettors[index].IsEliminated)
+            if (index < 0 || !book.Bettors[index].IsActive)
             {
                 _prompt = string.Empty;
                 return;

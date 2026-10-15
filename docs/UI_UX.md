@@ -34,7 +34,9 @@ El botón indica que cierra todas las apuestas. Al pulsarlo: bloqueo inmediato, 
 
 Comunicar antes del cierre la regla provisional de perder dinero sin apostar. Señalar correctamente usos de comodín sin recurrir a una nueva acción de marcadores del jugador.
 
-Después: respuesta correcta y explicación breve. Total perdido/recuperado y eliminaciones claros. La lectura no debe quedar oculta por la animación de expulsión.
+Sonido (implementado): golpe al cerrar, pitido en cada segundo del 3-2-1, tic de reloj en los últimos 10 s de las apuestas con tiempo. Detalle en [RECURSOS](RECURSOS.md#sonido).
+
+Después: respuesta correcta y explicación breve. Al acertar, confeti de colores a los lados de la pantalla (sin taparla); al ganar, lluvia dorada en toda la sala. Total perdido/recuperado y eliminaciones claros. La lectura no debe quedar oculta por la animación de expulsión.
 
 ## Resultados y compras
 

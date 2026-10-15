@@ -96,6 +96,35 @@ namespace Trivias.App.Tests
             Assert.That(Mathf.Abs(presenter.x), Is.GreaterThan(screenHalfWidth), "El presentador no debe estar delante de la pantalla.");
         }
 
+        [Test]
+        public void CorrectAnswerConfetti_ShootsFromBothSidesOfTheScreen()
+        {
+            var frame = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds;
+            var left = Find("StageConfetti/CorrectLeft").transform;
+            var right = Find("StageConfetti/CorrectRight").transform;
+
+            Assert.That(left.position.x, Is.LessThan(-frame.extents.x), "El chorro izquierdo debe salir fuera de la pantalla, no delante.");
+            Assert.That(right.position.x, Is.GreaterThan(frame.extents.x), "El chorro derecho debe salir fuera de la pantalla, no delante.");
+            foreach (var emitter in new[] { left, right })
+            {
+                Assert.That(Mathf.Abs(emitter.position.z - frame.center.z), Is.LessThan(1.5f), "Junto a la pantalla.");
+                Assert.That(emitter.forward.y, Is.GreaterThan(0.7f), "Dispara hacia arriba.");
+                Assert.That(Mathf.Sign(emitter.forward.x), Is.EqualTo(-Mathf.Sign(emitter.position.x)), "Se abre hacia el centro.");
+            }
+        }
+
+        [Test]
+        public void VictoryConfetti_CoversTheWholeRoom()
+        {
+            var rain = Find("StageConfetti/VictoryRain").GetComponent<ParticleSystem>();
+            var floor = Find($"{ENVIRONMENT}/Floor").GetComponent<Renderer>().bounds;
+            Assert.That(rain.shape.scale.x, Is.GreaterThanOrEqualTo(floor.size.x * 0.9f), "La lluvia dorada debe cubrir la sala a lo ancho.");
+            Assert.That(rain.shape.scale.z, Is.GreaterThanOrEqualTo(floor.size.z * 0.9f), "Y a lo largo.");
+            var offset = rain.transform.position - floor.center;
+            Assert.That(new Vector2(offset.x, offset.z).magnitude, Is.LessThan(2f), "Centrada sobre la sala.");
+            Assert.That(rain.main.loop, Is.True, "Sigue lloviendo mientras se ven los resultados.");
+        }
+
         // ---- Utilidades ----
 
         private GameObject Find(string path)

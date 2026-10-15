@@ -22,7 +22,8 @@
         "Trivias.HUD",
         "UnityEngine.UI",
         "Trivias.VerifyButton",
-        "Trivias.Shop"
+        "Trivias.Shop",
+        "Trivias.Feedback"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

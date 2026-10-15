@@ -40,11 +40,26 @@ Priorizar paredes, suelo, techo básico y luces para construir el volumen del pl
 - Personaje: reposo, locomoción, transporte y expulsión; transiciones según [PLAYER.md](PLAYER.md).
 - Cabinas: bloqueo, acierto y pérdida; pueden resolverse con luces y efectos sencillos.
 - Dinero: coger, depositar, conversión y retirada, sin física compleja obligatoria.
-- Victoria: confeti y cheque. No necesita un nivel nuevo.
+- Acierto: confeti de colores en dos chorros a los lados de la pantalla grande (implementado).
+- Victoria: lluvia de confeti dorado en toda la sala, continua mientras se ven los resultados y limpiada al volver a la sala (implementado); cheque pendiente. No necesita un nivel nuevo.
 
 ## Sonido
 
-Efectos propuestos para coger/depositar, convertir, pulsar botón, cuenta atrás, respuesta y expulsión. Música/ambiente para los tres bloques del concurso y resultados. Cantidad de pistas pendiente.
+Implementado en el MVP (módulo `Feedback`), todo **sintetizado por código al construir** (`.wav` en `Modules/Feedback/Audio/`, sin audio externo ni licencias):
+
+| Momento | Sonido |
+| --- | --- |
+| Coger / dejar dinero (jugador local) | Roce con subida / golpe sordo |
+| Alguien se apuesta en una cabina | Campanita |
+| Pregunta nueva en pantalla | Arpegio ascendente |
+| Últimos 10 s de las apuestas | Tic de reloj |
+| Verificar | Golpe metálico + pitido; pitido en cada segundo del 3-2-1 |
+| Trampillas | Silbido que cae |
+| Acierto / multiplicador | Arpegio alegre / destellos |
+| Fallo / expulsión | «Trombón triste» / caída con vibrato |
+| Victoria / derrota | Fanfarria / trombón triste largo |
+
+Música: un bucle por bloque de dificultad (preguntas 1–5 tranquila a 100 ppm, 6–10 con ritmo a 116 ppm, 11–15 tensa a 132 ppm), con fundido entre pistas; silencio en la sala de espera y en los resultados. Volúmenes en `Feedback/Config/FeedbackLibrary.asset`; la música va baja para no tapar la conversación. Sustituibles por audio definitivo en el acabado. Sin AudioMixer por ahora (Unity no permite crearlo por código); pendiente con el ajuste de volumen en opciones.
 
 El presentador es exclusivamente textual. La voz de jugadores por micrófono es un sistema de comunicación, no un recurso de voz del presentador. Mantener efectos y música por debajo de la conversación.
 
