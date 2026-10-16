@@ -4,7 +4,9 @@
     "references": [
         "Trivias.Shared",
         "Trivias.Shared.Editor",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [
         "Editor"

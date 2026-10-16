@@ -52,4 +52,4 @@ Tienda: compras cosméticas, confirmación de precio, objeto ya adquirido y sald
 
 ## Pendientes
 
-Ubicación de textos (cámara en tercera persona confirmada), asignación de controles, tamaño de tipografía, idiomas y compatibilidad de entrada. Validar legibilidad del texto más largo y usar letras/formas además del color. La interfaz no debe añadir sistemas de señalar ni votación obligatoria.
+Tipografías del plató decididas: Lilita One (titulares) y Poppins (texto), ver [LEVEL](LEVEL.md). Menús y HUD siguen con la fuente por defecto. Pendientes: ubicación de textos (cámara en tercera persona confirmada), asignación de controles, tamaño de tipografía, idiomas y compatibilidad de entrada. Validar legibilidad del texto más largo y usar letras/formas además del color. La interfaz no debe añadir sistemas de señalar ni votación obligatoria.

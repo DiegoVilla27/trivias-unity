@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SelfBetLayout
   m_EditorClassIdentifier: Trivias.SelfBet::Trivias.SelfBet.Data.SelfBetLayout
   _zoneCenters:
-  - {x: -5.351326, y: 0.01, z: 3.5613632}
-  - {x: -2.4449615, y: 0.01, z: 5.9449277}
-  - {x: 1.2973957, y: 0.01, z: 6.295774}
-  - {x: 4.596142, y: 0.01, z: 4.4939384}
+  - {x: -5.9, y: 0.22199999, z: 7.5}
+  - {x: 5.9, y: 0.22199999, z: 7.5}
+  - {x: -5.9, y: 0.22199999, z: 1.9999998}
+  - {x: 5.9, y: 0.22199999, z: 1.9999998}

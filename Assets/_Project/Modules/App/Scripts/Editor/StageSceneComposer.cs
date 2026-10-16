@@ -48,19 +48,12 @@ namespace Trivias.App.Editor
     }
 
     /// <summary>
-    /// Ensambla la escena Stage con instancias de los prefabs. Distribución según LEVEL.md:
-    /// mesa en el centro, cabinas en semicírculo delante, presentador y pantalla detrás.
+    /// Ensambla la escena Stage con instancias de los prefabs, según el plano de <see cref="StageLayout"/> (LEVEL.md):
+    /// pantalla al fondo, mesa en el centro, cabinas en dos filas a los lados y presentador al pie de la pantalla.
     /// </summary>
     public static class StageSceneComposer
     {
         public const string SCENE_PATH = "Assets/_Project/Scenes/Stage.unity";
-
-        private const float BOOTH_RADIUS = 8.5f;
-        private static readonly float[] BoothAngles = { -51f, -17f, 17f, 51f };
-
-        private const int SPAWN_COUNT = 6;
-        private const float SPAWN_SPACING = 1.5f;
-        private const float SPAWN_Z = -4.5f;
 
         public static void Compose(StageScenePrefabs prefabs, SpawnPointSet spawnPoints)
         {
@@ -68,11 +61,12 @@ namespace Trivias.App.Editor
 
             CreateLighting();
             var environment = Place(prefabs.Environment, Vector3.zero, 0f);
-            var table = Place(prefabs.Table, Vector3.zero, 0f);
-            var exchange = Place(prefabs.ExchangeStation, new Vector3(-3.4f, 0f, -0.5f), 180f);
-            Place(prefabs.VerifyButton, new Vector3(3.4f, 0f, -0.5f), 180f);
-            // A un lado de la pantalla, mirando al centro: ni él ni su viñeta tapan la pregunta.
-            Place(prefabs.Presenter, new Vector3(12.5f, 0f, 12f), 225f);
+            var table = Place(prefabs.Table, StageLayout.TablePosition, 0f);
+            var exchange = Place(prefabs.ExchangeStation, StageLayout.ExchangePosition, StageLayout.STATIONS_YAW);
+            Place(prefabs.VerifyButton, StageLayout.VerifyButtonPosition, StageLayout.STATIONS_YAW);
+            // En el centro, entre la pantalla y las estaciones, mirando a la zona de inicio. A pie de suelo y con la
+            // viñeta al lado de la cabeza: ni él ni lo que dice tapan la pregunta.
+            Place(prefabs.Presenter, StageLayout.PresenterSpot, StageLayout.PRESENTER_YAW);
             var booths = PlaceBooths(prefabs.Booths);
             WriteSpawnPoints(spawnPoints);
             ConnectMoney(table, exchange, booths);
@@ -111,11 +105,8 @@ namespace Trivias.App.Editor
             var instances = new GameObject[booths.Count];
             for (var i = 0; i < booths.Count; i++)
             {
-                var angle = BoothAngles[i];
-                var radians = angle * Mathf.Deg2Rad;
-                var position = new Vector3(Mathf.Sin(radians), 0f, Mathf.Cos(radians)) * BOOTH_RADIUS;
-                // El frente de la cabina (+Z local) mira al centro del plató.
-                instances[i] = Place(booths[i], position, angle + 180f);
+                // A los lados, como la cuadrícula de la pantalla; el frente de la cabina (+Z local) mira al centro.
+                instances[i] = Place(booths[i], StageLayout.BoothPosition(i), StageLayout.BoothYaw(i));
                 instances[i].transform.SetParent(parent, true);
             }
             return instances;
@@ -134,8 +125,8 @@ namespace Trivias.App.Editor
             var trayYaw = new float[booths.Length];
             for (var i = 0; i < booths.Length; i++)
             {
-                var surface = booths[i].transform.Find(BoothPrefabBuilder.TRAY_SURFACE);
-                traySurfaces[i] = surface.position + Vector3.up * (surface.lossyScale.y * 0.5f);
+                // «Surface» marca el suelo de la bandeja del mostrador: ahí se apila el dinero.
+                traySurfaces[i] = booths[i].transform.Find(BoothPrefabBuilder.TRAY_SURFACE).position;
                 trayYaw[i] = booths[i].transform.eulerAngles.y;
 
                 var tray = booths[i].transform.Find(BoothPrefabBuilder.TRAY);
@@ -148,12 +139,12 @@ namespace Trivias.App.Editor
 
         private static void WriteSpawnPoints(SpawnPointSet spawnPoints)
         {
-            var positions = new Vector3[SPAWN_COUNT];
-            var yaws = new float[SPAWN_COUNT];
-            var startX = -(SPAWN_COUNT - 1) * SPAWN_SPACING * 0.5f;
-            for (var i = 0; i < SPAWN_COUNT; i++)
+            var positions = new Vector3[StageLayout.SPAWN_COUNT];
+            var yaws = new float[StageLayout.SPAWN_COUNT];
+            var startX = -(StageLayout.SPAWN_COUNT - 1) * StageLayout.SPAWN_SPACING * 0.5f;
+            for (var i = 0; i < StageLayout.SPAWN_COUNT; i++)
             {
-                positions[i] = new Vector3(startX + i * SPAWN_SPACING, 0.05f, SPAWN_Z);
+                positions[i] = new Vector3(startX + i * StageLayout.SPAWN_SPACING, 0.05f, StageLayout.SPAWN_Z);
                 yaws[i] = 0f;
             }
 
@@ -227,8 +218,8 @@ namespace Trivias.App.Editor
             var rig = (GameObject)PrefabUtility.InstantiatePrefab(cameraRigPrefab);
             // Vista general del plató hasta que aparece el jugador local.
             var overview = rig.transform.Find("PlayerFollowCamera");
-            overview.SetPositionAndRotation(new Vector3(0f, 9f, -16f),
-                Quaternion.LookRotation(new Vector3(0f, 4f, 8f) - new Vector3(0f, 9f, -16f)));
+            overview.SetPositionAndRotation(StageLayout.OverviewPosition,
+                Quaternion.LookRotation(StageLayout.OverviewTarget - StageLayout.OverviewPosition));
             var mainCamera = rig.transform.Find("MainCamera");
             mainCamera.SetPositionAndRotation(overview.position, overview.rotation);
         }

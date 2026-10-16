@@ -79,8 +79,6 @@ namespace Trivias.Feedback.Editor
         }
 
         /// <summary>Pantalla grande del plató (StageEnvironmentPrefabBuilder): centro y medio ancho.</summary>
-        private static readonly Vector3 ScreenCenter = new(0f, 7.6f, 15f);
-        private const float SCREEN_HALF_WIDTH = 7.1f;
 
         private static readonly Color[] PartyColors =
         {
@@ -105,7 +103,8 @@ namespace Trivias.Feedback.Editor
             for (var side = 0; side < 2; side++)
             {
                 var sign = side == 0 ? -1f : 1f;
-                var position = new Vector3(sign * (SCREEN_HALF_WIDTH + 0.7f), ScreenCenter.y - 3.4f, ScreenCenter.z - 0.4f);
+                var screen = StageLayout.ScreenCenter;
+                var position = new Vector3(sign * (StageLayout.SCREEN_FRAME_HALF_WIDTH + 0.7f), screen.y - 3.4f, screen.z - 0.4f);
                 // Hacia arriba, un poco hacia el centro y hacia el público.
                 var direction = new Vector3(-sign * 0.35f, 1f, -0.3f);
                 var burst = CreateParticles(root.transform, side == 0 ? "CorrectLeft" : "CorrectRight", position,
@@ -130,7 +129,8 @@ namespace Trivias.Feedback.Editor
                 bursts[side] = burst;
             }
 
-            var rain = CreateParticles(root.transform, "VictoryRain", new Vector3(0f, 12f, 0f), Quaternion.identity, material, GoldColors);
+            var rain = CreateParticles(root.transform, "VictoryRain", StageLayout.RoomCenter + Vector3.up * (StageLayout.CEILING_HEIGHT - 0.4f),
+                Quaternion.identity, material, GoldColors);
             var rainMain = rain.main;
             rainMain.loop = true;
             rainMain.duration = 5f;
@@ -146,7 +146,7 @@ namespace Trivias.Feedback.Editor
 
             var rainShape = rain.shape;
             rainShape.shapeType = ParticleSystemShapeType.Box;
-            rainShape.scale = new Vector3(42f, 0.2f, 42f); // Todo el suelo del plató (44 m).
+            rainShape.scale = new Vector3(StageLayout.InnerHalfWidth * 2f, 0.2f, StageLayout.Depth); // Todo el suelo del plató.
 
             var confetti = root.AddComponent<StageConfetti>();
             SerializedWiring.Set(confetti, "_match", match);
@@ -199,7 +199,7 @@ namespace Trivias.Feedback.Editor
 
         // ---- Podio de la victoria ----
 
-        public static readonly Vector3 PodiumPosition = new(0f, 0f, 12f);
+        public static Vector3 PodiumPosition => StageLayout.PodiumPosition;
         public const float PODIUM_TOP = 1.35f;
         private const float PLAQUE_SPACING = 1.5f;
 
@@ -263,11 +263,9 @@ namespace Trivias.Feedback.Editor
         // ---- Ambiente de luz ----
 
         public const string MOODS_PATH = MODULE_ROOT + "/Config/StageMoodConfig.asset";
-        private static readonly Vector3 SpotTarget = new(0f, 0f, 5f);
-        private static readonly Vector3[] SpotPositions =
-        {
-            new(-10f, 11f, 1f), new(10f, 11f, 1f), new(-6f, 11.5f, 12f), new(6f, 11.5f, 12f),
-        };
+        // Colgados de las vigas del techo del plató (StageLayout): la luz sale de un foco sujeto con su abrazadera.
+        private static Vector3 SpotTarget => StageLayout.SpotTarget;
+        private static Vector3[] SpotPositions => StageLayout.SpotPositions;
 
         /// <summary>Valores de fábrica de cada ambiente (luego se ajustan en el asset sin tocar código).</summary>
         public static StageMoodConfig BuildMoods()
@@ -292,7 +290,8 @@ namespace Trivias.Feedback.Editor
             return config;
         }
 
-        public static GameObject BuildStageLighting(MatchRuntime match, StageMoodConfig moods)
+        /// <param name="fixtureModel">Modelo de foco que se cuelga en cada luz (lo elige App; puede ser null).</param>
+        public static GameObject BuildStageLighting(MatchRuntime match, StageMoodConfig moods, GameObject fixtureModel)
         {
             var root = new GameObject("StageLighting");
             var spots = new Light[SpotPositions.Length];
@@ -310,6 +309,16 @@ namespace Trivias.Feedback.Editor
                 spot.color = moods.For(StageMood.Lobby).SpotColor;
                 spot.intensity = moods.For(StageMood.Lobby).SpotIntensity;
                 spots[i] = spot;
+                if (fixtureModel != null)
+                {
+                    // El foco mira a +Z como la luz; se adelanta un poco para que la luz salga de su lente.
+                    var fixture = (GameObject)PrefabUtility.InstantiatePrefab(fixtureModel, go.transform);
+                    fixture.name = "Fixture";
+                    fixture.transform.SetLocalPositionAndRotation(new Vector3(0f, -0.6f, -0.3f), Quaternion.identity);
+                    fixture.transform.localScale = Vector3.one * 1.5f;
+                    foreach (var renderer in fixture.GetComponentsInChildren<Renderer>())
+                        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                }
             }
 
             var lighting = root.AddComponent<StageLighting>();

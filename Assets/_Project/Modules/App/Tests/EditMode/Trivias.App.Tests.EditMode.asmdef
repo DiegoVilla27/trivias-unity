@@ -13,7 +13,10 @@
         "Trivias.Feedback",
         "Trivias.Menu",
         "Trivias.Menu.Editor",
-        "Trivias.Spectator"
+        "Trivias.Spectator",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"

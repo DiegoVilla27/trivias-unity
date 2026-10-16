@@ -10,18 +10,28 @@ Un único plató 3D bonito, legible y reutilizable para las 15 preguntas. El hum
 
 | Zona | Función | Prototipo |
 | --- | --- | --- |
-| Mesa central | Dinero inicial y retorno entre preguntas | Mesa sencilla con superficie clara |
-| Estación de cambio | Conversión manual de denominaciones | Interacción junto a la mesa |
-| Cuatro cabinas | Respuestas, bandejas y zona de apuesta personal | Una cabina base reutilizada cuatro veces |
-| Botón de verificar | Bloqueo inmediato y cuenta atrás | Objeto separado de las bandejas |
-| Presentación de pregunta | Texto y cuatro opciones | Pantalla grande del plató (14 × 7,4 m) detrás de las cabinas, elevada para que nada la tape desde la zona de inicio |
-| Presentador | Personaje visual y comentarios de texto | A un lado de la pantalla; habla en una viñeta sobre su cabeza; sin voz |
-| Tubos de expulsión | Decoración que comunica el peligro | Solo decorativos; el jugador no entra en ellos |
+| Mesa central | Dinero inicial y retorno entre preguntas | Modelo de mesa redonda (tablero a 0,95 m) en el centro del plató, sobre un disco oscuro con aro dorado |
+| Estación de cambio | Conversión manual de denominaciones | Máquina de rodillo sobre un pedestal, al pie de la pantalla a la izquierda del presentador |
+| Cuatro cabinas | Respuestas, bandejas y zona de apuesta personal | Modelo de cabina por letra (escala 1,3: 2,8 m de alto); la respuesta se ve en su hueco y el dinero en la bandeja del mostrador. La zona de apuesta es la plataforma redonda con barandilla (modelo, 2,6 m de ancho, 22 cm de alto, se sube andando) delante de la cabina, con la entrada hacia el centro y el color de la respuesta |
+| Botón de verificar | Bloqueo inmediato y cuenta atrás | Modelo con placa «VERIFICAR»; la tapa roja se hunde al cerrar |
+| Presentación de pregunta | Texto y cuatro opciones | Pantalla del plató al fondo y en el centro (modelo a escala 1,12: 16,6 × 8,6 m con marco, de 2,1 a 10,7 m de alto); fondo oscuro translúcido sobre su resplandor y bombillas debajo |
+| Presentador | Personaje visual y comentarios de texto | En el centro, entre la pantalla y las dos estaciones, a pie de suelo sobre una marca dorada y mirando a la zona de inicio. Habla en una viñeta (4,6 × 1,7 m) al lado de su cabeza, a la altura de los ojos, que gira hacia la cámara; ni él ni la viñeta tapan la pantalla desde la zona de inicio; sin voz |
+| Tubos del dinero | Decoración que comunica a dónde va el dinero perdido | Uno por cabina: sale del techo del mueble, se retira hacia la pared y sube hasta el techo |
+| Tubos del concursante | Decoración de la expulsión | Uno por plataforma: cuelga del techo con su boca dorada a 3,4 m (por encima de la cabeza, aun saltando); el expulsado sale disparado hacia arriba y entra por él |
 | Podio de resultados | Victoria y cheque gigante | Encuadre reutilizando el plató |
 
 ## Distribución propuesta
 
-Mesa en el centro y cabinas en semicírculo frente a ella. Presentador y pantalla detrás de las cabinas; botón cerca de la mesa, separado de coger dinero y convertir. Es una propuesta de bloqueo inicial, pendiente de pruebas con la cámara en tercera persona.
+Implementada (plano único en `Shared/Scripts/Editor/StageLayout.cs`, que usan todos los constructores). Sala compacta de 25 × 29,5 m y 11 m de alto, sin espacio muerto. +Z es el fondo:
+
+- Pantalla al fondo y en el centro (z = 13,6); telón detrás.
+- Mesa en el centro (z = 4,75).
+- Al pie de la pantalla (z = 9,39, colocados por el usuario): estación de cambio a la izquierda (x = −2,7) y botón de verificar a la derecha (x = 2,7), mirando a la zona de inicio; el presentador en medio (0; 11,3).
+- Cabinas en dos filas a los lados mirando al centro, como la cuadrícula de la pantalla: A y B al fondo (z = 7,5), C y D delante (z = 2); A y C a la izquierda (x = −8,6), B y D a la derecha (x = 8,6). Plataformas de apuesta a 2,7 m delante de cada una (x = ±5,9).
+- El pasillo central queda libre: nada tapa la pantalla desde la zona de inicio.
+- Zona de inicio en fila (z = −2,5); detrás, la barandilla del público (z = −7) y tres gradas.
+- Esquina derecha junto a la pantalla (9,6; 11,6): plataforma redonda con escalera y una cámara de estudio encima.
+- Podio de victoria en el centro, delante de la mesa (z = 0,6), entre ella y la zona de inicio.
 
 - Cada cabina tiene identificador A/B/C/D y texto de respuesta, además de color. No depender solo del color.
 - Bandeja de dinero y zona de apuesta deben distinguirse. La zona de apuesta está delante de la cabina y admite hasta seis jugadores.
@@ -33,11 +43,15 @@ Mesa en el centro y cabinas en semicírculo frente a ella. Presentador y pantall
 - No fijar metros definitivos hasta probar escala del personaje y cámara.
 - Las distancias deben permitir el transporte dentro del tiempo por pregunta (90 s) con margen.
 
+Decorado (concepto-01, implementado): suelo de baldosas (modelo, a ras del suelo, con una colisión plana), aro dorado de incrustaciones alrededor de la mesa y línea dorada delante del público. Telón rojo con bambalinas, cortinas recogidas, columnas y altavoces junto a la pantalla; paredes con paneles, columnas, rejillas y altavoces (también detrás del público). Techo con paneles (cara lisa con marco dorado hacia abajo), dos líneas de vigas (z = −1 y z = 6, por encima de la línea de visión de la pantalla) con focos pequeños y los cuatro focos de verdad sujetos con su abrazadera (las luces del ambiente salen de ellos). Tres cámaras de estudio en el suelo y otra sobre una plataforma con escalera (borde curvo de escenario); público en tres gradas detrás de una barandilla dorada con colisión de pared a pared; marca dorada del presentador.
+
+Tipografías del plató (licencia OFL, `Shared/UI/Fonts`): Lilita One para titulares (logo TRIVIAS, cabecera de la pantalla, cheque, carteles «CAMBIO» y «PRESENTADOR») y Poppins SemiBold, con Poppins ExtraBold como negrita real, para preguntas, opciones, viñeta, nombres y totales. Sus tablas de caracteres (Latin-1 y puntuación tipográfica) se generan en edición y no cambian al jugar; la pregunta y las opciones se ajustan de tamaño si son largas. Posprocesado: brillo de bombillas y focos, viñeta suave y algo más de color.
+
 ## Ciclo visual
 
 Durante apuestas, se distinguen objetos disponibles, valores de bandejas y jugadores comprometidos. Al verificar, señal de bloqueo y cuenta atrás visible. En resolución, respuesta correcta claramente marcada y expulsiones breves: el personaje sale disparado hacia arriba y pasa a espectador (su cámara sigue después a un activo). Entre rondas, el dinero vuelve a la mesa.
 
-Bloques 1–5, 6–10 y 11–15 cambian iluminación, música y ambiente, usando la misma geometría y reglas (implementado: focos cálidos, morados y rojos; el plató se oscurece en las difíciles). Victoria: podio dorado centrado delante de la pantalla (z ≈ 12, entre cabinas y pantalla, por debajo de la línea de visión) y cheque gigante en la propia pantalla. Todos esos cambios cuentan dentro del tiempo total de partida.
+Bloques 1–5, 6–10 y 11–15 cambian iluminación, música y ambiente, usando la misma geometría y reglas (implementado: focos cálidos, morados y rojos; el plató se oscurece en las difíciles). Victoria: podio dorado centrado delante de la mesa (z = 0,6) y cheque gigante en la propia pantalla. Todos esos cambios cuentan dentro del tiempo total de partida.
 
 ## Recursos y comprobación
 

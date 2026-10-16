@@ -12,20 +12,15 @@ namespace Trivias.Money.Editor
 {
     /// <summary>
     /// Construye en tiempo de edición todo lo del dinero: configuración, objetos visibles (fajo, bolsa, lingote)
-    /// con primitivas, el prefab de red de la sesión y los componentes de mesa y bandejas.
+    /// con los modelos del módulo, el prefab de red de la sesión y los componentes de mesa y bandejas.
     /// </summary>
     public static class MoneyBuilder
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Money";
         private const string CONFIG = MODULE_ROOT + "/Config";
         private const string PREFABS = MODULE_ROOT + "/Prefabs";
-        private const string MATERIALS = MODULE_ROOT + "/Materials";
         public const string SESSION_PREFAB_PATH = PREFABS + "/MoneySession.prefab";
 
-        private static readonly Color BanknoteGreen = new(0.42f, 0.66f, 0.42f);
-        private static readonly Color PaperBand = new(0.93f, 0.86f, 0.66f);
-        private static readonly Color Burlap = new(0.78f, 0.64f, 0.45f);
-        private static readonly Color Rope = new(0.45f, 0.30f, 0.18f);
 
         public static MoneyConfig Config() => EditorAssets.GetOrCreateAsset<MoneyConfig>($"{CONFIG}/MoneyConfig.asset");
         public static MoneyLayout Layout() => EditorAssets.GetOrCreateAsset<MoneyLayout>($"{CONFIG}/MoneyLayout.asset");
@@ -90,40 +85,26 @@ namespace Trivias.Money.Editor
             SerializedWiring.Set(target, "_totalLabel", totalLabel);
         }
 
-        // ---- Objetos visibles: pivote en la base para apilarlos ----
+        // ---- Objetos visibles (modelos del módulo): pivote en la base para apilarlos ----
 
-        private static GameObject BuildBundle()
-        {
-            var notes = Material("Money_Banknotes", BanknoteGreen, 0.2f);
-            var band = Material("Money_Band", PaperBand, 0.2f);
-            var root = NewVisual("Bundle");
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Notes", root.transform, new Vector3(0f, 0.035f, 0f), new Vector3(0.30f, 0.07f, 0.15f), notes, GameLayers.MONEY, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Band", root.transform, new Vector3(0f, 0.035f, 0f), new Vector3(0.07f, 0.074f, 0.154f), band, GameLayers.MONEY, false, keepCollider: false);
-            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/Bundle.prefab");
-        }
+        private const string MODELS = MODULE_ROOT + "/Models";
 
-        private static GameObject BuildBag()
-        {
-            var cloth = Material("Money_Burlap", Burlap, 0.1f);
-            var rope = Material("Money_Rope", Rope, 0.1f);
-            var root = NewVisual("Bag");
-            EditorAssets.CreatePrimitive(PrimitiveType.Sphere, "Body", root.transform, new Vector3(0f, 0.13f, 0f), new Vector3(0.28f, 0.26f, 0.28f), cloth, GameLayers.MONEY, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, "Neck", root.transform, new Vector3(0f, 0.28f, 0f), new Vector3(0.09f, 0.035f, 0.09f), rope, GameLayers.MONEY, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Sphere, "Top", root.transform, new Vector3(0f, 0.33f, 0f), new Vector3(0.12f, 0.07f, 0.12f), cloth, GameLayers.MONEY, false, keepCollider: false);
-            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/Bag.prefab");
-        }
+        /// <summary>Fajo: el modelo mide 10 cm de alto; a 0,8 cabe en cada capa de la pila (9 cm).</summary>
+        private static GameObject BuildBundle() => BuildVisual("Bundle", 0.8f);
 
-        private static GameObject BuildGoldBar()
+        private static GameObject BuildBag() => BuildVisual("Bag", 0.9f);
+
+        private static GameObject BuildGoldBar() => BuildVisual("GoldBar", 0.8f);
+
+        private static GameObject BuildVisual(string name, float scale)
         {
-            var gold = Material("Money_Gold", StagePalette.Gold, 0.85f, 1f);
-            var root = NewVisual("GoldBar");
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Bar", root.transform, new Vector3(0f, 0.04f, 0f), new Vector3(0.28f, 0.08f, 0.12f), gold, GameLayers.MONEY, false, keepCollider: false);
-            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/GoldBar.prefab");
+            var root = NewVisual(name);
+            // No son estáticos (se mueven) ni proyectan sombra: hay muchos y son pequeños.
+            EditorAssets.PlaceModel($"{MODELS}/{name}/{name}.obj", "Model", root.transform, Vector3.zero, Quaternion.identity,
+                Vector3.one * scale, GameLayers.MONEY, false, castShadows: false);
+            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/{name}.prefab");
         }
 
         private static GameObject NewVisual(string name) => new(name) { layer = GameLayers.MONEY };
-
-        private static Material Material(string name, Color color, float smoothness, float metallic = 0f) =>
-            EditorAssets.GetOrCreateMaterial($"{MATERIALS}/{name}.mat", color, smoothness, metallic);
     }
 }

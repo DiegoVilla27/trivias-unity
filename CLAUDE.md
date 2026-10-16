@@ -7,7 +7,7 @@ Estas reglas se cumplen siempre, sin excepción. Si una regla de `.agents/AGENTS
 - Juego: concurso de trivias cooperativo 2–6 jugadores, PC/Steam. Unity 6 (6000.6) + URP, tercera persona con Cinemachine, Input System, Netcode for GameObjects + Facepunch.Steamworks, voz de Steam enrutada por el host.
 - Diseño: `docs/GDD.md` (referencia principal) y `docs/*.md` en la raíz del repositorio. Bocetos en `docs/bocetos/`.
 - **Documentación siempre al día (regla del usuario):** todo cambio de reglas, contenido, interfaz o arquitectura se refleja en el mismo trabajo en el GDD (con entrada en su historial) y en los docs afectados (`LEVEL`, `PLAYER`, `SISTEMAS`, `CONTENIDO`, `UI_UX`, `RECURSOS`, `DESARROLLO`). Comprobar que los enlaces internos siguen funcionando.
-- Fase actual: **MVP**. Todo el arte son primitivas de Unity (cubo, cilindro, esfera, cápsula, plano) con materiales simples. Única excepción: el personaje `PlayerArmature` de Starter Assets.
+- Fase actual: **MVP**. Desde el 16 de octubre de 2026 el plató y sus objetos usan los modelos 3D de cada módulo (`Modules/*/Models/`: OBJ con materiales URP; los `.glb` no se importan): cabinas y tubos, mesa, botón, estación de cambio, dinero, pantalla y decorado de concepto-01. Lo que aún no tiene modelo (presentador, cosméticos, podio, público, pedestal de la estación) sigue con primitivas. Personaje: `PlayerArmature` de Starter Assets.
 - Agente y skills: `.agents/AGENTS.md` (importado abajo, siempre en contexto) y `.agents/skills/` (enlazadas en `.claude/skills/`, invocables con la herramienta Skill). Antes de trabajar en un área, **cargar la skill correspondiente** (p. ej. `unity-networking-multiplayer`, `unity-camera-systems`, `unity-scriptable-objects`, `unity-performance-profiling`, `unity-core-architecture`).
 
 Instrucciones del agente Unity del proyecto:
@@ -93,9 +93,9 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 
 | Módulo | Contenido | Puede depender de |
 | --- | --- | --- |
-| Shared | Canales de eventos, capas, logger, puntos de aparición, contratos (interacción, jugadores, sala), perfil del jugador (nombre, fichas y compras; reglas del nombre en `PlayerNameRules`), opciones del jugador (`GameSettings`); utilidades de editor (`Shared.Editor`) | — |
+| Shared | Canales de eventos, capas, logger, puntos de aparición, contratos (interacción, jugadores, sala), perfil del jugador (nombre, fichas y compras; reglas del nombre en `PlayerNameRules`), opciones del jugador (`GameSettings`); utilidades de editor (`Shared.Editor`), incluido el plano del plató (`StageLayout`: medidas y posiciones que usan todos los constructores) y sus tipografías (`StageFonts`: Lilita One y Poppins, en `Shared/UI/Fonts`) | — |
 | Networking | NetworkManager, conexión local (Unity Transport), admisión a sala; se publica como `IRoomConnection` | Shared |
-| Player | Concursante: entrada, movimiento, mirada, nombre (lo pide el dueño y lo acepta el host), punto de carga, red | Shared |
+| Player | Concursante: entrada, movimiento, salto, mirada, nombre (lo pide el dueño y lo acepta el host), punto de carga, red | Shared |
 | Interaction | Interactor por cercanía del jugador local y aviso en pantalla | Shared |
 | Money | Libro de cuentas (Logic), sesión en red, objetos visibles con pool, mesa y bandejas interactivas, bloqueo y resolución de rondas | Shared |
 | Questions | Banco de preguntas (JSON en `Content/` importado y validado en edición), historial de preguntas vistas, planificación (bloques, historial del grupo y variedad de categorías) y orden de opciones | Shared |
@@ -112,7 +112,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | Shop | Tienda del vestíbulo, catálogo de cosméticos (primitivas) y presentador que viste a los concursantes | Shared |
 | Feedback | Sonido (efectos y música sintetizados en edición), confeti, podio de la victoria y ambiente de luz por momento | Shared, Match, Money, SelfBet, Questions |
 | Camera (`Trivias.Cameras`) | Rig Cinemachine en tercera persona, captura del ratón | Shared |
-| Booth, Table, Stage | Solo constructores de prefabs (Editor) | Shared (Editor) |
+| Booth, Table, Stage | Solo constructores de prefabs (Editor) con sus modelos; Booth incluye la plataforma de apuesta y los tubos del dinero y del concursante; Stage, el decorado del plató y el volumen de posprocesado | Shared (Editor) |
 
 Comunicación entre módulos sin referencias directas: contratos en `Shared` (`IInteractable`, `ICarrySocket`) y registros/anclajes como ScriptableObject (`InteractableRegistry`, `PlayerAvatarRegistry`, `RoomConnectionRuntime`, `MoneyRuntime`, `MatchRuntime`, `SelfBetRuntime`, `LocalRecords`, `QuestionHistory`). `App` une los módulos en tiempo de edición (p. ej. añade el interactor al concursante y conecta mesa y bandejas con Money). Los objetos de red de la sesión (p. ej. `MoneySession`) los crea el host al abrir la sala.
 | App | Raíz de composición: `Build All`, escena Stage y pruebas de humo. Es el único módulo que conoce a todos | Todos |
@@ -123,7 +123,7 @@ Módulos previstos aún sin crear: `Voice`.
 
 ## 4. Flujo de trabajo con Unity
 
-- **Todo se construye por código en tiempo de edición.** Cada módulo tiene un constructor en `Scripts/Editor/*Builder.cs` que crea sus materiales y prefabs con primitivas. `App/ProjectBuilder` los ejecuta en orden y ensambla `Scenes/Stage.unity`. Los constructores son idempotentes: se pueden repetir sin duplicar nada.
+- **Todo se construye por código en tiempo de edición.** Cada módulo tiene un constructor en `Scripts/Editor/*Builder.cs` que crea sus prefabs con los modelos de su carpeta `Models/` (`EditorAssets.PlaceModel`, con colisiones sencillas de caja o cilindro; los modelos no traen colisiones) o con primitivas. Los modelos son pesados: el decorado lejano no proyecta sombras y todo lo estático se marca para batching. `App/ProjectBuilder` los ejecuta en orden y ensambla `Scenes/Stage.unity`. Los constructores son idempotentes: se pueden repetir sin duplicar nada.
 - No editar a mano prefabs o escenas generados: cambiar el constructor.
 - **La escena siempre debe estar lista para jugar.** `App/AutoBuild` guarda en `Settings/BuildStamp.txt` una huella del código y del contenido; si al compilar en el editor no coincide, reconstruye todo solo. El usuario nunca debería tener que ejecutar Build All. La reconstrucción automática **nunca cambia la escena que el usuario tiene abierta** (`OpenScenesKeeper` la restaura). Para no provocar recompilaciones mientras el usuario trabaja, el código se cambia preferiblemente con Unity cerrado.
 - **Pruebas en cada cambio (regla del usuario, sin excepciones):** todo lo nuevo o modificado lleva pruebas nuevas que lo cubran (lógica en EditMode; comportamiento en juego, escena y textos en PlayMode; distribución del plató en `StageLayoutTests`). Después se ejecuta **la batería completa**, nuevas y anteriores, EditMode y PlayMode, nunca solo las nuevas. Si una prueba antigua falla, se arregla la causa antes de entregar.

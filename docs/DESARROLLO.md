@@ -10,7 +10,7 @@ Mantener configurables las propuestas económicas: capital 100.000, denominacion
 
 ## Hitos propuestos
 
-MVP: todo el arte con primitivas de Unity (cubos, cilindros, esferas, cápsulas). Única excepción: el personaje de Starter Assets.
+MVP: el plató y sus objetos usan los modelos 3D de cada módulo desde el 16 de octubre de 2026; lo que aún no tiene modelo (presentador, cosméticos, podio, público) sigue con primitivas. Personaje: Starter Assets.
 
 | Orden | Entregable | Criterio para avanzar |
 | --- | --- | --- |
@@ -33,7 +33,10 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | Hito | Estado |
 | --- | --- |
 | 0 Red local | Hecho: Netcode for GameObjects, salas de 2 a 6, menú principal y sala de espera |
-| 1 Plató y personaje | Hecho: plató con primitivas, tercera persona, interacción por cercanía, dinero |
+| 1 Plató y personaje | Hecho: tercera persona, interacción por cercanía, dinero |
+| Plató con modelos | Hecho: sala compacta (plano en `StageLayout`) con cabinas a los lados, plataformas de apuesta, tubos del dinero y del concursante, mesa, botón, estación, dinero y pantalla con sus modelos; suelo de baldosas y decorado de concepto-01 (telón, columnas, paredes, techo con vigas y focos, cámaras, público, tarima del presentador) y brillo de bombillas. Pendiente: modelos de presentador, podio y cosméticos; medir rendimiento en equipos modestos |
+| Salto | Hecho: Espacio, 0,9 m, con la animación de Starter Assets |
+| Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta junto a la cabeza; Lilita One y Poppins en el plató. Pendiente: tipografías de menús y HUD |
 | 2 Una pregunta completa | Hecho: pantalla grande, tiempo límite, verificar, cuenta atrás, resolución |
 | 3 Cambio y comodines | Hecho: estación de cambio, comodín con zona, multiplicador y expulsión |
 | 4 Partida de 15 preguntas | Hecho: victoria/derrota, resultados, fichas por tramo, volver a jugar, presentador |

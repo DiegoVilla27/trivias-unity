@@ -5,6 +5,7 @@ using Trivias.Shared.Physics;
 using Unity.Cinemachine;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Trivias.Cameras.Editor
 {
@@ -28,6 +29,8 @@ namespace Trivias.Cameras.Editor
             unityCamera.farClipPlane = 200f;
             unityCamera.clearFlags = CameraClearFlags.SolidColor;
             unityCamera.backgroundColor = new Color(0.04f, 0.04f, 0.09f);
+            // Posprocesado del plató (brillo de bombillas y focos, viñeta): lo define el volumen del módulo Stage.
+            unityCamera.GetUniversalAdditionalCameraData().renderPostProcessing = true;
             mainCamera.AddComponent<AudioListener>();
             mainCamera.AddComponent<CinemachineBrain>();
 

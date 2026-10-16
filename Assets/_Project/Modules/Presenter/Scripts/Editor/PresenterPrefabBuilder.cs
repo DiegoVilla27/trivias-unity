@@ -28,8 +28,13 @@ namespace Trivias.Presenter.Editor
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/Presenter.prefab";
         public const string SESSION_PREFAB_PATH = MODULE_ROOT + "/Prefabs/PresenterSession.prefab";
         public const string BUBBLE = "Bubble";
-        public const float BUBBLE_HEIGHT = 4.3f;
-        public static readonly Vector2 BubbleSize = new(7f, 2.6f);
+        /// <summary>
+        /// La viñeta sale al lado de la cabeza (no encima): el presentador está al pie de la pantalla y así ni él ni lo que
+        /// dice tapan la pregunta. Gira hacia la cámara, de modo que siempre queda a la derecha de su cabeza.
+        /// </summary>
+        public const float BUBBLE_HEIGHT = 1.55f;
+        public static readonly Vector2 BubbleSize = new(4.6f, 1.7f);
+        private const float BUBBLE_GAP = 0.5f;
         private const string CONFIG = MODULE_ROOT + "/Config";
         private const string CONTENT_PATH = MODULE_ROOT + "/Content/phrases_es.json";
 
@@ -51,25 +56,32 @@ namespace Trivias.Presenter.Editor
             EditorAssets.CreatePrimitive(PrimitiveType.Sphere, "Hair", t, new Vector3(0f, 2.1f, -0.08f), new Vector3(0.95f, 0.5f, 0.85f), hair, layer, false, keepCollider: false);
             EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Moustache", t, new Vector3(0f, 1.72f, 0.43f), new Vector3(0.4f, 0.08f, 0.06f), hair, layer, false, keepCollider: false);
 
-            EditorAssets.CreateWorldText("Label", t, "PRESENTADOR", 2.5f, Color.white,
-                new Vector3(0f, 2.75f, 0f), Quaternion.Euler(0f, 180f, 0f), new Vector2(2.5f, 0.5f));
+            var label = EditorAssets.CreateWorldText("Label", t, "PRESENTADOR", 2.6f, StagePalette.Gold,
+                new Vector3(0f, 2.62f, 0f), Quaternion.Euler(0f, 180f, 0f), new Vector2(2.8f, 0.35f), StageFonts.Display());
+            label.characterSpacing = 3f;
+            label.textWrappingMode = TextWrappingModes.NoWrap;
 
             // Viñeta sobre la cabeza (GDD 9): el presentador solo se comunica por aquí. Siempre de cara a la cámara.
             var bubbleMaterial = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Bubble.mat",
                 new Color(0.97f, 0.96f, 0.92f), 0.2f, emission: new Color(0.45f, 0.45f, 0.43f));
             var bubble = EditorAssets.CreateEmpty(BUBBLE, t, new Vector3(0f, BUBBLE_HEIGHT, 0f));
             bubble.AddComponent<Billboard>();
-            // El texto se lee mirando a su +Z: el fondo va detrás (+Z) y la punta hacia la cabeza.
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Background", bubble.transform, new Vector3(0f, 0f, 0.06f),
+            // El texto se lee mirando a su +Z: el fondo va detrás (+Z). La viñeta, a un lado de la cabeza, con la punta
+            // hacia ella.
+            var side = BubbleSize.x * 0.5f + BUBBLE_GAP;
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Background", bubble.transform, new Vector3(side, 0f, 0.06f),
                 new Vector3(BubbleSize.x, BubbleSize.y, 0.05f), bubbleMaterial, layer, false, keepCollider: false);
             var tail = EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Tail", bubble.transform,
-                new Vector3(0f, -BubbleSize.y * 0.5f - 0.15f, 0.06f), new Vector3(0.45f, 0.45f, 0.05f), bubbleMaterial, layer, false,
+                new Vector3(BUBBLE_GAP - 0.05f, 0.1f, 0.06f), new Vector3(0.42f, 0.42f, 0.05f), bubbleMaterial, layer, false,
                 keepCollider: false);
             tail.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
 
-            var text = EditorAssets.CreateWorldText("Text", bubble.transform, string.Empty, 4.4f, new Color(0.08f, 0.08f, 0.18f),
-                Vector3.zero, Quaternion.identity, new Vector2(BubbleSize.x - 0.5f, BubbleSize.y - 0.3f));
+            var text = EditorAssets.CreateWorldText("Text", bubble.transform, string.Empty, 3.4f, new Color(0.08f, 0.08f, 0.18f),
+                new Vector3(side, 0f, 0f), Quaternion.identity, new Vector2(BubbleSize.x - 0.4f, BubbleSize.y - 0.25f));
             text.fontStyle = FontStyles.Bold;
+            text.enableAutoSizing = true;
+            text.fontSizeMin = 1.6f;
+            text.fontSizeMax = 3.4f;
 
             // La vista vive en la raíz (siempre activa); la viñeta es lo que se muestra u oculta.
             var speech = root.AddComponent<PresenterLineView>();

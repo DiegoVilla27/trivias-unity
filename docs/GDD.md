@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.13 — 313 preguntas con cálculo mental, historial de preguntas vistas, 104 frases del presentador y nombre del jugador.
+- Versión: 0.16 — presentador al pie de la pantalla entre las estaciones, y tipografías del plató.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -397,6 +397,28 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.16 — 16 de octubre de 2026
+
+- Nuevo [cuerpo base modular del concursante](modelado/player/README.md), modelado localmente sin vestuario, cabello ni zapatos, con materiales y texturas. Asset independiente; su rig, animación e integración en el prefab quedan pendientes.
+
+- Estación de cambio y botón de verificar al pie de la pantalla, a los lados (posición elegida por el usuario en el editor).
+- El presentador pasa al centro, entre la pantalla y las dos estaciones, a pie de suelo; su viñeta sale al lado de la cabeza para no tapar la pregunta. La tarima de la esquina pasa a ser una plataforma de cámara.
+- El podio de la victoria sube delante de la mesa.
+- Tipografías del plató: Lilita One para titulares y Poppins para el texto (licencia OFL).
+
+### Versión 0.15 — 16 de octubre de 2026
+
+- Plató compacto (25 × 29,5 × 11 m, antes 44 × 44 × 13) con la distribución en un plano único: pantalla al fondo, mesa en el centro, cabinas en dos filas a los lados como la cuadrícula de la pantalla (A y B al fondo, C y D delante) y pasillo central libre.
+- Plataforma de apuesta con barandilla (modelo) delante de cada cabina, con el color de la respuesta.
+- Dos tubos por cabina: el del dinero (del techo del mueble al techo del plató) y el del concursante (cuelga sobre la plataforma; el expulsado entra por él).
+- Suelo de baldosas, paneles de techo del derecho, abrazaderas de los focos y decorado recolocado sin espacio muerto.
+- Los concursantes pueden saltar (Espacio).
+
+### Versión 0.14 — 16 de octubre de 2026
+
+- El plató usa los modelos 3D: cabinas A–D (la respuesta se ve en su hueco y el dinero en la bandeja del mostrador), tubos por piezas (hasta el techo en las cabinas de los lados; arco bajo en las del centro para no tapar la pantalla), mesa, botón con su tapa que se hunde, estación de cambio, fajo, bolsa, lingote y pantalla con marco dorado.
+- Decorado según concepto-01: telón rojo, columnas, paneles, altavoces, vigas con focos (las luces salen de ellos), cámaras de estudio, público en gradas tras una barandilla y tarima con escalera para el presentador. Brillo de bombillas con posprocesado.
 
 ### Versión 0.13 — 16 de octubre de 2026
 

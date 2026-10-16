@@ -3,12 +3,15 @@ using System.Linq;
 using NUnit.Framework;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Trivias.App.Tests
 {
     /// <summary>
     /// Comprueba la distribución del plató en la escena generada: la pantalla de preguntas es grande y nada
-    /// (cabinas, tubos, textos, mesa, botón, presentador) la tapa desde las zonas de inicio.
+    /// (cabinas, tubos, textos, mesa, botón, presentador) la tapa desde las zonas de inicio; los objetos usan sus
+    /// modelos y el decorado de concepto-01 está montado.
     /// </summary>
     public sealed class StageLayoutTests
     {
@@ -80,26 +83,77 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void PresenterBubble_DoesNotOverlapTheScreen()
+        public void PresenterBubble_DoesNotCoverTheQuestionOrOptions()
         {
+            // La viñeta gira hacia la cámara: se comprueba con una caja que la envuelve en cualquier giro.
             var bubble = Find("Presenter/Bubble/Background").transform;
-            var bubbleLeftEdge = bubble.position.x - bubble.lossyScale.x * 0.5f;
-            var screenHalfWidth = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds.extents.x;
-            Assert.That(bubbleLeftEdge, Is.GreaterThan(screenHalfWidth), "La viñeta del presentador no debe tapar la pantalla.");
+            var radius = bubble.lossyScale.x * 0.5f;
+            var box = new Bounds(bubble.position, new Vector3(radius * 2f, bubble.lossyScale.y, radius * 2f));
+            var screen = Find(SCREEN).transform.position;
+            var problems = new List<string>();
+            foreach (var spawn in SpawnPositions())
+            {
+                var eye = spawn + Vector3.up * EYE_HEIGHT;
+                for (var x = -6.8f; x <= 6.81f; x += 1.7f)
+                {
+                    foreach (var y in new[] { -2.9f, -1.55f, 0.05f, 1.75f, 3.1f })
+                    {
+                        var target = screen + new Vector3(x, y, -0.3f);
+                        var direction = target - eye;
+                        if (box.IntersectRay(new Ray(eye, direction.normalized), out var distance) && distance < direction.magnitude)
+                            problems.Add($"Desde {spawn}: tapa ({x:0.0}, {y:0.0}).");
+                    }
+                }
+            }
+            Assert.That(problems, Is.Empty, string.Join("\n", problems));
         }
 
         [Test]
-        public void Presenter_StandsBesideTheScreen()
+        public void Presenter_StandsBetweenTheStationsAndTheScreen_WithoutCoveringIt()
         {
             var presenter = Find("Presenter").transform.position;
-            var screenHalfWidth = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds.extents.x;
-            Assert.That(Mathf.Abs(presenter.x), Is.GreaterThan(screenHalfWidth), "El presentador no debe estar delante de la pantalla.");
+            var exchange = Find("ExchangeStation").transform.position;
+            var button = Find("VerifyButton").transform.position;
+            var frame = BoundsOf(Find($"{SCREEN}/Frame"));
+            Assert.That(presenter.x, Is.EqualTo((exchange.x + button.x) * 0.5f).Within(0.05f), "En medio de cambio y verificar.");
+            Assert.That(presenter.z, Is.GreaterThan(Mathf.Max(exchange.z, button.z) + 1f).And.LessThan(frame.min.z - 0.5f),
+                "Entre las estaciones y la pantalla.");
+            Assert.That(Find($"{ENVIRONMENT}/PresenterMark").transform.position.x, Is.EqualTo(presenter.x).Within(0.05f), "Sobre su marca dorada.");
+
+            // Ni su cuerpo ni su cartel tapan el texto de la pantalla desde la zona de inicio.
+            var body = BoundsOf(Find("Presenter/Body"));
+            body.Encapsulate(BoundsOf(Find("Presenter/Hair")));
+            var screen = Find(SCREEN).transform.position;
+            foreach (var spawn in SpawnPositions())
+            {
+                var eye = spawn + Vector3.up * EYE_HEIGHT;
+                foreach (var x in new[] { -3.5f, 0f, 3.5f })
+                {
+                    var target = screen + new Vector3(x, -2.95f, -0.3f); // La línea más baja: reloj y respuesta correcta.
+                    var direction = target - eye;
+                    Assert.That(body.IntersectRay(new Ray(eye, direction.normalized), out var distance) && distance < direction.magnitude,
+                        Is.False, $"Desde {spawn} el presentador tapa la línea de estado.");
+                }
+            }
+        }
+
+        [Test]
+        public void Stations_StandAtTheFootOfTheScreen_OnEachSideOfThePresenter()
+        {
+            var exchange = Find("ExchangeStation").transform;
+            var button = Find("VerifyButton").transform;
+            Assert.That(exchange.position.x, Is.EqualTo(-2.7f).Within(0.01f));
+            Assert.That(button.position.x, Is.EqualTo(2.7f).Within(0.01f));
+            Assert.That(exchange.position.z, Is.EqualTo(9.39f).Within(0.01f), "Donde las dejó el usuario.");
+            Assert.That(button.position.z, Is.EqualTo(9.39f).Within(0.01f));
+            Assert.That(Vector3.Dot(exchange.forward, Vector3.back), Is.GreaterThan(0.99f), "Miran a la zona de inicio.");
+            Assert.That(Vector3.Dot(button.forward, Vector3.back), Is.GreaterThan(0.99f));
         }
 
         [Test]
         public void CorrectAnswerConfetti_ShootsFromBothSidesOfTheScreen()
         {
-            var frame = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds;
+            var frame = BoundsOf(Find($"{SCREEN}/Frame"));
             var left = Find("StageConfetti/CorrectLeft").transform;
             var right = Find("StageConfetti/CorrectRight").transform;
 
@@ -126,11 +180,13 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void VictoryPodium_StandsBetweenBoothsAndScreen_WithoutBlockingIt()
+        public void VictoryPodium_RisesInFrontOfTheTable_WithoutBlockingTheScreen()
         {
             var podium = Find("VictoryPodium").transform.position;
-            var frame = Find($"{SCREEN}/Frame").GetComponent<Renderer>().bounds;
-            Assert.That(podium.z, Is.GreaterThan(9.5f).And.LessThan(frame.min.z - 1f), "Delante de la pantalla, detrás de las cabinas.");
+            var frame = BoundsOf(Find($"{SCREEN}/Frame"));
+            var table = Find("Table").transform.position;
+            var spawnZ = SpawnPositions().Max(p => p.z);
+            Assert.That(podium.z, Is.GreaterThan(spawnZ + 2f).And.LessThan(table.z - 2.6f), "Delante de la mesa, entre ella y la zona de inicio.");
             Assert.That(Mathf.Abs(podium.x), Is.LessThan(0.5f), "Centrado.");
 
             var lift = Find("VictoryPodium/Podium/Lift").transform;
@@ -140,7 +196,7 @@ namespace Trivias.App.Tests
                 if (renderer is MeshRenderer)
                     top = Mathf.Max(top, lift.TransformPoint(renderer.transform.localPosition).y + renderer.transform.lossyScale.y * 0.5f);
             }
-            Assert.That(top, Is.LessThan(frame.min.y - 1.5f), "El podio no debe tapar la pantalla.");
+            Assert.That(top, Is.LessThan(frame.min.y - 0.3f), "El podio queda por debajo del marco de la pantalla.");
             Assert.That(Find("VictoryPodium/Podium").activeSelf, Is.False, "Oculto hasta la victoria.");
             Assert.That(lift.GetComponentsInChildren<Collider>(true), Is.Empty, "Sin colisiones: no empuja a nadie al subir.");
         }
@@ -168,7 +224,231 @@ namespace Trivias.App.Tests
             }
         }
 
+        [Test]
+        public void Booths_UseTheirModels_WithTheTrayOnTheCounter()
+        {
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var letter = (char)('A' + booth);
+                var root = Find($"Booths/Booth_{letter}");
+                Assert.That(root, Is.Not.Null, $"Falta la cabina {letter}.");
+                Assert.That(ModelPath(root.transform.Find("Body")), Does.EndWith($"BoothCabinet_{letter}.obj"), $"Cabina {letter}.");
+                var cabinet = BoundsOf(root.transform.Find("Body").gameObject);
+                var surface = root.transform.Find("Tray/Surface").position;
+                Assert.That(surface.y, Is.InRange(1.1f, 1.35f), "El dinero se apila en la bandeja del mostrador.");
+                Assert.That(cabinet.Contains(surface + Vector3.up * 0.05f), Is.True, "La bandeja está dentro del mueble.");
+                Assert.That(root.GetComponentsInChildren<BoxCollider>().Length, Is.GreaterThanOrEqualTo(2), "El mueble no se atraviesa.");
+            }
+        }
+
+        [Test]
+        public void EachBooth_HasAMoneyTube_AndAPlayerTubeOverItsPlatform()
+        {
+            var ceiling = Find($"{ENVIRONMENT}/Ceiling").GetComponent<Renderer>().bounds.min.y;
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var letter = (char)('A' + booth);
+                var root = Find($"Booths/Booth_{letter}").transform;
+                var cabinet = BoundsOf(root.Find("Body").gameObject);
+
+                var money = BoundsOf(root.Find("MoneyTube").gameObject);
+                Assert.That(money.min.y, Is.EqualTo(cabinet.max.y).Within(0.3f), $"{letter}: el tubo del dinero sale del techo del mueble.");
+                Assert.That(money.max.y, Is.GreaterThanOrEqualTo(ceiling - 0.05f), $"{letter}: y sube hasta el techo del plató.");
+
+                var zone = root.Find("BetZone").position;
+                var player = BoundsOf(root.Find("PlayerTube").gameObject);
+                Assert.That(new Vector2(player.center.x - zone.x, player.center.z - zone.z).magnitude, Is.LessThan(0.15f),
+                    $"{letter}: el tubo del concursante está justo encima de su plataforma.");
+                Assert.That(player.min.y, Is.InRange(3f, 3.8f), $"{letter}: su boca queda por encima de la cabeza, aun saltando.");
+                Assert.That(player.max.y, Is.GreaterThanOrEqualTo(ceiling - 0.05f), $"{letter}: cuelga del techo.");
+            }
+        }
+
+        [Test]
+        public void MoneyTubes_AreTheSameInEveryBooth_WithOneGoldCollarPerJoint()
+        {
+            string Shape(Transform tube) => string.Join("\n", tube.GetComponentsInChildren<Transform>()
+                .Where(t => t != tube)
+                .Select(t => $"{t.name}|{tube.InverseTransformPoint(t.position).ToString("F2")}|{t.gameObject.activeSelf}"));
+
+            var reference = Shape(Find("Booths/Booth_C/MoneyTube").transform);
+            foreach (var letter in new[] { 'A', 'B', 'D' })
+                Assert.That(Shape(Find($"Booths/Booth_{letter}/MoneyTube").transform), Is.EqualTo(reference),
+                    $"El tubo del dinero de {letter} es igual que el de C.");
+
+            foreach (var tubeName in new[] { "MoneyTube", "PlayerTube" })
+            {
+                var collars = Find($"Booths/Booth_C/{tubeName}").GetComponentsInChildren<Renderer>()
+                    .Where(r => r.name.Contains("Collar")).Select(r => r.bounds.center).ToList();
+                for (var i = 0; i < collars.Count; i++)
+                    for (var j = i + 1; j < collars.Count; j++)
+                        Assert.That(Vector3.Distance(collars[i], collars[j]), Is.GreaterThan(0.1f),
+                            $"{tubeName}: dos aros dorados en la misma junta.");
+            }
+        }
+
+        [Test]
+        public void BetZones_AreThePlatformModel_OpenTowardsTheCenter()
+        {
+            var table = Find("Table").transform.position;
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var letter = (char)('A' + booth);
+                var root = Find($"Booths/Booth_{letter}").transform;
+                var platform = root.Find("Platform");
+                Assert.That(ModelPath(platform), Does.EndWith("PlayerPlatform.obj"), letter.ToString());
+                var zone = root.Find("BetZone").position;
+                Assert.That(zone.y, Is.InRange(0.2f, 0.3f), $"{letter}: el color de la zona está sobre la plataforma.");
+                Assert.That(BoundsOf(platform.gameObject).max.y, Is.LessThan(1.2f), $"{letter}: barandilla baja.");
+                // La barandilla está abierta por +Z del modelo: hacia el centro del plató.
+                var open = platform.forward;
+                var toCenter = table - platform.position;
+                toCenter.y = 0f;
+                Assert.That(Vector3.Dot(open, toCenter.normalized), Is.GreaterThan(0.6f), $"{letter}: se entra desde el centro.");
+                Assert.That(root.GetComponentsInChildren<Collider>().Any(c => c.name == "PlatformCollider"), Is.True,
+                    $"{letter}: la plataforma se pisa.");
+            }
+        }
+
+        [Test]
+        public void Booths_StandOnTheSides_LeavingTheViewOfTheScreenFree()
+        {
+            var frame = BoundsOf(Find($"{SCREEN}/Frame"));
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var letter = (char)('A' + booth);
+                var position = Find($"Booths/Booth_{letter}").transform.position;
+                Assert.That(Mathf.Abs(position.x), Is.GreaterThan(frame.extents.x * 0.9f), $"{letter}: a un lado del plató.");
+                Assert.That(position.x < 0f, Is.EqualTo(booth % 2 == 0), $"{letter}: A y C a la izquierda, B y D a la derecha.");
+                Assert.That(position.z > 5f, Is.EqualTo(booth < 2), $"{letter}: A y B al fondo, C y D delante (como la pantalla).");
+            }
+        }
+
+        [Test]
+        public void Room_IsCompact()
+        {
+            var floor = Find($"{ENVIRONMENT}/Floor").GetComponent<Renderer>().bounds.size;
+            Assert.That(floor.x, Is.LessThanOrEqualTo(26f), "Sin espacio muerto a los lados.");
+            Assert.That(floor.z, Is.LessThanOrEqualTo(31f), "Ni delante o detrás.");
+            var ceiling = Find($"{ENVIRONMENT}/Ceiling").GetComponent<Renderer>().bounds.min.y;
+            Assert.That(ceiling, Is.LessThanOrEqualTo(11.5f), "Techo bajo, de estudio de televisión.");
+        }
+
+        [Test]
+        public void Floor_IsTiled_FlushWithTheGround()
+        {
+            var tiles = Find($"{ENVIRONMENT}/FloorTiles").transform;
+            Assert.That(tiles.childCount, Is.GreaterThanOrEqualTo(30));
+            foreach (Transform tile in tiles)
+            {
+                Assert.That(ModelPath(tile), Does.EndWith("StudioFloorTile.obj"));
+                Assert.That(BoundsOf(tile.gameObject).max.y, Is.EqualTo(0f).Within(0.02f), $"{tile.name}: a ras del suelo.");
+            }
+            var collider = Find($"{ENVIRONMENT}/FloorCollider").GetComponent<BoxCollider>();
+            Assert.That(collider.bounds.max.y, Is.EqualTo(0f).Within(0.001f), "Se pisa a nivel de las baldosas.");
+        }
+
+        [Test]
+        public void CeilingPanels_ShowTheirFaceDownwards_UnderTheCeiling()
+        {
+            var ceiling = Find($"{ENVIRONMENT}/Ceiling").GetComponent<Renderer>().bounds.min.y;
+            var panels = Find($"{ENVIRONMENT}/CeilingRig").GetComponentsInChildren<Transform>().Where(t => t.name.StartsWith("CeilingPanel")).ToList();
+            Assert.That(panels.Count, Is.GreaterThanOrEqualTo(8));
+            foreach (var panel in panels)
+            {
+                Assert.That(Vector3.Dot(panel.up, Vector3.up), Is.GreaterThan(0.99f), $"{panel.name}: soportes arriba, cara lisa abajo.");
+                Assert.That(BoundsOf(panel.gameObject).max.y, Is.EqualTo(ceiling).Within(0.05f), $"{panel.name}: pegado al techo.");
+            }
+        }
+
+        [Test]
+        public void TableButtonAndExchange_UseTheirModels()
+        {
+            Assert.That(ModelPath(Find("Table/Model").transform), Does.EndWith("Table.obj"));
+            Assert.That(ModelPath(Find("VerifyButton/Model").transform), Does.EndWith("VerifyButton.obj"));
+            Assert.That(ModelPath(Find("ExchangeStation/Model").transform), Does.EndWith("ExchangeStation.obj"));
+            Assert.That(ModelPath(Find($"{SCREEN}/Frame").transform), Does.EndWith("QuestionScreen.obj"));
+        }
+
+        [Test]
+        public void MoneyPrefabs_UseTheirModels()
+        {
+            foreach (var name in new[] { "Bundle", "Bag", "GoldBar" })
+            {
+                var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/_Project/Modules/Money/Prefabs/{name}.prefab");
+                Assert.That(ModelPath(prefab.transform.Find("Model")), Does.EndWith($"{name}.obj"), name);
+                Assert.That(prefab.GetComponentsInChildren<Renderer>().All(r => r.shadowCastingMode == ShadowCastingMode.Off), Is.True,
+                    $"{name}: el dinero no proyecta sombras (hay mucho).");
+            }
+        }
+
+        [Test]
+        public void Stage_HasTheConceptDecor()
+        {
+            Assert.That(Find($"{ENVIRONMENT}/Backdrop").transform.childCount, Is.GreaterThanOrEqualTo(10), "Telón, bambalinas, columnas y altavoces.");
+            Assert.That(Find($"{ENVIRONMENT}/CeilingRig").GetComponentsInChildren<Renderer>().Length, Is.GreaterThan(100), "Vigas y focos.");
+            Assert.That(Find($"{ENVIRONMENT}/WallDecor").transform.childCount, Is.GreaterThanOrEqualTo(20), "Paneles y columnas en las paredes.");
+            Assert.That(Find($"{ENVIRONMENT}/StudioCameras"), Is.Not.Null);
+            var people = Find($"{ENVIRONMENT}/Audience").GetComponentsInChildren<Transform>().Count(t => t.name == "Head");
+            Assert.That(people, Is.GreaterThanOrEqualTo(40), "Público en las gradas.");
+            foreach (var spot in Find("StageLighting").GetComponentsInChildren<Light>())
+                Assert.That(spot.transform.Find("Fixture"), Is.Not.Null, $"{spot.name}: la luz sale de un foco colgado.");
+        }
+
+        [Test]
+        public void CameraDais_HasStairsAndACamera_AndPlayersCannotReachTheAudience()
+        {
+            var dais = Find($"{ENVIRONMENT}/CameraDais").transform;
+            Assert.That(ModelPath(dais.Find("Stairs")), Does.EndWith("StageStairs.obj"));
+            Assert.That(ModelPath(dais.Find("Camera")), Does.EndWith("StudioCamera.obj"));
+            Assert.That(dais.Find("Camera").position.y, Is.EqualTo(0.62f).Within(0.02f), "La cámara está encima de la plataforma.");
+            var barrier = Find($"{ENVIRONMENT}/AudienceRailing/RailingCollider").GetComponent<BoxCollider>();
+            var floorWidth = Find($"{ENVIRONMENT}/Floor").GetComponent<Renderer>().bounds.size.x;
+            Assert.That(barrier.bounds.size.x, Is.GreaterThanOrEqualTo(floorWidth - 0.1f), "La barandilla cruza toda la sala.");
+            foreach (var spawn in SpawnPositions())
+                Assert.That(spawn.z, Is.GreaterThan(barrier.bounds.max.z), "Los concursantes empiezan en el plató, no en el público.");
+        }
+
+        [Test]
+        public void PostProcessing_MakesBulbsGlow()
+        {
+            var volume = Find($"{ENVIRONMENT}/PostProcessing").GetComponent<Volume>();
+            Assert.That(volume.isGlobal, Is.True);
+            Assert.That(volume.sharedProfile.TryGet<Bloom>(out var bloom) && bloom.intensity.value > 0f, Is.True, "Con brillo (bloom).");
+            var camera = Find("CameraRig/MainCamera").GetComponent<Camera>();
+            Assert.That(camera.GetUniversalAdditionalCameraData().renderPostProcessing, Is.True, "La cámara aplica el posprocesado.");
+        }
+
+        [Test]
+        public void StageTexts_UseTheStageFonts()
+        {
+            var texts = _roots.SelectMany(r => r.GetComponentsInChildren<TMPro.TextMeshPro>(true)).ToList();
+            Assert.That(texts.Count, Is.GreaterThan(20));
+            foreach (var text in texts)
+                Assert.That(text.font.name, Does.StartWith("Poppins").Or.StartWith("LilitaOne"), $"{text.name}: tipografía del plató.");
+            Assert.That(Find($"{SCREEN}/Message").GetComponent<TMPro.TextMeshPro>().font.name, Does.StartWith("LilitaOne"), "El logo, con Lilita One.");
+            var body = Find($"{SCREEN}/Content/Question").GetComponent<TMPro.TextMeshPro>().font;
+            Assert.That(body.atlasPopulationMode, Is.EqualTo(TMPro.AtlasPopulationMode.Static), "Tabla fija: no cambia al jugar.");
+            foreach (var c in "¿¡áéíóúñÑü€«»…")
+                Assert.That(body.HasCharacter(c), Is.True, $"La fuente tiene «{c}».");
+            Assert.That(body.fontWeightTable[7].regularTypeface, Is.Not.Null, "Negrita real (Poppins ExtraBold).");
+        }
+
         // ---- Utilidades ----
+
+        /// <summary>Caja que envuelve todas las piezas visibles de un objeto (los modelos tienen muchas).</summary>
+        private static Bounds BoundsOf(GameObject go)
+        {
+            var renderers = go.GetComponentsInChildren<Renderer>(true);
+            var bounds = renderers[0].bounds;
+            foreach (var renderer in renderers)
+                bounds.Encapsulate(renderer.bounds);
+            return bounds;
+        }
+
+        /// <summary>Archivo del modelo de la primera malla del objeto.</summary>
+        private static string ModelPath(Transform model) =>
+            UnityEditor.AssetDatabase.GetAssetPath(model.GetComponentInChildren<MeshFilter>(true).sharedMesh);
 
         [Test]
         public void SpectatorBanner_IsHidden_AtTheBottom_AndDoesNotBlockClicks()

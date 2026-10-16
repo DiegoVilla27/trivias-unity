@@ -5,7 +5,8 @@
         "Trivias.Shared",
         "Trivias.Shared.Editor",
         "Trivias.Cameras",
-        "Unity.Cinemachine"
+        "Unity.Cinemachine",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [
         "Editor"

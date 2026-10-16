@@ -124,7 +124,7 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void PresenterSpeaks_OnlyInTheBubbleAboveHisHead()
+        public void PresenterSpeaks_OnlyInTheBubbleBesideHisHead()
         {
             var views = Object.FindObjectsByType<PresenterLineView>(FindObjectsInactive.Include);
             Assert.That(views.Length, Is.EqualTo(1), "El presentador habla solo en su viñeta (ni subtítulos ni HUD).");
@@ -134,7 +134,13 @@ namespace Trivias.App.Tests
 
             var bubble = Field<GameObject>(view, "_container");
             Assert.That(bubble.activeSelf, Is.True, "Al empezar, el presentador da la bienvenida.");
-            Assert.That(bubble.transform.position.y, Is.GreaterThan(view.transform.position.y + 3f), "La viñeta va sobre su cabeza.");
+            // Al pie de la pantalla, la viñeta sale al lado de la cabeza (encima taparía la pregunta).
+            var head = view.transform.Find("Head").position;
+            var background = bubble.transform.Find("Background").position;
+            Assert.That(Mathf.Abs(background.y - head.y), Is.LessThan(0.8f), "A la altura de su cabeza.");
+            var side = background - head;
+            side.y = 0f;
+            Assert.That(side.magnitude, Is.GreaterThan(1.5f), "Al lado, no encima.");
             Assert.That(Field<TMP_Text>(view, "_label").text, Is.Not.Empty);
         }
 

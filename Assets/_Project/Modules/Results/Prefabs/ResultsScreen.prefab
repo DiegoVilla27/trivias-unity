@@ -353,7 +353,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &3637617003394063489
+--- !u!1 &5361803959114041638
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,9 +361,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6178245293516672969}
-  - component: {fileID: 4472984884398305818}
-  - component: {fileID: 652522935398893768}
+  - component: {fileID: 1084944694310082151}
+  - component: {fileID: 867902393004777406}
+  - component: {fileID: 3948483088032793570}
   m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
@@ -371,13 +371,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6178245293516672969
+--- !u!224 &1084944694310082151
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637617003394063489}
+  m_GameObject: {fileID: 5361803959114041638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -390,21 +390,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -14}
   m_SizeDelta: {x: 280, y: 44}
   m_Pivot: {x: 0.5, y: 1}
---- !u!222 &4472984884398305818
+--- !u!222 &867902393004777406
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637617003394063489}
+  m_GameObject: {fileID: 5361803959114041638}
   m_CullTransparentMesh: 1
---- !u!114 &652522935398893768
+--- !u!114 &3948483088032793570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637617003394063489}
+  m_GameObject: {fileID: 5361803959114041638}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -769,7 +769,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6178245293516672969}
+  - {fileID: 1084944694310082151}
   m_Father: {fileID: 3639129535072243271}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}

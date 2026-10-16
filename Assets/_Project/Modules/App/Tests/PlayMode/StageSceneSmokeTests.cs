@@ -18,7 +18,7 @@ namespace Trivias.App.Tests
     public sealed class StageSceneSmokeTests
     {
         private const string STAGE_SCENE = "Stage";
-        private const float SPAWN_Z = -4.5f;
+        private const float SPAWN_Z = -2.5f; // StageLayout.SPAWN_Z
 
         [UnitySetUp]
         public IEnumerator LoadStage()

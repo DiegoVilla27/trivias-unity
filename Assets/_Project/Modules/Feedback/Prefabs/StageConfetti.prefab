@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 599665923117644701}
   serializedVersion: 2
   m_LocalRotation: {x: -0.22528684, y: 0.76515937, z: 0.48982328, w: 0.35192353}
-  m_LocalPosition: {x: -7.7999997, y: 4.2, z: 14.6}
+  m_LocalPosition: {x: -8.988, y: 3, z: 13.200001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2369,7 +2369,7 @@ Transform:
   m_GameObject: {fileID: 2562284291346252792}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 12, z: 0}
+  m_LocalPosition: {x: 0, y: 10.6, z: 1.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2654,7 +2654,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 42, y: 0.2, z: 42}
+    m_Scale: {x: 24.5, y: 0.2, z: 29.5}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -4741,7 +4741,7 @@ Transform:
   m_GameObject: {fileID: 6287306938923609431}
   serializedVersion: 2
   m_LocalRotation: {x: 0.22528684, y: 0.76515937, z: 0.48982328, w: -0.35192353}
-  m_LocalPosition: {x: 7.7999997, y: 4.2, z: 14.6}
+  m_LocalPosition: {x: 8.988, y: 3, z: 13.200001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

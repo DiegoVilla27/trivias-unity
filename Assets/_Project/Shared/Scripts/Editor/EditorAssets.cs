@@ -103,6 +103,78 @@ namespace Trivias.Shared.Editor
             return go;
         }
 
+        /// <summary>
+        /// Coloca un modelo importado (OBJ con sus materiales) como hijo. Toda su jerarquía recibe la capa, las marcas
+        /// de geometría estática y, si se pide, deja de proyectar sombras (decorado lejano: más barato de dibujar).
+        /// Los modelos no traen colisiones: quien los usa añade colisiones sencillas (<see cref="AddBoxCollider"/>).
+        /// </summary>
+        public static GameObject PlaceModel(string modelPath, string name, Transform parent, Vector3 localPosition,
+            Quaternion localRotation, Vector3 localScale, int layer, bool isStatic, bool castShadows = true)
+        {
+            var model = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
+            if (model == null)
+                throw new System.InvalidOperationException($"No se encuentra el modelo {modelPath}.");
+
+            var go = (GameObject)PrefabUtility.InstantiatePrefab(model, parent);
+            go.name = name;
+            go.transform.SetLocalPositionAndRotation(localPosition, localRotation);
+            go.transform.localScale = localScale;
+            foreach (var child in go.GetComponentsInChildren<Transform>(true))
+            {
+                child.gameObject.layer = layer;
+                if (isStatic)
+                    GameObjectUtility.SetStaticEditorFlags(child.gameObject, STATIC_GEOMETRY);
+            }
+            if (!castShadows)
+            {
+                foreach (var renderer in go.GetComponentsInChildren<Renderer>(true))
+                    renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
+            return go;
+        }
+
+        /// <summary>Colisión invisible en forma de caja (los modelos detallados no llevan MeshCollider).</summary>
+        public static BoxCollider AddBoxCollider(string name, Transform parent, Vector3 localCenter, Vector3 size, int layer,
+            Quaternion? localRotation = null)
+        {
+            var go = new GameObject(name) { layer = layer };
+            go.transform.SetParent(parent, false);
+            go.transform.SetLocalPositionAndRotation(localCenter, localRotation ?? Quaternion.identity);
+            var box = go.AddComponent<BoxCollider>();
+            box.size = size;
+            GameObjectUtility.SetStaticEditorFlags(go, STATIC_GEOMETRY);
+            return box;
+        }
+
+        /// <summary>Colisión invisible cilíndrica (convexa), centrada en <paramref name="localCenter"/>.</summary>
+        public static GameObject AddCylinderCollider(string name, Transform parent, Vector3 localCenter, float diameter,
+            float height, int layer)
+        {
+            var go = CreatePrimitive(PrimitiveType.Cylinder, name, parent, localCenter,
+                new Vector3(diameter, height * 0.5f, diameter), null, layer, true);
+            Object.DestroyImmediate(go.GetComponent<MeshRenderer>());
+            Object.DestroyImmediate(go.GetComponent<MeshFilter>());
+            return go;
+        }
+
+        /// <summary>Material transparente URP (p. ej. el fondo oscuro de la pantalla, que deja ver el decorado detrás).</summary>
+        public static Material GetOrCreateTransparentMaterial(string path, Color color, float smoothness = 0.5f)
+        {
+            var material = GetOrCreateMaterial(path, color, smoothness);
+            material.SetFloat("_Surface", 1f);
+            material.SetFloat("_Blend", 0f);
+            material.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetFloat("_SrcBlendAlpha", (float)UnityEngine.Rendering.BlendMode.One);
+            material.SetFloat("_DstBlendAlpha", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetFloat("_ZWrite", 0f);
+            material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            EditorUtility.SetDirty(material);
+            return material;
+        }
+
         public static GameObject CreateEmpty(string name, Transform parent, Vector3 localPosition)
         {
             var go = new GameObject(name);
@@ -111,8 +183,9 @@ namespace Trivias.Shared.Editor
             return go;
         }
 
+        /// <summary>Texto 3D del plató. Por defecto en Poppins (<see cref="StageFonts.Body"/>); titulares, con Lilita One.</summary>
         public static TextMeshPro CreateWorldText(string name, Transform parent, string text, float fontSize,
-            Color color, Vector3 localPosition, Quaternion localRotation, Vector2 size)
+            Color color, Vector3 localPosition, Quaternion localRotation, Vector2 size, TMP_FontAsset font = null)
         {
             var go = new GameObject(name, typeof(RectTransform));
             go.transform.SetParent(parent, false);
@@ -120,6 +193,7 @@ namespace Trivias.Shared.Editor
             go.transform.localRotation = localRotation;
 
             var tmp = go.AddComponent<TextMeshPro>();
+            tmp.font = font != null ? font : StageFonts.Body();
             tmp.text = text;
             tmp.fontSize = fontSize;
             tmp.color = color;

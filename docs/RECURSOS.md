@@ -10,16 +10,18 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 | --- | --- | --- |
 | Personaje base con esqueleto | 1 | Misma base |
 | Apariencias básicas | 1 | 10 personajes/variantes disponibles |
-| Cabina y bandeja | 1 conjunto reutilizado 4 veces | Acabado del mismo conjunto |
-| Tubo de expulsión | Pieza sencilla reutilizada | Acabado visual |
-| Mesa y estación de cambio | 1 conjunto | Mismo conjunto pulido |
-| Botón de verificar | 1 | Mismo objeto pulido |
-| Fajo, bolsa y lingote | 3 objetos | Valores legibles y acabado |
-| Plató modular | Geometría básica | Decoración, materiales e iluminación |
+| Cabina y bandeja | Modelos A–D integrados (bandeja en el mostrador) | Acabado del mismo conjunto |
+| Tubo de expulsión | Recto, codo y anillo encadenados por código: tubo del dinero y tubo del concursante en cada cabina | Acabado visual |
+| Mesa y estación de cambio | Modelos integrados (la estación, sobre un pedestal) | Mismo conjunto pulido |
+| Botón de verificar | Modelo integrado (la tapa se hunde) | Mismo objeto pulido |
+| Fajo, bolsa y lingote | Modelos integrados | Valores legibles y acabado |
+| Plató modular | Kit de ambiente integrado (ver abajo) | Iluminación precalculada y optimización |
 | Presentador visual | Representación provisional | Diseño propio, escala por definir |
 | Cheque/podio | Resultado sencillo | Ceremonia de victoria |
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
+
+Personaje base visual (16 de octubre de 2026): [modelo independiente y fuente Blender local](modelado/player/README.md), sin vestuario, cabello ni zapatos; incluye texturas y seis materiales URP. El nuevo modelo aún no tiene rig ni sustituye al personaje de Starter Assets en juego.
 
 ## Kit modular de ambiente
 
@@ -33,7 +35,13 @@ Referencia visual: [ambiente-modelado-01.png](bocetos/ambiente-modelado-01.png).
 - Panel de techo, viga modular, conector, soporte de foco y cable simplificado.
 - Altavoz y rejilla decorativos.
 
-Priorizar paredes, suelo, techo básico y luces para construir el volumen del plató. Añadir cortinas, cámaras y accesorios después. No requiere cámaras funcionales, telas simuladas ni iluminación dinámica en cada bombilla; la implementación visual se decidirá según rendimiento y motor.
+Priorizar paredes, suelo, techo básico y luces para construir el volumen del plató. Añadir cortinas, cámaras y accesorios después.
+
+Implementado (16 de octubre de 2026): todos los módulos del kit están en el plató salvo la esquina (es una esquina exterior, sin sitio en la sala), el conector de vigas y el cable (los cables son varillas, más baratas). Plataforma del concursante: es la zona de apuesta de cada cabina. Los modelos son muy detallados (la viga tiene 138.000 triángulos), así que se usan pocas copias, a escala, sin sombras en lo lejano. Si el juego va lento en equipos modestos, el siguiente paso es simplificar las mallas o añadir niveles de detalle. No requiere cámaras funcionales, telas simuladas ni iluminación dinámica en cada bombilla; la implementación visual se decidirá según rendimiento y motor.
+
+## Tipografías
+
+Lilita One y Poppins (SemiBold y ExtraBold), de Google Fonts con licencia SIL Open Font License; los archivos y sus licencias están en `Assets/_Project/Shared/UI/Fonts`. Se pueden incluir y distribuir con el juego.
 
 ## Animación y efectos
 
@@ -41,7 +49,7 @@ Priorizar paredes, suelo, techo básico y luces para construir el volumen del pl
 - Cabinas: bloqueo, acierto y pérdida; pueden resolverse con luces y efectos sencillos.
 - Dinero: coger, depositar, conversión y retirada, sin física compleja obligatoria.
 - Acierto: confeti de colores en dos chorros a los lados de la pantalla grande (implementado).
-- Victoria: lluvia de confeti dorado en toda la sala, cheque gigante en la pantalla (BANCO TRIVIAS, páguese a los supervivientes, cantidad, firma del Presentador) y podio dorado con placas de nombre (implementado, con primitivas). No necesita un nivel nuevo.
+- Victoria: lluvia de confeti dorado en toda la sala, cheque gigante en la pantalla (BANCO TRIVIAS, páguese a los supervivientes, cantidad, firma del Presentador) y podio dorado con placas de nombre (implementado, aún con primitivas). No necesita un nivel nuevo.
 - Iluminación: cuatro focos de colores por ambiente (sin sombras) además de la luz principal.
 
 ## Sonido
