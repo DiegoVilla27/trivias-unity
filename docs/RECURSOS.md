@@ -4,7 +4,7 @@ Referencia: [GDD](GDD.md), secciones 6–9 y 13. Lista de recursos necesarios; n
 
 ## Arte 3D
 
-Referencias específicas de modelado: [36 láminas individuales y notas](bocetos/detallados/README.md). Son bocetos, no medidas finales ni modelos terminados.
+Referencias específicas de modelado: [36 láminas individuales y notas](bocetos/recursos/detallados/README.md). Son bocetos, no medidas finales ni modelos terminados.
 
 | Recurso | Prototipo | Salida |
 | --- | --- | --- |
@@ -21,11 +21,17 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
 
-Personaje base visual (16 de octubre de 2026): [modelo independiente y fuente Blender local](modelado/player/README.md), sin vestuario, cabello ni zapatos; incluye texturas y seis materiales URP. El nuevo modelo aún no tiene rig ni sustituye al personaje de Starter Assets en juego.
+Referencia visual modular del player (16 de octubre de 2026): [boceto base completo](bocetos/player/base/README.md), sin ropa, pelo ni zapatos. Se usará para diseñar futuras prendas y accesorios. El antiguo despiece se retiró. Esta referencia es solo una imagen; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md).
+
+Vestuario del player: [clothes — Blue Tracksuit](bocetos/player/clothes/01-blue-tracksuit/README.md). Una única lámina de ropa aislada (chaqueta y pantalón), proporcionada para la base. El calzado se trabaja por separado. No implica un modelo nuevo ni un cosmético añadido al juego. El catálogo también incluye Casual, Gardener, Elegant, Explorer, Pajamas, Raincoat, Chef, Retro Sport y Winter (diez estilos en total): una lámina de cuatro vistas por conjunto, solo ropa.
+
+Peinados del player: [catálogo hair](bocetos/player/hair/README.md), con Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de pelo aislado por estilo, con cuatro vistas y referencia al volumen de la cabeza base; el encaje geométrico se verificará al modelar.
+
+Calzado del player: [catálogo shoes](bocetos/player/shoes/README.md). Diez estilos a juego con los diez conjuntos de ropa, una lámina de cuatro vistas por diseño. Puntera, empeine y talón cerrados para cubrir el pie base completo; el encaje geométrico y el solape con los pantalones se comprobarán al modelar.
 
 ## Kit modular de ambiente
 
-Referencia visual: [ambiente-modelado-01.png](bocetos/ambiente-modelado-01.png). Mantiene el estilo del plató y propone módulos reutilizables:
+Referencia visual: [ambiente-modelado-01.png](bocetos/plato/ambiente-modelado-01.png). Mantiene el estilo del plató y propone módulos reutilizables:
 
 - Cámara de estudio y trípode decorativos.
 - Foco con viseras, foco pequeño y tira de bombillas.

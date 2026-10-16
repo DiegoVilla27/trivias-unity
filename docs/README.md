@@ -1,6 +1,6 @@
 # Documentación del juego
 
-Documentos derivados del [GDD](GDD.md), versión 0.12, el 15 de octubre de 2026. El GDD es la referencia principal de reglas y alcance. Estos documentos concretan cada área sin dar por confirmadas las propuestas de balance.
+Documentos derivados del [GDD](GDD.md), referencia principal de reglas y alcance. Estos documentos concretan cada área sin dar por confirmadas las propuestas de balance.
 
 | Documento | Contenido |
 | --- | --- |
@@ -13,6 +13,12 @@ Documentos derivados del [GDD](GDD.md), versión 0.12, el 15 de octubre de 2026.
 | [DESARROLLO.md](DESARROLLO.md) | Orden de construcción, verificaciones y decisiones pendientes |
 | [Bocetos visuales](bocetos/README.md) | Concepto del plató y láminas para modelado de personaje, presentador y recursos |
 | [JUGAR_CON_AMIGOS.md](JUGAR_CON_AMIGOS.md) | Cómo probar el juego con otras personas gratis (build + VPN gratuita) |
+
+## Referencias visuales
+
+Los bocetos se organizan por [player](bocetos/player/README.md), [presentador](bocetos/presentador/README.md), [plató](bocetos/plato/README.md) y [recursos](bocetos/recursos/README.md). Los ZIP están reunidos en [paquetes](bocetos/paquetes/README.md).
+
+La referencia actual para futuras piezas del jugador es la [base completa en T-pose y A-pose](bocetos/player/base/README.md), sin ropa, pelo ni zapatos. El antiguo despiece se retiró.
 
 ## Cómo mantenerlos
 

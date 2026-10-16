@@ -4,13 +4,21 @@ Referencia: [GDD](GDD.md), secciones 5, 7, 8 y 10.
 
 ## Base compartida
 
-Referencias de modelado: [T-pose y A-pose del personaje y presentador](bocetos/poses/README.md).
+Referencias visuales: [bocetos del player](bocetos/player/README.md), [base sin ropa, pelo ni zapatos](bocetos/player/base/README.md) y [presentador](bocetos/presentador/README.md).
 
-Base visual modelada (16 de octubre de 2026): [fuente editable, vistas y especificaciones](modelado/player/README.md). Cuerpo neutro sin ropa, pelo ni zapatos, con manos de manopla, preparado como referencia común para crear vestuario intercambiable. Se entrega como asset independiente; el prefab jugable sigue usando PlayerArmature. Rig, pesos, animaciones y pruebas de deformación del nuevo modelo quedan pendientes.
+Concursante en juego (16 de octubre de 2026): el modelo oficial `base_basic_shaded` tal cual (`Player/Models/PlayerNew`): un millón de triángulos, sin quitar ninguno, y su textura `shaded.png` con la luz ya pintada. Se ve igual que al importarlo en Unity: color base negro y la textura como emisión, así que no depende de las luces del plató (no se tiñe con los ambientes de luz). Esqueleto puesto en Blender por consola con los nombres de huesos humanos de Unity (cadera, columna, pecho, cuello, cabeza, hombros, brazos, manos, piernas, pies y dedos de los pies) y pose T; los pesos se calculan en una copia ligera y se traspasan punto a punto al modelo completo. Mide 1,65 m (cabeza de 1 m de ancho con el pelo). Se importa como Humanoid y usa las animaciones de Starter Assets (reposo, andar, correr, saltar, caer). El chándal es una pieza aparte (textura gris por un color, calculada en espacio lineal para que de fábrica sea el mismo azul): los trajes de colores de la tienda tiñen su emisión sin tocar la cara, el pelo ni las franjas. Los cosméticos se enganchan a un anclaje en la cabeza a su escala (×2,6). La cámara va algo más alta y más al lado para que la cabeza no tape el plató. Sin dedos articulados. Seis concursantes son seis millones de triángulos animados: si el juego va lento en equipos modestos, esta es la primera causa a revisar.
+
+Boceto base modular (16 de octubre de 2026): [T-pose y A-pose, ocho vistas cada una](bocetos/player/base/README.md), sin ropa, pelo ni zapatos y con manos de manopla. Son dos posturas del mismo diseño para futuras piezas intercambiables. El antiguo despiece se retiró y ya no se usa. Esta fase es de bocetos en documentación; no sustituye ni modifica el concursante jugable descrito arriba. Las referencias documentales a los antiguos modelos de base y pelo, cuyos archivos se retiraron, dejan de ser vigentes.
 
 Un personaje de prototipo bien construido sirve de base para diez personajes disponibles desde el inicio del juego completo. Cabeza grande, cuerpo pequeño, formas redondeadas y apariencia de figura de vinilo, con diseños propios.
 
 Las variantes cambian atuendo, pelo, accesorios, colores y apariencia. Comparten movimiento, capacidades, esqueleto, animaciones, colisiones e interacción. No tienen poderes ni estadísticas diferentes.
+
+Referencia visual de vestuario: [catálogo clothes](bocetos/player/clothes/README.md). Su primer conjunto, Blue Tracksuit, recupera la chaqueta y el pantalón azules originales en una única lámina de ropa aislada, proporcionada para la base neutra. El calzado se trabaja por separado. Es documentación visual para una fase futura, sin cambios al modelo jugable. El catálogo también incluye Casual, Gardener, Elegant, Explorer, Pajamas, Raincoat, Chef, Retro Sport y Winter (diez estilos en total): una lámina de cuatro vistas por conjunto, solo ropa.
+
+Peinados del player: [catálogo hair](bocetos/player/hair/README.md), con Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de pelo aislado por estilo, con cuatro vistas y referencia al volumen de la cabeza base; el encaje geométrico se verificará al modelar.
+
+Calzado del player: [catálogo shoes](bocetos/player/shoes/README.md). Diez estilos a juego con los diez conjuntos de ropa, una lámina de cuatro vistas por diseño. Puntera, empeine y talón cerrados para cubrir el pie base completo; el encaje geométrico y el solape con los pantalones se comprobarán al modelar.
 
 ## Estructura propuesta del prefab
 

@@ -19,7 +19,7 @@ namespace Trivias.App.Tests
         private const string ENVIRONMENT = "StageEnvironment";
         private const string SCREEN = "StageEnvironment/QuestionScreen";
         private const float EYE_HEIGHT = 1.7f;
-        private static readonly Vector3 CameraOffset = new(0.5f, 2.2f, -3.8f); // Tercera persona: detrás y por encima.
+        private static readonly Vector3 CameraOffset = new(0.75f, 2.4f, -4.2f); // Tercera persona: detrás y por encima.
 
         private GameObject[] _roots;
 

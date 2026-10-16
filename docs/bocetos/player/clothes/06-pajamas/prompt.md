@@ -1,0 +1,10 @@
+# Pajamas — prompt
+
+Herramienta: imagegen integrado. Una generación y una imagen final para este conjunto.
+
+Referencias: [Blue Tracksuit](../01-blue-tracksuit/blue-tracksuit.png) para presentación y estilo; [base T-pose](../../base/personaje-base-t-pose.png) solo para proporciones.
+
+```text
+Use case: stylized-concept. Create exactly ONE landscape clothing turnaround concept sheet for Pajamas. Image 1 is the STYLE, COMPOSITION and clothing-scale reference (Blue Tracksuit); image 2 is ONLY the body PROPORTION reference, never depict that character. Match the cute rounded toy-like 3D rendering, soft studio lighting, off-white background, navy title plaque, subtle dashed alignment guides, and FOUR evenly spaced columns of image 1. The outfit is Dusty lavender loose long-sleeve crewneck pajama top, horizontal T-pose sleeves, matching soft full-length lavender pajama trousers, small warm cream neckline/cuff piping and a few tiny cream dots sparsely repeated on fabric. Cozy matte cotton, rounded gentle folds. No slippers, sleep mask, pillow or nightcap. The SAME garment construction must be consistent in all four orthographic views: front, back, anatomical left profile pointing screen RIGHT, anatomical right profile pointing screen LEFT. Sleeves horizontal, end-on empty sleeve openings in side views as in image 1. Fit the short chubby torso, short arms, rounded belly and very short legs of the exact base, modest garment ease; do not elongate into adult proportions. Clothing ONLY, hollow empty neckline and cuffs; absolutely NO player, body, mannequin, head, face, hands, skin, feet, shoes, socks or hair. No extra items, callouts, fifth view, alternatives or second sheet. Title exactly 'CLOTHES — PAJAMAS'. Subtitle exactly 'CAMISETA · PANTALÓN'. Bottom four navy labels exactly 'FRENTE', 'ESPALDA', 'PERFIL IZQUIERDO', 'PERFIL DERECHO'. Preserve readable consistent garment details in every view. All requested garments together in each column, aligned as a wearable outfit but empty inside.
+```
+

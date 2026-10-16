@@ -10,7 +10,7 @@ Mantener configurables las propuestas económicas: capital 100.000, denominacion
 
 ## Hitos propuestos
 
-MVP: el plató y sus objetos usan los modelos 3D de cada módulo desde el 16 de octubre de 2026; lo que aún no tiene modelo (presentador, cosméticos, podio, público) sigue con primitivas. Personaje: Starter Assets.
+MVP: el plató y sus objetos usan los modelos 3D de cada módulo desde el 16 de octubre de 2026; lo que aún no tiene modelo (presentador, cosméticos, podio, público) sigue con primitivas. Personaje: concursante chibi propio (riggeado, Humanoid) con las animaciones de Starter Assets.
 
 | Orden | Entregable | Criterio para avanzar |
 | --- | --- | --- |
@@ -35,6 +35,7 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 0 Red local | Hecho: Netcode for GameObjects, salas de 2 a 6, menú principal y sala de espera |
 | 1 Plató y personaje | Hecho: tercera persona, interacción por cercanía, dinero |
 | Plató con modelos | Hecho: sala compacta (plano en `StageLayout`) con cabinas a los lados, plataformas de apuesta, tubos del dinero y del concursante, mesa, botón, estación, dinero y pantalla con sus modelos; suelo de baldosas y decorado de concepto-01 (telón, columnas, paredes, techo con vigas y focos, cámaras, público, tarima del presentador) y brillo de bombillas. Pendiente: modelos de presentador, podio y cosméticos; medir rendimiento en equipos modestos |
+| Concursante | Hecho: modelo oficial `base_basic_shaded` tal cual (un millón de triángulos, `Player/Models/PlayerNew`) riggeado en Blender, Humanoid con las animaciones de Starter Assets, chándal teñible y cosméticos a la escala de su cabeza. Pendiente: cuerpo base con ropa por piezas, dedos articulados, medir rendimiento con seis jugadores y comprobarlo en Multiplayer Play Mode |
 | Salto y carrera | Hecho: Espacio, 0,9 m, con la animación de Starter Assets; correr con Shift (5,6 m/s) |
 | Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta de cómic junto a la cabeza (letra a letra, cuatro ánimos); Lilita One y Poppins en el plató y en toda la interfaz |
 | Plató vivo e interfaz | Hecho: succión del expulsado y del dinero perdido por sus tubos (aire y sonido), bombillas, público con reacciones, cámaras de estudio y focos que se mueven; tema de la interfaz (paneles con marco dorado, botones con tacto, bombillas, logo que late). Pendiente: comprobar en Multiplayer Play Mode que los clientes ven la succión igual que el anfitrión |

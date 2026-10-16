@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.19 — plató menos deslumbrante, cabinas que solo muestran su dinero, plataformas al lado de las cabinas y viñeta de cómic del presentador.
+- Versión: 0.25 — catálogos de bocetos de ropa, pelo y calzado para el player; concursante chibi riggeado con las animaciones de Starter Assets.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -398,6 +398,37 @@ Pendientes prioritarios:
 
 ## 15. Historial de cambios
 
+### Versión 0.25 — 16 de octubre de 2026
+
+- Se añaden [diez bocetos de calzado](bocetos/player/shoes/README.md), uno por cada conjunto de ropa. Una única lámina de cuatro vistas de un zapato por diseño, con puntera, empeine y talón cerrados para envolver el pie base completo. Incluye relación con cada clothe y criterios de encaje que se verificarán al modelar; no se modifican recursos de Unity ni el juego.
+
+
+### Versión 0.24 — 16 de octubre de 2026
+
+- Se añaden los [seis bocetos de pelo](bocetos/player/hair/README.md): Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de cuatro vistas de pelo aislado por peinado, usando la cabeza base como referencia de volumen. El encaje exacto se comprobará al modelar; no se modifican modelos ni el juego.
+
+
+### Versión 0.23 — 16 de octubre de 2026
+
+- Se completa el [catálogo de ropa](bocetos/player/clothes/README.md) con diez estilos: se añaden Chef, Retro Sport y Winter. Una única lámina de cuatro vistas por conjunto, solo ropa aislada, sin player, calzado ni accesorios; sin cambios al juego.
+
+
+### Versión 0.22 — 16 de octubre de 2026
+
+- Se amplía el [catálogo de ropa](bocetos/player/clothes/README.md) con Casual, Gardener, Elegant, Explorer, Pajamas y Raincoat. Una única imagen de cuatro vistas por conjunto, solo ropa aislada, proporcionada para la base T-pose. Zapatos y pelo separados; sin cambios a modelos ni al juego.
+
+
+### Versión 0.21 — 16 de octubre de 2026
+
+- Primer atuendo documentado en [clothes: Blue Tracksuit](bocetos/player/clothes/01-blue-tracksuit/README.md), con chaqueta y pantalón del diseño original. Incluye una única lámina de ropa aislada, proporcionada para la base T-pose. El calzado se trabaja por separado; no modifica el personaje jugable.
+
+- Bocetos organizados por player, presentador, plató y recursos, con índices y enlaces actualizados.
+- Nuevas láminas base del player en T-pose y A-pose, sin ropa, zapatos ni pelo, para futuras piezas intercambiables. Mantienen el mismo diseño y cambian la postura de los brazos. El antiguo despiece queda retirado; la referencia pasa a ser el [cuerpo completo](bocetos/player/base/README.md). Trabajo limitado a documentación e imágenes, sin cambios al modelo jugable.
+
+### Versión 0.20 — 16 de octubre de 2026
+
+- El concursante deja de ser el maniquí de Starter Assets: ahora es el modelo oficial del personaje chibi (pelo castaño rizado, chándal azul, 1,65 m) tal cual, con su textura de luz pintada, riggeado en Blender y con las mismas animaciones. Los trajes de colores tiñen solo el chándal y los cosméticos se adaptan a su cabeza grande. La cámara sube un poco para ver por encima de la cabeza. Detalle en [PLAYER](PLAYER.md).
+
 ### Versión 0.19 — 16 de octubre de 2026
 
 - El plató deslumbraba: focos de color más suaves (de 30–85 a 12–36), bombillas que no pasan de 1,3 de brillo, resplandor solo en lo que de verdad está encendido, colores sin saturar y luces fuertes suavizadas (tonemapping).
@@ -420,7 +451,7 @@ Pendientes prioritarios:
 
 ### Versión 0.16 — 16 de octubre de 2026
 
-- Nuevo [cuerpo base modular del concursante](modelado/player/README.md), modelado localmente sin vestuario, cabello ni zapatos, con materiales y texturas. Asset independiente; su rig, animación e integración en el prefab quedan pendientes.
+- Se exploró un cuerpo base modular y un peinado independiente en 3D. Sus archivos documentales se retiraron posteriormente; la referencia visual vigente es el [nuevo boceto base](bocetos/player/base/README.md).
 
 - Estación de cambio y botón de verificar al pie de la pantalla, a los lados (posición elegida por el usuario en el editor).
 - El presentador pasa al centro, entre la pantalla y las dos estaciones, a pie de suelo; su viñeta sale al lado de la cabeza para no tapar la pregunta. La tarima de la esquina pasa a ser una plataforma de cámara.
