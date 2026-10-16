@@ -13,7 +13,7 @@ Referencias organizadas por sujeto. Empieza por el índice de cada carpeta; cada
 
 ## Personajes del player
 
-El catálogo vigente muestra cada personaje completo, con pelo, ropa y calzado, en una sola lámina de ocho vistas en A-pose. [Blue Tracksuit](player/characters/01-blue-tracksuit/README.md) es la referencia original. Las piezas separadas, las bases y las T-poses se conservan en el [archivo histórico](player/archivo/README.md).
+El catálogo vigente muestra cada personaje completo, con pelo, ropa y calzado, en una sola lámina de ocho vistas en A-pose. [Blue Tracksuit](player/characters/01-blue-tracksuit/README.md) es la referencia original. Las piezas separadas, las bases y las T-poses fueron eliminadas; el [archivo histórico restante](player/archivo/README.md) conserva otros antecedentes.
 
 ## Uso de las referencias
 

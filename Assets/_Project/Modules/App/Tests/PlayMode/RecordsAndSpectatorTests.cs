@@ -100,7 +100,7 @@ namespace Trivias.App.Tests
         public IEnumerator TestRunVictory_DoesNotEnterTheRecords_AndSaysWhy()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             var config = (MatchConfig)typeof(MatchSessionNetwork).GetField("_config", PRIVATE).GetValue(match);
             var original = (int)StartField.GetValue(config);
@@ -129,12 +129,12 @@ namespace Trivias.App.Tests
         public IEnumerator Defeat_DoesNotTalkAboutRecords()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             Assert.That(match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(match.Result.StartedAtFirstQuestion, Is.True, "Partida normal, desde la pregunta 1.");
             Assert.That(match.Result.StartingPlayers, Is.EqualTo(1));
@@ -152,7 +152,7 @@ namespace Trivias.App.Tests
         public IEnumerator Eliminated_WatchesActivePlayers_AndGetsBackOnRespawn()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var player = NetworkManager.Singleton.LocalClient.PlayerObject;
             var local = player.GetComponent<IPlayerAvatar>();
             var spectator = Object.FindAnyObjectByType<SpectatorController>();
@@ -205,7 +205,7 @@ namespace Trivias.App.Tests
         public IEnumerator SpectatorBanner_HidesWhenTheMatchIsOver()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var local = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<IPlayerAvatar>();
             var spectator = Object.FindAnyObjectByType<SpectatorController>();
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
@@ -216,12 +216,21 @@ namespace Trivias.App.Tests
 
             // Todo el dinero fuera de las bandejas: al verificar se pierde y la partida acaba en derrota.
             // (Se verifica antes de eliminarlo: un eliminado no puede pulsar el botón.)
-            match.RequestVerify();
-            yield return null;
-            local.Eliminate();
-            yield return new WaitForSeconds(2.8f);
-            Assert.That(spectator.IsBannerShown, Is.True, "Durante la cuenta atrás y la revelación se ve el rótulo.");
-            yield return new WaitForSeconds(3.3f + 7.3f - 2.8f);
+            // La expulsión dura 2,8 s: la revelación de esta prueba dura lo justo para verla terminar.
+            PlayModeHelpers.SetPace(PlayModeHelpers.LOCK_SECONDS, 3f);
+            try
+            {
+                match.RequestVerify();
+                yield return null;
+                local.Eliminate();
+                yield return new WaitForSeconds(2.8f);
+                Assert.That(spectator.IsBannerShown, Is.True, "Durante la cuenta atrás y la revelación se ve el rótulo.");
+                yield return new WaitForSeconds(PlayModeHelpers.LOCK_SECONDS + 3f - 2.8f + 0.3f);
+            }
+            finally
+            {
+                PlayModeHelpers.SetPace(PlayModeHelpers.LOCK_SECONDS, PlayModeHelpers.REVEAL_SECONDS);
+            }
             Assert.That(match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(spectator.IsBannerShown, Is.False, "En los resultados el rótulo sobra.");
             Assert.That(Object.FindAnyObjectByType<ResultsView>().IsShown, Is.True);
@@ -246,7 +255,7 @@ namespace Trivias.App.Tests
             tray.Interact(new InteractionContext(player.OwnerClientId, InteractionAction.Secondary));
             yield return null;
             match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             yield return null;
         }
 

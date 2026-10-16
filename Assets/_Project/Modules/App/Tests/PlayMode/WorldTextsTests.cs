@@ -36,7 +36,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -192,11 +192,21 @@ namespace Trivias.App.Tests
         {
             var hud = Object.FindAnyObjectByType<MatchHudView>();
             var question = _match.CurrentQuestion;
-            foreach (var text in hud.GetComponentsInChildren<TextMeshProUGUI>(true))
+            foreach (var label in hud.GetComponentsInChildren<TextMeshProUGUI>(true))
             {
+                // Lo que se lee, sin etiquetas de formato (un «<size=60%>» no es la opción «60»).
+                var text = (name: label.name, text: System.Text.RegularExpressions.Regex.Replace(label.text, "<[^>]+>", ""));
                 Assert.That(text.text, Does.Not.Contain(question.Text), $"«{text.name}» muestra la pregunta: debe verse solo en la pantalla.");
+                // Una opción corta («60», «100») puede salir dentro de otra cifra (el dinero): esas, solo como línea entera.
+                var lines = text.text.Split('\n');
                 for (var option = 0; option < 4; option++)
-                    Assert.That(text.text, Does.Not.Contain(question.Option(option)), $"«{text.name}» muestra una opción.");
+                {
+                    var answer = question.Option(option);
+                    if (answer.Length >= 6)
+                        Assert.That(text.text, Does.Not.Contain(answer), $"«{text.name}» muestra una opción.");
+                    else
+                        Assert.That(lines, Has.None.EqualTo(answer), $"«{text.name}» muestra una opción.");
+                }
             }
         }
 

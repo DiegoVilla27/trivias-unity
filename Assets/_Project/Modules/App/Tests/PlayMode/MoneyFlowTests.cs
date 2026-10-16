@@ -27,7 +27,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync(STAGE_SCENE, LoadSceneMode.Single);
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             // El dinero solo se puede tocar con la partida empezada.
             Assert.That(connection.TryStartMatch(), Is.True);
             yield return null;

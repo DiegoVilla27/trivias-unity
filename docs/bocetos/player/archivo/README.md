@@ -1,10 +1,10 @@
 # Archivo histórico del player
 
-El trabajo vigente está en [personajes completos en A-pose](../characters/README.md).
+El catálogo vigente está en [personajes completos en A-pose](../characters/README.md).
 
-- [Diseño modular anterior](diseno-modular/README.md): ropa, pelo, zapatos y bases que sirvieron para diseñar los personajes.
-- [Poses originales retiradas](poses-originales/README.md): T-pose y sus prompts, conservados como antecedentes.
-- [Referencia general original](referencias-originales/personaje-modelado-01.png).
-- [Brief histórico de modelado 3D](prompt-modelado-3d-player.md).
+Se conservan únicamente:
 
-Este archivo conserva antecedentes sin convertirlos en entregables actuales. No se generan nuevas T-poses ni nuevos despieces salvo una petición posterior explícita.
+- [Referencia general original](referencias-originales/personaje-modelado-01.png) y su [prompt](referencias-originales/personaje-modelado-01-prompt.md).
+- [Brief histórico de modelado 3D](prompt-modelado-3d-player.md), anterior al flujo de personajes completos.
+
+El usuario eliminó los antiguos bocetos separados de ropa, pelo y zapatos, las bases y las poses históricas. No están disponibles y no deben restaurarse ni utilizarse como referencias actuales.

@@ -40,7 +40,7 @@ namespace Trivias.App.Tests
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             _shop = Object.FindAnyObjectByType<ShopView>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             _player = NetworkManager.Singleton.LocalClient.PlayerObject;
         }
 
@@ -149,7 +149,7 @@ namespace Trivias.App.Tests
             yield return null;
             yield return null;
             match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             Assert.That(match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(match.Result.TokensEach, Is.EqualTo(50));
             Assert.That(_profile.Tokens, Is.EqualTo(50), "Las fichas se guardan al ver los resultados.");

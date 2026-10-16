@@ -37,7 +37,7 @@ namespace Trivias.App.Tests
             _feedback = Object.FindAnyObjectByType<GameFeedbackPlayer>();
             _confetti = Object.FindAnyObjectByType<StageConfetti>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             _player = NetworkManager.Singleton.LocalClient.PlayerObject;
             _played.Clear();
             _feedback.CuePlayed += _played.Add;
@@ -118,12 +118,13 @@ namespace Trivias.App.Tests
             yield return null;
             Assert.That(_played, Is.EqualTo(new[] { FeedbackCue.Lock, FeedbackCue.CountdownBeep }));
 
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(_played, Does.Contain(FeedbackCue.Trapdoor));
             Assert.That(_played, Does.Contain(FeedbackCue.Fail), "Todo el dinero estaba fuera de las bandejas: se pierde.");
-            Assert.That(_played.FindAll(c => c == FeedbackCue.CountdownBeep).Count, Is.EqualTo(3), "3, 2, 1.");
+            Assert.That(_played.FindAll(c => c == FeedbackCue.CountdownBeep).Count, Is.EqualTo(Mathf.CeilToInt(PlayModeHelpers.LOCK_SECONDS)),
+                "Un pitido por segundo de cuenta atrás (3, 2, 1 en el juego).");
 
-            yield return new WaitForSeconds(7.3f);
+            yield return PlayModeHelpers.AfterReveal();
             Assert.That(match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(_played, Does.Contain(FeedbackCue.Defeat));
             Assert.That(_feedback.CurrentMusicBlock, Is.EqualTo(FeedbackRules.NO_MUSIC));
@@ -150,7 +151,7 @@ namespace Trivias.App.Tests
             yield return null;
 
             match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(match.Phase, Is.EqualTo(MatchPhase.Reveal));
             Assert.That(match.LastRound.Kept, Is.GreaterThan(0), "El dinero estaba en la cabina correcta.");
             Assert.That(_confetti.CorrectCelebrations, Is.EqualTo(1));

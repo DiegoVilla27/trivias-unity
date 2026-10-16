@@ -8,7 +8,7 @@ Referencias visuales: [personajes completos A-pose](bocetos/player/characters/RE
 
 Concursante en juego (16 de octubre de 2026): provisionalmente vuelve a ser el robot de Starter Assets (`PlayerArmature`), con sus animaciones (reposo, andar, correr, saltar, caer). Se descartó vestir un cuerpo base con piezas sueltas (pelo, ropa y zapatos): cada pieza generada trae tantos triángulos como un personaje entero (unos tres millones por concursante vestido, frente a uno de un personaje completo), y encajar piezas de proporciones distintas deja huecos y piel que asoma. El plan es un catálogo de unos diez personajes completos, cada uno riggeado con el mismo esqueleto Humanoid; mientras se modelan, el robot ocupa su lugar.
 
-Antecedentes visuales: las bases sin ropa y las poses de prueba están en el [archivo histórico](bocetos/player/archivo/README.md). Han sido sustituidas como referencia principal de bocetos por los personajes completos en A-pose. Esto no altera el concursante jugable descrito arriba.
+Antecedentes visuales: las bases sin ropa y las poses de prueba fueron eliminadas. La referencia vigente son los personajes completos en A-pose. Esto no altera el concursante jugable descrito arriba.
 
 Un personaje de prototipo bien construido sirve de base para diez personajes disponibles desde el inicio del juego completo. Cabeza grande, cuerpo pequeño, formas redondeadas y apariencia de figura de vinilo, con diseños propios.
 
@@ -16,7 +16,7 @@ Las variantes cambian atuendo, pelo, accesorios, colores y apariencia. Comparten
 
 Catálogo visual vigente: [diez personajes completos en A-pose](bocetos/player/characters/README.md), cada uno en su carpeta y con una única lámina de ocho vistas. Blue Tracksuit conserva la imagen A-pose original aprobada, ahora renombrada; los otros nueve integran sus atuendos, peinados y zapatos sobre la misma identidad visual. No se generan T-poses ni despieces como entregables del catálogo actual.
 
-Los antiguos bocetos separados de ropa, pelo, zapatos y bases se conservan en el [archivo histórico](bocetos/player/archivo/README.md). Este cambio organiza los bocetos de documentación; no modifica los modelos, rigs, prefabs ni el sistema de piezas que esté implementado en Unity.
+Los antiguos bocetos separados de ropa, pelo, zapatos, bases y T-poses fueron eliminados por el usuario. El [archivo histórico restante](bocetos/player/archivo/README.md) conserva únicamente otros antecedentes. Este cambio organiza los bocetos de documentación; no modifica los modelos, rigs, prefabs ni el sistema de piezas que esté implementado en Unity.
 
 ## Estructura propuesta del prefab
 

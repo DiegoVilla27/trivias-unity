@@ -63,7 +63,7 @@ namespace Trivias.App.Tests
         public IEnumerator Match_StartsWithAQuestionNobodyHasSeen_AndRemembersIt()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             var bank = (QuestionBank)typeof(MatchSessionNetwork).GetField("_bank", PRIVATE).GetValue(match);
             var unseenEasy = bank.Questions.Where(q => q.Difficulty == 1).Take(5).Select(q => q.Id).ToList();
@@ -108,7 +108,7 @@ namespace Trivias.App.Tests
         {
             Assert.That(_profile.PlayerName, Is.Empty);
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var avatar = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<Trivias.Shared.Players.IPlayerAvatar>();
             Assert.That(avatar.DisplayName, Is.EqualTo("Jugador 1"));
 
@@ -124,7 +124,7 @@ namespace Trivias.App.Tests
         public IEnumerator Presenter_AnnouncesTheLastQuestion()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             var config = (MatchConfig)typeof(MatchSessionNetwork).GetField("_config", PRIVATE).GetValue(match);
             var original = (int)StartField.GetValue(config);
@@ -162,7 +162,7 @@ namespace Trivias.App.Tests
             tray.Interact(new InteractionContext(player.OwnerClientId, InteractionAction.Secondary));
             yield return null;
             match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             yield return null;
         }
 

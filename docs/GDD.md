@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.29 — catálogo visual de diez personajes completos en A-pose.
+- Versión: 0.30 — documentación de bocetos ajustada a los archivos conservados.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -398,6 +398,11 @@ Pendientes prioritarios:
 
 ## 15. Historial de cambios
 
+### Versión 0.30 — 16 de octubre de 2026
+
+- Se ajustan los índices y prompts a la eliminación de los despieces, bases y poses históricas del player. Se retiran los enlaces a archivos eliminados; permanecen los diez personajes completos en A-pose y el archivo histórico que aún existe. No se restauran imágenes ni se modifica el juego.
+
+
 ### Versión 0.29 — 16 de octubre de 2026
 
 - El catálogo de bocetos pasa a [diez personajes completos en A-pose](bocetos/player/characters/README.md), cada uno en su carpeta. La A-pose original se conserva intacta y se renombra como Blue Tracksuit; se añaden los otros nueve personajes con su ropa, pelo y calzado integrados, en una única lámina de ocho vistas por personaje.
@@ -414,35 +419,35 @@ Pendientes prioritarios:
 
 ### Versión 0.26 — 16 de octubre de 2026
 
-- Se corrigen las diez láminas de [clothes](bocetos/player/archivo/diseno-modular/clothes/README.md) a A-pose usando la base aprobada. Se conservan los diseños, paletas y detalles de las prendas; las mangas bajan en diagonal en frente, espalda y perfiles. Se sustituyen los mismos archivos, manteniendo una imagen por conjunto y solo ropa aislada.
+- Se corrigen las diez láminas de clothes (referencia eliminada) a A-pose usando la base aprobada. Se conservan los diseños, paletas y detalles de las prendas; las mangas bajan en diagonal en frente, espalda y perfiles. Se sustituyen los mismos archivos, manteniendo una imagen por conjunto y solo ropa aislada.
 
 
 ### Versión 0.25 — 16 de octubre de 2026
 
-- Se añaden [diez bocetos de calzado](bocetos/player/archivo/diseno-modular/shoes/README.md), uno por cada conjunto de ropa. Una única lámina de cuatro vistas de un zapato por diseño, con puntera, empeine y talón cerrados para envolver el pie base completo. Incluye relación con cada clothe y criterios de encaje que se verificarán al modelar; no se modifican recursos de Unity ni el juego.
+- Se añaden diez bocetos de calzado (referencia eliminada), uno por cada conjunto de ropa. Una única lámina de cuatro vistas de un zapato por diseño, con puntera, empeine y talón cerrados para envolver el pie base completo. Incluye relación con cada clothe y criterios de encaje que se verificarán al modelar; no se modifican recursos de Unity ni el juego.
 
 
 ### Versión 0.24 — 16 de octubre de 2026
 
-- Se añaden los [seis bocetos de pelo](bocetos/player/archivo/diseno-modular/hair/README.md): Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de cuatro vistas de pelo aislado por peinado, usando la cabeza base como referencia de volumen. El encaje exacto se comprobará al modelar; no se modifican modelos ni el juego.
+- Se añaden los seis bocetos de pelo (referencia eliminada): Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de cuatro vistas de pelo aislado por peinado, usando la cabeza base como referencia de volumen. El encaje exacto se comprobará al modelar; no se modifican modelos ni el juego.
 
 
 ### Versión 0.23 — 16 de octubre de 2026
 
-- Se completa el [catálogo de ropa](bocetos/player/archivo/diseno-modular/clothes/README.md) con diez estilos: se añaden Chef, Retro Sport y Winter. Una única lámina de cuatro vistas por conjunto, solo ropa aislada, sin player, calzado ni accesorios; sin cambios al juego.
+- Se completa el catálogo de ropa (referencia eliminada) con diez estilos: se añaden Chef, Retro Sport y Winter. Una única lámina de cuatro vistas por conjunto, solo ropa aislada, sin player, calzado ni accesorios; sin cambios al juego.
 
 
 ### Versión 0.22 — 16 de octubre de 2026
 
-- Se amplía el [catálogo de ropa](bocetos/player/archivo/diseno-modular/clothes/README.md) con Casual, Gardener, Elegant, Explorer, Pajamas y Raincoat. Una única imagen de cuatro vistas por conjunto, solo ropa aislada, proporcionada para la base T-pose. Zapatos y pelo separados; sin cambios a modelos ni al juego.
+- Se amplía el catálogo de ropa (referencia eliminada) con Casual, Gardener, Elegant, Explorer, Pajamas y Raincoat. Una única imagen de cuatro vistas por conjunto, solo ropa aislada, proporcionada para la base T-pose. Zapatos y pelo separados; sin cambios a modelos ni al juego.
 
 
 ### Versión 0.21 — 16 de octubre de 2026
 
-- Primer atuendo documentado en [clothes: Blue Tracksuit](bocetos/player/archivo/diseno-modular/clothes/01-blue-tracksuit/README.md), con chaqueta y pantalón del diseño original. Incluye una única lámina de ropa aislada, proporcionada para la base T-pose. El calzado se trabaja por separado; no modifica el personaje jugable.
+- Primer atuendo documentado en clothes: Blue Tracksuit (referencia eliminada), con chaqueta y pantalón del diseño original. Incluye una única lámina de ropa aislada, proporcionada para la base T-pose. El calzado se trabaja por separado; no modifica el personaje jugable.
 
 - Bocetos organizados por player, presentador, plató y recursos, con índices y enlaces actualizados.
-- Nuevas láminas base del player en T-pose y A-pose, sin ropa, zapatos ni pelo, para futuras piezas intercambiables. Mantienen el mismo diseño y cambian la postura de los brazos. El antiguo despiece queda retirado; la referencia pasa a ser el [cuerpo completo](bocetos/player/archivo/diseno-modular/base/README.md). Trabajo limitado a documentación e imágenes, sin cambios al modelo jugable.
+- Nuevas láminas base del player en T-pose y A-pose, sin ropa, zapatos ni pelo, para futuras piezas intercambiables. Mantienen el mismo diseño y cambian la postura de los brazos. El antiguo despiece queda retirado; la referencia pasa a ser el cuerpo completo (referencia eliminada). Trabajo limitado a documentación e imágenes, sin cambios al modelo jugable.
 
 ### Versión 0.20 — 16 de octubre de 2026
 
@@ -470,7 +475,7 @@ Pendientes prioritarios:
 
 ### Versión 0.16 — 16 de octubre de 2026
 
-- Se exploró un cuerpo base modular y un peinado independiente en 3D. Sus archivos documentales se retiraron posteriormente; la referencia visual vigente es el [nuevo boceto base](bocetos/player/archivo/diseno-modular/base/README.md).
+- Se exploró un cuerpo base modular y un peinado independiente en 3D. Sus archivos documentales se retiraron posteriormente; la referencia visual vigente es el nuevo boceto base (referencia eliminada).
 
 - Estación de cambio y botón de verificar al pie de la pantalla, a los lados (posición elegida por el usuario en el editor).
 - El presentador pasa al centro, entre la pantalla y las dos estaciones, a pie de suelo; su viñeta sale al lado de la cabeza para no tapar la pregunta. La tarima de la esquina pasa a ser una plataforma de cámara.

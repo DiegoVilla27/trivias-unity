@@ -37,6 +37,16 @@ namespace Trivias.App.Tests
             yield return null;
         }
 
+        [Test]
+        public void Tests_PlayTheMatchAtAFastPace()
+        {
+            var configs = Resources.FindObjectsOfTypeAll<Trivias.Match.Data.MatchConfig>();
+            Assert.That(configs, Has.Length.EqualTo(1), "Una sola configuración de partida.");
+            var config = configs[0];
+            Assert.That(config.LockCountdownSeconds, Is.EqualTo(PlayModeHelpers.LOCK_SECONDS), "Las pruebas no esperan los 3 s reales.");
+            Assert.That(config.RevealSeconds, Is.EqualTo(PlayModeHelpers.REVEAL_SECONDS), "Ni los 7 s de la revelación.");
+        }
+
         [UnityTest]
         public IEnumerator Host_SpawnsLocalPlayerWithControlAndCamera()
         {
@@ -66,7 +76,7 @@ namespace Trivias.App.Tests
         {
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
 
             var player = NetworkManager.Singleton.LocalClient.PlayerObject;
             var gate = (PlayerControlGate)typeof(PlayerMotor)
@@ -89,7 +99,7 @@ namespace Trivias.App.Tests
         {
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
 
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
             Assert.That(transport.DisconnectTimeoutMS, Is.EqualTo(connection.Config.DisconnectTimeoutSeconds * 1000),

@@ -33,7 +33,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -73,7 +73,7 @@ namespace Trivias.App.Tests
             Assert.That(_bets.Book.Bettors[0].Booth, Is.EqualTo(correct), "No quedó apostado.");
 
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
 
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Reveal));
             Assert.That(_match.LastMultiplier, Is.EqualTo(2));
@@ -93,11 +93,11 @@ namespace Trivias.App.Tests
             yield return StandInZoneAndBet(wrong);
 
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(Avatar().IsEliminated, Is.True, "Fallar el comodín expulsa.");
             Assert.That(_match.LastEliminated, Does.Contain("Jugador 1"));
 
-            yield return new WaitForSeconds(7.3f);
+            yield return PlayModeHelpers.AfterReveal();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Defeat), "Sin concursantes activos es derrota.");
         }
 

@@ -18,7 +18,7 @@ Documentos derivados del [GDD](GDD.md), referencia principal de reglas y alcance
 
 Los bocetos se organizan por [player](bocetos/player/README.md), [presentador](bocetos/presentador/README.md), [plató](bocetos/plato/README.md) y [recursos](bocetos/recursos/README.md). Los ZIP están reunidos en [paquetes](bocetos/paquetes/README.md).
 
-La referencia actual para futuras piezas del jugador es la [base completa en T-pose y A-pose](bocetos/player/archivo/diseno-modular/base/README.md), sin ropa, pelo ni zapatos. El antiguo despiece se retiró.
+La referencia visual actual del jugador es el [catálogo de diez personajes completos en A-pose](bocetos/player/characters/README.md). Las bases, T-poses y piezas separadas anteriores fueron eliminadas.
 
 ## Cómo mantenerlos
 

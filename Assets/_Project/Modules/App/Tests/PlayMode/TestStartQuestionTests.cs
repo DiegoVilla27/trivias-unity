@@ -34,7 +34,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             _player = NetworkManager.Singleton.LocalClient.PlayerObject;
             _match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             _config = (MatchConfig)typeof(MatchSessionNetwork).GetField("_config", PRIVATE).GetValue(_match);
@@ -95,7 +95,7 @@ namespace Trivias.App.Tests
             yield return null;
 
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
 
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Victory));
             Assert.That(_match.Result.Victory, Is.True);

@@ -52,7 +52,7 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 10 Ranking | Récords locales hechos (por tamaño de grupo, dinero y tiempo, empates compartidos). Ranking global pendiente (con Steam) |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |
 
-Cada cambio se valida con Build All y la batería completa de pruebas (EditMode y PlayMode).
+Cada cambio se valida con Build All y la batería completa de pruebas (EditMode y PlayMode). Desde el 16 de octubre de 2026 la verificación completa tarda unos 3 minutos (antes, más de 5): en las pruebas en juego la cuenta atrás y la revelación duran 0,5 y 1 s, y se espera a que la sala esté lista en lugar de esperas fijas. El juego mantiene sus 3 y 7 s.
 
 ## Pruebas imprescindibles
 

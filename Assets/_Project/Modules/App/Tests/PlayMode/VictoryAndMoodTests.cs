@@ -40,7 +40,7 @@ namespace Trivias.App.Tests
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             _lighting = Object.FindAnyObjectByType<StageLighting>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             _player = NetworkManager.Singleton.LocalClient.PlayerObject;
             _match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             _config = (MatchConfig)typeof(MatchSessionNetwork).GetField("_config", PRIVATE).GetValue(_match);
@@ -100,7 +100,7 @@ namespace Trivias.App.Tests
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(Object.FindAnyObjectByType<ResultsView>().IsShown, Is.True);
             Assert.That(Object.FindAnyObjectByType<QuestionScreenView>().IsShowingCheck, Is.False);
@@ -126,7 +126,7 @@ namespace Trivias.App.Tests
             yield return null;
             yield return null;
             Assert.That(_lighting.Mood, Is.EqualTo(StageMood.Countdown));
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(_lighting.Mood, Is.EqualTo(StageMood.Wrong), "Todo el dinero estaba fuera: fallo en rojo.");
         }
 
@@ -161,7 +161,7 @@ namespace Trivias.App.Tests
             tray.Interact(new InteractionContext(_player.OwnerClientId, InteractionAction.Secondary));
             yield return null;
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Victory));
             yield return null;
         }

@@ -21,11 +21,11 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
 
-Referencia visual modular del player (16 de octubre de 2026): [boceto base completo](bocetos/player/archivo/diseno-modular/base/README.md), sin ropa, pelo ni zapatos. Se usará para diseñar futuras prendas y accesorios. El antiguo despiece se retiró. Esta referencia es solo una imagen; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md). Se descartaron las piezas sueltas en el juego: el concursante será uno de unos diez personajes completos (de momento, el robot de Starter Assets).
+La referencia visual vigente del player es el catálogo de personajes completos en A-pose; las bases y los despieces anteriores fueron eliminados. El catálogo es documentación visual; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md). Se descartaron las piezas sueltas en el juego: el concursante será uno de unos diez personajes completos (de momento, el robot de Starter Assets).
 
 Catálogo visual vigente: [diez personajes completos en A-pose](bocetos/player/characters/README.md), cada uno en su carpeta y con una única lámina de ocho vistas. Blue Tracksuit conserva la imagen A-pose original aprobada, ahora renombrada; los otros nueve integran sus atuendos, peinados y zapatos sobre la misma identidad visual. No se generan T-poses ni despieces como entregables del catálogo actual.
 
-Los antiguos bocetos separados de ropa, pelo, zapatos y bases se conservan en el [archivo histórico](bocetos/player/archivo/README.md). Este cambio organiza los bocetos de documentación; no modifica los modelos, rigs, prefabs ni el sistema de piezas que esté implementado en Unity.
+Los antiguos bocetos separados de ropa, pelo, zapatos, bases y T-poses fueron eliminados por el usuario. El [archivo histórico restante](bocetos/player/archivo/README.md) conserva únicamente otros antecedentes. Este cambio organiza los bocetos de documentación; no modifica los modelos, rigs, prefabs ni el sistema de piezas que esté implementado en Unity.
 
 ## Kit modular de ambiente
 

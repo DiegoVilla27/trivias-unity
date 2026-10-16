@@ -29,7 +29,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
 
             _match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             _money = Object.FindAnyObjectByType<MoneySessionNetwork>();
@@ -83,14 +83,14 @@ namespace Trivias.App.Tests
             yield return null;
             Assert.That(_money.Ledger.CountCarriedBy(_player.OwnerClientId), Is.Zero, "Se cogió dinero con las apuestas cerradas.");
 
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Reveal));
             Assert.That(_match.CorrectBooth, Is.EqualTo(correct));
             Assert.That(_match.LastRound.Kept, Is.EqualTo(25_000));
             Assert.That(_match.LastRound.Lost, Is.EqualTo(75_000), "Bandeja incorrecta (25.000) + mesa (50.000).");
             Assert.That(_match.TeamMoney, Is.EqualTo(25_000));
 
-            yield return new WaitForSeconds(7.3f);
+            yield return PlayModeHelpers.AfterReveal();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Betting), "Debe pasar a la pregunta 2.");
             Assert.That(_match.QuestionNumber, Is.EqualTo(2));
             Assert.That(_money.IsLocked, Is.False, "El dinero se desbloquea con la nueva pregunta.");
@@ -100,9 +100,9 @@ namespace Trivias.App.Tests
         public IEnumerator VerifyWithoutBetting_EndsInDefeat()
         {
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(_match.TeamMoney, Is.Zero);
-            yield return new WaitForSeconds(7.3f);
+            yield return PlayModeHelpers.AfterReveal();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Defeat));
         }
 

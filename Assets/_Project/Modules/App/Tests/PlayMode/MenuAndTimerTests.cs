@@ -54,7 +54,7 @@ namespace Trivias.App.Tests
             Assert.That(Panel("_lobbyPanel").activeSelf, Is.False);
 
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(Panel("_mainPanel").activeSelf, Is.False);
             Assert.That(Panel("_lobbyPanel").activeSelf, Is.True, "Con la sala creada se ve la sala de espera.");
             Assert.That(HudPanel().activeSelf, Is.False, "En la sala no se muestra el HUD de la partida.");
@@ -70,7 +70,7 @@ namespace Trivias.App.Tests
         public IEnumerator BettingTimer_VerifiesAutomaticallyWhenItRunsOut()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
 
             var match = Object.FindAnyObjectByType<MatchSessionNetwork>();
             _config = (MatchConfig)typeof(MatchSessionNetwork).GetField("_config", PRIVATE).GetValue(match);
@@ -85,7 +85,7 @@ namespace Trivias.App.Tests
             Assert.That(match.PhaseSecondsLeft, Is.GreaterThan(0f).And.LessThanOrEqualTo(2f));
 
             yield return new WaitForSeconds(2.5f);
-            Assert.That(match.Phase, Is.EqualTo(MatchPhase.Locked), "Al acabarse el tiempo se verifica sola.");
+            Assert.That(match.Phase, Is.Not.EqualTo(MatchPhase.Betting), "Al acabarse el tiempo se verifica sola.");
         }
 
         private GameObject Panel(string field) => (GameObject)typeof(MenuView).GetField(field, PRIVATE).GetValue(_menu);

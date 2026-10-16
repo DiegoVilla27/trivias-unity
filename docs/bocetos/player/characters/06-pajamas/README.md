@@ -6,7 +6,7 @@ Personaje completo con el atuendo y calzado Pajamas previamente diseñados. Pein
 
 Una única lámina de ocho vistas: frente, espalda, perfiles opuestos, superior, inferior y tres cuartos delantero y trasero. Brazos bajados en A-pose. Pelo, ropa y zapatos aparecen integrados en el personaje; el calzado cubre el pie.
 
-Referencias de diseño conservadas en el archivo: [ropa](../../archivo/diseno-modular/clothes/06-pajamas/README.md), [calzado](../../archivo/diseno-modular/shoes/06-pajamas/README.md) y [peinado](../../archivo/diseno-modular/hair/06-twin-buns/README.md). Son antecedentes; este boceto completo es la referencia vigente del personaje.
+Las antiguas referencias separadas de ropa, calzado y pelo fueron eliminadas. Este boceto completo es la referencia vigente del personaje.
 
 Son bocetos artísticos; al modelar se comprobará la coherencia entre vistas y el encaje. En este trabajo solo se modifica documentación.
 

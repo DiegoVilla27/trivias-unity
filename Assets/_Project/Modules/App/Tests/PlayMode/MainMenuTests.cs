@@ -80,7 +80,7 @@ namespace Trivias.App.Tests
             Assert.That(_menu.IsBackdropShown, Is.True, "También al unirse a una sala.");
 
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_menu.IsLobbyOpen, Is.True);
             Assert.That(_menu.IsBackdropShown, Is.False, "En la sala de espera se ve el plató.");
         }
@@ -128,7 +128,7 @@ namespace Trivias.App.Tests
         public IEnumerator CreatingARoom_ShowsTheAddressToShare()
         {
             MenuButton("_hostButton").onClick.Invoke();
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_menu.IsLobbyOpen, Is.True);
             var invite = (GameObject)typeof(MenuView).GetField("_invitePanel", PRIVATE).GetValue(_menu);
             Assert.That(invite.activeSelf, Is.True, "El host ve «Invita a tus amigos».");
@@ -182,7 +182,7 @@ namespace Trivias.App.Tests
         public IEnumerator Escape_InTheLobby_DoesNotPause()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             _pause.HandleEscape();
             Assert.That(_pause.IsOpen, Is.False, "En la sala de espera no hay pausa: ya está el menú.");
         }
@@ -192,7 +192,7 @@ namespace Trivias.App.Tests
         {
             var gate = Gate();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -211,7 +211,7 @@ namespace Trivias.App.Tests
         public IEnumerator Escape_ClosesTheTutorialBeforeThePause()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             _pause.HandleEscape();
@@ -227,7 +227,7 @@ namespace Trivias.App.Tests
         public IEnumerator LeavingFromThePause_AsksFirst_ThenReturnsToTheMainMenu()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             _pause.HandleEscape();

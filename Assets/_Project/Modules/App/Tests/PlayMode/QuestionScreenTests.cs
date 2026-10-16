@@ -46,7 +46,7 @@ namespace Trivias.App.Tests
         public IEnumerator Lobby_ShowsGetReadyMessage()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(Content().activeSelf, Is.False);
             Assert.That(Text("_message").gameObject.activeSelf, Is.True);
             Assert.That(Text("_message").text, Is.EqualTo("¿PREPARADOS?"));
@@ -83,7 +83,7 @@ namespace Trivias.App.Tests
             yield return null;
             Assert.That(Text("_status").text, Does.StartWith("CERRADO"));
 
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             var correct = _match.CorrectBooth;
             Assert.That(Text("_status").text, Does.StartWith($"CORRECTA: {(char)('A' + correct)}"));
             Assert.That(Text("_status").text, Does.Contain(_match.CurrentQuestion.Explanation), "La explicación se ve en la pantalla.");
@@ -96,7 +96,7 @@ namespace Trivias.App.Tests
         {
             yield return StartMatch();
             _match.RequestVerify(); // Sin apostar nada: con la regla provisional se pierde todo.
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Defeat));
             Assert.That(Content().activeSelf, Is.False);
             Assert.That(Text("_message").text, Is.EqualTo("DERROTA"));
@@ -105,7 +105,7 @@ namespace Trivias.App.Tests
         private IEnumerator StartMatch()
         {
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;

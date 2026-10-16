@@ -43,7 +43,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             var connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -75,7 +75,7 @@ namespace Trivias.App.Tests
             Assert.That(tubes.TryGet(TubeKind.Money, wrong, out var tube), Is.True, "Cada cabina tiene su tubo del dinero.");
 
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Reveal));
             Assert.That(presenter.FlightsInProgress, Is.GreaterThan(0), "Los fajos de la bandeja falsa empiezan a subir.");
             Assert.That(tube.IsSucking, Is.True, "El tubo sopla aire y suena al succionar.");
@@ -114,7 +114,7 @@ namespace Trivias.App.Tests
             Assert.That(tubes.TryGet(TubeKind.Player, wrong, out var tube), Is.True);
 
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(tube.IsSucking, Is.True, "Su tubo succiona.");
 
             var highest = model.position.y;
@@ -148,7 +148,7 @@ namespace Trivias.App.Tests
             Assert.That(bulbs.Mood, Is.EqualTo(StageMood.Countdown), "Las bombillas parpadean en la cuenta atrás.");
             Assert.That(Vector3.Distance(cameras.Focus, button.transform.position), Is.LessThan(0.1f), "Las cámaras miran el botón.");
 
-            yield return new WaitForSeconds(3.3f);
+            yield return PlayModeHelpers.AfterLock();
             Assert.That(crowd.Reaction, Is.EqualTo(CrowdReaction.Applause), "El público aplaude el acierto.");
             var figure = ((Transform[])typeof(AudienceCrowd).GetField("_figures", PRIVATE).GetValue(crowd))[0];
             float low = float.MaxValue, high = float.MinValue;

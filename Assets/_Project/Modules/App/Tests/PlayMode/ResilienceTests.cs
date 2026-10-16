@@ -35,7 +35,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -62,7 +62,7 @@ namespace Trivias.App.Tests
             Assert.That(NetworkManager.Singleton.IsListening, Is.False);
 
             Assert.That(_connection.StartHost(), Is.True, "Se debe poder crear otra sala tras cerrar la anterior.");
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;

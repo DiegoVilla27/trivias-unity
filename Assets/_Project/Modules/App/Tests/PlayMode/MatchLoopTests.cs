@@ -32,7 +32,7 @@ namespace Trivias.App.Tests
             yield return SceneManager.LoadSceneAsync("Stage", LoadSceneMode.Single);
             _connection = Object.FindAnyObjectByType<ConnectionService>();
             Assert.That(_connection.StartHost(), Is.True);
-            yield return new WaitForSeconds(0.5f);
+            yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_connection.TryStartMatch(), Is.True);
             yield return null;
             yield return null;
@@ -81,7 +81,7 @@ namespace Trivias.App.Tests
             yield return null;
             yield return null;
             _match.RequestVerify();
-            yield return new WaitForSeconds(3.3f + 7.3f);
+            yield return PlayModeHelpers.AfterRound();
 
             Assert.That(_match.Phase, Is.EqualTo(MatchPhase.Defeat));
             var result = _match.Result;
@@ -89,7 +89,8 @@ namespace Trivias.App.Tests
             Assert.That(result.QuestionsPassed, Is.Zero);
             Assert.That(result.TokensEach, Is.Zero);
             Assert.That(result.Eliminated, Does.Contain("Jugador 1"));
-            Assert.That(result.DurationSeconds, Is.GreaterThan(9f), "El tiempo incluye cuenta atrás y revelación.");
+            Assert.That(result.DurationSeconds, Is.GreaterThan(PlayModeHelpers.LOCK_SECONDS + PlayModeHelpers.REVEAL_SECONDS),
+                "El tiempo incluye cuenta atrás y revelación.");
             Assert.That(ResultsPanel().activeSelf, Is.True, "Debe verse la pantalla de resultados.");
 
             // Volver a jugar.

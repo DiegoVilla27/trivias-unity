@@ -1,3 +1,5 @@
+> Brief histórico sin vigencia para el flujo actual. Las bases y despieces que utilizaba fueron eliminados; consultar los [personajes completos en A-pose](../characters/README.md). No ejecutar este brief como instrucción actual.
+
 # Prompt de producción: personaje 3D base modular
 
 Actúa como un artista profesional de personajes 3D para videojuegos, especializado en personajes estilizados cute, topología para animación, materiales y texturas para Unity. Crea un modelo 3D editable y terminado del personaje definido en las referencias de este proyecto. La prioridad es reproducir su identidad visual y construir una base sólida para animarlo y personalizarlo posteriormente.
@@ -10,7 +12,7 @@ Analiza primero estas imágenes, utilizando rutas relativas a la raíz del proye
 
 - `docs/bocetos/player/poses/personaje-a-pose.png`: referencia principal de identidad, proporciones y silueta general.
 - `docs/bocetos/player/poses/personaje-t-pose.png`: comprobación adicional de proporciones.
-- `docs/bocetos/player/base/personaje-base-t-pose.png`: cuerpo completo sin ropa, pelo ni zapatos; sustituye al antiguo despiece retirado.
+- La antigua referencia de cuerpo base fue eliminada y no está disponible.
 
 Actualización del 16 de octubre de 2026: el usuario retiró las láminas individuales del cuerpo. No utilizarlas ni recuperarlas como fuente activa. Este documento es un antecedente para una fase futura; la tarea actual consiste solo en bocetos.
 

@@ -15,6 +15,6 @@ Diez personajes completos, una carpeta y una única lámina de ocho vistas por p
 | 09 | [Retro Sport](09-retro-sport/README.md) | [A-pose, ocho vistas](09-retro-sport/retro-sport-a-pose.png) | Coleta alta castaña |
 | 10 | [Winter](10-winter/README.md) | [A-pose, ocho vistas](10-winter/winter-a-pose.png) | Rizos compactos castaños |
 
-La ropa, el pelo y el calzado se presentan integrados. Los despieces anteriores y las T-poses se conservan únicamente como [archivo histórico](../archivo/README.md). Los bocetos son referencias artísticas; comprobar proporciones y detalles al modelar.
+La ropa, el pelo y el calzado se presentan integrados. Los despieces anteriores, las bases y las T-poses fueron eliminados; el [archivo histórico restante](../archivo/README.md) no contiene esas imágenes. Los bocetos son referencias artísticas; comprobar proporciones y detalles al modelar.
 
 [Índice del player](../README.md).
