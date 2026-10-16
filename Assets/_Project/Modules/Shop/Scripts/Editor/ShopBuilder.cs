@@ -34,14 +34,14 @@ namespace Trivias.Shop.Editor
         {
             var items = new List<CosmeticItem>
             {
-                new("gorra", "Gorra", CosmeticSlot.Head, ACCESSORY_PRICE, Cap(), new Vector3(0f, 0.15f, 0f), Color.white),
-                new("gafas", "Gafas de sol", CosmeticSlot.Face, ACCESSORY_PRICE, Glasses(), new Vector3(0f, 0.02f, 0.17f), Color.white),
-                new("pajarita", "Pajarita", CosmeticSlot.Neck, ACCESSORY_PRICE, BowTie(), new Vector3(0f, -0.1f, 0.08f), Color.white),
+                new("gorra", "Gorra", CosmeticSlot.Head, ACCESSORY_PRICE, Cap(), new Vector3(0f, 0.1f, 0f), Color.white),
+                new("gafas", "Gafas de sol", CosmeticSlot.Face, ACCESSORY_PRICE, Glasses(), new Vector3(0f, 0.07f, 0.13f), Color.white),
+                new("pajarita", "Pajarita", CosmeticSlot.Neck, ACCESSORY_PRICE, BowTie(), new Vector3(0f, -0.12f, 0.12f), Color.white),
                 new("color-rojo", "Traje rojo", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.95f, 0.35f, 0.35f)),
                 new("color-azul", "Traje azul", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.4f, 0.6f, 1f)),
                 new("color-verde", "Traje verde", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.45f, 0.95f, 0.55f)),
                 new("corona", "Corona de campeón", CosmeticSlot.Head, SPECIAL_PRICE, Crown(), new Vector3(0f, 0.16f, 0f), Color.white),
-                new("chistera", "Chistera", CosmeticSlot.Head, SPECIAL_PRICE, TopHat(), new Vector3(0f, 0.16f, 0f), Color.white),
+                new("chistera", "Chistera", CosmeticSlot.Head, SPECIAL_PRICE, TopHat(), new Vector3(0f, 0.14f, 0f), Color.white),
                 new("color-dorado", "Traje dorado", CosmeticSlot.Color, SPECIAL_PRICE, null, Vector3.zero, new Color(1f, 0.82f, 0.35f)),
             };
 

@@ -18,21 +18,21 @@ MonoBehaviour:
     _slot: 0
     _price: 300
     _prefab: {fileID: 49513379464189433, guid: ba9dc1a47f19c4d77b69fdd5926d2748, type: 3}
-    _offset: {x: 0, y: 0.15, z: 0}
+    _offset: {x: 0, y: 0.1, z: 0}
     _tint: {r: 1, g: 1, b: 1, a: 1}
   - _id: gafas
     _displayName: Gafas de sol
     _slot: 1
     _price: 300
     _prefab: {fileID: 4538672634362182995, guid: 5f31fb47a5b8e45d79b8e4d102a7b097, type: 3}
-    _offset: {x: 0, y: 0.02, z: 0.17}
+    _offset: {x: 0, y: 0.07, z: 0.13}
     _tint: {r: 1, g: 1, b: 1, a: 1}
   - _id: pajarita
     _displayName: Pajarita
     _slot: 2
     _price: 300
     _prefab: {fileID: 354577097030350883, guid: b4e6e03247b0e4037aaf6cb7c3ade59b, type: 3}
-    _offset: {x: 0, y: -0.1, z: 0.08}
+    _offset: {x: 0, y: -0.12, z: 0.12}
     _tint: {r: 1, g: 1, b: 1, a: 1}
   - _id: color-rojo
     _displayName: Traje rojo
@@ -67,7 +67,7 @@ MonoBehaviour:
     _slot: 0
     _price: 1200
     _prefab: {fileID: 701433945333587708, guid: d7053ffa316f544b594f13c52e4e577e, type: 3}
-    _offset: {x: 0, y: 0.16, z: 0}
+    _offset: {x: 0, y: 0.14, z: 0}
     _tint: {r: 1, g: 1, b: 1, a: 1}
   - _id: color-dorado
     _displayName: Traje dorado

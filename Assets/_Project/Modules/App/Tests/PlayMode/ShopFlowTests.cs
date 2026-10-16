@@ -23,6 +23,7 @@ namespace Trivias.App.Tests
     public sealed class ShopFlowTests
     {
         private const BindingFlags PRIVATE = BindingFlags.Instance | BindingFlags.NonPublic;
+        private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
 
         private ConnectionService _connection;
         private ShopView _shop;
@@ -94,7 +95,7 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
-        public IEnumerator BuyingAColor_IsEquipped_ButNeverTintsTheSkin()
+        public IEnumerator BuyingAColor_TintsTheSuit()
         {
             _profile.AwardMatch("regalo", 1000);
             _shop.Open();
@@ -103,11 +104,13 @@ namespace Trivias.App.Tests
             yield return null;
             yield return null;
 
-            // El cuerpo base no lleva ropa: el color queda comprado y puesto, pero no tiñe nada hasta que haya ropa.
             var avatar = _player.GetComponent<IPlayerAvatar>();
-            Assert.That(avatar.BodyRenderers, Is.Empty);
-            foreach (var renderer in _player.GetComponentsInChildren<SkinnedMeshRenderer>())
-                Assert.That(renderer.HasPropertyBlock(), Is.False, $"{renderer.name}: la piel no se tiñe.");
+            var expected = Catalog().Find("color-rojo").Tint;
+            var block = new MaterialPropertyBlock();
+            avatar.BodyRenderers[0].GetPropertyBlock(block);
+            var actual = block.GetColor(BaseColorId);
+            Assert.That(Vector4.Distance(actual, expected), Is.LessThan(0.01f),
+                $"El traje debe teñirse con el color comprado (esperado {expected}, aplicado {actual}).");
         }
 
         [UnityTest]

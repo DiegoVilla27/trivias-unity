@@ -21,13 +21,11 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
 
-Referencia visual modular del player (16 de octubre de 2026): [boceto base completo](bocetos/player/base/README.md), sin ropa, pelo ni zapatos. Se usará para diseñar futuras prendas y accesorios. El antiguo despiece se retiró. Esta referencia es solo una imagen; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md).
+Referencia visual modular del player (16 de octubre de 2026): [boceto base completo](bocetos/player/archivo/diseno-modular/base/README.md), sin ropa, pelo ni zapatos. Se usará para diseñar futuras prendas y accesorios. El antiguo despiece se retiró. Esta referencia es solo una imagen; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md). Se descartaron las piezas sueltas en el juego: el concursante será uno de unos diez personajes completos (de momento, el robot de Starter Assets).
 
-Vestuario del player: [clothes — Blue Tracksuit](bocetos/player/clothes/01-blue-tracksuit/README.md). Una única lámina de ropa aislada (chaqueta y pantalón), proporcionada para la base. El calzado se trabaja por separado. No implica un modelo nuevo ni un cosmético añadido al juego. El catálogo también incluye Casual, Gardener, Elegant, Explorer, Pajamas, Raincoat, Chef, Retro Sport y Winter (diez estilos en total): una lámina de cuatro vistas por conjunto, solo ropa, en A-pose siguiendo la base aprobada.
+Catálogo visual vigente: [diez personajes completos en A-pose](bocetos/player/characters/README.md), cada uno en su carpeta y con una única lámina de ocho vistas. Blue Tracksuit conserva la imagen A-pose original aprobada, ahora renombrada; los otros nueve integran sus atuendos, peinados y zapatos sobre la misma identidad visual. No se generan T-poses ni despieces como entregables del catálogo actual.
 
-Peinados del player: [catálogo hair](bocetos/player/hair/README.md), con Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de pelo aislado por estilo, con cuatro vistas y referencia al volumen de la cabeza base; el encaje geométrico se verificará al modelar.
-
-Calzado del player: [catálogo shoes](bocetos/player/shoes/README.md). Diez estilos a juego con los diez conjuntos de ropa, una lámina de cuatro vistas por diseño. Puntera, empeine y talón cerrados para cubrir el pie base completo; el encaje geométrico y el solape con los pantalones se comprobarán al modelar.
+Los antiguos bocetos separados de ropa, pelo, zapatos y bases se conservan en el [archivo histórico](bocetos/player/archivo/README.md). Este cambio organiza los bocetos de documentación; no modifica los modelos, rigs, prefabs ni el sistema de piezas que esté implementado en Unity.
 
 ## Kit modular de ambiente
 

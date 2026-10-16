@@ -1,15 +1,11 @@
-# Player — bocetos del personaje
+# Player — personajes completos
 
-Empieza por el [boceto base sin ropa, pelo ni zapatos](base/README.md).
+El catálogo vigente contiene **diez personajes completos en A-pose**, con pelo, ropa y calzado integrados. Cada personaje tiene su propia carpeta y una única lámina de ocho vistas.
 
-| Carpeta | Contenido |
-| --- | --- |
-| [base](base/README.md) | Cuerpo base completo sin ropa, pelo ni zapatos: T-pose y A-pose, ocho vistas cada una |
-| [clothes](clothes/README.md) | Ropa aislada en A-pose, proporcionada para la base y sin calzado; diez conjuntos, incluido Blue Tracksuit |
-| [shoes](shoes/README.md) | Diez tipos de calzado cerrado, uno por conjunto de ropa; cuatro vistas por diseño |
-| [hair](hair/README.md) | Seis bocetos de peinados aislados, cuatro vistas por estilo y criterios de encaje sobre la cabeza base |
-| [poses](poses/README.md) | T-pose y A-pose originales con chándal, pelo y calzado |
-| [referencias](referencias/personaje-modelado-01.png) | Lámina general original y su prompt |
-| [archivo](archivo/README.md) | Brief histórico de modelado 3D |
+[Ver los diez personajes](characters/README.md).
 
-Las poses originales conservan sus diseños y contenido. El antiguo despiece fue retirado por decisión del usuario y no se usa como referencia. La base completa es el punto de partida para futuras prendas, pelo y calzado. [Volver al índice visual](../README.md).
+La referencia principal es [Blue Tracksuit](characters/01-blue-tracksuit/blue-tracksuit-a-pose.png), la imagen original aprobada, ahora renombrada y organizada como personaje 01. Los otros nueve siguen su identidad visual y formato.
+
+El trabajo anterior de piezas separadas, las bases y las T-poses quedan en el [archivo histórico](archivo/README.md); no son el catálogo actual ni indican seguir generando piezas sueltas. En esta fase solo se crean bocetos dentro de docs.
+
+[Volver al índice visual](../README.md).

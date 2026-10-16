@@ -20,7 +20,7 @@ Tres láminas nuevas generadas con la herramienta integrada tomando concepto-01.
 
 | Lámina | Contenido | Prompt |
 | --- | --- | --- |
-| [Personaje](../player/referencias/personaje-modelado-01.png) | Frente, perfil, espalda, T-pose, A-pose, manos, pelo, calzado y acciones | [Prompt](../player/referencias/personaje-modelado-01-prompt.md) |
+| [Personaje](../player/archivo/referencias-originales/personaje-modelado-01.png) | Frente, perfil, espalda, T-pose, A-pose, manos, pelo, calzado y acciones | [Prompt](../player/archivo/referencias-originales/personaje-modelado-01-prompt.md) |
 | [Presentador](../presentador/referencias/presentador-modelado-01.png) | Frente, perfil, espalda, T-pose, A-pose, cabeza, traje y poses de actuación; sin micrófono | [Prompt](../presentador/referencias/presentador-modelado-01-prompt.md) |
 | [Recursos](../recursos/recursos-modelado-01.png) | Cabina, módulos, colores, mesa, estación, botón, fajo, bolsa, lingote, pantalla y podio | [Prompt](../recursos/recursos-modelado-01-prompt.md) |
 | [Ambiente modular](../plato/ambiente-modelado-01.png) | Cámaras, focos, paredes, cortinas, suelo, bordes, escaleras, barandillas, techo, estructuras, altavoz y rejilla | [Prompt](../plato/ambiente-modelado-01-prompt.md) |

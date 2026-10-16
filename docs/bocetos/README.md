@@ -4,19 +4,16 @@ Referencias organizadas por sujeto. Empieza por el índice de cada carpeta; cada
 
 | Carpeta | Contenido |
 | --- | --- |
-| [Player](player/README.md) | [Base sin ropa, pelo ni zapatos](player/base/README.md), poses originales y referencia general |
+| [Player](player/README.md) | [Diez personajes completos en A-pose](player/characters/README.md), una carpeta por personaje |
 | [Presentador](presentador/README.md) | Referencia general y poses del presentador |
 | [Plató](plato/README.md) | Concepto general y ambiente modular |
 | [Recursos](recursos/README.md) | Lámina general y [36 objetos detallados](recursos/detallados/README.md) |
 | [Paquetes](paquetes/README.md) | ZIP descargables existentes |
 | [Archivo](archivo/README.md) | Índices históricos; no sustituye a las referencias vigentes |
 
-## Base del player
+## Personajes del player
 
-- [T-pose base](player/base/personaje-base-t-pose.png).
-- [A-pose base](player/base/personaje-base-a-pose.png).
-
-La base completa se usa como referencia para futuras prendas, peinados y zapatos. El antiguo despiece del player fue retirado y ya no se utiliza.
+El catálogo vigente muestra cada personaje completo, con pelo, ropa y calzado, en una sola lámina de ocho vistas en A-pose. [Blue Tracksuit](player/characters/01-blue-tracksuit/README.md) es la referencia original. Las piezas separadas, las bases y las T-poses se conservan en el [archivo histórico](player/archivo/README.md).
 
 ## Uso de las referencias
 

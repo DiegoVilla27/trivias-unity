@@ -13,7 +13,6 @@ namespace Trivias.Shop.Components
     public sealed class AvatarCosmeticsPresenter : MonoBehaviour
     {
         private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
-        private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
         private static readonly CosmeticSlot[] AttachedSlots = { CosmeticSlot.Head, CosmeticSlot.Face, CosmeticSlot.Neck };
 
         [SerializeField] private CosmeticCatalog _catalog;
@@ -75,10 +74,11 @@ namespace Trivias.Shop.Components
             if (item?.Prefab == null || avatar.HeadAnchor == null)
                 return;
 
-            // Se engancha al anclaje de la cabeza (mira como el concursante y tiene la escala de su cabeza): el
-            // desplazamiento y el tamaño del cosmético se adaptan solos y sigue las animaciones.
-            var instance = Instantiate(item.Prefab, avatar.HeadAnchor, false);
-            instance.transform.SetLocalPositionAndRotation(item.Offset, Quaternion.identity);
+            // Se coloca alineado con el concursante y luego se engancha a la cabeza para seguir sus animaciones.
+            var root = avatar.HeadAnchor.root;
+            var instance = Instantiate(item.Prefab);
+            instance.transform.SetPositionAndRotation(avatar.HeadAnchor.position + root.rotation * item.Offset, root.rotation);
+            instance.transform.SetParent(avatar.HeadAnchor, true);
             dressed.Instances[index] = instance;
         }
 
@@ -100,9 +100,7 @@ namespace Trivias.Shop.Components
                     continue;
                 }
                 body.GetPropertyBlock(_block);
-                // El color del traje va al color base y a la emisión (el concursante se ve por su emisión).
                 _block.SetColor(BaseColorId, item.Tint);
-                _block.SetColor(EmissionColorId, item.Tint.linear); // La emisión es HDR, en espacio lineal.
                 body.SetPropertyBlock(_block);
             }
         }

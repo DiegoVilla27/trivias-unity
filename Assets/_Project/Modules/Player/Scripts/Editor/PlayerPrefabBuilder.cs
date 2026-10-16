@@ -16,8 +16,8 @@ using UnityEngine.InputSystem;
 namespace Trivias.Player.Editor
 {
     /// <summary>
-    /// Construye el prefab del concursante con su modelo propio (<see cref="PlayerBaseModelBuilder"/>, Humanoid) y las
-    /// animaciones y sonidos de pasos de Starter Assets (ThirdParty), con scripts propios del módulo. Los terceros no se modifican.
+    /// Construye el prefab del concursante a partir del modelo y animaciones de Starter Assets (ThirdParty),
+    /// con scripts propios del módulo. Los terceros no se modifican.
     /// </summary>
     public static class PlayerPrefabBuilder
     {
@@ -27,24 +27,14 @@ namespace Trivias.Player.Editor
         private const string CONTROLS_PATH = MODULE_ROOT + "/Config/PlayerControls.inputactions";
 
         private const string STARTER_CHARACTER = "Assets/ThirdParty/StarterAssets/Runtime/ThirdPersonController/Character";
+        private const string MODEL_PATH = STARTER_CHARACTER + "/Models/Armature.fbx";
         private const string ANIMATOR_PATH = STARTER_CHARACTER + "/Animations/StarterAssetsThirdPerson.controller";
         private const string SFX_FOLDER = STARTER_CHARACTER + "/Sfx";
 
-        // Medidas del concursante: el cuerpo base a su altura original (1,9 m, cabeza grande de 1,2 m de ancho).
-        private const float HEIGHT = PlayerBaseModelBuilder.HEIGHT;
-        private const float CAPSULE_RADIUS = 0.32f;
-        private const float CAMERA_ROOT_HEIGHT = 1.72f;
+        private const float CAMERA_ROOT_HEIGHT = 1.375f;
         private const string HEAD_BONE = "Head";
-        private const float NAME_TAG_HEIGHT = 2.25f;
-        /// <summary>El dinero se lleva delante de la barriga, por debajo de la cabeza.</summary>
-        private static readonly Vector3 CarryPointPosition = new(0f, 0.72f, 0.5f);
-        /// <summary>
-        /// Anclaje de los cosméticos: a la altura de los ojos, en el centro de la cabeza y a su escala (los cosméticos se
-        /// diseñaron para una cabeza de unos 0,35 m; esta mide 1,2 m de ancho).
-        /// </summary>
-        public static readonly Vector3 CosmeticsAnchorPosition = new(0f, 1.29f, 0f);
-        public const float COSMETICS_SCALE = 3f;
-        public const string COSMETICS_ANCHOR = "CosmeticsAnchor";
+        private const float NAME_TAG_HEIGHT = 2.15f;
+        private static readonly Vector3 CarryPointPosition = new(0f, 1.05f, 0.38f);
 
         [MenuItem("Tools/Trivias/Build/Player")]
         public static GameObject BuildFromMenu() =>
@@ -58,9 +48,9 @@ namespace Trivias.Player.Editor
             var root = new GameObject("Player");
 
             var controller = root.AddComponent<CharacterController>();
-            controller.center = new Vector3(0f, HEIGHT * 0.5f + 0.02f, 0f);
-            controller.height = HEIGHT;
-            controller.radius = CAPSULE_RADIUS;
+            controller.center = new Vector3(0f, 0.93f, 0f);
+            controller.height = 1.8f;
+            controller.radius = 0.28f;
             controller.stepOffset = 0.3f; // Sube a las plataformas de apuesta andando.
             controller.skinWidth = 0.02f;
             controller.slopeLimit = 45f;
@@ -124,10 +114,8 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_expulsion", expulsion);
             SerializedWiring.Set(playerNetwork, "_avatars", SharedAssets.PlayerAvatars());
             SerializedWiring.Set(playerNetwork, "_profile", SharedAssets.PlayerProfile());
-            SerializedWiring.Set(playerNetwork, "_headAnchor", CreateCosmeticsAnchor(root.transform, animator.transform));
-            // Los trajes de colores tiñen la ropa. El cuerpo base no lleva: no se tiñe nada (nunca la piel) hasta que
-            // haya ropa por piezas.
-            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers", new Renderer[0]);
+            SerializedWiring.Set(playerNetwork, "_headAnchor", FindDeep(animator.transform, HEAD_BONE));
+            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers", animator.GetComponentsInChildren<SkinnedMeshRenderer>(true));
 
             foreach (var extend in extensions)
                 extend(root);
@@ -138,16 +126,14 @@ namespace Trivias.Player.Editor
 
         private static Animator CreateModel(Transform parent)
         {
-            PlayerBaseModelBuilder.EnsureImported();
-            var model = (GameObject)PrefabUtility.InstantiatePrefab(PlayerBaseModelBuilder.Model(), parent);
+            var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>(MODEL_PATH);
+            var model = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset, parent);
             model.name = "Model";
-            foreach (var skinned in model.GetComponentsInChildren<SkinnedMeshRenderer>())
-                skinned.updateWhenOffscreen = false;
 
             if (!model.TryGetComponent<Animator>(out var animator))
                 animator = model.AddComponent<Animator>();
             animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(ANIMATOR_PATH);
-            animator.avatar = PlayerBaseModelBuilder.Avatar();
+            animator.avatar = AssetDatabase.LoadAllAssetsAtPath(MODEL_PATH).OfType<Avatar>().First();
             animator.applyRootMotion = false;
 
             var audioSource = model.AddComponent<AudioSource>();
@@ -160,21 +146,6 @@ namespace Trivias.Player.Editor
             SerializedWiring.SetArray(events, "_footstepClips", LoadClips("Player_Footstep"));
             SerializedWiring.Set(events, "_landingClip", LoadClips("Player_Land").FirstOrDefault());
             return animator;
-        }
-
-        /// <summary>
-        /// Punto de la cabeza donde se enganchan los cosméticos: sigue al hueso de la cabeza, mira como el concursante y
-        /// tiene la escala de esta cabeza, así gorras, gafas y pajaritas encajan sin tocarlas.
-        /// </summary>
-        private static Transform CreateCosmeticsAnchor(Transform root, Transform model)
-        {
-            var head = FindDeep(model, HEAD_BONE);
-            var anchor = new GameObject(COSMETICS_ANCHOR).transform;
-            anchor.SetParent(head, false);
-            anchor.SetPositionAndRotation(root.TransformPoint(CosmeticsAnchorPosition), root.rotation);
-            var headScale = head.lossyScale.x;
-            anchor.localScale = Vector3.one * (COSMETICS_SCALE / headScale);
-            return anchor;
         }
 
         private static PlayerNameTag CreateNameTag(Transform parent)
