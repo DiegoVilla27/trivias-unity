@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.18 — correr con Shift, barandillas sólidas en las plataformas, tutorial breve y velo detrás del menú principal.
+- Versión: 0.19 — plató menos deslumbrante, cabinas que solo muestran su dinero, plataformas al lado de las cabinas y viñeta de cómic del presentador.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -232,7 +232,7 @@ Al empezar una pregunta solo comenta la última, el inicio de un bloque o una de
 
 Usar variables como cantidad perdida, premio y supervivientes para adaptar textos. Ejemplo: «Habéis perdido {cantidad}. El decorado os lo agradece». No repetir ninguna frase de un evento hasta haber dicho todas las de ese evento, y no mostrar un comentario por cada interacción menor.
 
-El presentador se comunica mediante texto en una viñeta sobre su cabeza, en el plató (no en la interfaz): tanto las frases predefinidas como las generadas por IA. No incluye voz, síntesis de voz ni reconocimiento del micrófono. Usar un catálogo que permita añadir frases sin modificar la lógica de ronda. Evitar repeticiones consecutivas y espaciar comentarios sin ocultar preguntas o respuestas. Con tiempo límite, el presentador avisa cuando quedan pocos segundos; sin límite, comenta las discusiones largas sin forzar el cierre.
+El presentador se comunica mediante texto en una viñeta de cómic junto a su cabeza, en el plató (no en la interfaz). La frase se escribe letra a letra y la viñeta cambia con el ánimo del momento: estallido amarillo con rayos y letras que botan cuando hay ánimo (bienvenida, aciertos, victoria), nube oscura con letras lentas que ondulan y pausas en los puntos en el suspense (cuenta atrás, comodín, últimas preguntas), azul y caída cuando hay pena (pérdidas, expulsiones, derrota) y clara en el resto. Vale tanto para las frases predefinidas como para las generadas por IA. No incluye voz, síntesis de voz ni reconocimiento del micrófono. Usar un catálogo que permita añadir frases sin modificar la lógica de ronda. Evitar repeticiones consecutivas y espaciar comentarios sin ocultar preguntas o respuestas. Con tiempo límite, el presentador avisa cuando quedan pocos segundos; sin límite, comenta las discusiones largas sin forzar el cierre.
 
 Ejemplos de tono: «Aquí nadie pierde dinero: financia el decorado», «Tres segundos para arrepentiros. Para cambiar, ya es tarde», «El tubo tiene más certezas que vosotros».
 
@@ -397,6 +397,13 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.19 — 16 de octubre de 2026
+
+- El plató deslumbraba: focos de color más suaves (de 30–85 a 12–36), bombillas que no pasan de 1,3 de brillo, resplandor solo en lo que de verdad está encendido, colores sin saturar y luces fuertes suavizadas (tonemapping).
+- Las cabinas ya no repiten la respuesta (está en la pantalla): su hueco muestra solo, en grande, el dinero de la bandeja.
+- Las plataformas de apuesta pasan al lado derecho de su cabina (mirándola desde el centro): ya no tapan el mueble. El tubo del concursante va con su plataforma.
+- Viñeta de cómic del presentador: forma, color y movimiento según el ánimo, con las letras saliendo una a una.
 
 ### Versión 0.18 — 16 de octubre de 2026
 

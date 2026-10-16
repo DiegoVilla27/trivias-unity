@@ -26,11 +26,11 @@ namespace Trivias.Feedback.Tests
         [Test]
         public void Bulbs_BlinkOnCountdown_AndLightTheCorrectBooth()
         {
-            Assert.That(StageShowRules.BulbLevel(StageMood.Countdown, 0, -1, 0, 0.01f), Is.GreaterThan(1f));
+            Assert.That(StageShowRules.BulbLevel(StageMood.Countdown, 0, -1, 0, 0.01f), Is.GreaterThanOrEqualTo(0.9f));
             Assert.That(StageShowRules.BulbLevel(StageMood.Countdown, 0, -1, 0, 0.2f), Is.LessThan(0.2f), "Parpadeo.");
-            Assert.That(StageShowRules.BulbLevel(StageMood.Correct, 2, 2, 0, 1f), Is.GreaterThan(1f), "La correcta brilla.");
+            Assert.That(StageShowRules.BulbLevel(StageMood.Correct, 2, 2, 0, 1f), Is.GreaterThan(0.75f), "La correcta brilla.");
             Assert.That(StageShowRules.BulbLevel(StageMood.Correct, 1, 2, 0, 1f), Is.LessThan(0.1f), "Las falsas se apagan.");
-            Assert.That(StageShowRules.BulbLevel(StageMood.Wrong, 2, 2, 0, 1f), Is.GreaterThan(1f), "Aunque se pierda, se ve cuál era.");
+            Assert.That(StageShowRules.BulbLevel(StageMood.Wrong, 2, 2, 0, 1f), Is.GreaterThan(0.75f), "Aunque se pierda, se ve cuál era.");
             Assert.That(StageShowRules.BulbLevel(StageMood.Defeat, 0, -1, 0, 1f), Is.LessThan(0.3f), "Derrota: casi apagadas.");
         }
 
@@ -41,7 +41,19 @@ namespace Trivias.Feedback.Tests
             var later = StageShowRules.BulbLevel(StageMood.Easy, 0, -1, 3, 1f);
             Assert.That(first, Is.Not.EqualTo(later).Within(0.01f), "Cada bombilla de la fila va a su ritmo: una onda.");
             for (var order = 0; order < 10; order++)
-                Assert.That(StageShowRules.BulbLevel(StageMood.Easy, StageShowRules.MARQUEE, -1, order, 2f), Is.InRange(0.6f, 1.05f));
+                Assert.That(StageShowRules.BulbLevel(StageMood.Easy, StageShowRules.MARQUEE, -1, order, 2f), Is.InRange(0.45f, 0.8f));
+        }
+
+        [Test]
+        public void Bulbs_NeverDazzle()
+        {
+            // Las bombillas ya emiten 1,25: por encima de ~1,3 el resplandor molesta. El máximo de cualquier momento queda debajo.
+            for (var mood = 0; mood < StageMoods.COUNT; mood++)
+                for (var t = 0f; t < 3f; t += 0.01f)
+                    for (var order = 0; order < 8; order++)
+                        foreach (var booth in new[] { StageShowRules.MARQUEE, 0, 2 })
+                            Assert.That(StageShowRules.BulbLevel((StageMood)mood, booth, 2, order, t), Is.LessThanOrEqualTo(1.31f),
+                                $"{(StageMood)mood} a {t:0.00} s.");
         }
 
         [Test]

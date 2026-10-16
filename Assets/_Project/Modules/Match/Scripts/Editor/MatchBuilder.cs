@@ -51,14 +51,6 @@ namespace Trivias.Match.Editor
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }
 
-        public static void AttachBoothLabel(GameObject booth, int boothIndex, TextMeshPro label)
-        {
-            var view = booth.AddComponent<BoothAnswerLabel>();
-            SerializedWiring.Set(view, "_runtime", Runtime());
-            SerializedWiring.Set(view, "_label", label);
-            SerializedWiring.Set(view, "_booth", boothIndex);
-        }
-
         public static void AttachQuestionScreen(GameObject screen, GameObject content, TextMeshPro message,
             TextMeshPro header, TextMeshPro question, TextMeshPro[] optionTexts, GameObject[] optionBoxes, TextMeshPro status,
             GameObject check, TextMeshPro checkPayee, TextMeshPro checkAmount)

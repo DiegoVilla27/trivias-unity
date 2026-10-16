@@ -104,7 +104,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | HUD | Pregunta, opciones, estado, cuenta atrás, dinero del equipo y comodines | Shared, Match, Money, Questions, SelfBet |
 | Exchange | Estación de cambio interactiva (agrupar y dividir) | Shared, Money |
 | SelfBet | Comodines: reparto, reserva, zonas de apuesta, confinamiento, multiplicador y expulsión | Shared |
-| Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), momentos en que habla y elección por evento sin repetir, bocadillo | Shared, Match, Money, SelfBet, Questions |
+| Presenter | Presentador por texto: catálogo de frases (JSON validado en edición), momentos en que habla y elección por evento sin repetir, viñeta de cómic con ánimo (letra a letra) | Shared, Match, Money, SelfBet, Questions |
 | Results | Pantalla de resultados (con el puesto en los récords), volver a jugar y salir | Shared, Match, Money, Questions, Ranking |
 | Menu | Menú principal (tu nombre, crear, unirse, cómo se juega, récords, configuración, salir), invitación, tutorial (JSON en `Content/`), tabla de récords, configuración, sala de espera y pausa (Esc) | Shared, Match, Money, Questions, Ranking |
 | Ranking | Récords locales de victorias (C# puro: quién entra, orden y empates) guardados en JSON | Shared |

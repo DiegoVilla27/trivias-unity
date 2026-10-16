@@ -8,7 +8,8 @@
         "Trivias.SelfBet",
         "Trivias.Questions",
         "Unity.Netcode.Runtime",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

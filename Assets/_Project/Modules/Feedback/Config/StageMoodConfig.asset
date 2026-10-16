@@ -14,40 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Trivias.Feedback::Trivias.Feedback.Data.StageMoodConfig
   _moods:
   - SpotColor: {r: 1, g: 0.95, b: 0.85, a: 1}
-    SpotIntensity: 30
+    SpotIntensity: 16
     AmbientTint: {r: 1, g: 1, b: 1, a: 1}
-    KeyLightScale: 1
-  - SpotColor: {r: 1, g: 0.72, b: 0.32, a: 1}
-    SpotIntensity: 55
-    AmbientTint: {r: 1, g: 0.95, b: 0.85, a: 1}
-    KeyLightScale: 1
-  - SpotColor: {r: 0.55, g: 0.42, b: 1, a: 1}
-    SpotIntensity: 60
-    AmbientTint: {r: 0.85, g: 0.8, b: 1, a: 1}
-    KeyLightScale: 0.8
-  - SpotColor: {r: 1, g: 0.22, b: 0.2, a: 1}
-    SpotIntensity: 65
-    AmbientTint: {r: 0.7, g: 0.55, b: 0.6, a: 1}
-    KeyLightScale: 0.55
-  - SpotColor: {r: 1, g: 0.86, b: 0.6, a: 1}
-    SpotIntensity: 55
-    AmbientTint: {r: 0.65, g: 0.6, b: 0.6, a: 1}
-    KeyLightScale: 0.5
-  - SpotColor: {r: 0.3, g: 1, b: 0.45, a: 1}
-    SpotIntensity: 70
-    AmbientTint: {r: 0.85, g: 1, b: 0.85, a: 1}
     KeyLightScale: 0.9
-  - SpotColor: {r: 1, g: 0.15, b: 0.15, a: 1}
-    SpotIntensity: 70
-    AmbientTint: {r: 0.6, g: 0.45, b: 0.45, a: 1}
+  - SpotColor: {r: 1, g: 0.76, b: 0.42, a: 1}
+    SpotIntensity: 24
+    AmbientTint: {r: 1, g: 0.95, b: 0.88, a: 1}
+    KeyLightScale: 0.9
+  - SpotColor: {r: 0.62, g: 0.5, b: 1, a: 1}
+    SpotIntensity: 26
+    AmbientTint: {r: 0.86, g: 0.82, b: 1, a: 1}
+    KeyLightScale: 0.75
+  - SpotColor: {r: 1, g: 0.3, b: 0.28, a: 1}
+    SpotIntensity: 28
+    AmbientTint: {r: 0.72, g: 0.58, b: 0.62, a: 1}
+    KeyLightScale: 0.55
+  - SpotColor: {r: 1, g: 0.86, b: 0.62, a: 1}
+    SpotIntensity: 24
+    AmbientTint: {r: 0.66, g: 0.62, b: 0.62, a: 1}
     KeyLightScale: 0.5
-  - SpotColor: {r: 1, g: 0.82, b: 0.3, a: 1}
-    SpotIntensity: 85
-    AmbientTint: {r: 1, g: 0.9, b: 0.7, a: 1}
-    KeyLightScale: 1.1
-  - SpotColor: {r: 0.3, g: 0.4, b: 0.8, a: 1}
-    SpotIntensity: 25
+  - SpotColor: {r: 0.4, g: 1, b: 0.52, a: 1}
+    SpotIntensity: 30
+    AmbientTint: {r: 0.86, g: 1, b: 0.86, a: 1}
+    KeyLightScale: 0.85
+  - SpotColor: {r: 1, g: 0.25, b: 0.22, a: 1}
+    SpotIntensity: 30
+    AmbientTint: {r: 0.62, g: 0.48, b: 0.48, a: 1}
+    KeyLightScale: 0.5
+  - SpotColor: {r: 1, g: 0.84, b: 0.4, a: 1}
+    SpotIntensity: 36
+    AmbientTint: {r: 1, g: 0.92, b: 0.75, a: 1}
+    KeyLightScale: 1
+  - SpotColor: {r: 0.35, g: 0.45, b: 0.8, a: 1}
+    SpotIntensity: 12
     AmbientTint: {r: 0.5, g: 0.5, b: 0.6, a: 1}
     KeyLightScale: 0.4
   _fadeSpeed: 2.5
   _countdownPulse: 0.8
+  _version: 2

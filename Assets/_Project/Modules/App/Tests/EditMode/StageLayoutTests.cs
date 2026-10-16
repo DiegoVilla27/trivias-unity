@@ -85,10 +85,10 @@ namespace Trivias.App.Tests
         [Test]
         public void PresenterBubble_DoesNotCoverTheQuestionOrOptions()
         {
-            // La viñeta gira hacia la cámara: se comprueba con una caja que la envuelve en cualquier giro.
-            var bubble = Find("Presenter/Bubble/Background").transform;
-            var radius = bubble.lossyScale.x * 0.5f;
-            var box = new Bounds(bubble.position, new Vector3(radius * 2f, bubble.lossyScale.y, radius * 2f));
+            // La viñeta gira hacia la cámara: se comprueba con una caja que la envuelve en cualquier giro (con su rebote).
+            var bubble = (RectTransform)Find("Presenter/Bubble/Canvas/Body/Background").transform;
+            var size = bubble.rect.size * bubble.lossyScale.x * 1.05f;
+            var box = new Bounds(bubble.position, new Vector3(size.x, size.y, size.x));
             var screen = Find(SCREEN).transform.position;
             var problems = new List<string>();
             foreach (var spawn in SpawnPositions())
@@ -417,6 +417,57 @@ namespace Trivias.App.Tests
             Assert.That(volume.sharedProfile.TryGet<Bloom>(out var bloom) && bloom.intensity.value > 0f, Is.True, "Con brillo (bloom).");
             var camera = Find("CameraRig/MainCamera").GetComponent<Camera>();
             Assert.That(camera.GetUniversalAdditionalCameraData().renderPostProcessing, Is.True, "La cámara aplica el posprocesado.");
+        }
+
+        [Test]
+        public void PostProcessing_IsComfortable_NotDazzling()
+        {
+            var profile = Find($"{ENVIRONMENT}/PostProcessing").GetComponent<Volume>().sharedProfile;
+            Assert.That(profile.TryGet<Bloom>(out var bloom), Is.True);
+            Assert.That(bloom.threshold.value, Is.GreaterThanOrEqualTo(1.2f), "Solo brilla lo que de verdad está encendido.");
+            Assert.That(bloom.intensity.value, Is.LessThanOrEqualTo(0.4f), "Sin velo de resplandor sobre todo.");
+            Assert.That(profile.TryGet<ColorAdjustments>(out var color), Is.True);
+            Assert.That(color.saturation.value, Is.LessThanOrEqualTo(5f), "Colores naturales, sin saturar.");
+            Assert.That(color.postExposure.value, Is.LessThanOrEqualTo(0f));
+            Assert.That(profile.TryGet<Tonemapping>(out var tonemapping) && tonemapping.mode.value != TonemappingMode.None, Is.True,
+                "Las luces fuertes se suavizan en vez de quemarse.");
+        }
+
+        [Test]
+        public void BetPlatforms_StandToTheRightOfTheirBooth_WithoutCoveringIt()
+        {
+            var platforms = new List<Bounds>();
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var root = Find($"Booths/Booth_{(char)('A' + booth)}").transform;
+                var zone = root.Find("BetZone").position;
+                // Mirando la cabina desde el centro del plató, su derecha.
+                var towardsCenter = root.forward;
+                var right = Vector3.Cross(Vector3.up, -towardsCenter);
+                var offset = zone - root.position;
+                Assert.That(Vector3.Dot(offset, right), Is.GreaterThan(2.2f), $"{root.name}: plataforma a la derecha de la cabina.");
+                Assert.That(Mathf.Abs(Vector3.Dot(offset, towardsCenter)), Is.LessThan(1.2f), $"{root.name}: al lado, no delante.");
+
+                var platform = BoundsOf(root.Find("Platform").gameObject);
+                var cabinet = BoundsOf(root.Find("Body").gameObject);
+                cabinet.Expand(new Vector3(0f, 10f, 0f));
+                Assert.That(platform.Intersects(cabinet), Is.False, $"{root.name}: no se mete en el mueble.");
+                platforms.Add(platform);
+
+                // Desde el centro del plató, el mueble se ve entero: la plataforma no se cruza en medio.
+                var eye = new Vector3(0f, 1.7f, root.position.z);
+                var ray = new Ray(eye, (cabinet.center - eye).normalized);
+                Assert.That(platform.IntersectRay(ray), Is.False, $"{root.name}: nada tapa la cabina desde el centro.");
+            }
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var root = Find($"Booths/Booth_{(char)('A' + booth)}").transform;
+                foreach (var other in new[] { "A", "B", "C", "D" })
+                {
+                    var cabinet = BoundsOf(Find($"Booths/Booth_{other}/Body"));
+                    Assert.That(platforms[booth].Intersects(cabinet), Is.False, $"La plataforma de {root.name} no choca con la cabina {other}.");
+                }
+            }
         }
 
         [Test]

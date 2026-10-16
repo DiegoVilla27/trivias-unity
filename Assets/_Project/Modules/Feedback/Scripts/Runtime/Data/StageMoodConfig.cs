@@ -34,13 +34,21 @@ namespace Trivias.Feedback.Data
         [Tooltip("Cuánto sube la intensidad de los focos en cada latido de la cuenta atrás.")]
         [SerializeField, Range(0f, 2f)] private float _countdownPulse = 0.8f;
 
+        [Tooltip("Versión de los valores de fábrica: si sube, el constructor los renueva.")]
+        [SerializeField, HideInInspector] private int _version;
+
         public MoodLight For(StageMood mood) => _moods[(int)mood];
+        public int Version => _version;
         public int Count => _moods.Length;
         public float FadeSpeed => _fadeSpeed;
         public float CountdownPulse => _countdownPulse;
 
 #if UNITY_EDITOR
-        public void EditorSet(MoodLight[] moods) => _moods = moods;
+        public void EditorSet(MoodLight[] moods, int version)
+        {
+            _moods = moods;
+            _version = version;
+        }
 #endif
     }
 }

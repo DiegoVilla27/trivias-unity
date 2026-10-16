@@ -15,11 +15,12 @@ using Trivias.Shared.Presentation;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Trivias.Presenter.Editor
 {
     /// <summary>
-    /// Construye el presentador (figura con primitivas y viñeta sobre la cabeza), importa y valida su catálogo
+    /// Construye el presentador (figura con primitivas y viñeta de cómic junto a la cabeza), importa y valida su catálogo
     /// de frases y crea su sesión de red. Solo se comunica por texto en su viñeta.
     /// </summary>
     public static class PresenterPrefabBuilder
@@ -33,8 +34,13 @@ namespace Trivias.Presenter.Editor
         /// dice tapan la pregunta. Gira hacia la cámara, de modo que siempre queda a la derecha de su cabeza.
         /// </summary>
         public const float BUBBLE_HEIGHT = 1.55f;
-        public static readonly Vector2 BubbleSize = new(4.6f, 1.7f);
+        public static readonly Vector2 BubbleSize = new(4.8f, 1.8f);
         private const float BUBBLE_GAP = 0.5f;
+        /// <summary>Metros por unidad del lienzo de la viñeta (100 unidades = 1 m).</summary>
+        private const float CANVAS_UNIT = 0.01f;
+        public const string BUBBLE_BACKGROUND = "Background";
+        /// <summary>Forma de la viñeta, desde la raíz del presentador.</summary>
+        public const string BUBBLE_BACKGROUND_PATH = BUBBLE + "/Canvas/Body/" + BUBBLE_BACKGROUND;
         private const string CONFIG = MODULE_ROOT + "/Config";
         private const string CONTENT_PATH = MODULE_ROOT + "/Content/phrases_es.json";
 
@@ -61,36 +67,122 @@ namespace Trivias.Presenter.Editor
             label.characterSpacing = 3f;
             label.textWrappingMode = TextWrappingModes.NoWrap;
 
-            // Viñeta sobre la cabeza (GDD 9): el presentador solo se comunica por aquí. Siempre de cara a la cámara.
-            var bubbleMaterial = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Bubble.mat",
-                new Color(0.97f, 0.96f, 0.92f), 0.2f, emission: new Color(0.45f, 0.45f, 0.43f));
-            var bubble = EditorAssets.CreateEmpty(BUBBLE, t, new Vector3(0f, BUBBLE_HEIGHT, 0f));
-            bubble.AddComponent<Billboard>();
-            // El texto se lee mirando a su +Z: el fondo va detrás (+Z). La viñeta, a un lado de la cabeza, con la punta
-            // hacia ella.
-            var side = BubbleSize.x * 0.5f + BUBBLE_GAP;
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Background", bubble.transform, new Vector3(side, 0f, 0.06f),
-                new Vector3(BubbleSize.x, BubbleSize.y, 0.05f), bubbleMaterial, layer, false, keepCollider: false);
-            var tail = EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Tail", bubble.transform,
-                new Vector3(BUBBLE_GAP - 0.05f, 0.1f, 0.06f), new Vector3(0.42f, 0.42f, 0.05f), bubbleMaterial, layer, false,
-                keepCollider: false);
-            tail.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
+            BuildBubble(root, layer);
+            return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
+        }
 
-            var text = EditorAssets.CreateWorldText("Text", bubble.transform, string.Empty, 3.4f, new Color(0.08f, 0.08f, 0.18f),
-                new Vector3(side, 0f, 0f), Quaternion.identity, new Vector2(BubbleSize.x - 0.4f, BubbleSize.y - 0.25f));
-            text.fontStyle = FontStyles.Bold;
+        /// <summary>
+        /// Viñeta de cómic al lado de la cabeza (GDD 9): el presentador solo se comunica por aquí. Es un lienzo en el
+        /// mundo que gira hacia la cámara; la forma, el color y el movimiento de las letras cambian con el ánimo.
+        /// </summary>
+        private static void BuildBubble(GameObject root, int layer)
+        {
+            var bubble = EditorAssets.CreateEmpty(BUBBLE, root.transform, new Vector3(0f, BUBBLE_HEIGHT, 0f));
+            bubble.layer = layer;
+            bubble.AddComponent<Billboard>();
+
+            var side = BubbleSize.x * 0.5f + BUBBLE_GAP;
+            var size = BubbleSize / CANVAS_UNIT;
+            var canvasRect = UiRect("Canvas", bubble.transform, size + new Vector2(140f, 120f), layer);
+            canvasRect.localPosition = new Vector3(side, 0f, 0f);
+            canvasRect.localScale = Vector3.one * CANVAS_UNIT;
+            var canvas = canvasRect.gameObject.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+
+            var body = UiRect("Body", canvasRect, size, layer);
+            var rays = UiImage("Rays", body, SpeechBubbleArt.Rays(), size * 1.3f, Vector2.zero, layer);
+            var shadow = UiImage("Shadow", body, SpeechBubbleArt.Round(), size, new Vector2(10f, -12f), layer);
+            shadow.color = new Color(0f, 0f, 0f, 0.35f);
+            // La cola sale del borde izquierdo hacia la cabeza; su base queda debajo de la forma.
+            var tail = UiImage("Tail", body, SpeechBubbleArt.Tail(), new Vector2(76f, 76f), Vector2.zero, layer);
+            tail.rectTransform.pivot = new Vector2(1f, 0.5f);
+            tail.rectTransform.anchoredPosition = new Vector2(-size.x * 0.5f + 34f, 6f);
+            tail.rectTransform.localRotation = Quaternion.Euler(0f, 0f, -12f);
+            var shape = UiImage(BUBBLE_BACKGROUND, body, SpeechBubbleArt.Round(), size, Vector2.zero, layer);
+
+            // Caja del texto dentro de la zona lisa de cualquier forma (las puntas del estallido y los bultos de la nube no la pisan).
+            var textRect = UiRect("Text", body, new Vector2(size.x * 0.74f, size.y * 0.64f), layer);
+            var text = textRect.gameObject.AddComponent<TextMeshProUGUI>();
+            text.font = StageFonts.Display();
+            text.fontSize = 50f;
             text.enableAutoSizing = true;
-            text.fontSizeMin = 1.6f;
-            text.fontSizeMax = 3.4f;
+            text.fontSizeMin = 24f;
+            text.fontSizeMax = 50f;
+            text.characterSpacing = 1f;
+            text.lineSpacing = -6f;
+            text.alignment = TextAlignmentOptions.Center;
+            text.textWrappingMode = TextWrappingModes.Normal;
+            text.raycastTarget = false;
 
             // La vista vive en la raíz (siempre activa); la viñeta es lo que se muestra u oculta.
-            var speech = root.AddComponent<PresenterLineView>();
-            SerializedWiring.Set(speech, "_runtime", Runtime());
-            SerializedWiring.Set(speech, "_label", text);
-            SerializedWiring.Set(speech, "_container", bubble);
+            var view = root.AddComponent<PresenterBubbleView>();
+            SerializedWiring.Set(view, "_runtime", Runtime());
+            SerializedWiring.Set(view, "_config", Config());
+            SerializedWiring.Set(view, "_container", bubble);
+            SerializedWiring.Set(view, "_body", body);
+            SerializedWiring.Set(view, "_shape", shape);
+            SerializedWiring.Set(view, "_shadow", shadow);
+            SerializedWiring.Set(view, "_tail", tail);
+            SerializedWiring.Set(view, "_rays", rays);
+            SerializedWiring.Set(view, "_label", text);
+            WriteStyles(view);
             bubble.SetActive(false);
+        }
 
-            return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
+        /// <summary>Un estilo por ánimo (orden de <see cref="PresenterMood"/>).</summary>
+        private static void WriteStyles(PresenterBubbleView view)
+        {
+            var styles = new BubbleStyle[PresenterMoods.COUNT];
+            styles[(int)PresenterMood.Neutral] = new BubbleStyle
+            {
+                Shape = SpeechBubbleArt.Round(), Fill = new Color(0.99f, 0.97f, 0.9f), Text = new Color(0.09f, 0.08f, 0.2f),
+            };
+            styles[(int)PresenterMood.Excited] = new BubbleStyle
+            {
+                Shape = SpeechBubbleArt.Burst(), Fill = new Color(1f, 0.86f, 0.28f), Text = new Color(0.36f, 0.04f, 0.03f),
+                Rays = true, RaysColor = new Color(1f, 0.96f, 0.7f, 0.85f),
+            };
+            styles[(int)PresenterMood.Suspense] = new BubbleStyle
+            {
+                Shape = SpeechBubbleArt.Cloud(), Fill = new Color(0.22f, 0.13f, 0.38f), Text = new Color(1f, 0.9f, 0.55f),
+            };
+            styles[(int)PresenterMood.Sad] = new BubbleStyle
+            {
+                Shape = SpeechBubbleArt.Round(), Fill = new Color(0.68f, 0.79f, 0.98f), Text = new Color(0.07f, 0.1f, 0.3f),
+            };
+
+            var so = new SerializedObject(view);
+            var array = so.FindProperty("_styles");
+            array.arraySize = styles.Length;
+            for (var i = 0; i < styles.Length; i++)
+            {
+                var element = array.GetArrayElementAtIndex(i);
+                element.FindPropertyRelative(nameof(BubbleStyle.Shape)).objectReferenceValue = styles[i].Shape;
+                element.FindPropertyRelative(nameof(BubbleStyle.Fill)).colorValue = styles[i].Fill;
+                element.FindPropertyRelative(nameof(BubbleStyle.Text)).colorValue = styles[i].Text;
+                element.FindPropertyRelative(nameof(BubbleStyle.Rays)).boolValue = styles[i].Rays;
+                element.FindPropertyRelative(nameof(BubbleStyle.RaysColor)).colorValue = styles[i].RaysColor;
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static RectTransform UiRect(string name, Transform parent, Vector2 size, int layer)
+        {
+            var go = new GameObject(name, typeof(RectTransform)) { layer = layer };
+            go.transform.SetParent(parent, false);
+            var rect = (RectTransform)go.transform;
+            rect.sizeDelta = size;
+            return rect;
+        }
+
+        private static Image UiImage(string name, Transform parent, Sprite sprite, Vector2 size, Vector2 position, int layer)
+        {
+            var rect = UiRect(name, parent, size, layer);
+            rect.anchoredPosition = position;
+            var image = rect.gameObject.AddComponent<Image>();
+            image.sprite = sprite;
+            image.raycastTarget = false;
+            return image;
         }
 
         /// <summary>Sesión de red del presentador (el host decide qué dice y cuándo).</summary>

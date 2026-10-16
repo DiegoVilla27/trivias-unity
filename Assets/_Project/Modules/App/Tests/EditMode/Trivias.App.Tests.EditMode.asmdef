@@ -18,7 +18,8 @@
         "Unity.RenderPipelines.Universal.Runtime",
         "Unity.TextMeshPro",
         "UnityEngine.UI",
-        "Trivias.Shared.Editor"
+        "Trivias.Shared.Editor",
+        "Trivias.Feedback.Editor"
     ],
     "includePlatforms": [
         "Editor"

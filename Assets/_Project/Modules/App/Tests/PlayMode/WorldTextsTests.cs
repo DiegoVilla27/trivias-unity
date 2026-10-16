@@ -8,6 +8,8 @@ using Trivias.Match.Network;
 using Trivias.Money.Components;
 using Trivias.Networking.Components;
 using Trivias.Presenter.Components;
+using Trivias.Presenter.Data;
+using Trivias.Presenter.Logic;
 using Trivias.SelfBet.Components;
 using Trivias.Shared.Interaction;
 using Trivias.VerifyButton.Components;
@@ -56,14 +58,23 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void BoothLabels_ShowTheirAnswer()
+        public void Booths_ShowOnlyTheirMoney_NotTheAnswer()
         {
             var question = _match.CurrentQuestion;
-            foreach (var label in Object.FindObjectsByType<BoothAnswerLabel>(FindObjectsInactive.Exclude))
+            for (var booth = 0; booth < 4; booth++)
             {
-                var booth = (int)typeof(BoothAnswerLabel).GetField("_booth", PRIVATE).GetValue(label);
-                var text = Field<TextMeshPro>(label, "_label").text;
-                Assert.That(text, Is.EqualTo($"{(char)('A' + booth)} · {question.Option(_match.Order.OriginalAt(booth))}"));
+                var tray = FindTray(booth);
+                var root = tray.transform.parent;
+                foreach (var text in root.GetComponentsInChildren<TextMeshPro>())
+                {
+                    for (var option = 0; option < 4; option++)
+                        Assert.That(text.text, Does.Not.Contain(question.Option(option)), $"{root.name}/{text.name}: la respuesta solo está en la pantalla.");
+                }
+                var total = Field<TextMeshPro>(tray, "_totalLabel");
+                Assert.That(total.text, Is.EqualTo("0"), "La bandeja vacía muestra 0.");
+                var window = total.transform.position.y - root.position.y;
+                Assert.That(window, Is.InRange(1.6f, 2.4f), "La cantidad se ve en el hueco alto de la cabina, en grande.");
+                Assert.That(total.fontSize, Is.GreaterThanOrEqualTo(2.4f));
             }
         }
 
@@ -126,22 +137,54 @@ namespace Trivias.App.Tests
         [Test]
         public void PresenterSpeaks_OnlyInTheBubbleBesideHisHead()
         {
-            var views = Object.FindObjectsByType<PresenterLineView>(FindObjectsInactive.Include);
+            var views = Object.FindObjectsByType<PresenterBubbleView>(FindObjectsInactive.Include);
             Assert.That(views.Length, Is.EqualTo(1), "El presentador habla solo en su viñeta (ni subtítulos ni HUD).");
             var view = views[0];
             Assert.That(view.GetComponentInParent<Canvas>(), Is.Null, "La viñeta está en el plató, no en la interfaz.");
             Assert.That(view.name, Is.EqualTo("Presenter"));
+            Assert.That(Field<TMP_Text>(view, "_label").canvas.renderMode, Is.EqualTo(RenderMode.WorldSpace), "Lienzo en el mundo, junto a él.");
 
             var bubble = Field<GameObject>(view, "_container");
             Assert.That(bubble.activeSelf, Is.True, "Al empezar, el presentador da la bienvenida.");
             // Al pie de la pantalla, la viñeta sale al lado de la cabeza (encima taparía la pregunta).
             var head = view.transform.Find("Head").position;
-            var background = bubble.transform.Find("Background").position;
+            var background = view.transform.Find("Bubble/Canvas/Body/Background").position;
             Assert.That(Mathf.Abs(background.y - head.y), Is.LessThan(0.8f), "A la altura de su cabeza.");
             var side = background - head;
             side.y = 0f;
             Assert.That(side.magnitude, Is.GreaterThan(1.5f), "Al lado, no encima.");
             Assert.That(Field<TMP_Text>(view, "_label").text, Is.Not.Empty);
+        }
+
+        [UnityTest]
+        public IEnumerator PresenterBubble_TypesLetterByLetter_InTheStyleOfItsMood()
+        {
+            var view = Object.FindAnyObjectByType<PresenterBubbleView>();
+            var runtime = Field<PresenterRuntime>(view, "_runtime");
+            var shape = Field<UnityEngine.UI.Image>(view, "_shape");
+            var rays = Field<UnityEngine.UI.Image>(view, "_rays");
+            var styles = (BubbleStyle[])typeof(PresenterBubbleView).GetField("_styles", PRIVATE).GetValue(view);
+
+            runtime.Say("¡Bienvenidos al concurso más loco de la televisión!", PresenterMood.Excited);
+            yield return null;
+            Assert.That(view.IsShowing, Is.True);
+            Assert.That(view.VisibleCharacters, Is.InRange(1, view.TotalCharacters - 1), "Las letras salen poco a poco.");
+            Assert.That(shape.sprite, Is.EqualTo(styles[(int)PresenterMood.Excited].Shape), "Con ánimo: viñeta de estallido.");
+            Assert.That(rays.gameObject.activeSelf, Is.True, "Y rayos de énfasis.");
+            yield return new WaitForSeconds(3f);
+            Assert.That(view.VisibleCharacters, Is.EqualTo(view.TotalCharacters), "La frase se termina a tiempo de leerla.");
+
+            runtime.Say("Tres... dos... uno...", PresenterMood.Suspense);
+            yield return null;
+            Assert.That(shape.sprite, Is.EqualTo(styles[(int)PresenterMood.Suspense].Shape), "Suspense: otra forma.");
+            Assert.That(shape.color, Is.EqualTo(styles[(int)PresenterMood.Suspense].Fill));
+            Assert.That(rays.gameObject.activeSelf, Is.False);
+            Assert.That(view.VisibleCharacters, Is.LessThan(view.TotalCharacters), "Vuelve a escribir desde el principio.");
+
+            runtime.Say(string.Empty);
+            yield return new WaitForSeconds(0.3f);
+            Assert.That(view.IsShowing, Is.False, "Al callar, la viñeta se va.");
+            Assert.That(Field<GameObject>(view, "_container").activeSelf, Is.False);
         }
 
         [Test]

@@ -36,7 +36,7 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 1 Plató y personaje | Hecho: tercera persona, interacción por cercanía, dinero |
 | Plató con modelos | Hecho: sala compacta (plano en `StageLayout`) con cabinas a los lados, plataformas de apuesta, tubos del dinero y del concursante, mesa, botón, estación, dinero y pantalla con sus modelos; suelo de baldosas y decorado de concepto-01 (telón, columnas, paredes, techo con vigas y focos, cámaras, público, tarima del presentador) y brillo de bombillas. Pendiente: modelos de presentador, podio y cosméticos; medir rendimiento en equipos modestos |
 | Salto y carrera | Hecho: Espacio, 0,9 m, con la animación de Starter Assets; correr con Shift (5,6 m/s) |
-| Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta junto a la cabeza; Lilita One y Poppins en el plató y en toda la interfaz |
+| Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta de cómic junto a la cabeza (letra a letra, cuatro ánimos); Lilita One y Poppins en el plató y en toda la interfaz |
 | Plató vivo e interfaz | Hecho: succión del expulsado y del dinero perdido por sus tubos (aire y sonido), bombillas, público con reacciones, cámaras de estudio y focos que se mueven; tema de la interfaz (paneles con marco dorado, botones con tacto, bombillas, logo que late). Pendiente: comprobar en Multiplayer Play Mode que los clientes ven la succión igual que el anfitrión |
 | 2 Una pregunta completa | Hecho: pantalla grande, tiempo límite, verificar, cuenta atrás, resolución |
 | 3 Cambio y comodines | Hecho: estación de cambio, comodín con zona, multiplicador y expulsión |

@@ -159,15 +159,9 @@ namespace Trivias.App.Editor
             EditorUtility.SetDirty(spawnPoints);
         }
 
-        /// <summary>Une cabinas y pantalla con el módulo Match (textos de respuesta y número de pregunta).</summary>
+        /// <summary>Une la pantalla con el módulo Match (pregunta, opciones y número de pregunta).</summary>
         private static void ConnectMatch(GameObject environment, GameObject[] booths)
         {
-            for (var i = 0; i < booths.Length; i++)
-            {
-                MatchBuilder.AttachBoothLabel(booths[i], i,
-                    booths[i].transform.Find(BoothPrefabBuilder.ANSWER_LABEL).GetComponent<TextMeshPro>());
-            }
-
             var env = environment.transform;
             TextMeshPro FindText(string path) => env.Find(path).GetComponent<TextMeshPro>();
 

@@ -35,7 +35,6 @@ namespace Trivias.Booth.Editor
         public const string TRAY = "Tray";
         public const string TRAY_SURFACE = "Tray/Surface";
         public const string TRAY_TOTAL_LABEL = "TotalLabel";
-        public const string ANSWER_LABEL = "AnswerLabel";
         public const string MONEY_TUBE = "MoneyTube";
         public const string PLAYER_TUBE = "PlayerTube";
 
@@ -46,9 +45,16 @@ namespace Trivias.Booth.Editor
         private const float CABINET_HEIGHT = 2.15f;
         private const float TRAY_FLOOR_HEIGHT = 0.94f;
         private const float TRAY_CENTER_Z = 0.44f;
+        /// <summary>Hueco oscuro de la parte alta del mueble (ya escalado): ahí se ve el dinero de la bandeja.</summary>
+        private const float WINDOW_CENTER_HEIGHT = 2.0f;
+        private const float WINDOW_FRONT_Z = 0.1f;
 
         /// <summary>Plataforma de apuesta: 2,6 m de ancho (caben seis) y 22 cm de alto, que se sube andando (y saltando).</summary>
-        public const float BET_ZONE_Z = 2.7f;
+        /// <remarks>
+        /// Al lado derecho de la cabina mirándola desde el centro del plató (−X del modelo), a la altura del mostrador:
+        /// así no tapa el mueble. La entrada de la barandilla sigue mirando al centro.
+        /// </remarks>
+        public static readonly Vector3 BetZoneOffset = new(-2.63f, 0f, 0.6f);
         private static readonly Vector3 PlatformScale = new(1.8f, 0.9f, 1.8f);
         public const float PLATFORM_TOP = 0.21f;
         private const float PLATFORM_RADIUS = 0.72f * 1.8f;
@@ -98,18 +104,6 @@ namespace Trivias.Booth.Editor
             EditorAssets.AddBoxCollider("CounterCollider", t, new Vector3(0f, 0.52f * s, 0.45f * s),
                 new Vector3(1.46f * s, 1.04f * s, 1.02f * s), layer);
 
-            // La respuesta, dentro del hueco oscuro de la cabina, como una pantallita (la rellena el módulo Match).
-            // Texto mirando a +Z (hacia el centro del plató): TMP se lee mirando a su +Z, por eso gira 180°.
-            var answer = EditorAssets.CreateWorldText(ANSWER_LABEL, t, "?", 3f, Color.white,
-                new Vector3(0f, 2.0f, 0.1f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.75f, 1.05f));
-            answer.fontStyle = FontStyles.Bold;
-            answer.outlineWidth = 0.18f;
-            answer.outlineColor = Color.black;
-            answer.textWrappingMode = TextWrappingModes.Normal;
-            answer.enableAutoSizing = true;
-            answer.fontSizeMin = 1.2f;
-            answer.fontSizeMax = 3f;
-
             // Nombres de los apostados, sobre la cabina; los rellena el módulo SelfBet.
             var bettors = EditorAssets.CreateWorldText(BETTORS_LABEL, t, string.Empty, 3f, StagePalette.Yellow,
                 new Vector3(0f, CABINET_HEIGHT * s + 0.55f, 1.1f), Quaternion.Euler(0f, 180f, 0f), new Vector2(4.2f, 0.9f));
@@ -121,20 +115,27 @@ namespace Trivias.Booth.Editor
             // La bandeja es la del mostrador del modelo: su suelo marca dónde se apila el dinero.
             var tray = EditorAssets.CreateEmpty(TRAY, t, new Vector3(0f, 0f, TRAY_CENTER_Z * s)).transform;
             EditorAssets.CreateEmpty("Surface", tray, new Vector3(0f, TRAY_FLOOR_HEIGHT * s, 0f));
-            var trayTotal = EditorAssets.CreateWorldText(TRAY_TOTAL_LABEL, tray, string.Empty, 3.2f, StagePalette.Gold,
-                new Vector3(0f, TRAY_FLOOR_HEIGHT * s + 0.75f, 0.35f), Quaternion.Euler(0f, 180f, 0f), new Vector2(1.6f, 0.5f));
-            trayTotal.fontStyle = FontStyles.Bold;
-            trayTotal.outlineWidth = 0.2f;
-            trayTotal.outlineColor = Color.black;
+            // El dinero de la bandeja, en grande dentro del hueco oscuro de la cabina, como una pantallita. La letra ya
+            // está en el mueble y la respuesta en la pantalla grande: aquí solo la cantidad (la rellena Money).
+            // Texto mirando a +Z (hacia el centro del plató): TMP se lee mirando a su +Z, por eso gira 180°.
+            var trayTotal = EditorAssets.CreateWorldText(TRAY_TOTAL_LABEL, tray, string.Empty, 5f, StagePalette.Gold,
+                new Vector3(0f, WINDOW_CENTER_HEIGHT, WINDOW_FRONT_Z - TRAY_CENTER_Z * s), Quaternion.Euler(0f, 180f, 0f),
+                new Vector2(1.75f, 0.9f), StageFonts.Display());
+            trayTotal.outlineWidth = 0.16f;
+            trayTotal.outlineColor = new Color(0.12f, 0.07f, 0f);
+            trayTotal.textWrappingMode = TextWrappingModes.NoWrap;
+            trayTotal.enableAutoSizing = true;
+            trayTotal.fontSizeMin = 2.4f;
+            trayTotal.fontSizeMax = 5f;
 
             // Plataforma de apuesta: barandilla abierta hacia el centro (+Z del modelo), suelo que se pisa y su colisión.
-            EditorAssets.PlaceModel($"{MODELS}/PlayerPlatform/PlayerPlatform.obj", PLATFORM, t, new Vector3(0f, 0f, BET_ZONE_Z),
+            EditorAssets.PlaceModel($"{MODELS}/PlayerPlatform/PlayerPlatform.obj", PLATFORM, t, BetZoneOffset,
                 Quaternion.identity, PlatformScale, layer, true);
-            EditorAssets.AddCylinderCollider("PlatformCollider", t, new Vector3(0f, PLATFORM_TOP * 0.5f, BET_ZONE_Z),
+            EditorAssets.AddCylinderCollider("PlatformCollider", t, BetZoneOffset + Vector3.up * (PLATFORM_TOP * 0.5f),
                 PLATFORM_RADIUS * 2f, PLATFORM_TOP, layer);
             AddRailColliders(t, layer);
             // El color de la respuesta sobre el suelo de la plataforma (es la zona de apuesta).
-            EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, BET_ZONE, t, new Vector3(0f, PLATFORM_TOP + 0.012f, BET_ZONE_Z),
+            EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, BET_ZONE, t, BetZoneOffset + Vector3.up * (PLATFORM_TOP + 0.012f),
                 new Vector3(1.75f, 0.002f, 1.75f), zone, layer, true, keepCollider: false);
 
             BuildMoneyTube(t, layer);
@@ -146,7 +147,7 @@ namespace Trivias.Booth.Editor
         /// <summary>Paredes invisibles a lo largo de la barandilla: solo se entra (y se sale) por la abertura delantera.</summary>
         private static void AddRailColliders(Transform booth, int layer)
         {
-            var holder = EditorAssets.CreateEmpty(RAIL_COLLIDERS, booth, new Vector3(0f, 0f, BET_ZONE_Z)).transform;
+            var holder = EditorAssets.CreateEmpty(RAIL_COLLIDERS, booth, BetZoneOffset).transform;
             var span = (360f - RAIL_OPENING_DEGREES * 2f) / RAIL_SEGMENTS;
             var width = 2f * RAIL_RADIUS * Mathf.Sin(span * 0.5f * Mathf.Deg2Rad) + 0.08f; // Se solapan un poco: sin rendijas.
             for (var i = 0; i < RAIL_SEGMENTS; i++)
@@ -201,14 +202,14 @@ namespace Trivias.Booth.Editor
         private static void BuildPlayerTube(Transform parent, int layer)
         {
             var tube = EditorAssets.CreateEmpty(PLAYER_TUBE, parent, Vector3.zero).transform;
-            var run = new TubeRun(tube, new Vector3(0f, StageLayout.CEILING_HEIGHT, BET_ZONE_Z), Vector3.down, PLAYER_TUBE_SCALE, layer);
+            var run = new TubeRun(tube, BetZoneOffset + Vector3.up * StageLayout.CEILING_HEIGHT, Vector3.down, PLAYER_TUBE_SCALE, layer);
             run.Straight(StageLayout.CEILING_HEIGHT - PLAYER_TUBE_MOUTH);
             run.Ring();
 
             // El recorrido va al revés que la construcción: de la boca (abajo) al techo. El aire sube desde la plataforma.
             var points = new List<Vector3>(run.Points);
             points.Reverse();
-            var air = BuildAir(tube, "AirIntake", new Vector3(0f, PLATFORM_TOP + 0.15f, BET_ZONE_Z), Quaternion.Euler(-90f, 0f, 0f),
+            var air = BuildAir(tube, "AirIntake", BetZoneOffset + Vector3.up * (PLATFORM_TOP + 0.15f), Quaternion.Euler(-90f, 0f, 0f),
                 Vector3.one, ParticleSystemShapeType.Circle, new Vector3(0f, 6.5f, 0f), ParticleSystemSimulationSpace.World, -1.3f, 1.1f);
             AddTubePath(tube, TubeKind.Player, points, air, layer);
         }

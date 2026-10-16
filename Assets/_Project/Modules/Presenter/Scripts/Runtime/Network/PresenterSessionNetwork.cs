@@ -240,7 +240,8 @@ namespace Trivias.Presenter.Network
             }
 
             var variables = new PhraseVariables(line.Amount, line.Prize, line.Survivors, line.Round, line.Multiplier);
-            _runtime.Say(variables.Format(_catalog[line.Phrase].Text));
+            var phrase = _catalog[line.Phrase];
+            _runtime.Say(variables.Format(phrase.Text), PresenterMoods.For(phrase.Event));
             _silenceAt = Time.time + _config.LineSeconds;
         }
     }

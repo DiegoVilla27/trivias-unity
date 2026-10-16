@@ -203,13 +203,24 @@ namespace Trivias.Shared.Editor
             return tmp;
         }
 
+        /// <summary>Interfaz de pantalla (no un cartel en el mundo, como la viñeta del presentador, que tiene su estilo).</summary>
+        private static bool HasScreenCanvas(GameObject root)
+        {
+            foreach (var canvas in root.GetComponentsInChildren<Canvas>(true))
+            {
+                if (canvas.renderMode != RenderMode.WorldSpace)
+                    return true;
+            }
+            return false;
+        }
+
         /// <summary>
-        /// Guarda la jerarquía como prefab y destruye el objeto temporal de la escena. Si es interfaz (tiene Canvas),
+        /// Guarda la jerarquía como prefab y destruye el objeto temporal de la escena. Si es interfaz de pantalla (Canvas no del mundo),
         /// antes le aplica el tema del juego (<see cref="UiTheme"/>).
         /// </summary>
         public static GameObject SaveAsPrefab(GameObject root, string path)
         {
-            if (root.GetComponentInChildren<Canvas>(true) != null)
+            if (HasScreenCanvas(root))
                 UiTheme.Apply(root);
             EnsureFolder(Path.GetDirectoryName(path));
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);

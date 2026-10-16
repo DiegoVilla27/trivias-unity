@@ -163,7 +163,7 @@ namespace Trivias.App.Tests
             for (var i = 0; i < bulbs.Count; i++)
             {
                 if (bulbs.BoothOf(i) == correct)
-                    Assert.That(bulbs.LevelOf(i), Is.GreaterThan(1f), "La cabina correcta brilla.");
+                    Assert.That(bulbs.LevelOf(i), Is.GreaterThan(0.75f), "La cabina correcta brilla.");
                 else if (bulbs.BoothOf(i) >= 0)
                     Assert.That(bulbs.LevelOf(i), Is.LessThan(0.2f), "Las falsas se apagan.");
             }

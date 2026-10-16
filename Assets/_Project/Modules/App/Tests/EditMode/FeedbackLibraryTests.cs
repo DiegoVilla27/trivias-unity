@@ -37,6 +37,21 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void StageLights_AreSoft_InEveryMoment()
+        {
+            var moods = AssetDatabase.LoadAssetAtPath<StageMoodConfig>(Trivias.Feedback.Editor.FeedbackBuilder.MOODS_PATH);
+            Assert.That(moods.Version, Is.EqualTo(Trivias.Feedback.Editor.FeedbackBuilder.MOODS_VERSION), "Valores de fábrica al día.");
+            for (var mood = 0; mood < StageMoods.COUNT; mood++)
+            {
+                var light = moods.For((StageMood)mood);
+                Assert.That(light.SpotIntensity, Is.InRange(8f, 40f), $"{(StageMood)mood}: focos que tiñen sin deslumbrar.");
+                Assert.That(light.KeyLightScale, Is.LessThanOrEqualTo(1f), $"{(StageMood)mood}: la luz principal no se dispara.");
+            }
+            Assert.That(moods.For(StageMood.Victory).SpotIntensity, Is.GreaterThan(moods.For(StageMood.Lobby).SpotIntensity),
+                "La victoria sigue siendo el momento más luminoso.");
+        }
+
+        [Test]
         public void EveryDifficultyBlock_HasMusic()
         {
             var library = Library();

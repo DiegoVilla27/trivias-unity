@@ -51,22 +51,22 @@ namespace Trivias.Feedback.Logic
             switch (mood)
             {
                 case StageMood.Countdown:
-                    return (int)(time * 6f) % 2 == 0 ? 1.5f : 0.12f; // Parpadeo con la cuenta atrás.
+                    return (int)(time * 6f) % 2 == 0 ? 1f : 0.1f; // Parpadeo con la cuenta atrás.
                 case StageMood.Correct:
                 case StageMood.Wrong:
                     if (booth == MARQUEE)
-                        return mood == StageMood.Correct ? 0.35f + 1.1f * Chase(order, time, 12f) : 0.2f;
+                        return mood == StageMood.Correct ? 0.3f + 0.7f * Chase(order, time, 12f) : 0.2f;
                     if (booth != correctBooth)
                         return 0.06f; // Las cabinas falsas se apagan…
-                    return 1.7f + 0.5f * (float)Math.Sin(time * 10f); // …y la correcta brilla y late.
+                    return 1.05f + 0.25f * (float)Math.Sin(time * 10f); // …y la correcta brilla y late.
                 case StageMood.Victory:
-                    return 0.4f + 1.3f * Chase(order + booth * 3, time, 16f);
+                    return 0.3f + 0.8f * Chase(order + booth * 3, time, 16f);
                 case StageMood.Defeat:
                     return 0.15f + 0.08f * (float)Math.Sin(time * 2.3f + order);
                 case StageMood.Hard:
-                    return 0.35f + 0.45f * Chase(order, time, 5f);
+                    return 0.3f + 0.3f * Chase(order, time, 5f);
                 default:
-                    return 0.6f + 0.45f * Chase(order, time, 4f); // Persecución suave mientras se juega.
+                    return 0.45f + 0.35f * Chase(order, time, 4f); // Persecución suave mientras se juega.
             }
         }
 

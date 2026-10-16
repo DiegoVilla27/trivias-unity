@@ -1,4 +1,3 @@
-using System.IO;
 using System.Linq;
 using TMPro;
 using Trivias.Shared.Presentation;
@@ -250,32 +249,7 @@ namespace Trivias.Shared.Editor
             return pixels;
         }
 
-        private static Sprite GetOrCreateSprite(string name, Color[] pixels, int border)
-        {
-            var path = $"{SPRITES}/{name}.png";
-            var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
-            if (sprite != null)
-                return sprite;
-
-            EditorAssets.EnsureFolder(SPRITES);
-            var texture = new Texture2D(SPRITE_SIZE, SPRITE_SIZE, TextureFormat.RGBA32, false);
-            texture.SetPixels(pixels);
-            texture.Apply();
-            File.WriteAllBytes(path, texture.EncodeToPNG());
-            Object.DestroyImmediate(texture);
-            AssetDatabase.ImportAsset(path);
-
-            var importer = (TextureImporter)AssetImporter.GetAtPath(path);
-            importer.textureType = TextureImporterType.Sprite;
-            importer.spriteImportMode = SpriteImportMode.Single;
-            importer.spriteBorder = new Vector4(border, border, border, border);
-            importer.mipmapEnabled = false;
-            importer.alphaIsTransparency = true;
-            importer.textureCompression = TextureImporterCompression.Uncompressed;
-            importer.filterMode = FilterMode.Bilinear;
-            importer.wrapMode = TextureWrapMode.Clamp;
-            importer.SaveAndReimport();
-            return AssetDatabase.LoadAssetAtPath<Sprite>(path);
-        }
+        private static Sprite GetOrCreateSprite(string name, Color[] pixels, int border) =>
+            GeneratedSprites.GetOrCreate($"{SPRITES}/{name}.png", SPRITE_SIZE, SPRITE_SIZE, pixels, border);
     }
 }

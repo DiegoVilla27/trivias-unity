@@ -565,15 +565,19 @@ namespace Trivias.Stage.Editor
         {
             var profile = EditorAssets.GetOrCreateAsset<VolumeProfile>(VOLUME_PROFILE_PATH);
             var bloom = Effect<Bloom>(profile);
-            bloom.threshold.Override(1f);
-            bloom.intensity.Override(0.8f);
-            bloom.scatter.Override(0.7f);
+            // Resplandor solo en lo que de verdad brilla (bombillas encendidas, focos): sin velo sobre todo el plató.
+            bloom.threshold.Override(1.25f);
+            bloom.intensity.Override(0.3f);
+            bloom.scatter.Override(0.55f);
             var vignette = Effect<Vignette>(profile);
             vignette.intensity.Override(0.28f);
             vignette.smoothness.Override(0.45f);
             var color = Effect<ColorAdjustments>(profile);
-            color.saturation.Override(12f);
-            color.contrast.Override(8f);
+            color.saturation.Override(0f);
+            color.contrast.Override(6f);
+            color.postExposure.Override(-0.15f);
+            // Las luces fuertes se suavizan en vez de quemarse a blanco.
+            Effect<Tonemapping>(profile).mode.Override(TonemappingMode.Neutral);
             EditorUtility.SetDirty(profile);
 
             var go = EditorAssets.CreateEmpty("PostProcessing", t, Vector3.zero);

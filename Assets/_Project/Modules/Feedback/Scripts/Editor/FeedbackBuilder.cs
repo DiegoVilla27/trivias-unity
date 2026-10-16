@@ -279,6 +279,8 @@ namespace Trivias.Feedback.Editor
         // ---- Ambiente de luz ----
 
         public const string MOODS_PATH = MODULE_ROOT + "/Config/StageMoodConfig.asset";
+        /// <summary>Sube al cambiar los valores de fábrica (2: focos más suaves, el plató deslumbraba).</summary>
+        public const int MOODS_VERSION = 2;
         // Colgados de las vigas del techo del plató (StageLayout): la luz sale de un foco sujeto con su abrazadera.
         private static Vector3 SpotTarget => StageLayout.SpotTarget;
         private static Vector3[] SpotPositions => StageLayout.SpotPositions;
@@ -287,20 +289,21 @@ namespace Trivias.Feedback.Editor
         public static StageMoodConfig BuildMoods()
         {
             var moods = new MoodLight[StageMoods.COUNT];
-            moods[(int)StageMood.Lobby] = new MoodLight(new Color(1f, 0.95f, 0.85f), 30f, Color.white, 1f);
-            moods[(int)StageMood.Easy] = new MoodLight(new Color(1f, 0.72f, 0.32f), 55f, new Color(1f, 0.95f, 0.85f), 1f);
-            moods[(int)StageMood.Medium] = new MoodLight(new Color(0.55f, 0.42f, 1f), 60f, new Color(0.85f, 0.8f, 1f), 0.8f);
-            moods[(int)StageMood.Hard] = new MoodLight(new Color(1f, 0.22f, 0.2f), 65f, new Color(0.7f, 0.55f, 0.6f), 0.55f);
-            moods[(int)StageMood.Countdown] = new MoodLight(new Color(1f, 0.86f, 0.6f), 55f, new Color(0.65f, 0.6f, 0.6f), 0.5f);
-            moods[(int)StageMood.Correct] = new MoodLight(new Color(0.3f, 1f, 0.45f), 70f, new Color(0.85f, 1f, 0.85f), 0.9f);
-            moods[(int)StageMood.Wrong] = new MoodLight(new Color(1f, 0.15f, 0.15f), 70f, new Color(0.6f, 0.45f, 0.45f), 0.5f);
-            moods[(int)StageMood.Victory] = new MoodLight(new Color(1f, 0.82f, 0.3f), 85f, new Color(1f, 0.9f, 0.7f), 1.1f);
-            moods[(int)StageMood.Defeat] = new MoodLight(new Color(0.3f, 0.4f, 0.8f), 25f, new Color(0.5f, 0.5f, 0.6f), 0.4f);
+            // Focos de color suaves: tiñen el plató sin deslumbrar (la sala ya tiene su luz principal y la ambiente).
+            moods[(int)StageMood.Lobby] = new MoodLight(new Color(1f, 0.95f, 0.85f), 16f, Color.white, 0.9f);
+            moods[(int)StageMood.Easy] = new MoodLight(new Color(1f, 0.76f, 0.42f), 24f, new Color(1f, 0.95f, 0.88f), 0.9f);
+            moods[(int)StageMood.Medium] = new MoodLight(new Color(0.62f, 0.5f, 1f), 26f, new Color(0.86f, 0.82f, 1f), 0.75f);
+            moods[(int)StageMood.Hard] = new MoodLight(new Color(1f, 0.3f, 0.28f), 28f, new Color(0.72f, 0.58f, 0.62f), 0.55f);
+            moods[(int)StageMood.Countdown] = new MoodLight(new Color(1f, 0.86f, 0.62f), 24f, new Color(0.66f, 0.62f, 0.62f), 0.5f);
+            moods[(int)StageMood.Correct] = new MoodLight(new Color(0.4f, 1f, 0.52f), 30f, new Color(0.86f, 1f, 0.86f), 0.85f);
+            moods[(int)StageMood.Wrong] = new MoodLight(new Color(1f, 0.25f, 0.22f), 30f, new Color(0.62f, 0.48f, 0.48f), 0.5f);
+            moods[(int)StageMood.Victory] = new MoodLight(new Color(1f, 0.84f, 0.4f), 36f, new Color(1f, 0.92f, 0.75f), 1f);
+            moods[(int)StageMood.Defeat] = new MoodLight(new Color(0.35f, 0.45f, 0.8f), 12f, new Color(0.5f, 0.5f, 0.6f), 0.4f);
 
             var config = EditorAssets.GetOrCreateAsset<StageMoodConfig>(MOODS_PATH);
-            if (config.Count != StageMoods.COUNT || config.For(StageMood.Lobby).SpotIntensity <= 0f)
+            if (config.Count != StageMoods.COUNT || config.Version < MOODS_VERSION)
             {
-                config.EditorSet(moods); // Solo la primera vez: si se ajustó a mano, se respeta.
+                config.EditorSet(moods, MOODS_VERSION); // Solo si cambian los de fábrica: lo ajustado a mano se respeta.
                 EditorUtility.SetDirty(config);
             }
             return config;
