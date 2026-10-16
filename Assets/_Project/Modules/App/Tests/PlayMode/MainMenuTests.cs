@@ -65,6 +65,27 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
+        public IEnumerator MainMenu_DimsTheStageBehind_ButNotTheLobbyOrTheMatch()
+        {
+            Assert.That(_menu.IsBackdropShown, Is.True, "Velo semioscuro detrás del menú principal.");
+            var backdrop = ((GameObject)typeof(MenuView).GetField("_backdrop", PRIVATE).GetValue(_menu)).GetComponent<Image>();
+            Assert.That(backdrop.color.a, Is.InRange(0.45f, 0.8f), "Semioscuro: el plató se sigue viendo detrás.");
+            var rect = backdrop.rectTransform;
+            Assert.That(rect.anchorMin, Is.EqualTo(Vector2.zero));
+            Assert.That(rect.anchorMax, Is.EqualTo(Vector2.one), "A pantalla completa.");
+            Assert.That(rect.GetSiblingIndex(), Is.LessThan(_menu.transform.Find("MainMenu").GetSiblingIndex()), "Detrás del menú.");
+
+            MenuButton("_joinMenuButton").onClick.Invoke();
+            yield return null;
+            Assert.That(_menu.IsBackdropShown, Is.True, "También al unirse a una sala.");
+
+            Assert.That(_connection.StartHost(), Is.True);
+            yield return new WaitForSeconds(0.5f);
+            Assert.That(_menu.IsLobbyOpen, Is.True);
+            Assert.That(_menu.IsBackdropShown, Is.False, "En la sala de espera se ve el plató.");
+        }
+
+        [UnityTest]
         public IEnumerator Join_AsksForTheAddress_RemembersIt_AndGoesBack()
         {
             _settings.SetLastAddress("10.147.17.5");

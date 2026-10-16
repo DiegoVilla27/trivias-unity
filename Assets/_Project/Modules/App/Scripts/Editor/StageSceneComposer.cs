@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Trivias.Booth.Editor;
+using Trivias.Feedback.Data;
+using Trivias.Feedback.Editor;
 using Trivias.Match.Editor;
 using Trivias.Money.Editor;
 using Trivias.Networking.Components;
@@ -8,6 +11,7 @@ using Trivias.Networking.Editor;
 using Trivias.SelfBet.Editor;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Spawning;
+using Trivias.Shared.Tubes;
 using Trivias.Stage.Editor;
 using Trivias.Table.Editor;
 using Unity.Netcode;
@@ -63,7 +67,7 @@ namespace Trivias.App.Editor
             var environment = Place(prefabs.Environment, Vector3.zero, 0f);
             var table = Place(prefabs.Table, StageLayout.TablePosition, 0f);
             var exchange = Place(prefabs.ExchangeStation, StageLayout.ExchangePosition, StageLayout.STATIONS_YAW);
-            Place(prefabs.VerifyButton, StageLayout.VerifyButtonPosition, StageLayout.STATIONS_YAW);
+            var verifyButton = Place(prefabs.VerifyButton, StageLayout.VerifyButtonPosition, StageLayout.STATIONS_YAW);
             // En el centro, entre la pantalla y las estaciones, mirando a la zona de inicio. A pie de suelo y con la
             // viñeta al lado de la cabeza: ni él ni lo que dice tapan la pregunta.
             Place(prefabs.Presenter, StageLayout.PresenterSpot, StageLayout.PRESENTER_YAW);
@@ -84,7 +88,10 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.GameFeedback);
             PrefabUtility.InstantiatePrefab(prefabs.StageConfetti);
             PrefabUtility.InstantiatePrefab(prefabs.VictoryPodium);
-            PrefabUtility.InstantiatePrefab(prefabs.StageLighting);
+            var lighting = (GameObject)PrefabUtility.InstantiatePrefab(prefabs.StageLighting);
+            var library = FeedbackBuilder.Library();
+            ConnectTubes(booths, library);
+            AttachStageShow(environment, booths, table, verifyButton, lighting, library);
             PrefabUtility.InstantiatePrefab(prefabs.Spectator);
             CreateEventSystem();
 
@@ -196,6 +203,70 @@ namespace Trivias.App.Editor
                     booths[i].transform.Find(BoothPrefabBuilder.BETTORS_LABEL).GetComponent<TextMeshPro>());
             }
             SelfBetBuilder.WriteLayout(zoneCenters);
+        }
+
+        /// <summary>Los tubos suenan al succionar: el sonido lo sintetiza el módulo Feedback.</summary>
+        private static void ConnectTubes(GameObject[] booths, FeedbackLibrary library)
+        {
+            foreach (var booth in booths)
+            {
+                foreach (var tube in booth.GetComponentsInChildren<TubePath>(true))
+                {
+                    var audio = tube.GetComponentInChildren<AudioSource>(true);
+                    audio.clip = library.Suction;
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(audio);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Plató vivo (módulo Feedback): bombillas de las cabinas y de la marquesina, público, cámaras de estudio y focos.
+        /// App reúne las piezas del plató y de las cabinas; Feedback las anima.
+        /// </summary>
+        private static void AttachStageShow(GameObject environment, GameObject[] booths, GameObject table, GameObject verifyButton,
+            GameObject lighting, FeedbackLibrary library)
+        {
+            var env = environment.transform;
+            var bulbs = new List<Renderer>();
+            var bulbBooths = new List<int>();
+            var bulbOrders = new List<int>();
+            for (var booth = 0; booth < booths.Length; booth++)
+            {
+                // Bombillas del mueble, ordenadas de abajo arriba: la persecución sube por las dos columnas.
+                var boothBulbs = booths[booth].transform.Find(BoothPrefabBuilder.BODY).GetComponentsInChildren<Renderer>()
+                    .Where(r => r.sharedMaterial != null && r.sharedMaterial.name.Contains("Bulb"))
+                    .OrderBy(r => r.transform.TransformPoint(r.localBounds.center).y).ToList();
+                for (var i = 0; i < boothBulbs.Count; i++)
+                {
+                    bulbs.Add(boothBulbs[i]);
+                    bulbBooths.Add(booth);
+                    bulbOrders.Add(i / 2);
+                }
+            }
+
+            var marquee = env.Find(StageEnvironmentPrefabBuilder.MARQUEE).GetComponentsInChildren<Renderer>()
+                .Where(r => r.sharedMaterial != null && r.sharedMaterial.name.Contains("Lens"))
+                .OrderBy(r => r.bounds.center.x).ToList();
+            for (var i = 0; i < marquee.Count; i++)
+            {
+                bulbs.Add(marquee[i]);
+                bulbBooths.Add(Trivias.Feedback.Logic.StageShowRules.MARQUEE);
+                bulbOrders.Add(i);
+            }
+
+            var audience = env.Find("Audience");
+            var figures = audience.GetComponentsInChildren<Transform>()
+                .Where(t => t.name == StageEnvironmentPrefabBuilder.AUDIENCE_FIGURE).ToArray();
+            var audienceCenter = figures.Aggregate(Vector3.zero, (sum, t) => sum + t.position) / Mathf.Max(1, figures.Length);
+
+            var cameras = env.Find("StudioCameras").Cast<Transform>().Where(t => t.name.StartsWith("Camera") && !t.name.EndsWith("Collider"))
+                .Append(env.Find("CameraDais/Camera")).ToArray();
+            var fixtures = env.Find("CeilingRig").Cast<Transform>().Where(t => t.name.StartsWith("SmallSpot")).ToArray();
+            var spots = lighting.GetComponentsInChildren<Light>().Select(l => l.transform).ToArray();
+
+            FeedbackBuilder.AttachStageShow(MatchBuilder.Runtime(), library, bulbs.ToArray(), bulbBooths.ToArray(), bulbOrders.ToArray(),
+                figures, audienceCenter, cameras, table.transform, verifyButton.transform, booths.Select(b => b.transform).ToArray(),
+                fixtures, spots);
         }
 
         private static void PlaceNetworkManager(StageScenePrefabs prefabs)

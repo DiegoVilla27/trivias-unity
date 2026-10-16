@@ -31,6 +31,7 @@ namespace Trivias.Results.Editor
             background.color = new Color(0.05f, 0.06f, 0.16f, 0.94f);
 
             var title = CreateText("Title", panel, 64f, new Vector2(0f, -30f), new Vector2(700f, 80f), FontStyles.Bold);
+            UiTheme.AddMarquee(panel); // Bombillas alrededor del resultado, como en el plató.
             var details = CreateText("Details", panel, 28f, new Vector2(0f, -125f), new Vector2(680f, 400f), FontStyles.Normal);
 
             var playAgain = CreateButton("PlayAgain", panel, new Vector2(-170f, -540f), "Volver a jugar", out var playAgainLabel);

@@ -77,6 +77,12 @@ MonoBehaviour:
   _bagPrefab: {fileID: 8793939040916445702, guid: a496a929c60774e23b8d082ec61aaaea, type: 3}
   _goldBarPrefab: {fileID: 6263617572949204866, guid: 74e2a474321d44b2ba511f34327a0ffa, type: 3}
   _avatars: {fileID: 11400000, guid: 5e2315d71190445509fe6f9183cd46ac, type: 2}
+  _tubes: {fileID: 11400000, guid: c854cd985da8c44c6b962783cfd12446, type: 2}
+  _riseSeconds: 0.55
+  _tubeStartSpeed: 3
+  _tubeAcceleration: 22
+  _stagger: 0.07
+  _spinDegreesPerSecond: 540
 --- !u!114 &9092891558055254000
 MonoBehaviour:
   m_ObjectHideFlags: 0

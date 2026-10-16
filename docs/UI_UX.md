@@ -10,7 +10,7 @@ Referencia: [GDD](GDD.md), secciones 3–5, 9 y 11–12. Diseños de pantallas p
 | Récords | Una pestaña por tamaño de grupo (2 a 6 jugadores) con las 10 mejores victorias de este ordenador: puesto (los empates lo comparten), premio, tiempo, fecha, participantes y supervivientes. Esc o Cerrar |
 | Unirme a una sala | Dirección del host (recuerda la última), Conectar, Volver; valida el formato antes de intentarlo y explica los errores |
 | Sala de espera | Jugadores n/6, fichas, «Invita a tus amigos» (host: dirección a compartir y Copiar), Empezar partida (host), Tienda, Cómo se juega, Salir |
-| Cómo se juega | Tutorial de 6 páginas (objetivo, dinero, verificar, comodín, fichas y tienda, controles) con Anterior/Siguiente. Texto en `Menu/Content/howtoplay_es.json` |
+| Cómo se juega | Tutorial de 6 páginas (objetivo, dinero, verificar, comodín, fichas y tienda, controles) con Anterior/Siguiente. Se lee de un vistazo: como mucho 220 caracteres y 7 líneas por página, en letra grande y centrada (lo comprueban las pruebas). Texto en `Menu/Content/howtoplay_es.json` |
 | Configuración | Volumen general, música y efectos; sensibilidad del ratón; invertir eje vertical; pantalla completa; Restablecer. Se aplica al momento y se guarda al cerrar |
 | Pausa (Esc en partida) | Continuar · Cómo se juega · Configuración · Salir de la sala (con confirmación). La partida sigue para los demás: tu concursante queda quieto y el ratón libre. Esc cierra primero el panel abierto |
 | Concurso | Pantalla del plató: pregunta, respuestas A-D en recuadros de color, ronda, reloj y explicación. HUD: estado de la ronda, dinero y comodines. Viñeta del presentador sobre su cabeza |
@@ -50,6 +50,17 @@ Fichas personales y dinero del concurso usan nombres/iconos distintos. Mostrar �
 
 Tienda: compras cosméticas, confirmación de precio, objeto ya adquirido y saldo insuficiente. No vender gestos en la primera salida. Diez personajes básicos disponibles sin compra.
 
+## Estilo
+
+Toda la interfaz (menú, sala de espera, configuración, pausa, tienda, HUD, resultados, avisos) sigue el estilo del plató, aplicado al construir cada pantalla (`UiTheme`, en `Shared`), así que una pantalla nueva lo recibe sola:
+
+- Tipografías: Lilita One en títulos (los dorados, con degradado como el rótulo del plató) y Poppins en el resto, igual que en el plató ([LEVEL](LEVEL.md)). Los textos encogen si no caben.
+- Paneles redondeados con un leve degradado y marco dorado; los principales aparecen con un pequeño rebote (0,22 s).
+- Botones redondeados: crecen un poco al pasar el ratón y se hunden al pulsar; los secundarios (fondo translúcido) llevan borde dorado.
+- Detrás del menú principal y de «Unirme a una sala», un velo semioscuro a pantalla completa resalta el menú y deja ver el plató. En la sala de espera no hay velo.
+- Menú principal y resultados con bombillas alrededor que persiguen, como la marquesina; el logo del menú late.
+- Las animaciones usan tiempo real (siguen en pausa) y no reservan memoria por fotograma.
+
 ## Pendientes
 
-Tipografías del plató decididas: Lilita One (titulares) y Poppins (texto), ver [LEVEL](LEVEL.md). Menús y HUD siguen con la fuente por defecto. Pendientes: ubicación de textos (cámara en tercera persona confirmada), asignación de controles, tamaño de tipografía, idiomas y compatibilidad de entrada. Validar legibilidad del texto más largo y usar letras/formas además del color. La interfaz no debe añadir sistemas de señalar ni votación obligatoria.
+Pendientes: ubicación de textos (cámara en tercera persona confirmada), asignación de controles, tamaño de tipografía, idiomas y compatibilidad de entrada. Validar legibilidad del texto más largo y usar letras/formas además del color. La interfaz no debe añadir sistemas de señalar ni votación obligatoria.

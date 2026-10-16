@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Trivias.Player"
+        "Trivias.Player",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"

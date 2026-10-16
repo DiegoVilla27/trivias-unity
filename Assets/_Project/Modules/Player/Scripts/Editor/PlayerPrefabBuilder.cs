@@ -68,6 +68,7 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(expulsion, "_model", animator.transform);
             SerializedWiring.Set(expulsion, "_nameTag", nameTag.gameObject);
             SerializedWiring.Set(expulsion, "_controller", controller);
+            SerializedWiring.Set(expulsion, "_tubes", SharedAssets.TubeRegistry());
 
             var input = root.AddComponent<PlayerInputReader>();
             WireInput(input);
@@ -165,6 +166,7 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(input, "_move", FindAction(references, "Move"));
             SerializedWiring.Set(input, "_look", FindAction(references, "Look"));
             SerializedWiring.Set(input, "_jump", FindAction(references, "Jump"));
+            SerializedWiring.Set(input, "_sprint", FindAction(references, "Sprint"));
         }
 
         /// <summary>Referencia a una acción de los controles del concursante, para otros módulos (p. ej. Interact).</summary>

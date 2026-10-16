@@ -48,3 +48,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 95e30528630df4367b710b2ca558d149, type: 3}
   _musicVolume: 0.22
   _musicFadeSeconds: 0.8
+  _suction: {fileID: 8300000, guid: 1d5895449c8d64637b305862ed4aba49, type: 3}
+  _applause: {fileID: 8300000, guid: 5977323962a8d4594ab02e20045f65d5, type: 3}
+  _cheer: {fileID: 8300000, guid: 0162e91b92842406bbdd164cea94fa91, type: 3}
+  _aww: {fileID: 8300000, guid: f61f771f13f3a4cfe9f472043b0fa3f8, type: 3}
+  _crowdVolume: 0.55

@@ -130,6 +130,12 @@ MonoBehaviour:
   _model: {fileID: 1941848470727245855}
   _nameTag: {fileID: 5072060575748486107}
   _controller: {fileID: 5706620353365889747}
+  _tubes: {fileID: 11400000, guid: c854cd985da8c44c6b962783cfd12446, type: 2}
+  _tubeReach: 2.5
+  _windUpSeconds: 0.45
+  _riseSeconds: 0.5
+  _tubeStartSpeed: 6
+  _tubeAcceleration: 30
   _duration: 1.2
   _height: 8
   _spinDegreesPerSecond: 720
@@ -148,6 +154,7 @@ MonoBehaviour:
   _move: {fileID: 6617374115520764352, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
   _look: {fileID: -3670211711064513919, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
   _jump: {fileID: 7951701466428921893, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
+  _sprint: {fileID: 8363367319718636947, guid: 284e3830fdda04277b9bbe5da79ccf77, type: 3}
 --- !u!114 &6980080390388521248
 MonoBehaviour:
   m_ObjectHideFlags: 0

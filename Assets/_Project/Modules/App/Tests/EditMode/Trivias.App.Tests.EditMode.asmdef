@@ -16,7 +16,9 @@
         "Trivias.Spectator",
         "Unity.RenderPipelines.Core.Runtime",
         "Unity.RenderPipelines.Universal.Runtime",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Trivias.Shared.Editor"
     ],
     "includePlatforms": [
         "Editor"

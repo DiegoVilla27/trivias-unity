@@ -420,6 +420,120 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void BetPlatformRailing_Blocks_ExceptTheFrontOpening()
+        {
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var root = Find($"Booths/Booth_{(char)('A' + booth)}").transform;
+                var zone = root.Find("BetZone");
+                var rails = root.Find("RailColliders").GetComponentsInChildren<BoxCollider>();
+                Assert.That(rails.Length, Is.GreaterThanOrEqualTo(6), $"{root.name}: la barandilla tiene colisión.");
+                foreach (var rail in rails)
+                    Assert.That(rail.bounds.max.y, Is.GreaterThanOrEqualTo(1.3f), "Más alta que un salto desde la plataforma.");
+
+                for (var angle = -180; angle < 180; angle += 5)
+                {
+                    var direction = root.rotation * Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+                    var blocked = false;
+                    for (var d = 0.6f; d <= 1.6f && !blocked; d += 0.05f)
+                    {
+                        var point = zone.position + Vector3.up * 0.6f + direction * d;
+                        blocked = rails.Any(r => Inside(r, point));
+                    }
+                    if (Mathf.Abs(angle) <= 35)
+                        Assert.That(blocked, Is.False, $"{root.name} a {angle}°: la abertura hacia el centro queda libre.");
+                    else if (Mathf.Abs(angle) >= 55)
+                        Assert.That(blocked, Is.True, $"{root.name} a {angle}°: la barandilla no deja pasar.");
+                }
+            }
+        }
+
+        private static bool Inside(BoxCollider box, Vector3 world)
+        {
+            var local = box.transform.InverseTransformPoint(world) - box.center;
+            var half = box.size * 0.5f;
+            return Mathf.Abs(local.x) <= half.x && Mathf.Abs(local.y) <= half.y && Mathf.Abs(local.z) <= half.z;
+        }
+
+        [Test]
+        public void EachTube_KnowsItsPath_ItsAir_AndItsSound()
+        {
+            var ceiling = Find($"{ENVIRONMENT}/Ceiling").GetComponent<Renderer>().bounds.min.y;
+            for (var booth = 0; booth < 4; booth++)
+            {
+                var root = Find($"Booths/Booth_{(char)('A' + booth)}").transform;
+                var cabinetTop = BoundsOf(root.Find("Body").gameObject).max.y;
+                foreach (var tube in root.GetComponentsInChildren<Trivias.Shared.Tubes.TubePath>())
+                {
+                    Assert.That(tube.Booth, Is.EqualTo(booth), $"{root.name}/{tube.name}: sabe de qué cabina es.");
+                    tube.Sample(0f, out var start, out _);
+                    tube.Sample(tube.Length, out var end, out _);
+                    Assert.That(end.y, Is.EqualTo(ceiling).Within(0.2f), $"{tube.name}: acaba en el techo.");
+                    if (tube.Kind == Trivias.Shared.Tubes.TubeKind.Money)
+                        Assert.That(start.y, Is.EqualTo(cabinetTop).Within(0.15f), "El del dinero empieza en el techo del mueble.");
+                    else
+                        Assert.That(start.y, Is.InRange(3f, 3.8f), "El del concursante empieza en su boca, sobre la plataforma.");
+
+                    var air = tube.GetComponentInChildren<ParticleSystem>(true);
+                    Assert.That(air, Is.Not.Null, "Aire que entra al succionar.");
+                    Assert.That(air.main.loop, Is.False, "Una ráfaga por succión.");
+                    Assert.That(air.main.playOnAwake, Is.False);
+                    var audio = tube.GetComponentInChildren<AudioSource>(true);
+                    Assert.That(audio.clip, Is.Not.Null, "Suena la succión.");
+                    Assert.That(audio.playOnAwake, Is.False);
+                }
+                Assert.That(root.GetComponentsInChildren<Trivias.Shared.Tubes.TubePath>().Length, Is.EqualTo(2), "Dinero y concursante.");
+            }
+        }
+
+        [Test]
+        public void TubePaths_FlowSmoothly_WithoutSharpCorners()
+        {
+            var tube = Find("Booths/Booth_C/MoneyTube").GetComponent<Trivias.Shared.Tubes.TubePath>();
+            tube.Sample(0f, out _, out var previous);
+            for (var d = 0.1f; d < tube.Length; d += 0.1f)
+            {
+                tube.Sample(d, out _, out var direction);
+                Assert.That(Vector3.Angle(previous, direction), Is.LessThan(20f), $"A {d:0.0} m gira de golpe: el codo debe ser curvo.");
+                previous = direction;
+            }
+        }
+
+        [Test]
+        public void StageShow_HasItsBulbsAudienceCamerasAndFixtures()
+        {
+            var show = Find("StageShow");
+            Assert.That(show, Is.Not.Null);
+            var bulbs = show.GetComponent<Trivias.Feedback.Components.StageBulbs>();
+            var perBooth = new int[4];
+            var marquee = 0;
+            for (var i = 0; i < bulbs.Count; i++)
+            {
+                if (bulbs.BoothOf(i) >= 0) perBooth[bulbs.BoothOf(i)]++;
+                else marquee++;
+            }
+            foreach (var count in perBooth)
+                Assert.That(count, Is.GreaterThanOrEqualTo(10), "Las bombillas de cada cabina.");
+            Assert.That(marquee, Is.GreaterThanOrEqualTo(12), "Las de la marquesina de la pantalla.");
+
+            var figures = (Transform[])typeof(Trivias.Feedback.Components.AudienceCrowd)
+                .GetField("_figures", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .GetValue(show.GetComponent<Trivias.Feedback.Components.AudienceCrowd>());
+            Assert.That(figures.Length, Is.GreaterThanOrEqualTo(40));
+            foreach (var moving in figures.Concat(Moving(show, typeof(Trivias.Feedback.Components.StudioCameraOperators), "_cameras"))
+                         .Concat(Moving(show, typeof(Trivias.Feedback.Components.FixtureSway), "_fixtures")))
+            {
+                foreach (var part in moving.GetComponentsInChildren<Transform>())
+                    Assert.That(part.gameObject.isStatic, Is.False, $"{part.name} se mueve: no puede ser estático (static batching).");
+            }
+            Assert.That(Moving(show, typeof(Trivias.Feedback.Components.StudioCameraOperators), "_cameras").Length, Is.EqualTo(4));
+        }
+
+        private static Transform[] Moving(GameObject show, System.Type component, string field) =>
+            (Transform[])component.GetField(field, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .GetValue(show.GetComponent(component));
+
+        [Test]
         public void StageTexts_UseTheStageFonts()
         {
             var texts = _roots.SelectMany(r => r.GetComponentsInChildren<TMPro.TextMeshPro>(true)).ToList();
@@ -437,9 +551,10 @@ namespace Trivias.App.Tests
         // ---- Utilidades ----
 
         /// <summary>Caja que envuelve todas las piezas visibles de un objeto (los modelos tienen muchas).</summary>
+        /// <summary>Volumen de las mallas (sin partículas: el aire de los tubos no ocupa sitio mientras no sopla).</summary>
         private static Bounds BoundsOf(GameObject go)
         {
-            var renderers = go.GetComponentsInChildren<Renderer>(true);
+            var renderers = go.GetComponentsInChildren<MeshRenderer>(true);
             var bounds = renderers[0].bounds;
             foreach (var renderer in renderers)
                 bounds.Encapsulate(renderer.bounds);

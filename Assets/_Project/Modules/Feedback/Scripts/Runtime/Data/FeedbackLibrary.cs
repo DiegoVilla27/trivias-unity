@@ -16,6 +16,13 @@ namespace Trivias.Feedback.Data
         [SerializeField] private AudioClip[] _music = new AudioClip[FeedbackRules.MUSIC_BLOCKS];
         [SerializeField, Range(0f, 1f)] private float _musicVolume = 0.22f;
         [SerializeField, Min(0.05f)] private float _musicFadeSeconds = 0.8f;
+        [Header("Plató")]
+        [Tooltip("Succión de los tubos de las cabinas (dinero y concursante).")]
+        [SerializeField] private AudioClip _suction;
+        [SerializeField] private AudioClip _applause;
+        [SerializeField] private AudioClip _cheer;
+        [SerializeField] private AudioClip _aww;
+        [SerializeField, Range(0f, 1f)] private float _crowdVolume = 0.55f;
 
         public AudioClip Clip(FeedbackCue cue) => _cues[(int)cue];
         public float Volume(FeedbackCue cue) => _cueVolumes[(int)cue];
@@ -23,6 +30,11 @@ namespace Trivias.Feedback.Data
         public int MusicCount => _music.Length;
         public float MusicVolume => _musicVolume;
         public float MusicFadeSeconds => _musicFadeSeconds;
+        public AudioClip Suction => _suction;
+        public AudioClip Applause => _applause;
+        public AudioClip Cheer => _cheer;
+        public AudioClip Aww => _aww;
+        public float CrowdVolume => _crowdVolume;
 
 #if UNITY_EDITOR
         public void EditorSet(AudioClip[] cues, float[] volumes, AudioClip[] music)
@@ -30,6 +42,14 @@ namespace Trivias.Feedback.Data
             _cues = cues;
             _cueVolumes = volumes;
             _music = music;
+        }
+
+        public void EditorSetStage(AudioClip suction, AudioClip applause, AudioClip cheer, AudioClip aww)
+        {
+            _suction = suction;
+            _applause = applause;
+            _cheer = cheer;
+            _aww = aww;
         }
 #endif
     }

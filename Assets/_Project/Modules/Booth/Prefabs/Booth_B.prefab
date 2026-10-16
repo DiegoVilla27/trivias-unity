@@ -498,6 +498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Booth_B
       objectReference: {fileID: 0}
+    - target: {fileID: 3137249515354666133, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: _booth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3346729356214137017, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -506,6 +510,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 3624784000470867864, guid: 64995a890986d43318c3d5010ba3e981, type: 2}
+    - target: {fileID: 5770640261069089414, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
+      propertyPath: _booth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7307511060360395501, guid: e6bbf6fc72ca147a8bc33a842e46de94, type: 3}
       propertyPath: m_sharedMaterial
       value: 

@@ -36,6 +36,8 @@ namespace Trivias.Menu.Components
         [SerializeField] private RecordsView _recordsView;
 
         [Header("Pantalla principal")]
+        [Tooltip("Velo semioscuro a pantalla completa: resalta el menú y deja ver el plató detrás.")]
+        [SerializeField] private GameObject _backdrop;
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private TMP_InputField _playerName;
         [SerializeField] private Button _hostButton;
@@ -71,6 +73,7 @@ namespace Trivias.Menu.Components
         private string _joinError;
 
         public bool IsMainOpen => _mainPanel.activeSelf;
+        public bool IsBackdropShown => _backdrop.activeSelf;
         public bool IsJoinOpen => _joinPanel.activeSelf;
         public bool IsLobbyOpen => _lobbyPanel.activeSelf;
 
@@ -129,6 +132,7 @@ namespace Trivias.Menu.Components
             var connection = _room.Connection;
             if (connection == null)
             {
+                _backdrop.SetActive(false);
                 _mainPanel.SetActive(false);
                 _joinPanel.SetActive(false);
                 _lobbyPanel.SetActive(false);
@@ -138,6 +142,7 @@ namespace Trivias.Menu.Components
             if (connection.State == RoomConnectionState.Connected)
             {
                 _joinOpen = false;
+                _backdrop.SetActive(false);
                 _mainPanel.SetActive(false);
                 _joinPanel.SetActive(false);
                 var inMatch = _match.Session != null && _match.Session.Phase != MatchPhase.Lobby;
@@ -148,6 +153,7 @@ namespace Trivias.Menu.Components
             }
 
             _lobbyPanel.SetActive(false);
+            _backdrop.SetActive(true);
             _mainPanel.SetActive(!_joinOpen);
             _joinPanel.SetActive(_joinOpen);
             if (_joinOpen)

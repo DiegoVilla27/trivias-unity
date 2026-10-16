@@ -45,6 +45,7 @@ namespace Trivias.Money.Editor
             SerializedWiring.Set(presenter, "_bagPrefab", bag);
             SerializedWiring.Set(presenter, "_goldBarPrefab", goldBar);
             SerializedWiring.Set(presenter, "_avatars", SharedAssets.PlayerAvatars());
+            SerializedWiring.Set(presenter, "_tubes", SharedAssets.TubeRegistry());
 
             var session = root.AddComponent<MoneySessionNetwork>();
             SerializedWiring.Set(session, "_config", Config());

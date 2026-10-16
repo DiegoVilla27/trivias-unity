@@ -3,7 +3,8 @@
     "rootNamespace": "Trivias.Shared.Editor",
     "references": [
         "Trivias.Shared",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

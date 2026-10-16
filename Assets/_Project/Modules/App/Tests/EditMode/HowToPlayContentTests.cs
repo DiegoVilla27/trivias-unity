@@ -49,11 +49,30 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void DoesNotMentionControlsThatDoNotExist()
+        public void DoesNotMentionThingsThatDoNotExist()
         {
             var text = AllText().ToLowerInvariant();
-            foreach (var missing in new[] { "correr", "mayús" })
+            foreach (var missing in new[] { "trampilla", "mayús" })
                 Assert.That(text, Does.Not.Contain(missing), $"El juego no tiene «{missing}».");
+        }
+
+        [Test]
+        public void ExplainsHowToRun()
+        {
+            var text = AllText().ToLowerInvariant();
+            Assert.That(text, Does.Contain("shift").And.Contain("correr"), "Correr (Shift) se explica en los controles.");
+        }
+
+        [Test]
+        public void EveryPage_ReadsAtAGlance()
+        {
+            var content = Content();
+            for (var i = 0; i < content.Count; i++)
+            {
+                var visible = Regex.Replace(content[i].Body, "<[^>]+>", string.Empty);
+                Assert.That(visible.Length, Is.LessThanOrEqualTo(220), $"Página {i + 1}: demasiado texto, nadie lo leerá.");
+                Assert.That(visible.Split('\n').Length, Is.LessThanOrEqualTo(7), $"Página {i + 1}: demasiadas líneas.");
+            }
         }
 
         [Test]

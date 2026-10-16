@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.16 — presentador al pie de la pantalla entre las estaciones, y tipografías del plató.
+- Versión: 0.18 — correr con Shift, barandillas sólidas en las plataformas, tutorial breve y velo detrás del menú principal.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -195,7 +195,7 @@ Motor Unity 6 con URP y cámara en tercera persona (Cinemachine). La paleta defi
 
 ## 8. Interacción técnica sencilla
 
-El dinero se sujeta a un punto de la mano al cogerlo y encaja en una bandeja al depositarlo. Se evita depender de una simulación física compleja para decidir el valor apostado. La expulsión usa una animación breve (el personaje sale disparado hacia arriba) y transición a espectador. Los jugadores no entran en el tubo: el tubo es decorativo y no se simula ningún recorrido.
+El dinero se sujeta a un punto de la mano al cogerlo y encaja en una bandeja al depositarlo. Se evita depender de una simulación física compleja para decidir el valor apostado. La expulsión es una animación local, sin física ni red propia: el tubo del concursante succiona al expulsado (se tambalea, se estira y sube por dentro hasta el techo) y pasa a espectador. El dinero perdido sube igual por el tubo del dinero de su cabina, siguiendo sus curvas. Cada succión lleva su ráfaga de aire y su sonido. El recorrido es la línea central del tubo, guardada en edición; no se simula ningún choque.
 
 Propuesta de estados de dinero: mesa, transportado, bandeja y perdido. El sistema de partida controla dueño, ubicación y valor; la conversión y el cierre se resuelven de forma consistente para todo el grupo.
 
@@ -397,6 +397,19 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.18 — 16 de octubre de 2026
+
+- Correr: manteniendo Shift (o el stick izquierdo del mando) el concursante corre a 5,6 m/s; andando va a 3,2 m/s.
+- La barandilla de cada plataforma de apuesta es sólida: solo se sube por la abertura hacia el centro, y no se salta por encima.
+- «Cómo se juega» se reduce a seis páginas que se leen de un vistazo (unas pocas líneas cada una, letra más grande).
+- El menú principal (y «Unirme a una sala») tiene detrás un velo semioscuro a pantalla completa que resalta el menú y deja ver el plató.
+
+### Versión 0.17 — 16 de octubre de 2026
+
+- Succión por los tubos: el expulsado sube por el tubo de su plataforma y el dinero perdido por el tubo del dinero de su cabina, acelerando y siguiendo los codos sin saltos, con aire que entra y sonido de succión.
+- Plató vivo: las bombillas de las cabinas persiguen en espera, parpadean en la cuenta atrás y solo se queda encendida la cabina correcta; marquesina de la pantalla con persecución. El público respira, aplaude los aciertos y el inicio, vitorea la victoria y se lamenta al fallar, con sonido. Las cámaras de estudio miran la mesa, el botón al verificar y la cabina correcta al revelar; los focos pequeños se balancean y los grandes barren la sala al ganar.
+- Interfaz con el estilo del plató en todas las pantallas: Lilita One en títulos (con degradado dorado) y Poppins en el texto, paneles redondeados con marco dorado que aparecen con un pequeño rebote, botones que crecen al pasar el ratón y se hunden al pulsar, bombillas alrededor del menú principal y de los resultados, y logo que late.
 
 ### Versión 0.16 — 16 de octubre de 2026
 

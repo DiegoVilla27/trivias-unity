@@ -3,27 +3,27 @@
   "pages": [
     {
       "title": "El objetivo",
-      "body": "Sois un equipo de <b>2 a 6 concursantes</b> contra <b>15 preguntas</b> que van de fáciles a difíciles.\n\nEn cada pregunta, la pantalla grande muestra cuatro respuestas: una por cabina (<b>A, B, C y D</b>). Repartid el dinero del equipo entre las cabinas: <b>solo se salva el que esté en la cabina correcta</b>.\n\nGanáis si superáis las 15 preguntas con dinero y con al menos un superviviente. Hablad entre vosotros: es un juego de equipo."
+      "body": "Equipo de <b>2 a 6</b> contra <b>15 preguntas</b>.\n\nCada cabina (<b>A, B, C, D</b>) es una respuesta. Pon el dinero en la <b>cabina correcta</b>: el resto se pierde.\n\nLlegad al final con dinero y ganáis."
     },
     {
       "title": "El dinero",
-      "body": "Hay <b>fajos</b>, <b>bolsas</b> (10 fajos) y <b>lingotes</b> (10 bolsas). Todo empieza en la <b>mesa central</b>.\n\n<b>E</b> coge uno · <b>Q</b> coge varios (solo de un tipo por viaje)\nEn la <b>bandeja</b> de una cabina: <b>E</b> deja uno · <b>Q</b> deja todo (sin dinero en las manos, recoges)\n<b>R</b> en la mesa devuelve lo que llevas\n\n<b>Estación de cambio</b>: con las manos vacías, <b>E</b> agrupa 10 fajos en una bolsa y <b>Q</b> 10 bolsas en un lingote. Llevando bolsas o lingotes, <b>E</b> divide uno y <b>Q</b> todos.\n\n<color=#FF8080>El dinero que no esté en una bandeja al verificar se pierde.</color>"
+      "body": "Coge dinero de la <b>mesa</b> y déjalo en la <b>bandeja</b> de una cabina.\n\n<b>E</b> uno · <b>Q</b> varios · <b>R</b> devolver a la mesa\n<b>Cambio</b>: 10 fajos = 1 bolsa · 10 bolsas = 1 lingote\n\n<color=#FF8080>Lo que no esté en una bandeja se pierde.</color>"
     },
     {
       "title": "Verificar",
-      "body": "Cuando estéis listos, alguien pulsa el gran botón <b>VERIFICAR</b> con <b>E</b>.\n\nLas apuestas se cierran al instante y empieza una cuenta atrás de <b>3 segundos</b>: ya no se puede cambiar nada.\n\nCada pregunta tiene un <b>tiempo límite</b> (el reloj de la pantalla). Si se acaba, se verifica sola, así que no os despistéis.\n\nDespués se abren las trampillas: <b>solo queda el dinero de la cabina correcta</b> y la pantalla explica la respuesta."
+      "body": "¿Listos? Pulsad <b>VERIFICAR</b> con <b>E</b>.\n\n<b>3 segundos</b> y se revela: solo queda el dinero de la cabina correcta.\n\nSi se acaba el reloj, se verifica sola."
     },
     {
-      "title": "El comodín: apostarte a ti mismo",
-      "body": "Ponte en el <b>círculo</b> delante de una cabina y pulsa <b>E</b>: te apuestas a esa respuesta.\n\n<b>Si aciertas</b>, el dinero de esa cabina se multiplica: <b>x2</b> con uno apostado, <b>x3</b> con dos… uno más por cada concursante.\n<b>Si fallas</b>, caes por la trampilla y quedas <b>expulsado</b> (sigues viendo la partida).\n\nApostado no puedes salir del círculo; pulsa <b>E</b> otra vez para cancelar antes de verificar. Los usos son limitados (se ven en el HUD). Si todos estáis apostados, verificad desde el círculo con <b>Q</b>."
+      "title": "Apuéstate a ti mismo",
+      "body": "Sube a la <b>plataforma</b> de una cabina y pulsa <b>E</b>.\n\n<b>Aciertas</b>: el dinero se multiplica (<b>x2</b>, <b>x3</b>…)\n<b>Fallas</b>: el tubo te succiona y quedas <b>expulsado</b>\n\n<b>E</b> otra vez para bajarte · todos apostados: <b>Q</b> verifica"
     },
     {
       "title": "Fichas y tienda",
-      "body": "Al terminar, cada jugador gana <b>fichas</b>: cuantas más preguntas superéis, más fichas. Ganar las 15 da el premio máximo.\n\nLas fichas se guardan en tu ordenador. Gástalas en la <b>Tienda</b> de la sala de espera: gorras, gafas, pajaritas, trajes de colores y atuendos especiales.\n\nTodo es estético: <b>no da ninguna ventaja</b>. Lo que llevas puesto lo ven todos."
+      "body": "Cada partida te da <b>fichas</b>: cuantas más preguntas superéis, más.\n\nGástalas en la <b>tienda</b> de la sala de espera.\nSolo es ropa: <b>no da ventajas</b>."
     },
     {
       "title": "Controles",
-      "body": "<b>WASD</b> o flechas · moverse\n<b>Ratón</b> · mirar\n<b>Espacio</b> · saltar\n<b>E</b> · acción (coger, dejar, apostarse, verificar)\n<b>Q</b> · coger o dejar varios / verificar desde el círculo\n<b>R</b> · devolver el dinero a la mesa\n<b>Esc</b> · menú (configuración, cómo se juega, salir de la sala)\n<b>Clic</b> · volver a capturar el ratón\n\nPara jugar con amigos por internet, mira la guía <b>docs/JUGAR_CON_AMIGOS.md</b>."
+      "body": "<b>WASD</b> moverse · <b>Shift</b> correr\n<b>Ratón</b> mirar · <b>Espacio</b> saltar\n<b>E</b> acción · <b>Q</b> varios · <b>R</b> devolver\n<b>Esc</b> menú"
     }
   ]
 }

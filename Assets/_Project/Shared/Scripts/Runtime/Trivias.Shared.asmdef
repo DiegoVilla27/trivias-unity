@@ -1,7 +1,9 @@
 {
     "name": "Trivias.Shared",
     "rootNamespace": "Trivias.Shared",
-    "references": [],
+    "references": [
+        "UnityEngine.UI"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

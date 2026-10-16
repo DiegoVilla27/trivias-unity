@@ -11,7 +11,7 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 | Personaje base con esqueleto | 1 | Misma base |
 | Apariencias básicas | 1 | 10 personajes/variantes disponibles |
 | Cabina y bandeja | Modelos A–D integrados (bandeja en el mostrador) | Acabado del mismo conjunto |
-| Tubo de expulsión | Recto, codo y anillo encadenados por código: tubo del dinero y tubo del concursante en cada cabina | Acabado visual |
+| Tubo de expulsión | Recto, codo y anillo encadenados por código: tubo del dinero y tubo del concursante en cada cabina, con su línea central para la succión y una ráfaga de aire (partículas) | Acabado visual |
 | Mesa y estación de cambio | Modelos integrados (la estación, sobre un pedestal) | Mismo conjunto pulido |
 | Botón de verificar | Modelo integrado (la tapa se hunde) | Mismo objeto pulido |
 | Fajo, bolsa y lingote | Modelos integrados | Valores legibles y acabado |
@@ -68,11 +68,15 @@ Implementado en el MVP (módulo `Feedback`), todo **sintetizado por código al c
 | Fallo / expulsión | «Trombón triste» / caída con vibrato |
 | Victoria / derrota | Fanfarria / trombón triste largo |
 
+Plató (en `Audio/Stage/`): succión de los tubos (aire que entra y silbido que sube, 1,9 s, en 3D desde la boca del tubo), aplauso, vítores y lamento del público (sale de las gradas).
+
 Música: un bucle por bloque de dificultad (preguntas 1–5 tranquila a 100 ppm, 6–10 con ritmo a 116 ppm, 11–15 tensa a 132 ppm), con fundido entre pistas; silencio en la sala de espera y en los resultados. Volúmenes en `Feedback/Config/FeedbackLibrary.asset`; la música va baja para no tapar la conversación. Sustituibles por audio definitivo en el acabado. Sin AudioMixer por ahora (Unity no permite crearlo por código); pendiente con el ajuste de volumen en opciones.
 
 El presentador es exclusivamente textual. La voz de jugadores por micrófono es un sistema de comunicación, no un recurso de voz del presentador. Mantener efectos y música por debajo de la conversación.
 
 ## Interfaz y contenido
+
+Imágenes del tema de la interfaz (generadas al construir en `Shared/UI/Sprites`): rectángulo redondeado con degradado, marco redondeado y bombilla con halo.
 
 | Recurso | Prototipo | Salida |
 | --- | --- | --- |

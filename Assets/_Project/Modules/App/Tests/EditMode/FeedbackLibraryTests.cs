@@ -25,6 +25,18 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void Stage_HasSuctionAndCrowdSounds()
+        {
+            var library = AssetDatabase.LoadAssetAtPath<FeedbackLibrary>("Assets/_Project/Modules/Feedback/Config/FeedbackLibrary.asset");
+            foreach (var clip in new[] { library.Suction, library.Applause, library.Cheer, library.Aww })
+            {
+                Assert.That(clip, Is.Not.Null);
+                Assert.That(clip.length, Is.GreaterThan(1f), $"{clip.name}: dura lo que la succión o la reacción.");
+            }
+            Assert.That(library.CrowdVolume, Is.GreaterThan(0f));
+        }
+
+        [Test]
         public void EveryDifficultyBlock_HasMusic()
         {
             var library = Library();

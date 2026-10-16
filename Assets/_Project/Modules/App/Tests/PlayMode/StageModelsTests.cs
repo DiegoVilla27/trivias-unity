@@ -11,6 +11,8 @@ using Trivias.Shared.Interaction;
 using Trivias.VerifyButton.Components;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using static Trivias.App.Tests.PlayModeHelpers;
@@ -146,6 +148,73 @@ namespace Trivias.App.Tests
             reached.y = 0f;
             Assert.That(reached.magnitude, Is.LessThan(0.5f), "Llega al centro de la plataforma (se sube sin saltar).");
             Assert.That(_player.transform.position.y, Is.GreaterThan(0.15f), "Está encima, no dentro.");
+        }
+
+        [UnityTest]
+        public IEnumerator Contestant_CannotCrossTheRailing_FromTheSide()
+        {
+            var zone = FindBetZone(2);
+            var outside = zone.transform.position + zone.transform.right * 2.4f;
+            MoveTo(_player, new Vector3(outside.x, 0.05f, outside.z));
+            yield return new WaitForSeconds(0.3f);
+
+            var controller = _player.GetComponent<CharacterController>();
+            var motor = _player.GetComponent<PlayerMotor>();
+            motor.enabled = false;
+            var target = zone.transform.position;
+            for (var t = 0f; t < 2f; t += Time.deltaTime)
+            {
+                var flat = target - _player.transform.position;
+                flat.y = 0f;
+                controller.Move(flat.normalized * (3f * Time.deltaTime) + Vector3.down * (2f * Time.deltaTime));
+                yield return null;
+            }
+            motor.enabled = true;
+            var left = target - _player.transform.position;
+            left.y = 0f;
+            Assert.That(left.magnitude, Is.GreaterThan(1f), "La barandilla lo para: solo se entra por delante.");
+        }
+
+        [UnityTest]
+        public IEnumerator Contestant_RunsWithShift()
+        {
+            // Las pruebas corren sin foco de ventana: que la entrada simulada llegue igual.
+            var settings = InputSystem.settings;
+            var background = settings.backgroundBehavior;
+            var editorBehavior = settings.editorInputBehaviorInPlayMode;
+            settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+            settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+            var keyboard = InputSystem.AddDevice<Keyboard>();
+            try
+            {
+                var walked = 0f;
+                var ran = 0f;
+                yield return Walk(keyboard, new KeyboardState(Key.W), d => walked = d);
+                yield return Walk(keyboard, new KeyboardState(Key.W, Key.LeftShift), d => ran = d);
+                Assert.That(walked, Is.GreaterThan(0.8f), "Con W anda.");
+                Assert.That(ran, Is.GreaterThan(walked * 1.35f), "Con Shift corre bastante más.");
+            }
+            finally
+            {
+                InputSystem.RemoveDevice(keyboard);
+                settings.backgroundBehavior = background;
+                settings.editorInputBehaviorInPlayMode = editorBehavior;
+            }
+        }
+
+        /// <summary>Pulsa las teclas 0,6 s desde el mismo punto y mide lo recorrido.</summary>
+        private IEnumerator Walk(Keyboard keyboard, KeyboardState keys, System.Action<float> distance)
+        {
+            MoveTo(_player, new Vector3(0f, 0f, -4.5f));
+            yield return new WaitForSeconds(0.3f);
+            var start = _player.transform.position;
+            InputSystem.QueueStateEvent(keyboard, keys);
+            yield return new WaitForSeconds(0.6f);
+            var moved = _player.transform.position - start;
+            moved.y = 0f;
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+            yield return new WaitForSeconds(0.3f);
+            distance(moved.magnitude);
         }
 
         private static IEnumerable<GameObject> Visuals()

@@ -78,6 +78,10 @@ El módulo `Feedback` observa la partida, el dinero y los comodines sin interven
 
 Ambiente de luz (`StageLighting`): cuatro focos de colores, la luz ambiente y la principal cambian con fundido según el momento — sala neutra, preguntas fáciles cálidas, medias moradas, difíciles rojas y más oscuras, latido en la cuenta atrás, verde al acertar, rojo al fallar, dorado al ganar y apagado al perder. Valores en `Feedback/Config/StageMoodConfig.asset`. Detalle en [RECURSOS](RECURSOS.md#sonido).
 
+Plató vivo (`StageShow`): bombillas (`StageBulbs`, brillo por `MaterialPropertyBlock` sin duplicar materiales, a 24 Hz), público (`AudienceCrowd`), cámaras de estudio (`StudioCameraOperators`) y focos (`FixtureSway`). Las reglas (C# puro, probadas) están en `StageShowRules`: qué reacción toca al cambiar de fase, el brillo de cada bombilla según el momento y el balanceo. App reúne en edición las piezas del plató y de las cabinas y Feedback las anima; todo es local, nada viaja por red.
+
+Succión por los tubos: cada tubo guarda en edición su línea central (`TubePath`, en `Shared`, con un registro `TubeRegistry` por cabina y tipo). Al resolver la ronda, el dinero perdido de cada bandeja sube por el tubo del dinero de su cabina (`MoneyVisualPresenter`, los fajos vuelven al pool al llegar al techo) y el expulsado por el tubo de su plataforma (`PlayerExpulsionView`); si no hay tubo cerca, sale disparado hacia arriba como antes. Cada cliente lo anima por su cuenta a partir del estado sincronizado.
+
 ## Verificaciones esenciales
 
 - Dos jugadores intentan coger el mismo objeto: solo uno lo obtiene.

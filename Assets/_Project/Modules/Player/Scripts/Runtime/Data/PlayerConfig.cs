@@ -8,6 +8,8 @@ namespace Trivias.Player.Data
     {
         [Header("Movimiento")]
         [SerializeField, Min(0f)] private float _moveSpeed = 3.2f;
+        [Tooltip("Velocidad corriendo (Shift).")]
+        [SerializeField, Min(0f)] private float _sprintSpeed = 5.6f;
         [SerializeField, Min(0f)] private float _speedChangeRate = 10f;
         [SerializeField, Range(0f, 0.3f)] private float _rotationSmoothTime = 0.12f;
         [SerializeField] private float _gravity = -15f;
@@ -29,6 +31,7 @@ namespace Trivias.Player.Data
         [SerializeField] private float _maxPitch = 70f;
 
         public float MoveSpeed => _moveSpeed;
+        public float SprintSpeed => _sprintSpeed;
         public float SpeedChangeRate => _speedChangeRate;
         public float RotationSmoothTime => _rotationSmoothTime;
         public float Gravity => _gravity;

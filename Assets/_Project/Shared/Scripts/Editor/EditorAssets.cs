@@ -203,9 +203,14 @@ namespace Trivias.Shared.Editor
             return tmp;
         }
 
-        /// <summary>Guarda la jerarquía como prefab y destruye el objeto temporal de la escena.</summary>
+        /// <summary>
+        /// Guarda la jerarquía como prefab y destruye el objeto temporal de la escena. Si es interfaz (tiene Canvas),
+        /// antes le aplica el tema del juego (<see cref="UiTheme"/>).
+        /// </summary>
         public static GameObject SaveAsPrefab(GameObject root, string path)
         {
+            if (root.GetComponentInChildren<Canvas>(true) != null)
+                UiTheme.Apply(root);
             EnsureFolder(Path.GetDirectoryName(path));
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);

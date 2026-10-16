@@ -167,5 +167,73 @@ namespace Trivias.Feedback.Editor
             }
             return synth;
         }
+
+        // ---- Plató: succión de los tubos y público ----
+
+        /// <summary>
+        /// Succión del tubo: soplido de aire que se aspira cada vez más fuerte (ruido cuyo filtro se va abriendo), un
+        /// silbido que sube y un «plop» final de vacío.
+        /// </summary>
+        public static SoundSynth Suction()
+        {
+            var synth = new SoundSynth(1.9f, SoundSynth.SFX_RATE, 2001);
+            const int steps = 8;
+            for (var i = 0; i < steps; i++)
+            {
+                var k = (float)i / (steps - 1);
+                synth.Add(new Tone { Start = i * 0.17f, Duration = 0.42f, Wave = Wave.Noise, Volume = 0.25f + 0.45f * k,
+                    LowPass = 250f + 3200f * k * k, Attack = 0.15f, Release = 0.2f });
+            }
+            synth.Add(new Tone { Start = 0.1f, Duration = 1.45f, Frequency = 180f, FrequencyEnd = 1100f, Wave = Wave.Sine, Volume = 0.12f,
+                Attack = 0.4f, Release = 0.3f, VibratoRate = 9f, VibratoDepth = 0.03f });
+            synth.Add(new Tone { Start = 1.45f, Duration = 0.4f, Frequency = 340f, FrequencyEnd = 60f, Wave = Wave.Sine, Volume = 0.55f,
+                Attack = 0.004f, Decay = 9f, Release = 0.08f });
+            synth.Add(new Tone { Start = 1.45f, Duration = 0.12f, Wave = Wave.Noise, Volume = 0.3f, LowPass = 1500f, Release = 0.08f });
+            return synth;
+        }
+
+        /// <summary>Aplausos: muchas palmadas sueltas al azar que crecen y se apagan (público de un plató).</summary>
+        public static SoundSynth Applause(float seconds, int seed, float density)
+        {
+            var synth = new SoundSynth(seconds, SoundSynth.SFX_RATE, seed);
+            var random = new Random(seed);
+            var claps = (int)(seconds * density);
+            for (var i = 0; i < claps; i++)
+            {
+                var start = (float)random.NextDouble() * (seconds - 0.05f);
+                var swell = Math.Min(1f, Math.Min(start / 0.35f, (seconds - start) / 0.9f));
+                synth.Add(new Tone { Start = start, Duration = 0.02f + (float)random.NextDouble() * 0.015f, Wave = Wave.Noise,
+                    Volume = (0.3f + 0.7f * (float)random.NextDouble()) * swell, LowPass = 1800f + 2600f * (float)random.NextDouble(),
+                    Attack = 0.001f, Release = 0.015f });
+            }
+            return synth;
+        }
+
+        /// <summary>Ovación de la victoria: aplausos densos y un rugido de público que crece.</summary>
+        public static SoundSynth Cheer()
+        {
+            var synth = Applause(3.6f, 2003, 70f);
+            synth.Add(new Tone { Duration = 3.5f, Wave = Wave.Noise, Volume = 0.35f, LowPass = 700f, Attack = 0.6f, Release = 1.4f });
+            foreach (var (frequency, start) in new[] { (420f, 0.2f), (520f, 0.35f), (610f, 0.5f) })
+                synth.Add(new Tone { Start = start, Duration = 1.6f, Frequency = frequency, FrequencyEnd = frequency * 1.15f, Wave = Wave.Saw,
+                    Volume = 0.05f, LowPass = 1400f, Attack = 0.25f, Release = 0.6f, VibratoRate = 6f, VibratoDepth = 0.02f });
+            return synth;
+        }
+
+        /// <summary>«Oooh» del público ante una expulsión o una derrota: varias voces que bajan juntas.</summary>
+        public static SoundSynth Aww()
+        {
+            var synth = new SoundSynth(1.8f, SoundSynth.SFX_RATE, 2004);
+            var random = new Random(2004);
+            for (var voice = 0; voice < 9; voice++)
+            {
+                var pitch = 240f + 110f * (float)random.NextDouble();
+                synth.Add(new Tone { Start = 0.05f * voice / 9f, Duration = 1.6f, Frequency = pitch, FrequencyEnd = pitch * 0.72f,
+                    Wave = Wave.Saw, Volume = 0.09f, LowPass = 650f + 200f * (float)random.NextDouble(), Attack = 0.18f, Release = 0.7f,
+                    VibratoRate = 4.5f + (float)random.NextDouble() * 2f, VibratoDepth = 0.025f });
+            }
+            synth.Add(new Tone { Duration = 1.5f, Wave = Wave.Noise, Volume = 0.08f, LowPass = 500f, Attack = 0.2f, Release = 0.7f });
+            return synth;
+        }
     }
 }

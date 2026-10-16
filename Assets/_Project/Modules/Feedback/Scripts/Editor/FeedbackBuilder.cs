@@ -35,6 +35,12 @@ namespace Trivias.Feedback.Editor
             _ => 0.9f,
         };
 
+        /// <summary>
+        /// La librería ya construida, recién leída del disco: las importaciones posteriores del Build All (sonidos,
+        /// imágenes) pueden recargar el asset y dejar inservible una referencia guardada desde antes.
+        /// </summary>
+        public static FeedbackLibrary Library() => EditorAssets.GetOrCreateAsset<FeedbackLibrary>(LIBRARY_PATH);
+
         public static FeedbackLibrary BuildLibrary()
         {
             var cues = new AudioClip[FeedbackCues.COUNT];
@@ -54,8 +60,18 @@ namespace Trivias.Feedback.Editor
                 music[block] = WriteClip($"{AUDIO}/Music/Block{block + 1}.wav", synth.Normalized(0.8f), synth.SampleRate);
             }
 
+            var suction = SoundRecipes.Suction();
+            var applause = SoundRecipes.Applause(2.6f, 2002, 45f);
+            var cheer = SoundRecipes.Cheer();
+            var aww = SoundRecipes.Aww();
+
             var library = EditorAssets.GetOrCreateAsset<FeedbackLibrary>(LIBRARY_PATH);
             library.EditorSet(cues, volumes, music);
+            library.EditorSetStage(
+                WriteClip($"{AUDIO}/Stage/Suction.wav", suction.Normalized(), suction.SampleRate),
+                WriteClip($"{AUDIO}/Stage/Applause.wav", applause.Normalized(0.7f), applause.SampleRate),
+                WriteClip($"{AUDIO}/Stage/Cheer.wav", cheer.Normalized(0.75f), cheer.SampleRate),
+                WriteClip($"{AUDIO}/Stage/Aww.wav", aww.Normalized(0.7f), aww.SampleRate));
             EditorUtility.SetDirty(library);
             return library;
         }
@@ -326,6 +342,63 @@ namespace Trivias.Feedback.Editor
             SerializedWiring.Set(lighting, "_moods", moods);
             SerializedWiring.SetArray(lighting, "_spots", spots);
             return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/StageLighting.prefab");
+        }
+
+        // ---- Plató vivo: bombillas, público, cámaras y focos ----
+
+        /// <summary>
+        /// Monta en la escena el plató vivo con las piezas que le pasa App: bombillas (cabina 0..3 o -1 para la
+        /// marquesina, y su posición en la fila), figuras del público, cámaras de estudio, focos de adorno y focos de luz.
+        /// </summary>
+        public static GameObject AttachStageShow(MatchRuntime match, FeedbackLibrary library, Renderer[] bulbs, int[] bulbBooths,
+            int[] bulbOrders, Transform[] audience, Vector3 audienceCenter, Transform[] cameras, Transform table, Transform verifyButton,
+            Transform[] booths, Transform[] fixtures, Transform[] partySpots)
+        {
+            var root = new GameObject("StageShow");
+
+            var lights = root.AddComponent<StageBulbs>();
+            SerializedWiring.Set(lights, "_match", match);
+            SerializedWiring.SetArray(lights, "_bulbs", bulbs);
+            SetInts(lights, "_booths", bulbBooths);
+            SetInts(lights, "_orders", bulbOrders);
+
+            var voice = new GameObject("CrowdVoice");
+            voice.transform.SetParent(root.transform, false);
+            voice.transform.position = audienceCenter;
+            var audio = voice.AddComponent<AudioSource>();
+            audio.playOnAwake = false;
+            audio.spatialBlend = 0.5f; // Se oye que viene de las gradas, pero en todo el plató.
+            audio.minDistance = 8f;
+            audio.maxDistance = 40f;
+            var crowd = root.AddComponent<AudienceCrowd>();
+            SerializedWiring.Set(crowd, "_match", match);
+            SerializedWiring.Set(crowd, "_library", library);
+            SerializedWiring.Set(crowd, "_settings", SharedAssets.GameSettings());
+            SerializedWiring.Set(crowd, "_audio", audio);
+            SerializedWiring.SetArray(crowd, "_figures", audience);
+
+            var operators = root.AddComponent<StudioCameraOperators>();
+            SerializedWiring.Set(operators, "_match", match);
+            SerializedWiring.SetArray(operators, "_cameras", cameras);
+            SerializedWiring.Set(operators, "_table", table);
+            SerializedWiring.Set(operators, "_verifyButton", verifyButton);
+            SerializedWiring.SetArray(operators, "_booths", booths);
+
+            var sway = root.AddComponent<FixtureSway>();
+            SerializedWiring.Set(sway, "_match", match);
+            SerializedWiring.SetArray(sway, "_fixtures", fixtures);
+            SerializedWiring.SetArray(sway, "_partySpots", partySpots);
+            return root;
+        }
+
+        private static void SetInts(Object target, string field, int[] values)
+        {
+            var serialized = new SerializedObject(target);
+            var property = serialized.FindProperty(field);
+            property.arraySize = values.Length;
+            for (var i = 0; i < values.Length; i++)
+                property.GetArrayElementAtIndex(i).intValue = values[i];
+            serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static Material ConfettiMaterial()

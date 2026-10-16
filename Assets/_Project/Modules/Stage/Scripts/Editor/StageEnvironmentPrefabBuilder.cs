@@ -58,6 +58,10 @@ namespace Trivias.Stage.Editor
 
         private const int LAYER = GameLayers.STAGE;
 
+        /// <summary>Parte que se mueve de cada espectador (la anima el módulo Feedback).</summary>
+        public const string AUDIENCE_FIGURE = "Figure";
+        public const string MARQUEE = SCREEN + "/Marquee";
+
         [MenuItem("Tools/Trivias/Build/Stage Environment")]
         public static GameObject Build()
         {
@@ -398,8 +402,9 @@ namespace Trivias.Stage.Editor
                 {
                     var position = new Vector3(x, StageLayout.TRUSS_Y - 0.45f, z);
                     var look = Quaternion.LookRotation(new Vector3(x * 0.4f, 0f, StageLayout.TablePosition.z) - position);
+                    // No son estáticos: se balancean (módulo Feedback).
                     EditorAssets.PlaceModel($"{MODELS}/SmallSpotlight/SmallSpotlight.obj", $"SmallSpot{z:+0;-0}{x:+0;-0}", rig,
-                        position, look, Vector3.one * 1.4f, LAYER, true, castShadows: false);
+                        position, look, Vector3.one * 1.4f, LAYER, false, castShadows: false);
                 }
             }
 
@@ -438,7 +443,9 @@ namespace Trivias.Stage.Editor
             for (var i = 0; i < positions.Length; i++)
             {
                 var yaw = StageLayout.Yaw(positions[i], StageLayout.TablePosition);
-                Model("StudioCamera", $"Camera{i + 1}", gear, positions[i], yaw, Vector3.one * 1.5f);
+                // No es estática: gira siguiendo la acción (módulo Feedback).
+                EditorAssets.PlaceModel($"{MODELS}/StudioCamera/StudioCamera.obj", $"Camera{i + 1}", gear, positions[i],
+                    Quaternion.Euler(0f, yaw, 0f), Vector3.one * 1.5f, LAYER, false);
                 EditorAssets.AddBoxCollider($"Camera{i + 1}Collider", gear, positions[i] + Vector3.up * 0.95f,
                     new Vector3(1.1f, 1.9f, 1.3f), LAYER, Quaternion.Euler(0f, yaw, 0f));
             }
@@ -480,15 +487,17 @@ namespace Trivias.Stage.Editor
                 {
                     var x = -(perRow - 1) * 0.575f + i * 1.15f + (row % 2) * 0.3f;
                     var person = EditorAssets.CreateEmpty($"Person{row + 1}_{i + 1}", audience, new Vector3(x, height, z)).transform;
-                    Part(person, PrimitiveType.Cube, "Seat", new Vector3(0f, 0.22f, 0f), new Vector3(0.7f, 0.44f, 0.6f), seat);
+                    Part(person, PrimitiveType.Cube, "Seat", new Vector3(0f, 0.22f, 0f), new Vector3(0.7f, 0.44f, 0.6f), seat, true);
                     if (random.NextDouble() < 0.1)
                         continue; // Algún asiento vacío.
+                    // La figura se mueve (aplaude, celebra, se lamenta): no es estática; el asiento sí.
+                    var figure = EditorAssets.CreateEmpty(AUDIENCE_FIGURE, person, new Vector3(0f, 0.44f, 0f)).transform;
                     var tall = 0.9f + (float)random.NextDouble() * 0.2f;
-                    Part(person, PrimitiveType.Capsule, "Body", new Vector3(0f, 0.44f + tall * 0.45f, 0f), new Vector3(0.5f, tall * 0.45f, 0.36f),
-                        shirts[random.Next(shirts.Length)]);
-                    var headY = 0.44f + tall * 0.9f + 0.12f;
-                    Part(person, PrimitiveType.Sphere, "Head", new Vector3(0f, headY, 0f), Vector3.one * 0.32f, skins[random.Next(skins.Length)]);
-                    Part(person, PrimitiveType.Sphere, "Hair", new Vector3(0f, headY + 0.07f, -0.04f), new Vector3(0.34f, 0.24f, 0.32f), hair);
+                    Part(figure, PrimitiveType.Capsule, "Body", new Vector3(0f, tall * 0.45f, 0f), new Vector3(0.5f, tall * 0.45f, 0.36f),
+                        shirts[random.Next(shirts.Length)], false);
+                    var headY = tall * 0.9f + 0.12f;
+                    Part(figure, PrimitiveType.Sphere, "Head", new Vector3(0f, headY, 0f), Vector3.one * 0.32f, skins[random.Next(skins.Length)], false);
+                    Part(figure, PrimitiveType.Sphere, "Hair", new Vector3(0f, headY + 0.07f, -0.04f), new Vector3(0.34f, 0.24f, 0.32f), hair, false);
                 }
             }
 
@@ -505,9 +514,10 @@ namespace Trivias.Stage.Editor
                 new Vector3(inner * 2f, 1.4f, 0.4f), LAYER);
         }
 
-        private static void Part(Transform parent, PrimitiveType type, string name, Vector3 position, Vector3 scale, Material material)
+        private static void Part(Transform parent, PrimitiveType type, string name, Vector3 position, Vector3 scale, Material material,
+            bool isStatic)
         {
-            var part = EditorAssets.CreatePrimitive(type, name, parent, position, scale, material, LAYER, true, keepCollider: false);
+            var part = EditorAssets.CreatePrimitive(type, name, parent, position, scale, material, LAYER, isStatic, keepCollider: false);
             part.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
         }
 
@@ -545,7 +555,8 @@ namespace Trivias.Stage.Editor
             var stairs = facing * Vector3.forward * (DAIS_RADIUS + 0.5f);
             Model("StageStairs", "Stairs", dais, stairs, yaw, new Vector3(1f, 0.9f, 1f));
             EditorAssets.AddBoxCollider("StairsCollider", dais, stairs + Vector3.up * 0.15f, new Vector3(1.1f, 0.3f, 1.2f), LAYER, facing);
-            Model("StudioCamera", "Camera", dais, Vector3.up * DAIS_HEIGHT, yaw, Vector3.one * 1.5f);
+            EditorAssets.PlaceModel($"{MODELS}/StudioCamera/StudioCamera.obj", "Camera", dais, Vector3.up * DAIS_HEIGHT,
+                Quaternion.Euler(0f, yaw, 0f), Vector3.one * 1.5f, LAYER, false);
         }
 
         // ---- Posprocesado: brillo de bombillas y focos, viñeta suave ----

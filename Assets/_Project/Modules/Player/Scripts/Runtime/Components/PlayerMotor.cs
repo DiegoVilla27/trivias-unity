@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Trivias.Player.Components
 {
     /// <summary>
-    /// Movimiento en tercera persona relativo a la cámara, con salto (sin sprint).
+    /// Movimiento en tercera persona relativo a la cámara: andar, correr (Shift) y saltar.
     /// Solo lo activa el dueño; los demás reciben la posición por red.
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
@@ -110,7 +110,7 @@ namespace Trivias.Player.Components
         {
             var input = _controlGate.CanMove ? _input.Move : Vector2.zero;
             var hasInput = input.sqrMagnitude > INPUT_DEADZONE_SQR;
-            var targetSpeed = hasInput ? _config.MoveSpeed : 0f;
+            var targetSpeed = MoveSpeedRules.Target(hasInput, _input.SprintHeld, _config.MoveSpeed, _config.SprintSpeed);
             var inputMagnitude = hasInput ? Mathf.Clamp01(input.magnitude) : 1f;
 
             var velocity = _controller.velocity;

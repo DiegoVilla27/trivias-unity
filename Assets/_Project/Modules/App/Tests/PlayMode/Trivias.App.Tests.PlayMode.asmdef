@@ -26,7 +26,8 @@
         "Trivias.Feedback",
         "Trivias.Ranking",
         "Trivias.Spectator",
-        "Trivias.Cameras"
+        "Trivias.Cameras",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

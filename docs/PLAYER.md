@@ -26,7 +26,7 @@ Esta estructura no confirma motor ni nombres de componentes. El objetivo es camb
 
 | Acción | Regla |
 | --- | --- |
-| Desplazarse | Cámara en tercera persona con Cinemachine; controles con Input System. Sube escalones de hasta 30 cm (las plataformas de apuesta) andando |
+| Desplazarse | Cámara en tercera persona con Cinemachine; controles con Input System. Anda a 3,2 m/s y corre a 5,6 m/s manteniendo Shift (o pulsando el stick izquierdo del mando); velocidades en `PlayerConfig`. Sube escalones de hasta 30 cm (las plataformas de apuesta) andando, y solo por su abertura delantera: la barandilla no se atraviesa ni se salta |
 | Saltar | Espacio (o B en el mando): 0,9 m, solo desde el suelo, con la partida en marcha y sin pausa, con una espera de 0,3 s entre saltos (configurable en `PlayerConfig`). Usa la animación de salto de Starter Assets, sincronizada por red |
 | Coger/soltar dinero | Un solo tipo por viaje: hasta 5 fajos, 2 bolsas o 5 lingotes (configurable), visibles en las manos. E: uno; Q: varios; R en la mesa: devolver todo. Registrado al depositar |
 | Convertir dinero | Operación manual en la estación, conservando valor |
@@ -37,7 +37,7 @@ Esta estructura no confirma motor ni nombres de componentes. El objetivo es camb
 
 Las interacciones se activan por cercanía con una tecla contextual (por ejemplo «E: coger», «E: apostarme»), sin apuntar con la cámara.
 
-No hay señalar, gestos, sprint o empujones confirmados (el salto se añadió el 16 de octubre de 2026). No introducir nuevas acciones de movimiento sin evaluar su necesidad.
+No hay señalar, gestos ni empujones confirmados (el salto y correr con Shift se añadieron el 16 de octubre de 2026). No introducir nuevas acciones de movimiento sin evaluar su necesidad.
 
 ## Estados
 

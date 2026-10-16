@@ -7,6 +7,7 @@ using Trivias.Shared.Profile;
 using Trivias.Shared.Rooms;
 using Trivias.Shared.Settings;
 using Trivias.Shared.Spawning;
+using Trivias.Shared.Tubes;
 
 namespace Trivias.Shared.Editor
 {
@@ -29,6 +30,10 @@ namespace Trivias.Shared.Editor
         private const string GAME_SETTINGS_PATH = CONFIG_ROOT + "/Settings/GameSettings.asset";
         private const string OPEN_SHOP_PATH = CONFIG_ROOT + "/Events/OpenShopRequested.asset";
         private const string CURSOR_CAPTURE_BLOCKERS_PATH = CONFIG_ROOT + "/Input/CursorCaptureBlockers.asset";
+        private const string TUBE_REGISTRY_PATH = CONFIG_ROOT + "/Stage/TubeRegistry.asset";
+
+        /// <summary>Tubos de las cabinas (dinero y concursante), para las succiones.</summary>
+        public static TubeRegistry TubeRegistry() => EditorAssets.GetOrCreateAsset<TubeRegistry>(TUBE_REGISTRY_PATH);
 
         public static TransformEventChannel LocalPlayerCameraTarget() =>
             EditorAssets.GetOrCreateAsset<TransformEventChannel>(LOCAL_PLAYER_CAMERA_TARGET_PATH);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Physics;
+using Trivias.Shared.Tubes;
 using UnityEditor;
 using UnityEngine;
 
@@ -52,6 +53,17 @@ namespace Trivias.Booth.Editor
         public const float PLATFORM_TOP = 0.21f;
         private const float PLATFORM_RADIUS = 0.72f * 1.8f;
 
+        /// <summary>
+        /// Barandilla del modelo: arco de radio 0,64 (×1,8) abierto 90° hacia el centro (entre los postes delanteros).
+        /// Su colisión sube a 1,4 m para que tampoco se salte por encima (el salto llega a 0,9 m).
+        /// </summary>
+        private const float RAIL_RADIUS = 0.64f * 1.8f;
+        private const float RAIL_OPENING_DEGREES = 45f;
+        private const int RAIL_SEGMENTS = 9;
+        private const float RAIL_COLLIDER_HEIGHT = 1.4f;
+        private const float RAIL_COLLIDER_DEPTH = 0.14f;
+        public const string RAIL_COLLIDERS = "RailColliders";
+
         /// <summary>Boca del tubo del concursante: por encima de la cabeza incluso saltando.</summary>
         public const float PLAYER_TUBE_MOUTH = 3.4f;
         private const float PLAYER_TUBE_SCALE = 1.6f;
@@ -66,8 +78,8 @@ namespace Trivias.Booth.Editor
         {
             var basePrefab = BuildBase();
             var variants = new List<GameObject>(Answers.Length);
-            foreach (var (letter, color) in Answers)
-                variants.Add(BuildVariant(basePrefab, letter, color));
+            for (var i = 0; i < Answers.Length; i++)
+                variants.Add(BuildVariant(basePrefab, i, Answers[i].Letter, Answers[i].Color));
             return variants;
         }
 
@@ -120,6 +132,7 @@ namespace Trivias.Booth.Editor
                 Quaternion.identity, PlatformScale, layer, true);
             EditorAssets.AddCylinderCollider("PlatformCollider", t, new Vector3(0f, PLATFORM_TOP * 0.5f, BET_ZONE_Z),
                 PLATFORM_RADIUS * 2f, PLATFORM_TOP, layer);
+            AddRailColliders(t, layer);
             // El color de la respuesta sobre el suelo de la plataforma (es la zona de apuesta).
             EditorAssets.CreatePrimitive(PrimitiveType.Cylinder, BET_ZONE, t, new Vector3(0f, PLATFORM_TOP + 0.012f, BET_ZONE_Z),
                 new Vector3(1.75f, 0.002f, 1.75f), zone, layer, true, keepCollider: false);
@@ -130,7 +143,22 @@ namespace Trivias.Booth.Editor
             return EditorAssets.SaveAsPrefab(root, BASE_PREFAB_PATH);
         }
 
-        private static GameObject BuildVariant(GameObject basePrefab, string letter, Color color)
+        /// <summary>Paredes invisibles a lo largo de la barandilla: solo se entra (y se sale) por la abertura delantera.</summary>
+        private static void AddRailColliders(Transform booth, int layer)
+        {
+            var holder = EditorAssets.CreateEmpty(RAIL_COLLIDERS, booth, new Vector3(0f, 0f, BET_ZONE_Z)).transform;
+            var span = (360f - RAIL_OPENING_DEGREES * 2f) / RAIL_SEGMENTS;
+            var width = 2f * RAIL_RADIUS * Mathf.Sin(span * 0.5f * Mathf.Deg2Rad) + 0.08f; // Se solapan un poco: sin rendijas.
+            for (var i = 0; i < RAIL_SEGMENTS; i++)
+            {
+                var angle = RAIL_OPENING_DEGREES + span * (i + 0.5f);
+                var direction = Quaternion.Euler(0f, angle, 0f);
+                EditorAssets.AddBoxCollider($"Rail{i + 1}", holder, direction * new Vector3(0f, RAIL_COLLIDER_HEIGHT * 0.5f, RAIL_RADIUS),
+                    new Vector3(width, RAIL_COLLIDER_HEIGHT, RAIL_COLLIDER_DEPTH), layer, direction);
+            }
+        }
+
+        private static GameObject BuildVariant(GameObject basePrefab, int booth, string letter, Color color)
         {
             var zone = EditorAssets.GetOrCreateMaterial($"{MATERIALS}/Booth_{letter}_Zone.mat", color * 0.75f, 0.5f,
                 emission: color * 0.35f);
@@ -142,6 +170,9 @@ namespace Trivias.Booth.Editor
                     instance.transform, Vector3.zero, Quaternion.identity, Vector3.one * MODEL_SCALE, GameLayers.STAGE, true);
                 body.transform.SetAsFirstSibling();
                 instance.transform.Find(BET_ZONE).GetComponent<MeshRenderer>().sharedMaterial = zone;
+                // Cada tubo sabe de qué cabina es: el dinero de su bandeja y su concursante suben por él.
+                SerializedWiring.Set(instance.transform.Find(MONEY_TUBE).GetComponent<TubePath>(), "_booth", booth);
+                SerializedWiring.Set(instance.transform.Find(PLAYER_TUBE).GetComponent<TubePath>(), "_booth", booth);
             });
         }
 
@@ -158,6 +189,12 @@ namespace Trivias.Booth.Editor
             run.Elbow(Vector3.back);
             run.Elbow(Vector3.up);
             run.Straight(StageLayout.CEILING_HEIGHT - run.Point.y);
+
+            // El dinero perdido sale de la bandeja hacia el techo del mueble: el aire sopla de la bandeja a la entrada.
+            var air = BuildAir(tube, "AirIntake", new Vector3(0f, TRAY_FLOOR_HEIGHT * MODEL_SCALE + 0.15f, TRAY_CENTER_Z * MODEL_SCALE),
+                Quaternion.identity, new Vector3(1.3f, 0.1f, 0.8f), ParticleSystemShapeType.Box, new Vector3(0f, 3.2f, -1.4f),
+                ParticleSystemSimulationSpace.Local, 0f, 0.55f);
+            AddTubePath(tube, TubeKind.Money, run.Points, air, layer);
         }
 
         /// <summary>Tubo del concursante: baja del techo hasta encima de la plataforma y acaba en una boca dorada.</summary>
@@ -167,6 +204,111 @@ namespace Trivias.Booth.Editor
             var run = new TubeRun(tube, new Vector3(0f, StageLayout.CEILING_HEIGHT, BET_ZONE_Z), Vector3.down, PLAYER_TUBE_SCALE, layer);
             run.Straight(StageLayout.CEILING_HEIGHT - PLAYER_TUBE_MOUTH);
             run.Ring();
+
+            // El recorrido va al revés que la construcción: de la boca (abajo) al techo. El aire sube desde la plataforma.
+            var points = new List<Vector3>(run.Points);
+            points.Reverse();
+            var air = BuildAir(tube, "AirIntake", new Vector3(0f, PLATFORM_TOP + 0.15f, BET_ZONE_Z), Quaternion.Euler(-90f, 0f, 0f),
+                Vector3.one, ParticleSystemShapeType.Circle, new Vector3(0f, 6.5f, 0f), ParticleSystemSimulationSpace.World, -1.3f, 1.1f);
+            AddTubePath(tube, TubeKind.Player, points, air, layer);
+        }
+
+        private static void AddTubePath(Transform tube, TubeKind kind, List<Vector3> points, ParticleSystem air, int layer)
+        {
+            var sound = EditorAssets.CreateEmpty("Suction", tube, points[0]);
+            var audio = sound.AddComponent<AudioSource>();
+            audio.playOnAwake = false;
+            audio.loop = false;
+            audio.spatialBlend = 0.8f; // Se oye más cerca de su cabina, pero todo el plató la oye.
+            audio.minDistance = 4f;
+            audio.maxDistance = 35f;
+            audio.rolloffMode = AudioRolloffMode.Linear;
+            var path = tube.gameObject.AddComponent<TubePath>();
+            path.EditorSet(SharedAssets.TubeRegistry(), kind, 0, points.ToArray(), air, audio, SharedAssets.GameSettings());
+        }
+
+        /// <summary>
+        /// Aire que entra en el tubo al succionar: estelas blancas finas que nacen alrededor y corren hacia la entrada.
+        /// Sistema de partículas sin bucle: suena y sopla una vez por succión.
+        /// </summary>
+        private static ParticleSystem BuildAir(Transform parent, string name, Vector3 position, Quaternion rotation, Vector3 boxSize,
+            ParticleSystemShapeType shapeType, Vector3 velocity, ParticleSystemSimulationSpace velocitySpace, float radial, float radius)
+        {
+            var go = EditorAssets.CreateEmpty(name, parent, position);
+            go.transform.localRotation = rotation;
+            var particles = go.AddComponent<ParticleSystem>();
+            particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            var main = particles.main;
+            main.playOnAwake = false;
+            main.loop = false;
+            main.duration = 1.6f;
+            main.startLifetime = new ParticleSystem.MinMaxCurve(0.45f, 0.75f);
+            main.startSpeed = 0f;
+            main.startSize = new ParticleSystem.MinMaxCurve(0.05f, 0.11f);
+            main.startColor = new Color(0.85f, 0.95f, 1f, 0.45f);
+            main.simulationSpace = ParticleSystemSimulationSpace.Local;
+            main.maxParticles = 200;
+
+            var emission = particles.emission;
+            emission.rateOverTime = 110f;
+
+            var shape = particles.shape;
+            shape.shapeType = shapeType;
+            shape.radius = radius;
+            shape.scale = boxSize;
+
+            var speed = particles.velocityOverLifetime;
+            speed.enabled = true;
+            speed.space = velocitySpace; // En la cabina (hacia su mueble) o en el mundo (siempre hacia arriba).
+            speed.x = new ParticleSystem.MinMaxCurve(velocity.x);
+            speed.y = new ParticleSystem.MinMaxCurve(velocity.y);
+            speed.z = new ParticleSystem.MinMaxCurve(velocity.z);
+            speed.radial = new ParticleSystem.MinMaxCurve(radial);
+
+            var fade = particles.colorOverLifetime;
+            fade.enabled = true;
+            var gradient = new Gradient();
+            gradient.SetKeys(new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) },
+                new[] { new GradientAlphaKey(0f, 0f), new GradientAlphaKey(1f, 0.25f), new GradientAlphaKey(0f, 1f) });
+            fade.color = gradient;
+
+            var noise = particles.noise;
+            noise.enabled = true;
+            noise.strength = 0.5f;
+            noise.frequency = 1.2f;
+
+            var renderer = go.GetComponent<ParticleSystemRenderer>();
+            renderer.renderMode = ParticleSystemRenderMode.Stretch; // Estelas: se estiran en la dirección del aire.
+            renderer.velocityScale = 0.12f;
+            renderer.lengthScale = 2f;
+            renderer.sharedMaterial = AirMaterial();
+            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            return particles;
+        }
+
+        /// <summary>Partícula aditiva suave para el aire (sombreador de partículas de URP).</summary>
+        private static Material AirMaterial()
+        {
+            const string path = MATERIALS + "/Booth_Air.mat";
+            var material = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (material == null)
+            {
+                material = new Material(Shader.Find("Universal Render Pipeline/Particles/Unlit")) { name = "Booth_Air" };
+                AssetDatabase.CreateAsset(material, path);
+            }
+            material.SetFloat("_Surface", 1f);
+            material.SetFloat("_Blend", 2f); // Aditivo: el aire brilla un poco sobre el plató.
+            material.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.One);
+            material.SetFloat("_ZWrite", 0f);
+            material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            material.SetTexture("_BaseMap", AssetDatabase.GetBuiltinExtraResource<Texture2D>("Default-Particle.psd"));
+            material.SetColor("_BaseColor", Color.white);
+            EditorUtility.SetDirty(material);
+            return material;
         }
 
         /// <summary>
@@ -190,6 +332,8 @@ namespace Trivias.Booth.Editor
             private const string STRAIGHT_INLET_COLLAR = "GoldEndCollar0.625";
             private const string STRAIGHT_OUTLET_COLLAR = "GoldEndCollar-0.625";
             private const float RING_HALF_HEIGHT = 0.065f;
+            private const float ELBOW_BEND_RADIUS = 0.7f; // De la boca lateral (0; 0,38) a la superior (-0,7; 1,08).
+            private const int ELBOW_SAMPLES = 12;
 
             private readonly Transform _parent;
             private readonly float _scale;
@@ -205,10 +349,14 @@ namespace Trivias.Booth.Editor
                 Direction = direction;
                 _scale = scale;
                 _layer = layer;
+                Points.Add(start);
             }
 
             public Vector3 Point { get; private set; }
             public Vector3 Direction { get; private set; }
+
+            /// <summary>Recorrido interior (eje del tubo) desde el inicio: lo siguen el dinero y el concursante.</summary>
+            public List<Vector3> Points { get; } = new();
 
             /// <summary>Anillo dorado en la junta actual (no avanza); sustituye al aro de la pieza anterior.</summary>
             public void Ring()
@@ -230,6 +378,7 @@ namespace Trivias.Booth.Editor
                 var piece = Place("Straight", Point - rotation * Vector3.Scale(scale, StraightInlet), rotation, scale);
                 Joint(piece, STRAIGHT_INLET_COLLAR, STRAIGHT_OUTLET_COLLAR);
                 Point += Direction * length;
+                Points.Add(Point);
             }
 
             /// <summary>Codo de 90°: entra con la dirección actual y sale hacia <paramref name="newDirection"/>.</summary>
@@ -240,6 +389,16 @@ namespace Trivias.Booth.Editor
                 var position = Point - rotation * (ElbowInlet * _scale);
                 var piece = Place("Elbow", position, rotation, Vector3.one * _scale);
                 Joint(piece, ELBOW_INLET_COLLAR, ELBOW_OUTLET_COLLAR);
+
+                // El eje del codo es un cuarto de circunferencia: se muestrea para que lo recorrido fluya sin esquinas.
+                var radius = ELBOW_BEND_RADIUS * _scale;
+                var center = Point + newDirection * radius;
+                for (var step = 1; step <= ELBOW_SAMPLES; step++)
+                {
+                    var angle = step * Mathf.PI * 0.5f / ELBOW_SAMPLES;
+                    Points.Add(center - newDirection * (radius * Mathf.Cos(angle)) + Direction * (radius * Mathf.Sin(angle)));
+                }
+
                 Point = position + rotation * (ElbowOutlet * _scale);
                 Direction = newDirection;
             }

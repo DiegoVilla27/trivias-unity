@@ -8,6 +8,7 @@ using Trivias.Menu.Data;
 using Trivias.Ranking.Editor;
 using Trivias.Ranking.Logic;
 using Trivias.Shared.Editor;
+using Trivias.Shared.Presentation;
 using Trivias.Shared.Profile;
 using Trivias.Shared.Settings;
 using UnityEditor;
@@ -30,6 +31,7 @@ namespace Trivias.Menu.Editor
         private static readonly Color PanelColor = new(0.05f, 0.06f, 0.16f, 0.96f);
         private static readonly Color BoxColor = new(1f, 1f, 1f, 0.06f);
         private static readonly Color Dim = new(0f, 0f, 0.03f, 0.72f);
+        private static readonly Color Backdrop = new(0f, 0f, 0.02f, 0.62f);
         private static readonly Color Gold = new(0.95f, 0.70f, 0.22f);
         private static readonly Color DarkText = new(0.08f, 0.08f, 0.18f);
         private static readonly Color Muted = new(1f, 1f, 1f, 0.7f);
@@ -78,9 +80,16 @@ namespace Trivias.Menu.Editor
             scaler.matchWidthOrHeight = 0.5f;
             root.AddComponent<GraphicRaycaster>();
 
-            // ---- Pantalla principal ----
+            // ---- Pantalla principal: velo semioscuro detrás (el plató se intuye al fondo) ----
+            var backdrop = CreateRect("Backdrop", root.transform, Vector2.zero, Vector2.zero, Vector2.zero);
+            backdrop.anchorMin = Vector2.zero;
+            backdrop.anchorMax = Vector2.one;
+            backdrop.offsetMin = backdrop.offsetMax = Vector2.zero;
+            backdrop.gameObject.AddComponent<Image>().color = Backdrop;
             var main = CreatePanel("MainMenu", root.transform, new Vector2(620f, 850f));
-            CreateLabel("Title", main, "TRIVIAS", 84f, new Vector2(0f, -40f), new Vector2(560f, 100f), FontStyles.Bold, Gold);
+            var logo = CreateLabel("Title", main, "TRIVIAS", 92f, new Vector2(0f, -36f), new Vector2(560f, 104f), FontStyles.Bold, Gold);
+            logo.gameObject.AddComponent<UiPulse>(); // El logo late, como un rótulo luminoso.
+            UiTheme.AddMarquee(main); // Bombillas alrededor, como las del plató.
             CreateLabel("Subtitle", main, "El concurso donde tus amigos también son la apuesta", 24f,
                 new Vector2(0f, -140f), new Vector2(560f, 40f), FontStyles.Italic, Color.white);
             CreateLabel("NameLabel", main, "Tu nombre", 24f, new Vector2(0f, -190f), new Vector2(420f, 32f), FontStyles.Normal, Muted);
@@ -146,9 +155,11 @@ namespace Trivias.Menu.Editor
             var tutorial = CreateOverlay("HowToPlay", root.transform, new Vector2(1180f, 780f), out var tutorialPanel);
             var tutorialTitle = CreateLabel("Title", tutorialPanel, string.Empty, 52f, new Vector2(0f, -36f), new Vector2(1000f, 70f),
                 FontStyles.Bold, Gold);
-            var tutorialBody = CreateLabel("Body", tutorialPanel, string.Empty, 29f, new Vector2(0f, -130f), new Vector2(1060f, 480f),
+            // Poco texto y grande: cada página se lee de un vistazo.
+            var tutorialBody = CreateLabel("Body", tutorialPanel, string.Empty, 36f, new Vector2(0f, -150f), new Vector2(980f, 460f),
                 FontStyles.Normal, Color.white);
-            tutorialBody.alignment = TextAlignmentOptions.TopLeft;
+            tutorialBody.alignment = TextAlignmentOptions.Top;
+            tutorialBody.lineSpacing = 12f;
             var pageLabel = CreateLabel("Page", tutorialPanel, string.Empty, 24f, new Vector2(0f, -640f), new Vector2(200f, 32f),
                 FontStyles.Normal, Muted);
             var previous = CreateButton("Previous", tutorialPanel, "Anterior", new Vector2(-360f, -680f), secondary: true);
@@ -247,6 +258,7 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(view, "_howToPlay", howToPlayView);
             SerializedWiring.Set(view, "_settingsView", settingsView);
             SerializedWiring.Set(view, "_recordsView", recordsView);
+            SerializedWiring.Set(view, "_backdrop", backdrop.gameObject);
             SerializedWiring.Set(view, "_mainPanel", main.gameObject);
             SerializedWiring.Set(view, "_playerName", playerName);
             SerializedWiring.Set(view, "_hostButton", host);

@@ -35,8 +35,9 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 0 Red local | Hecho: Netcode for GameObjects, salas de 2 a 6, menú principal y sala de espera |
 | 1 Plató y personaje | Hecho: tercera persona, interacción por cercanía, dinero |
 | Plató con modelos | Hecho: sala compacta (plano en `StageLayout`) con cabinas a los lados, plataformas de apuesta, tubos del dinero y del concursante, mesa, botón, estación, dinero y pantalla con sus modelos; suelo de baldosas y decorado de concepto-01 (telón, columnas, paredes, techo con vigas y focos, cámaras, público, tarima del presentador) y brillo de bombillas. Pendiente: modelos de presentador, podio y cosméticos; medir rendimiento en equipos modestos |
-| Salto | Hecho: Espacio, 0,9 m, con la animación de Starter Assets |
-| Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta junto a la cabeza; Lilita One y Poppins en el plató. Pendiente: tipografías de menús y HUD |
+| Salto y carrera | Hecho: Espacio, 0,9 m, con la animación de Starter Assets; correr con Shift (5,6 m/s) |
+| Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta junto a la cabeza; Lilita One y Poppins en el plató y en toda la interfaz |
+| Plató vivo e interfaz | Hecho: succión del expulsado y del dinero perdido por sus tubos (aire y sonido), bombillas, público con reacciones, cámaras de estudio y focos que se mueven; tema de la interfaz (paneles con marco dorado, botones con tacto, bombillas, logo que late). Pendiente: comprobar en Multiplayer Play Mode que los clientes ven la succión igual que el anfitrión |
 | 2 Una pregunta completa | Hecho: pantalla grande, tiempo límite, verificar, cuenta atrás, resolución |
 | 3 Cambio y comodines | Hecho: estación de cambio, comodín con zona, multiplicador y expulsión |
 | 4 Partida de 15 preguntas | Hecho: victoria/derrota, resultados, fichas por tramo, volver a jugar, presentador |
@@ -44,8 +45,8 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | Nombre del jugador | Hecho: se elige en el menú, se guarda en el perfil y es único en la sala. Con Steam, el de la cuenta |
 | 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 9 cosméticos sincronizados |
 | Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
-| Sonido y sensaciones | Hecho: 14 efectos y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
-| Menú y opciones | Hecho: menú principal, unirse con validación, invitar (dirección y copiar), tutorial, configuración guardada y pausa con Esc |
+| Sonido y sensaciones | Hecho: 14 efectos, 4 sonidos del plató (succión y público) y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
+| Menú y opciones | Hecho: menú principal con velo semioscuro sobre el plató, unirse con validación, invitar (dirección y copiar), tutorial breve, configuración guardada y pausa con Esc |
 | Espectador | Hecho: cámara que sigue a los activos, cambiar con A/D, vista general con Espacio y rótulo |
 | 10 Ranking | Récords locales hechos (por tamaño de grupo, dinero y tiempo, empates compartidos). Ranking global pendiente (con Steam) |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |
