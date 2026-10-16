@@ -13,6 +13,12 @@ namespace Trivias.Player.Data
         [SerializeField] private float _gravity = -15f;
         [SerializeField, Min(0f)] private float _freeFallDelay = 0.15f;
 
+        [Header("Salto")]
+        [Tooltip("Altura del salto en metros (sube a las plataformas y da vida al plató).")]
+        [SerializeField, Min(0f)] private float _jumpHeight = 0.9f;
+        [Tooltip("Segundos de espera entre saltos.")]
+        [SerializeField, Min(0f)] private float _jumpCooldown = 0.3f;
+
         [Header("Detección de suelo")]
         [SerializeField] private float _groundedOffset = -0.14f;
         [SerializeField, Min(0f)] private float _groundedRadius = 0.28f;
@@ -27,6 +33,8 @@ namespace Trivias.Player.Data
         public float RotationSmoothTime => _rotationSmoothTime;
         public float Gravity => _gravity;
         public float FreeFallDelay => _freeFallDelay;
+        public float JumpHeight => _jumpHeight;
+        public float JumpCooldown => _jumpCooldown;
         public float GroundedOffset => _groundedOffset;
         public float GroundedRadius => _groundedRadius;
         public float LookSensitivity => _lookSensitivity;

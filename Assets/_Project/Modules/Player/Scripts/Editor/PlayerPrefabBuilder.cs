@@ -51,7 +51,7 @@ namespace Trivias.Player.Editor
             controller.center = new Vector3(0f, 0.93f, 0f);
             controller.height = 1.8f;
             controller.radius = 0.28f;
-            controller.stepOffset = 0.25f;
+            controller.stepOffset = 0.3f; // Sube a las plataformas de apuesta andando.
             controller.skinWidth = 0.02f;
             controller.slopeLimit = 45f;
             controller.minMoveDistance = 0f;
@@ -164,6 +164,7 @@ namespace Trivias.Player.Editor
             var references = AssetDatabase.LoadAllAssetsAtPath(CONTROLS_PATH).OfType<InputActionReference>().ToArray();
             SerializedWiring.Set(input, "_move", FindAction(references, "Move"));
             SerializedWiring.Set(input, "_look", FindAction(references, "Look"));
+            SerializedWiring.Set(input, "_jump", FindAction(references, "Jump"));
         }
 
         /// <summary>Referencia a una acción de los controles del concursante, para otros módulos (p. ej. Interact).</summary>

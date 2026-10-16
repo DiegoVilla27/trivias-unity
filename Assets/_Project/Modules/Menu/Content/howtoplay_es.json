@@ -23,7 +23,7 @@
     },
     {
       "title": "Controles",
-      "body": "<b>WASD</b> o flechas · moverse\n<b>Ratón</b> · mirar\n<b>E</b> · acción (coger, dejar, apostarse, verificar)\n<b>Q</b> · coger o dejar varios / verificar desde el círculo\n<b>R</b> · devolver el dinero a la mesa\n<b>Esc</b> · menú (configuración, cómo se juega, salir de la sala)\n<b>Clic</b> · volver a capturar el ratón\n\nPara jugar con amigos por internet, mira la guía <b>docs/JUGAR_CON_AMIGOS.md</b>."
+      "body": "<b>WASD</b> o flechas · moverse\n<b>Ratón</b> · mirar\n<b>Espacio</b> · saltar\n<b>E</b> · acción (coger, dejar, apostarse, verificar)\n<b>Q</b> · coger o dejar varios / verificar desde el círculo\n<b>R</b> · devolver el dinero a la mesa\n<b>Esc</b> · menú (configuración, cómo se juega, salir de la sala)\n<b>Clic</b> · volver a capturar el ratón\n\nPara jugar con amigos por internet, mira la guía <b>docs/JUGAR_CON_AMIGOS.md</b>."
     }
   ]
 }

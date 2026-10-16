@@ -52,8 +52,15 @@ namespace Trivias.App.Tests
         public void DoesNotMentionControlsThatDoNotExist()
         {
             var text = AllText().ToLowerInvariant();
-            foreach (var missing in new[] { "saltar", "correr", "espacio", "mayús" })
+            foreach (var missing in new[] { "correr", "mayús" })
                 Assert.That(text, Does.Not.Contain(missing), $"El juego no tiene «{missing}».");
+        }
+
+        [Test]
+        public void ExplainsHowToJump()
+        {
+            var text = AllText().ToLowerInvariant();
+            Assert.That(text, Does.Contain("espacio").And.Contain("saltar"), "El salto (Espacio) se explica en los controles.");
         }
 
         [Test]

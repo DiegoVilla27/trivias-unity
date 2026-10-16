@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Trivias.Player.Components
 {
     /// <summary>
-    /// Movimiento en tercera persona relativo a la cámara. Sin salto ni sprint (fuera del GDD).
+    /// Movimiento en tercera persona relativo a la cámara, con salto (sin sprint).
     /// Solo lo activa el dueño; los demás reciben la posición por red.
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
@@ -17,6 +17,7 @@ namespace Trivias.Player.Components
         private static readonly int MotionSpeedId = Animator.StringToHash("MotionSpeed");
         private static readonly int GroundedId = Animator.StringToHash("Grounded");
         private static readonly int FreeFallId = Animator.StringToHash("FreeFall");
+        private static readonly int JumpId = Animator.StringToHash("Jump");
 
         private const float INPUT_DEADZONE_SQR = 0.0001f;
         private const float SPEED_TOLERANCE = 0.1f;
@@ -39,6 +40,7 @@ namespace Trivias.Player.Components
         private float _verticalVelocity;
         private float _airTime;
         private bool _grounded = true;
+        private float _jumpCooldownLeft;
 
         private void OnEnable() => _targetYaw = transform.eulerAngles.y;
 
@@ -46,8 +48,22 @@ namespace Trivias.Player.Components
         {
             var deltaTime = Time.deltaTime;
             UpdateGrounded();
+            if (_input.JumpPressed)
+                TryJump();
             UpdateVerticalVelocity(deltaTime);
             Move(deltaTime);
+        }
+
+        /// <summary>Salta si está en el suelo y puede moverse (lo pide la tecla de salto). Devuelve si ha saltado.</summary>
+        public bool TryJump()
+        {
+            if (!JumpRules.CanJump(_grounded, _controlGate.CanMove, _jumpCooldownLeft))
+                return false;
+
+            _verticalVelocity = JumpRules.TakeOffSpeed(_config.JumpHeight, _config.Gravity);
+            _jumpCooldownLeft = _config.JumpCooldown;
+            _animator.SetBool(JumpId, true);
+            return true;
         }
 
         /// <summary>Coloca al personaje sin que el CharacterController lo devuelva a su posición anterior.</summary>
@@ -74,6 +90,11 @@ namespace Trivias.Player.Components
             {
                 _airTime = 0f;
                 _animator.SetBool(FreeFallId, false);
+                if (_jumpCooldownLeft > 0f)
+                    _jumpCooldownLeft -= deltaTime;
+                // Recién despegado sigue tocando el suelo un instante: el salto termina al bajar.
+                if (_verticalVelocity <= 0f)
+                    _animator.SetBool(JumpId, false);
                 if (_verticalVelocity < 0f)
                     _verticalVelocity = GROUNDED_VERTICAL_VELOCITY;
                 return;
