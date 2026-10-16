@@ -7,25 +7,23 @@ using UnityEngine;
 namespace Trivias.Player.Editor
 {
     /// <summary>
-    /// Modelo del concursante (Models/PlayerNew): el modelo oficial <c>base_basic_shaded</c> tal cual (un millón de
-    /// triángulos y su textura <c>shaded.png</c>, con la luz ya pintada), riggeado en Blender (1,65 m, pose T). Se ve
-    /// igual que el original en Unity: color base negro y la textura como emisión, sin depender de las luces del plató.
-    /// El chándal va en una pieza aparte (textura en gris + color) para que la tienda pueda teñirlo.
-    /// Se importa como Humanoid: los huesos se llaman como los de Unity y le sirven las animaciones de Starter Assets.
+    /// Modelo del concursante (Models/PlayerBase): el cuerpo base oficial sin ropa, pelo ni zapatos
+    /// (<c>base_basic_shaded</c>) tal cual, sin perder polígonos ni altura (un millón de triángulos, 1,9 m), riggeado en
+    /// Blender en pose T (<c>PlayerBase_Rigged.fbx</c>). Se ve igual que el original en Unity: color base negro y su
+    /// textura <c>shaded.png</c> (con la luz ya pintada) como emisión. Sobre este cuerpo irán la ropa, el pelo y los
+    /// zapatos como piezas. Se importa como Humanoid: los huesos se llaman como los de Unity y le sirven las animaciones
+    /// de Starter Assets.
     /// </summary>
-    public static class PlayerNewModelBuilder
+    public static class PlayerBaseModelBuilder
     {
-        public const string FOLDER = PlayerPrefabBuilder.MODULE_ROOT + "/Models/PlayerNew";
-        public const string MODEL_PATH = FOLDER + "/PlayerNew.fbx";
+        public const string FOLDER = PlayerPrefabBuilder.MODULE_ROOT + "/Models/PlayerBase";
+        public const string MODEL_PATH = FOLDER + "/PlayerBase_Rigged.fbx";
         public const string BODY_MESH = "Body";
-        public const string SUIT_MESH = "Suit";
-        public const string BODY_MATERIAL = "PlayerNew_Body";
-        public const string SUIT_MATERIAL = "PlayerNew_Suit";
-        /// <summary>Azul medio del chándal del original (su textura gris por este color lo reproduce).</summary>
-        public static readonly Color SuitBlue = new(0.2143f, 0.3837f, 0.6644f);
+        public const string BODY_MATERIAL = "PlayerBase_Body";
+        /// <summary>Altura del cuerpo, la del modelo original (no se escala).</summary>
+        public const float HEIGHT = 1.9f;
 
-        private const string COLOR_TEXTURE = FOLDER + "/PlayerNew_Color.png";
-        private const string SUIT_TEXTURE = FOLDER + "/PlayerNew_SuitGray.png";
+        private const string COLOR_TEXTURE = FOLDER + "/shaded.png";
 
         private static readonly string[] HumanBones =
         {
@@ -44,7 +42,6 @@ namespace Trivias.Player.Editor
         public static void EnsureImported()
         {
             ConfigureTexture(COLOR_TEXTURE);
-            ConfigureTexture(SUIT_TEXTURE);
 
             var importer = (ModelImporter)AssetImporter.GetAtPath(MODEL_PATH);
             var dirty = false;
@@ -55,7 +52,7 @@ namespace Trivias.Player.Editor
             }
             // Cada material del FBX se sustituye por el nuestro del mismo nombre.
             var remaps = importer.GetExternalObjectMap();
-            foreach (var (name, material) in new[] { (BODY_MATERIAL, BodyMaterial()), (SUIT_MATERIAL, SuitMaterial()) })
+            foreach (var (name, material) in new[] { (BODY_MATERIAL, BodyMaterial()) })
             {
                 var key = new AssetImporter.SourceAssetIdentifier(typeof(Material), name);
                 if (!remaps.TryGetValue(key, out var current) || current != material)
@@ -85,12 +82,6 @@ namespace Trivias.Player.Editor
 
         /// <summary>Como lo muestra Unity al importar el original: color base negro y la textura como emisión.</summary>
         public static Material BodyMaterial() => Material(BODY_MATERIAL, COLOR_TEXTURE, Color.white);
-
-        /// <summary>
-        /// Chándal: el gris de su textura por el color de la emisión. De fábrica, el azul del original; la tienda tiñe
-        /// esa emisión con el color del traje comprado.
-        /// </summary>
-        public static Material SuitMaterial() => Material(SUIT_MATERIAL, SUIT_TEXTURE, SuitBlue);
 
         private static Material Material(string name, string texture, Color emission)
         {

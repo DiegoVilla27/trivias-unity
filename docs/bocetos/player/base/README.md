@@ -21,7 +21,7 @@ Son bocetos artísticos generados, no planos dimensionales exactos: las vistas s
 
 ## Futuras variantes
 
-Primer conjunto disponible como boceto: [Blue Tracksuit](../clothes/01-blue-tracksuit/README.md), con una única lámina de chaqueta y pantalón aislados, proporcionados para esta base T-pose. El calzado se trabaja por separado.
+Primer conjunto disponible como boceto: [Blue Tracksuit](../clothes/01-blue-tracksuit/README.md), con una única lámina de chaqueta y pantalón aislados, proporcionados para la base A-pose. El calzado se trabaja por separado.
 
 - Conservar el cráneo completo debajo de cada peinado.
 - Diseñar prendas sobre el cuerpo, respetando cuello, hombros, codos, cadera, rodillas y tobillos.

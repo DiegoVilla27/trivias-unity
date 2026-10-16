@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.25 — catálogos de bocetos de ropa, pelo y calzado para el player; concursante chibi riggeado con las animaciones de Starter Assets.
+- Versión: 0.27 — el concursante jugable es el cuerpo base oficial (sin ropa, pelo ni zapatos), tal cual y riggeado; catálogos de bocetos de ropa, pelo y calzado para el player.
 - Última actualización: 16 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -397,6 +397,15 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.27 — 16 de octubre de 2026
+
+- El concursante jugable pasa a ser el cuerpo base oficial sin ropa, pelo ni zapatos, tal cual (un millón de triángulos, 1,9 m, su textura de luz pintada), riggeado y con las mismas animaciones. Es la base sobre la que irán la ropa, el pelo y los zapatos como piezas; hasta entonces, los trajes de colores no tiñen nada. Detalle en [PLAYER](PLAYER.md). Se eliminan los modelos anteriores con ropa (`PlayerNew` y `PlayerModel`), que ya no se usaban.
+
+### Versión 0.26 — 16 de octubre de 2026
+
+- Se corrigen las diez láminas de [clothes](bocetos/player/clothes/README.md) a A-pose usando la base aprobada. Se conservan los diseños, paletas y detalles de las prendas; las mangas bajan en diagonal en frente, espalda y perfiles. Se sustituyen los mismos archivos, manteniendo una imagen por conjunto y solo ropa aislada.
+
 
 ### Versión 0.25 — 16 de octubre de 2026
 

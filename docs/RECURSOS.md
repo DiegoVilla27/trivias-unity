@@ -23,7 +23,7 @@ Los cosméticos adicionales de tienda requieren catálogo por definir. No confun
 
 Referencia visual modular del player (16 de octubre de 2026): [boceto base completo](bocetos/player/base/README.md), sin ropa, pelo ni zapatos. Se usará para diseñar futuras prendas y accesorios. El antiguo despiece se retiró. Esta referencia es solo una imagen; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md).
 
-Vestuario del player: [clothes — Blue Tracksuit](bocetos/player/clothes/01-blue-tracksuit/README.md). Una única lámina de ropa aislada (chaqueta y pantalón), proporcionada para la base. El calzado se trabaja por separado. No implica un modelo nuevo ni un cosmético añadido al juego. El catálogo también incluye Casual, Gardener, Elegant, Explorer, Pajamas, Raincoat, Chef, Retro Sport y Winter (diez estilos en total): una lámina de cuatro vistas por conjunto, solo ropa.
+Vestuario del player: [clothes — Blue Tracksuit](bocetos/player/clothes/01-blue-tracksuit/README.md). Una única lámina de ropa aislada (chaqueta y pantalón), proporcionada para la base. El calzado se trabaja por separado. No implica un modelo nuevo ni un cosmético añadido al juego. El catálogo también incluye Casual, Gardener, Elegant, Explorer, Pajamas, Raincoat, Chef, Retro Sport y Winter (diez estilos en total): una lámina de cuatro vistas por conjunto, solo ropa, en A-pose siguiendo la base aprobada.
 
 Peinados del player: [catálogo hair](bocetos/player/hair/README.md), con Wavy Sweep, Short Crop, Curly Puff, Bob, High Ponytail y Twin Buns. Una lámina de pelo aislado por estilo, con cuatro vistas y referencia al volumen de la cabeza base; el encaje geométrico se verificará al modelar.
 

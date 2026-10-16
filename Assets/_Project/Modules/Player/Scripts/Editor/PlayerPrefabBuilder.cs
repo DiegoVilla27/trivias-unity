@@ -16,7 +16,7 @@ using UnityEngine.InputSystem;
 namespace Trivias.Player.Editor
 {
     /// <summary>
-    /// Construye el prefab del concursante con su modelo propio (<see cref="PlayerNewModelBuilder"/>, Humanoid) y las
+    /// Construye el prefab del concursante con su modelo propio (<see cref="PlayerBaseModelBuilder"/>, Humanoid) y las
     /// animaciones y sonidos de pasos de Starter Assets (ThirdParty), con scripts propios del módulo. Los terceros no se modifican.
     /// </summary>
     public static class PlayerPrefabBuilder
@@ -30,20 +30,20 @@ namespace Trivias.Player.Editor
         private const string ANIMATOR_PATH = STARTER_CHARACTER + "/Animations/StarterAssetsThirdPerson.controller";
         private const string SFX_FOLDER = STARTER_CHARACTER + "/Sfx";
 
-        // Medidas del concursante chibi (1,65 m, cabeza grande de 1 m de ancho).
-        private const float HEIGHT = 1.65f;
+        // Medidas del concursante: el cuerpo base a su altura original (1,9 m, cabeza grande de 1,2 m de ancho).
+        private const float HEIGHT = PlayerBaseModelBuilder.HEIGHT;
         private const float CAPSULE_RADIUS = 0.32f;
-        private const float CAMERA_ROOT_HEIGHT = 1.5f;
+        private const float CAMERA_ROOT_HEIGHT = 1.72f;
         private const string HEAD_BONE = "Head";
-        private const float NAME_TAG_HEIGHT = 1.95f;
+        private const float NAME_TAG_HEIGHT = 2.25f;
         /// <summary>El dinero se lleva delante de la barriga, por debajo de la cabeza.</summary>
-        private static readonly Vector3 CarryPointPosition = new(0f, 0.62f, 0.45f);
+        private static readonly Vector3 CarryPointPosition = new(0f, 0.72f, 0.5f);
         /// <summary>
         /// Anclaje de los cosméticos: a la altura de los ojos, en el centro de la cabeza y a su escala (los cosméticos se
-        /// diseñaron para una cabeza de unos 0,35 m; esta mide casi 1 m con el pelo).
+        /// diseñaron para una cabeza de unos 0,35 m; esta mide 1,2 m de ancho).
         /// </summary>
-        public static readonly Vector3 CosmeticsAnchorPosition = new(0f, 1.12f, 0.09f);
-        public const float COSMETICS_SCALE = 2.6f;
+        public static readonly Vector3 CosmeticsAnchorPosition = new(0f, 1.29f, 0f);
+        public const float COSMETICS_SCALE = 3f;
         public const string COSMETICS_ANCHOR = "CosmeticsAnchor";
 
         [MenuItem("Tools/Trivias/Build/Player")]
@@ -125,9 +125,9 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_avatars", SharedAssets.PlayerAvatars());
             SerializedWiring.Set(playerNetwork, "_profile", SharedAssets.PlayerProfile());
             SerializedWiring.Set(playerNetwork, "_headAnchor", CreateCosmeticsAnchor(root.transform, animator.transform));
-            // Los trajes de colores tiñen solo el chándal (la cara, el pelo y las franjas blancas no).
-            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers",
-                new Renderer[] { animator.transform.Find(PlayerNewModelBuilder.SUIT_MESH).GetComponent<SkinnedMeshRenderer>() });
+            // Los trajes de colores tiñen la ropa. El cuerpo base no lleva: no se tiñe nada (nunca la piel) hasta que
+            // haya ropa por piezas.
+            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers", new Renderer[0]);
 
             foreach (var extend in extensions)
                 extend(root);
@@ -138,8 +138,8 @@ namespace Trivias.Player.Editor
 
         private static Animator CreateModel(Transform parent)
         {
-            PlayerNewModelBuilder.EnsureImported();
-            var model = (GameObject)PrefabUtility.InstantiatePrefab(PlayerNewModelBuilder.Model(), parent);
+            PlayerBaseModelBuilder.EnsureImported();
+            var model = (GameObject)PrefabUtility.InstantiatePrefab(PlayerBaseModelBuilder.Model(), parent);
             model.name = "Model";
             foreach (var skinned in model.GetComponentsInChildren<SkinnedMeshRenderer>())
                 skinned.updateWhenOffscreen = false;
@@ -147,7 +147,7 @@ namespace Trivias.Player.Editor
             if (!model.TryGetComponent<Animator>(out var animator))
                 animator = model.AddComponent<Animator>();
             animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(ANIMATOR_PATH);
-            animator.avatar = PlayerNewModelBuilder.Avatar();
+            animator.avatar = PlayerBaseModelBuilder.Avatar();
             animator.applyRootMotion = false;
 
             var audioSource = model.AddComponent<AudioSource>();

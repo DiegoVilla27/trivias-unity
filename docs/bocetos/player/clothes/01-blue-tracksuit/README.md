@@ -1,6 +1,6 @@
 # 01 — Blue Tracksuit
 
-Chándal azul del diseño original, proporcionado para la [base T-pose](../../base/personaje-base-t-pose.png). Una única lámina de ropa aislada: frente, espalda, perfil izquierdo y perfil derecho.
+Chándal azul del diseño original, proporcionado para la [base A-pose](../../base/personaje-base-a-pose.png). Una única lámina de ropa aislada: frente, espalda, perfil izquierdo y perfil derecho.
 
 [Boceto](blue-tracksuit.png) · [Prompt de corrección](blue-tracksuit-prompts.md)
 
@@ -12,3 +12,5 @@ Tejido mate, formas redondeadas y pliegues suaves, fieles al [diseño original](
 [Catálogo de clothes](../README.md).
 
 [Calzado a juego](../../shoes/01-blue-tracksuit/README.md).
+
+Postura vigente: **A-pose** en las cuatro vistas, con las mangas bajadas en diagonal siguiendo la base aprobada. Se conserva el mismo diseño de prendas.

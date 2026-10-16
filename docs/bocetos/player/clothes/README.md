@@ -1,6 +1,6 @@
 # Clothes — ropa del player
 
-Bocetos de ropa aislada diseñada para encajar sobre la [base del player](../base/README.md), conservando sus proporciones. El calzado y el pelo se trabajan por separado.
+Bocetos de ropa aislada diseñada para encajar sobre la [base del player](../base/README.md), conservando sus proporciones y siguiendo la [A-pose aprobada](../base/personaje-base-a-pose.png). Todas las láminas muestran las mangas bajadas en diagonal en sus cuatro vistas. El calzado y el pelo se trabajan por separado.
 
 | ID | Ropa | Boceto único |
 | --- | --- | --- |
