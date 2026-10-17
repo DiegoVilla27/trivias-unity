@@ -170,6 +170,10 @@ namespace Trivias.App.Tests
             Assert.That(Text("_lost").text, Is.EqualTo("–100.000"), "La cifra ya ha llegado a su valor.");
             Assert.That(Text("_kept").text, Is.EqualTo("0"));
 
+            var presenter = Object.FindAnyObjectByType<Trivias.Presenter.Components.PresenterAnimator>();
+            Assert.That(presenter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Sad") || presenter.Animator.GetNextAnimatorStateInfo(0).IsName("Sad"),
+                Is.True, "Se ha perdido todo: el presentador se decepciona.");
+
             foreach (var mark in Object.FindObjectsByType<BoothRevealMark>(FindObjectsInactive.Exclude))
             {
                 var booth = (int)typeof(BoothRevealMark).GetField("_booth", PRIVATE).GetValue(mark);

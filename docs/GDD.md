@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.41 — bocetos de accesorios en cuatro vistas.
+- Versión: 0.43 — el presentador se alegra, se decepciona y habla con el micrófono.
 - Última actualización: 17 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -205,7 +205,7 @@ Acciones de salida: coger/soltar dinero, convertirlo, activar comodín y verific
 
 ## 9. Presentador
 
-Aspecto (17 de octubre de 2026): el modelo del usuario tal cual (esmoquin rojo de lentejuelas, pajarita y bigote; un millón de triángulos y 1,9 m, como los concursantes), riggeado con el mismo esqueleto Humanoid y en reposo con la animación de Starter Assets. Detalle en [LEVEL](LEVEL.md).
+Aspecto (17 de octubre de 2026): el modelo del usuario tal cual (esmoquin rojo de lentejuelas, pajarita y bigote; un millón de triángulos y 1,9 m, como los concursantes), riggeado con el mismo esqueleto Humanoid y en reposo con la animación de Starter Assets. Se mueve con tres animaciones propias hechas en Blender sobre su esqueleto (`Tools/Blender/presenter_anims.py`): **alegría** (se agacha, salta con el puño en alto y da dos golpes de «¡sí!») cuando el equipo conserva dinero en la cabina correcta y al ganar; **decepción** (suspira, se hunde, niega con la cabeza gacha y hace un gesto de «qué le vamos a hacer») cuando se pierde todo y en la derrota; y **hablar** mientras se ve su rótulo (se lleva el micrófono a la boca, gesticula con la otra mano y mueve la cabeza), en capas aparte que se combinan con las reacciones. El micrófono es provisional (dos cajas) hasta que llegue su modelo. Detalle en [LEVEL](LEVEL.md).
 
 ### 9.1 Implementación inicial
 
@@ -399,11 +399,17 @@ Pendientes prioritarios:
 
 ## 15. Historial de cambios
 
+### Versión 0.43 — 17 de octubre de 2026
+
+- El presentador tiene animaciones: **alegría** (se agacha, salta con el puño en alto y da dos golpes de «¡sí!») cuando el equipo conserva dinero en la cabina correcta y al ganar; **decepción** (suspira, se hunde, niega con la cabeza gacha y hace un gesto de «qué le vamos a hacer») cuando se pierde todo y en la derrota; y **hablar** mientras se ve su rótulo (se lleva el micrófono a la boca, gesticula con la otra mano y mueve la cabeza), en capas aparte que se combinan con las reacciones. El micrófono es provisional (dos cajas) hasta que llegue su modelo. Cada jugador las calcula con la misma revelación (no viajan por red).
+
+### Versión 0.42 — 17 de octubre de 2026
+
+- Diez [modelos 3D de accesorios](modelado/accessories/README.md), con fuentes Blender, OBJ y materiales URP, texturas y renders reales. Aún pendientes de ajuste sobre los personajes y conexión al catálogo; sin cambios de precios o de reglas.
+
 ### Versión 0.41 — 17 de octubre de 2026
 
 - El presentador deja la viñeta de cómic del plató (cambiaba de forma y color, temblaba y tapaba el plató o se hacía enorme al acercarse) y habla en un rótulo de televisión abajo a la izquierda (como un «lower third»): su cara en un círculo dorado, «PRESENTADOR» y la frase escribiéndose letra a letra, siempre del mismo tamaño y en el mismo sitio, sin tapar el plató; el ánimo solo cambia el color del nombre (dorado, naranja de fiesta, lila de suspense, azul de pena). El retrato sale de su modelo. Detalle en [UI_UX](UI_UX.md#hud-de-la-partida).
-
-### Versión 0.41 — 17 de octubre de 2026
 
 - Diez [accesorios cosméticos con bocetos individuales de cuatro vistas](bocetos/player/accessories/README.md), organizados en carpetas propias. Solo documentación visual; no cambia la tienda implementada ni sus precios. Encaje definitivo y modelado pendientes.
 

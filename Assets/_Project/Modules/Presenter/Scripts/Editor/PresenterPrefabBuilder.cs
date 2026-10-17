@@ -34,7 +34,18 @@ namespace Trivias.Presenter.Editor
         public const string MODEL_PATH = MODULE_ROOT + "/Models/Presenter/Presenter_Rigged.fbx";
         private const string TEXTURE_PATH = MODULE_ROOT + "/Models/Presenter/shaded.png";
         private const string MATERIAL_PATH = MODULE_ROOT + "/Models/Presenter/Presenter_Body.mat";
-        public const string ANIMATOR_PATH = MODULE_ROOT + "/Animations/PresenterIdle.controller";
+        public const string ANIMATIONS = MODULE_ROOT + "/Animations";
+        public const string ANIMATOR_PATH = ANIMATIONS + "/Presenter.controller";
+        private const string OLD_ANIMATOR_PATH = ANIMATIONS + "/PresenterIdle.controller";
+        public const string TALK_CLIP = ANIMATIONS + "/Presenter_Talk.fbx";
+        public const string HAPPY_CLIP = ANIMATIONS + "/Presenter_Happy.fbx";
+        public const string SAD_CLIP = ANIMATIONS + "/Presenter_Sad.fbx";
+        public const string MICROPHONE = "Microphone";
+        private static readonly string[] Layers = { "Base", "TalkMic", "TalkGesture", "TalkHead" };
+        /// <summary>Del centro del puño a la muñeca, por la mano (igual que en las animaciones de Blender).</summary>
+        private const float FIST = 0.09f;
+        /// <summary>Fotogramas por segundo con los que se diseñaron sus animaciones en Blender.</summary>
+        public const float DESIGN_FPS = 30f;
         private const string IDLE_CLIP_PATH = "Assets/ThirdParty/StarterAssets/Runtime/ThirdPersonController/Character/Animations/Stand--Idle.anim.fbx";
         /// <summary>Altura del modelo (la del original, sin escalar).</summary>
         public const float HEIGHT = 1.9f;
@@ -47,7 +58,7 @@ namespace Trivias.Presenter.Editor
         public static PresenterRuntime Runtime() => EditorAssets.GetOrCreateAsset<PresenterRuntime>($"{CONFIG}/PresenterRuntime.asset");
         public static PresenterConfig Config() => EditorAssets.GetOrCreateAsset<PresenterConfig>($"{CONFIG}/PresenterConfig.asset");
 
-        public static GameObject Build()
+        public static GameObject Build(MatchRuntime match)
         {
             HumanoidModels.EnsureImported(MODEL_PATH, TEXTURE_PATH, MATERIAL_PATH, "Presenter_Body");
             const int layer = GameLayers.STAGE;
@@ -63,39 +74,176 @@ namespace Trivias.Presenter.Editor
             if (!model.TryGetComponent<Animator>(out var animator))
                 animator = model.AddComponent<Animator>();
             animator.avatar = HumanoidModels.AvatarOf(MODEL_PATH);
-            animator.runtimeAnimatorController = IdleController();
+            animator.runtimeAnimatorController = Controller();
             animator.applyRootMotion = false;
             animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms; // Si nadie lo ve, no mueve los huesos.
+            AddMicrophone(model.transform, layer);
 
             var body = root.AddComponent<CapsuleCollider>();
             body.center = new Vector3(0f, HEIGHT * 0.5f, 0f);
             body.height = HEIGHT;
             body.radius = BODY_RADIUS;
 
+            var presenterAnimator = root.AddComponent<PresenterAnimator>();
+            SerializedWiring.Set(presenterAnimator, "_match", match);
+            SerializedWiring.Set(presenterAnimator, "_speech", Runtime());
+            SerializedWiring.Set(presenterAnimator, "_animator", animator);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
 
-        /// <summary>Un solo estado: el reposo de Starter Assets en bucle (el presentador no anda).</summary>
-        private static RuntimeAnimatorController IdleController()
+        /// <summary>
+        /// Micrófono provisional (dos cajas) en su mano derecha, hasta que llegue el modelo: en la pose T apunta al frente
+        /// desde el centro del puño, igual que en las animaciones de Blender, así que al hablar llega a la boca.
+        /// </summary>
+        private static void AddMicrophone(Transform model, int layer)
+        {
+            var hand = FindDeep(model, "RightHand");
+            var forearm = FindDeep(model, "RightLowerArm");
+            var fist = hand.position + (hand.position - forearm.position).normalized * FIST;
+            var handle = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_MicHandle.mat", new Color(0.05f, 0.05f, 0.06f), 0.6f);
+            var grille = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_MicHead.mat", new Color(0.55f, 0.56f, 0.6f), 0.75f);
+
+            var mic = new GameObject(MICROPHONE) { layer = layer };
+            mic.transform.SetPositionAndRotation(fist, model.rotation);
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "MicHandle", mic.transform, new Vector3(0f, 0f, 0.09f),
+                new Vector3(0.042f, 0.042f, 0.28f), handle, layer, false, keepCollider: false);
+            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "MicHead", mic.transform, new Vector3(0f, 0f, 0.265f),
+                Vector3.one * 0.075f, grille, layer, false, keepCollider: false);
+            mic.transform.SetParent(hand, true);
+        }
+
+        /// <summary>
+        /// Controlador: reposo (Starter Assets), alegría y decepción en la capa base; hablar en tres capas que solo tocan
+        /// su parte (brazo derecho con el micro, brazo izquierdo que gesticula y cabeza, esta sumada al resto).
+        /// </summary>
+        private static RuntimeAnimatorController Controller()
         {
             var idle = AssetDatabase.LoadAllAssetsAtPath(IDLE_CLIP_PATH).OfType<AnimationClip>()
                 .First(clip => !clip.name.StartsWith("__preview__"));
+            var talk = HumanoidModels.EnsureAnimationImported(TALK_CLIP, MODEL_PATH, loop: true);
+            var happy = HumanoidModels.EnsureAnimationImported(HAPPY_CLIP, MODEL_PATH, loop: false);
+            var sad = HumanoidModels.EnsureAnimationImported(SAD_CLIP, MODEL_PATH, loop: false);
+            var masks = new[]
+            {
+                null,
+                Mask("Presenter_RightArm", AvatarMaskBodyPart.RightArm),
+                Mask("Presenter_LeftArm", AvatarMaskBodyPart.LeftArm),
+                Mask("Presenter_Head", AvatarMaskBodyPart.Head),
+            };
+
+            if (AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(OLD_ANIMATOR_PATH) != null)
+                AssetDatabase.DeleteAsset(OLD_ANIMATOR_PATH);
             var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(ANIMATOR_PATH);
-            if (controller == null)
+            if (controller != null && !controller.layers.Select(l => l.name).SequenceEqual(Layers))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(ANIMATOR_PATH)!);
-                controller = AnimatorController.CreateAnimatorControllerAtPath(ANIMATOR_PATH);
+                AssetDatabase.DeleteAsset(ANIMATOR_PATH);
+                controller = null;
             }
-            var machine = controller.layers[0].stateMachine;
-            var state = machine.states.Select(s => s.state).FirstOrDefault(s => s.name == "Idle") ?? machine.AddState("Idle");
-            if (state.motion != idle || machine.defaultState != state)
+            if (controller == null)
+                controller = CreateController(masks);
+
+            // Lo que puede cambiar sin rehacer el controlador: clips y máscaras.
+            var layers = controller.layers;
+            Motion(layers[0], "Idle", idle);
+            Motion(layers[0], PresenterAnimator.HAPPY, happy);
+            Motion(layers[0], PresenterAnimator.SAD, sad);
+            for (var i = 1; i < layers.Length; i++)
             {
-                state.motion = idle;
-                machine.defaultState = state;
-                EditorUtility.SetDirty(controller);
-                AssetDatabase.SaveAssetIfDirty(controller);
+                Motion(layers[i], "Talk", talk);
+                layers[i].avatarMask = masks[i];
+            }
+            controller.layers = layers;
+            EditorUtility.SetDirty(controller);
+            AssetDatabase.SaveAssetIfDirty(controller);
+            return controller;
+        }
+
+        private static AnimatorController CreateController(AvatarMask[] masks)
+        {
+            var controller = AnimatorController.CreateAnimatorControllerAtPath(ANIMATOR_PATH);
+            controller.AddParameter(PresenterAnimator.HAPPY, AnimatorControllerParameterType.Trigger);
+            controller.AddParameter(PresenterAnimator.SAD, AnimatorControllerParameterType.Trigger);
+
+            var layers = controller.layers;
+            layers[0].name = Layers[0];
+            controller.layers = layers;
+            var machine = controller.layers[0].stateMachine;
+            var idle = machine.AddState("Idle");
+            machine.defaultState = idle;
+            foreach (var reaction in new[] { PresenterAnimator.HAPPY, PresenterAnimator.SAD })
+            {
+                var state = machine.AddState(reaction);
+                var enter = machine.AddAnyStateTransition(state);
+                enter.AddCondition(AnimatorConditionMode.If, 0f, reaction);
+                enter.hasExitTime = false;
+                enter.hasFixedDuration = true;
+                enter.duration = 0.2f;
+                enter.canTransitionToSelf = true;
+                var back = state.AddTransition(idle);
+                back.hasExitTime = true;
+                back.exitTime = 0.86f;
+                back.hasFixedDuration = true;
+                back.duration = 0.35f;
+            }
+
+            for (var i = 1; i < Layers.Length; i++)
+            {
+                var talkMachine = new AnimatorStateMachine { name = Layers[i], hideFlags = HideFlags.HideInHierarchy };
+                AssetDatabase.AddObjectToAsset(talkMachine, controller);
+                talkMachine.defaultState = talkMachine.AddState("Talk");
+                controller.AddLayer(new AnimatorControllerLayer
+                {
+                    name = Layers[i],
+                    stateMachine = talkMachine,
+                    avatarMask = masks[i],
+                    defaultWeight = 0f,
+                    // La cabeza se suma (asiente y ladea sobre lo que ya hace); los brazos se sustituyen.
+                    blendingMode = i == PresenterAnimator.HEAD_LAYER ? AnimatorLayerBlendingMode.Additive : AnimatorLayerBlendingMode.Override,
+                });
             }
             return controller;
+        }
+
+        private static void Motion(AnimatorControllerLayer layer, string stateName, Motion motion)
+        {
+            var state = layer.stateMachine.states.Select(s => s.state).First(s => s.name == stateName);
+            if (state.motion != motion)
+                state.motion = motion;
+            // Las animaciones del presentador se diseñaron a 30 fotogramas por segundo: si el archivo dice otra cosa
+            // (Blender exporta a 24 por defecto), se reproducen al ritmo con el que se hicieron.
+            var clip = (AnimationClip)motion;
+            var speed = AssetDatabase.GetAssetPath(clip).StartsWith(ANIMATIONS) ? DESIGN_FPS / clip.frameRate : 1f;
+            if (!Mathf.Approximately(state.speed, speed))
+                state.speed = speed;
+        }
+
+        /// <summary>Máscara humanoide con una sola parte del cuerpo.</summary>
+        private static AvatarMask Mask(string name, AvatarMaskBodyPart part)
+        {
+            var path = $"{ANIMATIONS}/{name}.mask";
+            var mask = AssetDatabase.LoadAssetAtPath<AvatarMask>(path);
+            if (mask == null)
+            {
+                mask = new AvatarMask();
+                AssetDatabase.CreateAsset(mask, path);
+            }
+            for (var p = AvatarMaskBodyPart.Root; p < AvatarMaskBodyPart.LastBodyPart; p++)
+                mask.SetHumanoidBodyPartActive(p, p == part);
+            EditorUtility.SetDirty(mask);
+            return mask;
+        }
+
+        private static Transform FindDeep(Transform parent, string name)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child.name == name)
+                    return child;
+                var found = FindDeep(child, name);
+                if (found != null)
+                    return found;
+            }
+            return null;
         }
 
         /// <summary>

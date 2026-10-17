@@ -1,5 +1,7 @@
 # Accesorios — propuesta visual
 
+[Modelos 3D y fuentes Blender](../../../modelado/accessories/README.md).
+
 ## Bocetos individuales de cuatro vistas
 
 Cada carpeta contiene una lámina con frente, atrás, izquierda y derecha, y su prompt. En las alas, frente corresponde al lado orientado hacia la espalda del jugador y atrás al exterior. Las vistas son referencias conceptuales de volumen, no planos con medidas definitivas.

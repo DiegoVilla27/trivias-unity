@@ -1,5 +1,7 @@
 # Jugador — Personaje y prefab base
 
+[Accesorios 3D adicionales](modelado/accessories/README.md): diez piezas rígidas con origen de colocación, pendientes de ajuste por personaje y conexión al catálogo. Las alas necesitan un futuro anclaje de espalda; no sustituyen el sistema vigente de equipamiento.
+
 Referencia: [GDD](GDD.md), secciones 5, 7, 8 y 10.
 
 ## Base compartida

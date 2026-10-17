@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Crown",
+    "mesh_parts": 21,
+    "problems": []
+  },
+  {
+    "name": "BowTie",
+    "mesh_parts": 4,
+    "problems": []
+  },
+  {
+    "name": "TopHat",
+    "mesh_parts": 4,
+    "problems": []
+  },
+  {
+    "name": "StarGlasses",
+    "mesh_parts": 9,
+    "problems": []
+  },
+  {
+    "name": "Mustache",
+    "mesh_parts": 8,
+    "problems": []
+  },
+  {
+    "name": "PirateHat",
+    "mesh_parts": 12,
+    "problems": []
+  },
+  {
+    "name": "SuperheroMask",
+    "mesh_parts": 8,
+    "problems": []
+  },
+  {
+    "name": "Halo",
+    "mesh_parts": 1,
+    "problems": []
+  },
+  {
+    "name": "AngelWings",
+    "mesh_parts": 19,
+    "problems": []
+  },
+  {
+    "name": "DragonWings",
+    "mesh_parts": 25,
+    "problems": []
+  }
+]

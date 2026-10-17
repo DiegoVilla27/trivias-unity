@@ -62,6 +62,53 @@ namespace Trivias.Shared.Editor
             }
         }
 
+        /// <summary>
+        /// Una animación hecha sobre el mismo esqueleto (FBX solo con el esqueleto animado): Humanoid con su propio avatar
+        /// (las animaciones se pasan por músculos al modelo), sin moverse del sitio (la raíz se queda en la pose) y en
+        /// bucle si se pide. Devuelve su clip.
+        /// </summary>
+        public static AnimationClip EnsureAnimationImported(string path, string modelPath, bool loop)
+        {
+            var importer = (ModelImporter)AssetImporter.GetAtPath(path);
+            // Sin fundir el nodo raíz del esqueleto (lleva un giro): el archivo debe tener la misma jerarquía que el modelo.
+            if (!importer.preserveHierarchy)
+            {
+                importer.preserveHierarchy = true;
+                importer.SaveAndReimport();
+            }
+            // La pose de referencia es la pose T del modelo (no el primer fotograma del archivo): si no, los músculos
+            // salen desplazados y los brazos acaban en otro sitio.
+            var description = DescribeAnimation(AssetDatabase.LoadAssetAtPath<GameObject>(path), AssetDatabase.LoadAssetAtPath<GameObject>(modelPath));
+            if (importer.animationType != ModelImporterAnimationType.Human || !SameSkeleton(importer.humanDescription, description) ||
+                !importer.importAnimation)
+            {
+                importer.animationType = ModelImporterAnimationType.Human;
+                importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+                importer.importAnimation = true;
+                importer.materialImportMode = ModelImporterMaterialImportMode.None;
+                importer.humanDescription = description;
+                importer.SaveAndReimport();
+            }
+
+            var name = System.IO.Path.GetFileNameWithoutExtension(path);
+            var clips = importer.clipAnimations;
+            var clip = clips.Length == 1 ? clips[0] : null;
+            if (clip == null || clip.name != name || clip.loopTime != loop || !clip.lockRootRotation || !clip.lockRootHeightY ||
+                !clip.lockRootPositionXZ || !clip.keepOriginalPositionY)
+            {
+                var take = importer.defaultClipAnimations[0];
+                take.name = name;
+                take.loopTime = loop;
+                take.loopPose = loop;
+                // Sin desplazarse: giro, altura y posición se quedan en la pose (así el salto se ve, pero no se va).
+                take.lockRootRotation = take.lockRootHeightY = take.lockRootPositionXZ = true;
+                take.keepOriginalOrientation = take.keepOriginalPositionY = take.keepOriginalPositionXZ = true;
+                importer.clipAnimations = new[] { take };
+                importer.SaveAndReimport();
+            }
+            return AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().First(c => !c.name.StartsWith("__preview__"));
+        }
+
         public static Avatar AvatarOf(string modelPath) =>
             AssetDatabase.LoadAllAssetsAtPath(modelPath).OfType<Avatar>().FirstOrDefault();
 
@@ -76,6 +123,33 @@ namespace Trivias.Shared.Editor
             material.SetFloat("_EnvironmentReflections", 1f);
             EditorUtility.SetDirty(material);
             return material;
+        }
+
+        /// <summary>
+        /// Avatar de un archivo de animación con la pose T del modelo: sus mismos huesos (por nombre), con las posiciones
+        /// y giros de reposo del modelo; la raíz con el nombre del archivo.
+        /// </summary>
+        private static HumanDescription DescribeAnimation(GameObject animation, GameObject model)
+        {
+            var description = Describe(model);
+            var names = new HashSet<string>(animation.GetComponentsInChildren<Transform>(true).Select(t => t.name));
+            var skeleton = description.skeleton.Where((bone, i) => i == 0 || names.Contains(bone.name)).ToArray();
+            skeleton[0].name = animation.name;
+            description.skeleton = skeleton;
+            return description;
+        }
+
+        private static bool SameSkeleton(HumanDescription a, HumanDescription b)
+        {
+            if (a.human == null || a.human.Length != b.human.Length || a.skeleton == null || a.skeleton.Length != b.skeleton.Length)
+                return false;
+            for (var i = 0; i < a.skeleton.Length; i++)
+            {
+                if (a.skeleton[i].name != b.skeleton[i].name || Quaternion.Angle(a.skeleton[i].rotation, b.skeleton[i].rotation) > 0.01f ||
+                    (a.skeleton[i].position - b.skeleton[i].position).sqrMagnitude > 1e-8f)
+                    return false;
+            }
+            return true;
         }
 
         /// <summary>Esqueleto en pose T y correspondencia directa de nombres con los huesos humanos de Unity.</summary>

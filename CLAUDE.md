@@ -104,7 +104,7 @@ Se actualiza cada vez que se crea un módulo. Una flecha significa "puede refere
 | HUD | HUD de la partida según sus bocetos, sin saturar (`HudPrefabBuilder` con `UiKit`): pregunta y estado, reloj, cierre 3-2-1 y resultado de la ronda, dinero del equipo y comodines, aviso de dinero fuera de bandejas, lo que llevas y el comodín preparado (textos en `HudText`, C# puro); iconos en `HUD/UI/Icons` | Shared, Match, Money, Questions, SelfBet |
 | Exchange | Estación de cambio interactiva (agrupar y dividir) | Shared, Money |
 | SelfBet | Comodines: reparto, reserva, zonas de apuesta, confinamiento, multiplicador y expulsión | Shared |
-| Presenter | Presentador: su modelo (Humanoid, en reposo) y habla por texto: catálogo de frases (JSON validado en edición), momentos en que habla y elección por evento sin repetir, rótulo de televisión en pantalla con su cara y el ánimo en el color del nombre (letra a letra) | Shared, Match, Money, SelfBet, Questions |
+| Presenter | Presentador: su modelo (Humanoid) con sus animaciones de alegría, decepción y hablar (`PresenterAnimator`, micrófono provisional) y habla por texto: catálogo de frases (JSON validado en edición), momentos en que habla y elección por evento sin repetir, rótulo de televisión en pantalla con su cara y el ánimo en el color del nombre (letra a letra) | Shared, Match, Money, SelfBet, Questions |
 | Results | Pantalla de resultados con la convención de los menús (`UiKit`, fondo desenfocado; con el puesto en los récords), volver a jugar y salir | Shared, Match, Money, Questions, Ranking |
 | Menu | Pantallas como los bocetos (`MenuPrefabBuilder` con `UiKit`): menú principal (tu nombre, tu personaje en 3D, crear, unirse, cómo se juega, récords, configuración, salir), invitación, tutorial (JSON en `Content/`), tabla de récords, configuración, sala de espera y pausa (Esc) | Shared, Match, Money, Questions, Ranking |
 | Ranking | Récords locales de victorias (C# puro: quién entra, orden y empates) guardados en JSON | Shared |
@@ -143,6 +143,7 @@ Módulos previstos aún sin crear: `Voice`.
 - Prefabs de red: tras crearlos por código, llamar a `NetworkManagerPrefabBuilder.EnsureGlobalObjectIdHash` (si no, el hash queda en 0 y no aparecen en red). La lista de prefabs de red vive en `Networking/Config/DefaultNetworkPrefabs.asset`.
 - Pruebas multijugador en local: **Multiplayer Play Mode** (Window > Multiplayer > Multiplayer Play Mode).
 - Iluminación: de momento una luz direccional en tiempo real y luz ambiente. Precalcular la iluminación queda pendiente para el acabado.
+- **Blender (`Tools/Blender/`)**: scripts para riggear modelos completos del usuario y para las animaciones del presentador. Las animaciones se importan como Humanoid con la pose T del modelo como referencia y conservando la jerarquía (`HumanoidModels.EnsureAnimationImported`); si no, los brazos salen torcidos. Se diseñan a 30 fps.
 - **GPU Resident Drawer desactivado** (`Settings/PC_RPAsset`): en Unity 6000.6 una cámara que pinta en una imagen (el expositor del personaje del menú) hace que Unity se cuelgue al descargar la escena. No reactivarlo sin comprobarlo con la batería PlayMode completa.
 
 ## 5. Glosario español → código

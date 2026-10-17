@@ -4,6 +4,8 @@ Referencia: [GDD](GDD.md), secciones 6–9 y 13. Lista de recursos necesarios; n
 
 ## Arte 3D
 
+[Diez accesorios 3D modelados en Blender](modelado/accessories/README.md): OBJ y materiales URP en `Shop/Models/Accessories`, fuentes y renders reales en docs. Integración en catálogo y ajuste por personaje pendientes.
+
 Accesorios cosméticos: [diez láminas de cuatro vistas](bocetos/player/accessories/README.md), con corona, pajarita, sombrero de copa, gafas de estrella, bigote, sombrero de pirata, antifaz, halo y alas de ángel y de dragón. Bocetos para modelado; aún sin integración ni nuevos precios.
 
 Referencias específicas de modelado: [36 láminas individuales y notas](bocetos/recursos/detallados/README.md). Son bocetos, no medidas finales ni modelos terminados.
@@ -18,7 +20,7 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 | Botón de verificar | Modelo integrado (la tapa se hunde) | Mismo objeto pulido |
 | Fajo, bolsa y lingote | Modelos integrados | Valores legibles y acabado |
 | Plató modular | Kit de ambiente integrado (ver abajo) | Iluminación precalculada y optimización |
-| Presentador visual | Modelo del usuario tal cual (1M triángulos, 1,9 m), riggeado, en `Presenter/Models/Presenter` | Gestos al hablar (animaciones propias) |
+| Presentador visual | Modelo del usuario tal cual (1M triángulos, 1,9 m), riggeado, en `Presenter/Models/Presenter` | Hecho: alegría, decepción y hablar (Blender, `Tools/Blender`); pendiente el modelo del micrófono |
 | Cheque/podio | Resultado sencillo | Ceremonia de victoria |
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.

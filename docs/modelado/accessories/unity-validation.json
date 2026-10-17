@@ -1,0 +1,25 @@
+{
+  "unity": "6000.6.0f1",
+  "build_all": "passed",
+  "suites": {
+    "editmode": {
+      "total": "407",
+      "passed": "407",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "8.3340715",
+      "start-time": "2026-10-17 16:25:07Z",
+      "end-time": "2026-10-17 16:25:15Z"
+    },
+    "playmode": {
+      "total": "114",
+      "passed": "114",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "133.6276068",
+      "start-time": "2026-10-17 16:26:15Z",
+      "end-time": "2026-10-17 16:28:29Z"
+    }
+  },
+  "assets_errors_and_warnings": 0
+}

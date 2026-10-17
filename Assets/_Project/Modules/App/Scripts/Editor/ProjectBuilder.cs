@@ -90,7 +90,7 @@ namespace Trivias.App.Editor
                 Table = TablePrefabBuilder.Build(),
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),
                 VerifyButton = VerifyButtonPrefabBuilder.Build(matchRuntime, interactables),
-                Presenter = PresenterPrefabBuilder.Build(),
+                Presenter = PresenterPrefabBuilder.Build(matchRuntime),
                 PresenterCaption = PresenterPrefabBuilder.BuildCaption(),
                 Environment = StageEnvironmentPrefabBuilder.Build(),
                 NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(

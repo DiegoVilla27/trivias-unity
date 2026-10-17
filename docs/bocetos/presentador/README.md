@@ -1,5 +1,6 @@
 # Presentador — bocetos
 
+- [Micrófono aislado](props/microphone.png) y [prompt](props/microphone-prompt.md).
 - [Pose de presentación con micrófono](poses/presentador-con-microfono.png) y [prompt](poses/presentador-con-microfono-prompt.md).
 - [Referencia general](referencias/presentador-modelado-01.png) y [prompt](referencias/presentador-modelado-01-prompt.md).
 - [T-pose](poses/presentador-t-pose.png) y [prompt](poses/presentador-t-pose-prompt.md).

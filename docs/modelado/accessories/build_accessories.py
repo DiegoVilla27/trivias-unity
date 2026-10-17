@@ -4,6 +4,7 @@ Run with Blender --background --python <this file>. Blender coordinates: Z up,
 -Y wearer forward. OBJ uses Unity Y up, +Z forward. No runtime code is changed.
 """
 import bpy
+import bmesh
 import math
 import json
 import sys
@@ -84,9 +85,9 @@ def box(name, loc, scale, mat, bevel=.006):
 def tube(name, points, radius, mat, cyclic=False):
     curve = bpy.data.curves.new(name, 'CURVE')
     curve.dimensions = '3D'
-    curve.resolution_u = 16
+    curve.resolution_u = 8
     curve.bevel_depth = radius
-    curve.bevel_resolution = 4
+    curve.bevel_resolution = 3
     curve.use_fill_caps = True
     spline = curve.splines.new('BEZIER')
     spline.bezier_points.add(len(points)-1)
@@ -271,13 +272,13 @@ def pirate_hat():
     tube('Gold rolled tricorn edge',[edge(i*TAU/72) for i in range(72)],.013,'Gold',True)
     # Proud high front fold carries the reference skull.
     panel=[(-.30,.04),(-.26,.13),(-.15,.22),(0,.30),(.15,.22),(.26,.13),(.30,.04)]
-    polygon_solid('High front fold',panel,.027,'NavyFabric',lambda x,z:-.24+.12*(x/.3)**2,.009)
-    tube('Front fold gold edge',[(x,-.255+.12*(x/.3)**2,z) for x,z in panel[:-1]],.012,'Gold')
-    ellipsoid('Ivory skull',(0,-.269,.175),(.052,.016,.059),'Ivory')
-    box('Skull jaw',(0,-.27,.12),(.066,.028,.035),'Ivory',.008)
-    for x in [-.021,.021]:ellipsoid('Skull eye socket',(x,-.285,.181),(.014,.006,.017),'Charcoal')
-    polygon_solid('Skull nose',[(-.008,.148),(.008,.148),(0,.16)],.006,'Charcoal',lambda x,z:-.288,.001)
-    for x in [-.014,.014]:box('Skull tooth groove',(x,-.286,.112),(.004,.003,.018),'Charcoal',.001)
+    polygon_solid('High front fold',panel,.027,'NavyFabric',lambda x,z:-.39+.12*(x/.3)**2,.009)
+    tube('Front fold gold edge',[(x,-.405+.12*(x/.3)**2,z) for x,z in panel],.012,'Gold')
+    ellipsoid('Ivory skull',(0,-.419,.175),(.052,.016,.059),'Ivory')
+    box('Skull jaw',(0,-.42,.12),(.066,.028,.035),'Ivory',.008)
+    for x in [-.021,.021]:ellipsoid('Skull eye socket',(x,-.435,.181),(.014,.006,.017),'Charcoal')
+    polygon_solid('Skull nose',[(-.008,.148),(.008,.148),(0,.16)],.006,'Charcoal',lambda x,z:-.438,.001)
+    for x in [-.014,.014]:box('Skull tooth groove',(x,-.436,.112),(.004,.003,.018),'Charcoal',.001)
 
 
 def superhero_mask():
@@ -304,10 +305,10 @@ def angel_wings():
     box('Central back mount',(0,0,0),(.055,.052,.105),'Gold',.014)
     for sign in [-1,1]:
         ellipsoid('Wing root',(sign*.062,0,.015),(.07,.038,.11),'Ivory')
-        feathers=[(.16,.12,.18,-.62),(.205,.055,.165,-.92),(.21,-.015,.145,-1.28),(.17,-.08,.12,-1.60),(.105,-.12,.095,-1.9)]
+        feathers=[(.15,.10,.14,.75),(.205,.04,.125,1.1),(.21,-.02,.11,1.4),(.17,-.07,.10,1.8),(.105,-.10,.08,2.1)]
         for i,(x,z,length,angle) in enumerate(feathers):
-            obj=ellipsoid('Rounded primary feather',(sign*x,.006,z),(.043,.024,length),'Ivory')
-            obj.rotation_euler.y=sign*(-angle-.35)
+            obj=ellipsoid('Rounded primary feather',(sign*x,.006,z),(.055,.029,length),'Ivory')
+            obj.rotation_euler.y=sign*angle
         for x,z,angle in [(.075,.07,-.3),(.10,.005,-.6),(.095,-.055,-.8)]:
             obj=ellipsoid('Layered soft covert',(sign*x,-.025,z),(.04,.025,.072),'Cream')
             obj.rotation_euler.y=sign*angle
@@ -323,7 +324,7 @@ def dragon_wings():
         tube('Rounded dark wing border',border,.012,'Charcoal',True)
         for end in [( .35,.07),(.32,-.13),(.155,-.18)]:
             for yoffset in [-.012,.012]:
-                tube('Wing structural rib',[(sign*.035,yoffset,.025),(sign*.11,yoffset+.004,.09),(sign*.18,yoffset+.008,.23),(sign*end[0],yoffset+.045*end[0],end[1])],.009,'Charcoal')
+                tube('Wing structural rib',[(sign*.18,yoffset+.008,.23),(sign*(.18+end[0])*.5,yoffset+.012,(.23+end[1])*.5),(sign*end[0],yoffset+.045*end[0],end[1])],.009,'Charcoal')
         for x,z in [(.18,.23),(.35,.07),(.32,-.13),(.155,-.18)]:
             ellipsoid('Rounded gold tip',(sign*x,.045*x,z),(.015,.015,.015),'Gold')
 
@@ -332,6 +333,10 @@ BUILDERS=[('Crown',crown,'Head','Origin at circlet seating plane'),('BowTie',bow
 
 
 def recalculate_and_uv(objects):
+    for obj in objects:
+        bm=bmesh.new();bm.from_mesh(obj.data)
+        bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=1e-7)
+        bm.to_mesh(obj.data);bm.free()
     bpy.ops.object.select_all(action='DESELECT')
     for obj in objects:obj.select_set(True)
     bpy.context.view_layer.objects.active=objects[0]
