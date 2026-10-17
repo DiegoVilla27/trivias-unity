@@ -73,7 +73,7 @@ namespace Trivias.Exchange.Components
 
             var into = carried - 1;
             var ratio = ledger.ExchangeRatio(carried);
-            var prompt = PromptText.Key("E", $"Dividir {MoneyFormat.Name(carried)} → {ratio} {Plural(into)}");
+            var prompt = PromptText.Key("E", $"Dividir {MoneyFormat.Name(carried)} en {ratio} {Plural(into)}");
             var count = ledger.CountCarriedBy(client);
             if (count > 1)
                 prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Dividir las {count}"));
@@ -90,9 +90,9 @@ namespace Trivias.Exchange.Components
             if (!canGroupBundles && !canGroupBags)
                 return $"Agrupar: hacen falta {bagRatio} fajos o {barRatio} bolsas en la mesa";
 
-            var prompt = canGroupBundles ? PromptText.Key("E", $"Agrupar {bagRatio} fajos → bolsa") : string.Empty;
+            var prompt = canGroupBundles ? PromptText.Key("E", $"Agrupar {bagRatio} fajos en 1 bolsa") : string.Empty;
             if (canGroupBags)
-                prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Agrupar {barRatio} bolsas → lingote"));
+                prompt = PromptText.Join(prompt, PromptText.Key("Q", $"Agrupar {barRatio} bolsas en 1 lingote"));
             return prompt;
         }
 

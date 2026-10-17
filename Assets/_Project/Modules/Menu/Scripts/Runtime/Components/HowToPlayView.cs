@@ -20,6 +20,8 @@ namespace Trivias.Menu.Components
         [SerializeField] private GameObject _panel;
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _body;
+        [Tooltip("Dibuja como teclas las «[E]» del texto.")]
+        [SerializeField] private UiKeyedText _bodyKeys;
         [SerializeField] private TextMeshProUGUI _pageLabel;
         [SerializeField] private Image _illustration;
         [Tooltip("Una ilustración por página, en orden.")]
@@ -104,7 +106,7 @@ namespace Trivias.Menu.Components
             Page = Pager.Clamp(page, PageCount);
             var current = _content[Page];
             _title.text = current.Title.ToUpperInvariant();
-            _body.text = current.Body;
+            _bodyKeys.SetText(current.Body);
             _pageLabel.text = Pager.Label(Page, PageCount);
             _illustration.sprite = Page < _illustrations.Length ? _illustrations[Page] : null;
             _illustration.type = Image.Type.Simple; // Con su proporción: nunca estirada.

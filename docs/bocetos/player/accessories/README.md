@@ -1,9 +1,26 @@
 # Accesorios — propuesta visual
 
-[Lámina conjunta de diez accesorios](accesorios-tienda.png), creada con la herramienta integrada de imágenes. Propuesta de bocetos, sin cambios en el catálogo implementado ni precios nuevos.
+## Bocetos individuales de cuatro vistas
 
-Gorra, gafas redondas, pajarita, corona, sombrero de copa, auriculares, diadema estrella, flor de solapa, mochila y capa de campeón. Referencias visuales: Blue Tracksuit y hoja de iconos del menú.
+Cada carpeta contiene una lámina con frente, atrás, izquierda y derecha, y su prompt. En las alas, frente corresponde al lado orientado hacia la espalda del jugador y atrás al exterior. Las vistas son referencias conceptuales de volumen, no planos con medidas definitivas.
+
+- [CORONA](01-crown/crown-views.png) · [notas y prompt](01-crown/README.md)
+- [PAJARITA](02-bow-tie/bow-tie-views.png) · [notas y prompt](02-bow-tie/README.md)
+- [SOMBRERO DE COPA](03-top-hat/top-hat-views.png) · [notas y prompt](03-top-hat/README.md)
+- [GAFAS DE ESTRELLA](04-star-glasses/star-glasses-views.png) · [notas y prompt](04-star-glasses/README.md)
+- [BIGOTE](05-mustache/mustache-views.png) · [notas y prompt](05-mustache/README.md)
+- [SOMBRERO DE PIRATA](06-pirate-hat/pirate-hat-views.png) · [notas y prompt](06-pirate-hat/README.md)
+- [ANTIFAZ](07-superhero-mask/superhero-mask-views.png) · [notas y prompt](07-superhero-mask/README.md)
+- [HALO](08-halo/halo-views.png) · [notas y prompt](08-halo/README.md)
+- [ALAS DE ÁNGEL](09-angel-wings/angel-wings-views.png) · [notas y prompt](09-angel-wings/README.md)
+- [ALAS DE DRAGÓN](10-dragon-wings/dragon-wings-views.png) · [notas y prompt](10-dragon-wings/README.md)
+
+[Lámina conjunta de diez accesorios](accesorios-tienda.png), generada con la herramienta integrada de imágenes. Propuesta para revisión, sin cambios en el catálogo implementado ni precios nuevos.
+
+Selección vigente: corona, pajarita, sombrero de copa, gafas de estrella, bigote del presentador, sombrero de pirata, antifaz de superhéroe, halo, alas de ángel y alas de dragón. Los siete primeros accesorios aprobados se conservan; pirata, antifaz y dragón están pendientes de revisión. Sustituyen bufón, cuernos y cohete, descartados por el usuario.
+
+Pensados para anclajes de cabeza, cara, cuello o espalda. El ajuste a cada personaje y la compatibilidad con el pelo quedan pendientes del modelado.
 
 ## Prompt
 
-Use case: stylized-concept. One polished accessory concept sheet for the cute chibi TV trivia game in reference1; reference2 provides navy/gold warm glossy material palette. Landscape sheet, warm ivory background, exactly TEN separate wearable accessory objects in an orderly5columns x2rows grid, equal generous whitespace, one object per cell, no characters, no mannequin heads/bodies. Title 'ACCESORIOS DEL CONCURSO'. Rounded chunky professional 3D cartoon vinyl aesthetic, simple readable silhouettes, warm soft studio light, restrained burgundy navy cream gold palette, subtle contact shadows. Each object shown useful front three-quarter view, consistent visual scale. Row1 left to right: navy short-brim baseball cap with small gold embroidered star, label 'GORRA'; thick round tortoiseshell eyeglasses with clear lenses and visible temples, label 'GAFAS'; plush burgundy bow tie, label 'PAJARITA'; soft gold crown with rounded points and small blue gems, label 'CORONA'; short wide black top hat with burgundy band, label 'SOMBRERO DE COPA'. Row2: chunky navy over-ear headphones with cream cushions, label 'AURICULARES'; slim wearable headband with one large gold star on short spring upright, label 'DIADEMA ESTRELLA'; single cream daisy lapel pin with soft yellow center and tiny green leaf, label 'FLOR DE SOLAPA'; small rounded navy backpack with cream straps, front pocket and gold star badge, show straps enough to establish wearable design, label 'MOCHILA'; short flowing burgundy champion cape with cream lining and gold clasp at neck opening, EMPTY cape no body, label 'CAPA'. Do not add prices, rarity, extra objects, duplicate accessories or views. Accurate ten-object inventory, appealing game-ready design concept.
+Una sola lámina de diez accesorios separados, cuadrícula de cinco columnas y dos filas, fondo marfil y rótulos en español. Conservar la fila superior completa: corona dorada con gemas azules, pajarita burdeos, sombrero de copa negro con cinta burdeos, gafas doradas de estrella y bigote oscuro curvado. Conservar halo dorado y alas marfil en sus posiciones inferiores. Sustituir únicamente bufón por tricornio pirata azul marino con borde dorado y pequeña calavera marfil, cuernos por antifaz burdeos con borde dorado y dos huecos de ojos abiertos, y cohete por alas compactas de dragón burdeos con estructura oscura y puntas redondeadas. Estética 3D cartoon cute, luz cálida y construcción sencilla. Sin personajes, precios, duplicados ni objetos adicionales.

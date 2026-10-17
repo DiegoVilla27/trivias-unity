@@ -9,17 +9,17 @@
     {
       "step": "Dinero",
       "title": "El dinero",
-      "body": "<b>E</b>: coge o deja uno. <b>Q</b>: varios. <b>R</b>: devuelve todo a la mesa.\nCambia 10 fajos por 1 bolsa y 10 bolsas por 1 lingote.\nEl dinero fuera de las bandejas <b>se pierde</b> al verificar."
+      "body": "[E] coge o deja uno. [Q] varios. [R] devuelve todo a la mesa.\nCambia 10 fajos por 1 bolsa y 10 bolsas por 1 lingote.\nEl dinero fuera de las bandejas <b>se pierde</b> al verificar."
     },
     {
       "step": "Verificar",
       "title": "Verificar",
-      "body": "Pulsa <b>VERIFICAR</b> con <b>E</b>: las apuestas se bloquean al instante.\nTras <b>3 segundos</b> se revela la respuesta.\nSi se acaba el reloj, se verifica automáticamente."
+      "body": "Pulsa <b>VERIFICAR</b> con [E]: las apuestas se bloquean al instante.\nTras <b>3 segundos</b> se revela la respuesta.\nSi se acaba el reloj, se verifica automáticamente."
     },
     {
       "step": "Comodín",
       "title": "Apuéstate a ti mismo",
-      "body": "Entra en la plataforma y pulsa <b>E</b> para apostar tu comodín.\nSi aciertas, <b>multiplicas</b> el dinero de esa cabina.\nSi fallas, quedas <b>expulsado</b> hasta la siguiente partida. Antes del cierre, <b>E</b> cancela."
+      "body": "Entra en la plataforma y pulsa [E] para apostar tu comodín.\nSi aciertas, <b>multiplicas</b> el dinero de esa cabina.\nSi fallas, quedas <b>expulsado</b> hasta la siguiente partida. Antes del cierre, [E] cancela."
     },
     {
       "step": "Fichas",
@@ -29,7 +29,7 @@
     {
       "step": "Controles",
       "title": "Controles",
-      "body": "<b>WASD</b>: moverte · <b>Shift</b>: correr\n<b>Ratón</b>: mirar · <b>Espacio</b>: saltar\n<b>E</b>: acción · <b>Q</b>: varios · <b>R</b>: devolver a la mesa\n<b>Esc</b>: menú; la partida continúa para los demás."
+      "body": "[W] [A] [S] [D] moverte · [Shift] correr\n[Ratón] mirar · [Espacio] saltar\n[E] acción · [Q] varios · [R] devolver a la mesa\n[Esc] menú; la partida continúa para los demás."
     }
   ]
 }

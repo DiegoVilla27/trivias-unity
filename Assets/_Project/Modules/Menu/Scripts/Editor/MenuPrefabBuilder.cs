@@ -41,6 +41,8 @@ namespace Trivias.Menu.Editor
         public const int RECORD_ROWS = RankingRules.TABLE_SIZE;
 
         private static readonly Color Veil = new(0.02f, 0.04f, 0.1f, 0.28f);
+        /// <summary>Teclas que puede dibujar una página del tutorial (la de controles usa once).</summary>
+        private const int TUTORIAL_KEYS = 14;
         private static readonly Color OverlayVeil = new(0.02f, 0.04f, 0.1f, 0.45f);
 
         private static readonly string[] TutorialArt =
@@ -142,7 +144,10 @@ namespace Trivias.Menu.Editor
         private static MenuBackdropView BuildBackdrop(GameObject root)
         {
             var dim = FullScreen("Backdrop", root.transform);
-            dim.gameObject.AddComponent<Image>().color = Veil;
+            // Solo oscurece: no atrapa clics (los resultados, en otro lienzo, se pulsan aunque el velo esté encima).
+            var veil = dim.gameObject.AddComponent<Image>();
+            veil.color = Veil;
+            veil.raycastTarget = false;
 
             var volume = root.AddComponent<Volume>();
             volume.isGlobal = true;
@@ -397,9 +402,21 @@ namespace Trivias.Menu.Editor
                 dots[i] = Picture($"Dot{i + 1}", panel, DotSprite(), 666f + i * 39f, 139f, 21f, 21f);
             var pill = Picture("PagePill", panel, PlateSprite(), 436f, 178f, 588f, 60f);
             var title = Text("PageTitle", pill.transform, string.Empty, 10f, 2f, 568f, 56f, 30f, UiFont.Bold, Ivory);
-            var illustration = Picture("Illustration", panel, null, 140f, 250f, 1181f, 320f, preserveAspect: true);
-            var body = Text("Body", panel, string.Empty, 100f, 582f, 1261f, 150f, 33f, UiFont.Bold, Ivory);
-            body.lineSpacing = 6f;
+            var illustration = Picture("Illustration", panel, null, 140f, 248f, 1181f, 296f, preserveAspect: true);
+            // Las teclas del texto («[E]») se dibujan como en el juego, en una capa detrás de las letras.
+            // Cuatro líneas con teclas (página de controles) caben sin encoger mucho.
+            var keyLayer = Rect("Keys", panel, 100f, 552f, 1261f, 186f);
+            var keys = new Image[TUTORIAL_KEYS];
+            for (var i = 0; i < keys.Length; i++)
+            {
+                keys[i] = Picture($"Key{i + 1}", keyLayer, KeycapSprite(), 0f, 0f, 40f, 40f);
+                keys[i].gameObject.SetActive(false);
+            }
+            var body = Text("Body", panel, string.Empty, 100f, 552f, 1261f, 186f, 33f, UiFont.Bold, Ivory);
+            body.lineSpacing = 4f;
+            var bodyKeys = body.gameObject.AddComponent<Trivias.Shared.Presentation.UiKeyedText>();
+            SerializedWiring.Set(bodyKeys, "_text", body);
+            SerializedWiring.SetArray(bodyKeys, "_keys", keys);
             var previous = MakeButton("Previous", panel, "‹  Anterior", 94f, 751f, 390f, 76f, ButtonStyle.Quiet, 32f);
             var next = MakeButton("Next", panel, "Siguiente  ›", 530f, 746f, 400f, 86f, ButtonStyle.Primary, out var nextLabel, 34f);
             var close = MakeButton("Close", panel, "Cerrar", 974f, 751f, 393f, 76f, ButtonStyle.Secondary, 32f);
@@ -414,6 +431,7 @@ namespace Trivias.Menu.Editor
             SerializedWiring.Set(view, "_panel", overlay);
             SerializedWiring.Set(view, "_title", title);
             SerializedWiring.Set(view, "_body", body);
+            SerializedWiring.Set(view, "_bodyKeys", bodyKeys);
             SerializedWiring.Set(view, "_pageLabel", pageLabel);
             SerializedWiring.Set(view, "_illustration", illustration);
             SerializedWiring.SetArray(view, "_illustrations", illustrations);

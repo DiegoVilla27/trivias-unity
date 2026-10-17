@@ -5,93 +5,94 @@ using Trivias.Results.Components;
 using Trivias.Shared.Editor;
 using UnityEngine;
 using UnityEngine.UI;
+using static Trivias.Shared.Editor.UiKit;
 
 namespace Trivias.Results.Editor
 {
-    /// <summary>Construye la pantalla de resultados centrada, con los botones «Volver a jugar» y «Salir de la sala».</summary>
+    /// <summary>
+    /// Construye la pantalla de resultados con la convención de los menús (bocetos de docs/bocetos/ui/menu): velo sobre
+    /// el plató desenfocado, panel azul noche con marco dorado que aparece con un rebote, título grande de Lilita One,
+    /// cifras en tarjetas, fichas en una pastilla dorada y los botones del kit.
+    /// </summary>
     public static class ResultsPrefabBuilder
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Results";
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/ResultsScreen.prefab";
+        private static readonly Color OverlayVeil = new(0.02f, 0.04f, 0.1f, 0.45f);
+        public const int SORTING_ORDER = 35;
 
         public static GameObject Build(MatchRuntime match)
         {
             var root = new GameObject("ResultsScreen", typeof(RectTransform));
             var canvas = root.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 20;
+            // Por encima del menú (30): su velo de fondo desenfocado queda detrás de los resultados, no encima.
+            canvas.sortingOrder = SORTING_ORDER;
             var scaler = root.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920f, 1080f);
             scaler.matchWidthOrHeight = 0.5f;
             root.AddComponent<GraphicRaycaster>();
 
-            var panel = CreateRect("Panel", root.transform, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(760f, 640f));
-            var background = panel.gameObject.AddComponent<Image>();
-            background.color = new Color(0.05f, 0.06f, 0.16f, 0.94f);
+            // Como las ventanas del menú: velo a pantalla completa y un lienzo de 1920 × 1080 centrado.
+            var overlay = FullScreen("Panel", root.transform);
+            overlay.gameObject.AddComponent<Image>().color = OverlayVeil;
+            var screen = UiKit.Screen("Screen", overlay);
+            var card = UiKit.Panel("Card", screen, 510f, 110f, 900f, 830f);
 
-            var title = CreateText("Title", panel, 64f, new Vector2(0f, -30f), new Vector2(700f, 80f), FontStyles.Bold);
-            UiTheme.AddMarquee(panel); // Bombillas alrededor del resultado, como en el plató.
-            var details = CreateText("Details", panel, 28f, new Vector2(0f, -125f), new Vector2(680f, 400f), FontStyles.Normal);
+            var title = Text("Title", card, "DERROTA", 0f, 22f, 900f, 126f, 110f, UiFont.Display, Color.white);
+            title.fontSharedMaterial = StageFonts.DisplayTitle();
+            title.enableVertexGradient = true;
+            title.characterSpacing = 2f;
+            var subtitle = Text("Subtitle", card, string.Empty, 40f, 146f, 820f, 44f, 30f, UiFont.Body, Ivory);
 
-            var playAgain = CreateButton("PlayAgain", panel, new Vector2(-170f, -540f), "Volver a jugar", out var playAgainLabel);
-            var leave = CreateButton("Leave", panel, new Vector2(170f, -540f), "Salir de la sala", out _);
+            var questions = Stat(card, 0, "PREGUNTAS");
+            var money = Stat(card, 1, "DINERO FINAL");
+            var time = Stat(card, 2, "TIEMPO");
+
+            var record = Text("Record", card, string.Empty, 40f, 360f, 820f, 40f, 26f, UiFont.Bold, Gold);
+            Pill("Tokens", card, PillGoldSprite(), Icon("Token"), string.Empty, 170f, 412f, 560f, 66f, DarkText, out var tokens, out _, 28f);
+            tokens.fontStyle = FontStyles.Bold;
+            var tokensHint = Text("TokensHint", card, string.Empty, 40f, 484f, 820f, 34f, 22f, UiFont.Body, Muted);
+            Divider("Divider", card, 100f, 536f, 700f);
+            var survivors = Text("Survivors", card, string.Empty, 40f, 552f, 820f, 40f, 26f, UiFont.Body, Ivory);
+            var eliminated = Text("Eliminated", card, string.Empty, 40f, 594f, 820f, 36f, 23f, UiFont.Body, Muted);
+
+            var playAgain = MakeButton("PlayAgain", card, "Volver a jugar", 48f, 668f, 470f, 104f, ButtonStyle.Primary, out var playAgainLabel, 40f);
+            var leave = MakeButton("Leave", card, "Salir de la sala", 538f, 674f, 314f, 92f, ButtonStyle.Danger, 32f);
 
             var view = root.AddComponent<ResultsView>();
             SerializedWiring.Set(view, "_match", match);
             SerializedWiring.Set(view, "_leaveRoomRequested", SharedAssets.LeaveRoomRequested());
             SerializedWiring.Set(view, "_profile", SharedAssets.PlayerProfile());
             SerializedWiring.Set(view, "_records", RankingBuilder.LocalRecords());
-            SerializedWiring.Set(view, "_panel", panel.gameObject);
+            SerializedWiring.Set(view, "_backdrop", SharedAssets.UiBackdrop());
+            SerializedWiring.Set(view, "_panel", overlay.gameObject);
             SerializedWiring.Set(view, "_title", title);
-            SerializedWiring.Set(view, "_details", details);
+            SerializedWiring.Set(view, "_subtitle", subtitle);
+            SerializedWiring.Set(view, "_questions", questions);
+            SerializedWiring.Set(view, "_money", money);
+            SerializedWiring.Set(view, "_time", time);
+            SerializedWiring.Set(view, "_record", record);
+            SerializedWiring.Set(view, "_tokens", tokens);
+            SerializedWiring.Set(view, "_tokensHint", tokensHint);
+            SerializedWiring.Set(view, "_survivors", survivors);
+            SerializedWiring.Set(view, "_eliminated", eliminated);
             SerializedWiring.Set(view, "_playAgainButton", playAgain);
             SerializedWiring.Set(view, "_playAgainLabel", playAgainLabel);
             SerializedWiring.Set(view, "_leaveButton", leave);
             SerializedWiring.Set(view, "_victoryCelebrationSeconds", 5f);
 
-            panel.gameObject.SetActive(false);
+            overlay.gameObject.SetActive(false);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
 
-        private static RectTransform CreateRect(string name, Transform parent, Vector2 anchor, Vector2 position, Vector2 size)
+        /// <summary>Tarjeta de una cifra (preguntas, dinero, tiempo), en una fila de tres.</summary>
+        private static TextMeshProUGUI Stat(Transform card, int column, string caption)
         {
-            var go = new GameObject(name, typeof(RectTransform));
-            go.transform.SetParent(parent, false);
-            var rect = (RectTransform)go.transform;
-            rect.anchorMin = rect.anchorMax = anchor;
-            rect.pivot = anchor;
-            rect.anchoredPosition = position;
-            rect.sizeDelta = size;
-            return rect;
-        }
-
-        private static TextMeshProUGUI CreateText(string name, Transform parent, float size, Vector2 position, Vector2 box, FontStyles style)
-        {
-            var rect = CreateRect(name, parent, new Vector2(0.5f, 1f), position, box);
-            var text = rect.gameObject.AddComponent<TextMeshProUGUI>();
-            text.fontSize = size;
-            text.fontStyle = style;
-            text.alignment = TextAlignmentOptions.Center;
-            text.textWrappingMode = TextWrappingModes.Normal;
-            text.richText = true;
-            text.raycastTarget = false;
-            text.color = Color.white;
-            return text;
-        }
-
-        private static Button CreateButton(string name, Transform parent, Vector2 position, string caption, out TextMeshProUGUI label)
-        {
-            var rect = CreateRect(name, parent, new Vector2(0.5f, 1f), position, new Vector2(300f, 70f));
-            var image = rect.gameObject.AddComponent<Image>();
-            image.color = new Color(0.95f, 0.70f, 0.22f);
-            var button = rect.gameObject.AddComponent<Button>();
-            button.targetGraphic = image;
-
-            label = CreateText("Label", rect, 30f, new Vector2(0f, -14f), new Vector2(280f, 44f), FontStyles.Bold);
-            label.color = new Color(0.08f, 0.08f, 0.18f);
-            label.text = caption;
-            return button;
+            var box = Picture($"Stat{column}", card, CardSprite(), 40f + column * 280f, 206f, 260f, 134f);
+            Text("Label", box.transform, caption, 0f, 16f, 260f, 28f, 20f, UiFont.Bold, Muted);
+            return Text("Value", box.transform, string.Empty, 10f, 48f, 240f, 70f, 52f, UiFont.Display, Gold);
         }
     }
 }

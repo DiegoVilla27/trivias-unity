@@ -47,11 +47,13 @@ namespace Trivias.Spectator.Tests
         {
             var following = SpectatorText.Banner("Jugador 2", true);
             Assert.That(following, Does.Contain("ELIMINADO").And.Contain("espectador"));
-            Assert.That(following, Does.Contain("Viendo a <b>Jugador 2</b>"));
-            Assert.That(following, Does.Contain("A/D").And.Contain("Espacio"));
+            Assert.That(following, Does.Contain("Viendo a").And.Contain("Jugador 2"));
+            Assert.That(following, Does.Contain("A/D Cambiar jugador").And.Contain("Espacio Vista general").And.Contain("Esc Menú"));
+            Assert.That(SpectatorText.Watching("Ana"), Does.Contain("Viendo a").And.Contain("<b>Ana</b>"), "El nombre resaltado.");
 
-            Assert.That(SpectatorText.Banner(string.Empty, true), Does.Contain("Vista general").And.Contain("seguir"));
-            Assert.That(SpectatorText.Banner(string.Empty, false), Does.Contain("Vista general").And.Not.Contain("seguir"),
+            Assert.That(SpectatorText.Banner(string.Empty, true), Does.Contain("Vista general").And.Contain("Seguir a un concursante"));
+            Assert.That(SpectatorText.Banner(string.Empty, true), Does.Not.Contain("Espacio"), "Ya está en la vista general.");
+            Assert.That(SpectatorText.Banner(string.Empty, false), Does.Contain("Vista general").And.Not.Contain("eguir"),
                 "Sin nadie activo no se ofrece seguir a nadie.");
         }
     }

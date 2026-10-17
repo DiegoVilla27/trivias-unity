@@ -16,7 +16,7 @@ Siete estados de partida, una imagen por estado. Estilo derivado del plató y de
 
 La pregunta y las respuestas se leen en la pantalla física del plató. Los bocetos muestran la composición de la interfaz, no la distribución exacta del nivel ni un número vinculante de personajes/objetos de decorado. La posición estable de los indicadores se fija en la especificación para implementación; algunos encuadres ilustrativos varían. El dibujo del fondo no debe introducir pistas visuales de la respuesta ni sustituir pregunta/opciones por ilustraciones durante la apuesta o el cierre.
 
-Los importes son ejemplos, no cambios de balance. La interfaz y sus estados siguen pendientes de implementación y verificación en Unity. No se ha modificado código ni escenas.
+Los importes son ejemplos, no cambios de balance. Montado en el juego el 17 de octubre de 2026 en una versión sin saturar (tres tarjetas fijas arriba y el resto solo cuando importa), con los [iconos de HudUI](recursos/README.md); detalle en [UI_UX](../../../UI_UX.md#hud-de-la-partida).
 
 ## Vista general
 

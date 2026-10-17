@@ -1,3 +1,5 @@
+> Entrega generada: [hoja de iconos de HudUI](recursos/README.md). Se conserva este pedido como especificación original.
+
 # Pedido de imágenes del HUD para ChatGPT
 
 Recursos gráficos que faltan para montar el HUD de la partida a partir de los [bocetos](README.md), en su versión simplificada: tres piezas fijas arriba y paneles que solo aparecen cuando hacen falta. Solo hace falta **una imagen**: una hoja con seis iconos. El resto (teclas, placas, cintas, candado y ✓) sale del kit de los menús y de su [hoja de iconos](../menu/recursos/MenuUI/iconos.png).

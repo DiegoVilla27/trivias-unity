@@ -135,56 +135,52 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void PresenterSpeaks_OnlyInTheBubbleBesideHisHead()
+        public void PresenterSpeaks_InATvCaption_WithHisFace()
         {
-            var views = Object.FindObjectsByType<PresenterBubbleView>(FindObjectsInactive.Include);
-            Assert.That(views.Length, Is.EqualTo(1), "El presentador habla solo en su viñeta (ni subtítulos ni HUD).");
+            var views = Object.FindObjectsByType<PresenterCaptionView>(FindObjectsInactive.Include);
+            Assert.That(views.Length, Is.EqualTo(1), "El presentador habla en un solo rótulo.");
             var view = views[0];
-            Assert.That(view.GetComponentInParent<Canvas>(), Is.Null, "La viñeta está en el plató, no en la interfaz.");
-            Assert.That(view.name, Is.EqualTo("Presenter"));
-            Assert.That(Field<TMP_Text>(view, "_label").canvas.renderMode, Is.EqualTo(RenderMode.WorldSpace), "Lienzo en el mundo, junto a él.");
+            var canvas = view.GetComponent<Canvas>();
+            Assert.That(canvas.renderMode, Is.EqualTo(RenderMode.ScreenSpaceOverlay), "En pantalla: se lee mires donde mires.");
+            Assert.That(canvas.sortingOrder, Is.GreaterThan(Object.FindAnyObjectByType<MatchHudView>().GetComponent<Canvas>().sortingOrder));
 
-            var bubble = Field<GameObject>(view, "_container");
-            Assert.That(bubble.activeSelf, Is.True, "Al empezar, el presentador da la bienvenida.");
-            // Al pie de la pantalla, la viñeta sale al lado de la cabeza (encima taparía la pregunta).
-            var head = view.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position;
-            var background = view.transform.Find("Bubble/Canvas/Body/Background").position;
-            Assert.That(Mathf.Abs(background.y - head.y), Is.LessThan(0.8f), "A la altura de su cabeza.");
-            var side = background - head;
-            side.y = 0f;
-            Assert.That(side.magnitude, Is.GreaterThan(1.5f), "Al lado, no encima.");
-            Assert.That(Field<TMP_Text>(view, "_label").text, Is.Not.Empty);
+            Assert.That(view.IsShowing, Is.True, "Al empezar, el presentador da la bienvenida.");
+            Assert.That(view.Text, Is.Not.Empty);
+            var portrait = view.transform.Find("BottomLeft/Card/Portrait").GetComponent<UnityEngine.UI.Image>();
+            Assert.That(portrait.sprite.name, Is.EqualTo("Portrait_Presenter"), "Con su cara.");
+            foreach (var text in GameObject.Find("Presenter").GetComponentsInChildren<TMP_Text>(true))
+                Assert.Fail($"El presentador del plató no lleva textos ({text.name}): habla en el rótulo.");
         }
 
         [UnityTest]
-        public IEnumerator PresenterBubble_TypesLetterByLetter_InTheStyleOfItsMood()
+        public IEnumerator PresenterCaption_TypesCalmly_AndOnlyItsColourChangesWithTheMood()
         {
-            var view = Object.FindAnyObjectByType<PresenterBubbleView>();
+            var view = Object.FindAnyObjectByType<PresenterCaptionView>();
             var runtime = Field<PresenterRuntime>(view, "_runtime");
-            var shape = Field<UnityEngine.UI.Image>(view, "_shape");
-            var rays = Field<UnityEngine.UI.Image>(view, "_rays");
-            var styles = (BubbleStyle[])typeof(PresenterBubbleView).GetField("_styles", PRIVATE).GetValue(view);
+            var colors = (Color[])typeof(PresenterCaptionView).GetField("_moodColors", PRIVATE).GetValue(view);
+            var card = (RectTransform)Field<GameObject>(view, "_card").transform;
+            var size = card.sizeDelta;
 
             runtime.Say("¡Bienvenidos al concurso más loco de la televisión!", PresenterMood.Excited);
             yield return null;
             Assert.That(view.IsShowing, Is.True);
             Assert.That(view.VisibleCharacters, Is.InRange(1, view.TotalCharacters - 1), "Las letras salen poco a poco.");
-            Assert.That(shape.sprite, Is.EqualTo(styles[(int)PresenterMood.Excited].Shape), "Con ánimo: viñeta de estallido.");
-            Assert.That(rays.gameObject.activeSelf, Is.True, "Y rayos de énfasis.");
+            Assert.That(view.AccentColor, Is.EqualTo(colors[(int)PresenterMood.Excited]), "El ánimo, en el color del nombre.");
             yield return new WaitForSeconds(3f);
             Assert.That(view.VisibleCharacters, Is.EqualTo(view.TotalCharacters), "La frase se termina a tiempo de leerla.");
+            Assert.That(card.localRotation, Is.EqualTo(Quaternion.identity), "Sin temblores ni giros.");
+            Assert.That(card.sizeDelta, Is.EqualTo(size), "Siempre del mismo tamaño.");
 
             runtime.Say("Tres... dos... uno...", PresenterMood.Suspense);
             yield return null;
-            Assert.That(shape.sprite, Is.EqualTo(styles[(int)PresenterMood.Suspense].Shape), "Suspense: otra forma.");
-            Assert.That(shape.color, Is.EqualTo(styles[(int)PresenterMood.Suspense].Fill));
-            Assert.That(rays.gameObject.activeSelf, Is.False);
+            Assert.That(view.AccentColor, Is.EqualTo(colors[(int)PresenterMood.Suspense]));
+            Assert.That(colors[(int)PresenterMood.Suspense], Is.Not.EqualTo(colors[(int)PresenterMood.Excited]));
             Assert.That(view.VisibleCharacters, Is.LessThan(view.TotalCharacters), "Vuelve a escribir desde el principio.");
 
             runtime.Say(string.Empty);
             yield return new WaitForSeconds(0.3f);
-            Assert.That(view.IsShowing, Is.False, "Al callar, la viñeta se va.");
-            Assert.That(Field<GameObject>(view, "_container").activeSelf, Is.False);
+            Assert.That(view.IsShowing, Is.False, "Al callar, el rótulo se va.");
+            Assert.That(Field<GameObject>(view, "_card").activeSelf, Is.False);
         }
 
         [Test]
@@ -214,7 +210,7 @@ namespace Trivias.App.Tests
         public void Hud_ShowsTheBettingClock()
         {
             var hud = Object.FindAnyObjectByType<MatchHudView>();
-            Assert.That(Field<TextMeshProUGUI>(hud, "_status").text, Does.Match(@"\d:\d\d"));
+            Assert.That(Field<TMP_Text>(hud, "_clock").text, Does.Match(@"^\d\d:\d\d$"), "Reloj «01:12».");
         }
 
         private static T Field<T>(object target, string name) where T : class

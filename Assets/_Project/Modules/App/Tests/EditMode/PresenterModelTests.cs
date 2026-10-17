@@ -8,7 +8,7 @@ namespace Trivias.App.Tests
 {
     /// <summary>
     /// El presentador es el modelo del usuario tal cual (un millón de triángulos, 1,9 m, su textura), Humanoid, en
-    /// reposo con la animación de Starter Assets, con una cápsula para que nadie lo atraviese y su viñeta junto a la cabeza.
+    /// reposo con la animación de Starter Assets y con una cápsula para que nadie lo atraviese.
     /// </summary>
     public sealed class PresenterModelTests
     {
@@ -46,15 +46,12 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void NobodyWalksThroughHim_AndHisBubble_IsBesideHisHead()
+        public void NobodyWalksThroughHim()
         {
             var body = Prefab().GetComponent<CapsuleCollider>();
             Assert.That(body.height, Is.EqualTo(1.9f).Within(0.01f));
             Assert.That(body.center.y, Is.EqualTo(0.95f).Within(0.01f));
-
-            var bubble = Prefab().transform.Find("Bubble").localPosition.y;
-            var mesh = Model().GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh.bounds;
-            Assert.That(bubble, Is.InRange(mesh.max.y - 0.6f, mesh.max.y - 0.3f), "A la altura de la cara.");
+            Assert.That(Prefab().transform.Find("Bubble"), Is.Null, "Habla en su rótulo de la pantalla, no en una viñeta del plató.");
         }
     }
 }

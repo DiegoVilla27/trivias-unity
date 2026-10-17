@@ -36,7 +36,9 @@ namespace Trivias.App.Tests
                 foreach (var text in Load(path).GetComponentsInChildren<TextMeshProUGUI>(true))
                 {
                     Assert.That(text.font.name, Does.StartWith("Poppins").Or.StartWith("LilitaOne"), $"{path}: {text.name}");
-                    Assert.That(text.enableAutoSizing, Is.True, $"{path}: {text.name} encoge si no cabe.");
+                    // Las teclas y acciones de los avisos no encogen: miden lo que ocupan y su fila se ajusta a ellas.
+                    var growsWithItsText = text.transform.parent.GetComponent<HorizontalLayoutGroup>() != null;
+                    Assert.That(text.enableAutoSizing || growsWithItsText, Is.True, $"{path}: {text.name} encoge si no cabe.");
                 }
             }
         }
@@ -68,18 +70,37 @@ namespace Trivias.App.Tests
                 Assert.That(panel.GetComponent<Image>().sprite, Is.EqualTo(Trivias.Shared.Editor.UiKit.PanelSprite()), $"{name}: marco dorado.");
                 Assert.That(panel.GetComponent<UiPanelIntro>(), Is.Not.Null, $"{name}: aparece con rebote.");
             }
-            var results = Load(UiPrefabs[2]).transform.Find("Panel");
-            Assert.That(results.GetComponent<UiPanelIntro>(), Is.Not.Null);
+            // Los resultados siguen la misma convención que los menús.
+            var results = Load(UiPrefabs[2]).transform.Find("Panel/Screen/Card");
+            Assert.That(results.GetComponent<Image>().sprite, Is.EqualTo(Trivias.Shared.Editor.UiKit.PanelSprite()), "Resultados: marco dorado.");
+            Assert.That(results.GetComponent<UiPanelIntro>(), Is.Not.Null, "Resultados: aparecen con rebote.");
         }
 
         [Test]
-        public void MainMenu_HasTheGoldenLogo_AndResultsKeepTheirBulbs()
+        public void TheBlurredBackdropsVeil_NeverCatchesClicks_AndResultsDrawAboveTheMenu()
+        {
+            var menu = Load(UiPrefabs[0]);
+            Assert.That(menu.transform.Find("Backdrop").GetComponent<Image>().raycastTarget, Is.False, "El velo solo oscurece.");
+            var results = Load(UiPrefabs[2]);
+            Assert.That(results.GetComponent<Canvas>().sortingOrder, Is.GreaterThan(menu.GetComponent<Canvas>().sortingOrder),
+                "Los resultados, delante del velo del menú.");
+        }
+
+        [Test]
+        public void MainMenu_HasTheGoldenLogo_AndResultsLookLikeAMenu()
         {
             // Como el boceto: el rótulo dorado de TRIVIAS (imagen) sobre el panel; las bombillas, en el plató de fondo.
             var logo = Load(UiPrefabs[0]).transform.Find("MainScreen/Title").GetComponent<Image>();
             Assert.That(AssetDatabase.GetAssetPath(logo.sprite), Does.EndWith("Title_Trivias.png"));
             Assert.That(logo.preserveAspect, Is.True);
-            Assert.That(Load(UiPrefabs[2]).GetComponentInChildren<UiMarquee>(true), Is.Not.Null, "Resultados con bombillas.");
+            var results = Load(UiPrefabs[2]);
+            Assert.That(results.GetComponentInChildren<UiMarquee>(true), Is.Null, "Como los menús: sin bombillas alrededor (están en el plató).");
+            var title = results.transform.Find("Panel/Screen/Card/Title").GetComponent<TMPro.TextMeshProUGUI>();
+            Assert.That(title.font.name, Does.StartWith("LilitaOne"));
+            Assert.That(title.fontSharedMaterial.IsKeywordEnabled("OUTLINE_ON"), Is.True, "Título con contorno, como los de los menús.");
+            Assert.That(title.enableVertexGradient, Is.True);
+            foreach (var button in results.GetComponentsInChildren<Button>(true))
+                Assert.That(button.GetComponent<Image>().sprite, Is.Not.Null, $"{button.name}: botón del kit.");
         }
 
         [Test]

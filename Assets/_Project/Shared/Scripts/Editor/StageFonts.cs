@@ -39,6 +39,33 @@ namespace Trivias.Shared.Editor
 
         public static TMP_FontAsset Display() => GetOrCreate("LilitaOne-Regular", null);
 
+        /// <summary>
+        /// Lilita One para rótulos grandes de la interfaz, como los títulos de los menús: contorno azul noche grueso y
+        /// sombra suave debajo. El degradado de color lo pone cada texto.
+        /// </summary>
+        public static Material DisplayTitle()
+        {
+            var font = Display();
+            var path = $"{FONTS}/LilitaOne-Regular Title.mat";
+            var material = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (material == null)
+            {
+                material = new Material(font.material) { name = "LilitaOne-Regular Title" };
+                AssetDatabase.CreateAsset(material, path);
+            }
+            material.shader = font.material.shader;
+            material.SetTexture("_MainTex", font.atlasTexture);
+            material.EnableKeyword("OUTLINE_ON");
+            material.SetFloat("_OutlineWidth", 0.24f);
+            material.SetColor("_OutlineColor", new Color(0.04f, 0.07f, 0.15f));
+            material.EnableKeyword("UNDERLAY_ON");
+            material.SetColor("_UnderlayColor", new Color(0f, 0f, 0f, 0.55f));
+            material.SetFloat("_UnderlayOffsetY", -0.9f);
+            material.SetFloat("_UnderlaySoftness", 0.3f);
+            EditorUtility.SetDirty(material);
+            return material;
+        }
+
         public static TMP_FontAsset Body() => GetOrCreate("Poppins-SemiBold", GetOrCreate("Poppins-ExtraBold", null));
 
         private static TMP_FontAsset GetOrCreate(string fontName, TMP_FontAsset bold)

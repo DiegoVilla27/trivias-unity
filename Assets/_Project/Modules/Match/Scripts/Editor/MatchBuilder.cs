@@ -51,6 +51,15 @@ namespace Trivias.Match.Editor
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }
 
+        /// <summary>✓ sobre la cabina correcta al revelar.</summary>
+        public static void AttachRevealMark(GameObject booth, int boothIndex, GameObject mark)
+        {
+            var reveal = booth.AddComponent<BoothRevealMark>();
+            SerializedWiring.Set(reveal, "_runtime", Runtime());
+            SerializedWiring.Set(reveal, "_booth", boothIndex);
+            SerializedWiring.Set(reveal, "_mark", mark);
+        }
+
         public static void AttachQuestionScreen(GameObject screen, GameObject content, TMP_Text message,
             TMP_Text header, TMP_Text question, TMP_Text[] optionTexts, GameObject[] optionBoxes, TMP_Text status,
             UnityEngine.UI.Image statusBox, GameObject options, GameObject reveal, TMP_Text answer, TMP_Text explanation,

@@ -1,0 +1,7 @@
+# GAFAS DE ESTRELLA
+
+[Boceto de cuatro vistas](star-glasses-views.png): frente, atrás, izquierda y derecha. Diseño basado en la lámina conjunta aprobada. Boceto para modelado; ajuste al personaje pendiente. Generado con la herramienta integrada de imágenes.
+
+## Prompt
+
+Use case: stylized-concept. Create ONE detailed four-view modeling turnaround sheet of ONLY the GAFAS DE ESTRELLA accessory from attached approved collection, faithfully preserve its design, proportions, colors and materials. Object: Gold five-point star-shaped spectacle frames, dark navy lenses, navy temples with curved ear ends, open temples in every view. Reference collection is identity reference, NOT layout to repeat. Landscape warm ivory sheet, title 'GAFAS DE ESTRELLA'. EXACTLY FOUR equally sized panels in2x2 grid: upper left 'FRENTE', upper right 'ATRÁS', lower left 'IZQUIERDA', lower right 'DERECHA'. True coherent orthographic front rear left right rotations of the SAME object, consistent scale and aligned proportions. Left/right defined from wearer perspective. NOT four perspective duplicates. Show full object in every panel, no cropping, ample margins, tiny natural contact shadow, navy label plaques, subtle separators. Professional polished cute rounded 3D cartoon game asset, warm studio light, same restrained gold navy burgundy ivory palette as reference. No player, face, body, mannequin, scenery, extra accessories, exploded views or redesign. Construction should be simple wearable solid geometry suitable for later attachment. Only requested four views, one final sheet.

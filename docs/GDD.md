@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.37 — el presentador con su modelo.
+- Versión: 0.41 — bocetos de accesorios en cuatro vistas.
 - Última actualización: 17 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -234,7 +234,7 @@ Al empezar una pregunta solo comenta la última, el inicio de un bloque o una de
 
 Usar variables como cantidad perdida, premio y supervivientes para adaptar textos. Ejemplo: «Habéis perdido {cantidad}. El decorado os lo agradece». No repetir ninguna frase de un evento hasta haber dicho todas las de ese evento, y no mostrar un comentario por cada interacción menor.
 
-El presentador se comunica mediante texto en una viñeta de cómic junto a su cabeza, en el plató (no en la interfaz). La frase se escribe letra a letra y la viñeta cambia con el ánimo del momento: estallido amarillo con rayos y letras que botan cuando hay ánimo (bienvenida, aciertos, victoria), nube oscura con letras lentas que ondulan y pausas en los puntos en el suspense (cuenta atrás, comodín, últimas preguntas), azul y caída cuando hay pena (pérdidas, expulsiones, derrota) y clara en el resto. Vale tanto para las frases predefinidas como para las generadas por IA. No incluye voz, síntesis de voz ni reconocimiento del micrófono. Usar un catálogo que permita añadir frases sin modificar la lógica de ronda. Evitar repeticiones consecutivas y espaciar comentarios sin ocultar preguntas o respuestas. Con tiempo límite, el presentador avisa cuando quedan pocos segundos; sin límite, comenta las discusiones largas sin forzar el cierre.
+El presentador se comunica mediante texto en un rótulo de televisión abajo a la izquierda (como un «lower third»): su cara en un círculo dorado, «PRESENTADOR» y la frase escribiéndose letra a letra, siempre del mismo tamaño y en el mismo sitio, sin tapar el plató; el ánimo solo cambia el color del nombre (dorado, naranja de fiesta, lila de suspense, azul de pena). Sin botes, temblores ni cambios de forma: se lee bien mientras se juega (17 de octubre de 2026; antes era una viñeta de cómic en el plató, que resultaba caótica).
 
 Ejemplos de tono: «Aquí nadie pierde dinero: financia el decorado», «Tres segundos para arrepentiros. Para cambiar, ya es tarde», «El tubo tiene más certezas que vosotros».
 
@@ -398,6 +398,30 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.41 — 17 de octubre de 2026
+
+- El presentador deja la viñeta de cómic del plató (cambiaba de forma y color, temblaba y tapaba el plató o se hacía enorme al acercarse) y habla en un rótulo de televisión abajo a la izquierda (como un «lower third»): su cara en un círculo dorado, «PRESENTADOR» y la frase escribiéndose letra a letra, siempre del mismo tamaño y en el mismo sitio, sin tapar el plató; el ánimo solo cambia el color del nombre (dorado, naranja de fiesta, lila de suspense, azul de pena). El retrato sale de su modelo. Detalle en [UI_UX](UI_UX.md#hud-de-la-partida).
+
+### Versión 0.41 — 17 de octubre de 2026
+
+- Diez [accesorios cosméticos con bocetos individuales de cuatro vistas](bocetos/player/accessories/README.md), organizados en carpetas propias. Solo documentación visual; no cambia la tienda implementada ni sus precios. Encaje definitivo y modelado pendientes.
+
+### Versión 0.40 — 17 de octubre de 2026
+
+- Los botones de los resultados vuelven a responder: el velo del fondo desenfocado se dibujaba encima y atrapaba los clics; ahora solo oscurece y los resultados van delante del menú.
+- El botón VERIFICAR usa su modelo sin la placa (`VerifyPlaque`), por decisión del usuario.
+
+### Versión 0.39 — 17 de octubre de 2026
+
+- La pantalla de resultados (victoria y derrota) sigue la convención de los menús: plató desenfocado, panel con marco dorado, título grande con contorno, cifras en tarjetas, fichas en una pastilla dorada y botones del kit. Detalle en [UI_UX](UI_UX.md).
+- En «Cómo se juega», las teclas del texto se dibujan como las del juego («[E] coge o deja uno»).
+- En el HUD, la línea de comodines queda centrada bajo el dinero del equipo.
+
+### Versión 0.38 — 17 de octubre de 2026
+
+- HUD de la partida según los [bocetos del HUD](bocetos/ui/hud/README.md), en una versión sin saturar: siempre solo tres tarjetas pequeñas arriba (pregunta y estado; reloj «01:12» que se pone rojo y late los últimos 10 s; dinero del equipo con los comodines), y el resto solo cuando importa: dinero fuera de bandejas, lo que llevas (tipo, cantidad y capacidad de ese tipo), el comodín preparado con lo que daría si aciertas, el cierre con candado y 3-2-1 grande, y el resultado de la ronda (conservado, bono y perdido) contando. Los avisos de interacción dibujan cada tecla; el espectador tiene su cinta «ELIMINADO». En el plató, los apostados pasan a «BLOQUEADO» al cerrar y un ✓ grande marca la cabina correcta. Se quita el panel grande de cambio manual (la equivalencia va en el aviso) y la tira del equipo. Iconos en [HudUI](bocetos/ui/hud/recursos/README.md). Detalle en [UI_UX](UI_UX.md#hud-de-la-partida).
+- La pantalla del plató muestra el reloj como el HUD («01:29»).
 
 ### Versión 0.37 — 17 de octubre de 2026
 

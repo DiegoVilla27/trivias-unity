@@ -6,7 +6,10 @@ using UnityEngine;
 
 namespace Trivias.SelfBet.Components
 {
-    /// <summary>Nombres de los concursantes apostados en una cabina, encima de ella (LEVEL.md).</summary>
+    /// <summary>
+    /// Nombres de los concursantes apostados en una cabina, encima de ella (LEVEL.md). Al cerrar las apuestas dice que
+    /// ya están bloqueados (boceto 05 del HUD).
+    /// </summary>
     public sealed class BoothBettorsLabel : MonoBehaviour
     {
         [SerializeField] private SelfBetRuntime _runtime;
@@ -37,12 +40,16 @@ namespace Trivias.SelfBet.Components
             var session = _runtime.Session;
             if (session != null)
             {
+                var locked = false;
                 foreach (var bettor in session.Book.Bettors)
                 {
                     if (bettor.Booth != _booth || !bettor.IsActive)
                         continue;
-                    _builder.Append(_builder.Length == 0 ? "APOSTADOS\n" : " · ").Append(_avatars.NameOf(bettor.ClientId));
+                    _builder.Append(_builder.Length == 0 ? "\n" : " · ").Append(_avatars.NameOf(bettor.ClientId));
+                    locked |= bettor.IsLocked;
                 }
+                if (_builder.Length > 0)
+                    _builder.Insert(0, locked ? "APOSTADOS · BLOQUEADO" : "APOSTADOS");
             }
 
             var text = _builder.ToString();

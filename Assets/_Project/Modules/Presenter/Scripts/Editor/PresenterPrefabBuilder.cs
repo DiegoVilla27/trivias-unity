@@ -21,21 +21,15 @@ using UnityEngine.UI;
 namespace Trivias.Presenter.Editor
 {
     /// <summary>
-    /// Construye el presentador (el modelo del usuario tal cual, Humanoid, en reposo con la animación de Starter Assets,
-    /// y su viñeta de cómic junto a la cabeza), importa y valida su catálogo de frases y crea su sesión de red. Solo se
-    /// comunica por texto en su viñeta.
+    /// Construye el presentador (el modelo del usuario tal cual, Humanoid, en reposo con la animación de Starter Assets)
+    /// y su rótulo de televisión en pantalla, importa y valida su catálogo de frases y crea su sesión de red. Solo se
+    /// comunica por texto en su rótulo.
     /// </summary>
     public static class PresenterPrefabBuilder
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Presenter";
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/Presenter.prefab";
         public const string SESSION_PREFAB_PATH = MODULE_ROOT + "/Prefabs/PresenterSession.prefab";
-        public const string BUBBLE = "Bubble";
-        /// <summary>
-        /// La viñeta sale al lado de la cabeza (no encima): el presentador está al pie de la pantalla y así ni él ni lo que
-        /// dice tapan la pregunta. Gira hacia la cámara, de modo que siempre queda a la derecha de su cabeza.
-        /// </summary>
-        public const float BUBBLE_HEIGHT = 1.45f;
         public const string MODEL = "Model";
         public const string MODEL_PATH = MODULE_ROOT + "/Models/Presenter/Presenter_Rigged.fbx";
         private const string TEXTURE_PATH = MODULE_ROOT + "/Models/Presenter/shaded.png";
@@ -45,13 +39,8 @@ namespace Trivias.Presenter.Editor
         /// <summary>Altura del modelo (la del original, sin escalar).</summary>
         public const float HEIGHT = 1.9f;
         private const float BODY_RADIUS = 0.42f;
-        public static readonly Vector2 BubbleSize = new(4.8f, 1.8f);
-        private const float BUBBLE_GAP = 0.5f;
-        /// <summary>Metros por unidad del lienzo de la viñeta (100 unidades = 1 m).</summary>
-        private const float CANVAS_UNIT = 0.01f;
-        public const string BUBBLE_BACKGROUND = "Background";
-        /// <summary>Forma de la viñeta, desde la raíz del presentador.</summary>
-        public const string BUBBLE_BACKGROUND_PATH = BUBBLE + "/Canvas/Body/" + BUBBLE_BACKGROUND;
+        public const string CAPTION_PREFAB_PATH = MODULE_ROOT + "/Prefabs/PresenterCaption.prefab";
+        private const string PORTRAIT_PATH = MODULE_ROOT + "/UI/Portrait/Portrait_Presenter.png";
         private const string CONFIG = MODULE_ROOT + "/Config";
         private const string CONTENT_PATH = MODULE_ROOT + "/Content/phrases_es.json";
 
@@ -83,7 +72,6 @@ namespace Trivias.Presenter.Editor
             body.height = HEIGHT;
             body.radius = BODY_RADIUS;
 
-            BuildBubble(root, layer);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
 
@@ -111,117 +99,69 @@ namespace Trivias.Presenter.Editor
         }
 
         /// <summary>
-        /// Viñeta de cómic al lado de la cabeza (GDD 9): el presentador solo se comunica por aquí. Es un lienzo en el
-        /// mundo que gira hacia la cámara; la forma, el color y el movimiento de las letras cambian con el ánimo.
+        /// Rótulo de televisión del presentador (GDD 9), abajo a la izquierda con el estilo del HUD: su cara en un círculo
+        /// dorado (retrato sacado de su modelo), «PRESENTADOR» y la frase. El ánimo cambia el color del nombre y su raya.
+        /// Se dibuja por encima del HUD y por debajo de los avisos.
         /// </summary>
-        private static void BuildBubble(GameObject root, int layer)
+        public static GameObject BuildCaption()
         {
-            var bubble = EditorAssets.CreateEmpty(BUBBLE, root.transform, new Vector3(0f, BUBBLE_HEIGHT, 0f));
-            bubble.layer = layer;
-            bubble.AddComponent<Billboard>();
+            var root = new GameObject("PresenterCaption", typeof(RectTransform));
+            var canvas = root.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 6;
+            var scaler = root.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920f, 1080f);
+            scaler.matchWidthOrHeight = 0.5f;
 
-            var side = BubbleSize.x * 0.5f + BUBBLE_GAP;
-            var size = BubbleSize / CANVAS_UNIT;
-            var canvasRect = UiRect("Canvas", bubble.transform, size + new Vector2(140f, 120f), layer);
-            canvasRect.localPosition = new Vector3(side, 0f, 0f);
-            canvasRect.localScale = Vector3.one * CANVAS_UNIT;
-            var canvas = canvasRect.gameObject.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.WorldSpace;
+            // Marco de 1920 × 1080 pegado a la esquina de abajo a la izquierda (como las esquinas del HUD).
+            var corner = new GameObject("BottomLeft", typeof(RectTransform));
+            corner.transform.SetParent(root.transform, false);
+            var cornerRect = (RectTransform)corner.transform;
+            cornerRect.anchorMin = cornerRect.anchorMax = cornerRect.pivot = Vector2.zero;
+            cornerRect.sizeDelta = new Vector2(1920f, 1080f);
 
-            var body = UiRect("Body", canvasRect, size, layer);
-            var rays = UiImage("Rays", body, SpeechBubbleArt.Rays(), size * 1.3f, Vector2.zero, layer);
-            var shadow = UiImage("Shadow", body, SpeechBubbleArt.Round(), size, new Vector2(10f, -12f), layer);
-            shadow.color = new Color(0f, 0f, 0f, 0.35f);
-            // La cola sale del borde izquierdo hacia la cabeza; su base queda debajo de la forma.
-            var tail = UiImage("Tail", body, SpeechBubbleArt.Tail(), new Vector2(76f, 76f), Vector2.zero, layer);
-            tail.rectTransform.pivot = new Vector2(1f, 0.5f);
-            tail.rectTransform.anchoredPosition = new Vector2(-size.x * 0.5f + 34f, 6f);
-            tail.rectTransform.localRotation = Quaternion.Euler(0f, 0f, -12f);
-            var shape = UiImage(BUBBLE_BACKGROUND, body, SpeechBubbleArt.Round(), size, Vector2.zero, layer);
+            var card = UiKit.Picture("Card", cornerRect, UiKit.HudPlateSprite(), 48f, 742f, 550f, 132f);
+            var group = card.gameObject.AddComponent<CanvasGroup>();
+            card.gameObject.AddComponent<UiPanelIntro>();
+            UiKit.Picture("Ring", card.transform, UiKit.CircleGoldSprite(), 14f, 14f, 104f, 104f);
+            UiKit.Picture("Portrait", card.transform, UiKit.ArtSprite(PORTRAIT_PATH), 18f, 18f, 96f, 96f, preserveAspect: true);
+            var name = UiKit.Text("Name", card.transform, "PRESENTADOR", 132f, 12f, 390f, 30f, 22f, UiKit.UiFont.Display, UiKit.Gold,
+                TextAlignmentOptions.MidlineLeft);
+            name.characterSpacing = 3f;
+            var accent = UiKit.Picture("Accent", card.transform, UiKit.LineSprite(), 132f, 42f, 56f, 3f);
+            var label = UiKit.Text("Line", card.transform, string.Empty, 132f, 50f, 398f, 72f, 23f, UiKit.UiFont.Bold, UiKit.Ivory,
+                TextAlignmentOptions.TopLeft);
+            label.fontSizeMin = 17f;
+            label.lineSpacing = -4f;
 
-            // Caja del texto dentro de la zona lisa de cualquier forma (las puntas del estallido y los bultos de la nube no la pisan).
-            var textRect = UiRect("Text", body, new Vector2(size.x * 0.74f, size.y * 0.64f), layer);
-            var text = textRect.gameObject.AddComponent<TextMeshProUGUI>();
-            text.font = StageFonts.Display();
-            text.fontSize = 50f;
-            text.enableAutoSizing = true;
-            text.fontSizeMin = 24f;
-            text.fontSizeMax = 50f;
-            text.characterSpacing = 1f;
-            text.lineSpacing = -6f;
-            text.alignment = TextAlignmentOptions.Center;
-            text.textWrappingMode = TextWrappingModes.Normal;
-            text.raycastTarget = false;
-
-            // La vista vive en la raíz (siempre activa); la viñeta es lo que se muestra u oculta.
-            var view = root.AddComponent<PresenterBubbleView>();
+            var view = root.AddComponent<PresenterCaptionView>();
             SerializedWiring.Set(view, "_runtime", Runtime());
             SerializedWiring.Set(view, "_config", Config());
-            SerializedWiring.Set(view, "_container", bubble);
-            SerializedWiring.Set(view, "_body", body);
-            SerializedWiring.Set(view, "_shape", shape);
-            SerializedWiring.Set(view, "_shadow", shadow);
-            SerializedWiring.Set(view, "_tail", tail);
-            SerializedWiring.Set(view, "_rays", rays);
-            SerializedWiring.Set(view, "_label", text);
-            WriteStyles(view);
-            bubble.SetActive(false);
+            SerializedWiring.Set(view, "_card", card.gameObject);
+            SerializedWiring.Set(view, "_group", group);
+            SerializedWiring.Set(view, "_name", name);
+            SerializedWiring.Set(view, "_accent", accent);
+            SerializedWiring.Set(view, "_label", label);
+            WriteMoodColors(view);
+            card.gameObject.SetActive(false);
+            return EditorAssets.SaveAsPrefab(root, CAPTION_PREFAB_PATH);
         }
 
-        /// <summary>Un estilo por ánimo (orden de <see cref="PresenterMood"/>).</summary>
-        private static void WriteStyles(PresenterBubbleView view)
+        /// <summary>Un color por ánimo (orden de <see cref="PresenterMood"/>): dorado, naranja de fiesta, lila y azul.</summary>
+        private static void WriteMoodColors(PresenterCaptionView view)
         {
-            var styles = new BubbleStyle[PresenterMoods.COUNT];
-            styles[(int)PresenterMood.Neutral] = new BubbleStyle
-            {
-                Shape = SpeechBubbleArt.Round(), Fill = new Color(0.99f, 0.97f, 0.9f), Text = new Color(0.09f, 0.08f, 0.2f),
-            };
-            styles[(int)PresenterMood.Excited] = new BubbleStyle
-            {
-                Shape = SpeechBubbleArt.Burst(), Fill = new Color(1f, 0.86f, 0.28f), Text = new Color(0.36f, 0.04f, 0.03f),
-                Rays = true, RaysColor = new Color(1f, 0.96f, 0.7f, 0.85f),
-            };
-            styles[(int)PresenterMood.Suspense] = new BubbleStyle
-            {
-                Shape = SpeechBubbleArt.Cloud(), Fill = new Color(0.22f, 0.13f, 0.38f), Text = new Color(1f, 0.9f, 0.55f),
-            };
-            styles[(int)PresenterMood.Sad] = new BubbleStyle
-            {
-                Shape = SpeechBubbleArt.Round(), Fill = new Color(0.68f, 0.79f, 0.98f), Text = new Color(0.07f, 0.1f, 0.3f),
-            };
-
+            var colors = new Color[PresenterMoods.COUNT];
+            colors[(int)PresenterMood.Neutral] = UiKit.Gold;
+            colors[(int)PresenterMood.Excited] = UiKit.Hex("#FFA94D");
+            colors[(int)PresenterMood.Suspense] = UiKit.Hex("#B9A2FF");
+            colors[(int)PresenterMood.Sad] = UiKit.Hex("#8FB8FF");
             var so = new SerializedObject(view);
-            var array = so.FindProperty("_styles");
-            array.arraySize = styles.Length;
-            for (var i = 0; i < styles.Length; i++)
-            {
-                var element = array.GetArrayElementAtIndex(i);
-                element.FindPropertyRelative(nameof(BubbleStyle.Shape)).objectReferenceValue = styles[i].Shape;
-                element.FindPropertyRelative(nameof(BubbleStyle.Fill)).colorValue = styles[i].Fill;
-                element.FindPropertyRelative(nameof(BubbleStyle.Text)).colorValue = styles[i].Text;
-                element.FindPropertyRelative(nameof(BubbleStyle.Rays)).boolValue = styles[i].Rays;
-                element.FindPropertyRelative(nameof(BubbleStyle.RaysColor)).colorValue = styles[i].RaysColor;
-            }
+            var array = so.FindProperty("_moodColors");
+            array.arraySize = colors.Length;
+            for (var i = 0; i < colors.Length; i++)
+                array.GetArrayElementAtIndex(i).colorValue = colors[i];
             so.ApplyModifiedPropertiesWithoutUndo();
-        }
-
-        private static RectTransform UiRect(string name, Transform parent, Vector2 size, int layer)
-        {
-            var go = new GameObject(name, typeof(RectTransform)) { layer = layer };
-            go.transform.SetParent(parent, false);
-            var rect = (RectTransform)go.transform;
-            rect.sizeDelta = size;
-            return rect;
-        }
-
-        private static Image UiImage(string name, Transform parent, Sprite sprite, Vector2 size, Vector2 position, int layer)
-        {
-            var rect = UiRect(name, parent, size, layer);
-            rect.anchoredPosition = position;
-            var image = rect.gameObject.AddComponent<Image>();
-            image.sprite = sprite;
-            image.raycastTarget = false;
-            return image;
         }
 
         /// <summary>Sesión de red del presentador (el host decide qué dice y cuándo).</summary>

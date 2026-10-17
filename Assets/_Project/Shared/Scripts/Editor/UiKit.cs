@@ -76,6 +76,12 @@ namespace Trivias.Shared.Editor
         public static Sprite DotSprite() => Shape("Dot", 62, 0, Color.white, Color.white, Color.clear);
         public static Sprite LineSprite() => Shape("Line", 4, 0, Color.white, Color.white, Color.clear);
 
+        // HUD de la partida (bocetos de docs/bocetos/ui/hud): más ligero que los menús, algo translúcido.
+        public static Sprite HudPlateSprite() => Shape("HudPlate", 18, 2, Hex("#1A2546EB"), Hex("#0F172CEB"), Hex("#D6AC61"));
+        public static Sprite HudWarningSprite() => Shape("HudWarning", 24, 2, Hex("#4E1526EB"), Hex("#350E1AEB"), Hex("#E46E88"));
+        /// <summary>Tecla de teclado: azul con borde marfil.</summary>
+        public static Sprite KeycapSprite() => Shape("Keycap", 10, 2, Hex("#2A3A66"), Hex("#18223F"), Hex("#F5EFE1"));
+
         /// <summary>Halo de foco (blanco que se desvanece), para la luz detrás del personaje.</summary>
         public static Sprite GlowSprite()
         {
@@ -329,6 +335,62 @@ namespace Trivias.Shared.Editor
             label = Text("Label", pill.transform, caption, left, 2f, width - left - 12f, height - 4f, fontSize, UiFont.Body, textColor);
             label.textWrappingMode = TextWrappingModes.NoWrap;
             return pill;
+        }
+
+        /// <summary>
+        /// Una tecla y su acción («[E] Coger fajo»), que se ordena sola en una fila (<see cref="KeyRow"/>): la tecla crece
+        /// con su texto («Espacio») y la acción ocupa lo que mide.
+        /// </summary>
+        public static GameObject KeyHint(string name, Transform parent, string key, string action, float fontSize,
+            out TextMeshProUGUI keyLabel, out TextMeshProUGUI actionLabel)
+        {
+            var hint = new GameObject(name, typeof(RectTransform));
+            hint.transform.SetParent(parent, false);
+            var row = hint.AddComponent<HorizontalLayoutGroup>();
+            row.spacing = 10f;
+            row.childAlignment = TextAnchor.MiddleLeft;
+            row.childControlWidth = row.childControlHeight = true;
+            row.childForceExpandWidth = row.childForceExpandHeight = false;
+
+            var cap = new GameObject("Key", typeof(RectTransform));
+            cap.transform.SetParent(hint.transform, false);
+            var capImage = cap.AddComponent<Image>();
+            capImage.sprite = KeycapSprite();
+            capImage.type = UnityEngine.UI.Image.Type.Sliced;
+            capImage.raycastTarget = false;
+            var capRow = cap.AddComponent<HorizontalLayoutGroup>();
+            capRow.padding = new RectOffset(12, 12, 2, 2);
+            capRow.childAlignment = TextAnchor.MiddleCenter;
+            capRow.childControlWidth = capRow.childControlHeight = true;
+            capRow.childForceExpandWidth = capRow.childForceExpandHeight = false;
+            var capSize = cap.AddComponent<LayoutElement>();
+            capSize.minWidth = capSize.minHeight = fontSize * 1.6f;
+
+            keyLabel = LayoutText("Label", cap.transform, key, fontSize, UiFont.Display, Ivory);
+            actionLabel = LayoutText("Action", hint.transform, action, fontSize, UiFont.Bold, Ivory);
+            return hint;
+        }
+
+        /// <summary>Fila de teclas centrada en (x, y) y ancho fijo; las teclas se reparten solas.</summary>
+        public static RectTransform KeyRow(string name, Transform parent, float x, float y, float width, float height, float spacing)
+        {
+            var rect = Rect(name, parent, x, y, width, height);
+            var row = rect.gameObject.AddComponent<HorizontalLayoutGroup>();
+            row.spacing = spacing;
+            row.childAlignment = TextAnchor.MiddleCenter;
+            row.childControlWidth = row.childControlHeight = true;
+            row.childForceExpandWidth = row.childForceExpandHeight = false;
+            return rect;
+        }
+
+        /// <summary>Texto que mide lo que ocupa (para filas que se ordenan solas): sin encoger ni partir líneas.</summary>
+        public static TextMeshProUGUI LayoutText(string name, Transform parent, string text, float size, UiFont font, Color color)
+        {
+            var label = Text(name, parent, text, 0f, 0f, 10f, 10f, size, font, color, TextAlignmentOptions.Midline);
+            label.enableAutoSizing = false;
+            label.fontSize = size;
+            label.textWrappingMode = TextWrappingModes.NoWrap;
+            return label;
         }
 
         /// <summary>Línea divisoria fina.</summary>

@@ -4,6 +4,8 @@ Referencia: [GDD](GDD.md), secciones 6–9 y 13. Lista de recursos necesarios; n
 
 ## Arte 3D
 
+Accesorios cosméticos: [diez láminas de cuatro vistas](bocetos/player/accessories/README.md), con corona, pajarita, sombrero de copa, gafas de estrella, bigote, sombrero de pirata, antifaz, halo y alas de ángel y de dragón. Bocetos para modelado; aún sin integración ni nuevos precios.
+
 Referencias específicas de modelado: [36 láminas individuales y notas](bocetos/recursos/detallados/README.md). Son bocetos, no medidas finales ni modelos terminados.
 
 | Recurso | Prototipo | Salida |
@@ -104,4 +106,4 @@ Pendientes: herramienta de modelado, estilo final, catálogo de cosméticos, idi
 
 Referencias del HUD: [siete bocetos de estados](bocetos/ui/hud/README.md), con [especificación visual](bocetos/ui/hud/DISENO.md). Una imagen por estado, usando el estilo del plató y los menús; no modifica assets ni escenas.
 
-Recursos gráficos del menú: [18 PNG transparentes de MenuUI](bocetos/ui/menu/recursos/README.md), con títulos, hoja de iconos, ilustraciones del tutorial y personaje. Montados en el juego el 17 de octubre de 2026: títulos e ilustraciones en `Menu/UI`, el de la tienda en `Shop/UI` e iconos sueltos en `Shared/UI/Icons`.
+Recursos gráficos del menú: [18 PNG transparentes de MenuUI](bocetos/ui/menu/recursos/README.md), con títulos, hoja de iconos, ilustraciones del tutorial y personaje. Montados en el juego el 17 de octubre de 2026: títulos e ilustraciones en `Menu/UI`, el de la tienda en `Shop/UI` e iconos sueltos en `Shared/UI/Icons`. Iconos del HUD: [hoja de HudUI](bocetos/ui/hud/recursos/README.md) (fajo, bolsa, lingote, comodín, reloj y aviso), recortados en `HUD/UI/Icons`.

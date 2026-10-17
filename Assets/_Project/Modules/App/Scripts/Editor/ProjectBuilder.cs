@@ -74,7 +74,7 @@ namespace Trivias.App.Editor
                 SessionPrefabs = new[] { moneySession, selfBetSession, matchSession, presenterSession },
                 CameraRig = CameraRigPrefabBuilder.Build(cameraTarget),
                 InteractionHud = InteractionBuilder.BuildHud(),
-                MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime()),
+                MatchHud = HudPrefabBuilder.Build(matchRuntime, SelfBetBuilder.Runtime(), MoneyBuilder.Runtime()),
                 ResultsScreen = ResultsPrefabBuilder.Build(matchRuntime),
                 Menu = MenuPrefabBuilder.Build(matchRuntime),
                 ShopUi = ShopBuilder.BuildShopUi(cosmetics),
@@ -91,6 +91,7 @@ namespace Trivias.App.Editor
                 ExchangeStation = ExchangeStationPrefabBuilder.Build(MoneyBuilder.Config(), MoneyBuilder.Runtime(), interactables),
                 VerifyButton = VerifyButtonPrefabBuilder.Build(matchRuntime, interactables),
                 Presenter = PresenterPrefabBuilder.Build(),
+                PresenterCaption = PresenterPrefabBuilder.BuildCaption(),
                 Environment = StageEnvironmentPrefabBuilder.Build(),
                 NetworkPrefabs = NetworkManagerPrefabBuilder.GetOrCreateNetworkPrefabsList(
                     player, moneySession, selfBetSession, matchSession, presenterSession),

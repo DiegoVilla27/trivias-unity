@@ -167,6 +167,34 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
+        public IEnumerator HowToPlay_DrawsEachKeyLikeTheGamesKeys()
+        {
+            MenuButton("_howToPlayButton").onClick.Invoke();
+            yield return null;
+            _howToPlay.Show(_howToPlay.PageCount - 1); // Controles: W A S D, Shift, Ratón, Espacio, E, Q, R y Esc.
+            yield return null;
+
+            var keyed = (Trivias.Shared.Presentation.UiKeyedText)typeof(HowToPlayView).GetField("_bodyKeys", PRIVATE).GetValue(_howToPlay);
+            Assert.That(keyed.ShownKeys, Is.EqualTo(11), "Una tecla dibujada por cada tecla del texto.");
+            Assert.That(keyed.Label.text, Does.Not.Contain("["), "Sin corchetes: se ven teclas.");
+
+            // Cada tecla, bajo su letra: la «W» empieza la primera línea, a la izquierda del texto.
+            var keys = (UnityEngine.UI.Image[])typeof(Trivias.Shared.Presentation.UiKeyedText).GetField("_keys", PRIVATE).GetValue(keyed);
+            var info = keyed.Label.textInfo;
+            var w = info.characterInfo[0];
+            Assert.That(w.character, Is.EqualTo('W'));
+            var center = keys[0].rectTransform.anchoredPosition;
+            Assert.That(center.x, Is.EqualTo((w.bottomLeft.x + w.topRight.x) * 0.5f).Within(w.pointSize * 0.2f));
+            Assert.That(center.y, Is.EqualTo((w.bottomLeft.y + w.topRight.y) * 0.5f).Within(w.pointSize * 0.5f));
+            Assert.That(keys[0].rectTransform.sizeDelta.x, Is.GreaterThan(w.topRight.x - w.bottomLeft.x), "La tecla abraza su letra.");
+            Assert.That(keys[0].transform.parent.GetSiblingIndex(), Is.LessThan(keyed.transform.GetSiblingIndex()), "Detrás de las letras.");
+
+            _howToPlay.Show(0); // El objetivo no habla de teclas.
+            yield return null;
+            Assert.That(keyed.ShownKeys, Is.Zero);
+        }
+
+        [UnityTest]
         public IEnumerator Settings_ApplyAtOnce_AndSaveOnClose()
         {
             MenuButton("_settingsButton").onClick.Invoke();

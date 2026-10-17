@@ -1,0 +1,7 @@
+# PAJARITA
+
+[Boceto de cuatro vistas](bow-tie-views.png): frente, atrás, izquierda y derecha. Diseño basado en la lámina conjunta aprobada. Boceto para modelado; ajuste al personaje pendiente. Generado con la herramienta integrada de imágenes.
+
+## Prompt
+
+Use case: stylized-concept. Create ONE detailed four-view modeling turnaround sheet of ONLY the PAJARITA accessory from attached approved collection, faithfully preserve its design, proportions, colors and materials. Object: Plush burgundy fabric bow tie, two broad rounded wings and center knot; back shows small discreet fastening clip, not extra fabric. Reference collection is identity reference, NOT layout to repeat. Landscape warm ivory sheet, title 'PAJARITA'. EXACTLY FOUR equally sized panels in2x2 grid: upper left 'FRENTE', upper right 'ATRÁS', lower left 'IZQUIERDA', lower right 'DERECHA'. True coherent orthographic front rear left right rotations of the SAME object, consistent scale and aligned proportions. Left/right defined from wearer perspective. NOT four perspective duplicates. Show full object in every panel, no cropping, ample margins, tiny natural contact shadow, navy label plaques, subtle separators. Professional polished cute rounded 3D cartoon game asset, warm studio light, same restrained gold navy burgundy ivory palette as reference. No player, face, body, mannequin, scenery, extra accessories, exploded views or redesign. Construction should be simple wearable solid geometry suitable for later attachment. Only requested four views, one final sheet.

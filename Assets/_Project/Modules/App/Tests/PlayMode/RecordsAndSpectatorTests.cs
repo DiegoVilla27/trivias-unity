@@ -116,7 +116,7 @@ namespace Trivias.App.Tests
                 var results = Object.FindAnyObjectByType<ResultsView>();
                 Assert.That(results.LastRecord.Kind, Is.EqualTo(RecordResultKind.NotEligible));
                 Assert.That(results.LastRecord.Eligibility, Is.EqualTo(RecordEligibility.TestRun));
-                var details = (TextMeshProUGUI)typeof(ResultsView).GetField("_details", PRIVATE).GetValue(results);
+                var details = (TextMeshProUGUI)typeof(ResultsView).GetField("_record", PRIVATE).GetValue(results);
                 Assert.That(details.text, Does.Contain("no cuenta para los récords"));
                 Assert.That(_records.Book.entries, Is.Empty, "Nada se guarda.");
             }
@@ -142,9 +142,37 @@ namespace Trivias.App.Tests
 
             var results = Object.FindAnyObjectByType<ResultsView>();
             Assert.That(results.LastRecord.Eligibility, Is.EqualTo(RecordEligibility.Defeat));
-            var details = (TextMeshProUGUI)typeof(ResultsView).GetField("_details", PRIVATE).GetValue(results);
+            var details = (TextMeshProUGUI)typeof(ResultsView).GetField("_record", PRIVATE).GetValue(results);
             Assert.That(details.text, Does.Not.Contain("récord"), "Una derrota no habla de récords.");
             Assert.That(_records.Book.entries, Is.Empty);
+
+            // Como los menús: plató desenfocado detrás, título grande y las cifras en sus tarjetas.
+            TextMeshProUGUI Label(string field) => (TextMeshProUGUI)typeof(ResultsView).GetField(field, PRIVATE).GetValue(results);
+            Assert.That(results.IsShown, Is.True);
+            var backdrop = (Trivias.Shared.Presentation.UiBackdrop)typeof(ResultsView).GetField("_backdrop", PRIVATE).GetValue(results);
+            Assert.That(backdrop.IsShown, Is.True, "El plató se desenfoca detrás.");
+            Assert.That(Label("_title").text, Is.EqualTo("DERROTA"));
+            Assert.That(Label("_subtitle").text, Is.EqualTo($"Habéis superado 0 de {match.TotalQuestions} preguntas"));
+            Assert.That(Label("_questions").text, Is.EqualTo($"0/{match.TotalQuestions}"));
+            Assert.That(Label("_money").text, Is.EqualTo("0"));
+            Assert.That(Label("_tokens").text, Does.StartWith("+").And.EndWith("fichas para cada jugador"));
+            Assert.That(details.gameObject.activeSelf, Is.False, "Sin línea de récords en una derrota.");
+
+            // Los botones se pueden pulsar: nada (ni el velo del fondo desenfocado) los tapa.
+            yield return null;
+            foreach (var field in new[] { "_playAgainButton", "_leaveButton" })
+            {
+                var button = (UnityEngine.UI.Button)typeof(ResultsView).GetField(field, PRIVATE).GetValue(results);
+                var pointer = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current)
+                {
+                    position = RectTransformUtility.WorldToScreenPoint(null, button.transform.position),
+                };
+                var hits = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+                UnityEngine.EventSystems.EventSystem.current.RaycastAll(pointer, hits);
+                Assert.That(hits, Is.Not.Empty, $"{field}: el clic llega a algo.");
+                Assert.That(hits[0].gameObject.transform.IsChildOf(button.transform), Is.True,
+                    $"{field}: el clic llega al botón, no a «{hits[0].gameObject.name}».");
+            }
         }
 
         // ---- Espectador ----
@@ -179,7 +207,8 @@ namespace Trivias.App.Tests
             Assert.That(spectator.IsFollowing(_fake.ClientId), Is.True, "Mira al único activo.");
             Assert.That(camera.Target.TrackingTarget, Is.EqualTo(_fake.ViewTarget), "La cámara sigue al activo.");
             Assert.That(spectator.IsBannerShown, Is.True);
-            Assert.That(spectator.BannerText, Does.Contain("ELIMINADO").And.Contain("Viendo a <b>Jugador Falso</b>"));
+            Assert.That(spectator.BannerText, Does.Contain("ELIMINADO").And.Contain("Viendo a").And.Contain("Jugador Falso"));
+            Assert.That(spectator.IsFollowHintShown, Is.True, "A/D para cambiar de concursante.");
 
             spectator.ToggleOverview();
             Assert.That(spectator.IsOverview, Is.True);
@@ -192,7 +221,8 @@ namespace Trivias.App.Tests
             _fake.IsEliminated = true;
             Avatars().NotifyChanged(_fake.ClientId);
             Assert.That(spectator.IsOverview, Is.True, "Si cae el que miraba y no queda nadie: vista general.");
-            Assert.That(spectator.BannerText, Does.Contain("Vista general").And.Not.Contain("seguir"));
+            Assert.That(spectator.BannerText, Does.Contain("Vista general").And.Not.Contain("eguir"));
+            Assert.That(spectator.IsFollowHintShown, Is.False, "Sin nadie a quien seguir, no se ofrece A/D.");
 
             local.Respawn();
             yield return null;

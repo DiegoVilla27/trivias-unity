@@ -126,7 +126,7 @@ namespace Trivias.Match.Components
                 return $"CERRADO · {seconds}";
             if (!bettingTimed)
                 return "¡A APOSTAR!";
-            var clock = $"{seconds / 60}:{seconds % 60:00}";
+            var clock = $"{seconds / 60:00}:{seconds % 60:00}"; // «01:29», como el HUD.
             return seconds <= URGENT_SECONDS ? $"<color={RED}>{clock}</color>" : clock;
         }
 

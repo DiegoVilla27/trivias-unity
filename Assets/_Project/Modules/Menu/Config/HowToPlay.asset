@@ -22,17 +22,17 @@ MonoBehaviour:
       Llevad el dinero a la <b>cabina correcta</b> y llegad al final con dinero.'
   - _step: Dinero
     _title: El dinero
-    _body: '<b>E</b>: coge o deja uno. <b>Q</b>: varios. <b>R</b>: devuelve todo a la mesa.
+    _body: '[E] coge o deja uno. [Q] varios. [R] devuelve todo a la mesa.
 
       Cambia 10 fajos por 1 bolsa y 10 bolsas por 1 lingote.
 
       El dinero fuera de las bandejas <b>se pierde</b> al verificar.'
   - _step: Verificar
     _title: Verificar
-    _body: "Pulsa <b>VERIFICAR</b> con <b>E</b>: las apuestas se bloquean al instante.\nTras <b>3 segundos</b> se revela la respuesta.\nSi se acaba el reloj, se verifica autom\xE1ticamente."
+    _body: "Pulsa <b>VERIFICAR</b> con [E]: las apuestas se bloquean al instante.\nTras <b>3 segundos</b> se revela la respuesta.\nSi se acaba el reloj, se verifica autom\xE1ticamente."
   - _step: "Comod\xEDn"
     _title: "Apu\xE9state a ti mismo"
-    _body: "Entra en la plataforma y pulsa <b>E</b> para apostar tu comod\xEDn.\nSi aciertas, <b>multiplicas</b> el dinero de esa cabina.\nSi fallas, quedas <b>expulsado</b> hasta la siguiente partida. Antes del cierre, <b>E</b> cancela."
+    _body: "Entra en la plataforma y pulsa [E] para apostar tu comod\xEDn.\nSi aciertas, <b>multiplicas</b> el dinero de esa cabina.\nSi fallas, quedas <b>expulsado</b> hasta la siguiente partida. Antes del cierre, [E] cancela."
   - _step: Fichas
     _title: Fichas y tienda
     _body: 'Las preguntas superadas dan <b>fichas</b> a cada jugador.
@@ -42,4 +42,4 @@ MonoBehaviour:
       Solo cambian la apariencia: no dan ventajas.'
   - _step: Controles
     _title: Controles
-    _body: "<b>WASD</b>: moverte \xB7 <b>Shift</b>: correr\n<b>Rat\xF3n</b>: mirar \xB7 <b>Espacio</b>: saltar\n<b>E</b>: acci\xF3n \xB7 <b>Q</b>: varios \xB7 <b>R</b>: devolver a la mesa\n<b>Esc</b>: men\xFA; la partida contin\xFAa para los dem\xE1s."
+    _body: "[W] [A] [S] [D] moverte \xB7 [Shift] correr\n[Rat\xF3n] mirar \xB7 [Espacio] saltar\n[E] acci\xF3n \xB7 [Q] varios \xB7 [R] devolver a la mesa\n[Esc] men\xFA; la partida contin\xFAa para los dem\xE1s."

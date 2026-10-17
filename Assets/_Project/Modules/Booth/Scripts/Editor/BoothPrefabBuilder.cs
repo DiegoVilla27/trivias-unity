@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using Trivias.Shared.Editor;
+using Trivias.Shared.Presentation;
 using Trivias.Shared.Physics;
 using Trivias.Shared.Tubes;
 using UnityEditor;
@@ -32,6 +33,8 @@ namespace Trivias.Booth.Editor
         public const string BET_ZONE = "BetZone";
         public const string PLATFORM = "Platform";
         public const string BETTORS_LABEL = "BettorsLabel";
+        /// <summary>✓ sobre la cabina, encima de los apostados: se enciende si es la correcta (lo maneja Match).</summary>
+        public const string REVEAL_MARK = "RevealMark";
         public const string TRAY = "Tray";
         public const string TRAY_SURFACE = "Tray/Surface";
         public const string TRAY_TOTAL_LABEL = "TotalLabel";
@@ -112,6 +115,8 @@ namespace Trivias.Booth.Editor
             bettors.outlineColor = Color.black;
             bettors.textWrappingMode = TextWrappingModes.Normal;
 
+            BuildRevealMark(t, new Vector3(0f, CABINET_HEIGHT * s + 1.6f, 1.1f), layer);
+
             // La bandeja es la del mostrador del modelo: su suelo marca dónde se apila el dinero.
             var tray = EditorAssets.CreateEmpty(TRAY, t, new Vector3(0f, 0f, TRAY_CENTER_Z * s)).transform;
             EditorAssets.CreateEmpty("Surface", tray, new Vector3(0f, TRAY_FLOOR_HEIGHT * s, 0f));
@@ -142,6 +147,26 @@ namespace Trivias.Booth.Editor
             BuildPlayerTube(t, layer);
 
             return EditorAssets.SaveAsPrefab(root, BASE_PREFAB_PATH);
+        }
+
+        /// <summary>El ✓ de los menús en un lienzo del mundo que mira a la cámara; aparece con un pequeño rebote.</summary>
+        private static void BuildRevealMark(Transform booth, Vector3 position, int layer)
+        {
+            const float metres = 1.1f;
+            const float unit = 0.01f;
+            var mark = new GameObject(REVEAL_MARK, typeof(RectTransform)) { layer = layer };
+            mark.transform.SetParent(booth, false);
+            var rect = (RectTransform)mark.transform;
+            rect.localPosition = position;
+            rect.localScale = Vector3.one * unit;
+            rect.sizeDelta = Vector2.one * (metres / unit);
+            mark.AddComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            mark.AddComponent<Billboard>();
+            mark.AddComponent<CanvasGroup>();
+            mark.AddComponent<UiPanelIntro>();
+            var image = UiKit.Picture("Check", rect, UiKit.Icon("Check"), 0f, 0f, metres / unit, metres / unit, preserveAspect: true);
+            image.gameObject.layer = layer;
+            mark.SetActive(false);
         }
 
         /// <summary>Paredes invisibles a lo largo de la barandilla: solo se entra (y se sale) por la abertura delantera.</summary>

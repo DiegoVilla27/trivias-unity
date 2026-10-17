@@ -15,6 +15,7 @@ namespace Trivias.VerifyButton.Editor
         public const string PREFAB_PATH = MODULE_ROOT + "/Prefabs/VerifyButton.prefab";
         private const string MODEL_PATH = MODULE_ROOT + "/Models/VerifyButton/VerifyButton.obj";
         private const float MODEL_SCALE = 1.15f;
+        private const string PLAQUE = "VerifyPlaque";
 
         public static GameObject Build(MatchRuntime matchRuntime, InteractableRegistry registry)
         {
@@ -24,6 +25,11 @@ namespace Trivias.VerifyButton.Editor
 
             var model = EditorAssets.PlaceModel(MODEL_PATH, "Model", t, Vector3.zero, Quaternion.identity,
                 Vector3.one * MODEL_SCALE, layer, true);
+            // Sin la placa del modelo (decisión del usuario): se quita la pieza y lo demás queda tal cual.
+            PrefabUtility.UnpackPrefabInstance(model, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            var plaque = model.transform.Find(PLAQUE);
+            if (plaque != null)
+                Object.DestroyImmediate(plaque.gameObject);
             // La tapa no es estática: se hunde cuando las apuestas están cerradas.
             var cap = model.transform.Find("Cap");
             GameObjectUtility.SetStaticEditorFlags(cap.gameObject, 0);

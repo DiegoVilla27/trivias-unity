@@ -91,7 +91,7 @@ namespace Trivias.App.Tests
         private GameObject Panel(string field) => (GameObject)typeof(MenuView).GetField(field, PRIVATE).GetValue(_menu);
 
         private static GameObject HudPanel() =>
-            (GameObject)typeof(MatchHudView).GetField("_statusPanel", PRIVATE)
+            (GameObject)typeof(MatchHudView).GetField("_questionCard", PRIVATE)
                 .GetValue(Object.FindAnyObjectByType<MatchHudView>());
     }
 }

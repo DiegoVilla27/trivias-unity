@@ -36,7 +36,8 @@ namespace Trivias.App.Tests
         public void ExplainsEveryControl()
         {
             var text = AllText();
-            foreach (var key in new[] { "<b>E</b>", "<b>Q</b>", "<b>R</b>", "<b>Esc</b>", "WASD", "Ratón" })
+            // Las teclas van entre corchetes: la pantalla las dibuja como las teclas del juego.
+            foreach (var key in new[] { "[E]", "[Q]", "[R]", "[Esc]", "[W] [A] [S] [D]", "[Ratón]", "[Shift]", "[Espacio]" })
                 Assert.That(text, Does.Contain(key), $"El tutorial no explica {key}.");
         }
 

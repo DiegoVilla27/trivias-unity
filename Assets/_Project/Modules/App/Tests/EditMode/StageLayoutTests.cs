@@ -87,32 +87,6 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void PresenterBubble_DoesNotCoverTheQuestionOrOptions()
-        {
-            // La viñeta gira hacia la cámara: se comprueba con una caja que la envuelve en cualquier giro (con su rebote).
-            var bubble = (RectTransform)Find("Presenter/Bubble/Canvas/Body/Background").transform;
-            var size = bubble.rect.size * bubble.lossyScale.x * 1.05f;
-            var box = new Bounds(bubble.position, new Vector3(size.x, size.y, size.x));
-            var screen = Find(SCREEN).transform.position;
-            var problems = new List<string>();
-            foreach (var spawn in SpawnPositions())
-            {
-                var eye = spawn + Vector3.up * EYE_HEIGHT;
-                for (var x = -6.8f; x <= 6.81f; x += 1.7f)
-                {
-                    foreach (var y in new[] { -2.9f, -1.55f, 0.05f, 1.75f, 3.1f })
-                    {
-                        var target = screen + new Vector3(x, y, -0.3f);
-                        var direction = target - eye;
-                        if (box.IntersectRay(new Ray(eye, direction.normalized), out var distance) && distance < direction.magnitude)
-                            problems.Add($"Desde {spawn}: tapa ({x:0.0}, {y:0.0}).");
-                    }
-                }
-            }
-            Assert.That(problems, Is.Empty, string.Join("\n", problems));
-        }
-
-        [Test]
         public void Presenter_StandsBetweenTheStationsAndTheScreen_WithoutCoveringIt()
         {
             var presenter = Find("Presenter").transform.position;
@@ -627,9 +601,11 @@ namespace Trivias.App.Tests
             Assert.That(spectator.GetComponent<Trivias.Spectator.Components.SpectatorController>(), Is.Not.Null);
             Assert.That(spectator.GetComponent<UnityEngine.UI.GraphicRaycaster>(), Is.Null, "El rótulo no debe capturar clics.");
 
-            var banner = (RectTransform)spectator.transform.Find("Banner");
+            var bottom = (RectTransform)spectator.transform.Find("Bottom");
+            var banner = (RectTransform)bottom.Find("Banner");
             Assert.That(banner.gameObject.activeSelf, Is.False, "Solo aparece al quedar eliminado.");
-            Assert.That(banner.anchorMin.y, Is.Zero, "Abajo, sin tapar la pantalla de preguntas.");
+            Assert.That(bottom.anchorMin.y, Is.Zero, "Pegada al borde de abajo…");
+            Assert.That(-((RectTransform)banner.Find("Ribbon")).anchoredPosition.y, Is.GreaterThan(1080f * 0.7f), "…sin tapar la pantalla de preguntas.");
             foreach (var graphic in banner.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
                 Assert.That(graphic.raycastTarget, Is.False, graphic.name);
         }

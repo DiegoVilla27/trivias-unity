@@ -48,6 +48,7 @@ namespace Trivias.App.Editor
         public GameObject ExchangeStation;
         public GameObject VerifyButton;
         public GameObject Presenter;
+        public GameObject PresenterCaption;
         public GameObject Environment;
         public NetworkPrefabsList NetworkPrefabs;
     }
@@ -82,6 +83,7 @@ namespace Trivias.App.Editor
             PlaceCameraRig(prefabs.CameraRig);
             PrefabUtility.InstantiatePrefab(prefabs.InteractionHud);
             PrefabUtility.InstantiatePrefab(prefabs.MatchHud);
+            PrefabUtility.InstantiatePrefab(prefabs.PresenterCaption);
             PrefabUtility.InstantiatePrefab(prefabs.ResultsScreen);
             PrefabUtility.InstantiatePrefab(prefabs.Menu);
             PrefabUtility.InstantiatePrefab(prefabs.ShopUi);
@@ -202,6 +204,7 @@ namespace Trivias.App.Editor
                 zoneCenters[i] = zone.position;
                 SelfBetBuilder.AttachToBooth(zone.gameObject, booths[i], i,
                     booths[i].transform.Find(BoothPrefabBuilder.BETTORS_LABEL).GetComponent<TextMeshPro>());
+                MatchBuilder.AttachRevealMark(booths[i], i, booths[i].transform.Find(BoothPrefabBuilder.REVEAL_MARK).gameObject);
             }
             SelfBetBuilder.WriteLayout(zoneCenters);
         }

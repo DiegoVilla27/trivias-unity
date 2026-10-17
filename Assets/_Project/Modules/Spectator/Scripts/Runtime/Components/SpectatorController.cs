@@ -21,8 +21,14 @@ namespace Trivias.Spectator.Components
         [SerializeField] private PlayerAvatarRegistry _avatars;
         [SerializeField] private TransformEventChannel _cameraTarget;
         [SerializeField] private PlayerControlGate _controlGate;
+        [Header("Cinta (boceto 07 del HUD)")]
         [SerializeField] private GameObject _banner;
-        [SerializeField] private TextMeshProUGUI _bannerText;
+        [SerializeField] private TMP_Text _watching;
+        [Tooltip("Tecla A/D y su acción (cambiar o seguir): solo si queda alguien a quien seguir.")]
+        [SerializeField] private GameObject _followHint;
+        [SerializeField] private TMP_Text _followAction;
+        [Tooltip("Espacio · Vista general: solo mientras sigue a alguien.")]
+        [SerializeField] private GameObject _overviewHint;
         [Tooltip("Segundos tras la expulsión antes de pasar a la vista de espectador (para ver la expulsión).")]
         [SerializeField, Min(0f)] private float _startDelay = 2.5f;
 
@@ -39,7 +45,8 @@ namespace Trivias.Spectator.Components
         public bool IsOverview => IsSpectating && !_hasFollowed;
         public bool IsFollowing(ulong clientId) => IsSpectating && _hasFollowed && _followed == clientId;
         public bool IsBannerShown => _banner.activeSelf;
-        public string BannerText => _bannerText.text;
+        public string BannerText { get; private set; } = string.Empty;
+        public bool IsFollowHintShown => _banner.activeSelf && _followHint.activeSelf;
 
         private void Awake()
         {
@@ -189,7 +196,12 @@ namespace Trivias.Spectator.Components
                 return;
             CollectCandidates();
             var name = _hasFollowed ? _avatars.NameOf(_followed) : string.Empty;
-            _bannerText.text = SpectatorText.Banner(name, _candidates.Count > 0);
+            var anyone = _candidates.Count > 0;
+            _watching.text = SpectatorText.Watching(name);
+            _followHint.SetActive(anyone);
+            _followAction.text = SpectatorText.FollowAction(_hasFollowed);
+            _overviewHint.SetActive(_hasFollowed);
+            BannerText = SpectatorText.Banner(name, anyone);
         }
 
         private void CollectCandidates()

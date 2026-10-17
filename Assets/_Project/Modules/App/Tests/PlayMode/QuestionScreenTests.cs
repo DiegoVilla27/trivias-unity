@@ -71,7 +71,7 @@ namespace Trivias.App.Tests
                 Assert.That(OptionBox(booth).activeSelf, Is.True, "Antes de revelar todos los recuadros están encendidos.");
             }
 
-            Assert.That(Text("_status").text, Does.Match(@"\d:\d\d"), "Debe verse el reloj de las apuestas.");
+            Assert.That(Text("_status").text, Does.Match(@"\d\d:\d\d"), "Debe verse el reloj de las apuestas («01:29», como el HUD).");
         }
 
         [UnityTest]
