@@ -14,14 +14,16 @@ using Trivias.Shared.Physics;
 using Trivias.Shared.Presentation;
 using Unity.Netcode;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Trivias.Presenter.Editor
 {
     /// <summary>
-    /// Construye el presentador (figura con primitivas y viñeta de cómic junto a la cabeza), importa y valida su catálogo
-    /// de frases y crea su sesión de red. Solo se comunica por texto en su viñeta.
+    /// Construye el presentador (el modelo del usuario tal cual, Humanoid, en reposo con la animación de Starter Assets,
+    /// y su viñeta de cómic junto a la cabeza), importa y valida su catálogo de frases y crea su sesión de red. Solo se
+    /// comunica por texto en su viñeta.
     /// </summary>
     public static class PresenterPrefabBuilder
     {
@@ -33,7 +35,16 @@ namespace Trivias.Presenter.Editor
         /// La viñeta sale al lado de la cabeza (no encima): el presentador está al pie de la pantalla y así ni él ni lo que
         /// dice tapan la pregunta. Gira hacia la cámara, de modo que siempre queda a la derecha de su cabeza.
         /// </summary>
-        public const float BUBBLE_HEIGHT = 1.55f;
+        public const float BUBBLE_HEIGHT = 1.45f;
+        public const string MODEL = "Model";
+        public const string MODEL_PATH = MODULE_ROOT + "/Models/Presenter/Presenter_Rigged.fbx";
+        private const string TEXTURE_PATH = MODULE_ROOT + "/Models/Presenter/shaded.png";
+        private const string MATERIAL_PATH = MODULE_ROOT + "/Models/Presenter/Presenter_Body.mat";
+        public const string ANIMATOR_PATH = MODULE_ROOT + "/Animations/PresenterIdle.controller";
+        private const string IDLE_CLIP_PATH = "Assets/ThirdParty/StarterAssets/Runtime/ThirdPersonController/Character/Animations/Stand--Idle.anim.fbx";
+        /// <summary>Altura del modelo (la del original, sin escalar).</summary>
+        public const float HEIGHT = 1.9f;
+        private const float BODY_RADIUS = 0.42f;
         public static readonly Vector2 BubbleSize = new(4.8f, 1.8f);
         private const float BUBBLE_GAP = 0.5f;
         /// <summary>Metros por unidad del lienzo de la viñeta (100 unidades = 1 m).</summary>
@@ -49,26 +60,54 @@ namespace Trivias.Presenter.Editor
 
         public static GameObject Build()
         {
-            var suit = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Suit.mat", StagePalette.Burgundy, 0.5f);
-            var skin = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Skin.mat", StagePalette.Skin, 0.3f);
-            var hair = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_Hair.mat", new Color(0.2f, 0.2f, 0.22f), 0.4f);
-
-            var root = new GameObject("Presenter") { layer = GameLayers.STAGE };
-            var t = root.transform;
+            HumanoidModels.EnsureImported(MODEL_PATH, TEXTURE_PATH, MATERIAL_PATH, "Presenter_Body");
             const int layer = GameLayers.STAGE;
+            var root = new GameObject("Presenter") { layer = layer };
 
-            EditorAssets.CreatePrimitive(PrimitiveType.Capsule, "Body", t, new Vector3(0f, 0.75f, 0f), new Vector3(0.8f, 0.75f, 0.6f), suit, layer, false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Sphere, "Head", t, new Vector3(0f, 1.85f, 0f), Vector3.one * 0.9f, skin, layer, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Sphere, "Hair", t, new Vector3(0f, 2.1f, -0.08f), new Vector3(0.95f, 0.5f, 0.85f), hair, layer, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Moustache", t, new Vector3(0f, 1.72f, 0.43f), new Vector3(0.4f, 0.08f, 0.06f), hair, layer, false, keepCollider: false);
+            // El modelo tal cual; nadie lo atraviesa (una cápsula sencilla, el modelo no trae colisiones).
+            var model = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(MODEL_PATH), root.transform);
+            model.name = MODEL;
+            foreach (var part in model.GetComponentsInChildren<Transform>(true))
+                part.gameObject.layer = layer;
+            foreach (var skinned in model.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+                skinned.updateWhenOffscreen = false;
+            if (!model.TryGetComponent<Animator>(out var animator))
+                animator = model.AddComponent<Animator>();
+            animator.avatar = HumanoidModels.AvatarOf(MODEL_PATH);
+            animator.runtimeAnimatorController = IdleController();
+            animator.applyRootMotion = false;
+            animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms; // Si nadie lo ve, no mueve los huesos.
 
-            var label = EditorAssets.CreateWorldText("Label", t, "PRESENTADOR", 2.6f, StagePalette.Gold,
-                new Vector3(0f, 2.62f, 0f), Quaternion.Euler(0f, 180f, 0f), new Vector2(2.8f, 0.35f), StageFonts.Display());
-            label.characterSpacing = 3f;
-            label.textWrappingMode = TextWrappingModes.NoWrap;
+            var body = root.AddComponent<CapsuleCollider>();
+            body.center = new Vector3(0f, HEIGHT * 0.5f, 0f);
+            body.height = HEIGHT;
+            body.radius = BODY_RADIUS;
 
             BuildBubble(root, layer);
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
+        }
+
+        /// <summary>Un solo estado: el reposo de Starter Assets en bucle (el presentador no anda).</summary>
+        private static RuntimeAnimatorController IdleController()
+        {
+            var idle = AssetDatabase.LoadAllAssetsAtPath(IDLE_CLIP_PATH).OfType<AnimationClip>()
+                .First(clip => !clip.name.StartsWith("__preview__"));
+            var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(ANIMATOR_PATH);
+            if (controller == null)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(ANIMATOR_PATH)!);
+                controller = AnimatorController.CreateAnimatorControllerAtPath(ANIMATOR_PATH);
+            }
+            var machine = controller.layers[0].stateMachine;
+            var state = machine.states.Select(s => s.state).FirstOrDefault(s => s.name == "Idle") ?? machine.AddState("Idle");
+            if (state.motion != idle || machine.defaultState != state)
+            {
+                state.motion = idle;
+                machine.defaultState = state;
+                EditorUtility.SetDirty(controller);
+                AssetDatabase.SaveAssetIfDirty(controller);
+            }
+            return controller;
         }
 
         /// <summary>

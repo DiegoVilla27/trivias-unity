@@ -147,7 +147,7 @@ namespace Trivias.App.Tests
             var bubble = Field<GameObject>(view, "_container");
             Assert.That(bubble.activeSelf, Is.True, "Al empezar, el presentador da la bienvenida.");
             // Al pie de la pantalla, la viñeta sale al lado de la cabeza (encima taparía la pregunta).
-            var head = view.transform.Find("Head").position;
+            var head = view.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position;
             var background = view.transform.Find("Bubble/Canvas/Body/Background").position;
             Assert.That(Mathf.Abs(background.y - head.y), Is.LessThan(0.8f), "A la altura de su cabeza.");
             var side = background - head;

@@ -47,6 +47,10 @@ namespace Trivias.App.Tests
                 var letter = (char)('A' + booth);
                 Assert.That(Find($"{SCREEN}/Display/Content/Options/Option{letter}/Box"), Is.Not.Null, $"Falta el recuadro {letter}.");
                 Assert.That(Find($"{SCREEN}/Display/Content/Options/Option{letter}/Text"), Is.Not.Null, $"Falta el texto {letter}.");
+                var tag = (RectTransform)Find($"{SCREEN}/Display/Content/Options/Option{letter}/Box/Tag").transform;
+                var letterBox = (RectTransform)tag.Find("Letter");
+                Assert.That(letterBox.sizeDelta, Is.EqualTo(tag.sizeDelta), $"La letra {letter} ocupa su círculo (centrada en él).");
+                Assert.That(letterBox.anchoredPosition, Is.EqualTo(Vector2.zero));
             }
         }
 
@@ -121,8 +125,7 @@ namespace Trivias.App.Tests
             Assert.That(Find($"{ENVIRONMENT}/PresenterMark").transform.position.x, Is.EqualTo(presenter.x).Within(0.05f), "Sobre su marca dorada.");
 
             // Ni su cuerpo ni su cartel tapan el texto de la pantalla desde la zona de inicio.
-            var body = BoundsOf(Find("Presenter/Body"));
-            body.Encapsulate(BoundsOf(Find("Presenter/Hair")));
+            var body = Find("Presenter/Model").GetComponentInChildren<SkinnedMeshRenderer>().bounds;
             var screen = Find(SCREEN).transform.position;
             foreach (var spawn in SpawnPositions())
             {

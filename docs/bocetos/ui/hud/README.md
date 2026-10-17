@@ -12,7 +12,7 @@ Siete estados de partida, una imagen por estado. Estilo derivado del plató y de
 | Resolución de la ronda | [Abrir imagen](06-reveal.png) |
 | Jugador eliminado — espectador | [Abrir imagen](07-spectator.png) |
 
-[Especificación visual y reglas de cada estado](DISENO.md) · [Prompts](PROMPTS.md).
+[Especificación visual y reglas de cada estado](DISENO.md) · [Prompts](PROMPTS.md) · [Pedido de imágenes para montarlo](PEDIDO_IMAGENES.md).
 
 La pregunta y las respuestas se leen en la pantalla física del plató. Los bocetos muestran la composición de la interfaz, no la distribución exacta del nivel ni un número vinculante de personajes/objetos de decorado. La posición estable de los indicadores se fija en la especificación para implementación; algunos encuadres ilustrativos varían. El dibujo del fondo no debe introducir pistas visuales de la respuesta ni sustituir pregunta/opciones por ilustraciones durante la apuesta o el cierre.
 

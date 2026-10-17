@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.36 — los diez personajes completos en el juego y nueva pantalla del plató.
+- Versión: 0.37 — el presentador con su modelo.
 - Última actualización: 17 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -205,6 +205,8 @@ Acciones de salida: coger/soltar dinero, convertirlo, activar comodín y verific
 
 ## 9. Presentador
 
+Aspecto (17 de octubre de 2026): el modelo del usuario tal cual (esmoquin rojo de lentejuelas, pajarita y bigote; un millón de triángulos y 1,9 m, como los concursantes), riggeado con el mismo esqueleto Humanoid y en reposo con la animación de Starter Assets. Detalle en [LEVEL](LEVEL.md).
+
 ### 9.1 Implementación inicial
 
 Catálogo local de **104 frases** en archivos de contenido, seleccionadas por evento, no al azar sin contexto. Así el presentador habla de todo un poco sin repetirse.
@@ -396,6 +398,11 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.37 — 17 de octubre de 2026
+
+- El presentador deja las primitivas: es el modelo del usuario tal cual (un millón de triángulos, 1,9 m, su textura), riggeado con el esqueleto de los concursantes y animado en reposo. Sin el cartel «PRESENTADOR» (ya se reconoce); su viñeta sale a la altura de su cara. Detalle en [LEVEL](LEVEL.md).
+- La letra de cada opción de la pantalla del plató queda centrada en su círculo.
 
 ### Versión 0.36 — 17 de octubre de 2026
 

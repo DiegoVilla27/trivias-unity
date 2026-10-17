@@ -16,7 +16,7 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 | Botón de verificar | Modelo integrado (la tapa se hunde) | Mismo objeto pulido |
 | Fajo, bolsa y lingote | Modelos integrados | Valores legibles y acabado |
 | Plató modular | Kit de ambiente integrado (ver abajo) | Iluminación precalculada y optimización |
-| Presentador visual | Representación provisional | Diseño propio, escala por definir |
+| Presentador visual | Modelo del usuario tal cual (1M triángulos, 1,9 m), riggeado, en `Presenter/Models/Presenter` | Gestos al hablar (animaciones propias) |
 | Cheque/podio | Resultado sencillo | Ceremonia de victoria |
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.

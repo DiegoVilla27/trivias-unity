@@ -204,7 +204,10 @@ namespace Trivias.Shared.Editor
         public static TextMeshProUGUI Text(string name, Transform parent, string text, float x, float y, float width, float height,
             float size, UiFont font, Color color, TextAlignmentOptions alignment = TextAlignmentOptions.Center)
         {
-            var label = Rect(name, parent, x, y, width, height).gameObject.AddComponent<TextMeshProUGUI>();
+            var rect = Rect(name, parent, x, y, width, height);
+            var label = rect.gameObject.AddComponent<TextMeshProUGUI>();
+            // TextMeshPro cambia a 200 × 50 una caja recién creada de 100 × 100: se le devuelve su medida.
+            rect.sizeDelta = new Vector2(width, height);
             label.text = text;
             label.font = font == UiFont.Display ? StageFonts.Display() : StageFonts.Body();
             label.fontSize = size;
