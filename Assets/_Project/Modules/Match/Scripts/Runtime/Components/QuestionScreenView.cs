@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine.UI;
 using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Money.Logic;
@@ -7,30 +8,35 @@ using UnityEngine;
 namespace Trivias.Match.Components
 {
     /// <summary>
-    /// Pantalla grande del plató: cabecera, pregunta, las 4 opciones (recuadros del color de su cabina) y estado
-    /// (reloj, cierre o respuesta correcta). Al revelar solo queda encendido el recuadro correcto. Fuera de las preguntas
+    /// Pantalla grande del plató, con el estilo de los menús: cabecera, pregunta, las 4 opciones (píldoras del color de
+    /// su cabina) y estado (reloj, cierre o «CORRECTA: B» con la explicación). Al revelar solo queda encendida la correcta. Fuera de las preguntas
     /// muestra un mensaje (¿PREPARADOS?, DERROTA). Al ganar muestra el cheque gigante con los supervivientes y el premio.
     /// Se redibuja por eventos; el reloj solo cada segundo.
     /// </summary>
     public sealed class QuestionScreenView : MonoBehaviour
     {
-        private const string RED = "#FF6B6B";
-        private const string GOLD = "#FFD15C";
+        private const string RED = "#FF8A8A";
         private const int URGENT_SECONDS = 10;
-        private static readonly Color DimmedText = new(1f, 1f, 1f, 0.35f);
+        private static readonly Color DimmedText = new(1f, 1f, 1f, 0.4f);
 
         [SerializeField] private MatchRuntime _runtime;
         [SerializeField] private GameObject _content;
-        [SerializeField] private TextMeshPro _message;
-        [SerializeField] private TextMeshPro _header;
-        [SerializeField] private TextMeshPro _question;
-        [SerializeField] private TextMeshPro[] _optionTexts = new TextMeshPro[4];
+        [SerializeField] private TMP_Text _message;
+        [SerializeField] private TMP_Text _header;
+        [SerializeField] private TMP_Text _question;
+        [SerializeField] private TMP_Text[] _optionTexts = new TMP_Text[4];
         [SerializeField] private GameObject[] _optionBoxes = new GameObject[4];
-        [SerializeField] private TextMeshPro _status;
+        [SerializeField] private TMP_Text _status;
+        [SerializeField] private Image _statusBox;
+        [Header("Revelación")]
+        [SerializeField] private GameObject _options;
+        [SerializeField] private GameObject _reveal;
+        [SerializeField] private TMP_Text _answer;
+        [SerializeField] private TMP_Text _explanation;
         [Header("Cheque de la victoria")]
         [SerializeField] private GameObject _check;
-        [SerializeField] private TextMeshPro _checkPayee;
-        [SerializeField] private TextMeshPro _checkAmount;
+        [SerializeField] private TMP_Text _checkPayee;
+        [SerializeField] private TMP_Text _checkAmount;
 
         public bool IsShowingCheck => _check.activeSelf;
 
@@ -89,16 +95,26 @@ namespace Trivias.Match.Components
             var correct = session.CorrectBooth;
             for (var booth = 0; booth < _optionTexts.Length; booth++)
             {
-                _optionTexts[booth].text = $"<color={GOLD}>{(char)('A' + booth)}</color>   {question.Option(session.Order.OriginalAt(booth))}";
+                _optionTexts[booth].text = question.Option(session.Order.OriginalAt(booth));
                 var lit = correct < 0 || correct == booth;
                 _optionBoxes[booth].SetActive(lit);
                 _optionTexts[booth].color = lit ? Color.white : DimmedText;
             }
 
             _shownSeconds = -1;
-            _status.text = session.Phase == MatchPhase.Reveal
-                ? $"CORRECTA: {(char)('A' + correct)}\n<size=55%><i>{question.Explanation}</i></size>"
+            var reveal = session.Phase == MatchPhase.Reveal;
+            _status.text = reveal
+                ? $"CORRECTA: {(char)('A' + correct)}"
                 : ClockText(session.Phase, Mathf.CeilToInt(session.PhaseSecondsLeft), session.IsBettingTimed);
+            // Al revelar: la respuesta en grande con «CORRECTA» y la explicación, en lugar de las opciones y el reloj.
+            _options.SetActive(!reveal);
+            _statusBox.gameObject.SetActive(!reveal);
+            _reveal.SetActive(reveal);
+            if (reveal)
+            {
+                _answer.text = $"{(char)('A' + correct)} · {question.Option(session.Order.OriginalAt(correct)).ToUpperInvariant()}";
+                _explanation.text = question.Explanation;
+            }
         }
 
         private static bool HasClock(IMatchSession session) =>

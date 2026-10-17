@@ -4,7 +4,7 @@ Fecha: 15 de octubre de 2026. **36 láminas individuales** generadas con la herr
 
 Cada lámina reúne vistas del objeto y, cuando corresponde, perspectiva, despiece o secciones. No son modelos 3D ni planos dimensionales. Las vistas generadas requieren ajustar proyecciones y proporciones al mismo modelo; no asumir que todas son ortográficas exactas por su etiqueta.
 
-[Descargar el conjunto con imágenes y prompts](../../paquetes/recursos-detallados-01.zip).
+Descargar el conjunto con imágenes y prompts (archivo retirado).
 
 ## Objetos principales
 

@@ -8,7 +8,7 @@ Referencias organizadas por sujeto. Empieza por el índice de cada carpeta; cada
 | [Presentador](presentador/README.md) | Referencia general y poses del presentador |
 | [Plató](plato/README.md) | Concepto general y ambiente modular |
 | [Recursos](recursos/README.md) | Lámina general y [36 objetos detallados](recursos/detallados/README.md) |
-| [Paquetes](paquetes/README.md) | ZIP descargables existentes |
+| [Interfaz](ui/README.md) | [Diez menús](ui/menu/README.md) y [siete estados del HUD](ui/hud/README.md), estilo y navegación |
 | [Archivo](archivo/README.md) | Índices históricos; no sustituye a las referencias vigentes |
 
 ## Personajes del player

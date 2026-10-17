@@ -6,11 +6,10 @@ namespace Trivias.Shared.Profile
         Head = 0,
         Face = 1,
         Neck = 2,
-        Color = 3,
     }
 
     public static class CosmeticSlots
     {
-        public const int COUNT = 4;
+        public const int COUNT = 3;
     }
 }

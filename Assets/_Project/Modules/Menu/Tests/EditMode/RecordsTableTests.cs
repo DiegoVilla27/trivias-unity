@@ -6,7 +6,7 @@ using Trivias.Ranking.Logic;
 
 namespace Trivias.Menu.Tests
 {
-    /// <summary>Tabla de récords del menú: vacía, filas con premio, tiempo, fecha, jugadores y supervivientes, y empates.</summary>
+    /// <summary>Tabla de récords del menú: filas con premio, tiempo, fecha, participantes y supervivientes, y empates.</summary>
     public sealed class RecordsTableTests
     {
         private static RecordEntry Win(long money, long ms, string survivors = "Ana") => new()
@@ -20,41 +20,55 @@ namespace Trivias.Menu.Tests
             date = "2026-10-15",
         };
 
-        [Test]
-        public void AnEmptyCategory_InvitesToWin()
+        private static List<RecordRow> Rows(params RecordEntry[] sorted)
         {
-            var text = RecordsTable.Build(new List<RecordEntry>(), 4);
-            Assert.That(text, Does.Contain("Aún no tenéis victorias con 4 jugadores"));
+            var rows = new List<RecordRow>();
+            RecordsTable.Rows(sorted, 3, rows);
+            return rows;
         }
 
         [Test]
-        public void EachRow_ShowsPrizeTimeDatePlayersAndSurvivors()
+        public void AnEmptyCategory_SaysSo()
         {
-            var text = RecordsTable.Build(new List<RecordEntry> { Win(6_400_000, 754_000) }, 3);
-            Assert.That(text, Does.Contain("PREMIO").And.Contain("TIEMPO").And.Contain("FECHA"));
-            Assert.That(text, Does.Contain(MoneyFormat.Amount(6_400_000)));
-            Assert.That(text, Does.Contain("12:34"));
-            Assert.That(text, Does.Contain("15/10/2026"));
-            Assert.That(text, Does.Contain("Ana, Luis, Eva"));
-            Assert.That(text, Does.Contain("supervivientes: Ana"));
+            Assert.That(Rows(), Is.Empty);
+            Assert.That(RecordsTable.EMPTY, Is.EqualTo("Todavía no hay victorias en esta categoría."));
+        }
+
+        [Test]
+        public void EachRow_HasPrizeTimeDatePlayersAndSurvivors()
+        {
+            var row = Rows(Win(6_400_000, 754_000, "Ana, Eva"))[0];
+            Assert.That(row.Position, Is.EqualTo(1));
+            Assert.That(row.Money, Is.EqualTo(MoneyFormat.Amount(6_400_000) + " $"));
+            Assert.That(row.Time, Is.EqualTo("12:34"));
+            Assert.That(row.Date, Is.EqualTo("15/10/26"));
+            Assert.That(row.Players, Is.EqualTo("Ana, Luis, Eva"));
+            Assert.That(row.Survivors, Is.EqualTo("2/3"), "Supervivientes de los que empezaron.");
         }
 
         [Test]
         public void TiedRows_ShareTheirPosition()
         {
-            var sorted = new List<RecordEntry> { Win(900, 100), Win(900, 100), Win(500, 100) };
-            var text = RecordsTable.Build(sorted, 3);
-            Assert.That(text.Split("<b>1.</b>").Length - 1, Is.EqualTo(2), "Dos primeros puestos.");
-            Assert.That(text, Does.Contain("<b>3.</b>"));
-            Assert.That(text, Does.Not.Contain("<b>2.</b>"));
+            var rows = Rows(Win(900, 100), Win(900, 100), Win(500, 100));
+            Assert.That(rows.ConvertAll(r => r.Position), Is.EqualTo(new[] { 1, 1, 3 }));
         }
 
         [Test]
         public void Dates_AreShownDayFirst()
         {
             Assert.That(RecordText.Date("2026-01-31"), Is.EqualTo("31/01/2026"));
+            Assert.That(RecordText.ShortDate("2026-01-31"), Is.EqualTo("31/01/26"));
             Assert.That(RecordText.Date("raro"), Is.EqualTo("raro"));
+            Assert.That(RecordText.ShortDate("raro"), Is.EqualTo("raro"));
             Assert.That(RecordText.Date(null), Is.Empty);
+        }
+
+        [Test]
+        public void Names_AreCounted()
+        {
+            Assert.That(RecordsTable.CountNames(""), Is.Zero);
+            Assert.That(RecordsTable.CountNames("Ana"), Is.EqualTo(1));
+            Assert.That(RecordsTable.CountNames("Ana, Luis, Eva"), Is.EqualTo(3));
         }
     }
 }

@@ -2,28 +2,34 @@
   "language": "es",
   "pages": [
     {
+      "step": "Objetivo",
       "title": "El objetivo",
-      "body": "Equipo de <b>2 a 6</b> contra <b>15 preguntas</b>.\n\nCada cabina (<b>A, B, C, D</b>) es una respuesta. Pon el dinero en la <b>cabina correcta</b>: el resto se pierde.\n\nLlegad al final con dinero y ganáis."
+      "body": "De <b>2 a 6</b> jugadores contra <b>15 preguntas</b>.\nCada cabina es una respuesta.\nLlevad el dinero a la <b>cabina correcta</b> y llegad al final con dinero."
     },
     {
+      "step": "Dinero",
       "title": "El dinero",
-      "body": "Coge dinero de la <b>mesa</b> y déjalo en la <b>bandeja</b> de una cabina.\n\n<b>E</b> uno · <b>Q</b> varios · <b>R</b> devolver a la mesa\n<b>Cambio</b>: 10 fajos = 1 bolsa · 10 bolsas = 1 lingote\n\n<color=#FF8080>Lo que no esté en una bandeja se pierde.</color>"
+      "body": "<b>E</b>: coge o deja uno. <b>Q</b>: varios. <b>R</b>: devuelve todo a la mesa.\nCambia 10 fajos por 1 bolsa y 10 bolsas por 1 lingote.\nEl dinero fuera de las bandejas <b>se pierde</b> al verificar."
     },
     {
+      "step": "Verificar",
       "title": "Verificar",
-      "body": "¿Listos? Pulsad <b>VERIFICAR</b> con <b>E</b>.\n\n<b>3 segundos</b> y se revela: solo queda el dinero de la cabina correcta.\n\nSi se acaba el reloj, se verifica sola."
+      "body": "Pulsa <b>VERIFICAR</b> con <b>E</b>: las apuestas se bloquean al instante.\nTras <b>3 segundos</b> se revela la respuesta.\nSi se acaba el reloj, se verifica automáticamente."
     },
     {
+      "step": "Comodín",
       "title": "Apuéstate a ti mismo",
-      "body": "Sube a la <b>plataforma</b> de una cabina y pulsa <b>E</b>.\n\n<b>Aciertas</b>: el dinero se multiplica (<b>x2</b>, <b>x3</b>…)\n<b>Fallas</b>: el tubo te succiona y quedas <b>expulsado</b>\n\n<b>E</b> otra vez para bajarte · todos apostados: <b>Q</b> verifica"
+      "body": "Entra en la plataforma y pulsa <b>E</b> para apostar tu comodín.\nSi aciertas, <b>multiplicas</b> el dinero de esa cabina.\nSi fallas, quedas <b>expulsado</b> hasta la siguiente partida. Antes del cierre, <b>E</b> cancela."
     },
     {
+      "step": "Fichas",
       "title": "Fichas y tienda",
-      "body": "Cada partida te da <b>fichas</b>: cuantas más preguntas superéis, más.\n\nGástalas en la <b>tienda</b> de la sala de espera.\nSolo es ropa: <b>no da ventajas</b>."
+      "body": "Las preguntas superadas dan <b>fichas</b> a cada jugador.\nSe guardan para comprar personajes y accesorios en la <b>tienda</b> de la sala de espera.\nSolo cambian la apariencia: no dan ventajas."
     },
     {
+      "step": "Controles",
       "title": "Controles",
-      "body": "<b>WASD</b> moverse · <b>Shift</b> correr\n<b>Ratón</b> mirar · <b>Espacio</b> saltar\n<b>E</b> acción · <b>Q</b> varios · <b>R</b> devolver\n<b>Esc</b> menú"
+      "body": "<b>WASD</b>: moverte · <b>Shift</b>: correr\n<b>Ratón</b>: mirar · <b>Espacio</b>: saltar\n<b>E</b>: acción · <b>Q</b>: varios · <b>R</b>: devolver a la mesa\n<b>Esc</b>: menú; la partida continúa para los demás."
     }
   ]
 }

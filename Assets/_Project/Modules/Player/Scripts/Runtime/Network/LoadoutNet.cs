@@ -11,7 +11,6 @@ namespace Trivias.Player.Network
         public FixedString32Bytes Head;
         public FixedString32Bytes Face;
         public FixedString32Bytes Neck;
-        public FixedString32Bytes Color;
 
         public static LoadoutNet From(in CosmeticLoadout loadout)
         {
@@ -19,25 +18,23 @@ namespace Trivias.Player.Network
             net.Head.CopyFromTruncated(loadout.Head);
             net.Face.CopyFromTruncated(loadout.Face);
             net.Neck.CopyFromTruncated(loadout.Neck);
-            net.Color.CopyFromTruncated(loadout.Color);
             return net;
         }
 
-        public CosmeticLoadout ToLoadout() => new(Head.ToString(), Face.ToString(), Neck.ToString(), Color.ToString());
+        public CosmeticLoadout ToLoadout() => new(Head.ToString(), Face.ToString(), Neck.ToString());
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
             serializer.SerializeValue(ref Head);
             serializer.SerializeValue(ref Face);
             serializer.SerializeValue(ref Neck);
-            serializer.SerializeValue(ref Color);
         }
 
         public bool Equals(LoadoutNet other) =>
-            Head.Equals(other.Head) && Face.Equals(other.Face) && Neck.Equals(other.Neck) && Color.Equals(other.Color);
+            Head.Equals(other.Head) && Face.Equals(other.Face) && Neck.Equals(other.Neck);
 
         public override bool Equals(object obj) => obj is LoadoutNet other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(Head, Face, Neck, Color);
+        public override int GetHashCode() => HashCode.Combine(Head, Face, Neck);
     }
 }

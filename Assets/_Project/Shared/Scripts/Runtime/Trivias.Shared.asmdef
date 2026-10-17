@@ -2,7 +2,8 @@
     "name": "Trivias.Shared",
     "rootNamespace": "Trivias.Shared",
     "references": [
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

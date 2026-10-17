@@ -21,6 +21,13 @@ namespace Trivias.Ranking.Logic
             return $"{isoDate.Substring(8, 2)}/{isoDate.Substring(5, 2)}/{isoDate.Substring(0, 4)}";
         }
 
+        /// <summary>«2026-10-15» → «15/10/26» (tabla de récords). Si no tiene ese formato, se muestra tal cual.</summary>
+        public static string ShortDate(string isoDate)
+        {
+            var date = Date(isoDate);
+            return date.Length == 10 && date[2] == '/' && date[5] == '/' ? date.Substring(0, 6) + date.Substring(8, 2) : date;
+        }
+
         /// <summary>Línea de la pantalla de resultados sobre los récords.</summary>
         public static string Outcome(RecordOutcome outcome) => outcome.Kind switch
         {

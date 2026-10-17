@@ -36,6 +36,13 @@ namespace Trivias.Shared.Editor
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
+        public static void Set(Object target, string field, UnityEngine.Vector3 value)
+        {
+            var so = new SerializedObject(target);
+            Find(so, target, field).vector3Value = value;
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
         public static void Set(Object target, string field, string value)
         {
             var so = new SerializedObject(target);

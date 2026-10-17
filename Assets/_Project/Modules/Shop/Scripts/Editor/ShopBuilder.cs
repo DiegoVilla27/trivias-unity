@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using Trivias.Shared.Editor;
+using Trivias.Shared.Presentation;
 using Trivias.Shared.Profile;
 using Trivias.Shop.Components;
 using Trivias.Shop.Data;
@@ -11,8 +12,9 @@ using UnityEngine.UI;
 namespace Trivias.Shop.Editor
 {
     /// <summary>
-    /// Construye la tienda (GDD 11): cosméticos con primitivas, catálogo con los precios del GDD (accesorio 300,
-    /// color 600, atuendo especial 1.200), la ventana de la tienda y el presentador que viste a los concursantes.
+    /// Construye la tienda (GDD 11): cosméticos con primitivas, catálogo con los precios del GDD (accesorio 300, especial
+    /// 1.200), los personajes de pago (del catálogo de personajes), la ventana de la tienda y el presentador que viste a
+    /// los concursantes.
     /// </summary>
     public static class ShopBuilder
     {
@@ -24,25 +26,18 @@ namespace Trivias.Shop.Editor
         public const string PRESENTER_PREFAB_PATH = PREFABS + "/AvatarCosmetics.prefab";
 
         public const int ACCESSORY_PRICE = 300;
-        public const int COLOR_PRICE = 600;
         public const int SPECIAL_PRICE = 1200;
 
-        private static readonly Color PanelColor = new(0.05f, 0.06f, 0.16f, 0.96f);
-        private static readonly Color Gold = new(0.95f, 0.70f, 0.22f);
 
         public static CosmeticCatalog BuildCatalog()
         {
             var items = new List<CosmeticItem>
             {
-                new("gorra", "Gorra", CosmeticSlot.Head, ACCESSORY_PRICE, Cap(), new Vector3(0f, 0.1f, 0f), Color.white),
-                new("gafas", "Gafas de sol", CosmeticSlot.Face, ACCESSORY_PRICE, Glasses(), new Vector3(0f, 0.07f, 0.13f), Color.white),
-                new("pajarita", "Pajarita", CosmeticSlot.Neck, ACCESSORY_PRICE, BowTie(), new Vector3(0f, -0.12f, 0.12f), Color.white),
-                new("color-rojo", "Traje rojo", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.95f, 0.35f, 0.35f)),
-                new("color-azul", "Traje azul", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.4f, 0.6f, 1f)),
-                new("color-verde", "Traje verde", CosmeticSlot.Color, COLOR_PRICE, null, Vector3.zero, new Color(0.45f, 0.95f, 0.55f)),
-                new("corona", "Corona de campeón", CosmeticSlot.Head, SPECIAL_PRICE, Crown(), new Vector3(0f, 0.16f, 0f), Color.white),
-                new("chistera", "Chistera", CosmeticSlot.Head, SPECIAL_PRICE, TopHat(), new Vector3(0f, 0.14f, 0f), Color.white),
-                new("color-dorado", "Traje dorado", CosmeticSlot.Color, SPECIAL_PRICE, null, Vector3.zero, new Color(1f, 0.82f, 0.35f)),
+                new("gorra", "Gorra", CosmeticSlot.Head, ACCESSORY_PRICE, Cap(), new Vector3(0f, 0.15f, 0f)),
+                new("gafas", "Gafas de sol", CosmeticSlot.Face, ACCESSORY_PRICE, Glasses(), new Vector3(0f, 0.02f, 0.17f)),
+                new("pajarita", "Pajarita", CosmeticSlot.Neck, ACCESSORY_PRICE, BowTie(), new Vector3(0f, -0.1f, 0.08f)),
+                new("corona", "Corona de campeón", CosmeticSlot.Head, SPECIAL_PRICE, Crown(), new Vector3(0f, 0.16f, 0f)),
+                new("chistera", "Chistera", CosmeticSlot.Head, SPECIAL_PRICE, TopHat(), new Vector3(0f, 0.16f, 0f)),
             };
 
             var catalog = EditorAssets.GetOrCreateAsset<CosmeticCatalog>(CATALOG_PATH);
@@ -61,6 +56,10 @@ namespace Trivias.Shop.Editor
             return EditorAssets.SaveAsPrefab(root, PRESENTER_PREFAB_PATH);
         }
 
+        public const int CHARACTER_CARDS = 10;
+        private const string SHOP_TITLE = MODULE_ROOT + "/UI/Title_Shop.png";
+
+        /// <summary>La tienda como los bocetos 04 (personajes) y 05 (accesorios), a 1920 × 1080.</summary>
         public static GameObject BuildShopUi(CosmeticCatalog catalog)
         {
             var root = new GameObject("Shop", typeof(RectTransform));
@@ -73,59 +72,129 @@ namespace Trivias.Shop.Editor
             scaler.matchWidthOrHeight = 0.5f;
             root.AddComponent<GraphicRaycaster>();
 
-            const float rowHeight = 62f;
-            var items = catalog.Items;
-            var panelHeight = 200f + items.Count * rowHeight + 90f;
-            var panel = CreateRect("Panel", root.transform, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(820f, panelHeight));
-            panel.gameObject.AddComponent<Image>().color = PanelColor;
+            var overlay = UiKit.FullScreen("Panel", root.transform);
+            var veil = overlay.gameObject.AddComponent<Image>();
+            veil.sprite = UiKit.DotSprite(); // Con imagen propia: el tema no la toca.
+            veil.color = new Color(0.02f, 0.04f, 0.1f, 0.3f);
+            var screen = UiKit.Screen("Screen", overlay);
 
-            CreateLabel("Title", panel, "TIENDA", 54f, new Vector2(0f, -28f), new Vector2(760f, 64f), FontStyles.Bold, Gold);
-            var tokens = CreateLabel("Tokens", panel, string.Empty, 30f, new Vector2(0f, -96f), new Vector2(760f, 40f),
-                FontStyles.Normal, Color.white);
-            CreateLabel("Hint", panel, "Solo estética: no da ventajas. Las compras son para siempre.", 20f,
-                new Vector2(0f, -140f), new Vector2(760f, 30f), FontStyles.Italic, new Color(1f, 1f, 1f, 0.6f));
+            UiKit.Picture("Title", screen, UiKit.ArtSprite(SHOP_TITLE), 128f, 22f, 470f, 128f, preserveAspect: true);
+            var tokens = UiKit.Picture("Tokens", screen, UiKit.SecondarySprite(), 1472f, 52f, 302f, 66f);
+            UiKit.Picture("Icon", tokens.transform, UiKit.Icon("Token"), 16f, 8f, 50f, 50f, preserveAspect: true);
+            var tokensText = UiKit.Text("Text", tokens.transform, string.Empty, 76f, 2f, 214f, 62f, 30f, UiKit.UiFont.Bold, UiKit.Ivory,
+                TextAlignmentOptions.MidlineLeft);
 
-            var rows = new ShopItemRow[items.Count];
-            for (var i = 0; i < items.Count; i++)
-                rows[i] = CreateRow(panel, i, new Vector2(0f, -190f - i * rowHeight));
+            // Pestañas.
+            UiKit.Picture("Tabs", screen, UiKit.SecondarySprite(), 129f, 149f, 853f, 78f);
+            var charactersTab = UiKit.MakeButton("CharactersTab", screen, "Personajes", 135f, 155f, 452f, 66f, UiKit.ButtonStyle.Primary,
+                out var charactersLabel, 34f);
+            var accessoriesTab = UiKit.MakeButton("AccessoriesTab", screen, "Accesorios", 594f, 155f, 382f, 66f, UiKit.ButtonStyle.Secondary,
+                out var accessoriesLabel, 34f);
 
-            var close = CreateButton("Close", panel, "Volver", new Vector2(0f, -panelHeight + 80f), new Vector2(260f, 56f),
-                new Color(1f, 1f, 1f, 0.15f), Color.white, out _);
+            // Tarjetas.
+            var grid = UiKit.Panel("Grid", screen, 106f, 236f, 1108f, 748f);
+            var charactersGrid = UiKit.Rect("Characters", grid, 0f, 0f, 1108f, 748f);
+            var characterCards = new ShopCard[CHARACTER_CARDS];
+            for (var i = 0; i < CHARACTER_CARDS; i++)
+                characterCards[i] = BuildCard(charactersGrid, $"Character{i + 1}", 24f + (i % 5) * 215f, 26f + (i / 5) * 360f, 200f, 340f,
+                    fullBody: true);
+            var accessoriesGrid = UiKit.Rect("Accessories", grid, 0f, 0f, 1108f, 748f);
+            var accessoryCards = new ShopCard[catalog.Items.Count];
+            for (var i = 0; i < accessoryCards.Length; i++)
+                accessoryCards[i] = BuildCard(accessoriesGrid, $"Accessory{i + 1}", 46f + (i % 3) * 348f, 26f + (i / 3) * 362f, 320f, 342f,
+                    fullBody: false);
+            accessoriesGrid.gameObject.SetActive(false);
+
+            // A la derecha: el artículo en 3D.
+            var detail = UiKit.Panel("Detail", screen, 1226f, 140f, 573f, 845f);
+            UiKit.Tinted(UiKit.Picture("Spotlight", detail, UiKit.GlowSprite(), 36f, 30f, 500f, 600f), new Color(0.55f, 0.65f, 1f, 0.22f));
+            var preview = UiKit.Rect("Preview", detail, 46f, 24f, 480f, 600f).gameObject.AddComponent<RawImage>();
+            preview.raycastTarget = false;
+            var previewBinder = preview.gameObject.AddComponent<CharacterPreviewImage>();
+            SerializedWiring.Set(previewBinder, "_preview", SharedAssets.CharacterPreview());
+            SerializedWiring.Set(previewBinder, "_image", preview);
+            var previous = UiKit.IconButton("Previous", detail, UiKit.Icon("ArrowLeft"), 25f, 284f, 92f);
+            var next = UiKit.IconButton("Next", detail, UiKit.Icon("ArrowRight"), 456f, 284f, 92f);
+            var plate = UiKit.Picture("NamePlate", detail, UiKit.PlateSprite(), 114f, 586f, 345f, 60f);
+            var name = UiKit.Text("Name", plate.transform, string.Empty, 8f, 2f, 329f, 56f, 34f, UiKit.UiFont.Bold, UiKit.Ivory);
+            var badge = UiKit.Pill("Badge", detail, UiKit.PillGoldSprite(), UiKit.Icon("Token"), string.Empty, 137f, 652f, 299f, 50f,
+                UiKit.DarkText, out var badgeText, out var badgeIcon, 26f);
+            var action = UiKit.MakeButton("Action", detail, string.Empty, 63f, 718f, 447f, 76f, UiKit.ButtonStyle.Primary, out var actionLabel, 36f);
+            UiKit.Text("Hint", detail, "Solo apariencia. Sin ventajas.", 40f, 800f, 493f, 32f, 22f, UiKit.UiFont.Body, UiKit.Muted);
+
+            var close = UiKit.MakeButton("Close", screen, "Volver a la sala", 797f, 998f, 326f, 58f, UiKit.ButtonStyle.Secondary, 28f);
 
             var view = root.AddComponent<ShopView>();
             SerializedWiring.Set(view, "_catalog", catalog);
+            SerializedWiring.Set(view, "_characters", SharedAssets.CharacterCatalog());
             SerializedWiring.Set(view, "_profile", SharedAssets.PlayerProfile());
+            SerializedWiring.Set(view, "_preview", SharedAssets.CharacterPreview());
+            SerializedWiring.Set(view, "_backdrop", SharedAssets.UiBackdrop());
             SerializedWiring.Set(view, "_openRequested", SharedAssets.OpenShopRequested());
             SerializedWiring.Set(view, "_controlGate", SharedAssets.PlayerControlGate());
-            SerializedWiring.Set(view, "_panel", panel.gameObject);
-            SerializedWiring.Set(view, "_tokens", tokens);
-            SerializedWiring.SetArray(view, "_rows", rows);
+            SerializedWiring.Set(view, "_panel", overlay.gameObject);
+            SerializedWiring.Set(view, "_tokens", tokensText);
+            SerializedWiring.Set(view, "_charactersTab", charactersTab);
+            SerializedWiring.Set(view, "_accessoriesTab", accessoriesTab);
+            SerializedWiring.Set(view, "_charactersTabLabel", charactersLabel);
+            SerializedWiring.Set(view, "_accessoriesTabLabel", accessoriesLabel);
+            SerializedWiring.Set(view, "_charactersGrid", charactersGrid.gameObject);
+            SerializedWiring.Set(view, "_accessoriesGrid", accessoriesGrid.gameObject);
+            SerializedWiring.SetArray(view, "_characterCards", characterCards);
+            SerializedWiring.SetArray(view, "_accessoryCards", accessoryCards);
+            SerializedWiring.Set(view, "_previousButton", previous);
+            SerializedWiring.Set(view, "_nextButton", next);
+            SerializedWiring.Set(view, "_name", name);
+            SerializedWiring.Set(view, "_badge", badge);
+            SerializedWiring.Set(view, "_badgeIcon", badgeIcon);
+            SerializedWiring.Set(view, "_badgeText", badgeText);
+            SerializedWiring.Set(view, "_actionButton", action);
+            SerializedWiring.Set(view, "_actionLabel", actionLabel);
             SerializedWiring.Set(view, "_closeButton", close);
+            SerializedWiring.Set(view, "_tabSelected", UiKit.PrimarySprite());
+            SerializedWiring.Set(view, "_tabIdle", UiKit.SecondarySprite());
+            SerializedWiring.Set(view, "_card", UiKit.CardSprite());
+            SerializedWiring.Set(view, "_cardSelected", UiKit.CardSelectedSprite());
+            SerializedWiring.Set(view, "_badgeDark", UiKit.PillSprite());
+            SerializedWiring.Set(view, "_badgeGreen", UiKit.PillGreenSprite());
+            SerializedWiring.Set(view, "_badgeGold", UiKit.PillGoldSprite());
+            SerializedWiring.Set(view, "_checkIcon", UiKit.Icon("Check"));
+            SerializedWiring.Set(view, "_tokenIcon", UiKit.Icon("Token"));
 
-            panel.gameObject.SetActive(false);
+            overlay.gameObject.SetActive(false);
             return EditorAssets.SaveAsPrefab(root, SHOP_PREFAB_PATH);
         }
 
-        // ---- Filas ----
-
-        private static ShopItemRow CreateRow(RectTransform parent, int index, Vector2 position)
+        /// <summary>Tarjeta: foto (cuerpo entero o cabeza con el complemento), nombre y pastilla de estado.</summary>
+        private static ShopCard BuildCard(Transform parent, string name, float x, float y, float width, float height, bool fullBody)
         {
-            var rect = CreateRect($"Row{index}", parent, new Vector2(0.5f, 1f), position, new Vector2(760f, 54f));
-            rect.gameObject.AddComponent<Image>().color = new Color(1f, 1f, 1f, 0.06f);
+            var background = UiKit.Picture(name, parent, UiKit.CardSprite(), x, y, width, height);
+            background.raycastTarget = true;
+            var button = background.gameObject.AddComponent<Button>();
+            button.targetGraphic = background;
+            background.gameObject.AddComponent<Trivias.Shared.Presentation.UiButtonFeel>();
+            var photoHeight = height - 104f;
+            var photoWidth = fullBody ? photoHeight * 0.8f : photoHeight;
+            var portrait = UiKit.Rect("Portrait", background.transform, (width - photoWidth) * 0.5f, 6f, photoWidth, photoHeight)
+                .gameObject.AddComponent<RawImage>();
+            portrait.raycastTarget = false;
+            var label = UiKit.Text("Name", background.transform, string.Empty, 6f, height - 100f, width - 12f, 40f, fullBody ? 25f : 30f,
+                UiKit.UiFont.Bold, UiKit.Ivory);
+            var badge = UiKit.Pill("Badge", background.transform, UiKit.PillSprite(), UiKit.Icon("Check"), string.Empty, 10f, height - 56f,
+                width - 20f, 44f, UiKit.Ivory, out var badgeText, out var badgeIcon, fullBody ? 21f : 25f);
+            var padlock = UiKit.Picture("Lock", badge.transform, UiKit.Icon("Lock"), width - 58f, 7f, 30f, 30f, preserveAspect: true);
+            badgeText.rectTransform.sizeDelta -= new Vector2(30f, 0f); // Sitio para el candado.
 
-            var label = CreateLabel("Label", rect, string.Empty, 26f, new Vector2(-150f, -10f), new Vector2(440f, 36f),
-                FontStyles.Normal, Color.white);
-            label.alignment = TextAlignmentOptions.MidlineLeft;
-
-            var button = CreateButton("Action", rect, "Comprar", new Vector2(250f, -5f), new Vector2(230f, 44f),
-                Gold, new Color(0.08f, 0.08f, 0.18f), out var buttonLabel);
-
-            var row = rect.gameObject.AddComponent<ShopItemRow>();
-            SerializedWiring.Set(row, "_itemIndex", index);
-            SerializedWiring.Set(row, "_label", label);
-            SerializedWiring.Set(row, "_button", button);
-            SerializedWiring.Set(row, "_buttonLabel", buttonLabel);
-            return row;
+            var card = background.gameObject.AddComponent<ShopCard>();
+            SerializedWiring.Set(card, "_button", button);
+            SerializedWiring.Set(card, "_background", background);
+            SerializedWiring.Set(card, "_portrait", portrait);
+            SerializedWiring.Set(card, "_name", label);
+            SerializedWiring.Set(card, "_badge", badge);
+            SerializedWiring.Set(card, "_badgeIcon", badgeIcon);
+            SerializedWiring.Set(card, "_badgeText", badgeText);
+            SerializedWiring.Set(card, "_lock", padlock);
+            return card;
         }
 
         // ---- Cosméticos con primitivas (pivote en la cabeza del concursante) ----
@@ -196,47 +265,5 @@ namespace Trivias.Shop.Editor
         private static Material Mat(string name, Color color, float smoothness = 0.4f, float metallic = 0f) =>
             EditorAssets.GetOrCreateMaterial($"{MATERIALS}/{name}.mat", color, smoothness, metallic);
 
-        // ---- Utilidades de interfaz ----
-
-        private static RectTransform CreateRect(string name, Transform parent, Vector2 anchor, Vector2 position, Vector2 size)
-        {
-            var go = new GameObject(name, typeof(RectTransform));
-            go.transform.SetParent(parent, false);
-            var rect = (RectTransform)go.transform;
-            rect.anchorMin = rect.anchorMax = anchor;
-            rect.pivot = anchor;
-            rect.anchoredPosition = position;
-            rect.sizeDelta = size;
-            return rect;
-        }
-
-        private static TextMeshProUGUI CreateLabel(string name, Transform parent, string text, float size, Vector2 position,
-            Vector2 box, FontStyles style, Color color)
-        {
-            var rect = CreateRect(name, parent, new Vector2(0.5f, 1f), position, box);
-            var label = rect.gameObject.AddComponent<TextMeshProUGUI>();
-            label.text = text;
-            label.fontSize = size;
-            label.fontStyle = style;
-            label.color = color;
-            label.alignment = TextAlignmentOptions.Center;
-            label.textWrappingMode = TextWrappingModes.NoWrap;
-            label.richText = true;
-            label.raycastTarget = false;
-            return label;
-        }
-
-        private static Button CreateButton(string name, Transform parent, string caption, Vector2 position, Vector2 size,
-            Color background, Color textColor, out TextMeshProUGUI label)
-        {
-            var rect = CreateRect(name, parent, new Vector2(0.5f, 1f), position, size);
-            var image = rect.gameObject.AddComponent<Image>();
-            image.color = background;
-            var button = rect.gameObject.AddComponent<Button>();
-            button.targetGraphic = image;
-            label = CreateLabel("Label", rect, caption, 24f, new Vector2(0f, -(size.y - 32f) * 0.5f), new Vector2(size.x - 16f, 32f),
-                FontStyles.Bold, textColor);
-            return button;
-        }
     }
 }

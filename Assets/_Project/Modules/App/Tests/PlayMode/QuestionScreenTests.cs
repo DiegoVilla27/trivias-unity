@@ -86,7 +86,10 @@ namespace Trivias.App.Tests
             yield return PlayModeHelpers.AfterLock();
             var correct = _match.CorrectBooth;
             Assert.That(Text("_status").text, Does.StartWith($"CORRECTA: {(char)('A' + correct)}"));
-            Assert.That(Text("_status").text, Does.Contain(_match.CurrentQuestion.Explanation), "La explicación se ve en la pantalla.");
+            Assert.That(Text("_explanation").text, Is.EqualTo(_match.CurrentQuestion.Explanation), "La explicación se ve en la pantalla.");
+            Assert.That(Text("_answer").text, Does.StartWith($"{(char)('A' + correct)} · "), "La respuesta, en grande.");
+            Assert.That(Field<GameObject>("_reveal").activeSelf, Is.True);
+            Assert.That(Field<GameObject>("_options").activeSelf, Is.False, "Como en el boceto: la respuesta ocupa el sitio de las opciones.");
             for (var booth = 0; booth < 4; booth++)
                 Assert.That(OptionBox(booth).activeSelf, Is.EqualTo(booth == correct), $"Recuadro {(char)('A' + booth)}.");
         }
@@ -112,12 +115,14 @@ namespace Trivias.App.Tests
             _match = Object.FindAnyObjectByType<MatchSessionNetwork>();
         }
 
+        private T Field<T>(string name) => (T)typeof(QuestionScreenView).GetField(name, PRIVATE).GetValue(_screen);
+
         private GameObject Content() => (GameObject)typeof(QuestionScreenView).GetField("_content", PRIVATE).GetValue(_screen);
 
-        private TextMeshPro Text(string field) => (TextMeshPro)typeof(QuestionScreenView).GetField(field, PRIVATE).GetValue(_screen);
+        private TMP_Text Text(string field) => (TMP_Text)typeof(QuestionScreenView).GetField(field, PRIVATE).GetValue(_screen);
 
-        private TextMeshPro OptionText(int booth) =>
-            ((TextMeshPro[])typeof(QuestionScreenView).GetField("_optionTexts", PRIVATE).GetValue(_screen))[booth];
+        private TMP_Text OptionText(int booth) =>
+            ((TMP_Text[])typeof(QuestionScreenView).GetField("_optionTexts", PRIVATE).GetValue(_screen))[booth];
 
         private GameObject OptionBox(int booth) =>
             ((GameObject[])typeof(QuestionScreenView).GetField("_optionBoxes", PRIVATE).GetValue(_screen))[booth];

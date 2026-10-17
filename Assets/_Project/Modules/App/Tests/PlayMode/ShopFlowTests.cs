@@ -23,7 +23,6 @@ namespace Trivias.App.Tests
     public sealed class ShopFlowTests
     {
         private const BindingFlags PRIVATE = BindingFlags.Instance | BindingFlags.NonPublic;
-        private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
 
         private ConnectionService _connection;
         private ShopView _shop;
@@ -75,18 +74,22 @@ namespace Trivias.App.Tests
             _shop.Open();
             yield return null;
 
-            Row("gorra").Button.onClick.Invoke();
+            _shop.Select("gorra");
+            Assert.That(_shop.IsAccessoriesTab, Is.True);
+            Assert.That(_shop.ActionText, Is.EqualTo("Comprar y equipar"));
+            _shop.PressAction();
             yield return null;
             yield return null;
 
             Assert.That(_profile.Tokens, Is.EqualTo(700), "La gorra cuesta 300.");
+            Assert.That(_shop.ActionText, Is.EqualTo("Quitar"));
             Assert.That(_profile.Loadout.Head, Is.EqualTo("gorra"), "Al comprar se equipa.");
             var avatar = _player.GetComponent<IPlayerAvatar>();
             Assert.That(avatar.Loadout.Head, Is.EqualTo("gorra"), "Lo que lleva se publica en red.");
             Assert.That(avatar.HeadAnchor.GetComponentsInChildren<Transform>().Any(t => t.name.StartsWith("Gorra")), Is.True,
                 "La gorra debe verse en la cabeza.");
 
-            Row("gorra").Button.onClick.Invoke(); // Ya comprada: ahora quita.
+            _shop.PressAction(); // Ya comprada y puesta: ahora quita.
             yield return null;
             yield return null;
             Assert.That(avatar.Loadout.Head, Is.Empty);
@@ -95,22 +98,65 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
-        public IEnumerator BuyingAColor_TintsTheSuit()
+        public IEnumerator BuyingACharacter_ChoosesIt_AndTheContestantWearsIt()
         {
-            _profile.AwardMatch("regalo", 1000);
+            _profile.AwardMatch("regalo", 1200);
             _shop.Open();
             yield return null;
-            Row("color-rojo").Button.onClick.Invoke();
+            _shop.Select("raincoat");
+            Assert.That(_shop.ActionText, Is.EqualTo("Comprar y elegir"));
+            _shop.PressAction();
             yield return null;
             yield return null;
 
+            Assert.That(ProfileRules.Owns(_profile.Data, "raincoat"), Is.True);
+            Assert.That(_profile.Tokens, Is.Zero);
+            Assert.That(_profile.CharacterId, Is.EqualTo("raincoat"), "Al comprarlo se elige.");
+            Assert.That(_shop.ActionText, Is.EqualTo("Elegido"));
+            Assert.That(_shop.CanAct, Is.False, "El elegido no se vuelve a elegir.");
+
             var avatar = _player.GetComponent<IPlayerAvatar>();
-            var expected = Catalog().Find("color-rojo").Tint;
-            var block = new MaterialPropertyBlock();
-            avatar.BodyRenderers[0].GetPropertyBlock(block);
-            var actual = block.GetColor(BaseColorId);
-            Assert.That(Vector4.Distance(actual, expected), Is.LessThan(0.01f),
-                $"El traje debe teñirse con el color comprado (esperado {expected}, aplicado {actual}).");
+            Assert.That(avatar.CharacterId, Is.EqualTo("raincoat"), "El concursante lo lleva puesto.");
+            var view = _player.GetComponent<Trivias.Player.Components.PlayerCharacterView>();
+            Assert.That(view.ShownId, Is.EqualTo("raincoat"));
+            Assert.That(view.Animator.avatar.name, Does.StartWith("Raincoat"), "Con el modelo del personaje comprado.");
+        }
+
+        [UnityTest]
+        public IEnumerator TheShop_ShowsEveryCharacter_FreeOnesAsFree_PaidOnesWithPriceAndLock()
+        {
+            _shop.Open();
+            yield return null;
+            var cards = (ShopCard[])typeof(ShopView).GetField("_characterCards", PRIVATE).GetValue(_shop);
+            Assert.That(cards.Length, Is.EqualTo(10));
+            Assert.That(cards.Count(c => c.BadgeText == "Gratis" || c.BadgeText == "Elegido"), Is.EqualTo(6), "Seis gratuitos.");
+            Assert.That(cards.Count(c => c.BadgeText == "1.200 fichas" && c.IsLocked), Is.EqualTo(4), "Cuatro de pago, con candado.");
+            Assert.That(_shop.SelectedId, Is.EqualTo(_profile.CharacterId.Length > 0 ? _profile.CharacterId : "tracksuit"),
+                "Se abre con tu personaje seleccionado.");
+        }
+
+        [UnityTest]
+        public IEnumerator WithoutEnoughTokens_ThePriceStays_AndTheButtonSaysHowManyAreMissing()
+        {
+            _profile.AwardMatch("poco", 900);
+            _shop.Open();
+            yield return null;
+            _shop.Select("winter");
+            Assert.That(_shop.ActionText, Is.EqualTo("Te faltan 300 fichas"));
+            Assert.That(_shop.CanAct, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator TheShop_CoversTheLobby_AndClosingBringsItBack()
+        {
+            var menu = Object.FindAnyObjectByType<MenuView>();
+            Assert.That(menu.IsLobbyOpen, Is.True);
+            _shop.Open();
+            yield return null;
+            Assert.That(menu.IsLobbyOpen, Is.False, "Como en el boceto: la tienda ocupa la pantalla.");
+            _shop.Close();
+            yield return null;
+            Assert.That(menu.IsLobbyOpen, Is.True);
         }
 
         [UnityTest]
@@ -118,9 +164,9 @@ namespace Trivias.App.Tests
         {
             _shop.Open();
             yield return null;
-            var row = Row("corona");
-            Assert.That(row.Button.interactable, Is.False, "Sin fichas el botón de comprar está desactivado.");
-            row.Button.onClick.Invoke();
+            _shop.Select("corona");
+            Assert.That(_shop.CanAct, Is.False, "Sin fichas el botón de comprar está desactivado.");
+            _shop.PressAction();
             yield return null;
             Assert.That(ProfileRules.Owns(_profile.Data, "corona"), Is.False);
         }
@@ -162,13 +208,5 @@ namespace Trivias.App.Tests
             Assert.That(_profile.Tokens, Is.EqualTo(50), "Una sola entrega por partida.");
         }
 
-        private ShopItemRow Row(string itemId)
-        {
-            var catalog = Catalog();
-            var rows = (ShopItemRow[])typeof(ShopView).GetField("_rows", PRIVATE).GetValue(_shop);
-            return rows.First(r => catalog.Items[r.ItemIndex].Id == itemId);
-        }
-
-        private CosmeticCatalog Catalog() => (CosmeticCatalog)typeof(ShopView).GetField("_catalog", PRIVATE).GetValue(_shop);
     }
 }

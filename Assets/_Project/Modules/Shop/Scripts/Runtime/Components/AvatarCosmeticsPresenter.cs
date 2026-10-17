@@ -12,7 +12,6 @@ namespace Trivias.Shop.Components
     /// </summary>
     public sealed class AvatarCosmeticsPresenter : MonoBehaviour
     {
-        private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
         private static readonly CosmeticSlot[] AttachedSlots = { CosmeticSlot.Head, CosmeticSlot.Face, CosmeticSlot.Neck };
 
         [SerializeField] private CosmeticCatalog _catalog;
@@ -25,11 +24,9 @@ namespace Trivias.Shop.Components
         }
 
         private readonly Dictionary<ulong, Dressed> _dressed = new();
-        private MaterialPropertyBlock _block;
 
         private void OnEnable()
         {
-            _block ??= new MaterialPropertyBlock();
             _avatars.Changed += OnAvatarChanged;
             foreach (var avatar in _avatars.All)
                 Apply(avatar);
@@ -56,17 +53,18 @@ namespace Trivias.Shop.Components
             var loadout = avatar.Loadout;
             foreach (var slot in AttachedSlots)
                 ApplyAttached(avatar, dressed, slot, loadout[slot]);
-            ApplyColor(avatar, dressed, loadout.Color);
         }
 
         private void ApplyAttached(IPlayerAvatar avatar, Dressed dressed, CosmeticSlot slot, string id)
         {
             var index = (int)slot;
-            if (dressed.Ids[index] == id && (string.IsNullOrEmpty(id) || dressed.Instances[index] != null))
+            // Si cambió de personaje, su cabeza es otra: lo puesto se vuelve a colocar en ella.
+            var instance = dressed.Instances[index];
+            if (dressed.Ids[index] == id && (string.IsNullOrEmpty(id) || (instance != null && instance.transform.parent == avatar.HeadAnchor)))
                 return;
 
-            if (dressed.Instances[index] != null)
-                Destroy(dressed.Instances[index]);
+            if (instance != null)
+                Destroy(instance);
             dressed.Instances[index] = null;
             dressed.Ids[index] = id;
 
@@ -74,35 +72,11 @@ namespace Trivias.Shop.Components
             if (item?.Prefab == null || avatar.HeadAnchor == null)
                 return;
 
-            // Se coloca alineado con el concursante y luego se engancha a la cabeza para seguir sus animaciones.
-            var root = avatar.HeadAnchor.root;
-            var instance = Instantiate(item.Prefab);
-            instance.transform.SetPositionAndRotation(avatar.HeadAnchor.position + root.rotation * item.Offset, root.rotation);
-            instance.transform.SetParent(avatar.HeadAnchor, true);
+            // Se engancha al anclaje de la cabeza (mira como el concursante y tiene la escala de su cabeza): el
+            // desplazamiento y el tamaño del cosmético se adaptan solos y sigue las animaciones.
+            instance = Instantiate(item.Prefab, avatar.HeadAnchor, false);
+            instance.transform.SetLocalPositionAndRotation(item.Offset, Quaternion.identity);
             dressed.Instances[index] = instance;
-        }
-
-        private void ApplyColor(IPlayerAvatar avatar, Dressed dressed, string id)
-        {
-            var index = (int)CosmeticSlot.Color;
-            if (dressed.Ids[index] == id)
-                return;
-            dressed.Ids[index] = id;
-
-            var item = _catalog.Find(id);
-            foreach (var body in avatar.BodyRenderers)
-            {
-                if (body == null)
-                    continue;
-                if (item == null)
-                {
-                    body.SetPropertyBlock(null);
-                    continue;
-                }
-                body.GetPropertyBlock(_block);
-                _block.SetColor(BaseColorId, item.Tint);
-                body.SetPropertyBlock(_block);
-            }
         }
     }
 }

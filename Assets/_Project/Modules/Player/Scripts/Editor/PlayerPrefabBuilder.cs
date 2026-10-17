@@ -2,6 +2,7 @@ using System.Linq;
 using Trivias.Player.Components;
 using Trivias.Player.Data;
 using Trivias.Player.Network;
+using Trivias.Shared.Characters;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Events;
 using Trivias.Shared.Physics;
@@ -27,14 +28,19 @@ namespace Trivias.Player.Editor
         private const string CONTROLS_PATH = MODULE_ROOT + "/Config/PlayerControls.inputactions";
 
         private const string STARTER_CHARACTER = "Assets/ThirdParty/StarterAssets/Runtime/ThirdPersonController/Character";
-        private const string MODEL_PATH = STARTER_CHARACTER + "/Models/Armature.fbx";
         private const string ANIMATOR_PATH = STARTER_CHARACTER + "/Animations/StarterAssetsThirdPerson.controller";
         private const string SFX_FOLDER = STARTER_CHARACTER + "/Sfx";
 
-        private const float CAMERA_ROOT_HEIGHT = 1.375f;
-        private const string HEAD_BONE = "Head";
-        private const float NAME_TAG_HEIGHT = 2.15f;
-        private static readonly Vector3 CarryPointPosition = new(0f, 1.05f, 0.38f);
+        // Medidas del concursante: los personajes a su altura original (1,9 m, cabeza grande de 1,2 m de ancho).
+        private const float HEIGHT = CharacterModelBuilder.HEIGHT;
+        private const float CAPSULE_RADIUS = 0.32f;
+        private const float CAMERA_ROOT_HEIGHT = 1.72f;
+        private const float NAME_TAG_HEIGHT = 2.25f;
+        /// <summary>El dinero se lleva delante de la barriga, por debajo de la cabeza.</summary>
+        private static readonly Vector3 CarryPointPosition = new(0f, 0.72f, 0.5f);
+        /// <summary>Anclaje de los complementos: a la altura de los ojos, en el centro de la cabeza y a su escala.</summary>
+        public static readonly Vector3 CosmeticsAnchorPosition = new(0f, 1.29f, 0f);
+        public const float COSMETICS_SCALE = 3f;
 
         [MenuItem("Tools/Trivias/Build/Player")]
         public static GameObject BuildFromMenu() =>
@@ -48,15 +54,16 @@ namespace Trivias.Player.Editor
             var root = new GameObject("Player");
 
             var controller = root.AddComponent<CharacterController>();
-            controller.center = new Vector3(0f, 0.93f, 0f);
-            controller.height = 1.8f;
-            controller.radius = 0.28f;
+            controller.center = new Vector3(0f, HEIGHT * 0.5f + 0.02f, 0f);
+            controller.height = HEIGHT;
+            controller.radius = CAPSULE_RADIUS;
             controller.stepOffset = 0.3f; // Sube a las plataformas de apuesta andando.
             controller.skinWidth = 0.02f;
             controller.slopeLimit = 45f;
             controller.minMoveDistance = 0f;
 
-            var animator = CreateModel(root.transform);
+            var catalog = CharacterModelBuilder.Build();
+            var animator = CreateModel(root.transform, CharacterModelBuilder.Default(catalog));
             var cameraRoot = EditorAssets.CreateEmpty("CameraRoot", root.transform, Vector3.up * CAMERA_ROOT_HEIGHT);
             var nameTag = CreateNameTag(root.transform);
 
@@ -114,8 +121,9 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(playerNetwork, "_expulsion", expulsion);
             SerializedWiring.Set(playerNetwork, "_avatars", SharedAssets.PlayerAvatars());
             SerializedWiring.Set(playerNetwork, "_profile", SharedAssets.PlayerProfile());
-            SerializedWiring.Set(playerNetwork, "_headAnchor", FindDeep(animator.transform, HEAD_BONE));
-            SerializedWiring.SetArray(playerNetwork, "_bodyRenderers", animator.GetComponentsInChildren<SkinnedMeshRenderer>(true));
+            var characterView = AddCharacterView(root, animator, catalog);
+            SerializedWiring.Set(playerNetwork, "_characters", catalog);
+            SerializedWiring.Set(playerNetwork, "_characterView", characterView);
 
             foreach (var extend in extensions)
                 extend(root);
@@ -124,16 +132,21 @@ namespace Trivias.Player.Editor
             return EditorAssets.SaveAsPrefab(root, PREFAB_PATH);
         }
 
-        private static Animator CreateModel(Transform parent)
+        /// <summary>
+        /// El personaje por defecto ya puesto en el prefab, con el Animator y los pasos. Al elegir otro, el
+        /// <see cref="PlayerCharacterView"/> cambia lo que cuelga del Animator.
+        /// </summary>
+        internal static Animator CreateModel(Transform parent, CharacterDefinition character)
         {
-            var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>(MODEL_PATH);
-            var model = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset, parent);
+            var model = (GameObject)PrefabUtility.InstantiatePrefab(character.Model, parent);
             model.name = "Model";
+            foreach (var skinned in model.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+                skinned.updateWhenOffscreen = false;
 
             if (!model.TryGetComponent<Animator>(out var animator))
                 animator = model.AddComponent<Animator>();
             animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(ANIMATOR_PATH);
-            animator.avatar = AssetDatabase.LoadAllAssetsAtPath(MODEL_PATH).OfType<Avatar>().First();
+            animator.avatar = character.Avatar;
             animator.applyRootMotion = false;
 
             var audioSource = model.AddComponent<AudioSource>();
@@ -146,6 +159,21 @@ namespace Trivias.Player.Editor
             SerializedWiring.SetArray(events, "_footstepClips", LoadClips("Player_Footstep"));
             SerializedWiring.Set(events, "_landingClip", LoadClips("Player_Land").FirstOrDefault());
             return animator;
+        }
+
+        /// <summary>El personaje que lleva y el anclaje de sus complementos en la cabeza.</summary>
+        internal static PlayerCharacterView AddCharacterView(GameObject root, Animator animator, CharacterCatalog catalog)
+        {
+            var view = root.AddComponent<PlayerCharacterView>();
+            var head = PlayerCharacterView.FindDeep(animator.transform, PlayerCharacterView.HEAD_BONE);
+            SerializedWiring.Set(view, "_catalog", catalog);
+            SerializedWiring.Set(view, "_animator", animator);
+            SerializedWiring.Set(view, "_builtWith", catalog.DefaultId);
+            SerializedWiring.Set(view, "_anchorPosition", CosmeticsAnchorPosition);
+            SerializedWiring.Set(view, "_cosmeticsScale", COSMETICS_SCALE);
+            SerializedWiring.Set(view, "_head", head);
+            SerializedWiring.Set(view, "_headAnchor", PlayerCharacterView.CreateAnchor(head, root.transform, CosmeticsAnchorPosition, COSMETICS_SCALE));
+            return view;
         }
 
         private static PlayerNameTag CreateNameTag(Transform parent)
@@ -183,7 +211,7 @@ namespace Trivias.Player.Editor
                 .Select(AssetDatabase.LoadAssetAtPath<AudioClip>)
                 .ToArray();
 
-        private static Transform FindDeep(Transform parent, string name)
+        internal static Transform FindDeep(Transform parent, string name)
         {
             foreach (Transform child in parent)
             {

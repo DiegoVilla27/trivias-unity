@@ -81,7 +81,8 @@ namespace Trivias.App.Tests
 
             Assert.That(view.IsOpen, Is.True);
             Assert.That(view.GroupSize, Is.EqualTo(3), "Abre en la primera categoría con victorias.");
-            Assert.That(view.ListText, Does.Contain("12:34").And.Contain("supervivientes: Ana, Luis"));
+            Assert.That(view.ListText, Does.Contain("12:34").And.Contain("Ana, Luis, Eva").And.Contain("2/3"),
+                "Tiempo, participantes y supervivientes de cada victoria.");
             Assert.That(view.ListText.IndexOf("6.400.000", System.StringComparison.Ordinal),
                 Is.LessThan(view.ListText.IndexOf("500.000", System.StringComparison.Ordinal)), "Primero el mayor premio.");
 
@@ -90,7 +91,7 @@ namespace Trivias.App.Tests
             Assert.That(tabs[0].GetComponentInChildren<TextMeshProUGUI>().text, Is.EqualTo("2 jugadores"));
             tabs[3].onClick.Invoke();
             Assert.That(view.GroupSize, Is.EqualTo(5));
-            Assert.That(view.ListText, Does.Contain("Aún no tenéis victorias con 5 jugadores"));
+            Assert.That(view.ListText, Is.EqualTo(Trivias.Menu.Logic.RecordsTable.EMPTY), "Categoría vacía: lo dice claro.");
 
             Object.FindAnyObjectByType<PauseMenuView>().HandleEscape();
             Assert.That(view.IsOpen, Is.False, "Esc cierra los récords.");
@@ -293,7 +294,7 @@ namespace Trivias.App.Tests
             public Vector3 Position => Root.transform.position;
             public Transform CarryPoint => Root.transform;
             public Transform HeadAnchor => null;
-            public Renderer[] BodyRenderers { get; } = new Renderer[0];
+            public string CharacterId => string.Empty;
             public CosmeticLoadout Loadout => default;
             public bool IsLocal => false;
             public Transform ViewTarget { get; }

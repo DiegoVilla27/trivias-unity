@@ -99,8 +99,8 @@ namespace Trivias.App.Tests
             yield return new WaitForSeconds(0.5f);
             var avatar = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<Trivias.Shared.Players.IPlayerAvatar>();
             Assert.That(avatar.DisplayName, Is.EqualTo("Ana bLópez"));
-            var players = (TextMeshProUGUI)typeof(MenuView).GetField("_players", PRIVATE).GetValue(menu);
-            Assert.That(players.text, Does.Contain("Ana bLópez"), "La sala de espera muestra el nombre elegido.");
+            var seats = (LobbyPlayerRow[])typeof(MenuView).GetField("_rows", PRIVATE).GetValue(menu);
+            Assert.That(seats[0].NameText, Is.EqualTo("Ana bLópez"), "La sala de espera muestra el nombre elegido.");
         }
 
         [UnityTest]

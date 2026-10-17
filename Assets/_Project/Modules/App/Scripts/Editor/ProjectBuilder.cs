@@ -78,6 +78,7 @@ namespace Trivias.App.Editor
                 ResultsScreen = ResultsPrefabBuilder.Build(matchRuntime),
                 Menu = MenuPrefabBuilder.Build(matchRuntime),
                 ShopUi = ShopBuilder.BuildShopUi(cosmetics),
+                CharacterShowcase = CharacterShowcaseBuilder.Build(),
                 AvatarCosmetics = ShopBuilder.BuildPresenter(cosmetics),
                 GameFeedback = FeedbackBuilder.BuildPlayer(feedbackLibrary, matchRuntime, MoneyBuilder.Runtime(), SelfBetBuilder.Runtime()),
                 StageConfetti = FeedbackBuilder.BuildStageConfetti(matchRuntime),

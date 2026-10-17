@@ -10,7 +10,7 @@ Mantener configurables las propuestas económicas: capital 100.000, denominacion
 
 ## Hitos propuestos
 
-MVP: el plató y sus objetos usan los modelos 3D de cada módulo desde el 16 de octubre de 2026; lo que aún no tiene modelo (presentador, cosméticos, podio, público) sigue con primitivas. Personaje: provisionalmente el robot de Starter Assets; se preparan unos diez personajes completos.
+MVP: el plató y sus objetos usan los modelos 3D de cada módulo desde el 16 de octubre de 2026; lo que aún no tiene modelo (presentador, cosméticos, podio, público) sigue con primitivas. Personajes: los diez completos del usuario tal cual, riggeados con el mismo esqueleto Humanoid y las animaciones de Starter Assets.
 
 | Orden | Entregable | Criterio para avanzar |
 | --- | --- | --- |
@@ -35,7 +35,7 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 0 Red local | Hecho: Netcode for GameObjects, salas de 2 a 6, menú principal y sala de espera |
 | 1 Plató y personaje | Hecho: tercera persona, interacción por cercanía, dinero |
 | Plató con modelos | Hecho: sala compacta (plano en `StageLayout`) con cabinas a los lados, plataformas de apuesta, tubos del dinero y del concursante, mesa, botón, estación, dinero y pantalla con sus modelos; suelo de baldosas y decorado de concepto-01 (telón, columnas, paredes, techo con vigas y focos, cámaras, público, tarima del presentador) y brillo de bombillas. Pendiente: modelos de presentador, podio y cosméticos; medir rendimiento en equipos modestos |
-| Concursante | Provisional: robot de Starter Assets con sus animaciones. Pendiente: unos diez personajes completos (en preparación por el usuario), riggeados con el mismo esqueleto Humanoid; elegir personaje; medir rendimiento con seis jugadores y comprobarlo en Multiplayer Play Mode |
+| Concursante | Hecho: los diez personajes completos del usuario tal cual, riggeados con el mismo esqueleto Humanoid y las animaciones de Starter Assets; elegir personaje en el menú (seis gratuitos y cuatro en la tienda), sin repetirse en la sala. Pendiente: confirmar los seis gratuitos; medir rendimiento con seis jugadores y comprobarlo en Multiplayer Play Mode |
 | Salto y carrera | Hecho: Espacio, 0,9 m, con la animación de Starter Assets; correr con Shift (5,6 m/s) |
 | Presentador y tipografías | Hecho: presentador al pie de la pantalla entre cambio y verificar, viñeta de cómic junto a la cabeza (letra a letra, cuatro ánimos); Lilita One y Poppins en el plató y en toda la interfaz |
 | Plató vivo e interfaz | Hecho: succión del expulsado y del dinero perdido por sus tubos (aire y sonido), bombillas, público con reacciones, cámaras de estudio y focos que se mueven; tema de la interfaz (paneles con marco dorado, botones con tacto, bombillas, logo que late). Pendiente: comprobar en Multiplayer Play Mode que los clientes ven la succión igual que el anfitrión |
@@ -44,10 +44,10 @@ Comprobar pronto los riesgos de red y micrófono, aunque el acabado se haga desp
 | 4 Partida de 15 preguntas | Hecho: victoria/derrota, resultados, fichas por tramo, volver a jugar, presentador |
 | 6 Contenido | Hecho: 313 preguntas (60 de cálculo mental) con historial de vistas del grupo y 104 frases en 17 momentos. Pendiente: micrófono (con Steam) |
 | Nombre del jugador | Hecho: se elige en el menú, se guarda en el perfil y es único en la sala. Con Steam, el de la cuenta |
-| 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 9 cosméticos sincronizados |
+| 8 Tienda y fichas guardadas | Hecho: perfil local, entrega única, tienda con 5 cosméticos y 4 personajes de pago, sincronizados |
 | Robustez para pruebas en grupo | Hecho: abandonos a mitad de partida, reapertura de sala y build para compartir con un clic (Tools → Trivias → Crear build) |
 | Sonido y sensaciones | Hecho: 14 efectos, 4 sonidos del plató (succión y público) y 3 pistas sintetizados al construir, confeti por acierto y victoria, iluminación por bloque y momento, cheque y podio en la victoria |
-| Menú y opciones | Hecho: menú principal con velo semioscuro sobre el plató, unirse con validación, invitar (dirección y copiar), tutorial breve, configuración guardada y pausa con Esc |
+| Menú y opciones | Hecho: menús, sala de espera y tienda como sus bocetos (`docs/bocetos/ui/menu`), con el plató desenfocado detrás, retratos de los personajes hechos al cargar y vista 3D con complementos; invitación, tutorial con pasos e ilustraciones, configuración, récords en tabla y pausa con confirmación de salida |
 | Espectador | Hecho: cámara que sigue a los activos, cambiar con A/D, vista general con Espacio y rótulo |
 | 10 Ranking | Récords locales hechos (por tamaño de grupo, dinero y tiempo, empates compartidos). Ranking global pendiente (con Steam) |
 | 9 Steam y voz | Pendiente (AppID 480 para pruebas, sin coste) |

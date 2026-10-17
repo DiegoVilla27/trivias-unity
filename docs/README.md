@@ -9,14 +9,14 @@ Documentos derivados del [GDD](GDD.md), referencia principal de reglas y alcance
 | [RECURSOS.md](RECURSOS.md) | Inventario de arte, animación, audio, interfaz y contenido |
 | [SISTEMAS.md](SISTEMAS.md) | Partida, dinero, comodines, fichas, ranking y multijugador |
 | [CONTENIDO.md](CONTENIDO.md) | Preguntas, frases del presentador y entrada opcional de IA |
-| [UI_UX.md](UI_UX.md) | Pantallas, información visible y respuestas a las acciones |
+| [UI_UX.md](UI_UX.md) | Pantallas, información visible, respuestas a las acciones y [bocetos del menú](bocetos/ui/menu/README.md) |
 | [DESARROLLO.md](DESARROLLO.md) | Orden de construcción, verificaciones y decisiones pendientes |
 | [Bocetos visuales](bocetos/README.md) | Concepto del plató y láminas para modelado de personaje, presentador y recursos |
 | [JUGAR_CON_AMIGOS.md](JUGAR_CON_AMIGOS.md) | Cómo probar el juego con otras personas gratis (build + VPN gratuita) |
 
 ## Referencias visuales
 
-Los bocetos se organizan por [player](bocetos/player/README.md), [presentador](bocetos/presentador/README.md), [plató](bocetos/plato/README.md) y [recursos](bocetos/recursos/README.md). Los ZIP están reunidos en [paquetes](bocetos/paquetes/README.md).
+Los bocetos se organizan por [player](bocetos/player/README.md), [presentador](bocetos/presentador/README.md), [plató](bocetos/plato/README.md) y [recursos](bocetos/recursos/README.md). Los ZIP están reunidos en paquetes (archivo retirado).
 
 La referencia visual actual del jugador es el [catálogo de diez personajes completos en A-pose](bocetos/player/characters/README.md). Las bases, T-poses y piezas separadas anteriores fueron eliminadas.
 

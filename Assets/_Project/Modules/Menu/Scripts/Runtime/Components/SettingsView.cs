@@ -1,4 +1,5 @@
 using TMPro;
+using Trivias.Shared.Presentation;
 using Trivias.Shared.Settings;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace Trivias.Menu.Components
     public sealed class SettingsView : MonoBehaviour
     {
         [SerializeField] private GameSettings _settings;
+        [SerializeField] private UiBackdrop _backdrop;
         [SerializeField] private GameObject _panel;
         [SerializeField] private Slider _masterVolume;
         [SerializeField] private Slider _musicVolume;
@@ -23,10 +25,13 @@ namespace Trivias.Menu.Components
         [SerializeField] private TextMeshProUGUI _sensitivityValue;
         [SerializeField] private Toggle _invertY;
         [SerializeField] private Toggle _fullscreen;
+        [SerializeField] private UiSwitch _invertYSwitch;
+        [SerializeField] private UiSwitch _fullscreenSwitch;
         [SerializeField] private Button _resetButton;
         [SerializeField] private Button _closeButton;
 
         public bool IsOpen => _panel.activeSelf;
+
 
         private void Start() => ApplyScreen(); // La pantalla completa guardada se aplica al arrancar.
 
@@ -54,17 +59,20 @@ namespace Trivias.Menu.Components
             _resetButton.onClick.RemoveListener(OnReset);
             _closeButton.onClick.RemoveListener(Close);
             _settings.Changed -= RefreshLabels;
+            _backdrop.Cover(this, false);
         }
 
         public void Open()
         {
             _panel.SetActive(true);
+            _backdrop.Cover(this, true);
             SyncControls();
         }
 
         public void Close()
         {
             _panel.SetActive(false);
+            _backdrop.Cover(this, false);
             _settings.Save();
         }
 
@@ -93,6 +101,8 @@ namespace Trivias.Menu.Components
             _mouseSensitivity.SetValueWithoutNotify(_settings.MouseSensitivity);
             _invertY.SetIsOnWithoutNotify(_settings.InvertY);
             _fullscreen.SetIsOnWithoutNotify(_settings.Fullscreen);
+            _invertYSwitch.Refresh();
+            _fullscreenSwitch.Refresh();
             RefreshLabels();
         }
 
@@ -103,7 +113,8 @@ namespace Trivias.Menu.Components
             _masterValue.text = Percent(_settings.MasterVolume);
             _musicValue.text = Percent(_settings.MusicVolume);
             _effectsValue.text = Percent(_settings.EffectsVolume);
-            _sensitivityValue.text = $"x{_settings.MouseSensitivity:0.0}";
+            _sensitivityValue.text = Percent(Mathf.InverseLerp(SettingsRules.MIN_SENSITIVITY, SettingsRules.MAX_SENSITIVITY,
+                _settings.MouseSensitivity));
         }
 
         private static string Percent(float value) => $"{Mathf.RoundToInt(value * 100f)}%";

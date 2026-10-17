@@ -1,11 +1,12 @@
 using System;
 using System.IO;
+using Trivias.Shared.Characters;
 using UnityEngine;
 
 namespace Trivias.Shared.Profile
 {
     /// <summary>
-    /// Perfil del jugador local (nombre, fichas, compras y equipamiento), cargado una vez y guardado en cada cambio.
+    /// Perfil del jugador local (nombre, personaje, fichas, compras y equipamiento), cargado una vez y guardado en cada cambio.
     /// Lo usan el menú (nombre), la pantalla de resultados (entregar fichas), la tienda (comprar y equipar) y el
     /// concursante (cómo se llama y lo que lleva).
     /// </summary>
@@ -30,6 +31,8 @@ namespace Trivias.Shared.Profile
 
         /// <summary>Nombre elegido (ya limpio), o vacío si no ha elegido ninguno.</summary>
         public string PlayerName => Data.name;
+        /// <summary>Personaje guardado (puede estar vacío o no tenerlo ya: ver <see cref="CharacterRules.Current"/>).</summary>
+        public string CharacterId => Data.character;
         public int Tokens => Data.tokens;
         public CosmeticLoadout Loadout => Data.Loadout;
 
@@ -49,6 +52,15 @@ namespace Trivias.Shared.Profile
             if (name == Data.name)
                 return false;
             _data.name = name;
+            return Apply(true);
+        }
+
+        /// <summary>Elige personaje si lo tiene (gratuito o comprado). Devuelve false si no lo tiene o ya era ese.</summary>
+        public bool TryChooseCharacter(CharacterCatalog catalog, string id)
+        {
+            if (catalog.Find(id) == null || !CharacterRules.IsUnlocked(id, catalog.FreeIds, Data.owned) || Data.character == id)
+                return false;
+            _data.character = id;
             return Apply(true);
         }
 

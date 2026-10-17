@@ -21,7 +21,7 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
 
-La referencia visual vigente del player es el catálogo de personajes completos en A-pose; las bases y los despieces anteriores fueron eliminados. El catálogo es documentación visual; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md). Se descartaron las piezas sueltas en el juego: el concursante será uno de unos diez personajes completos (de momento, el robot de Starter Assets).
+La referencia visual vigente del player es el catálogo de personajes completos en A-pose; las bases y los despieces anteriores fueron eliminados. El catálogo es documentación visual; el concursante jugable sigue siendo el descrito en [PLAYER](PLAYER.md). Se descartaron las piezas sueltas en el juego: el concursante es uno de los diez personajes completos, importados tal cual en `Player/Models/Characters/` (FBX riggeado de unos 40 MB cada uno, en LFS, con su textura `shaded.png`).
 
 Catálogo visual vigente: [diez personajes completos en A-pose](bocetos/player/characters/README.md), cada uno en su carpeta y con una única lámina de ocho vistas. Blue Tracksuit conserva la imagen A-pose original aprobada, ahora renombrada; los otros nueve integran sus atuendos, peinados y zapatos sobre la misma identidad visual. No se generan T-poses ni despieces como entregables del catálogo actual.
 
@@ -97,3 +97,11 @@ Documentar fuentes de preguntas y licencias/origen de recursos externos antes de
 Primero geometría y arte provisional, luego un personaje base y una cabina representativos, después sus variantes y acabado. La tienda, decorado amplio, diez apariencias y materiales de Steam vienen después de validar una partida completa.
 
 Pendientes: herramienta de modelado, estilo final, catálogo de cosméticos, idiomas de salida, presupuesto y recursos existentes aprovechables.
+
+## Bocetos de interfaz
+
+[Diez pantallas de menús](bocetos/ui/menu/README.md), con selección de personaje, salas, tienda, ayuda, récords, opciones y salida. Estilo derivado del plató y del tema UI; [especificación visual y estados](bocetos/ui/menu/DISENO.md). Son referencias de producción, sin cambios a los assets ni prefabs de Unity.
+
+Referencias del HUD: [siete bocetos de estados](bocetos/ui/hud/README.md), con [especificación visual](bocetos/ui/hud/DISENO.md). Una imagen por estado, usando el estilo del plató y los menús; no modifica assets ni escenas.
+
+Recursos gráficos del menú: [18 PNG transparentes de MenuUI](bocetos/ui/menu/recursos/README.md), con títulos, hoja de iconos, ilustraciones del tutorial y personaje. Montados en el juego el 17 de octubre de 2026: títulos e ilustraciones en `Menu/UI`, el de la tienda en `Shop/UI` e iconos sueltos en `Shared/UI/Icons`.

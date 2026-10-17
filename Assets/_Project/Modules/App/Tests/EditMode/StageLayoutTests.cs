@@ -19,7 +19,7 @@ namespace Trivias.App.Tests
         private const string ENVIRONMENT = "StageEnvironment";
         private const string SCREEN = "StageEnvironment/QuestionScreen";
         private const float EYE_HEIGHT = 1.7f;
-        private static readonly Vector3 CameraOffset = new(0.5f, 2.2f, -3.8f); // Tercera persona: detrás y por encima.
+        private static readonly Vector3 CameraOffset = new(0.75f, 2.62f, -4.2f); // Tercera persona: detrás y por encima.
 
         private GameObject[] _roots;
 
@@ -38,15 +38,15 @@ namespace Trivias.App.Tests
         [Test]
         public void QuestionScreen_HasQuestionFourOptionsAndStatus()
         {
-            Assert.That(Find($"{SCREEN}/Content/Question"), Is.Not.Null);
-            Assert.That(Find($"{SCREEN}/Content/Header"), Is.Not.Null);
-            Assert.That(Find($"{SCREEN}/Content/Status"), Is.Not.Null);
-            Assert.That(Find($"{SCREEN}/Message"), Is.Not.Null);
+            Assert.That(Find($"{SCREEN}/Display/Content/Question"), Is.Not.Null);
+            Assert.That(Find($"{SCREEN}/Display/Content/Header"), Is.Not.Null);
+            Assert.That(Find($"{SCREEN}/Display/Content/StatusBox/Status"), Is.Not.Null);
+            Assert.That(Find($"{SCREEN}/Display/Message"), Is.Not.Null);
             for (var booth = 0; booth < 4; booth++)
             {
                 var letter = (char)('A' + booth);
-                Assert.That(Find($"{SCREEN}/Content/Option{letter}/Box"), Is.Not.Null, $"Falta el recuadro {letter}.");
-                Assert.That(Find($"{SCREEN}/Content/Option{letter}/Text"), Is.Not.Null, $"Falta el texto {letter}.");
+                Assert.That(Find($"{SCREEN}/Display/Content/Options/Option{letter}/Box"), Is.Not.Null, $"Falta el recuadro {letter}.");
+                Assert.That(Find($"{SCREEN}/Display/Content/Options/Option{letter}/Text"), Is.Not.Null, $"Falta el texto {letter}.");
             }
         }
 
@@ -55,13 +55,13 @@ namespace Trivias.App.Tests
         {
             var targets = new List<(string Name, Vector3 Point)>
             {
-                ("pregunta", Find($"{SCREEN}/Content/Question").transform.position),
-                ("estado", Find($"{SCREEN}/Content/Status").transform.position),
+                ("pregunta", Find($"{SCREEN}/Display/Content/Question").transform.position),
+                ("estado", Find($"{SCREEN}/Display/Content/StatusBox/Status").transform.position),
             };
             for (var booth = 0; booth < 4; booth++)
             {
                 var letter = (char)('A' + booth);
-                targets.Add(($"opción {letter}", Find($"{SCREEN}/Content/Option{letter}/Box").transform.position));
+                targets.Add(($"opción {letter}", Find($"{SCREEN}/Display/Content/Options/Option{letter}/Box").transform.position));
             }
 
             var blockers = Blockers();
@@ -587,12 +587,12 @@ namespace Trivias.App.Tests
         [Test]
         public void StageTexts_UseTheStageFonts()
         {
-            var texts = _roots.SelectMany(r => r.GetComponentsInChildren<TMPro.TextMeshPro>(true)).ToList();
+            var texts = _roots.SelectMany(r => r.GetComponentsInChildren<TMPro.TMP_Text>(true)).ToList();
             Assert.That(texts.Count, Is.GreaterThan(20));
             foreach (var text in texts)
                 Assert.That(text.font.name, Does.StartWith("Poppins").Or.StartWith("LilitaOne"), $"{text.name}: tipografía del plató.");
-            Assert.That(Find($"{SCREEN}/Message").GetComponent<TMPro.TextMeshPro>().font.name, Does.StartWith("LilitaOne"), "El logo, con Lilita One.");
-            var body = Find($"{SCREEN}/Content/Question").GetComponent<TMPro.TextMeshPro>().font;
+            Assert.That(Find($"{SCREEN}/Display/Message").GetComponent<TMPro.TMP_Text>().font.name, Does.StartWith("LilitaOne"), "El logo, con Lilita One.");
+            var body = Find($"{SCREEN}/Display/Content/Question").GetComponent<TMPro.TMP_Text>().font;
             Assert.That(body.atlasPopulationMode, Is.EqualTo(TMPro.AtlasPopulationMode.Static), "Tabla fija: no cambia al jugar.");
             foreach (var c in "¿¡áéíóúñÑü€«»…")
                 Assert.That(body.HasCharacter(c), Is.True, $"La fuente tiene «{c}».");

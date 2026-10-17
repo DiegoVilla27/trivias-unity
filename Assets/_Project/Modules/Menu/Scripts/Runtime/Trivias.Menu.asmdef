@@ -9,7 +9,8 @@
         "Unity.TextMeshPro",
         "UnityEngine.UI",
         "Unity.InputSystem",
-        "Trivias.Ranking"
+        "Trivias.Ranking",
+        "Unity.RenderPipelines.Core.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

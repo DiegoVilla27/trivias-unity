@@ -37,12 +37,20 @@ namespace Trivias.Shared.Editor
         /// <summary>Aplica el tema a toda la interfaz que cuelga de <paramref name="root"/>.</summary>
         public static void Apply(GameObject root)
         {
+            var display = StageFonts.Display();
+            var body = StageFonts.Body();
             foreach (var text in root.GetComponentsInChildren<TextMeshProUGUI>(true))
+            {
+                // Los textos del kit de menús (UiKit) ya traen su tipografía y su estilo: no se tocan.
+                if (text.font == display || text.font == body)
+                    continue;
                 StyleText(text);
+            }
 
             foreach (var image in root.GetComponentsInChildren<Image>(true).ToList())
             {
-                if (image.sprite != null || image.name == FRAME || IsFullScreen(image.rectTransform))
+                // Las imágenes que guardan su proporción (ilustraciones, medallas) se rellenan al jugar: no son formas.
+                if (image.sprite != null || image.preserveAspect || image.name == FRAME || IsFullScreen(image.rectTransform))
                     continue;
                 var selectable = image.GetComponent<Selectable>();
                 if (selectable != null && selectable.targetGraphic == image && selectable is Button button)

@@ -36,6 +36,7 @@ namespace Trivias.App.Editor
         public GameObject ResultsScreen;
         public GameObject Menu;
         public GameObject ShopUi;
+        public GameObject CharacterShowcase;
         public GameObject AvatarCosmetics;
         public GameObject GameFeedback;
         public GameObject StageConfetti;
@@ -84,6 +85,7 @@ namespace Trivias.App.Editor
             PrefabUtility.InstantiatePrefab(prefabs.ResultsScreen);
             PrefabUtility.InstantiatePrefab(prefabs.Menu);
             PrefabUtility.InstantiatePrefab(prefabs.ShopUi);
+            PrefabUtility.InstantiatePrefab(prefabs.CharacterShowcase);
             PrefabUtility.InstantiatePrefab(prefabs.AvatarCosmetics);
             PrefabUtility.InstantiatePrefab(prefabs.GameFeedback);
             PrefabUtility.InstantiatePrefab(prefabs.StageConfetti);
@@ -163,9 +165,9 @@ namespace Trivias.App.Editor
         private static void ConnectMatch(GameObject environment, GameObject[] booths)
         {
             var env = environment.transform;
-            TextMeshPro FindText(string path) => env.Find(path).GetComponent<TextMeshPro>();
+            TMP_Text FindText(string path) => env.Find(path).GetComponent<TMP_Text>();
 
-            var optionTexts = new TextMeshPro[booths.Length];
+            var optionTexts = new TMP_Text[booths.Length];
             var optionBoxes = new GameObject[booths.Length];
             for (var i = 0; i < booths.Length; i++)
             {
@@ -180,6 +182,11 @@ namespace Trivias.App.Editor
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_QUESTION),
                 optionTexts, optionBoxes,
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_STATUS),
+                env.Find(StageEnvironmentPrefabBuilder.SCREEN_STATUS_BOX).GetComponent<UnityEngine.UI.Image>(),
+                env.Find(StageEnvironmentPrefabBuilder.SCREEN_OPTIONS).gameObject,
+                env.Find(StageEnvironmentPrefabBuilder.SCREEN_REVEAL).gameObject,
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_ANSWER),
+                FindText(StageEnvironmentPrefabBuilder.SCREEN_EXPLANATION),
                 env.Find(StageEnvironmentPrefabBuilder.SCREEN_CHECK).gameObject,
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_CHECK_PAYEE),
                 FindText(StageEnvironmentPrefabBuilder.SCREEN_CHECK_AMOUNT));

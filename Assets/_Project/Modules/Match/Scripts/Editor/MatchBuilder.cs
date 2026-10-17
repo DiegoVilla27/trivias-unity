@@ -51,9 +51,10 @@ namespace Trivias.Match.Editor
             return EditorAssets.SaveAsPrefab(root, SESSION_PREFAB_PATH);
         }
 
-        public static void AttachQuestionScreen(GameObject screen, GameObject content, TextMeshPro message,
-            TextMeshPro header, TextMeshPro question, TextMeshPro[] optionTexts, GameObject[] optionBoxes, TextMeshPro status,
-            GameObject check, TextMeshPro checkPayee, TextMeshPro checkAmount)
+        public static void AttachQuestionScreen(GameObject screen, GameObject content, TMP_Text message,
+            TMP_Text header, TMP_Text question, TMP_Text[] optionTexts, GameObject[] optionBoxes, TMP_Text status,
+            UnityEngine.UI.Image statusBox, GameObject options, GameObject reveal, TMP_Text answer, TMP_Text explanation,
+            GameObject check, TMP_Text checkPayee, TMP_Text checkAmount)
         {
             var view = screen.AddComponent<QuestionScreenView>();
             SerializedWiring.Set(view, "_runtime", Runtime());
@@ -64,6 +65,11 @@ namespace Trivias.Match.Editor
             SerializedWiring.SetArray(view, "_optionTexts", optionTexts);
             SerializedWiring.SetArray(view, "_optionBoxes", optionBoxes);
             SerializedWiring.Set(view, "_status", status);
+            SerializedWiring.Set(view, "_statusBox", statusBox);
+            SerializedWiring.Set(view, "_options", options);
+            SerializedWiring.Set(view, "_reveal", reveal);
+            SerializedWiring.Set(view, "_answer", answer);
+            SerializedWiring.Set(view, "_explanation", explanation);
             SerializedWiring.Set(view, "_check", check);
             SerializedWiring.Set(view, "_checkPayee", checkPayee);
             SerializedWiring.Set(view, "_checkAmount", checkAmount);

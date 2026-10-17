@@ -1,0 +1,146 @@
+[
+  {
+    "file": "titulo-trivias.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "9bda04bae518e34255e1c1d6931e7750367edbaf3ee172b5af52febb7c0e8eec"
+  },
+  {
+    "file": "titulo-unirme.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "81e78e246773e0290f56f1be7c2aac1081cbff4ca44c7719de585a97138e8817"
+  },
+  {
+    "file": "titulo-sala-espera.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "2e27a9fed51ce45efd1a72f26236e877a4c1665bba43e007442eda64cd923032"
+  },
+  {
+    "file": "titulo-tienda.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "4dcecd97531782429d23a19e3937d2b2b14c980819ee8afed97b5ca3f8d83e2c"
+  },
+  {
+    "file": "titulo-como-se-juega.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "53538f71e4cf1d6ced5ba2304dcc8a9a499d6dc5b482673699e3c3c72558e500"
+  },
+  {
+    "file": "titulo-records.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "8689474a770e7ba9b3f5ce234940507f1b67bbbfa8454d3ed2aa4808cd497dad"
+  },
+  {
+    "file": "titulo-configuracion.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "ff11c98b7ab3b5048e3b45b0dc11486d1415293b38be9ffed06bab2b4e9a1907"
+  },
+  {
+    "file": "titulo-menu-partida.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "efe5fd3aa4b4706b33a50300dadc032f74388cc6dadbfa693be5b8ee623f08cf"
+  },
+  {
+    "file": "titulo-salir-sala.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "fde6369d3b061eeea038255f6e1d05f88485bbd595b025ae68fd1ebe32a4b319"
+  },
+  {
+    "file": "iconos.png",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "63c45abb0e8b32e625987a09b277a9562614211d6c7a46c6c97476fe2dda192c"
+  },
+  {
+    "file": "tutorial-1-objetivo.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "a45153153e496d8c3e8192d58174d3a74a718f16c00c98e88813dbd3028f0870"
+  },
+  {
+    "file": "tutorial-2-dinero.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "bfdcbd0d50ee41721eebe4f1ea1d733397cfede607a41c949c22030cf15d2eb3"
+  },
+  {
+    "file": "tutorial-3-verificar.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "df9732d198ac835b1c7b7ad4c95ddc789e4ea16f189f4d60194599f4a52772a5"
+  },
+  {
+    "file": "tutorial-4-comodin.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "92bdf7ee31f7a2b4d5b02e67a371484e687539409b6a0294569091b3c59bfad5"
+  },
+  {
+    "file": "tutorial-5-fichas.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "534ad634b0c1b000a5ace4ee67419c083103a146019d09105d0c2ee59f74614e"
+  },
+  {
+    "file": "tutorial-6-controles.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "f5e344d45c0ebb0d8d3c3b97785beb9ba8e8bb2be1ff06de3240c10dca55ac42"
+  },
+  {
+    "file": "personaje-senalando.png",
+    "width": 1024,
+    "height": 1536,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "be5e2185b96c8fda18c19d0e9dcaa7580144621bf335ff6ea0001708a2c68f36"
+  },
+  {
+    "file": "personaje-puerta.png",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha": true,
+    "sha256": "9e285bd937e01ce9ce9f136ef5288b9cab1a23c0a07434056fc2b37ab95ff5fb"
+  }
+]

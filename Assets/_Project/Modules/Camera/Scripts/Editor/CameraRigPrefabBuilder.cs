@@ -38,10 +38,12 @@ namespace Trivias.Cameras.Editor
             var cinemachineCamera = follow.AddComponent<CinemachineCamera>();
             cinemachineCamera.Lens.FieldOfView = 50f;
             var thirdPerson = follow.AddComponent<CinemachineThirdPersonFollow>();
-            thirdPerson.ShoulderOffset = new Vector3(0.5f, 0.15f, 0f);
-            thirdPerson.VerticalArmLength = 0.3f;
+            // Los concursantes son cabezones (cabeza de 1 m): la cámara va más al lado, algo más alta y más lejos para que
+            // la cabeza no tape el plató.
+            thirdPerson.ShoulderOffset = new Vector3(0.75f, 0.2f, 0f);
+            thirdPerson.VerticalArmLength = 0.35f;
             thirdPerson.CameraSide = 1f;
-            thirdPerson.CameraDistance = 3.8f;
+            thirdPerson.CameraDistance = 4.2f;
             thirdPerson.Damping = new Vector3(0.1f, 0.4f, 0.3f);
             var obstacles = thirdPerson.AvoidObstacles;
             obstacles.Enabled = true;

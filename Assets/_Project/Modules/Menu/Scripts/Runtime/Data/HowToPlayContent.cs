@@ -7,15 +7,19 @@ namespace Trivias.Menu.Data
     [Serializable]
     public sealed class HowToPlayPage
     {
+        [Tooltip("Nombre corto en la tira de pasos (p. ej. «Comodín»).")]
+        [SerializeField] private string _step;
         [SerializeField] private string _title;
         [SerializeField, TextArea(4, 12)] private string _body;
 
-        public HowToPlayPage(string title, string body)
+        public HowToPlayPage(string step, string title, string body)
         {
+            _step = step;
             _title = title;
             _body = body;
         }
 
+        public string Step => _step;
         public string Title => _title;
         public string Body => _body;
     }

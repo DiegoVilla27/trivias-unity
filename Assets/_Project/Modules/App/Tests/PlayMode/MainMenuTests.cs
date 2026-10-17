@@ -65,15 +65,19 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
-        public IEnumerator MainMenu_DimsTheStageBehind_ButNotTheLobbyOrTheMatch()
+        public IEnumerator MenuAndLobby_BlurTheStageBehind_ButNotTheMatch()
         {
-            Assert.That(_menu.IsBackdropShown, Is.True, "Velo semioscuro detrás del menú principal.");
-            var backdrop = ((GameObject)typeof(MenuView).GetField("_backdrop", PRIVATE).GetValue(_menu)).GetComponent<Image>();
-            Assert.That(backdrop.color.a, Is.InRange(0.45f, 0.8f), "Semioscuro: el plató se sigue viendo detrás.");
+            Assert.That(_menu.IsBackdropShown, Is.True, "Plató desenfocado detrás del menú principal.");
+            var view = Object.FindAnyObjectByType<MenuBackdropView>();
+            Assert.That(view.IsShown, Is.True);
+            var blur = (UnityEngine.Rendering.Volume)typeof(MenuBackdropView).GetField("_blur", PRIVATE).GetValue(view);
+            Assert.That(blur.weight, Is.EqualTo(1f), "Desenfocado.");
+            var backdrop = ((GameObject)typeof(MenuBackdropView).GetField("_dim", PRIVATE).GetValue(view)).GetComponent<Image>();
+            Assert.That(backdrop.color.a, Is.InRange(0.15f, 0.5f), "Un velo suave: el plató se sigue viendo detrás.");
             var rect = backdrop.rectTransform;
             Assert.That(rect.anchorMin, Is.EqualTo(Vector2.zero));
             Assert.That(rect.anchorMax, Is.EqualTo(Vector2.one), "A pantalla completa.");
-            Assert.That(rect.GetSiblingIndex(), Is.LessThan(_menu.transform.Find("MainMenu").GetSiblingIndex()), "Detrás del menú.");
+            Assert.That(rect.GetSiblingIndex(), Is.LessThan(_menu.transform.Find("MainScreen").GetSiblingIndex()), "Detrás del menú.");
 
             MenuButton("_joinMenuButton").onClick.Invoke();
             yield return null;
@@ -82,7 +86,13 @@ namespace Trivias.App.Tests
             Assert.That(_connection.StartHost(), Is.True);
             yield return PlayModeHelpers.UntilHostReady();
             Assert.That(_menu.IsLobbyOpen, Is.True);
-            Assert.That(_menu.IsBackdropShown, Is.False, "En la sala de espera se ve el plató.");
+            Assert.That(_menu.IsBackdropShown, Is.True, "La sala de espera, también con el plató desenfocado (boceto 03).");
+
+            Assert.That(_connection.TryStartMatch(), Is.True);
+            yield return null;
+            yield return null;
+            Assert.That(_menu.IsBackdropShown, Is.False, "En la partida se ve el plató tal cual.");
+            Assert.That(blur.weight, Is.Zero);
         }
 
         [UnityTest]
@@ -134,10 +144,10 @@ namespace Trivias.App.Tests
             Assert.That(invite.activeSelf, Is.True, "El host ve «Invita a tus amigos».");
             var shareable = _connection.ShareableAddresses;
             Assert.That(shareable.Count, Is.GreaterThan(0));
-            Assert.That(MenuLabel("_inviteText").text, Does.Contain(shareable[0].Address));
+            Assert.That(MenuLabel("_inviteAddress").text, Is.EqualTo(shareable[0].Address));
 
             MenuButton("_copyButton").onClick.Invoke();
-            Assert.That(MenuLabel("_copyLabel").text, Is.EqualTo("¡Copiada!"));
+            Assert.That(MenuLabel("_copyLabel").text, Is.EqualTo("Copiado"));
         }
 
         [UnityTest]
@@ -152,7 +162,7 @@ namespace Trivias.App.Tests
             for (var i = 1; i < _howToPlay.PageCount; i++)
                 next.onClick.Invoke();
             Assert.That(_howToPlay.Page, Is.EqualTo(_howToPlay.PageCount - 1));
-            next.onClick.Invoke(); // «¡A jugar!»
+            next.onClick.Invoke(); // «Entendido»
             Assert.That(_howToPlay.IsOpen, Is.False);
         }
 

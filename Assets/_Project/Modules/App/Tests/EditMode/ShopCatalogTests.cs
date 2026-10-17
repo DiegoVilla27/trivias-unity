@@ -28,22 +28,18 @@ namespace Trivias.App.Tests
         public void Catalog_PricesFollowGddCategories()
         {
             foreach (var item in Catalog().Items)
-                Assert.That(item.Price, Is.EqualTo(300).Or.EqualTo(600).Or.EqualTo(1200), $"{item.Id}: precio fuera de las categorías del GDD.");
+                Assert.That(item.Price, Is.EqualTo(300).Or.EqualTo(1200), $"{item.Id}: precio fuera de las categorías del GDD.");
             Assert.That(Catalog().Items.Any(i => i.Price == 300), Is.True, "Faltan accesorios de 300.");
-            Assert.That(Catalog().Items.Any(i => i.Price == 600), Is.True, "Faltan colores de 600.");
             Assert.That(Catalog().Items.Any(i => i.Price == 1200), Is.True, "Faltan atuendos especiales de 1.200.");
         }
 
         [Test]
-        public void AttachedItemsHaveModel_ColorsDoNot()
+        public void EveryItemHasItsModel_AndSuitColorsAreGone()
         {
             foreach (var item in Catalog().Items)
-            {
-                if (item.Slot == CosmeticSlot.Color)
-                    Assert.That(item.Prefab, Is.Null, $"{item.Id}: un color no necesita modelo.");
-                else
-                    Assert.That(item.Prefab, Is.Not.Null, $"{item.Id}: le falta el modelo.");
-            }
+                Assert.That(item.Prefab, Is.Not.Null, $"{item.Id}: le falta el modelo.");
+            Assert.That(Catalog().Items.Any(i => i.Id.StartsWith("color-")), Is.False,
+                "Los trajes de colores se sustituyeron por personajes.");
         }
     }
 }

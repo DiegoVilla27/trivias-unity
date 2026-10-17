@@ -6,13 +6,13 @@ Conservado al reorganizar las carpetas el 16 de octubre de 2026. Para las refere
 
 ## Poses individuales — 15 de octubre de 2026
 
-[Cuatro láminas de personaje y presentador en T-pose y A-pose](../archivo/poses-2026-10-15.md), con vistas por lado, superior/inferior y tres cuartos. [Paquete completo](../paquetes/personajes-poses-01.zip).
+[Cuatro láminas de personaje y presentador en T-pose y A-pose](../archivo/poses-2026-10-15.md), con vistas por lado, superior/inferior y tres cuartos. Paquete completo (archivo retirado).
 
 ## Recursos individuales — 15 de octubre de 2026
 
 [Índice de 36 láminas detalladas](../recursos/detallados/README.md), con vistas individuales, componentes y notas para modelado. Incluye objetos principales, cámaras, iluminación, paredes, cortinas, suelo, techo y componentes separados de la cabina.
 
-[Paquete completo de imágenes y prompts](../paquetes/recursos-detallados-01.zip).
+Paquete completo de imágenes y prompts (archivo retirado).
 
 ## Referencias para modelado — 14 de octubre de 2026
 

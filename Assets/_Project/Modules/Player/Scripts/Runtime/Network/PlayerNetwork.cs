@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Trivias.Player.Components;
+using Trivias.Shared.Characters;
 using Trivias.Shared.Events;
 using Trivias.Shared.Players;
 using Trivias.Shared.Profile;
@@ -12,7 +13,8 @@ namespace Trivias.Player.Network
 {
     /// <summary>
     /// Une el concursante con la red: activa control y cámara solo para el dueño, lo coloca en su punto de aparición,
-    /// sincroniza su nombre (lo pide el dueño desde su perfil; el host lo limpia y lo hace único) y su eliminación
+    /// sincroniza su nombre (lo pide el dueño desde su perfil; el host lo limpia y lo hace único), su personaje (lo pide
+    /// el dueño; el host evita que dos lleven el mismo) y su eliminación
     /// (escritos por el host) y lo registra para el resto de módulos.
     /// </summary>
     public sealed class PlayerNetwork : NetworkBehaviour, IPlayerAvatar
@@ -27,10 +29,13 @@ namespace Trivias.Player.Network
         [SerializeField] private TransformEventChannel _localPlayerCameraTarget;
         [SerializeField] private PlayerAvatarRegistry _avatars;
         [SerializeField] private PlayerProfile _profile;
-        [SerializeField] private Transform _headAnchor;
-        [SerializeField] private Renderer[] _bodyRenderers;
+        [SerializeField] private CharacterCatalog _characters;
+        [SerializeField] private PlayerCharacterView _characterView;
 
         private readonly NetworkVariable<FixedString64Bytes> _displayName = new(
+            default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        private readonly NetworkVariable<FixedString32Bytes> _character = new(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private readonly NetworkVariable<bool> _eliminated = new(
@@ -47,11 +52,14 @@ namespace Trivias.Player.Network
         // Lo recibido por red se aplica en LateUpdate, fuera de la lectura del paquete (un error aquí no debe
         // interrumpir la sincronización del resto).
         private bool _namePending;
+        private bool _characterPending;
         private bool _eliminationPending;
         private bool _respawnPending;
         private bool _notifyPending;
         private string _publishedName; // Solo en el dueño: último nombre pedido al host.
+        private string _publishedCharacter; // Solo en el dueño: último personaje pedido al host.
         private readonly List<string> _takenNames = new(); // Solo en el host.
+        private readonly List<string> _takenCharacters = new(); // Solo en el host.
 
         // ---- IPlayerAvatar ----
 
@@ -62,8 +70,8 @@ namespace Trivias.Player.Network
         public bool IsEliminated => _eliminated.Value;
         public bool IsLocal => IsOwner;
         public Transform ViewTarget => _look.CameraRoot;
-        public Transform HeadAnchor => _headAnchor;
-        public Renderer[] BodyRenderers => _bodyRenderers;
+        public Transform HeadAnchor => _characterView.HeadAnchor;
+        public string CharacterId => _character.Value.ToString();
         public CosmeticLoadout Loadout => _loadout.Value.ToLoadout();
 
         public void Eliminate()
@@ -91,7 +99,9 @@ namespace Trivias.Player.Network
             _eliminated.OnValueChanged += OnEliminatedChanged;
             _respawnSequence.OnValueChanged += OnRespawnRequested;
             _loadout.OnValueChanged += OnLoadoutChanged;
+            _character.OnValueChanged += OnCharacterChanged;
             _nameTag.SetName(DisplayName);
+            _characterView.Show(CharacterId);
             _avatars.Register(this);
 
             if (!IsOwner)
@@ -105,6 +115,7 @@ namespace Trivias.Player.Network
             // El nombre y lo que lleva puesto salen del perfil local; se actualizan al cambiarlos.
             _profile.Changed += OnProfileChanged;
             _publishedName = null;
+            _publishedCharacter = null;
             OnProfileChanged();
         }
 
@@ -112,7 +123,40 @@ namespace Trivias.Player.Network
         {
             PublishLoadout();
             PublishName();
+            PublishCharacter();
         }
+
+        private void PublishCharacter()
+        {
+            var preferred = CharacterRules.Current(_profile.CharacterId, _characters.Ids, _characters.FreeIds, _profile.Data.owned);
+            if (preferred == _publishedCharacter)
+                return;
+            _publishedCharacter = preferred;
+            var requested = new FixedString32Bytes();
+            requested.CopyFromTruncated(preferred);
+            RequestCharacterRpc(requested);
+        }
+
+        /// <summary>El host le da el que pide si nadie más lo lleva; si no, el primer gratuito libre.</summary>
+        [Rpc(SendTo.Server)]
+        private void RequestCharacterRpc(FixedString32Bytes requested, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId)
+                return;
+
+            _takenCharacters.Clear();
+            foreach (var avatar in _avatars.All)
+            {
+                if (avatar.ClientId != OwnerClientId && !string.IsNullOrEmpty(avatar.CharacterId))
+                    _takenCharacters.Add(avatar.CharacterId);
+            }
+            var assigned = CharacterRules.Assign(requested.ToString(), _characters.Ids, _characters.FreeIds, _takenCharacters);
+            var value = new FixedString32Bytes();
+            value.CopyFromTruncated(assigned);
+            _character.Value = value;
+        }
+
+        private void OnCharacterChanged(FixedString32Bytes previous, FixedString32Bytes current) => _characterPending = true;
 
         private void PublishName()
         {
@@ -162,6 +206,7 @@ namespace Trivias.Player.Network
             _eliminated.OnValueChanged -= OnEliminatedChanged;
             _respawnSequence.OnValueChanged -= OnRespawnRequested;
             _loadout.OnValueChanged -= OnLoadoutChanged;
+            _character.OnValueChanged -= OnCharacterChanged;
             _avatars.Unregister(OwnerClientId);
             if (!IsOwner)
                 return;
@@ -187,6 +232,13 @@ namespace Trivias.Player.Network
             {
                 _namePending = false;
                 _nameTag.SetName(DisplayName);
+                _notifyPending = true;
+            }
+
+            if (_characterPending)
+            {
+                _characterPending = false;
+                _characterView.Show(CharacterId);
                 _notifyPending = true;
             }
 

@@ -9,7 +9,9 @@
         "Unity.TextMeshPro",
         "UnityEngine.UI",
         "Trivias.Ranking",
-        "Trivias.Ranking.Editor"
+        "Trivias.Ranking.Editor",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [
         "Editor"

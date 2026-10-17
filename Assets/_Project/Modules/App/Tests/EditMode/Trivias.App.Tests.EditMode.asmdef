@@ -19,7 +19,8 @@
         "Unity.TextMeshPro",
         "UnityEngine.UI",
         "Trivias.Shared.Editor",
-        "Trivias.Feedback.Editor"
+        "Trivias.Feedback.Editor",
+        "Trivias.Player"
     ],
     "includePlatforms": [
         "Editor"

@@ -2,6 +2,8 @@ using Trivias.Match.Data;
 using Trivias.Match.Logic;
 using Trivias.Shared.Events;
 using Trivias.Shared.Gameplay;
+using Trivias.Shared.Presentation;
+using Trivias.Shared.Rooms;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,11 +13,14 @@ namespace Trivias.Menu.Components
     /// <summary>
     /// Esc: cierra el panel abierto (tutorial, configuración, récords) o, durante la partida, abre el menú de pausa
     /// (continuar, cómo se juega, configuración, salir de la sala). El juego no se detiene para los demás:
-    /// solo tu concursante se queda quieto y el ratón queda libre.
+    /// solo tu concursante se queda quieto y el ratón queda libre. También pregunta antes de salir de la sala (desde la
+    /// pausa o desde la sala de espera); si eres el anfitrión, avisa de que la sala se cierra para todos.
     /// </summary>
     public sealed class PauseMenuView : MonoBehaviour
     {
         [SerializeField] private MatchRuntime _match;
+        [SerializeField] private RoomConnectionRuntime _room;
+        [SerializeField] private UiBackdrop _backdrop;
         [SerializeField] private PlayerControlGate _controlGate;
         [SerializeField] private VoidEventChannel _leaveRoomRequested;
         [SerializeField] private HowToPlayView _howToPlay;
@@ -29,6 +34,7 @@ namespace Trivias.Menu.Components
         [SerializeField] private GameObject _confirmPanel;
         [SerializeField] private Button _confirmLeaveButton;
         [SerializeField] private Button _cancelLeaveButton;
+        [SerializeField] private GameObject _hostWarning;
 
         private InputAction _escape;
 
@@ -70,6 +76,7 @@ namespace Trivias.Menu.Components
             _confirmLeaveButton.onClick.RemoveListener(Leave);
             _cancelLeaveButton.onClick.RemoveListener(CancelLeave);
             Close();
+            _backdrop.Show(this, false);
         }
 
         private void OnDestroy() => _escape.Dispose();
@@ -91,11 +98,14 @@ namespace Trivias.Menu.Components
                 Open();
         }
 
+        public bool IsConfirmingLeave => _confirmPanel.activeSelf;
+
         public void Open()
         {
             _panel.SetActive(true);
             _confirmPanel.SetActive(false);
             _controlGate.SetPaused(true);
+            RefreshBackdrop();
         }
 
         public void Close()
@@ -103,7 +113,10 @@ namespace Trivias.Menu.Components
             _panel.SetActive(false);
             _confirmPanel.SetActive(false);
             _controlGate.SetPaused(false);
+            RefreshBackdrop();
         }
+
+        private void RefreshBackdrop() => _backdrop.Show(this, _panel.activeSelf || _confirmPanel.activeSelf);
 
         private void OnEscape(InputAction.CallbackContext _) => HandleEscape();
 
@@ -114,9 +127,19 @@ namespace Trivias.Menu.Components
                 Close();
         }
 
-        private void AskToLeave() => _confirmPanel.SetActive(true);
+        /// <summary>«¿Salir de la sala?» (desde la pausa o desde la sala de espera).</summary>
+        public void AskToLeave()
+        {
+            _hostWarning.SetActive(_room.Connection != null && _room.Connection.IsHost);
+            _confirmPanel.SetActive(true);
+            RefreshBackdrop();
+        }
 
-        private void CancelLeave() => _confirmPanel.SetActive(false);
+        private void CancelLeave()
+        {
+            _confirmPanel.SetActive(false);
+            RefreshBackdrop();
+        }
 
         private void Leave()
         {

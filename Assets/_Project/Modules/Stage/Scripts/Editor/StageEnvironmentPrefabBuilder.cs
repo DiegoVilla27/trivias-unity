@@ -29,16 +29,35 @@ namespace Trivias.Stage.Editor
         // Pantalla de preguntas: rutas de sus partes, para conectarlas con el módulo Match.
         public const string SCREEN = "QuestionScreen";
         public const string SCREEN_FRAME = SCREEN + "/Frame";
-        public const string SCREEN_CONTENT = SCREEN + "/Content";
-        public const string SCREEN_MESSAGE = SCREEN + "/Message";
+        public const string SCREEN_DISPLAY = SCREEN + "/Display";
+        public const string SCREEN_CONTENT = SCREEN_DISPLAY + "/Content";
+        public const string SCREEN_MESSAGE = SCREEN_DISPLAY + "/Message";
+        public const string SCREEN_OPTIONS = SCREEN_CONTENT + "/Options";
+        public const string SCREEN_REVEAL = SCREEN_CONTENT + "/Reveal";
+        public const string SCREEN_ANSWER = SCREEN_REVEAL + "/Answer";
+        public const string SCREEN_EXPLANATION = SCREEN_REVEAL + "/Explanation";
         public const string SCREEN_HEADER = SCREEN_CONTENT + "/Header";
         public const string SCREEN_QUESTION = SCREEN_CONTENT + "/Question";
-        public const string SCREEN_STATUS = SCREEN_CONTENT + "/Status";
+        public const string SCREEN_STATUS_BOX = SCREEN_CONTENT + "/StatusBox";
+        public const string SCREEN_STATUS = SCREEN_STATUS_BOX + "/Status";
         public const string SCREEN_CHECK = SCREEN + "/Check";
         public const string SCREEN_CHECK_PAYEE = SCREEN_CHECK + "/Payee";
         public const string SCREEN_CHECK_AMOUNT = SCREEN_CHECK + "/Amount";
-        public static string ScreenOptionBox(int booth) => $"{SCREEN_CONTENT}/Option{(char)('A' + booth)}/Box";
-        public static string ScreenOptionText(int booth) => $"{SCREEN_CONTENT}/Option{(char)('A' + booth)}/Text";
+        public static string ScreenOptionBox(int booth) => $"{SCREEN_OPTIONS}/Option{(char)('A' + booth)}/Box";
+        public static string ScreenOptionText(int booth) => $"{SCREEN_OPTIONS}/Option{(char)('A' + booth)}/Text";
+
+        /// <summary>Lienzo de la pantalla: 1490 × 705 unidades de interfaz = el cristal de 14,9 × 7,05 m.</summary>
+        public const float SCREEN_UI_SCALE = 0.01f;
+
+        /// <summary>
+        /// Colores de las opciones: los de las cabinas, más profundos y menos chillones (arriba, abajo y borde claro), como
+        /// en los bocetos del HUD.
+        /// </summary>
+        private static readonly (string top, string bottom, string border)[] OptionColors =
+        {
+            ("#C9454F", "#9A2B37", "#EE8C93"), ("#4572D4", "#2A4FA6", "#97B4F2"),
+            ("#DEAB43", "#B4842A", "#F6D88C"), ("#3FA566", "#287A47", "#8FD8A8"),
+        };
 
         /// <summary>Fondo oscuro detrás del texto: del tamaño del cristal de la pantalla (modelo a escala 1,12).</summary>
         public static readonly Vector2 ScreenPanelSize = new(14.9f, 7.05f);
@@ -170,7 +189,7 @@ namespace Trivias.Stage.Editor
         private static void BuildQuestionScreen(Transform parent, Material gold)
         {
             var panel = EditorAssets.GetOrCreateTransparentMaterial($"{MODULE_ROOT}/Materials/Stage_Screen.mat",
-                new Color(0.03f, 0.05f, 0.16f, 0.82f), 0.9f);
+                new Color(0.05f, 0.09f, 0.26f, 0.92f), 0.9f);
             // Antes que el texto (URP calcula la cola con _QueueOffset): el fondo nunca tapa la pregunta.
             panel.SetFloat("_QueueOffset", -10f);
             panel.renderQueue = (int)RenderQueue.Transparent - 10;
@@ -185,54 +204,7 @@ namespace Trivias.Stage.Editor
             Sign(EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Panel", root, new Vector3(0f, 0f, -0.25f),
                 new Vector3(ScreenPanelSize.x, ScreenPanelSize.y, 0.01f), panel, LAYER, true, keepCollider: false));
 
-            const float textZ = -0.3f;
-            var display = StageFonts.Display();
-            var message = EditorAssets.CreateWorldText("Message", root, "TRIVIAS", 18f, StagePalette.Gold,
-                new Vector3(0f, 0f, textZ), Quaternion.identity, new Vector2(13.6f, 6f), display);
-            message.characterSpacing = 4f;
-            message.outlineWidth = 0.2f;
-            message.outlineColor = new Color(0.25f, 0.12f, 0f);
-
-            var content = EditorAssets.CreateEmpty("Content", root, Vector3.zero).transform;
-            var header = EditorAssets.CreateWorldText("Header", content, "PREGUNTA 1/15", 5.4f, StagePalette.Gold,
-                new Vector3(0f, 3.1f, textZ), Quaternion.identity, new Vector2(13.6f, 0.8f), display);
-            header.characterSpacing = 3f;
-
-            var question = EditorAssets.CreateWorldText("Question", content, "¿Pregunta?", 7f, Color.white,
-                new Vector3(0f, 1.75f, textZ), Quaternion.identity, new Vector2(13.6f, 2f));
-            question.fontStyle = FontStyles.Bold;
-            question.enableAutoSizing = true; // Las preguntas largas encogen en vez de salirse.
-            question.fontSizeMin = 4.5f;
-            question.fontSizeMax = 7f;
-
-            var optionColors = new[] { StagePalette.Red, StagePalette.Blue, StagePalette.Yellow, StagePalette.Green };
-            for (var booth = 0; booth < optionColors.Length; booth++)
-            {
-                var column = booth % 2;
-                var row = booth / 2;
-                var letter = (char)('A' + booth);
-                var option = EditorAssets.CreateEmpty($"Option{letter}", content,
-                    new Vector3(column == 0 ? -3.5f : 3.5f, row == 0 ? 0.05f : -1.55f, 0f)).transform;
-
-                var boxMaterial = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Stage_Option{letter}.mat",
-                    optionColors[booth] * 0.8f, 0.5f, emission: optionColors[booth] * 0.25f);
-                // Los recuadros cambian al revelar (solo queda el correcto): no son estáticos.
-                Sign(EditorAssets.CreatePrimitive(PrimitiveType.Cube, "Box", option, new Vector3(0f, 0f, -0.26f),
-                    new Vector3(6.7f, 1.35f, 0.02f), boxMaterial, LAYER, false, keepCollider: false));
-
-                var text = EditorAssets.CreateWorldText("Text", option, $"{letter}  Opción", 5.5f, Color.white,
-                    new Vector3(0f, 0f, textZ), Quaternion.identity, new Vector2(6.3f, 1.3f));
-                text.fontStyle = FontStyles.Bold;
-                text.enableAutoSizing = true;
-                text.fontSizeMin = 3.4f;
-                text.fontSizeMax = 5.5f;
-                text.outlineWidth = 0.15f;
-                text.outlineColor = Color.black;
-            }
-
-            var status = EditorAssets.CreateWorldText("Status", content, string.Empty, 6.5f, Color.white,
-                new Vector3(0f, -2.95f, textZ), Quaternion.identity, new Vector2(13.6f, 1.3f));
-            status.fontStyle = FontStyles.Bold;
+            BuildDisplay(root);
 
             BuildCheck(root, gold);
 
@@ -242,6 +214,75 @@ namespace Trivias.Stage.Editor
                 Model("StudioLightStrip", $"Strip{i + 1}", marquee, new Vector3((i - 1.5f) * 2.3f, 0f, 0f), 180f, Vector3.one * 1.45f,
                     castShadows: false);
         }
+
+        /// <summary>
+        /// Lo que muestra la pantalla, con las tipografías y las piezas redondeadas de los menús (bocetos del HUD): cabecera,
+        /// pregunta en blanco, las cuatro opciones en píldoras del color de su cabina con la letra en un bloque, y el reloj
+        /// (o «CORRECTA: B» y la explicación). Es un lienzo de interfaz en el mundo, justo delante del cristal.
+        /// </summary>
+        private static void BuildDisplay(Transform root)
+        {
+            var go = new GameObject("Display", typeof(RectTransform));
+            go.transform.SetParent(root, false);
+            var rect = (RectTransform)go.transform;
+            rect.localPosition = new Vector3(0f, 0f, -0.3f);
+            rect.sizeDelta = new Vector2(ScreenPanelSize.x / SCREEN_UI_SCALE, ScreenPanelSize.y / SCREEN_UI_SCALE);
+            rect.localScale = Vector3.one * SCREEN_UI_SCALE;
+            var canvas = go.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            go.layer = LAYER;
+
+            // Resplandor azul en el centro, como la pantalla de los bocetos.
+            UiKit.Tinted(UiKit.Picture("Glow", rect, UiKit.GlowSprite(), 145f, -250f, 1200f, 1200f), new Color(0.35f, 0.5f, 1f, 0.28f));
+
+            var message = UiKit.Text("Message", rect, "TRIVIAS", 0f, 120f, 1490f, 460f, 230f, UiKit.UiFont.Display, UiKit.Gold);
+            message.enableVertexGradient = true;
+            message.colorGradient = new VertexGradient(new Color(1f, 0.92f, 0.55f), new Color(1f, 0.92f, 0.55f), UiTheme.GoldDeep, UiTheme.GoldDeep);
+            message.color = Color.white;
+            message.characterSpacing = 4f;
+
+            var content = UiKit.Rect("Content", rect, 0f, 0f, 1490f, 705f);
+            // El marco del modelo tapa un poco los bordes del cristal: nada pegado a ellos.
+            var header = UiKit.Picture("HeaderBox", content, UiKit.PlateSprite(), 425f, 44f, 640f, 60f);
+            UiKit.Text("Header", header.transform, string.Empty, 14f, 2f, 612f, 56f, 30f, UiKit.UiFont.Bold, UiKit.Ivory)
+                .rectTransform.SetParent(content, true);
+            UiKit.Text("Question", content, string.Empty, 90f, 112f, 1310f, 190f, 62f, UiKit.UiFont.Bold, Color.white);
+            var options = UiKit.Rect("Options", content, 0f, 0f, 1490f, 705f);
+
+            for (var booth = 0; booth < OptionColors.Length; booth++)
+            {
+                var letter = (char)('A' + booth);
+                var (top, bottom, border) = OptionColors[booth];
+                var option = UiKit.Rect($"Option{letter}", options, booth % 2 == 0 ? 80f : 760f, booth < 2 ? 318f : 460f, 650f, 124f);
+                // Atenuada (al revelar, las incorrectas) y encendida, con su color.
+                UiKit.Picture("Dim", option, UiKit.QuietSprite(), 0f, 0f, 650f, 124f);
+                var box = UiKit.Picture("Box", option, OptionSprite(letter, top, bottom, border), 0f, 0f, 650f, 124f);
+                var tag = UiKit.Tinted(UiKit.Picture("Tag", box.transform, UiKit.DotSprite(), 12f, 12f, 100f, 100f),
+                    new Color(1f, 1f, 1f, 0.22f));
+                var letterText = UiKit.Text("Letter", tag.transform, letter.ToString(), 0f, 0f, 100f, 100f, 76f, UiKit.UiFont.Display, Color.white,
+                    TextAlignmentOptions.Center);
+                letterText.enableAutoSizing = false; // Una letra siempre cabe: a su tamaño.
+                letterText.textWrappingMode = TextWrappingModes.NoWrap;
+                UiKit.Text("Text", option, string.Empty, 132f, 4f, 500f, 116f, 58f, UiKit.UiFont.Bold, Color.white,
+                    TextAlignmentOptions.MidlineLeft);
+            }
+
+            var statusBox = UiKit.Picture("StatusBox", content, UiKit.PlateSprite(), 520f, 600f, 450f, 76f);
+            UiKit.Text("Status", statusBox.transform, string.Empty, 10f, 2f, 430f, 72f, 52f, UiKit.UiFont.Display, UiKit.Ivory);
+
+            // Al revelar (boceto 06 del HUD): la respuesta en grande, «✓ CORRECTA» y la explicación.
+            var reveal = UiKit.Rect("Reveal", content, 0f, 0f, 1490f, 705f);
+            UiKit.Text("Answer", reveal, string.Empty, 90f, 318f, 1310f, 120f, 92f, UiKit.UiFont.Display, Color.white);
+            UiKit.Pill("Correct", reveal, UiKit.PillGreenSprite(), UiKit.Icon("Check"), "CORRECTA", 590f, 448f, 310f, 66f, UiKit.Ivory,
+                out _, out _, 36f);
+            UiKit.Divider("Line", reveal, 300f, 532f, 890f);
+            UiKit.Text("Explanation", reveal, string.Empty, 110f, 546f, 1270f, 120f, 34f, UiKit.UiFont.Body, UiKit.Ivory);
+            reveal.gameObject.SetActive(false);
+        }
+
+        /// <summary>Píldora de una opción: el color de su cabina en degradado, con borde claro.</summary>
+        private static Sprite OptionSprite(char letter, string top, string bottom, string border) =>
+            UiKit.Shape($"Option{letter}", 26, 4, UiKit.Hex(top), UiKit.Hex(bottom), UiKit.Hex(border), highlight: true);
 
         /// <summary>Los carteles y recuadros de la pantalla no hacen sombra (se ven siempre limpios).</summary>
         private static void Sign(GameObject go) => go.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;

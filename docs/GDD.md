@@ -2,8 +2,8 @@
 
 ## Estado del documento
 
-- Versión: 0.30 — documentación de bocetos ajustada a los archivos conservados.
-- Última actualización: 16 de octubre de 2026.
+- Versión: 0.36 — los diez personajes completos en el juego y nueva pantalla del plató.
+- Última actualización: 17 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
 - Formato: cooperativo, de 2 a 6 jugadores, con dinero compartido.
@@ -188,8 +188,8 @@ El prototipo tiene **un personaje base bien construido**. De ese prefab salen lo
 - Mantener la apariencia separada de la lógica del concursante.
 - Definir puntos comunes de manos, cabeza y accesorios para que las variantes encajen sin rehacer interacciones.
 - Mismas capacidades para todos: elección estética, sin poderes ni ventajas.
-- Permitir personajes repetidos, distinguidos por nombres y colores.
-- Los diez personajes básicos están disponibles desde el inicio del juego completo; los atuendos y accesorios adicionales se compran con fichas.
+- Cada jugador elige personaje en el menú principal y se recuerda. En una sala no se repiten: si el elegido ya lo lleva otro, el host le da el primer gratuito libre (sin perder su preferencia para otra sala).
+- Diez personajes: seis gratuitos desde el inicio y el resto se compran con fichas en la tienda (precio de atuendo especial). De momento son gratuitos los seis primeros de los bocetos (Blue Tracksuit, Casual, Gardener, Elegant, Explorer y Pajamas); se cambia en el catálogo sin tocar código. Los diez modelos se usan tal cual (un millón de triángulos y 1,9 m cada uno, sin retocar texturas), riggeados con el mismo esqueleto Humanoid.
 
 Motor Unity 6 con URP y cámara en tercera persona (Cinemachine). La paleta definitiva queda pendiente. No fabricar diez esqueletos o controladores distintos.
 
@@ -305,13 +305,12 @@ Se entrega solo el tramo alcanzado, no la suma de tramos. Cada participante reci
 | Compra | Precio orientativo |
 | --- | --- |
 | Accesorio sencillo | 300 fichas |
-| Ropa o variante de color | 600 fichas |
 | Celebración futura | 800 fichas; fuera de la primera salida |
-| Atuendo especial | 1.200 fichas |
+| Atuendo especial o personaje | 1.200 fichas |
 
 Compras cosméticas individuales y permanentes, sin ventajas y sin dinero real ni cajas aleatorias en la propuesta actual.
 
-Implementación del prototipo: las fichas y compras se guardan en un perfil local por jugador y se entregan una sola vez por partida al ver los resultados. La tienda se abre desde la sala de espera. Catálogo inicial: gorra, gafas y pajarita (300); trajes rojo, azul y verde (600); corona, chistera y traje dorado (1.200). Lo que cada jugador lleva puesto lo ven todos. Objetivos: superar el concurso, mejorar récords y conseguir atuendos. Fama/niveles y títulos permanecen como ideas pendientes, fuera del primer prototipo.
+Implementación del prototipo: las fichas y compras se guardan en un perfil local por jugador y se entregan una sola vez por partida al ver los resultados. La tienda se abre desde la sala de espera. Catálogo inicial: gorra, gafas y pajarita (300); corona y chistera (1.200); y los cuatro personajes de pago (1.200). Los trajes de colores se retiraron: el color lo da el personaje. Lo que cada jugador lleva puesto lo ven todos. Objetivos: superar el concurso, mejorar récords y conseguir atuendos. Fama/niveles y títulos permanecen como ideas pendientes, fuera del primer prototipo.
 
 ## 12. Ranking de victorias
 
@@ -397,6 +396,36 @@ Pendientes prioritarios:
 8. Probar si merece incluir IA opcional; comprobar cuotas gratuitas y mantener respaldo local de texto para la salida.
 
 ## 15. Historial de cambios
+
+### Versión 0.36 — 17 de octubre de 2026
+
+- Los diez personajes completos del usuario entran en el juego tal cual (sin quitar triángulos, sin cambiar tamaño ni texturas), riggeados con el mismo esqueleto Humanoid y las animaciones de Starter Assets: Blue Tracksuit, Casual, Gardener, Elegant, Explorer y Pajamas gratuitos; Raincoat, Chef, Retro Sport y Winter en la tienda. Al elegir uno, el concursante cambia de modelo; los complementos siguen en su cabeza. Detalle en [PLAYER](PLAYER.md).
+- Pantalla del plató rehecha con el estilo del menú: recuadros redondeados de colores profundos como las cabinas, Lilita One y Poppins, la letra de cada opción en su círculo, y al revelar la respuesta en grande con «✓ CORRECTA» y la explicación (como el boceto 06 del HUD). Detalle en [UI_UX](UI_UX.md).
+- Cómo se juega, Configuración y Récords se abren encima del menú de partida; las ilustraciones del tutorial quedan centradas.
+
+### Versión 0.35 — 17 de octubre de 2026
+
+- Los menús se montan como los [bocetos](bocetos/ui/menu/README.md) con los recursos de MenuUI: menú principal con «TU PERSONAJE» en 3D, unirme a una sala (sin puerto), sala de espera con seis plazas (retrato, nombre, personaje e insignia de anfitrión), invitación y tu personaje en su peana, tienda con pestañas Personajes y Accesorios (tarjetas con foto y estado, vista 3D con el complemento puesto, «Comprar y elegir», «Te faltan N fichas»…), cómo se juega con tira de seis pasos e ilustración por página, récords en tabla con medallas, configuración con interruptores, menú de partida y confirmación de salida (también desde la sala; al anfitrión le avisa de que se cierra para todos). Detrás, el plató real desenfocado. La tienda se abre desde la sala de espera, como en los bocetos. Textos del tutorial según la revisión de DISENO.md. Detalle en [UI_UX](UI_UX.md). Ajustes: los botones apenas crecen al pasar el ratón, las ilustraciones no se estiran y los deslizadores tienen forma de píldora.
+
+### Versión 0.34 — 17 de octubre de 2026
+
+- Se preparan [18 recursos gráficos de MenuUI](bocetos/ui/menu/recursos/README.md): nueve títulos, una hoja de trece iconos, seis ilustraciones del tutorial y dos del personaje Blue Tracksuit. PNG con alfa real y dimensiones normalizadas; no se montan pantallas ni se cambia el juego.
+
+
+### Versión 0.33 — 17 de octubre de 2026
+
+- Se añaden [siete bocetos del HUD](bocetos/ui/hud/README.md), uno por estado: apuestas, transporte, comodín, cambio, cierre, resolución y espectador. La especificación conserva pregunta/opciones en el plató, distingue dinero total, carga, riesgo y multiplicador, y retira las acciones cuando dejan de ser válidas. Son propuestas visuales: no cambian reglas, código ni escenas.
+
+
+### Versión 0.32 — 17 de octubre de 2026
+
+- Se incorporan [diez bocetos de menús](bocetos/ui/menu/README.md), coherentes con el plató, con selección de personaje integrada, crear/unirse a sala, espera, tienda, ayuda, récords, configuración y salida. La especificación documenta estados y navegación; no cambia el alcance ni implementa pantallas.
+- Se corrige en UI_UX una referencia antigua a diez personajes gratuitos: la regla actual sigue siendo seis gratuitos y cuatro de pago, con reparto concreto pendiente. Los datos y el nombre del boceto son ilustrativos.
+
+
+### Versión 0.31 — 16 de octubre de 2026
+
+- Elegir personaje: en el menú principal, en un panel «TU PERSONAJE» a la derecha del menú, con el personaje en 3D girando despacio, flechas a los lados y su nombre; las flechas pasan por los personajes que tiene el jugador (gratuitos y comprados) y se recuerda. Quien no elige lleva el de por defecto (el primero de los gratuitos). Diez personajes: seis gratuitos (en un array del catálogo, fácil de cambiar) y cuatro de pago en la tienda a 1.200 fichas. En una sala nunca hay dos iguales: si el elegido ya lo lleva otro, el host le da el primer gratuito libre. Los trajes de colores desaparecen de la tienda. Mientras llegan los modelos, los personajes son el robot de Starter Assets en diez colores. En la sala de espera cada nombre se ve con el color de su personaje. Detalle en [PLAYER](PLAYER.md).
 
 ### Versión 0.30 — 16 de octubre de 2026
 

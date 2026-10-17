@@ -3,12 +3,17 @@ using System.Collections.Generic;
 
 namespace Trivias.Shared.Profile
 {
-    /// <summary>Progreso guardado del jugador en este ordenador (GDD 11): nombre, fichas, compras y lo que lleva puesto.</summary>
+    /// <summary>
+    /// Progreso guardado del jugador en este ordenador (GDD 11): nombre, personaje, fichas, compras (cosméticos y
+    /// personajes) y lo que lleva puesto.
+    /// </summary>
     [Serializable]
     public sealed class ProfileData
     {
         /// <summary>Nombre elegido en el menú (vacío: «Jugador N»). Con Steam se usará el de la cuenta.</summary>
         public string name = string.Empty;
+        /// <summary>Personaje elegido en el menú (vacío: el primero que tenga).</summary>
+        public string character = string.Empty;
         public int tokens;
         public List<string> owned = new();
         public string[] equipped = new string[CosmeticSlots.COUNT];
@@ -17,7 +22,7 @@ namespace Trivias.Shared.Profile
         public List<string> awardedMatches = new();
 
         public CosmeticLoadout Loadout => new(Equipped(CosmeticSlot.Head), Equipped(CosmeticSlot.Face),
-            Equipped(CosmeticSlot.Neck), Equipped(CosmeticSlot.Color));
+            Equipped(CosmeticSlot.Neck));
 
         public string Equipped(CosmeticSlot slot) =>
             equipped != null && (int)slot < equipped.Length ? equipped[(int)slot] ?? string.Empty : string.Empty;
@@ -26,6 +31,7 @@ namespace Trivias.Shared.Profile
         public void Normalize()
         {
             name = PlayerNameRules.Sanitize(name);
+            character ??= string.Empty;
             owned ??= new List<string>();
             awardedMatches ??= new List<string>();
             if (equipped == null || equipped.Length != CosmeticSlots.COUNT)

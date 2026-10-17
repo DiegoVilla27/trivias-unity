@@ -17,8 +17,8 @@ namespace Trivias.Shared.Players
         /// <summary>Hueso de la cabeza: ahí se colocan gorras, gafas, coronas...</summary>
         Transform HeadAnchor { get; }
 
-        /// <summary>Mallas del cuerpo, para teñir el traje con el color equipado.</summary>
-        Renderer[] BodyRenderers { get; }
+        /// <summary>Personaje que lleva (id del catálogo de personajes); el host evita que se repita en la sala.</summary>
+        string CharacterId { get; }
 
         /// <summary>Cosméticos que lleva puestos (iguales en todos los clientes).</summary>
         CosmeticLoadout Loadout { get; }
