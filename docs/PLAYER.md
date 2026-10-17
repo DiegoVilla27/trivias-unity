@@ -1,6 +1,6 @@
 # Jugador — Personaje y prefab base
 
-[Accesorios 3D adicionales](modelado/accessories/README.md): diez piezas rígidas con origen de colocación, pendientes de ajuste por personaje y conexión al catálogo. Las alas necesitan un futuro anclaje de espalda; no sustituyen el sistema vigente de equipamiento.
+Accesorios ([bocetos](bocetos/player/accessories/README.md)): Diez accesorios, modelos del usuario tal cual (500.000 triángulos y su textura cada uno), preparados en Blender (`Tools/Blender/accessories.py`) solo con su tamaño y su origen en el punto de enganche: corona, sombrero de copa y aureola (cabeza, 1.200); gafas de estrella, gafas de sol y antifaz (cara, 300); bigote (boca, 300); pajarita (cuello, 300); y alas de ángel y de dragón (espalda, 1.200). Se puede llevar uno por hueco a la vez (cinco huecos). Cada personaje tiene medidos en su malla sus puntos de enganche (encima del pelo, delante de los ojos, de la boca, bajo la barbilla y la espalda), así que todo encaja en los diez. Los anclajes de cabeza, cara y boca siguen al hueso de la cabeza; los de cuello y espalda, al del pecho (`PlayerCharacterView`, medidos por `CharacterModelBuilder`).
 
 Referencia: [GDD](GDD.md), secciones 5, 7, 8 y 10.
 

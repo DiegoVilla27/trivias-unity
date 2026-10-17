@@ -18,51 +18,111 @@ MonoBehaviour:
     _tint: {r: 0.25, g: 0.5, b: 0.95, a: 1}
     _model: {fileID: 919132149155446097, guid: 097a46351a5ef498cae328f1cedd1cae, type: 3}
     _avatar: {fileID: 9000000, guid: 097a46351a5ef498cae328f1cedd1cae, type: 3}
+    _anchors:
+    - {x: 0, y: 1.9058814, z: 0.08162494}
+    - {x: 0, y: 1.38, z: 0.43509132}
+    - {x: 0, y: 0.99, z: 0.23227657}
+    - {x: 0, y: 1.22, z: 0.49402505}
+    - {x: 0, y: 0.8, z: -0.08828935}
   - _id: casual
     _displayName: Casual
     _tint: {r: 0.95, g: 0.55, b: 0.45, a: 1}
     _model: {fileID: 919132149155446097, guid: b78385defff6e448fbdef4f4d2d93738, type: 3}
     _avatar: {fileID: 9000000, guid: b78385defff6e448fbdef4f4d2d93738, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8965029, z: 0.029719578}
+    - {x: 0, y: 1.38, z: 0.39177138}
+    - {x: 0, y: 0.99, z: 0.1825464}
+    - {x: 0, y: 1.22, z: 0.45070451}
+    - {x: 0, y: 0.8, z: -0.13784531}
   - _id: gardener
     _displayName: Gardener
     _tint: {r: 0.45, g: 0.65, b: 0.45, a: 1}
     _model: {fileID: 919132149155446097, guid: 29a280ce4e7364fd59dabd9f23437b7f, type: 3}
     _avatar: {fileID: 9000000, guid: 29a280ce4e7364fd59dabd9f23437b7f, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8981235, z: -0.14725915}
+    - {x: 0, y: 1.38, z: 0.5384051}
+    - {x: 0, y: 0.99, z: 0.43515873}
+    - {x: 0, y: 1.22, z: 0.4801892}
+    - {x: 0, y: 0.8, z: 0.005300473}
   - _id: elegant
     _displayName: Elegant
     _tint: {r: 0.3, g: 0.45, b: 0.85, a: 1}
     _model: {fileID: 919132149155446097, guid: abf969d8c002a4e98a1a6af937a16adf, type: 3}
     _avatar: {fileID: 9000000, guid: abf969d8c002a4e98a1a6af937a16adf, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8994691, z: 0.06776253}
+    - {x: 0, y: 1.38, z: 0.42771882}
+    - {x: 0, y: 0.99, z: 0.22692102}
+    - {x: 0, y: 1.22, z: 0.49030185}
+    - {x: 0, y: 0.8, z: -0.10385911}
   - _id: explorer
     _displayName: Explorer
     _tint: {r: 0.8, g: 0.72, b: 0.5, a: 1}
     _model: {fileID: 919132149155446097, guid: 795ab4cec483f48aa8fb72557eeb0768, type: 3}
     _avatar: {fileID: 9000000, guid: 795ab4cec483f48aa8fb72557eeb0768, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8990437, z: 0.05846127}
+    - {x: 0, y: 1.38, z: 0.39873794}
+    - {x: 0, y: 0.99, z: 0.22149885}
+    - {x: 0, y: 1.22, z: 0.46179965}
+    - {x: 0, y: 0.8, z: -0.13111116}
   - _id: pajamas
     _displayName: Pajamas
     _tint: {r: 0.72, g: 0.66, b: 0.95, a: 1}
     _model: {fileID: 919132149155446097, guid: b831fb95bbc9c4a6181db215f511686d, type: 3}
     _avatar: {fileID: 9000000, guid: b831fb95bbc9c4a6181db215f511686d, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8905021, z: -0.17374256}
+    - {x: 0, y: 1.38, z: 0.39710632}
+    - {x: 0, y: 0.99, z: 0.19325736}
+    - {x: 0, y: 1.22, z: 0.45763442}
+    - {x: 0, y: 0.8, z: -0.117764816}
   - _id: raincoat
     _displayName: Raincoat
     _tint: {r: 0.98, g: 0.82, b: 0.3, a: 1}
     _model: {fileID: 919132149155446097, guid: 3ee480f87534a457f924f3da129c9179, type: 3}
     _avatar: {fileID: 9000000, guid: 3ee480f87534a457f924f3da129c9179, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8994529, z: 0.09681085}
+    - {x: 0, y: 1.38, z: 0.4015677}
+    - {x: 0, y: 0.99, z: 0.2619399}
+    - {x: 0, y: 1.22, z: 0.4654038}
+    - {x: 0, y: 0.8, z: -0.24815543}
   - _id: chef
     _displayName: Chef
     _tint: {r: 0.95, g: 0.95, b: 0.95, a: 1}
     _model: {fileID: 919132149155446097, guid: a286ccdd5ebaf4510a73201d5e3f7283, type: 3}
     _avatar: {fileID: 9000000, guid: a286ccdd5ebaf4510a73201d5e3f7283, type: 3}
+    _anchors:
+    - {x: 0, y: 1.900114, z: 0.10066236}
+    - {x: 0, y: 1.38, z: 0.4441719}
+    - {x: 0, y: 0.99, z: 0.24044144}
+    - {x: 0, y: 1.22, z: 0.50241995}
+    - {x: 0, y: 0.8, z: -0.07684389}
   - _id: retro-sport
     _displayName: Retro Sport
     _tint: {r: 0.85, g: 0.25, b: 0.3, a: 1}
     _model: {fileID: 919132149155446097, guid: d9c17f86f410645e887068fcb6780e8d, type: 3}
     _avatar: {fileID: 9000000, guid: d9c17f86f410645e887068fcb6780e8d, type: 3}
+    _anchors:
+    - {x: 0, y: 1.9011202, z: -0.031210149}
+    - {x: 0, y: 1.38, z: 0.5860514}
+    - {x: 0, y: 0.99, z: 0.47373623}
+    - {x: 0, y: 1.22, z: 0.49152583}
+    - {x: 0, y: 0.8, z: -0.43213212}
   - _id: winter
     _displayName: Winter
     _tint: {r: 0.3, g: 0.6, b: 0.35, a: 1}
     _model: {fileID: 919132149155446097, guid: fa04f2d5655ab4e46b52c875bb4e45d0, type: 3}
     _avatar: {fileID: 9000000, guid: fa04f2d5655ab4e46b52c875bb4e45d0, type: 3}
+    _anchors:
+    - {x: 0, y: 1.8964548, z: 0.07245719}
+    - {x: 0, y: 1.38, z: 0.44465375}
+    - {x: 0, y: 0.99, z: 0.29430065}
+    - {x: 0, y: 1.22, z: 0.46333307}
+    - {x: 0, y: 0.8, z: -0.12172479}
   _freeCharacterIds:
   - tracksuit
   - casual

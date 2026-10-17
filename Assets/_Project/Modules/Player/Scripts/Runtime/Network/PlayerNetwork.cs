@@ -70,7 +70,7 @@ namespace Trivias.Player.Network
         public bool IsEliminated => _eliminated.Value;
         public bool IsLocal => IsOwner;
         public Transform ViewTarget => _look.CameraRoot;
-        public Transform HeadAnchor => _characterView.HeadAnchor;
+        public Transform AnchorFor(CosmeticSlot slot) => _characterView.AnchorFor(slot);
         public string CharacterId => _character.Value.ToString();
         public CosmeticLoadout Loadout => _loadout.Value.ToLoadout();
 

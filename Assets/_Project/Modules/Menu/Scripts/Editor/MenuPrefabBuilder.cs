@@ -387,6 +387,7 @@ namespace Trivias.Menu.Editor
                 hit.color = new Color(1f, 1f, 1f, 0f);
                 steps[i] = step.gameObject.AddComponent<Button>();
                 steps[i].targetGraphic = hit;
+                SoftTint(steps[i]);
                 step.gameObject.AddComponent<Trivias.Shared.Presentation.UiButtonFeel>();
                 circles[i] = Picture("Circle", step, CircleNavySprite(), 66f, 8f, 48f, 48f);
                 numbers[i] = Text("Number", circles[i].transform, (i + 1).ToString(), 0f, 0f, 48f, 48f, 26f, UiFont.Bold, Ivory);

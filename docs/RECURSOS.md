@@ -4,7 +4,7 @@ Referencia: [GDD](GDD.md), secciones 6–9 y 13. Lista de recursos necesarios; n
 
 ## Arte 3D
 
-[Diez accesorios 3D modelados en Blender](modelado/accessories/README.md): OBJ y materiales URP en `Shop/Models/Accessories`, fuentes y renders reales en docs. Integración en catálogo y ajuste por personaje pendientes.
+Accesorios: los diez modelos del usuario tal cual (500.000 triángulos cada uno) en `Shop/Models/Accessories/<Nombre>` (FBX con el origen en su punto de enganche y su `shaded.png` como emisión), preparados con `Tools/Blender/accessories.py`. Micrófono del presentador en `Presenter/Models/Microphone`. Rendimiento: cada accesorio puesto suma 500.000 triángulos; con seis concursantes y los cinco huecos llenos serían 15 millones más, así que hay que medirlo en equipos modestos.
 
 Accesorios cosméticos: [diez láminas de cuatro vistas](bocetos/player/accessories/README.md), con corona, pajarita, sombrero de copa, gafas de estrella, bigote, sombrero de pirata, antifaz, halo y alas de ángel y de dragón. Bocetos para modelado; aún sin integración ni nuevos precios.
 
@@ -20,7 +20,7 @@ Referencias específicas de modelado: [36 láminas individuales y notas](bocetos
 | Botón de verificar | Modelo integrado (la tapa se hunde) | Mismo objeto pulido |
 | Fajo, bolsa y lingote | Modelos integrados | Valores legibles y acabado |
 | Plató modular | Kit de ambiente integrado (ver abajo) | Iluminación precalculada y optimización |
-| Presentador visual | Modelo del usuario tal cual (1M triángulos, 1,9 m), riggeado, en `Presenter/Models/Presenter` | Hecho: alegría, decepción y hablar (Blender, `Tools/Blender`); pendiente el modelo del micrófono |
+| Presentador visual | Modelo del usuario tal cual (1M triángulos, 1,9 m), riggeado, en `Presenter/Models/Presenter` | Hecho: alegría, decepción y hablar (Blender, `Tools/Blender`) con su micrófono |
 | Cheque/podio | Resultado sencillo | Ceremonia de victoria |
 
 Los cosméticos adicionales de tienda requieren catálogo por definir. No confundir los diez personajes básicos gratuitos con atuendos que se compran usando fichas.
@@ -80,7 +80,7 @@ Plató (en `Audio/Stage/`): succión de los tubos (aire que entra y silbido que 
 
 Música: un bucle por bloque de dificultad (preguntas 1–5 tranquila a 100 ppm, 6–10 con ritmo a 116 ppm, 11–15 tensa a 132 ppm), con fundido entre pistas; silencio en la sala de espera y en los resultados. Volúmenes en `Feedback/Config/FeedbackLibrary.asset`; la música va baja para no tapar la conversación. Sustituibles por audio definitivo en el acabado. Sin AudioMixer por ahora (Unity no permite crearlo por código); pendiente con el ajuste de volumen en opciones.
 
-El presentador es exclusivamente textual. La voz de jugadores por micrófono es un sistema de comunicación, no un recurso de voz del presentador. Mantener efectos y música por debajo de la conversación.
+El presentador implementado es exclusivamente textual. Se ha preparado el [guion de 104 locuciones para ElevenLabs](audio/PRESENTER_VOICE_SCRIPT_ES.md), con interpretación y versiones fijas; la generación de audios y su integración están pendientes. La voz de jugadores por micrófono es un sistema de comunicación, no un recurso de voz del presentador. Mantener efectos y música por debajo de la conversación.
 
 ## Interfaz y contenido
 

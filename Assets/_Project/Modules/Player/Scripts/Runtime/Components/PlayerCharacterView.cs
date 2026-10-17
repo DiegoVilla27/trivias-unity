@@ -1,4 +1,5 @@
 using Trivias.Shared.Characters;
+using Trivias.Shared.Profile;
 using UnityEngine;
 
 namespace Trivias.Player.Components
@@ -6,25 +7,23 @@ namespace Trivias.Player.Components
     /// <summary>
     /// Pone al concursante (o al expositor del menú) el modelo del personaje que lleva. Todos comparten esqueleto
     /// (huesos humanos de Unity) y animaciones: cambiar de personaje es cambiar el esqueleto y la malla que cuelgan del
-    /// Animator, su avatar Humanoid, y volver a crear en su cabeza el anclaje de los complementos. Solo ocurre al elegir
-    /// personaje (en la sala de espera), nunca durante una ronda.
+    /// Animator, su avatar Humanoid, y volver a crear los anclajes de los cosméticos en sus puntos medidos (encima de su
+    /// pelo, delante de sus ojos…). Solo ocurre al elegir personaje (en la sala de espera), nunca durante una ronda.
     /// </summary>
     public sealed class PlayerCharacterView : MonoBehaviour
     {
         public const string HEAD_BONE = "Head";
-        public const string COSMETICS_ANCHOR = "CosmeticsAnchor";
+        public const string CHEST_BONE = "Chest";
+        public const string ANCHOR_PREFIX = "CosmeticsAnchor_";
 
         [SerializeField] private CharacterCatalog _catalog;
         [Tooltip("Animator del modelo: de él cuelgan el esqueleto y la malla del personaje.")]
         [SerializeField] private Animator _animator;
         [Tooltip("Personaje con el que se construyó el prefab (ya puesto: no hace falta cambiarlo).")]
         [SerializeField] private string _builtWith;
-        [Tooltip("Anclaje de los complementos respecto a los pies del concursante: a la altura de los ojos, en el centro de la cabeza.")]
-        [SerializeField] private Vector3 _anchorPosition = new(0f, 1.29f, 0f);
-        [Tooltip("Escala de los complementos (se diseñaron para una cabeza de unos 0,35 m).")]
-        [SerializeField, Min(0.01f)] private float _cosmeticsScale = 3f;
         [SerializeField] private Transform _head;
-        [SerializeField] private Transform _headAnchor;
+        [Tooltip("Un anclaje por hueco de cosmético (orden de CosmeticSlot).")]
+        [SerializeField] private Transform[] _anchors = new Transform[CosmeticSlots.COUNT];
 
         private string _modelId;
 
@@ -33,8 +32,11 @@ namespace Trivias.Player.Components
         /// <summary>Hueso de la cabeza del modelo que lleva.</summary>
         public Transform Head => _head;
 
-        /// <summary>Donde se enganchan gorras, gafas y pajaritas (sigue a la cabeza y tiene su escala).</summary>
-        public Transform HeadAnchor => _headAnchor;
+        /// <summary>Encima del pelo: coronas, sombreros, aureolas.</summary>
+        public Transform HeadAnchor => AnchorFor(CosmeticSlot.Head);
+
+        /// <summary>Dónde se engancha un cosmético de ese hueco (sigue a su hueso; en metros, mirando como el concursante).</summary>
+        public Transform AnchorFor(CosmeticSlot slot) => _anchors != null && (int)slot < _anchors.Length ? _anchors[(int)slot] : null;
 
         public Animator Animator => _animator;
 
@@ -83,22 +85,29 @@ namespace Trivias.Player.Components
             _animator.Rebind();
             _modelId = character.Id;
             _head = FindDeep(model, HEAD_BONE);
-            _headAnchor = CreateAnchor(_head, transform, _anchorPosition, _cosmeticsScale);
+            CreateAnchors(_anchors, transform, model, character);
         }
 
         /// <summary>
-        /// Anclaje de los complementos en la cabeza: sigue al hueso, mira como el concursante y tiene la escala de esta
-        /// cabeza, así gorras, gafas y pajaritas encajan sin tocarlas (lo usan también el constructor del prefab).
+        /// Anclajes de los cosméticos en los puntos medidos del personaje (en pose T, respecto a sus pies): los de la cabeza
+        /// siguen al hueso de la cabeza y los del cuello y la espalda al del pecho. Miran como el concursante y van en
+        /// metros, así cada cosmético se coloca con su origen en su punto de enganche (lo usa también el constructor).
         /// </summary>
-        public static Transform CreateAnchor(Transform head, Transform root, Vector3 position, float scale)
+        public static void CreateAnchors(Transform[] anchors, Transform root, Transform model, CharacterDefinition character)
         {
-            if (head == null)
-                return null;
-            var anchor = new GameObject(COSMETICS_ANCHOR).transform;
-            anchor.SetParent(head, false);
-            anchor.SetPositionAndRotation(root.TransformPoint(position), root.rotation);
-            anchor.localScale = Vector3.one * (scale / Mathf.Max(0.0001f, head.lossyScale.x));
-            return anchor;
+            var head = FindDeep(model, HEAD_BONE);
+            var chest = FindDeep(model, CHEST_BONE);
+            for (var slot = 0; slot < anchors.Length; slot++)
+            {
+                var bone = (CosmeticSlot)slot is CosmeticSlot.Neck or CosmeticSlot.Back ? chest : head;
+                if (bone == null)
+                    continue;
+                var anchor = new GameObject(ANCHOR_PREFIX + (CosmeticSlot)slot).transform;
+                anchor.SetParent(bone, false);
+                anchor.SetPositionAndRotation(root.TransformPoint(character.Anchor((CosmeticSlot)slot)), root.rotation);
+                anchor.localScale = Vector3.one / Mathf.Max(0.0001f, bone.lossyScale.x);
+                anchors[slot] = anchor;
+            }
         }
 
         public static Transform FindDeep(Transform parent, string name)

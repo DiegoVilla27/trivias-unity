@@ -3,6 +3,7 @@ using Trivias.Player.Components;
 using Trivias.Player.Data;
 using Trivias.Player.Network;
 using Trivias.Shared.Characters;
+using Trivias.Shared.Profile;
 using Trivias.Shared.Editor;
 using Trivias.Shared.Events;
 using Trivias.Shared.Physics;
@@ -39,8 +40,6 @@ namespace Trivias.Player.Editor
         /// <summary>El dinero se lleva delante de la barriga, por debajo de la cabeza.</summary>
         private static readonly Vector3 CarryPointPosition = new(0f, 0.72f, 0.5f);
         /// <summary>Anclaje de los complementos: a la altura de los ojos, en el centro de la cabeza y a su escala.</summary>
-        public static readonly Vector3 CosmeticsAnchorPosition = new(0f, 1.29f, 0f);
-        public const float COSMETICS_SCALE = 3f;
 
         [MenuItem("Tools/Trivias/Build/Player")]
         public static GameObject BuildFromMenu() =>
@@ -161,7 +160,7 @@ namespace Trivias.Player.Editor
             return animator;
         }
 
-        /// <summary>El personaje que lleva y el anclaje de sus complementos en la cabeza.</summary>
+        /// <summary>El personaje que lleva y los anclajes de sus cosméticos, en los puntos medidos de su modelo.</summary>
         internal static PlayerCharacterView AddCharacterView(GameObject root, Animator animator, CharacterCatalog catalog)
         {
             var view = root.AddComponent<PlayerCharacterView>();
@@ -169,10 +168,10 @@ namespace Trivias.Player.Editor
             SerializedWiring.Set(view, "_catalog", catalog);
             SerializedWiring.Set(view, "_animator", animator);
             SerializedWiring.Set(view, "_builtWith", catalog.DefaultId);
-            SerializedWiring.Set(view, "_anchorPosition", CosmeticsAnchorPosition);
-            SerializedWiring.Set(view, "_cosmeticsScale", COSMETICS_SCALE);
             SerializedWiring.Set(view, "_head", head);
-            SerializedWiring.Set(view, "_headAnchor", PlayerCharacterView.CreateAnchor(head, root.transform, CosmeticsAnchorPosition, COSMETICS_SCALE));
+            var anchors = new Transform[CosmeticSlots.COUNT];
+            PlayerCharacterView.CreateAnchors(anchors, root.transform, animator.transform, catalog.Find(catalog.DefaultId));
+            SerializedWiring.SetArray(view, "_anchors", anchors);
             return view;
         }
 

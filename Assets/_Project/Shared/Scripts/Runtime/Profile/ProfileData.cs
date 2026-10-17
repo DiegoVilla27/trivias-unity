@@ -22,7 +22,7 @@ namespace Trivias.Shared.Profile
         public List<string> awardedMatches = new();
 
         public CosmeticLoadout Loadout => new(Equipped(CosmeticSlot.Head), Equipped(CosmeticSlot.Face),
-            Equipped(CosmeticSlot.Neck));
+            Equipped(CosmeticSlot.Neck), Equipped(CosmeticSlot.Mouth), Equipped(CosmeticSlot.Back));
 
         public string Equipped(CosmeticSlot slot) =>
             equipped != null && (int)slot < equipped.Length ? equipped[(int)slot] ?? string.Empty : string.Empty;

@@ -75,5 +75,22 @@ namespace Trivias.Shop.Logic
         /// <summary>Paso de las flechas (dando la vuelta).</summary>
         public static int Step(int index, int direction, int count) =>
             count <= 0 ? 0 : ((index + (direction >= 0 ? 1 : -1)) % count + count) % count;
+
+        /// <summary>
+        /// Para probar: da por adquiridos los artículos que falten (sin gastar fichas ni ponérselos). Devuelve cuántos
+        /// eran nuevos.
+        /// </summary>
+        public static int UnlockAll(Trivias.Shared.Profile.ProfileData profile, System.Collections.Generic.IEnumerable<string> ids)
+        {
+            var added = 0;
+            foreach (var id in ids)
+            {
+                if (string.IsNullOrEmpty(id) || profile.owned.Contains(id))
+                    continue;
+                profile.owned.Add(id);
+                added++;
+            }
+            return added;
+        }
     }
 }

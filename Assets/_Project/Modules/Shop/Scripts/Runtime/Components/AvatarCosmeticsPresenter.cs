@@ -12,7 +12,8 @@ namespace Trivias.Shop.Components
     /// </summary>
     public sealed class AvatarCosmeticsPresenter : MonoBehaviour
     {
-        private static readonly CosmeticSlot[] AttachedSlots = { CosmeticSlot.Head, CosmeticSlot.Face, CosmeticSlot.Neck };
+        private static readonly CosmeticSlot[] AttachedSlots =
+            { CosmeticSlot.Head, CosmeticSlot.Face, CosmeticSlot.Neck, CosmeticSlot.Mouth, CosmeticSlot.Back };
 
         [SerializeField] private CosmeticCatalog _catalog;
         [SerializeField] private PlayerAvatarRegistry _avatars;
@@ -58,9 +59,10 @@ namespace Trivias.Shop.Components
         private void ApplyAttached(IPlayerAvatar avatar, Dressed dressed, CosmeticSlot slot, string id)
         {
             var index = (int)slot;
-            // Si cambió de personaje, su cabeza es otra: lo puesto se vuelve a colocar en ella.
+            var anchor = avatar.AnchorFor(slot);
+            // Si cambió de personaje, sus anclajes son otros: lo puesto se vuelve a colocar en ellos.
             var instance = dressed.Instances[index];
-            if (dressed.Ids[index] == id && (string.IsNullOrEmpty(id) || (instance != null && instance.transform.parent == avatar.HeadAnchor)))
+            if (dressed.Ids[index] == id && (string.IsNullOrEmpty(id) || (instance != null && instance.transform.parent == anchor)))
                 return;
 
             if (instance != null)
@@ -69,12 +71,12 @@ namespace Trivias.Shop.Components
             dressed.Ids[index] = id;
 
             var item = _catalog.Find(id);
-            if (item?.Prefab == null || avatar.HeadAnchor == null)
+            if (item?.Prefab == null || anchor == null)
                 return;
 
-            // Se engancha al anclaje de la cabeza (mira como el concursante y tiene la escala de su cabeza): el
-            // desplazamiento y el tamaño del cosmético se adaptan solos y sigue las animaciones.
-            instance = Instantiate(item.Prefab, avatar.HeadAnchor, false);
+            // Se engancha al anclaje de su hueco, medido en ese personaje (encima de su pelo, delante de sus ojos…): mira
+            // como el concursante, va en metros y sigue las animaciones.
+            instance = Instantiate(item.Prefab, anchor, false);
             instance.transform.SetLocalPositionAndRotation(item.Offset, Quaternion.identity);
             dressed.Instances[index] = instance;
         }

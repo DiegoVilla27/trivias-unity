@@ -323,7 +323,7 @@ namespace Trivias.App.Tests
             public string DisplayName { get; }
             public Vector3 Position => Root.transform.position;
             public Transform CarryPoint => Root.transform;
-            public Transform HeadAnchor => null;
+            public Transform AnchorFor(CosmeticSlot slot) => null;
             public string CharacterId => string.Empty;
             public CosmeticLoadout Loadout => default;
             public bool IsLocal => false;

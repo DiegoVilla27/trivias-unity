@@ -77,6 +77,27 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void Buttons_ChangeColourSubtly_AndSlowly()
+        {
+            foreach (var path in UiPrefabs)
+            {
+                foreach (var button in Load(path).GetComponentsInChildren<Button>(true))
+                {
+                    var colors = button.colors;
+                    Assert.That(colors.fadeDuration, Is.GreaterThanOrEqualTo(0.15f), $"{path}: {button.name} cambia de color sin golpe.");
+                    if (colors.pressedColor.a > 0.5f)
+                        Assert.That(Mathf.Min(colors.pressedColor.r, colors.pressedColor.g, colors.pressedColor.b), Is.GreaterThanOrEqualTo(0.85f),
+                            $"{path}: {button.name} se oscurece apenas al pulsar.");
+                }
+                foreach (var feel in Load(path).GetComponentsInChildren<UiButtonFeel>(true))
+                {
+                    var hover = (float)typeof(UiButtonFeel).GetField("_hoverScale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(feel);
+                    Assert.That(hover, Is.LessThanOrEqualTo(1.03f), $"{path}: {feel.name} crece poco.");
+                }
+            }
+        }
+
+        [Test]
         public void TheBlurredBackdropsVeil_NeverCatchesClicks_AndResultsDrawAboveTheMenu()
         {
             var menu = Load(UiPrefabs[0]);

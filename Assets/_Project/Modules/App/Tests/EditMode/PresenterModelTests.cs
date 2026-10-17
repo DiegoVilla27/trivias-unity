@@ -28,8 +28,8 @@ namespace Trivias.App.Tests
             Assert.That(body.sharedMesh.bounds.size.y, Is.EqualTo(1.9f).Within(0.03f), "Su altura original.");
             Assert.That(body.sharedMaterial.GetColor("_BaseColor"), Is.EqualTo(Color.black), "Como el original en Unity…");
             Assert.That(body.sharedMaterial.GetTexture("_EmissionMap").name, Is.EqualTo("shaded"), "…con su textura como emisión.");
-            foreach (var primitive in Prefab().GetComponentsInChildren<MeshFilter>(true))
-                Assert.That(primitive.transform.parent.name, Is.EqualTo("Microphone"), "Solo el micrófono provisional es de cajas.");
+            Assert.That(Prefab().GetComponentsInChildren<MeshFilter>(true).Where(m => m.sharedMesh.name.StartsWith("Cube")), Is.Empty,
+                "Ya no queda ninguna caja: el micrófono es su modelo.");
             Assert.That(Prefab().GetComponentsInChildren<TMPro.TextMeshPro>(true), Is.Empty, "Sin el cartel «PRESENTADOR».");
         }
 
@@ -86,7 +86,13 @@ namespace Trivias.App.Tests
         {
             var mic = Prefab().transform.Find("Model").GetComponentsInChildren<Transform>(true).Single(t => t.name == "Microphone");
             Assert.That(mic.parent.name, Is.EqualTo("RightHand"), "Va con la mano.");
-            Assert.That(Vector3.Angle(mic.forward, Prefab().transform.forward), Is.LessThan(1f), "En la pose T apunta al frente (como en Blender).");
+            Assert.That(Vector3.Angle(mic.up, Prefab().transform.forward), Is.LessThan(1f), "En la pose T apunta al frente (como en Blender).");
+            var model = mic.Find("Model");
+            Assert.That(AssetDatabase.GetAssetPath(PrefabUtility.GetCorrespondingObjectFromSource(model.gameObject)),
+                Does.EndWith("Presenter/Models/Microphone/Microphone.fbx"), "El modelo del usuario.");
+            var mesh = model.GetComponentInChildren<MeshFilter>().sharedMesh;
+            Assert.That(mesh.triangles.Length / 3, Is.EqualTo(500_000), "Tal cual, sin quitarle triángulos.");
+            Assert.That(mesh.bounds.size.y, Is.EqualTo(0.34f).Within(0.01f), "34 cm, a la medida de su mano.");
             Assert.That(mic.GetComponentsInChildren<Collider>(true), Is.Empty, "Sin colisiones.");
             Assert.That(Prefab().GetComponent<Trivias.Presenter.Components.PresenterAnimator>(), Is.Not.Null);
         }

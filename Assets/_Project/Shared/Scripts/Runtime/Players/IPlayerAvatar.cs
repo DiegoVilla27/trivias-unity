@@ -14,8 +14,11 @@ namespace Trivias.Shared.Players
         Vector3 Position { get; }
         Transform CarryPoint { get; }
 
-        /// <summary>Hueso de la cabeza: ahí se colocan gorras, gafas, coronas...</summary>
-        Transform HeadAnchor { get; }
+        /// <summary>
+        /// Dónde se engancha un cosmético de ese hueco, medido en su modelo: encima del pelo (cabeza), delante de los
+        /// ojos (cara), delante de la boca, bajo la barbilla (cuello) o en la espalda. Sigue a sus huesos.
+        /// </summary>
+        Transform AnchorFor(CosmeticSlot slot);
 
         /// <summary>Personaje que lleva (id del catálogo de personajes); el host evita que se repita en la sala.</summary>
         string CharacterId { get; }

@@ -143,5 +143,26 @@ namespace Trivias.Shared.Tests
             var loaded = ProfileStore.Load(path);
             Assert.That(loaded.tokens, Is.Zero);
         }
+
+        [Test]
+        public void FiveSlots_MouthAndBackToo_AndAnOldThreeSlotFileStillLoads()
+        {
+            _profile.owned.AddRange(new[] { "bigote", "alas-angel", "corona" });
+            Assert.That(ProfileRules.TryEquip(_profile, CosmeticSlot.Mouth, "bigote"), Is.True);
+            Assert.That(ProfileRules.TryEquip(_profile, CosmeticSlot.Back, "alas-angel"), Is.True);
+            Assert.That(ProfileRules.TryEquip(_profile, CosmeticSlot.Head, "corona"), Is.True);
+            var loadout = _profile.Loadout;
+            Assert.That(loadout[CosmeticSlot.Mouth], Is.EqualTo("bigote"));
+            Assert.That(loadout[CosmeticSlot.Back], Is.EqualTo("alas-angel"));
+            Assert.That(loadout[CosmeticSlot.Head], Is.EqualTo("corona"));
+            Assert.That(loadout, Is.Not.EqualTo(new CosmeticLoadout("corona", "", "", "bigote", "")), "Cuenta también la espalda.");
+
+            // Un perfil guardado antes, con tres huecos: conserva lo puesto y gana los dos nuevos vacíos.
+            var old = new ProfileData { equipped = new[] { "corona", "gafas-sol", "pajarita" } };
+            old.Normalize();
+            Assert.That(old.equipped, Is.EqualTo(new[] { "corona", "gafas-sol", "pajarita", null, null }));
+            Assert.That(old.Loadout.Mouth, Is.Empty);
+            Assert.That(old.Loadout.Back, Is.Empty);
+        }
     }
 }

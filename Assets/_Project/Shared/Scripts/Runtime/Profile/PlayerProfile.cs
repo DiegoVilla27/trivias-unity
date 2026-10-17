@@ -13,7 +13,7 @@ namespace Trivias.Shared.Profile
     [CreateAssetMenu(menuName = "Trivias/Profile/Player Profile", fileName = "PlayerProfile")]
     public sealed class PlayerProfile : ScriptableObject
     {
-        private const string FILE_NAME = "trivias-profile.json";
+        public const string FILE_NAME = "trivias-profile.json";
 
         public event Action Changed;
 

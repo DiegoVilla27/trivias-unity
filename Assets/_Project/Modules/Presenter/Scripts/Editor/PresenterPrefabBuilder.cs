@@ -41,6 +41,14 @@ namespace Trivias.Presenter.Editor
         public const string HAPPY_CLIP = ANIMATIONS + "/Presenter_Happy.fbx";
         public const string SAD_CLIP = ANIMATIONS + "/Presenter_Sad.fbx";
         public const string MICROPHONE = "Microphone";
+        public const string MIC_GRILLE = "Grille";
+        private const string MIC_MODEL = MODULE_ROOT + "/Models/Microphone/Microphone.fbx";
+        private const string MIC_TEXTURE = MODULE_ROOT + "/Models/Microphone/shaded.png";
+        private const string MIC_MATERIAL = MODULE_ROOT + "/Models/Microphone/Microphone_Mat.mat";
+        /// <summary>Lo que asoma el mango por detrás del puño (el micro mide 34 cm desde la base).</summary>
+        private const float MIC_GRIP = 0.03f;
+        /// <summary>Altura del centro de la rejilla desde la base del micro.</summary>
+        private const float MIC_GRILLE_HEIGHT = 0.285f;
         private static readonly string[] Layers = { "Base", "TalkMic", "TalkGesture", "TalkHead" };
         /// <summary>Del centro del puño a la muñeca, por la mano (igual que en las animaciones de Blender).</summary>
         private const float FIST = 0.09f;
@@ -92,23 +100,29 @@ namespace Trivias.Presenter.Editor
         }
 
         /// <summary>
-        /// Micrófono provisional (dos cajas) en su mano derecha, hasta que llegue el modelo: en la pose T apunta al frente
-        /// desde el centro del puño, igual que en las animaciones de Blender, así que al hablar llega a la boca.
+        /// Su micrófono (el modelo del usuario tal cual, preparado con <c>Tools/Blender/accessories.py</c>: 34 cm y el origen
+        /// en la base) en la mano derecha: en la pose T apunta al frente desde el puño, igual que en las animaciones de
+        /// Blender, con el puño cerrado en la parte baja del mango; así al hablar la rejilla llega a la boca.
         /// </summary>
         private static void AddMicrophone(Transform model, int layer)
         {
             var hand = FindDeep(model, "RightHand");
             var forearm = FindDeep(model, "RightLowerArm");
             var fist = hand.position + (hand.position - forearm.position).normalized * FIST;
-            var handle = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_MicHandle.mat", new Color(0.05f, 0.05f, 0.06f), 0.6f);
-            var grille = EditorAssets.GetOrCreateMaterial($"{MODULE_ROOT}/Materials/Presenter_MicHead.mat", new Color(0.55f, 0.56f, 0.6f), 0.75f);
+            var forward = model.forward;
 
             var mic = new GameObject(MICROPHONE) { layer = layer };
-            mic.transform.SetPositionAndRotation(fist, model.rotation);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "MicHandle", mic.transform, new Vector3(0f, 0f, 0.09f),
-                new Vector3(0.042f, 0.042f, 0.28f), handle, layer, false, keepCollider: false);
-            EditorAssets.CreatePrimitive(PrimitiveType.Cube, "MicHead", mic.transform, new Vector3(0f, 0f, 0.265f),
-                Vector3.one * 0.075f, grille, layer, false, keepCollider: false);
+            // El modelo va de pie (arriba +Y): se tumba para que apunte al frente.
+            mic.transform.SetPositionAndRotation(fist - forward * MIC_GRIP, model.rotation * Quaternion.Euler(90f, 0f, 0f));
+            var microphone = (GameObject)PrefabUtility.InstantiatePrefab(HumanoidModels.EnsureStaticImported(MIC_MODEL, MIC_TEXTURE,
+                MIC_MATERIAL, "Microphone_Mat"), mic.transform);
+            microphone.name = "Model";
+            foreach (var part in mic.GetComponentsInChildren<Transform>(true))
+                part.gameObject.layer = layer;
+            // Centro de la rejilla (lo que debe quedar en la boca al hablar).
+            var grille = new GameObject(MIC_GRILLE).transform;
+            grille.SetParent(mic.transform, false);
+            grille.localPosition = new Vector3(0f, MIC_GRILLE_HEIGHT, 0f);
             mic.transform.SetParent(hand, true);
         }
 

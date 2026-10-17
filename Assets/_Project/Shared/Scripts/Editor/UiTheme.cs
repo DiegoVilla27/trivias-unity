@@ -137,11 +137,11 @@ namespace Trivias.Shared.Editor
             Round(image, Mathf.Min(18f, size.y * 0.5f));
             var colors = button.colors;
             colors.normalColor = Color.white;
-            colors.highlightedColor = new Color(1f, 0.97f, 0.88f);
+            colors.highlightedColor = UiKit.HoverTint;
             colors.selectedColor = Color.white;
-            colors.pressedColor = new Color(0.86f, 0.8f, 0.7f);
+            colors.pressedColor = UiKit.PressedTint;
             colors.disabledColor = new Color(0.6f, 0.6f, 0.65f, 0.55f);
-            colors.fadeDuration = 0.08f;
+            colors.fadeDuration = UiKit.TINT_SECONDS;
             button.colors = colors;
 
             // Botones secundarios (fondo translúcido): borde dorado fino para que se lean como botones.

@@ -9,6 +9,7 @@ Documentos derivados del [GDD](GDD.md), referencia principal de reglas y alcance
 | [RECURSOS.md](RECURSOS.md) | Inventario de arte, animación, audio, interfaz y contenido |
 | [SISTEMAS.md](SISTEMAS.md) | Partida, dinero, comodines, fichas, ranking y multijugador |
 | [CONTENIDO.md](CONTENIDO.md) | Preguntas, frases del presentador y entrada opcional de IA |
+| [Guion de voz del presentador](audio/PRESENTER_VOICE_SCRIPT_ES.md) | 104 intervenciones para ElevenLabs, interpretación y versiones sin variables; audio aún pendiente |
 | [UI_UX.md](UI_UX.md) | Pantallas, información visible, respuestas a las acciones y [bocetos del menú](bocetos/ui/menu/README.md) |
 | [DESARROLLO.md](DESARROLLO.md) | Orden de construcción, verificaciones y decisiones pendientes |
 | [Bocetos visuales](bocetos/README.md) | Concepto del plató y láminas para modelado de personaje, presentador y recursos |

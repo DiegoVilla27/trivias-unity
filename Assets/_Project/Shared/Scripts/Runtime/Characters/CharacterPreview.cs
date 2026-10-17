@@ -17,18 +17,20 @@ namespace Trivias.Shared.Characters
         public event Action AccessoryChanged;
         public event Action<string> AccessoryPortraitRequested;
 
-        /// <summary>Un complemento (gorra, gafas…) que se quiere ver puesto o fotografiado.</summary>
+        /// <summary>Un complemento (corona, gafas, alas…) que se quiere ver puesto o fotografiado, y en qué hueco va.</summary>
         public readonly struct Accessory
         {
             public readonly string Id;
             public readonly GameObject Prefab;
             public readonly Vector3 Offset;
+            public readonly Profile.CosmeticSlot Slot;
 
-            public Accessory(string id, GameObject prefab, Vector3 offset)
+            public Accessory(string id, GameObject prefab, Vector3 offset, Profile.CosmeticSlot slot)
             {
                 Id = id;
                 Prefab = prefab;
                 Offset = offset;
+                Slot = slot;
             }
         }
 
@@ -71,12 +73,12 @@ namespace Trivias.Shared.Characters
             !string.IsNullOrEmpty(characterId) && _bodies.TryGetValue(characterId, out var body) ? body : null;
 
         /// <summary>Pone (o quita, con prefab nulo) un complemento al personaje de la vista grande.</summary>
-        public void Wear(string id, GameObject prefab, Vector3 offset)
+        public void Wear(string id, GameObject prefab, Vector3 offset, Profile.CosmeticSlot slot = Profile.CosmeticSlot.Head)
         {
             id ??= string.Empty;
             if (id == (Worn.Id ?? string.Empty))
                 return;
-            Worn = new Accessory(id, prefab, offset);
+            Worn = new Accessory(id, prefab, offset, slot);
             AccessoryChanged?.Invoke();
         }
 
@@ -85,11 +87,11 @@ namespace Trivias.Shared.Characters
             !string.IsNullOrEmpty(id) && _accessoryPortraits.TryGetValue(id, out var portrait) ? portrait : null;
 
         /// <summary>Pide la foto de un complemento; el expositor la hace en cuanto puede.</summary>
-        public void RequestAccessoryPortrait(string id, GameObject prefab, Vector3 offset)
+        public void RequestAccessoryPortrait(string id, GameObject prefab, Vector3 offset, Profile.CosmeticSlot slot)
         {
             if (string.IsNullOrEmpty(id) || _accessoryPortraits.ContainsKey(id))
                 return;
-            _pendingAccessories[id] = new Accessory(id, prefab, offset);
+            _pendingAccessories[id] = new Accessory(id, prefab, offset, slot);
             AccessoryPortraitRequested?.Invoke(id);
         }
 

@@ -1,6 +1,6 @@
 # Accesorios — propuesta visual
 
-[Modelos 3D y fuentes Blender](../../../modelado/accessories/README.md).
+Modelos 3D: los del usuario, en el juego en `Shop/Models/Accessories` (preparados con `Tools/Blender/accessories.py`).
 
 ## Bocetos individuales de cuatro vistas
 
@@ -11,7 +11,7 @@ Cada carpeta contiene una lámina con frente, atrás, izquierda y derecha, y su 
 - [SOMBRERO DE COPA](03-top-hat/top-hat-views.png) · [notas y prompt](03-top-hat/README.md)
 - [GAFAS DE ESTRELLA](04-star-glasses/star-glasses-views.png) · [notas y prompt](04-star-glasses/README.md)
 - [BIGOTE](05-mustache/mustache-views.png) · [notas y prompt](05-mustache/README.md)
-- [SOMBRERO DE PIRATA](06-pirate-hat/pirate-hat-views.png) · [notas y prompt](06-pirate-hat/README.md)
+- [GAFAS DE SOL](06-sunglasses/sunglasses-views.png) · [notas y prompt](06-sunglasses/README.md)
 - [ANTIFAZ](07-superhero-mask/superhero-mask-views.png) · [notas y prompt](07-superhero-mask/README.md)
 - [HALO](08-halo/halo-views.png) · [notas y prompt](08-halo/README.md)
 - [ALAS DE ÁNGEL](09-angel-wings/angel-wings-views.png) · [notas y prompt](09-angel-wings/README.md)
@@ -19,9 +19,9 @@ Cada carpeta contiene una lámina con frente, atrás, izquierda y derecha, y su 
 
 [Lámina conjunta de diez accesorios](accesorios-tienda.png), generada con la herramienta integrada de imágenes. Propuesta para revisión, sin cambios en el catálogo implementado ni precios nuevos.
 
-Selección vigente: corona, pajarita, sombrero de copa, gafas de estrella, bigote del presentador, sombrero de pirata, antifaz de superhéroe, halo, alas de ángel y alas de dragón. Los siete primeros accesorios aprobados se conservan; pirata, antifaz y dragón están pendientes de revisión. Sustituyen bufón, cuernos y cohete, descartados por el usuario.
+Selección vigente: corona, pajarita, sombrero de copa, gafas de estrella, bigote del presentador, gafas de sol, antifaz de superhéroe, halo, alas de ángel y alas de dragón. Las gafas de sol sustituyen al sombrero pirata por petición del usuario. El boceto y el modelo del pirata quedan descartados; se conservan como referencia histórica. La lámina conjunta anterior todavía muestra el pirata: prevalece este índice actualizado.
 
-Pensados para anclajes de cabeza, cara, cuello o espalda. El ajuste a cada personaje y la compatibilidad con el pelo quedan pendientes del modelado.
+En el juego (17 de octubre de 2026) van en cinco huecos: cabeza, cara, boca, cuello y espalda, enganchados a los puntos medidos en cada personaje.
 
 ## Prompt
 

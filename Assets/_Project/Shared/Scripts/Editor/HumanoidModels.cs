@@ -109,6 +109,37 @@ namespace Trivias.Shared.Editor
             return AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().First(c => !c.name.StartsWith("__preview__"));
         }
 
+        /// <summary>
+        /// Un modelo rígido del usuario (accesorio, micrófono) tal cual: su material en lugar del del FBX, sin esqueleto,
+        /// animaciones, cámaras ni luces. Devuelve el modelo.
+        /// </summary>
+        public static GameObject EnsureStaticImported(string modelPath, string texturePath, string materialPath, string fbxMaterial)
+        {
+            ConfigureTexture(texturePath);
+            var importer = (ModelImporter)AssetImporter.GetAtPath(modelPath);
+            var dirty = false;
+            if (importer.animationType != ModelImporterAnimationType.None || importer.importAnimation || importer.importCameras ||
+                importer.importLights || importer.materialImportMode != ModelImporterMaterialImportMode.ImportViaMaterialDescription)
+            {
+                importer.animationType = ModelImporterAnimationType.None;
+                importer.importAnimation = false;
+                importer.importCameras = false;
+                importer.importLights = false;
+                importer.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
+                dirty = true;
+            }
+            var material = ShadedMaterial(materialPath, texturePath);
+            var key = new AssetImporter.SourceAssetIdentifier(typeof(Material), fbxMaterial);
+            if (!importer.GetExternalObjectMap().TryGetValue(key, out var current) || current != material)
+            {
+                importer.AddRemap(key, material);
+                dirty = true;
+            }
+            if (dirty)
+                importer.SaveAndReimport();
+            return AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
+        }
+
         public static Avatar AvatarOf(string modelPath) =>
             AssetDatabase.LoadAllAssetsAtPath(modelPath).OfType<Avatar>().FirstOrDefault();
 

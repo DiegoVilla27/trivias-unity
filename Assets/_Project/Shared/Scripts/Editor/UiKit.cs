@@ -25,6 +25,22 @@ namespace Trivias.Shared.Editor
         public static readonly Color DarkText = Hex("#101830");
         public static readonly Color Green = Hex("#7BD86A");
         public static readonly Color Danger = Hex("#FF8A8A");
+        /// <summary>Al pasar el ratón y al pulsar, los botones cambian de color apenas y sin golpe.</summary>
+        public static readonly Color HoverTint = new(1f, 0.985f, 0.95f);
+        public static readonly Color PressedTint = new(0.93f, 0.91f, 0.87f);
+        public const float TINT_SECONDS = 0.18f;
+
+        /// <summary>Colores de un botón hecho a mano (tarjetas, pasos): como los del kit, sutiles y sin golpe.</summary>
+        public static void SoftTint(Selectable selectable)
+        {
+            var colors = selectable.colors;
+            colors.normalColor = Color.white;
+            colors.highlightedColor = HoverTint;
+            colors.selectedColor = Color.white;
+            colors.pressedColor = PressedTint;
+            colors.fadeDuration = TINT_SECONDS;
+            selectable.colors = colors;
+        }
 
         public enum ButtonStyle
         {
@@ -254,12 +270,12 @@ namespace Trivias.Shared.Editor
             var button = rect.gameObject.AddComponent<Button>();
             button.targetGraphic = image;
             var colors = button.colors;
-            colors.highlightedColor = style == ButtonStyle.Text ? new Color(1f, 1f, 1f, 0.06f) : new Color(1f, 0.97f, 0.88f);
+            colors.highlightedColor = style == ButtonStyle.Text ? new Color(1f, 1f, 1f, 0.05f) : HoverTint;
             colors.normalColor = style == ButtonStyle.Text ? new Color(1f, 1f, 1f, 0f) : Color.white;
             colors.selectedColor = colors.normalColor;
-            colors.pressedColor = new Color(0.86f, 0.8f, 0.7f, style == ButtonStyle.Text ? 0.1f : 1f);
+            colors.pressedColor = style == ButtonStyle.Text ? new Color(1f, 1f, 1f, 0.08f) : PressedTint;
             colors.disabledColor = new Color(0.55f, 0.58f, 0.68f, style == ButtonStyle.Text ? 0f : 0.6f);
-            colors.fadeDuration = 0.08f;
+            colors.fadeDuration = TINT_SECONDS;
             button.colors = colors;
             rect.gameObject.AddComponent<UiButtonFeel>();
 
@@ -286,7 +302,9 @@ namespace Trivias.Shared.Editor
             var button = image.gameObject.AddComponent<Button>();
             button.targetGraphic = image;
             var colors = button.colors;
-            colors.highlightedColor = new Color(1f, 0.95f, 0.8f);
+            colors.highlightedColor = HoverTint;
+            colors.pressedColor = PressedTint;
+            colors.fadeDuration = TINT_SECONDS;
             colors.disabledColor = new Color(1f, 1f, 1f, 0.35f);
             button.colors = colors;
             image.gameObject.AddComponent<UiButtonFeel>();

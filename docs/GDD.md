@@ -2,7 +2,7 @@
 
 ## Estado del documento
 
-- Versión: 0.43 — el presentador se alegra, se decepciona y habla con el micrófono.
+- Versión: 0.45 — botones con un tacto más suave.
 - Última actualización: 17 de octubre de 2026.
 - Nombre: pendiente.
 - Plataforma objetivo: PC, Steam.
@@ -238,6 +238,8 @@ El presentador se comunica mediante texto en un rótulo de televisión abajo a l
 
 Ejemplos de tono: «Aquí nadie pierde dinero: financia el decorado», «Tres segundos para arrepentiros. Para cambiar, ya es tarde», «El tubo tiene más certezas que vosotros».
 
+**Preparación de voz (17 de octubre de 2026, aún sin integrar):** [guion de 104 intervenciones para ElevenLabs](audio/PRESENTER_VOICE_SCRIPT_ES.md), con texto de generación y dirección individual. Las propuestas eliminan variables de 30 frases y acortan seis cierres para los tres segundos de bloqueo; se conservan los IDs. El catálogo textual, sus eventos, las reglas y las animaciones actuales no se modifican. Audio, adaptación de subtítulos y sincronización quedan pendientes.
+
 ### 9.2 Funcionalidad opcional: presentador con IA
 
 Preparar desde el inicio una separación entre eventos del juego y proveedor de frases: catálogo local o generador opcional. El juego completo debe funcionar con frases predefinidas sin depender de la IA.
@@ -312,7 +314,7 @@ Se entrega solo el tramo alcanzado, no la suma de tramos. Cada participante reci
 
 Compras cosméticas individuales y permanentes, sin ventajas y sin dinero real ni cajas aleatorias en la propuesta actual.
 
-Implementación del prototipo: las fichas y compras se guardan en un perfil local por jugador y se entregan una sola vez por partida al ver los resultados. La tienda se abre desde la sala de espera. Catálogo inicial: gorra, gafas y pajarita (300); corona y chistera (1.200); y los cuatro personajes de pago (1.200). Los trajes de colores se retiraron: el color lo da el personaje. Lo que cada jugador lleva puesto lo ven todos. Objetivos: superar el concurso, mejorar récords y conseguir atuendos. Fama/niveles y títulos permanecen como ideas pendientes, fuera del primer prototipo.
+Implementación del prototipo: las fichas y compras se guardan en un perfil local por jugador y se entregan una sola vez por partida al ver los resultados. La tienda se abre desde la sala de espera. Catálogo: diez accesorios, modelos del usuario tal cual (500.000 triángulos y su textura cada uno), preparados en Blender (`Tools/Blender/accessories.py`) solo con su tamaño y su origen en el punto de enganche: corona, sombrero de copa y aureola (cabeza, 1.200); gafas de estrella, gafas de sol y antifaz (cara, 300); bigote (boca, 300); pajarita (cuello, 300); y alas de ángel y de dragón (espalda, 1.200). Se puede llevar uno por hueco a la vez (cinco huecos). Cada personaje tiene medidos en su malla sus puntos de enganche (encima del pelo, delante de los ojos, de la boca, bajo la barbilla y la espalda), así que todo encaja en los diez; y los cuatro personajes de pago (1.200). Los trajes de colores se retiraron: el color lo da el personaje. Lo que cada jugador lleva puesto lo ven todos. Objetivos: superar el concurso, mejorar récords y conseguir atuendos. Fama/niveles y títulos permanecen como ideas pendientes, fuera del primer prototipo.
 
 ## 12. Ranking de victorias
 
@@ -399,13 +401,27 @@ Pendientes prioritarios:
 
 ## 15. Historial de cambios
 
+### Versión 0.46 — 17 de octubre de 2026
+
+- Preparado el guion de 104 locuciones del presentador para ElevenLabs, con interpretación individual y bloques listos para pegar; propuestas sin variables y versiones breves de cierre. Solo documentación de producción: no se han generado voces ni modificado el catálogo o la reproducción del juego.
+
+### Versión 0.45 — 17 de octubre de 2026
+
+- Los botones de los menús responden con más suavidad: al pasar el ratón crecen menos y sin salto, al pulsar se hunden un poco, y los cambios de color son más sutiles y lentos. Detalle en [UI_UX](UI_UX.md).
+- Para probar la tienda: *Tools > Trivias > Pruebas > Desbloquear todos los accesorios* los da por adquiridos en el perfil local (sin fichas).
+
+### Versión 0.44 — 17 de octubre de 2026
+
+- Diez accesorios, modelos del usuario tal cual (500.000 triángulos y su textura cada uno), preparados en Blender (`Tools/Blender/accessories.py`) solo con su tamaño y su origen en el punto de enganche: corona, sombrero de copa y aureola (cabeza, 1.200); gafas de estrella, gafas de sol y antifaz (cara, 300); bigote (boca, 300); pajarita (cuello, 300); y alas de ángel y de dragón (espalda, 1.200). Se puede llevar uno por hueco a la vez (cinco huecos). Cada personaje tiene medidos en su malla sus puntos de enganche (encima del pelo, delante de los ojos, de la boca, bajo la barbilla y la espalda), así que todo encaja en los diez. Sustituyen a la gorra, las gafas, la pajarita, la corona y la chistera de primitivas. La tienda los muestra en una cuadrícula de 5 × 2; las alas se fotografían por detrás y la vista grande gira para enseñarlas.
+- El presentador lleva su micrófono (modelo del usuario, 34 cm) en lugar del rectángulo provisional.
+
 ### Versión 0.43 — 17 de octubre de 2026
 
 - El presentador tiene animaciones: **alegría** (se agacha, salta con el puño en alto y da dos golpes de «¡sí!») cuando el equipo conserva dinero en la cabina correcta y al ganar; **decepción** (suspira, se hunde, niega con la cabeza gacha y hace un gesto de «qué le vamos a hacer») cuando se pierde todo y en la derrota; y **hablar** mientras se ve su rótulo (se lleva el micrófono a la boca, gesticula con la otra mano y mueve la cabeza), en capas aparte que se combinan con las reacciones. El micrófono es provisional (dos cajas) hasta que llegue su modelo. Cada jugador las calcula con la misma revelación (no viajan por red).
 
 ### Versión 0.42 — 17 de octubre de 2026
 
-- Diez [modelos 3D de accesorios](modelado/accessories/README.md), con fuentes Blender, OBJ y materiales URP, texturas y renders reales. Aún pendientes de ajuste sobre los personajes y conexión al catálogo; sin cambios de precios o de reglas.
+- Diez modelos 3D de accesorios (carpeta `docs/modelado` retirada después; sustituidos por los del usuario en la 0.44), con fuentes Blender, OBJ y materiales URP, texturas y renders reales. Aún pendientes de ajuste sobre los personajes y conexión al catálogo; sin cambios de precios o de reglas.
 
 ### Versión 0.41 — 17 de octubre de 2026
 

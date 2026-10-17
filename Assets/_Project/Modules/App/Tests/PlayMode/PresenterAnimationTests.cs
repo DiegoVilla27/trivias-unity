@@ -62,7 +62,7 @@ namespace Trivias.App.Tests
         [UnityTest]
         public IEnumerator Talking_BringsTheMicToHisMouth_AndStopping_LowersIt()
         {
-            var micHead = FindDeep(_presenter.transform, "MicHead");
+            var micHead = FindDeep(_presenter.transform, "Grille");
             var mouth = _presenter.transform.TransformPoint(new Vector3(0f, 1.15f, 0.47f));
             yield return new WaitForSeconds(0.3f);
             var resting = Vector3.Distance(micHead.position, mouth);

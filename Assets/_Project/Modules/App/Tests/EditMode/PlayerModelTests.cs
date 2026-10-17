@@ -36,13 +36,43 @@ namespace Trivias.App.Tests
         }
 
         [Test]
-        public void Cosmetics_HangFromTheHead_AtItsScale()
+        public void Cosmetics_HangFromTheirMeasuredPoints_InMetres()
         {
             var view = Prefab().GetComponent<PlayerCharacterView>();
-            Assert.That(view.HeadAnchor, Is.Not.Null);
-            Assert.That(view.HeadAnchor.parent.name, Is.EqualTo("Head"), "Sigue a la cabeza en las animaciones.");
-            Assert.That(view.HeadAnchor.lossyScale.x, Is.EqualTo(3f).Within(0.01f), "A la escala de esta cabeza grande.");
-            Assert.That(view.HeadAnchor.position.y, Is.InRange(1.2f, 1.4f), "A la altura de los ojos.");
+            var catalog = AssetDatabase.LoadAssetAtPath<Trivias.Shared.Characters.CharacterCatalog>(
+                "Assets/_Project/Shared/Config/Characters/CharacterCatalog.asset");
+            var character = catalog.Find(catalog.DefaultId);
+            for (var slot = Trivias.Shared.Profile.CosmeticSlot.Head; slot <= Trivias.Shared.Profile.CosmeticSlot.Back; slot++)
+            {
+                var anchor = view.AnchorFor(slot);
+                Assert.That(anchor, Is.Not.Null, $"{slot}");
+                var bone = slot is Trivias.Shared.Profile.CosmeticSlot.Neck or Trivias.Shared.Profile.CosmeticSlot.Back ? "Chest" : "Head";
+                Assert.That(anchor.parent.name, Is.EqualTo(bone), $"{slot}: sigue a su hueso en las animaciones.");
+                Assert.That(anchor.lossyScale.x, Is.EqualTo(1f).Within(0.01f), $"{slot}: en metros.");
+                Assert.That(Vector3.Distance(Prefab().transform.InverseTransformPoint(anchor.position), character.Anchor(slot)), Is.LessThan(0.001f),
+                    $"{slot}: en el punto medido de su modelo.");
+            }
+        }
+
+        [Test]
+        public void EveryCharacter_HasItsAnchorsMeasured_WhereEachAccessoryGoes()
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<Trivias.Shared.Characters.CharacterCatalog>(
+                "Assets/_Project/Shared/Config/Characters/CharacterCatalog.asset");
+            foreach (var character in catalog.Characters)
+            {
+                var head = character.Anchor(Trivias.Shared.Profile.CosmeticSlot.Head);
+                var face = character.Anchor(Trivias.Shared.Profile.CosmeticSlot.Face);
+                var mouth = character.Anchor(Trivias.Shared.Profile.CosmeticSlot.Mouth);
+                var neck = character.Anchor(Trivias.Shared.Profile.CosmeticSlot.Neck);
+                var back = character.Anchor(Trivias.Shared.Profile.CosmeticSlot.Back);
+                Assert.That(head.y, Is.InRange(1.85f, 1.95f), $"{character.Id}: encima del pelo.");
+                Assert.That(face.z, Is.InRange(0.3f, 0.6f), $"{character.Id}: delante de los ojos.");
+                Assert.That(mouth.z, Is.InRange(0.35f, 0.6f), $"{character.Id}: delante de la boca.");
+                Assert.That(mouth.y, Is.LessThan(face.y), $"{character.Id}: la boca, bajo los ojos.");
+                Assert.That(neck.z, Is.InRange(0.1f, 0.5f), $"{character.Id}: bajo la barbilla, por delante.");
+                Assert.That(back.z, Is.LessThan(neck.z - 0.15f).And.LessThan(0.05f), $"{character.Id}: la espalda, detrás del pecho.");
+            }
         }
     }
 }

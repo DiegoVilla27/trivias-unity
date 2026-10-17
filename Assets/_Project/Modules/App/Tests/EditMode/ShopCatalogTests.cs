@@ -34,6 +34,36 @@ namespace Trivias.App.Tests
         }
 
         [Test]
+        public void TheTenAccessories_AreTheUsersModels_InTheirSlots_AndPrices()
+        {
+            var expected = new (string Id, string Folder, CosmeticSlot Slot, int Price, float Width)[]
+            {
+                ("corona", "Crown", CosmeticSlot.Head, 1200, 0.46f), ("pajarita", "BowTie", CosmeticSlot.Neck, 300, 0.26f),
+                ("sombrero-copa", "TopHat", CosmeticSlot.Head, 1200, 0.60f), ("gafas-estrella", "StarGlasses", CosmeticSlot.Face, 300, 0.62f),
+                ("bigote", "Mustache", CosmeticSlot.Mouth, 300, 0.30f), ("gafas-sol", "SunGlasses", CosmeticSlot.Face, 300, 0.58f),
+                ("antifaz", "Mask", CosmeticSlot.Face, 300, 0.68f), ("aureola", "Halo", CosmeticSlot.Head, 1200, 0.50f),
+                ("alas-angel", "AngelWings", CosmeticSlot.Back, 1200, 1.10f), ("alas-dragon", "DragonWings", CosmeticSlot.Back, 1200, 1.15f),
+            };
+            var items = Catalog().Items;
+            Assert.That(items.Select(i => i.Id), Is.EqualTo(expected.Select(e => e.Id)), "Los diez, en el orden de la tienda.");
+            for (var i = 0; i < expected.Length; i++)
+            {
+                var item = items[i];
+                Assert.That(item.Slot, Is.EqualTo(expected[i].Slot), item.Id);
+                Assert.That(item.Price, Is.EqualTo(expected[i].Price), item.Id);
+                var model = item.Prefab.transform.Find("Model");
+                Assert.That(AssetDatabase.GetAssetPath(PrefabUtility.GetCorrespondingObjectFromSource(model.gameObject)),
+                    Does.EndWith($"Shop/Models/Accessories/{expected[i].Folder}/{expected[i].Folder}.fbx"), item.Id);
+                var mesh = model.GetComponentInChildren<UnityEngine.MeshFilter>().sharedMesh;
+                Assert.That(mesh.triangles.Length / 3, Is.EqualTo(500_000), $"{item.Id}: tal cual, sin quitarle triángulos.");
+                Assert.That(mesh.bounds.size.x, Is.EqualTo(expected[i].Width).Within(0.01f), $"{item.Id}: a su tamaño real.");
+                var material = model.GetComponentInChildren<UnityEngine.MeshRenderer>().sharedMaterial;
+                Assert.That(material.GetTexture("_EmissionMap"), Is.Not.Null, $"{item.Id}: su textura, como en el original.");
+                Assert.That(item.Prefab.GetComponentsInChildren<UnityEngine.Collider>(true), Is.Empty, $"{item.Id}: sin colisiones.");
+            }
+        }
+
+        [Test]
         public void EveryItemHasItsModel_AndSuitColorsAreGone()
         {
             foreach (var item in Catalog().Items)

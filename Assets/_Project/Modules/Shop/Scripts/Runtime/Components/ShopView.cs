@@ -134,7 +134,7 @@ namespace Trivias.Shop.Components
             _panel.SetActive(true);
             _backdrop.Cover(this, true); // Tapa la sala de espera (y deja de pedir su vista).
             foreach (var item in _catalog.Items)
-                _preview.RequestAccessoryPortrait(item.Id, item.Prefab, item.Offset);
+                _preview.RequestAccessoryPortrait(item.Id, item.Prefab, item.Offset, item.Slot);
             var current = Current();
             _characterIndex = Mathf.Max(0, IndexOf(current));
             IsAccessoriesTab = false;
@@ -306,7 +306,7 @@ namespace Trivias.Shop.Components
                 selected = AccessoryOffer(item);
                 _name.text = item.DisplayName;
                 _preview.Request(current);
-                _preview.Wear(item.Id, item.Prefab, item.Offset);
+                _preview.Wear(item.Id, item.Prefab, item.Offset, item.Slot);
             }
             else
             {

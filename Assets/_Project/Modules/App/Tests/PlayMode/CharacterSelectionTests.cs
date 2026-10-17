@@ -155,7 +155,13 @@ namespace Trivias.App.Tests
                 "El esqueleto anterior ya no cuelga del Animator.");
             Assert.That(animator.GetBoneTransform(HumanBodyBones.Head), Is.SameAs(view.Head), "El avatar mueve la cabeza nueva.");
             Assert.That(view.HeadAnchor.parent, Is.SameAs(view.Head), "Los complementos van en la cabeza nueva.");
-            Assert.That(local.GetComponent<IPlayerAvatar>().HeadAnchor, Is.SameAs(view.HeadAnchor));
+            Assert.That(local.GetComponent<IPlayerAvatar>().AnchorFor(CosmeticSlot.Head), Is.SameAs(view.HeadAnchor));
+            var chest = animator.GetBoneTransform(HumanBodyBones.Chest);
+            for (var slot = CosmeticSlot.Head; slot <= CosmeticSlot.Back; slot++)
+            {
+                var bone = slot is CosmeticSlot.Neck or CosmeticSlot.Back ? chest : view.Head;
+                Assert.That(view.AnchorFor(slot).parent, Is.SameAs(bone), $"{slot}: anclaje en el esqueleto nuevo.");
+            }
         }
 
         [UnityTest]
@@ -189,7 +195,7 @@ namespace Trivias.App.Tests
             public string DisplayName => "Otro";
             public Vector3 Position => Vector3.zero;
             public Transform CarryPoint => null;
-            public Transform HeadAnchor => null;
+            public Transform AnchorFor(CosmeticSlot slot) => null;
             public CosmeticLoadout Loadout => default;
             public bool IsLocal => false;
             public Transform ViewTarget => null;

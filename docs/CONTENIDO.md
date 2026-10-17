@@ -54,6 +54,10 @@ Campos: identificador, evento y texto (con variables). Elegir por evento real y 
 
 Variables: cantidad perdida, premio, ronda, supervivientes y multiplicador. Validar que todas se pueden rellenar. El presentador es textual: no hay voz ni escucha del micrófono. No ocultar pregunta o opciones con sus comentarios.
 
+## Preparación de voz pregrabada
+
+El [guion para ElevenLabs](audio/PRESENTER_VOICE_SCRIPT_ES.md) contiene las 104 fichas, con dirección individual y texto de generación. Propone adaptar 30 frases con variables y acortar seis de las siete frases de cierre para el bloqueo de tres segundos; conserva todos los IDs, incluido `loss-04` como evento de expulsión. Es un documento de producción: el JSON actual no cambia. Antes de integrar los clips se deberán sincronizar subtítulos y reproducción; todavía no hay voz implementada ni audios generados.
+
 ## IA opcional
 
 Primero catálogo local; después probar comentarios puntuales tras eventos públicos. Gemini con nivel gratuito es candidato según el GDD, sujeto a cuotas del proyecto. No es una dependencia de la salida.

@@ -98,3 +98,5 @@ Succión por los tubos: cada tubo guarda en edición su línea central (`TubePat
 - Un bono grande se emite en lingotes y bolsas, sin generar cientos de fajos.
 - Dividir un lingote o una bolsa conserva el valor exacto.
 - Un eliminado no se oye en el canal de activos aunque manipule su cliente, porque el host filtra la voz.
+
+Huecos de cosméticos (17 de octubre de 2026): cabeza, cara, cuello, boca y espalda (`CosmeticSlot`), uno por hueco. Lo puesto viaja en red como cinco ids (`LoadoutNet`) y se guarda en el perfil; un perfil antiguo de tres huecos se completa solo. Cada cosmético se engancha al punto medido de su hueco en el personaje que lleva cada uno (`IPlayerAvatar.AnchorFor`).

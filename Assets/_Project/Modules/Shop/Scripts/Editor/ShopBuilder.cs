@@ -12,15 +12,16 @@ using UnityEngine.UI;
 namespace Trivias.Shop.Editor
 {
     /// <summary>
-    /// Construye la tienda (GDD 11): cosméticos con primitivas, catálogo con los precios del GDD (accesorio 300, especial
-    /// 1.200), los personajes de pago (del catálogo de personajes), la ventana de la tienda y el presentador que viste a
-    /// los concursantes.
+    /// Construye la tienda (GDD 11): los diez accesorios del usuario (modelos tal cual, preparados en
+    /// <c>Tools/Blender/accessories.py</c> con su tamaño y su origen en el punto de enganche), el catálogo con los precios
+    /// del GDD (accesorio 300, especial 1.200), los personajes de pago (del catálogo de personajes), la ventana de la tienda
+    /// y el presentador que viste a los concursantes.
     /// </summary>
     public static class ShopBuilder
     {
         public const string MODULE_ROOT = "Assets/_Project/Modules/Shop";
         private const string PREFABS = MODULE_ROOT + "/Prefabs";
-        private const string MATERIALS = MODULE_ROOT + "/Materials";
+        private const string ACCESSORIES = MODULE_ROOT + "/Models/Accessories";
         public const string CATALOG_PATH = MODULE_ROOT + "/Config/CosmeticCatalog.asset";
         public const string SHOP_PREFAB_PATH = PREFABS + "/Shop.prefab";
         public const string PRESENTER_PREFAB_PATH = PREFABS + "/AvatarCosmetics.prefab";
@@ -29,21 +30,49 @@ namespace Trivias.Shop.Editor
         public const int SPECIAL_PRICE = 1200;
 
 
+        /// <summary>
+        /// Los diez accesorios, en el orden de la tienda. El ajuste es lo que se separa de su punto de enganche (medido en
+        /// cada personaje): la corona y el sombrero se hunden un poco en el pelo, la aureola flota encima, las gafas y el
+        /// antifaz quedan delante de los ojos y el bigote y las alas se apoyan en la cara y en la espalda.
+        /// </summary>
+        private static readonly (string Id, string Name, string Folder, CosmeticSlot Slot, int Price, Vector3 Offset)[] Accessories =
+        {
+            ("corona", "Corona", "Crown", CosmeticSlot.Head, SPECIAL_PRICE, new Vector3(0f, -0.07f, 0f)),
+            ("pajarita", "Pajarita", "BowTie", CosmeticSlot.Neck, ACCESSORY_PRICE, new Vector3(0f, 0f, -0.005f)),
+            ("sombrero-copa", "Sombrero de copa", "TopHat", CosmeticSlot.Head, SPECIAL_PRICE, new Vector3(0f, -0.09f, 0f)),
+            ("gafas-estrella", "Gafas de estrella", "StarGlasses", CosmeticSlot.Face, ACCESSORY_PRICE, new Vector3(0f, 0f, 0.02f)),
+            ("bigote", "Bigote", "Mustache", CosmeticSlot.Mouth, ACCESSORY_PRICE, new Vector3(0f, 0.01f, -0.01f)),
+            ("gafas-sol", "Gafas de sol", "SunGlasses", CosmeticSlot.Face, ACCESSORY_PRICE, new Vector3(0f, 0f, 0.02f)),
+            // El antifaz se curva hacia atrás: más adelante que las gafas, o la frente y los mofletes lo tapan.
+            ("antifaz", "Antifaz", "Mask", CosmeticSlot.Face, ACCESSORY_PRICE, new Vector3(0f, 0.01f, 0.1f)),
+            ("aureola", "Aureola", "Halo", CosmeticSlot.Head, SPECIAL_PRICE, new Vector3(0f, 0.12f, 0f)),
+            ("alas-angel", "Alas de ángel", "AngelWings", CosmeticSlot.Back, SPECIAL_PRICE, new Vector3(0f, 0f, 0.02f)),
+            ("alas-dragon", "Alas de dragón", "DragonWings", CosmeticSlot.Back, SPECIAL_PRICE, new Vector3(0f, 0f, 0.02f)),
+        };
+
+        public static string ModelPath(string folder) => $"{ACCESSORIES}/{folder}/{folder}.fbx";
+
         public static CosmeticCatalog BuildCatalog()
         {
-            var items = new List<CosmeticItem>
-            {
-                new("gorra", "Gorra", CosmeticSlot.Head, ACCESSORY_PRICE, Cap(), new Vector3(0f, 0.15f, 0f)),
-                new("gafas", "Gafas de sol", CosmeticSlot.Face, ACCESSORY_PRICE, Glasses(), new Vector3(0f, 0.02f, 0.17f)),
-                new("pajarita", "Pajarita", CosmeticSlot.Neck, ACCESSORY_PRICE, BowTie(), new Vector3(0f, -0.1f, 0.08f)),
-                new("corona", "Corona de campeón", CosmeticSlot.Head, SPECIAL_PRICE, Crown(), new Vector3(0f, 0.16f, 0f)),
-                new("chistera", "Chistera", CosmeticSlot.Head, SPECIAL_PRICE, TopHat(), new Vector3(0f, 0.16f, 0f)),
-            };
+            var items = new List<CosmeticItem>();
+            foreach (var (id, name, folder, slot, price, offset) in Accessories)
+                items.Add(new CosmeticItem(id, name, slot, price, AccessoryPrefab(folder), offset));
 
             var catalog = EditorAssets.GetOrCreateAsset<CosmeticCatalog>(CATALOG_PATH);
             catalog.EditorSet(items);
             EditorUtility.SetDirty(catalog);
             return catalog;
+        }
+
+        /// <summary>Prefab de un accesorio: el modelo tal cual con su origen en el punto de enganche (sin colisiones).</summary>
+        private static GameObject AccessoryPrefab(string folder)
+        {
+            var model = HumanoidModels.EnsureStaticImported(ModelPath(folder), $"{ACCESSORIES}/{folder}/shaded.png",
+                $"{ACCESSORIES}/{folder}/{folder}_Mat.mat", $"{folder}_Mat");
+            var root = new GameObject(folder);
+            var instance = (GameObject)PrefabUtility.InstantiatePrefab(model, root.transform);
+            instance.name = "Model";
+            return EditorAssets.SaveAsPrefab(root, $"{PREFABS}/Cosmetics/{folder}.prefab");
         }
 
         /// <summary>Objeto de escena que viste a todos los concursantes con lo que llevan equipado.</summary>
@@ -101,7 +130,7 @@ namespace Trivias.Shop.Editor
             var accessoriesGrid = UiKit.Rect("Accessories", grid, 0f, 0f, 1108f, 748f);
             var accessoryCards = new ShopCard[catalog.Items.Count];
             for (var i = 0; i < accessoryCards.Length; i++)
-                accessoryCards[i] = BuildCard(accessoriesGrid, $"Accessory{i + 1}", 46f + (i % 3) * 348f, 26f + (i / 3) * 362f, 320f, 342f,
+                accessoryCards[i] = BuildCard(accessoriesGrid, $"Accessory{i + 1}", 24f + (i % 5) * 215f, 26f + (i / 5) * 360f, 200f, 340f,
                     fullBody: false);
             accessoriesGrid.gameObject.SetActive(false);
 
@@ -172,6 +201,7 @@ namespace Trivias.Shop.Editor
             background.raycastTarget = true;
             var button = background.gameObject.AddComponent<Button>();
             button.targetGraphic = background;
+            UiKit.SoftTint(button);
             background.gameObject.AddComponent<Trivias.Shared.Presentation.UiButtonFeel>();
             var photoHeight = height - 104f;
             var photoWidth = fullBody ? photoHeight * 0.8f : photoHeight;
@@ -196,74 +226,5 @@ namespace Trivias.Shop.Editor
             SerializedWiring.Set(card, "_lock", padlock);
             return card;
         }
-
-        // ---- Cosméticos con primitivas (pivote en la cabeza del concursante) ----
-
-        private static GameObject Cap()
-        {
-            var root = new GameObject("Gorra");
-            Part(root, PrimitiveType.Sphere, "Crown", new Vector3(0f, 0.04f, 0f), new Vector3(0.3f, 0.16f, 0.3f), Mat("Cap_Red", new Color(0.85f, 0.2f, 0.2f)));
-            Part(root, PrimitiveType.Cube, "Brim", new Vector3(0f, 0f, 0.16f), new Vector3(0.24f, 0.02f, 0.16f), Mat("Cap_Navy", new Color(0.12f, 0.14f, 0.3f)));
-            return Save(root);
-        }
-
-        private static GameObject Glasses()
-        {
-            var root = new GameObject("Gafas");
-            var black = Mat("Glasses_Black", new Color(0.05f, 0.05f, 0.07f), 0.9f);
-            foreach (var x in new[] { -0.065f, 0.065f })
-            {
-                var lens = Part(root, PrimitiveType.Cylinder, "Lens", new Vector3(x, 0f, 0f), new Vector3(0.1f, 0.01f, 0.08f), black);
-                lens.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
-            }
-            Part(root, PrimitiveType.Cube, "Bridge", Vector3.zero, new Vector3(0.05f, 0.012f, 0.012f), black);
-            return Save(root);
-        }
-
-        private static GameObject BowTie()
-        {
-            var root = new GameObject("Pajarita");
-            var burgundy = Mat("BowTie_Burgundy", StagePalette.Burgundy);
-            foreach (var side in new[] { -1f, 1f })
-            {
-                var wing = Part(root, PrimitiveType.Cube, "Wing", new Vector3(side * 0.05f, 0f, 0f), new Vector3(0.07f, 0.06f, 0.02f), burgundy);
-                wing.transform.localRotation = Quaternion.Euler(0f, 0f, side * 20f);
-            }
-            Part(root, PrimitiveType.Cube, "Knot", Vector3.zero, new Vector3(0.03f, 0.035f, 0.025f), burgundy);
-            return Save(root);
-        }
-
-        private static GameObject Crown()
-        {
-            var root = new GameObject("Corona");
-            var gold = Mat("Crown_Gold", StagePalette.Gold, 0.8f, 1f);
-            Part(root, PrimitiveType.Cylinder, "Band", Vector3.zero, new Vector3(0.28f, 0.04f, 0.28f), gold);
-            for (var i = 0; i < 5; i++)
-            {
-                var angle = i * Mathf.PI * 2f / 5f;
-                Part(root, PrimitiveType.Sphere, "Point", new Vector3(Mathf.Sin(angle) * 0.13f, 0.07f, Mathf.Cos(angle) * 0.13f),
-                    Vector3.one * 0.05f, Mat("Crown_Ruby", new Color(0.85f, 0.1f, 0.25f)));
-            }
-            return Save(root);
-        }
-
-        private static GameObject TopHat()
-        {
-            var root = new GameObject("Chistera");
-            var black = Mat("TopHat_Black", new Color(0.06f, 0.06f, 0.08f), 0.4f);
-            Part(root, PrimitiveType.Cylinder, "Brim", Vector3.zero, new Vector3(0.36f, 0.008f, 0.36f), black);
-            Part(root, PrimitiveType.Cylinder, "Body", new Vector3(0f, 0.13f, 0f), new Vector3(0.22f, 0.13f, 0.22f), black);
-            Part(root, PrimitiveType.Cylinder, "Ribbon", new Vector3(0f, 0.04f, 0f), new Vector3(0.225f, 0.025f, 0.225f), Mat("TopHat_Ribbon", StagePalette.Burgundy));
-            return Save(root);
-        }
-
-        private static GameObject Part(GameObject root, PrimitiveType type, string name, Vector3 position, Vector3 scale, Material material) =>
-            EditorAssets.CreatePrimitive(type, name, root.transform, position, scale, material, 0, false, keepCollider: false);
-
-        private static GameObject Save(GameObject root) => EditorAssets.SaveAsPrefab(root, $"{PREFABS}/Cosmetics/{root.name}.prefab");
-
-        private static Material Mat(string name, Color color, float smoothness = 0.4f, float metallic = 0f) =>
-            EditorAssets.GetOrCreateMaterial($"{MATERIALS}/{name}.mat", color, smoothness, metallic);
-
     }
 }

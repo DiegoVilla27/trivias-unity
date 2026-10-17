@@ -13,33 +13,63 @@ MonoBehaviour:
   m_Name: CosmeticCatalog
   m_EditorClassIdentifier: Trivias.Shop::Trivias.Shop.Data.CosmeticCatalog
   _items:
-  - _id: gorra
-    _displayName: Gorra
+  - _id: corona
+    _displayName: Corona
     _slot: 0
-    _price: 300
-    _prefab: {fileID: 49513379464189433, guid: ba9dc1a47f19c4d77b69fdd5926d2748, type: 3}
-    _offset: {x: 0, y: 0.15, z: 0}
-  - _id: gafas
-    _displayName: Gafas de sol
-    _slot: 1
-    _price: 300
-    _prefab: {fileID: 4538672634362182995, guid: 5f31fb47a5b8e45d79b8e4d102a7b097, type: 3}
-    _offset: {x: 0, y: 0.02, z: 0.17}
+    _price: 1200
+    _prefab: {fileID: 7042513631161666022, guid: 4975251687b1c4f738dae3bc26a7b890, type: 3}
+    _offset: {x: 0, y: -0.07, z: 0}
   - _id: pajarita
     _displayName: Pajarita
     _slot: 2
     _price: 300
-    _prefab: {fileID: 354577097030350883, guid: b4e6e03247b0e4037aaf6cb7c3ade59b, type: 3}
-    _offset: {x: 0, y: -0.1, z: 0.08}
-  - _id: corona
-    _displayName: "Corona de campe\xF3n"
+    _prefab: {fileID: 1129230480256290054, guid: e8c29ab707b064a39bdaa6f40e0051af, type: 3}
+    _offset: {x: 0, y: 0, z: -0.005}
+  - _id: sombrero-copa
+    _displayName: Sombrero de copa
     _slot: 0
     _price: 1200
-    _prefab: {fileID: 2151144597699228547, guid: b7d81d0d0b32d4e39bb57644d45eda56, type: 3}
-    _offset: {x: 0, y: 0.16, z: 0}
-  - _id: chistera
-    _displayName: Chistera
+    _prefab: {fileID: 2330059445135796898, guid: 5d5b6ce3b6d0a46d4bb8560e7566ed60, type: 3}
+    _offset: {x: 0, y: -0.09, z: 0}
+  - _id: gafas-estrella
+    _displayName: Gafas de estrella
+    _slot: 1
+    _price: 300
+    _prefab: {fileID: 1091821191499158082, guid: 0433d398b51604b9783ad33231b11563, type: 3}
+    _offset: {x: 0, y: 0, z: 0.02}
+  - _id: bigote
+    _displayName: Bigote
+    _slot: 3
+    _price: 300
+    _prefab: {fileID: 4192878028392885741, guid: 953b077a3cf0c4c7e8d6ecf72dfbca79, type: 3}
+    _offset: {x: 0, y: 0.01, z: -0.01}
+  - _id: gafas-sol
+    _displayName: Gafas de sol
+    _slot: 1
+    _price: 300
+    _prefab: {fileID: 6347898204771963581, guid: 62b0f33dabd1544cea240dbef39c5e56, type: 3}
+    _offset: {x: 0, y: 0, z: 0.02}
+  - _id: antifaz
+    _displayName: Antifaz
+    _slot: 1
+    _price: 300
+    _prefab: {fileID: 6290361443474061009, guid: 4f57e316a4adf4f55a57c5b093d0ee32, type: 3}
+    _offset: {x: 0, y: 0.01, z: 0.1}
+  - _id: aureola
+    _displayName: Aureola
     _slot: 0
     _price: 1200
-    _prefab: {fileID: 701433945333587708, guid: d7053ffa316f544b594f13c52e4e577e, type: 3}
-    _offset: {x: 0, y: 0.16, z: 0}
+    _prefab: {fileID: 5169535399013293464, guid: 7080570bef5004eecb94563019015315, type: 3}
+    _offset: {x: 0, y: 0.12, z: 0}
+  - _id: alas-angel
+    _displayName: "Alas de \xE1ngel"
+    _slot: 4
+    _price: 1200
+    _prefab: {fileID: 1404811703030094501, guid: 942b78f5e110f44dd944bcf73a2bcbc4, type: 3}
+    _offset: {x: 0, y: 0, z: 0.02}
+  - _id: alas-dragon
+    _displayName: "Alas de drag\xF3n"
+    _slot: 4
+    _price: 1200
+    _prefab: {fileID: 6151493084666085858, guid: 7408437ecd8854f02b0abff35fbf935d, type: 3}
+    _offset: {x: 0, y: 0, z: 0.02}

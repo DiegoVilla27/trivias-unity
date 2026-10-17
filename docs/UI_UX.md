@@ -58,7 +58,7 @@ Toda la interfaz (menú, sala de espera, configuración, pausa, tienda, HUD, res
 
 - Tipografías: Lilita One en títulos (los dorados, con degradado como el rótulo del plató) y Poppins en el resto, igual que en el plató ([LEVEL](LEVEL.md)). Los textos encogen si no caben.
 - Paneles redondeados con un leve degradado y marco dorado; los principales aparecen con un pequeño rebote (0,22 s).
-- Botones redondeados: crecen un poco al pasar el ratón y se hunden al pulsar; los secundarios (fondo translúcido) llevan borde dorado.
+- Botones redondeados con un tacto suave: al pasar el ratón crecen apenas (2,5 %, como mucho 3 px por lado) y se aclaran un poco, al pulsar se hunden un poco y se oscurecen apenas; todo con curvas que arrancan y frenan con suavidad (unos 0,16 s), sin saltos. Los secundarios (fondo translúcido) llevan borde dorado.
 - Detrás del menú principal y de «Unirme a una sala», un velo semioscuro a pantalla completa resalta el menú y deja ver el plató. En la sala de espera no hay velo.
 - Menú principal y resultados con bombillas alrededor que persiguen, como la marquesina; el logo del menú late.
 - Las animaciones usan tiempo real (siguen en pausa) y no reservan memoria por fotograma.

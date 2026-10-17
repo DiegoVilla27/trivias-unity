@@ -56,5 +56,18 @@ namespace Trivias.Shop.Tests
             Assert.That(ShopRules.Step(0, -1, 5), Is.EqualTo(4));
             Assert.That(ShopRules.Step(2, 1, 5), Is.EqualTo(3));
         }
+
+        [Test]
+        public void UnlockAll_GivesWhatIsMissing_WithoutSpendingOrWearing()
+        {
+            var profile = new Trivias.Shared.Profile.ProfileData { tokens = 50 };
+            profile.Normalize();
+            profile.owned.Add("corona");
+            var added = ShopRules.UnlockAll(profile, new[] { "corona", "bigote", "", "alas-angel", "bigote" });
+            Assert.That(added, Is.EqualTo(2), "Solo los que faltaban (sin repetir).");
+            Assert.That(profile.owned, Is.EquivalentTo(new[] { "corona", "bigote", "alas-angel" }));
+            Assert.That(profile.tokens, Is.EqualTo(50), "No cuesta fichas.");
+            Assert.That(profile.Loadout.Head, Is.Empty, "No se pone nada.");
+        }
     }
 }

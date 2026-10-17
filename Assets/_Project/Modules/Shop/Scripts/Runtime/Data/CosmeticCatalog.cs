@@ -13,9 +13,9 @@ namespace Trivias.Shop.Data
         [SerializeField] private string _displayName;
         [SerializeField] private CosmeticSlot _slot;
         [SerializeField, Min(0)] private int _price;
-        [Tooltip("Objeto que se coloca en la cabeza (gorras, gafas, pajaritas...).")]
+        [Tooltip("Modelo del accesorio, con su origen en el punto de enganche de su hueco.")]
         [SerializeField] private GameObject _prefab;
-        [Tooltip("Posición respecto a la cabeza, en el espacio del concursante.")]
+        [Tooltip("Ajuste respecto al punto de enganche (medido en cada personaje), en metros.")]
         [SerializeField] private Vector3 _offset;
 
         public CosmeticItem(string id, string displayName, CosmeticSlot slot, int price, GameObject prefab, Vector3 offset)

@@ -18,6 +18,9 @@ namespace Trivias.Shared.Characters
         [Tooltip("Modelo riggeado (FBX importado como Humanoid).")]
         [SerializeField] private GameObject _model;
         [SerializeField] private Avatar _avatar;
+        [Tooltip("Dónde se enganchan los cosméticos de cada hueco (orden de CosmeticSlot), medido en su modelo en pose T " +
+                 "respecto a sus pies: encima del pelo, delante de los ojos, bajo la barbilla, delante de la boca y la espalda.")]
+        [SerializeField] private Vector3[] _anchors = new Vector3[Profile.CosmeticSlots.COUNT];
 
         public CharacterDefinition(string id, string displayName, Color tint)
         {
@@ -32,12 +35,18 @@ namespace Trivias.Shared.Characters
         public GameObject Model => _model;
         public Avatar Avatar => _avatar;
 
+        /// <summary>Punto de enganche de un hueco, respecto a los pies del personaje (mirando a +Z).</summary>
+        public Vector3 Anchor(Profile.CosmeticSlot slot) =>
+            _anchors != null && (int)slot < _anchors.Length ? _anchors[(int)slot] : Vector3.zero;
+
 #if UNITY_EDITOR
         public void EditorSetModel(GameObject model, Avatar avatar)
         {
             _model = model;
             _avatar = avatar;
         }
+
+        public void EditorSetAnchors(Vector3[] anchors) => _anchors = anchors;
 #endif
     }
 

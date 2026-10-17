@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Trivias.Shared.Characters;
+using Trivias.Shared.Profile;
 using UnityEngine;
 
 namespace Trivias.Player.Components
@@ -36,6 +37,13 @@ namespace Trivias.Player.Components
         private readonly List<string> _pendingIds = new();
         private GameObject _worn;
         private float _swayTime;
+
+        /// <summary>Giro de la peana para enseñar la espalda (de tres cuartos, para ver también la cara).</summary>
+        public const float BACK_YAW = 155f;
+        private float _baseYaw;
+
+        /// <summary>Hacia dónde mira la peana sin contar su vaivén (0: de frente).</summary>
+        public float BaseYaw => _baseYaw;
 
         public bool IsShowing => _camera.enabled;
         public string ShownId => _view.ShownId;
@@ -110,7 +118,7 @@ namespace Trivias.Player.Components
                 return;
             _swayTime += Time.unscaledDeltaTime;
             var angle = Mathf.Sin(_swayTime * Mathf.PI * 2f / _swaySeconds) * _swayDegrees;
-            _turntable.localRotation = Quaternion.Euler(0f, angle, 0f);
+            _turntable.localRotation = Quaternion.Euler(0f, _baseYaw + angle, 0f);
         }
 
         /// <summary>En el suelo y quieto: la animación de reposo.</summary>
@@ -165,15 +173,18 @@ namespace Trivias.Player.Components
         {
             if (_worn != null)
                 Destroy(_worn);
-            _worn = Attach(_preview.Worn.Prefab, _preview.Worn.Offset);
+            _worn = Attach(_preview.Worn.Prefab, _preview.Worn.Offset, _preview.Worn.Slot);
+            // Lo que va a la espalda (alas) se enseña de tres cuartos por detrás.
+            _baseYaw = _worn != null && _preview.Worn.Slot == CosmeticSlot.Back ? BACK_YAW : 0f;
         }
 
-        /// <summary>Como la tienda lo pone en el concursante: en el anclaje de la cabeza, con su desplazamiento.</summary>
-        private GameObject Attach(GameObject prefab, Vector3 offset)
+        /// <summary>Como la tienda lo pone en el concursante: en el anclaje de su hueco, con su desplazamiento.</summary>
+        private GameObject Attach(GameObject prefab, Vector3 offset, CosmeticSlot slot)
         {
-            if (prefab == null || _view.HeadAnchor == null)
+            var anchor = _view.AnchorFor(slot);
+            if (prefab == null || anchor == null)
                 return null;
-            var instance = Instantiate(prefab, _view.HeadAnchor, false);
+            var instance = Instantiate(prefab, anchor, false);
             instance.transform.SetLocalPositionAndRotation(offset, Quaternion.identity);
             return instance;
         }
@@ -211,8 +222,15 @@ namespace Trivias.Player.Components
             foreach (var id in _pendingIds)
             {
                 var accessory = _preview.PendingAccessoryPortraits[id];
-                var instance = Attach(accessory.Prefab, accessory.Offset);
-                FrameFace(3f);
+                var instance = Attach(accessory.Prefab, accessory.Offset, accessory.Slot);
+                // Lo de la espalda se fotografía por detrás; lo demás, la cabeza de frente.
+                _turntable.localRotation = accessory.Slot == CosmeticSlot.Back ? Quaternion.Euler(0f, 180f, 0f) : Quaternion.identity;
+                if (accessory.Slot == CosmeticSlot.Back)
+                    FrameBack(4.2f);
+                else if (accessory.Slot == CosmeticSlot.Head)
+                    FrameFace(3.7f, 0.17f); // Lo que va encima del pelo (corona, sombrero, aureola), entero.
+                else
+                    FrameFace(3f);
                 var portrait = Snap(_faceSize, _faceSize);
                 if (instance != null)
                     DestroyImmediate(instance);
@@ -230,13 +248,23 @@ namespace Trivias.Player.Components
         }
 
         /// <summary>Encuadre de la cara (la cabeza entera, cabezona); más lejos si hay complemento encima.</summary>
-        private void FrameFace(float distance)
+        private void FrameFace(float distance, float raise = 0f)
         {
             // El hueso de la cabeza está en su base: el centro de la cara queda algo más arriba.
-            var face = _view.Head.position + Vector3.up * 0.38f;
+            var face = _view.Head.position + Vector3.up * (0.38f + raise);
             var cameraTransform = _camera.transform;
             cameraTransform.position = face + _turntable.forward * distance + Vector3.up * 0.05f;
             cameraTransform.LookAt(face);
+            _camera.fieldOfView = 30f;
+        }
+
+        /// <summary>Encuadre de la espalda (con lo que lleva puesto), desde detrás.</summary>
+        private void FrameBack(float distance)
+        {
+            var back = _view.transform.position + Vector3.up * 1.05f;
+            var cameraTransform = _camera.transform;
+            cameraTransform.position = back + _turntable.forward * distance + Vector3.up * 0.25f;
+            cameraTransform.LookAt(back);
             _camera.fieldOfView = 30f;
         }
 

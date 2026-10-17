@@ -68,34 +68,66 @@ namespace Trivias.App.Tests
         }
 
         [UnityTest]
-        public IEnumerator BuyingAHat_EquipsItOnThePlayersHead()
+        public IEnumerator BuyingABowTie_EquipsItUnderTheChin()
         {
             _profile.AwardMatch("regalo", 1000);
             _shop.Open();
             yield return null;
 
-            _shop.Select("gorra");
+            _shop.Select("pajarita");
             Assert.That(_shop.IsAccessoriesTab, Is.True);
             Assert.That(_shop.ActionText, Is.EqualTo("Comprar y equipar"));
             _shop.PressAction();
             yield return null;
             yield return null;
 
-            Assert.That(_profile.Tokens, Is.EqualTo(700), "La gorra cuesta 300.");
+            Assert.That(_profile.Tokens, Is.EqualTo(700), "La pajarita cuesta 300.");
             Assert.That(_shop.ActionText, Is.EqualTo("Quitar"));
-            Assert.That(_profile.Loadout.Head, Is.EqualTo("gorra"), "Al comprar se equipa.");
+            Assert.That(_profile.Loadout.Neck, Is.EqualTo("pajarita"), "Al comprar se equipa.");
             var avatar = _player.GetComponent<IPlayerAvatar>();
-            Assert.That(avatar.Loadout.Head, Is.EqualTo("gorra"), "Lo que lleva se publica en red.");
-            Assert.That(avatar.HeadAnchor.GetComponentsInChildren<Transform>().Any(t => t.name.StartsWith("Gorra")), Is.True,
-                "La gorra debe verse en la cabeza.");
+            Assert.That(avatar.Loadout.Neck, Is.EqualTo("pajarita"), "Lo que lleva se publica en red.");
+            Assert.That(Worn(avatar, CosmeticSlot.Neck, "BowTie"), Is.True, "La pajarita debe verse bajo la barbilla.");
 
             _shop.PressAction(); // Ya comprada y puesta: ahora quita.
             yield return null;
             yield return null;
-            Assert.That(avatar.Loadout.Head, Is.Empty);
-            Assert.That(avatar.HeadAnchor.GetComponentsInChildren<Transform>().Any(t => t.name.StartsWith("Gorra")), Is.False);
+            Assert.That(avatar.Loadout.Neck, Is.Empty);
+            Assert.That(Worn(avatar, CosmeticSlot.Neck, "BowTie"), Is.False);
             Assert.That(_profile.Tokens, Is.EqualTo(700), "Quitar no devuelve ni cobra fichas.");
         }
+
+        [UnityTest]
+        public IEnumerator FiveSlots_CanBeWornAtOnce_EachInItsPlace()
+        {
+            _profile.AwardMatch("regalo", 10000);
+            _shop.Open();
+            yield return null;
+            foreach (var id in new[] { "corona", "gafas-sol", "pajarita", "bigote", "alas-dragon" })
+            {
+                _shop.Select(id);
+                _shop.PressAction();
+                yield return null;
+            }
+            yield return null;
+            yield return null;
+
+            var avatar = _player.GetComponent<IPlayerAvatar>();
+            var loadout = avatar.Loadout;
+            Assert.That(new[] { loadout.Head, loadout.Face, loadout.Neck, loadout.Mouth, loadout.Back },
+                Is.EqualTo(new[] { "corona", "gafas-sol", "pajarita", "bigote", "alas-dragon" }), "Los cinco, publicados en red.");
+            Assert.That(Worn(avatar, CosmeticSlot.Head, "Crown") && Worn(avatar, CosmeticSlot.Face, "SunGlasses") &&
+                        Worn(avatar, CosmeticSlot.Neck, "BowTie") && Worn(avatar, CosmeticSlot.Mouth, "Mustache") &&
+                        Worn(avatar, CosmeticSlot.Back, "DragonWings"), Is.True, "Cada uno en su sitio a la vez.");
+
+            // Las alas, en la espalda (detrás del concursante); las gafas, delante de la cara; la corona, encima del pelo.
+            var root = _player.transform;
+            Assert.That(root.InverseTransformPoint(avatar.AnchorFor(CosmeticSlot.Back).position).z, Is.LessThan(0f), "Alas detrás.");
+            Assert.That(root.InverseTransformPoint(avatar.AnchorFor(CosmeticSlot.Face).position).z, Is.GreaterThan(0.3f), "Gafas delante de la cara.");
+            Assert.That(root.InverseTransformPoint(avatar.AnchorFor(CosmeticSlot.Head).position).y, Is.GreaterThan(1.8f), "Corona encima del pelo.");
+        }
+
+        private static bool Worn(IPlayerAvatar avatar, CosmeticSlot slot, string model) =>
+            avatar.AnchorFor(slot).GetComponentsInChildren<Transform>().Any(t => t.name.StartsWith(model));
 
         [UnityTest]
         public IEnumerator BuyingACharacter_ChoosesIt_AndTheContestantWearsIt()
